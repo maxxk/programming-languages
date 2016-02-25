@@ -1,0 +1,13 @@
+# Site settings
+title: Software and Programming Language Theory
+email: maxim.krivchikov@gmail.com
+description: "
+
+"
+baseurl: "/programming-languages-2016/" # the subpath of your site, e.g. /blog/
+url: "https://maxxk.github.io" # the base hostname & protocol for your site
+twitter_username:
+github_username:  maxxk
+
+# Build settings
+markdown: kramdown
