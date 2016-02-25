@@ -2,7 +2,9 @@
 layout: default
 ---
 Special course for 3rd-6th year students
+
 # Software and Programming Language Theory
+
 ### V. A. Vasenin, M. A. Krivchikov
 
 Course topics include:
