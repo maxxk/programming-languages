@@ -8,6 +8,7 @@ Special course for 3rd-6th year students
 ### V. A. Vasenin, M. A. Krivchikov
 
 Course topics include:
+
 * history and classification of programming languages
 * formal semantics of programming languages
 * specification of domain-specific programming languages
