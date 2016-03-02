@@ -18,3 +18,5 @@ Course topics include:
 
 The course is required for 5th year Computational Mathematics
 department students as a course in foreign language.
+
+Introduction [presentation - html](presentations/01-Introduction.html)
