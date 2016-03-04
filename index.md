@@ -16,7 +16,10 @@ Course topics include:
 
 **Wednesday, 12:30-14:05, aud. 13-15, starting March 2nd.**
 
+**Attention! Lecture at March 9th is cancelled, next lecture is scheduled for March 16th.**
+
 The course is required for 5th year Computational Mathematics
 department students as a course in foreign language.
 
-Introduction [presentation - html](presentations/01-Introduction.html)
+**2.03.2016** Introduction. History of programming languages. ([presentation - html](presentations/01-Introduction.html))
+**16.03.2016** Classification of programming languages. 
