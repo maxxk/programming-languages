@@ -22,4 +22,5 @@ The course is required for 5th year Computational Mathematics
 department students as a course in foreign language.
 
 **2.03.2016** Introduction. History of programming languages. ([presentation - html](presentations/01-Introduction.html))
-**16.03.2016** Classification of programming languages. 
+
+**16.03.2016** Classification of programming languages. ([presentation - html](presentations/02-Classification.md))
