@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <title></title>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <link rel="stylesheet" href="reveal.js/css/reveal.css"/>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
+  <link rel="stylesheet" href="reveal.js/css/theme/maxxk.css" id="theme">
+  <link rel="stylesheet" href="additional.css"/>
+  <link rel="stylesheet" href="reveal.js/css/highlight-github.css"/>
+  <!-- If the query includes 'print-pdf', include the PDF print sheet -->
+  <script>
+    if( window.location.search.match( /print-pdf/gi ) ) {
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = 'reveal.js/css/print/pdf.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+    }
+  </script>
+  <!--[if lt IE 9]>
+  <script src="reveal.js/lib/js/html5shiv.js"></script>
+  <![endif]-->
+<style type="text/css">.reveal pre code{white-space: pre; font-size: 1.5em; line-height: 1.3;}
+.reveal abbr { border-bottom: 0.1pt dashed blue;}
+</style>
+
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+
+<section id="software-and-programming-language-theory" class="slide level1">
+<h1>Software and Programming Language Theory</h1>
+<h2 id="project">Project</h2>
+<h2 id="formal-syntax-analysis">Formal syntax analysis</h2>
+<h2 id="macros-as-a-part-of-syntax">Macros as a part of syntax</h2>
+<style>
+.twocolumn {
+  -moz-column-count: 2;
+  -webkit-column-count: 2;
+}
+.small { font-size: small !important; }
+.smaller { font-size: 0.8em !important; }
+.large { font-size: 1.5em !important; }
+.huge { font-size: 2em !important; }
+</style>
+<p>Course page: <a href="https://maxxk.github.io/programming-languages-2016/" class="uri">https://maxxk.github.io/programming-languages-2016/</a><br />
+Contact author: <script type="text/javascript">
+<!--
+h='&#x67;&#x6d;&#x61;&#x69;&#108;&#46;&#x63;&#x6f;&#x6d;';a='&#64;';n='&#x6d;&#x61;&#120;&#x69;&#x6d;&#46;&#x6b;&#114;&#x69;&#118;&#x63;&#104;&#x69;&#x6b;&#x6f;&#118;';e=n+a+h;
+document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'" clas'+'s="em' + 'ail">'+e+'<\/'+'a'+'>');
+// -->
+</script><noscript>&#x6d;&#x61;&#120;&#x69;&#x6d;&#46;&#x6b;&#114;&#x69;&#118;&#x63;&#104;&#x69;&#x6b;&#x6f;&#118;&#32;&#x61;&#116;&#32;&#x67;&#x6d;&#x61;&#x69;&#108;&#32;&#100;&#x6f;&#116;&#32;&#x63;&#x6f;&#x6d;</noscript></p>
+</section>
+<section id="project-1" class="slide level1">
+<h1>Project</h1>
+<p>Let's write a verifiable implementation of a toy programming language. In total you will get at least 10 stars.</p>
+<p><strong>Task 1.1</strong>* <em>(addition)</em> Coq, Agda; Idris (if you feel adventurous).</p>
+<p><strong>Project Step 1.</strong>* Write a &quot;design document&quot; (short informal description, 1-4 pages, in English) of a toy programming language of your choice. Design document must include the following information:</p>
+<ul>
+<li>what is the main focus of the language</li>
+<li>examples of language statements and results of evaluation for such statements</li>
+</ul>
+<p>Language must support variables or named function arguments.</p>
+</section>
+<section id="project-ideas" class="slide level1">
+<h1>Project ideas</h1>
+<ul>
+<li>(simple) Imp (simple imperative programming language)</li>
+<li>(simple) Simply-typed lambda calculus with natural number operations (simple functional programming language)</li>
+<li>(simple) mathematical expression calculator with variables, elementary functions and symbolic differentiation</li>
+<li>(medium) Lisp-ish (dynamic functional, simple syntax)</li>
+<li>(medium) Smalltalk-ish (dynamic object-oriented)</li>
+<li>(medium) SQL-like declarative language</li>
+<li>(hard) Refal-ish (pattern matching-based, like Markov algorithms), or, easier, regex engine or some parser generator</li>
+<li>any nontrivial domain-specific language</li>
+</ul>
+</section>
+<section id="proof-assistants-coq-and-agda" class="slide level1">
+<h1>Proof assistants: Coq and Agda</h1>
+<p>Coq and Agda are the proof assistants based on dependently-typed lambda calculus (<a href="https://maxxk.github.io/formal-models-2015/">remember the previous semester</a>).</p>
+<h2 id="coq">Coq</h2>
+<p>ML-like syntax.<br />
+Homepage: <a href="https://coq.inria.fr" class="uri">https://coq.inria.fr</a><br />
+Textbook: <a href="http://adam.chlipala.net/cpdt/" class="uri">http://adam.chlipala.net/cpdt/</a><br />
+Quickstart (in Russian): <a href="https://habrahabr.ru/post/182442/" class="uri">https://habrahabr.ru/post/182442/</a><br />
+Another short texbook (in Russian): <a href="http://lpcs.math.msu.su/~krupski/download/coq_pract.pdf" class="uri">http://lpcs.math.msu.su/~krupski/download/coq_pract.pdf</a></p>
+<h2 id="agda">Agda</h2>
+<p>Haskell-like syntax.<br />
+Homepage: <a href="http://wiki.portal.chalmers.se/agda/pmwiki.php?n=Main.HomePage" class="uri">http://wiki.portal.chalmers.se/agda/pmwiki.php?n=Main.HomePage</a><br />
+Introduction paper: <a href="http://www.cse.chalmers.se/~ulfn/papers/afp08/tutorial.pdf" class="uri">http://www.cse.chalmers.se/~ulfn/papers/afp08/tutorial.pdf</a><br />
+Example (in Russian): <a href="https://habrahabr.ru/post/148769/" class="uri">https://habrahabr.ru/post/148769/</a></p>
+</section>
+<section id="coq-and-agda" class="slide level1">
+<h1>Coq and Agda</h1>
+<p>In Coq and Agda all definable functions are (under the normal circumstances) total, which means:</p>
+<ol type="1">
+<li>The function will accept any input of the specified type, errors like Haskell's &quot;non-exhaustive patterns&quot; are not possible:</li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">helper ::</span> <span class="dt">Integer</span> <span class="ot">-&gt;</span> [<span class="dt">Integer</span>] <span class="ot">-&gt;</span> [<span class="dt">Integer</span>] <span class="ot">-&gt;</span> [(<span class="dt">Integer</span>,<span class="dt">Integer</span>)] <span class="ot">-&gt;</span> [<span class="dt">Integer</span>]
+helper n [] (v) _ <span class="fu">=</span> []
+helper n (x<span class="fu">:</span>y<span class="fu">:</span>xs) (v) (c<span class="fu">:</span>cs) <span class="fu">=</span>
+    <span class="kw">if</span> (chinese3 (b<span class="fu">:</span>c<span class="fu">:</span>cs) <span class="fu">==</span> n)
+      <span class="kw">then</span> (x<span class="fu">:</span>v)
+    <span class="kw">else</span> helper n (xs) (x<span class="fu">:</span>v) ((n <span class="ot">`mod`</span> y,y)<span class="fu">:</span>c<span class="fu">:</span>cs)
+    <span class="kw">where</span> b <span class="fu">=</span>(n <span class="ot">`mod`</span> x,x)
+
+<span class="co">-- helper 10 primes [] [] ⟶ error: Non-exhaustive patterns in function helper.</span></code></pre></div>
+<ol start="2" type="1">
+<li><p>The function will terminate for any input, infinite recursion is not allowed:</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">helper a b c d <span class="fu">=</span> helper a (a<span class="fu">:</span>b) c d</code></pre></div></li>
+</ol>
+</section>
+<section id="agda-examples" class="slide level1">
+<h1>Agda examples</h1>
+<p>Inductive datatype is defined by a set of constructors. Note that indentation is significant (like in Python and Haskell)</p>
+<div class="sourceCode"><pre class="sourceCode agda"><code class="sourceCode agda"><span class="kw">data</span> Nat <span class="ot">:</span> <span class="dt">Set</span> <span class="kw">where</span>
+    zero <span class="ot">:</span> Nat
+    succ <span class="ot">:</span> Nat <span class="ot">→</span> Nat</code></pre></div>
+<p>Function on inductive types are defined by the means of pattern matching.</p>
+<div class="sourceCode"><pre class="sourceCode agda"><code class="sourceCode agda">plus <span class="ot">:</span> Nat <span class="ot">→</span> Nat <span class="ot">→</span> Nat
+plus zero m <span class="ot">=</span> m
+plus <span class="ot">(</span>succ n<span class="ot">)</span> m <span class="ot">=</span> succ <span class="ot">(</span>plus n m<span class="ot">)</span></code></pre></div>
+</section>
+<section id="agda-examples-1" class="slide level1">
+<h1>Agda examples</h1>
+<p>Dependent product indexed type familiy. Note that the implicit argument n to <code>cons</code> is enclosed in braces.</p>
+<div class="sourceCode"><pre class="sourceCode agda"><code class="sourceCode agda"><span class="kw">data</span> Vec <span class="ot">(</span>A <span class="ot">:</span> <span class="dt">Set</span><span class="ot">)</span> <span class="ot">:</span> Nat <span class="ot">→</span> <span class="dt">Set</span> <span class="kw">where</span>
+    [] <span class="ot">:</span> Vec A zero
+    cons <span class="ot">:</span> <span class="ot">{</span>n <span class="ot">:</span> Nat<span class="ot">}</span> <span class="ot">→</span> A <span class="ot">→</span> Vec A n <span class="ot">→</span> Vec A <span class="ot">(</span>succ n<span class="ot">)</span>
+
+cons zero [] <span class="co">-- Vector with a single element (0)</span>
+
+head <span class="ot">:</span> <span class="ot">{</span>A <span class="ot">:</span> <span class="dt">Set</span><span class="ot">}{</span>n <span class="ot">:</span> Nat<span class="ot">}</span> <span class="ot">→</span> Vec A <span class="ot">(</span>succ n<span class="ot">)</span> <span class="ot">→</span> A
+head <span class="ot">(</span>cons x xs<span class="ot">)</span> <span class="ot">=</span> x</code></pre></div>
+</section>
+<section id="coq-examples" class="slide level1">
+<h1>Coq examples</h1>
+<p>Inductive data types. Indentation is not significant in Coq. Statements are terminated by dot <code>.</code></p>
+<pre class="coq"><code>Inductive nat : Type :=
+ | O : nat
+ | S : nat → nat.</code></pre>
+<p>There are some different keywords for definitions (<code>Definition</code>, <code>Inductive</code>, <code>Fixpoint</code>, <code>Program Definition</code>). Functions are defined like in lambda-calculus, pattern matching is possible with <code>match</code> expression:</p>
+<pre class="coq"><code>Fixpoint plus (a b : nat) : nat :=
+  match a with
+  | O ⇒ b
+  | S a&#39; ⇒ S (plus a&#39; b)
+  end.</code></pre>
+</section>
+<section id="coq-examples-1" class="slide level1">
+<h1>Coq examples</h1>
+<p>Dependent type family. As in Agda, implicit arguments are written inside braces, explicit dependent arguments are written insied the round brackets.</p>
+<pre class="coq"><code>Inductive Vector (A : Set) : nat → Set :=
+  | Nil : Vector A O
+  | Cons : forall {n : Nat}, A → Vector A n → Vector a (S n).</code></pre>
+<pre class="coq"><code>Definition head&#39; A n (vec : Vector A n) :=
+  match vec in (Vector A n) return
+    (match n with O ⇒ unit | S _ ⇒ A end) with
+    | Nil ⇒ tt
+    | Cons h _ ⇒ h
+  end.
+
+Definition head A n (vec : Vector A (S n)) : A := head&#39; vec.</code></pre>
+</section>
+<section id="formal-syntax-analysis-1" class="slide level1">
+<h1>Formal syntax analysis</h1>
+<p>Parser is a function which implements syntax analysis.<br />
+Suppose we have defined some language grammar G (represented as AST) and implemented a parser P.</p>
+<p>P : String → G?</p>
+<p>How can we make sure that our parser will:</p>
+<ol type="1">
+<li>accept all strings from G-defined language.</li>
+<li>not accept any string outside of G-defined language.</li>
+<li>will terminate for every finite input.</li>
+</ol>
+</section>
+<section id="couldnt-we-just-write-a-parser-in-agda" class="slide level1">
+<h1>Couldn't we just write a parser in Agda?</h1>
+<p>From the previous class: left recursion.</p>
+<pre><code>term ::= factor | term &#39;+&#39; factor
+factor ::= atom | factor &#39;*&#39; atom
+atom ::= number | &#39;(&#39; term &#39;)&#39;</code></pre>
+<pre><code>x+1 ⟶ ⟂</code></pre>
+<p>(try to parse a <code>term</code>, <code>x</code> is not a <code>factor</code> so it must be a <code>term</code> and now we have a cycle)</p>
+</section>
+<section id="danielsson.-total-parser-combinators-2010" class="slide level1">
+<h1>Danielsson. Total Parser Combinators (2010)</h1>
+<p>Main idea is: use the lazy computation. Total, dependently-typed programming languages may represent infinite lazy computations as a corecursive type. After the parsing process is represented as tree with some infinite-depth paths, make a breadth-first search of successful parse result.</p>
+<div class="sourceCode"><pre class="sourceCode agda"><code class="sourceCode agda"><span class="kw">data</span> List <span class="ot">(</span>A <span class="ot">:</span> <span class="dt">Set</span><span class="ot">)</span> <span class="ot">:</span> <span class="dt">Set</span> <span class="kw">where</span>
+  [] <span class="ot">:</span> List A
+  <span class="ot">_</span>::<span class="ot">_</span> <span class="ot">:</span> A <span class="ot">→</span> List A <span class="ot">→</span> List A
+
+<span class="kw">data</span> Colist <span class="ot">(</span>A <span class="ot">:</span> <span class="dt">Set</span><span class="ot">)</span> <span class="ot">:</span> <span class="dt">Set</span> <span class="kw">where</span>
+  [] <span class="ot">:</span> Colist A
+  <span class="ot">_</span>::<span class="ot">_</span> <span class="ot">:</span> A <span class="ot">→</span> ∞ <span class="ot">(</span>Colist A<span class="ot">)</span> <span class="ot">→</span> Colist A
+
+♯ <span class="ot">:</span> <span class="ot">{</span>A <span class="ot">:</span> <span class="dt">Set</span><span class="ot">}</span> <span class="ot">→</span>  A <span class="ot">→</span> ∞ A
+♭ <span class="ot">:</span> <span class="ot">{</span>A <span class="ot">:</span> <span class="dt">Set</span><span class="ot">}</span> <span class="ot">→</span> ∞ A→ A</code></pre></div>
+<p><span class="smaller"><br />
+Danielsson N.A. Total parser combinators // Proceedings of the 15th ACM SIGPLAN international conference on Functional programming - ICFP ’10. ACM Press, 2010. P. 285–285.<br />
+Source and paper is available at: <a href="http://www.cse.chalmers.se/~nad/publications/danielsson-parser-combinators.html" class="uri">http://www.cse.chalmers.se/~nad/publications/danielsson-parser-combinators.html</a><br />
+</span></p>
+</section>
+<section id="danielsson.-total-parser-combinators-2010-1" class="slide level1">
+<h1>Danielsson. Total Parser Combinators (2010)</h1>
+<div class="sourceCode"><pre class="sourceCode agda"><code class="sourceCode agda">map <span class="ot">:</span> <span class="ot">∀{</span>A B<span class="ot">}</span> <span class="ot">→</span> <span class="ot">(</span> A <span class="ot">→</span> B<span class="ot">)</span> <span class="ot">→</span> Colist A <span class="ot">→</span> Colist B
+map f [ ] <span class="ot">=</span> [ ]
+map f <span class="ot">(</span>x::xs<span class="ot">)</span> <span class="ot">=</span> f x :: ♯ map f <span class="ot">(</span>♭xs<span class="ot">)</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode agda"><code class="sourceCode agda"><span class="kw">mutual</span>
+  <span class="co">-- The index is true if the corresponding language contains the</span>
+  <span class="co">-- empty string (is nullable).</span>
+  <span class="kw">data</span> P <span class="ot">:</span> Bool <span class="ot">→</span> <span class="dt">Set</span> <span class="kw">where</span>
+    fail  <span class="ot">:</span> P false
+    empty <span class="ot">:</span> P true
+    tok   <span class="ot">:</span> Tok <span class="ot">→</span> P false
+    <span class="ot">_</span>∣<span class="ot">_</span>   <span class="ot">:</span> <span class="ot">∀</span> <span class="ot">{</span>n₁ n₂<span class="ot">}</span> <span class="ot">→</span> P n₁ <span class="ot">→</span>            P n₂ <span class="ot">→</span> P <span class="ot">(</span>n₁ ∨ n₂<span class="ot">)</span>
+    <span class="ot">_</span>·<span class="ot">_</span>   <span class="ot">:</span> <span class="ot">∀</span> <span class="ot">{</span>n₁ n₂<span class="ot">}</span> <span class="ot">→</span> P n₁ <span class="ot">→</span> ∞⟨ not n₁ ⟩P n₂ <span class="ot">→</span> P <span class="ot">(</span>n₁ ∧ n₂<span class="ot">)</span>
+
+  <span class="co">-- Coinductive if the index is true.</span>
+  ∞⟨<span class="ot">_</span>⟩P <span class="ot">:</span> Bool <span class="ot">→</span> Bool <span class="ot">→</span> <span class="dt">Set</span>
+  ∞⟨ true  ⟩P n <span class="ot">=</span> ∞ <span class="ot">(</span>P n<span class="ot">)</span>
+  ∞⟨ false ⟩P n <span class="ot">=</span>    P n</code></pre></div>
+</section>
+<section id="danielsson.-total-parser-combinators-2010-2" class="slide level1">
+<h1>Danielsson. Total Parser Combinators (2010)</h1>
+<p>Example from: <a href="http://www.cse.chalmers.se/~nad/publications/danielsson-parser-combinators/TotalParserCombinators.Examples.Expression.html#233" class="uri">http://www.cse.chalmers.se/~nad/publications/danielsson-parser-combinators/TotalParserCombinators.Examples.Expression.html#233</a></p>
+<div class="sourceCode"><pre class="sourceCode agda"><code class="sourceCode agda"><span class="kw">module</span> Monadic <span class="kw">where</span>
+  <span class="kw">mutual</span>
+    term   <span class="ot">=</span> factor
+           ∣ ♯ term            &gt;&gt;= <span class="ot">λ</span> e₁ <span class="ot">→</span>
+             tok <span class="ch">&#39;+&#39;</span>           &gt;&gt;= <span class="ot">λ</span> <span class="ot">_</span>  <span class="ot">→</span>
+             factor            &gt;&gt;= <span class="ot">λ</span> e₂ <span class="ot">→</span>
+             return <span class="ot">(</span>e₁ + e₂<span class="ot">)</span>
+    factor <span class="ot">=</span> atom
+           ∣ ♯ factor          &gt;&gt;= <span class="ot">λ</span> e₁ <span class="ot">→</span>
+             tok <span class="ch">&#39;*&#39;</span>           &gt;&gt;= <span class="ot">λ</span> <span class="ot">_</span>  <span class="ot">→</span>
+             atom              &gt;&gt;= <span class="ot">λ</span> e₂ <span class="ot">→</span>
+             return <span class="ot">(</span>e₁ * e₂<span class="ot">)</span>
+    atom   <span class="ot">=</span> number
+           ∣ tok <span class="ch">&#39;(&#39;</span>           &gt;&gt;= <span class="ot">λ</span> <span class="ot">_</span>  <span class="ot">→</span>
+             ♯ term            &gt;&gt;= <span class="ot">λ</span> e  <span class="ot">→</span>
+             tok <span class="ch">&#39;)&#39;</span>           &gt;&gt;= <span class="ot">λ</span> <span class="ot">_</span>  <span class="ot">→</span>
+             return e</code></pre></div>
+</section>
+<section id="and-what-about-proofs" class="slide level1">
+<h1>And what about proofs?</h1>
+<p>Simplification</p>
+<div class="sourceCode"><pre class="sourceCode agda"><code class="sourceCode agda"><span class="co">-- f &lt;$&gt; fail                  → fail</span>
+<span class="co">-- f &lt;$&gt; return x              → return (f x)</span>
+<span class="co">-- fail         ∣ p            → p</span>
+<span class="co">-- p            ∣ fail         → p</span>
+<span class="co">-- token &gt;&gt;= p₁ ∣ token &gt;&gt;= p₂ → token &gt;&gt;= (λ t → p₁ t ∣ p₂ t)  (*)</span>
+<span class="co">-- ...</span>
+simplify₁ <span class="ot">:</span> <span class="ot">∀</span> <span class="ot">{</span>Tok R xs<span class="ot">}</span> <span class="ot">(</span>p <span class="ot">:</span> Parser Tok R xs<span class="ot">)</span> <span class="ot">→</span>
+            ∃₂ <span class="ot">λ</span> xs <span class="ot">(</span>p′ <span class="ot">:</span> Parser Tok R xs<span class="ot">)</span> <span class="ot">→</span> p ≅P p′</code></pre></div>
+<p>Completeness</p>
+<div class="sourceCode"><pre class="sourceCode agda"><code class="sourceCode agda"><span class="co">-- A proof showing that all functions of type List Bool → List R can</span>
+<span class="co">-- be realised using parser combinators (for any R, assuming that bag</span>
+<span class="co">-- equality is used for the lists of results).</span>
+parser⇒fun <span class="ot">:</span> <span class="ot">∀</span> <span class="ot">{</span>R xs<span class="ot">}</span> <span class="ot">(</span>p <span class="ot">:</span> Parser Bool R xs<span class="ot">)</span> <span class="ot">{</span>x s<span class="ot">}</span> <span class="ot">→</span>
+             x ∈ p · s ⇿ x ∈ parse p s
+maximally-expressive <span class="ot">:</span>
+ <span class="ot">∀</span> <span class="ot">{</span>R<span class="ot">}</span> <span class="ot">(</span>f <span class="ot">:</span> List Bool <span class="ot">→</span> List R<span class="ot">)</span> <span class="ot">{</span>s<span class="ot">}</span> <span class="ot">→</span>
+ parse <span class="ot">(</span>grammar f<span class="ot">)</span> s ≈[ bag ] f s</code></pre></div>
+</section>
+<section id="koprowski-binsztok.-trx-a-formally-verified-parser-interpreter" class="slide level1">
+<h1>Koprowski, Binsztok. TRX: A Formally Verified Parser Interpreter</h1>
+<p>Main idea: like in original PEG parsers, disallow direct and indirect left-recursive grammars. <a href="http://www.google.com/patents/EP2454661A1?cl=en">Patented</a> algorithm :)</p>
+<pre class="coq"><code>Definition wf_analyse (exp : pexp) (wf : PES.t) : bool :=
+  match exp with
+  | empty ⇒ true
+  | range     ⇒ true
+  | terminal a ⇒ true
+  | anyChar ⇒ true
+  | nonTerminal p ⇒ is_wf (production p) wf
+  | seq e1 e2 ⇒ is_wf e1 wf ∧ (if e1 − [gp] → 0 then is_wf e2 wf else true) | choice e1 e2 ⇒ is_wf e1 wf ∧ is_wf e2 wf
+  | star e ⇒ is_wf e wf ∧ (negb (e − [gp] → 0))
+  |note ⇒is_wf e wf
+  | id e ⇒ is_wf e wf
+end.</code></pre>
+<p><span class="smaller"><br />
+Koprowski A., Binsztok H. TRX: A Formally Verified Parser Interpreter // Logical Methods in Computer Science / ed. Gordon A. 2011. Vol. 7, № 2.<br />
+Note: some approaches exist to enable left-recursive PEG parsing, I must have references somewhere :)<br />
+Medeiros S., Ierusalimschy R. A parsing machine for PEGs // Proceedings of the 2008 symposium on Dynamic languages - DLS ’08. 2008. P. 1–12.<br />
+</span></p>
+</section>
+<section id="trx-a-formally-verified-parser-interpreter" class="slide level1">
+<h1>TRX: A Formally Verified Parser Interpreter</h1>
+<pre class="coq"><code>Program Fixpoint parse (T : Type) (e : PExp T | is grammar exp e) (s : string)
+{measure (e , s ) ≻ } : {r : ParsingResult T | ∃ n , [ e , s ] ⇒ [ n , r ] }</code></pre>
+</section>
+<section id="see-also" class="slide level1">
+<h1>See also</h1>
+<ol type="1">
+<li>Uustalu, Tarmo, Firsov, Denis. Certified Parsing of Regular Languages // Certified Programs and Proofs. Springer International Publishing, 2013. P. 98–113.</li>
+<li>Jourdan J.-H., Leroy X., Pottier F. Validating LR(1) Parsers // Proceedings of the 21st European Symposium on Programming. 2012. Vol. 7211. P. 397–416.</li>
+<li>Bernardy, Jean-Philippe, Jansson, Patrik. Certified Context-Free Parsing: a Formalisation of Valiant's Algorithm in Agda: Preprint. Chalmers University of Technology, University of Gothenburg, Sweden, 2016. 27 p.</li>
+<li>Sjöblom, Thomas Bååth. An Agda proof of the correctness of Valiant’s algorithm for context free parsing: MSc. Göteborg University: Chalmers University of Technilogy, University of Gothenburg, 2013. 63 p.</li>
+</ol>
+</section>
+<section id="macros" class="slide level1">
+<h1>Macros</h1>
+<p>Macro (macroinstruction) — is a rule of generation a set of instructions in compile-time.</p>
+<p>Different kinds of macros may be related to both syntax and static semantics of programming language.</p>
+</section>
+<section id="macroassemblers-revisited" class="slide level1">
+<h1>Macroassemblers revisited</h1>
+Macros are substituted before the assembly time.<br />
+
+<div class="twocolumn">
+<pre class="x86asm"><code>ForLp           macro   LCV, Start, Stop
+ifndef  $$For&amp;LCV&amp;      
+$$For&amp;LCV&amp;      =       0
+else
+$$For&amp;LCV&amp;      =       $$For&amp;LCV&amp; + 1
+endif
+
+mov     ax, Start
+mov     LCV, ax
+
+MakeLbl $$For&amp;LCV&amp;, %$$For&amp;LCV&amp;
+
+mov     ax, LCV
+cmp     ax, Stop
+jgDone  $$Next&amp;LCV&amp;, %$$For&amp;LCV&amp;
+endm
+
+Next            macro   LCV
+inc     LCV
+jmpLoop $$For&amp;LCV&amp;, %$$For&amp;LCV&amp;
+MakeLbl $$Next&amp;LCV&amp;, %$$For&amp;LCV&amp;
+endm</code></pre>
+<pre class="x86asm"><code>ForLp   I, 0, 15
+ForLp   J, 0, 6
+
+ldax    A, I, J         ;Fetch A[I][J]
+mov     bx, 15          ;Compute 16-I.
+sub     bx, I
+ldax    b, bx, J, imul  ;Multiply in B[15-I][J].
+stax    x, J, I         ;Store to X[J][I]
+
+Next    J
+Next    I</code></pre>
+</div>
+</section>
+<section id="preprocessors" class="slide level1">
+<h1>Preprocessors</h1>
+<p>Preprocessor is a program which operates on input data for some other program. Preprocessors may be used to provide primitive macro facilities.</p>
+</section>
+<section id="c-preprocessor" class="slide level1">
+<h1>C preprocessor</h1>
+<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c"><span class="ot">#include &lt;math.h&gt;</span>
+
+<span class="ot">#ifndef _WINDOW_H</span>
+<span class="ot">#define _WINDOW_H</span>
+<span class="ot">#endif</span>
+
+<span class="ot">#define MAX(a,b) ((a) &gt; (b) ? (a) : (b))</span>
+
+<span class="ot">#if VERBOSE &gt;= 2</span>
+  print(<span class="st">&quot;trace message&quot;</span>);
+<span class="ot">#endif</span>
+
+<span class="ot">#if !(defined __LP64__ || defined __LLP64__) || defined _WIN32 &amp;&amp; !defined _WIN64</span>
+<span class="ot">#error 32-bit systems not supported</span>
+<span class="ot">#else</span>
+    <span class="co">// we are compiling for a 64-bit system</span>
+<span class="ot">#endif</span></code></pre></div>
+</section>
+<section id="c-preprocessor-1" class="slide level1">
+<h1>C preprocessor</h1>
+<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c"><span class="ot">#define xstr(s) str(s)</span>
+<span class="ot">#define str(s) #s</span>
+<span class="ot">#define foo 4</span>
+
+str (foo)  <span class="co">// outputs &quot;foo&quot;</span>
+xstr (foo) <span class="co">// outputs &quot;4&quot;</span>
+
+<span class="ot">#define DECLARE_STRUCT_TYPE(name) typedef struct name##_s name##_t</span>
+
+DECLARE_STRUCT_TYPE(g_object);
+<span class="co">// Outputs: typedef struct g_object_s g_object_t;</span></code></pre></div>
+<p>(It is even possible to write limited recursive programs in C preprocessor by itself: <a href="https://github.com/pfultz2/Cloak/wiki/Is-the-C-preprocessor-Turing-complete%3F">https://github.com/pfultz2/Cloak/wiki/Is-the-C-preprocessor-Turing-complete%3F</a>)</p>
+</section>
+<section id="m4-t4" class="slide level1">
+<h1>M4 / T4</h1>
+<pre class="csharp"><code>public class Decorator: &lt;#= interface.FullName #&gt;
+{    // …
+&lt;#
+    foreach(Member member in interfaceType.Members)
+        WriteMember(member);
+#&gt;
+}</code></pre>
+</section>
+<section id="lisp-reader-macros" class="slide level1">
+<h1>LISP Reader Macros</h1>
+</section>
+<section id="perl" class="slide level1">
+<h1>Perl</h1>
+</section>
+<section id="homework-assignments" class="slide level1">
+<h1>Homework assignments</h1>
+<p><strong>Task 4.2a</strong>* Write (manually) an extensible parser for LISP-like symbolic expressions (subset of <a href="http://www.scheme-reports.org">&quot;R7RS small&quot;</a> Scheme specification). Whitespace, identifier and number specifications are omitted as a trivial exercise.</p>
+<pre><code>&lt;datum&gt; ::= &lt;atom&gt; &lt;optional whitespace&gt; | &lt;list&gt; &lt;optional whitespace&gt;
+&lt;atom&gt; ::= &lt;identifier&gt; | &lt;number&gt; | &lt;string&gt;
+&lt;string&gt; ::= &#39;&quot;&#39; &lt;string element&gt;* &#39;&quot;&#39;
+&lt;string element&gt; ::= &lt;any character except &quot; and \&gt; | &#39;\&quot;&#39; | &#39;\\&#39;
+&lt;list&gt; ::= &quot;(&quot; &lt;datum&gt;  &quot;)&quot;</code></pre>
+</section>
+<section id="homework-assignments-1" class="slide level1">
+<h1>Homework assignments</h1>
+<p><strong>Task 4.2b</strong>** Implement reader macros for a subset of a context-free grammar as an interpreter from s-expressions to parser extension.</p>
+<div class="sourceCode"><pre class="sourceCode scheme"><code class="sourceCode scheme">(reader-macro &lt;start-string&gt; &lt;stop-string&gt; &lt;grammar&gt;)
+<span class="co">; Example:</span>
+(reader-macro <span class="st">&quot;#&quot;</span> <span class="st">&quot;#&quot;</span> (float decimal-digits
+    (optional <span class="st">&quot;.&quot;</span> (optional decimal-digits))
+    (optional <span class="st">&quot;e&quot;</span> (either <span class="st">&quot;+&quot;</span> <span class="st">&quot;-&quot;</span> <span class="st">&quot;&quot;</span>) decimal-digits)))
+
+#<span class="fl">1.5e11</span># ⟶ (float <span class="st">&quot;1&quot;</span> (<span class="st">&quot;.&quot;</span> (<span class="st">&quot;5&quot;</span>)) (<span class="st">&quot;e&quot;</span> (<span class="st">&quot;&quot;</span>) <span class="st">&quot;11&quot;</span>))</code></pre></div>
+<p><strong>Task 4.2c</strong>* Write a reader macro for infix arithmetical expressions (addition, multiplication, brackets).</p>
+</section>
+<section id="project-2" class="slide level1">
+<h1>Project</h1>
+<p><strong>Project Step 2.</strong>* Implement an abstract syntax tree type for the language.<br />
+Example (I didn't check it in Agda):</p>
+<div class="sourceCode"><pre class="sourceCode agda"><code class="sourceCode agda"><span class="kw">mutual</span>
+  <span class="kw">data</span> Term <span class="kw">where</span>
+    TFactor <span class="ot">:</span> Factor <span class="ot">→</span> Term
+    TAdd <span class="ot">:</span> Term <span class="ot">→</span> Factor <span class="ot">→</span> Term
+  <span class="kw">data</span> Factor <span class="kw">where</span>
+    FAtom <span class="ot">:</span> Atom <span class="ot">→</span> Factor
+    FMult <span class="ot">:</span> Factor <span class="ot">→</span> Atom <span class="ot">→</span> Factor
+  <span class="kw">data</span> Atom <span class="kw">where</span>
+    ANumber <span class="ot">:</span> Nat <span class="ot">→</span> Atom
+    AGroup <span class="ot">:</span> Term <span class="ot">→</span> Atom</code></pre></div>
+<p><strong>Project Step 3.</strong>* Use one of the formally verified parser implementation approaches do define a parser for the language.</p>
+</section>
+    </div>
+  </div>
+
+
+  <script src="reveal.js/lib/js/head.min.js"></script>
+  <script src="reveal.js/js/reveal.js"></script>
+
+  <script>
+
+      // Full list of configuration options available here:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        controls: false,         // Display controls in the bottom right corner
+        progress: true,         // Display a presentation progress bar
+        history: true,          // Push each slide change to the browser history
+        fragments: true,
+        center: false,                       // Vertical centering of slides
+        maxScale: 1.5,                  // Bounds for smallest/largest possible content scale
+        slideNumber: "c / t",                // Display the page number of the current slide
+        theme: 'maxxk', // available themes are in /css/theme
+        transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+        math: {
+          mathjax: 'reveal.js/../MathJax-2.5.3/MathJax.js',
+          config: 'TeX-AMS_HTML-full'  // See http://docs.mathjax.org/en/latest/config-files.html
+        },
+
+        // Optional libraries used to extend on reveal.js
+        dependencies: [
+          { src: 'reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: 'reveal.js/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+          { src: 'reveal.js/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } },
+          { src: 'reveal.js/plugin/math/math.js', async: true },
+//          { src: 'reveal.js/plugin/search/search.js', async: true, condition: function() { return !!document.body.classList; }, }
+//          { src: 'reveal.js/plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+]});
+    </script>
+    </body>
+</html>

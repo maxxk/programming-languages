@@ -26,3 +26,5 @@ department students as a course in foreign language.
 **16.03.2016** Classification of programming languages. ([presentation - html](presentations/02-Classification.html))
 
 **23.03.2016** Specification of programming language. Syntax. ([presentation - html](presentations/03-Specification-Syntax.html))
+
+**30.03.2016** Formal syntax analysis. Syntax extensions. ([presentation - html](presentations/04-Macros-Parsing.html))
