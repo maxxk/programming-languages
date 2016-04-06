@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<!-- saved from url=(0077)file:///Users/maxxk/Languages-course/02-Classification.html#/live-programming -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta name="generator" content="pandoc">
+  <title></title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <link rel="stylesheet" href="./02-Classification_files/reveal.css">
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
+  <link rel="stylesheet" href="./02-Classification_files/maxxk.css" id="theme">
+  <link rel="stylesheet" href="./02-Classification_files/additional.css">
+  <link rel="stylesheet" href="./02-Classification_files/highlight-github.css">
+  <!-- If the query includes 'print-pdf', include the PDF print sheet -->
+  <script>
+    if( window.location.search.match( /print-pdf/gi ) ) {
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = 'reveal.js/css/print/pdf.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+    }
+  </script>
+  <!--[if lt IE 9]>
+  <script src="reveal.js/lib/js/html5shiv.js"></script>
+  <![endif]-->
+<style type="text/css">.reveal pre code{white-space: pre; font-size: 1.5em; line-height: 1.3;}
+.reveal abbr { border-bottom: 0.1pt dashed blue;}
+</style>
+
+<script type="text/javascript" src="./02-Classification_files/MathJax.js"></script><style type="text/css">.MathJax_Hover_Frame {border-radius: .25em; -webkit-border-radius: .25em; -moz-border-radius: .25em; -khtml-border-radius: .25em; box-shadow: 0px 0px 15px #83A; -webkit-box-shadow: 0px 0px 15px #83A; -moz-box-shadow: 0px 0px 15px #83A; -khtml-box-shadow: 0px 0px 15px #83A; border: 1px solid #A6D ! important; display: inline-block; position: absolute}
+.MathJax_Hover_Arrow {position: absolute; width: 15px; height: 11px; cursor: pointer}
+</style><style type="text/css">#MathJax_About {position: fixed; left: 50%; width: auto; text-align: center; border: 3px outset; padding: 1em 2em; background-color: #DDDDDD; color: black; cursor: default; font-family: message-box; font-size: 120%; font-style: normal; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 15px; -webkit-border-radius: 15px; -moz-border-radius: 15px; -khtml-border-radius: 15px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+.MathJax_Menu {position: absolute; background-color: white; color: black; width: auto; padding: 5px 0px; border: 1px solid #CCCCCC; margin: 0; cursor: default; font: menu; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 5px; -webkit-border-radius: 5px; -moz-border-radius: 5px; -khtml-border-radius: 5px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+.MathJax_MenuItem {padding: 1px 2em; background: transparent}
+.MathJax_MenuArrow {position: absolute; right: .5em; color: #666666}
+.MathJax_MenuActive .MathJax_MenuArrow {color: white}
+.MathJax_MenuArrow.RTL {left: .5em; right: auto}
+.MathJax_MenuCheck {position: absolute; left: .7em}
+.MathJax_MenuCheck.RTL {right: .7em; left: auto}
+.MathJax_MenuRadioCheck {position: absolute; left: .7em}
+.MathJax_MenuRadioCheck.RTL {right: .7em; left: auto}
+.MathJax_MenuLabel {padding: 1px 2em 3px 1.33em; font-style: italic}
+.MathJax_MenuRule {border-top: 1px solid #DDDDDD; margin: 4px 3px}
+.MathJax_MenuDisabled {color: GrayText}
+.MathJax_MenuActive {background-color: #606872; color: white}
+.MathJax_Menu_Close {position: absolute; width: 31px; height: 31px; top: -15px; left: -15px}
+</style><style type="text/css">.MathJax_Preview .MJXc-math {color: inherit!important}
+</style><style type="text/css">#MathJax_Zoom {position: absolute; background-color: #F0F0F0; overflow: auto; display: block; z-index: 301; padding: .5em; border: 1px solid black; margin: 0; font-weight: normal; font-style: normal; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; box-shadow: 5px 5px 15px #AAAAAA; -webkit-box-shadow: 5px 5px 15px #AAAAAA; -moz-box-shadow: 5px 5px 15px #AAAAAA; -khtml-box-shadow: 5px 5px 15px #AAAAAA; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_ZoomOverlay {position: absolute; left: 0; top: 0; z-index: 300; display: inline-block; width: 100%; height: 100%; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+#MathJax_ZoomFrame {position: relative; display: inline-block; height: 0; width: 0}
+#MathJax_ZoomEventTrap {position: absolute; left: 0; top: 0; z-index: 302; display: inline-block; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+</style><style type="text/css">.MathJax_Preview {color: #888}
+#MathJax_Message {position: fixed; left: 1em; bottom: 1.5em; background-color: #E6E6E6; border: 1px solid #959595; margin: 0px; padding: 2px 8px; z-index: 102; color: black; font-size: 80%; width: auto; white-space: nowrap}
+#MathJax_MSIE_Frame {position: absolute; top: 0; left: 0; width: 0px; z-index: 101; border: 0px; margin: 0px; padding: 0px}
+.MathJax_Error {color: #CC0000; font-style: italic}
+</style><style type="text/css">.MJXc-script {font-size: .8em}
+.MJXc-right {-webkit-transform-origin: right; -moz-transform-origin: right; -ms-transform-origin: right; -o-transform-origin: right; transform-origin: right}
+.MJXc-bold {font-weight: bold}
+.MJXc-italic {font-style: italic}
+.MJXc-scr {font-family: MathJax_Script,'Times New Roman',Times,STIXGeneral,serif}
+.MJXc-frak {font-family: MathJax_Fraktur,'Times New Roman',Times,STIXGeneral,serif}
+.MJXc-sf {font-family: MathJax_SansSerif,'Times New Roman',Times,STIXGeneral,serif}
+.MJXc-cal {font-family: MathJax_Caligraphic,'Times New Roman',Times,STIXGeneral,serif}
+.MJXc-mono {font-family: MathJax_Typewriter,'Times New Roman',Times,STIXGeneral,serif}
+.MJXc-largeop {font-size: 150%}
+.MJXc-largeop.MJXc-int {vertical-align: -.2em}
+.MJXc-math {display: inline-block; line-height: 1.2; text-indent: 0; font-family: 'Times New Roman',Times,STIXGeneral,serif; white-space: nowrap; border-collapse: collapse}
+.MJXc-display {display: block; text-align: center; margin: 1em 0}
+.MJXc-math span {display: inline-block}
+.MJXc-box {display: block!important; text-align: center}
+.MJXc-box:after {content: " "}
+.MJXc-rule {display: block!important; margin-top: .1em}
+.MJXc-char {display: block!important}
+.MJXc-mo {margin: 0 .15em}
+.MJXc-mfrac {margin: 0 .125em; vertical-align: .25em}
+.MJXc-denom {display: inline-table!important; width: 100%}
+.MJXc-denom > * {display: table-row!important}
+.MJXc-surd {vertical-align: top}
+.MJXc-surd > * {display: block!important}
+.MJXc-script-box > *  {display: table!important; height: 50%}
+.MJXc-script-box > * > * {display: table-cell!important; vertical-align: top}
+.MJXc-script-box > *:last-child > * {vertical-align: bottom}
+.MJXc-script-box > * > * > * {display: block!important}
+.MJXc-mphantom {visibility: hidden}
+.MJXc-munderover {display: inline-table!important}
+.MJXc-over {display: inline-block!important; text-align: center}
+.MJXc-over > * {display: block!important}
+.MJXc-munderover > * {display: table-row!important}
+.MJXc-mtable {vertical-align: .25em; margin: 0 .125em}
+.MJXc-mtable > * {display: inline-table!important; vertical-align: middle}
+.MJXc-mtr {display: table-row!important}
+.MJXc-mtd {display: table-cell!important; text-align: center; padding: .5em 0 0 .5em}
+.MJXc-mtr > .MJXc-mtd:first-child {padding-left: 0}
+.MJXc-mtr:first-child > .MJXc-mtd {padding-top: 0}
+.MJXc-mlabeledtr {display: table-row!important}
+.MJXc-mlabeledtr > .MJXc-mtd:first-child {padding-left: 0}
+.MJXc-mlabeledtr:first-child > .MJXc-mtd {padding-top: 0}
+.MJXc-merror {background-color: #FFFF88; color: #CC0000; border: 1px solid #CC0000; padding: 1px 3px; font-style: normal; font-size: 90%}
+.MJXc-scale0 {-webkit-transform: scaleX(.0); -moz-transform: scaleX(.0); -ms-transform: scaleX(.0); -o-transform: scaleX(.0); transform: scaleX(.0)}
+.MJXc-scale1 {-webkit-transform: scaleX(.1); -moz-transform: scaleX(.1); -ms-transform: scaleX(.1); -o-transform: scaleX(.1); transform: scaleX(.1)}
+.MJXc-scale2 {-webkit-transform: scaleX(.2); -moz-transform: scaleX(.2); -ms-transform: scaleX(.2); -o-transform: scaleX(.2); transform: scaleX(.2)}
+.MJXc-scale3 {-webkit-transform: scaleX(.3); -moz-transform: scaleX(.3); -ms-transform: scaleX(.3); -o-transform: scaleX(.3); transform: scaleX(.3)}
+.MJXc-scale4 {-webkit-transform: scaleX(.4); -moz-transform: scaleX(.4); -ms-transform: scaleX(.4); -o-transform: scaleX(.4); transform: scaleX(.4)}
+.MJXc-scale5 {-webkit-transform: scaleX(.5); -moz-transform: scaleX(.5); -ms-transform: scaleX(.5); -o-transform: scaleX(.5); transform: scaleX(.5)}
+.MJXc-scale6 {-webkit-transform: scaleX(.6); -moz-transform: scaleX(.6); -ms-transform: scaleX(.6); -o-transform: scaleX(.6); transform: scaleX(.6)}
+.MJXc-scale7 {-webkit-transform: scaleX(.7); -moz-transform: scaleX(.7); -ms-transform: scaleX(.7); -o-transform: scaleX(.7); transform: scaleX(.7)}
+.MJXc-scale8 {-webkit-transform: scaleX(.8); -moz-transform: scaleX(.8); -ms-transform: scaleX(.8); -o-transform: scaleX(.8); transform: scaleX(.8)}
+.MJXc-scale9 {-webkit-transform: scaleX(.9); -moz-transform: scaleX(.9); -ms-transform: scaleX(.9); -o-transform: scaleX(.9); transform: scaleX(.9)}
+.MathJax_CHTML .noError {vertical-align: ; font-size: 90%; text-align: left; color: black; padding: 1px 3px; border: 1px solid}
+</style><style type="text/css">.MathJax_Display {text-align: center; margin: 1em 0em; position: relative; display: block!important; text-indent: 0; max-width: none; max-height: none; min-width: 0; min-height: 0; width: 100%}
+.MathJax .merror {background-color: #FFFF88; color: #CC0000; border: 1px solid #CC0000; padding: 1px 3px; font-style: normal; font-size: 90%}
+.MathJax .MJX-monospace {font-family: monospace}
+.MathJax .MJX-sans-serif {font-family: sans-serif}
+#MathJax_Tooltip {background-color: InfoBackground; color: InfoText; border: 1px solid black; box-shadow: 2px 2px 5px #AAAAAA; -webkit-box-shadow: 2px 2px 5px #AAAAAA; -moz-box-shadow: 2px 2px 5px #AAAAAA; -khtml-box-shadow: 2px 2px 5px #AAAAAA; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true'); padding: 3px 4px; z-index: 401; position: absolute; left: 0; top: 0; width: auto; height: auto; display: none}
+.MathJax {display: inline; font-style: normal; font-weight: normal; line-height: normal; font-size: 100%; font-size-adjust: none; text-indent: 0; text-align: left; text-transform: none; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; direction: ltr; max-width: none; max-height: none; min-width: 0; min-height: 0; border: 0; padding: 0; margin: 0}
+.MathJax img, .MathJax nobr, .MathJax a {border: 0; padding: 0; margin: 0; max-width: none; max-height: none; min-width: 0; min-height: 0; vertical-align: 0; line-height: normal; text-decoration: none}
+img.MathJax_strut {border: 0!important; padding: 0!important; margin: 0!important; vertical-align: 0!important}
+.MathJax span {display: inline; position: static; border: 0; padding: 0; margin: 0; vertical-align: 0; line-height: normal; text-decoration: none}
+.MathJax nobr {white-space: nowrap!important}
+.MathJax img {display: inline!important; float: none!important}
+.MathJax * {transition: none; -webkit-transition: none; -moz-transition: none; -ms-transition: none; -o-transition: none}
+.MathJax_Processing {visibility: hidden; position: fixed; width: 0; height: 0; overflow: hidden}
+.MathJax_Processed {display: none!important}
+.MathJax_ExBox {display: block!important; overflow: hidden; width: 1px; height: 60ex; min-height: 0; max-height: none}
+.MathJax .MathJax_EmBox {display: block!important; overflow: hidden; width: 1px; height: 60em; min-height: 0; max-height: none}
+.MathJax .MathJax_HitBox {cursor: text; background: white; opacity: 0; filter: alpha(opacity=0)}
+.MathJax .MathJax_HitBox * {filter: none; opacity: 1; background: transparent}
+#MathJax_Tooltip * {filter: none; opacity: 1; background: transparent}
+@font-face {font-family: MathJax_Blank; src: url('about:blank')}
+.MathJax .noError {vertical-align: ; font-size: 90%; text-align: left; color: black; padding: 1px 3px; border: 1px solid}
+</style></head>
+<body style="transition: -webkit-transform 0.8s ease;"><div style="visibility: hidden; overflow: hidden; position: absolute; top: 0px; height: 1px; width: auto; padding: 0px; border: 0px; margin: 0px; text-align: left; text-indent: 0px; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal;"><div id="MathJax_Hidden"></div></div><div id="MathJax_Message" style="display: none;"></div>
+  <div class="reveal default center" role="application" data-transition-speed="default" data-background-transition="fade">
+    <div class="slides" style="width: 960px; height: 700px; zoom: 0.732857;">
+
+
+<section id="software-and-programming-language-theory" class="slide level1 past" style="top: 147.5px; display: none;" hidden="" aria-hidden="true">
+<h1>Software and Programming Language Theory</h1>
+<h2 id="classification-of-programming-languages">Classification of programming languages</h2>
+<h3 id="characteristics-of-programming-languages">Characteristics of programming languages</h3>
+<h3 id="how-do-programming-languages-differ-from-each-other">(How do programming languages differ from each other)</h3>
+<style>
+.twocolumn {
+  -moz-column-count: 2;
+  -webkit-column-count: 2;
+}
+.small { font-size: small !important; }
+.smaller { font-size: 0.8em !important; }
+
+
+</style>
+<p>Course page: <a href="https://maxxk.github.io/programming-languages-2016/" class="uri">https://maxxk.github.io/programming-languages-2016/</a><br>
+<span style="font-size: small">Chrome or Firefox are recommended to watch presentations; Konqueror in aud. 13-15 skips some slides. Open with Firefox and enable scripts with button “Settings”, lower right corner</span></p>
+</section>
+<section id="literature" class="slide level1 past" style="top: 209.5px; display: none;" hidden="" aria-hidden="true">
+<h1>Literature</h1>
+<ol type="1">
+<li>B. Pierce. Types and Programming Languages. MIT Press. 2002.</li>
+<li>D. Watt. Programming Language Design Concepts. Wiley. 2004.</li>
+<li>F. Turbak, D. Gifford. Design Concepts in Programming Languages. 2008.</li>
+<li>R. Sebesta. Concepts of Programming Languages. 2012.</li>
+</ol>
+</section>
+<section id="history-of-programming-languages" class="slide level1 past" style="top: 275.5px; display: none;" hidden="" aria-hidden="true">
+<h1>History of programming languages</h1>
+</section>
+<section id="forth-stack-based-and-concatenative" class="slide level1 past" style="top: 33.5px; display: none;" hidden="" aria-hidden="true">
+<h1>Forth: stack-based and concatenative</h1>
+<p>Uses point-free notation (e.g. f ∘ g instead of λx. f(g(x))).</p>
+<pre class="factor"><code>: reshape ( width height -- )
+    [ 0 0 ] 2dip glViewport
+    GL_PROJECTION glMatrixMode
+    glLoadIdentity
+    -30.0 30.0 -30.0 30.0 -30.0 30.0 glOrtho
+    GL_MODELVIEW glMatrixMode ;
+
+: paint ( -- )
+    0.3 0.3 0.3 0.0 glClearColor
+    GL_COLOR_BUFFER_BIT GL_DEPTH_BUFFER_BIT bitor glClear
+    GL_SMOOTH glShadeModel
+    glLoadIdentity
+    -15.0 -15.0 0.0 glTranslatef
+    GL_TRIANGLES glBegin
+    1.0 0.0 0.0 glColor3f 0.0 0.0 glVertex2f
+    0.0 1.0 0.0 glColor3f 30.0 0.0 glVertex2f
+    0.0 0.0 1.0 glColor3f 0.0 30.0 glVertex2f
+    glEnd
+    glFlush ;
+
+M: triangle-gadget pref-dim* drop { 640 480 } ;
+M: triangle-gadget draw-gadget*
+    rect-bounds nip first2 reshape paint ;
+
+: triangle-window ( -- )
+   [ triangle-gadget new "Triangle" open-window ] with-ui ;
+MAIN: triangle-window</code></pre>
+</section>
+<section id="ada-programming-language" class="slide level1 past" style="top: 37.5px; display: none;" hidden="" aria-hidden="true">
+<h1>Ada programming language</h1>
+<p><span class="small">Missing parts from previous lecture. Based on «R. Sebesta. Concepts of Programming Lanugages. 2012»</span><br>
+US Department of Defense initiated the design process of programming language in 1975. Original motivation: make a single high-level programming language for a broad range of applications, including critical embedded systems. At the time of proposal, about 450 different languages was in use by DoD contractors.</p>
+<p>In 1979 design and rationale of Ada were published in ACM SIGPLAN Notices. In October 1979 a public test and evaluation conference was held. In the conference representatives from over 100 US and Europe organizations took part.</p>
+<p>Final specification was mostly completed in 1980, revised and published in 1983. First usable compilers appeared around 1980.</p>
+<p>Revised in 1995, 2005 (both revisions featuring OOP and concurrency enhancements). Widely used in aviation.</p>
+</section>
+<section id="ada" class="slide level1 past" style="top: 50.5px; display: none;" hidden="" aria-hidden="true">
+<h1>Ada</h1>
+<div class="sourceCode"><pre class="sourceCode ada"><code class="sourceCode ada"><span class="kw">procedure</span> Ada_Ex <span class="kw">is</span>
+  <span class="kw">type</span> Int_List_Type <span class="kw">is</span> <span class="kw">array</span> (<span class="dv">1</span>..<span class="dv">99</span>) <span class="kw">of</span> <span class="dt">Integer</span>; Int_List : Int_List_Type;
+  List_Len, Sum, Average, Result : <span class="dt">Integer</span>;
+<span class="kw">begin</span>
+  Result:= <span class="dv">0</span>;
+  Sum := <span class="dv">0</span>;
+  Get (List_Len);
+  <span class="kw">if</span> (List_Len &gt; <span class="dv">0</span>) <span class="kw">and</span> (List_Len &lt; <span class="dv">100</span>) <span class="kw">then</span>
+  <span class="co">-- Read input data into an array and compute the sum</span>
+  <span class="kw">for</span> Counter := <span class="dv">1</span> .. List_Len <span class="kw">loop</span>
+      Get (Int_List(Counter));
+      Sum := Sum + Int_List(Counter);
+  <span class="kw">end loop</span>;
+  <span class="co">-- Compute the average</span>
+  Average := Sum / List_Len;
+  <span class="co">-- Count the number of values that are &gt; average</span>
+  <span class="kw">for</span> Counter := <span class="dv">1</span> .. List_Len <span class="kw">loop</span>
+      <span class="kw">if</span> Int_List(Counter) &gt; Average <span class="kw">then</span>
+        Result:= Result+ <span class="dv">1</span>;
+      <span class="kw">end if</span>;
+  <span class="kw">end loop</span>;
+  <span class="co">-- Print result</span>
+  Put (<span class="st">"The number of values &gt; average is:"</span>);
+  Put (Result);
+  New_Line;
+<span class="kw">else</span>
+    Put_Line (<span class="st">"Error—input list length is not legal"</span>);
+<span class="kw">end if</span>;
+<span class="kw">end</span> Ada_Ex;</code></pre></div>
+</section>
+<section id="ada-1" class="slide level1 past" style="top: 50.5px; display: none;" hidden="" aria-hidden="true">
+<h1>Ada</h1>
+<div class="sourceCode"><pre class="sourceCode ada"><code class="sourceCode ada"><span class="kw">generic</span>
+  capacity: Positive;
+<span class="kw">package</span> Queues <span class="kw">is</span>
+  <span class="kw">type</span> Queue <span class="kw">is</span> <span class="kw">limited</span> <span class="kw">private</span>;
+  <span class="co">-- A Queue value represents a queue whose elements are characters and</span>
+  <span class="co">-- whose maximum length is capacity.</span>
+  <span class="kw">procedure</span> clear (q: <span class="kw">out</span> Queue);
+  <span class="co">-- Make queue q empty.</span>
+  <span class="kw">procedure</span> add (q: <span class="kw">in</span> <span class="kw">out</span> Queue; e: <span class="kw">in</span> Character);
+  <span class="co">-- Add element e to the rear of queue q.</span>
+  <span class="kw">procedure</span> remove (q: <span class="kw">in</span> <span class="kw">out</span> Queue; e: <span class="kw">out</span> Character);
+  <span class="co">-- Remove element e from the front of queue q. private</span>
+  <span class="kw">type</span> Queue <span class="kw">is</span> <span class="kw">record</span>
+    length: <span class="dt">Integer</span> <span class="kw">range</span> <span class="dv">0</span> .. capacity;
+    front, rear: <span class="dt">Integer</span> <span class="kw">range</span> <span class="dv">0</span> .. capacity<span class="dv">-1</span>; elems: <span class="kw">array</span> (<span class="dv">0</span> .. capacity<span class="dv">-1</span>) <span class="kw">of</span> Character;
+  <span class="kw">end record</span>;
+  <span class="co">-- A queue is represented by a cyclic array, with the queued elements</span>
+  <span class="co">-- stored either in elems(front..rear-1) or in</span>
+  <span class="co">-- elems(front..capacity-1) and elems(0..rear-1).</span>
+<span class="kw">end</span> Queues;</code></pre></div>
+</section>
+<section id="characteristics-of-programming-languages-1" class="slide level1 past" style="top: 139.5px; display: none;" hidden="" aria-hidden="true">
+<h1>Characteristics of programming languages</h1>
+<p>How the modern programming languages differ from each other?</p>
+<p>Two major categories:</p>
+<ul>
+<li>«internal» characteristic — what is representable in the language, features of any language implementation<br>
+E.g.: static vs dynamic typing</li>
+<li>«external» characteristic — features of specific language implementation<br>
+E.g. interpreted vs compiled</li>
+</ul>
+</section>
+<section id="interpreted-vs-compiled-python" class="slide level1 past" style="top: 209.5px; display: none;" hidden="" aria-hidden="true">
+<h1>Interpreted vs compiled: Python</h1>
+<ul>
+<li><a href="https://www.python.org/">CPython</a> — interpreter (reference implementation)</li>
+<li><a href="http://pypy.org/">PyPy</a>, <a href="http://ironpython.net/">IronPython</a>, <a href="https://wiki.python.org/jython/">Jython</a> — just-in-time compiler (specific tracing JIT, .NET, JVM, respectively)</li>
+<li><a href="http://cython.org/">Cython</a>, <a href="http://nuitka.net/">Nuitka</a> — ahead-of-time compiler</li>
+</ul>
+</section>
+<section id="object-oriented-programming" class="slide level1 past" style="top: 98px; display: block;" hidden="" aria-hidden="true">
+<h1>Object-oriented programming</h1>
+<p>Main entities:</p>
+<ul>
+<li>object</li>
+<li>class - a family of similar objects</li>
+</ul>
+<p>Classical concepts:</p>
+<ul>
+<li>encapsulation - hiding of irrelevant implementation details (e.g. fields)</li>
+<li>inheritance - a subclass inherits all methods of superclass, unless subclass explicitly overrides a method</li>
+<li>inclusion polymorphism (Liskov substitution principle) - objects of subclasses can be treated uniformly as an object of common superclass</li>
+</ul>
+</section>
+<section id="prototype-based-object-oriented-programming" class="slide level1 past" style="top: 30.5px; display: block;" hidden="" aria-hidden="true">
+<h1>Prototype-based object-oriented programming</h1>
+<p>Class is replaced with prototype object, which defines the common methods for objects.<br>
+Well-known implementation: JavaScript (ECMAScript)</p>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript">[<span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span>].<span class="at">sum</span>()<span class="op">;</span>
+<span class="co">// ⟶ Exception: sum is not defined</span>
+
+<span class="va">Array</span>.<span class="va">prototype</span>.<span class="at">sum</span> <span class="op">=</span> <span class="kw">function</span>() <span class="op">{</span>
+  <span class="kw">let</span> sum <span class="op">=</span> <span class="dv">0</span><span class="op">;</span>
+  <span class="cf">for</span> (<span class="kw">let</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> <span class="kw">this</span>.<span class="at">length</span><span class="op">;</span> i<span class="op">++</span>) <span class="op">{</span>
+    sum <span class="op">+=</span> <span class="kw">this</span>[i]<span class="op">;</span>
+  <span class="op">}</span>
+  <span class="cf">return</span> sum<span class="op">;</span>
+<span class="op">}</span>
+
+[<span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span>].<span class="at">sum</span>()<span class="op">;</span>
+<span class="co">// ⟶ 6</span></code></pre></div>
+</section>
+<section id="live-programming" class="slide level1 present" style="top: 275.5px; display: block;">
+<h1>Live programming</h1>
+</section>
+<section id="pascal-family" class="slide level1 future" hidden="" aria-hidden="true" style="top: 275.5px; display: block;">
+<h1>Pascal family</h1>
+</section>
+<section id="polymorphism" class="slide level1 future" hidden="" aria-hidden="true" style="top: 275.5px; display: block;">
+<h1>Polymorphism</h1>
+</section>
+<section id="type-system" class="slide level1 future" hidden="" aria-hidden="true" style="top: 330px; display: none;">
+<h1>Type system</h1>
+<blockquote>
+<p>A type system is a tractable syntactic method for proving the absence of certain program behaviors by classifying phrases according to the kinds of values they compute.<br>
+<span class="small">B. Pierce. Types and Programming Languages. 2002.</span></p>
+</blockquote>
+<ul>
+<li>safe and unsafe</li>
+<li>statically-checked and dynamically-checked</li>
+</ul>
+</section>
+<section id="optional-typing" class="slide level1 future" hidden="" aria-hidden="true" style="top: 330px; display: none;">
+<h1>Optional typing</h1>
+</section>
+<section id="live-programming-1" class="slide level1 future" hidden="" aria-hidden="true" style="top: 330px; display: none;">
+<h1>Live programming</h1>
+</section>
+<section id="variable-scoping" class="slide level1 future" hidden="" aria-hidden="true" style="top: 330px; display: none;">
+<h1>Variable scoping</h1>
+</section>
+<section id="functional-programming" class="slide level1 future" hidden="" aria-hidden="true" style="top: 330px; display: none;">
+<h1>Functional programming</h1>
+</section>
+<section id="haskell" class="slide level1 future" hidden="" aria-hidden="true" style="top: 330px; display: none;">
+<h1>Haskell</h1>
+</section>
+<section id="pure-functional-programming" class="slide level1 future" hidden="" aria-hidden="true" style="top: 330px; display: none;">
+<h1>Pure functional programming</h1>
+</section>
+<section id="evaluation-strategy" class="slide level1 future" hidden="" aria-hidden="true" style="top: 330px; display: none;">
+<h1>Evaluation strategy</h1>
+<h2 id="strict-vs-non-strict-evaluation">Strict vs Non-strict evaluation</h2>
+<p>Strict (eager) evaluation: all function arguments are evaluated before call.</p>
+<p>Non-strict (lazy) evaluation: function arguments are evaluated only when used.</p>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">function</span> <span class="at">f</span>(a<span class="op">,</span> b<span class="op">,</span> c) <span class="op">{</span> <span class="cf">return</span> a<span class="op">+</span>b<span class="op">;</span> <span class="op">}</span>
+<span class="kw">function</span> ⟂() <span class="op">{</span> <span class="cf">while</span>(<span class="kw">true</span>) <span class="op">{}</span> <span class="op">}</span>
+<span class="at">f</span>(<span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> ⟂())
+<span class="co">// Strict evaluation ⟶ ⟂</span>
+<span class="co">// Non-strict evaluation ⟶ 3</span></code></pre></div>
+</section>
+<section id="strict-evaluation" class="slide level1 future" hidden="" aria-hidden="true" style="top: 330px; display: none;">
+<h1>Strict evaluation</h1>
+<p>`void example(int a, int* b, )``<br>
+call-by-value<br>
+~ (like in C for non-pointer arguments) arguments are copied to the callee memory, callee-made changes are <em>not visible</em> to caller</p>
+<dl>
+<dt>call-by-reference</dt>
+<dd>(like pointer arguments in C or reference arguments in C++) callee gets references to the arguments, callee-made changes are <em>visible</em> to caller
+</dd>
+<dt>call-by-sharing</dt>
+<dd>arguments are placed on the shared heap, they can't be reassigned, but can be changed
+</dd>
+</dl>
+</section>
+<section id="lazy-evaluation" class="slide level1 future" hidden="" aria-hidden="true" style="top: 330px; display: none;">
+<h1>Lazy evaluation</h1>
+<dl>
+<dt>call-by-name</dt>
+<dd>(Algol-60) arguments are directly substituted to caller code (as a terms in lambda-calculus)
+</dd>
+<dt>call-by-need</dt>
+<dd>(Haskell) the result of argument computation is cached (so that the two different substitutions of the same argument share the same result)
+</dd>
+</dl>
+</section>
+<section id="execution-model" class="slide level1 future" hidden="" aria-hidden="true" style="top: 330px; display: none;">
+<h1>Execution model</h1>
+<ul>
+<li>interpreted languages - the source code is directly, "line-by-line" executed by a program</li>
+<li>bytecode interpreters - the source code is compiled to some intermediate representation (resembling machine code), then it runs on top of some virtual machine implementation</li>
+<li>just-in-time (JIT) compilers - the source code or byte code is partially compiled to machine code at the time of execution</li>
+<li>ahead-of-time (AOT) compilers - the source code is completely translated to machine code before the execution</li>
+</ul>
+</section>
+<section id="futamura-projections" class="slide level1 future" hidden="" aria-hidden="true" style="top: 330px; display: none;">
+<h1>Futamura projections</h1>
+</section>
+<section id="list-comprehensions" class="slide level1 future" hidden="" aria-hidden="true" style="top: 330px; display: none;">
+<h1>List-comprehensions</h1>
+</section>
+<section id="pattern-matching" class="slide level1 future" hidden="" aria-hidden="true" style="top: 330px; display: none;">
+<h1>Pattern-matching</h1>
+</section>
+<section id="macros-and-metaprogramming" class="slide level1 future" hidden="" aria-hidden="true" style="top: 330px; display: none;">
+<h1>Macros and metaprogramming</h1>
+</section>
+<section id="domain-specific-programming-languages" class="slide level1 future" hidden="" aria-hidden="true" style="top: 330px; display: none;">
+<h1>Domain-specific programming languages</h1>
+</section>
+<section id="tex" class="slide level1 future" hidden="" aria-hidden="true" style="top: 330px; display: none;">
+<h1>TeX</h1>
+<p>call-by-expansion and variable capture</p>
+</section>
+<section id="memory-management" class="slide level1 future" hidden="" aria-hidden="true" style="top: 330px; display: none;">
+<h1>Memory management</h1>
+<p>Implementation feature.</p>
+<ul>
+<li><p><strong>manual memory management</strong>: standard library provides some means of direct allocation and deallocation of dynamical memory (<code>malloc</code> and <code>free</code>; <code>new</code> and <code>delete</code>). Usually it is directly connected with an existence of unchecked memory pointers (as in C language)</p></li>
+<li><p><strong>automated memory management</strong>: direct allocation. Deallocation is done by runtime at some point (with some or none guarantees about time of deallocation).</p></li>
+</ul>
+<p>Memory buffers are usually allocated on the heap.</p>
+</section>
+<section id="manual-memory-management" class="slide level1 future" hidden="" aria-hidden="true" style="top: 330px; display: none;">
+<h1>Manual memory management</h1>
+<ul>
+<li><p>static allocation<br>
+microcontrollers, GPU</p></li>
+<li><p>dynamic allocation<br>
+generic limited resources (not just memory buffers: socket connections, file descriptors)</p></li>
+</ul>
+<h2 id="disadvantages">Disadvantages</h2>
+<ul>
+<li>common classes of memory management-related errors (use after free, double free, memory leak, dangling pointer)</li>
+<li>common classes of dangerous unchecked memory pointer-related errors</li>
+</ul>
+</section>
+<section id="automated-memory-management" class="slide level1 future" hidden="" aria-hidden="true" style="top: 330px; display: none;">
+<h1>Automated memory management</h1>
+<ul>
+<li>garbage collection is an undecidable problem</li>
+<li>stack analysis (is this a pointer or the data?)</li>
+<li>escape analysis (if we pass the pointer to a function, will it store it somewhere on the heap)</li>
+</ul>
+<p>Modern solution: instrumentation<br>
+Approaches: reference counting, tracing collection</p>
+<p><span class="small">See also: R. Jones, A. Hosking, E. Moss. The Garbage Collection Handbook: The Art of Automatic Memory Management. 2012. <a href="http://gchandbook.org/" class="uri">http://gchandbook.org/</a> </span></p>
+</section>
+<section id="reference-counting" class="slide level1 future" hidden="" aria-hidden="true" style="top: 330px; display: none;">
+<h1>Reference counting</h1>
+<p>Every object stores a counter of references. Each time the object reference is stored somewhere, counter is incremented. When the reference is deleted (function return for stack variables), the counter is decremented. When the counter becomes zero, the object is marked as unreachable.</p>
+<p>Disadvantages: performance hit, circular references</p>
+<p>Implemented in C++, Objective-C</p>
+</section>
+<section id="tracing-garbage-collection" class="slide level1 future" hidden="" aria-hidden="true" style="top: 330px; display: none;">
+<h1>Tracing garbage collection</h1>
+<ul>
+<li>Most common approach, can be used also to solve the aforementioned circular reference problem. Garbage collection algorithm walks through the graph of objects, which are reachable from the current execution state. All other memory is marked as free.</li>
+</ul>
+<p>Advantages: requires strict checked pointers ⇒ compacting garbage collection (immediate allocation, periodic defragmentation)</p>
+<p>Disadvantages: non-deterministic execution time, performance, memory usage</p>
+<p>Some varieties of garbage collection algorigthms include:</p>
+<ul>
+<li>stop-the-world (main program execution is interrupted for garbage collection) vs concurrent (garbage collection runs in different thread)</li>
+</ul>
+</section>
+<section id="monster-languages" class="slide level1 future" hidden="" aria-hidden="true" style="top: 330px; display: none;">
+<h1>”Monster languages"</h1>
+</section>
+<section id="c" class="slide level1 future" hidden="" aria-hidden="true" style="top: 330px; display: none;">
+<h1>C++</h1>
+</section>
+<section id="scala" class="slide level1 future" hidden="" aria-hidden="true" style="top: 330px; display: none;">
+<h1>Scala</h1>
+</section>
+<section id="homework-assignments" class="slide level1 future" hidden="" aria-hidden="true" style="top: 330px; display: none;">
+<h1>Homework assignments</h1>
+<p><strong>Task 2.1</strong>* Select 5 <a href="https://www.random.org/integer-sets/">random</a> programming languages (e.g. from <a href="https://github.com/github/linguist/tree/master/vendor/grammars">GitHub highlighting repository</a> or from <a href="https://en.wikipedia.org/wiki/List_of_programming_languages">Wikipedia</a>). Describe each of them in terms of features you learned today (1-2 pages, language primary focus, typing system, main features, reference implementation features).</p>
+</section>
+    </div>
+  <div class="backgrounds"><div class="slide-background slide level1 past" data-loaded="true" style="display: none;"></div><div class="slide-background slide level1 past" data-loaded="true" style="display: none;"></div><div class="slide-background slide level1 past" data-loaded="true" style="display: none;"></div><div class="slide-background slide level1 past" data-loaded="true" style="display: none;"></div><div class="slide-background slide level1 past" data-loaded="true" style="display: none;"></div><div class="slide-background slide level1 past" data-loaded="true" style="display: none;"></div><div class="slide-background slide level1 past" data-loaded="true" style="display: none;"></div><div class="slide-background slide level1 past" data-loaded="true" style="display: none;"></div><div class="slide-background slide level1 past" data-loaded="true" style="display: none;"></div><div class="slide-background slide level1 past" data-loaded="true" style="display: block;"></div><div class="slide-background slide level1 past" data-loaded="true" style="display: block;"></div><div class="slide-background slide level1 present" data-loaded="true" style="display: block;"></div><div class="slide-background slide level1 future" data-loaded="true" style="display: block;"></div><div class="slide-background slide level1 future" data-loaded="true" style="display: block;"></div><div class="slide-background slide level1 future" style="display: none;"></div><div class="slide-background slide level1 future" style="display: none;"></div><div class="slide-background slide level1 future" style="display: none;"></div><div class="slide-background slide level1 future" style="display: none;"></div><div class="slide-background slide level1 future" style="display: none;"></div><div class="slide-background slide level1 future" style="display: none;"></div><div class="slide-background slide level1 future" style="display: none;"></div><div class="slide-background slide level1 future" style="display: none;"></div><div class="slide-background slide level1 future" style="display: none;"></div><div class="slide-background slide level1 future" style="display: none;"></div><div class="slide-background slide level1 future" style="display: none;"></div><div class="slide-background slide level1 future" style="display: none;"></div><div class="slide-background slide level1 future" style="display: none;"></div><div class="slide-background slide level1 future" style="display: none;"></div><div class="slide-background slide level1 future" style="display: none;"></div><div class="slide-background slide level1 future" style="display: none;"></div><div class="slide-background slide level1 future" style="display: none;"></div><div class="slide-background slide level1 future" style="display: none;"></div><div class="slide-background slide level1 future" style="display: none;"></div><div class="slide-background slide level1 future" style="display: none;"></div><div class="slide-background slide level1 future" style="display: none;"></div><div class="slide-background slide level1 future" style="display: none;"></div><div class="slide-background slide level1 future" style="display: none;"></div><div class="slide-background slide level1 future" style="display: none;"></div><div class="slide-background slide level1 future" style="display: none;"></div><div class="slide-background slide level1 future" style="display: none;"></div></div><div class="progress" style="display: block;"><span style="width: 577.641px;"></span></div><aside class="controls" style="display: none;"><div class="navigate-left enabled"></div><div class="navigate-right enabled"></div><div class="navigate-up"></div><div class="navigate-down"></div></aside><div class="slide-number">12 / 40</div><div class="pause-overlay"></div><div id="aria-status-div" aria-live="polite" aria-atomic="true" style="position: absolute; height: 1px; width: 1px; overflow: hidden; clip: rect(1px 1px 1px 1px);">
+Live programming
+</div></div>
+
+
+  <script src="./02-Classification_files/head.min.js"></script>
+  <script src="./02-Classification_files/reveal.js"></script>
+
+  <script>
+
+      // Full list of configuration options available here:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        controls: false,         // Display controls in the bottom right corner
+        progress: true,         // Display a presentation progress bar
+        history: true,          // Push each slide change to the browser history
+        fragments: true,
+        center: true,                       // Vertical centering of slides
+        maxScale: 1.5,                  // Bounds for smallest/largest possible content scale
+        slideNumber: "c / t",                // Display the page number of the current slide
+        theme: 'maxxk', // available themes are in /css/theme
+        transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+        math: {
+          mathjax: 'reveal.js/../MathJax-2.5.3/MathJax.js',
+          config: 'TeX-AMS_HTML-full'  // See http://docs.mathjax.org/en/latest/config-files.html
+        },
+
+        // Optional libraries used to extend on reveal.js
+        dependencies: [
+          { src: 'reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: 'reveal.js/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+          { src: 'reveal.js/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } },
+          { src: 'reveal.js/plugin/math/math.js', async: true },
+//          { src: 'reveal.js/plugin/search/search.js', async: true, condition: function() { return !!document.body.classList; }, }
+//          { src: 'reveal.js/plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+]});
+    </script><script type="text/javascript" src="./02-Classification_files/zoom.js"></script><script type="text/javascript" src="./02-Classification_files/notes.js"></script><script type="text/javascript" src="./02-Classification_files/math.js"></script>
+    
+
+<div style="position: absolute; width: 0px; height: 0px; overflow: hidden; padding: 0px; border: 0px; margin: 0px;"><div id="MathJax_Font_Test" style="position: absolute; visibility: hidden; top: 0px; left: 0px; width: auto; padding: 0px; border: 0px; margin: 0px; white-space: nowrap; text-align: left; text-indent: 0px; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; font-size: 40px; font-weight: normal; font-style: normal; font-family: STIXSizeOneSym, sans-serif;"></div></div></body></html>
