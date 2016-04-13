@@ -41,3 +41,5 @@ department students as a course in foreign language.
 **Project Step 4.** Implement a static formal semantics for your programming language (in Agda or Coq). Choose one of the following approaches.
 - **Project Step 4a.** *  Assign the unique identifiers (e.g. natural numbers) to each bindable identifier leaf in the AST and create the mapping between the unique identifiers and static semantics subtrees.
 - **Project Step 4b.** ** Use Higher-Order Abstract Syntax.
+
+**13.04.2016** Typing as a part of static semantics. ([presentation - html](presentations/06-Typing.html))
