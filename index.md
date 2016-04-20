@@ -43,3 +43,5 @@ department students as a course in foreign language.
 - **Project Step 4b.** ** Use Higher-Order Abstract Syntax.
 
 **13.04.2016** Typing as a part of static semantics. ([presentation - html](presentations/06-Typing.html))
+
+**20.04.2016** Operational semantics ([presentation - html](presentations/07-Operational-Semantics.html))
