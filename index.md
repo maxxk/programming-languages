@@ -45,3 +45,7 @@ department students as a course in foreign language.
 **13.04.2016** Typing as a part of static semantics. ([presentation - html](presentations/06-Typing.html))
 
 **20.04.2016** Operational semantics ([presentation - html](presentations/07-Operational-Semantics.html))
+
+**27.04.2016** Operational semantics implementation ([presentation - html](presentations/08-Operational-Semantics-Implementation.html))
+
+**04.05.2016** Denotational semantics ([presentation - html](presentations/09-Denotational-semantics.html))
