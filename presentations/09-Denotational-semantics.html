@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <title></title>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <link rel="stylesheet" href="reveal.js/css/reveal.css"/>
+  <link rel="stylesheet" href="reveal.js/css/theme/maxxk.css" id="theme">
+  <link rel="stylesheet" href="additional.css"/>
+  <link rel="stylesheet" href="reveal.js/css/highlight-github.css"/>
+  <!-- If the query includes 'print-pdf', include the PDF print sheet -->
+  <script>
+    if( window.location.search.match( /print-pdf/gi ) ) {
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = 'reveal.js/css/print/pdf.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+    }
+  </script>
+  <!--[if lt IE 9]>
+  <script src="reveal.js/lib/js/html5shiv.js"></script>
+  <![endif]-->
+
+  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+<style type="text/css">.reveal pre code{white-space: pre; font-size: 1.5em; line-height: 1.3;}
+.reveal abbr { border-bottom: 0.1pt dashed blue;}
+</style>
+
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+
+<section id="software-and-programming-language-theory" class="slide level1">
+<h1>Software and Programming Language Theory</h1>
+<h2 id="denotational-semantics">Denotational semantics</h2>
+<h3 id="domain-theory">Domain theory</h3>
+<!--## Implementation of denotational semantics
+### Monads and monad transformers-->
+<h3 id="resumptions">Resumptions</h3>
+<style>
+.twocolumn {
+  -moz-column-count: 2;
+  -webkit-column-count: 2;
+}
+.small { font-size: small !important; }
+.smaller { font-size: 0.8em !important; }
+.large { font-size: 1.5em !important; }
+.huge { font-size: 2em !important; }
+.reveal section {
+  text-align: left;
+}
+
+.xits {
+  font-family: "XITS Math", "XITS", "STIX", "PT Serif Caption", sans-serif !important;
+}
+</style>
+<p>Course page: <a href="https://maxxk.github.io/programming-languages-2016/" class="uri">https://maxxk.github.io/programming-languages-2016/</a><br />
+Contact author: <script type="text/javascript">
+<!--
+h='&#x67;&#x6d;&#x61;&#x69;&#108;&#46;&#x63;&#x6f;&#x6d;';a='&#64;';n='&#x6d;&#x61;&#120;&#x69;&#x6d;&#46;&#x6b;&#114;&#x69;&#118;&#x63;&#104;&#x69;&#x6b;&#x6f;&#118;';e=n+a+h;
+document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'" clas'+'s="em' + 'ail">'+e+'<\/'+'a'+'>');
+// -->
+</script><noscript>&#x6d;&#x61;&#120;&#x69;&#x6d;&#46;&#x6b;&#114;&#x69;&#118;&#x63;&#104;&#x69;&#x6b;&#x6f;&#118;&#32;&#x61;&#116;&#32;&#x67;&#x6d;&#x61;&#x69;&#108;&#32;&#100;&#x6f;&#116;&#32;&#x63;&#x6f;&#x6d;</noscript></p>
+</section>
+<section id="off-topic" class="slide level1">
+<h1>Off-topic</h1>
+<p>An interesting paper introduced in blogpost yesterday: <a href="http://www.scottaaronson.com/blog/?p=2725">The 8000th Busy Beaver number eludes ZF set theory: new paper by Adam Yedidia and me</a>.<br />
+The authors constructed Turing machines the termination of which depends on some nontrivial foundational statements, with not-so-many states.</p>
+<ul>
+<li>4888-state machine that halts iff (if and only if) there is a counterexample to Goldbach's Conjecture</li>
+<li>5372-state machine that halts iff there is a counterexample to Riemann hypothesis</li>
+<li>7918-state machine whose behavior can not be proven from the usual axioms of set theory under reasonable consistency hypothesis</li>
+</ul>
+</section>
+<section id="some-non-trivial-parts-of-programming-language-semantics" class="slide level1">
+<h1>Some non-trivial parts of programming language semantics</h1>
+<ol type="1">
+<li><p>Possible non-termination. Some languages allow possibly-infinite loops. Languages without non-termination have rather simple semantics.<br />
+<strong>Operational semantics:</strong> sequence of steps form the directed graph (execution trace), non-termination is represented as a loop in graph.</p></li>
+<li><p>Non-determinism. In some languages (for example, C) the order of execution of some expressions (e.g. the evaluation order of arguments) is unspecified. Furthermore, threads parallel programming model is essentially non-deterministic.<br />
+<strong>Operational semantics:</strong> evaluation relations are many-valued.</p></li>
+</ol>
+</section>
+<section id="denotational-semantics-literature" class="slide level1">
+<h1>Denotational semantics: Literature</h1>
+<div class="smaller">
+<ol type="1">
+<li><p>R.W. Sebesta. Concepts of Programming Languages, 2012.<br />
+Section 3.5.2. Denotational semantics (pp. 142–147)<br />
+— concise practical introduction, good for getting first impression.</p></li>
+<li><p><strong>F.A. Turbak, D.K. Gifford. Desing Concepts in Programming Languages, 2008.<br />
+Section 4. Denotational semantics, Section 5. Fixed Points. (pp. 113–204)</strong></p></li>
+<li><p>D.A. Schmidt. Denotational Semantics: A Methodology for Language Development. 1997.<br />
+A monograph on denotational semantics.</p></li>
+<li><p>N.S. Papaspyrou. A Formal Semantics for the C Programming Language. 1998.<br />
+PhD thesis.</p></li>
+<li><p><strong>D.S. Scott. Logics and programming languages. 1977 <a href="http://dx.doi.org/10.1145/359810.359826">doi:10.1145/359810.359826</a><br />
+1976 ACM Turing Award Lecture. The creator of domain theory and denotational semantics describes the history and the essence of the theory to wide audience.</strong></p></li>
+<li>Ю.Л. Ершов.</li>
+</ol>
+<ul>
+<li>Непрерывные решетки и A-пространства // Докл. АН СССР. — 1972. — Т. 207, No 3. — C. 523–526.</li>
+<li>Теория A-пространств // Алгебра и логика. — 1973. — T. 12, No 4. — C. 369–416.</li>
+</ul>
+</div>
+</section>
+<section id="denotational-semantics-1" class="slide level1">
+<h1>Denotational semantics</h1>
+<p>The core idea of denotational semantics is compositionality. «The meaning of the whole is composed out of the meaning of the parts».<br />
+Main parts:</p>
+<ol type="1">
+<li><p><strong>Syntactic algebra</strong> — abstract syntax representation, AST in our notation. Describes the syntax of the program.</p></li>
+<li><p><strong>Semantic algebra</strong> — a collection of <strong>semantic domains</strong> along with functions that manipulate these domains. Models the meaning of program phrases.<br />
+Usually the meaning of a program is an element of a function domain that maps <strong>context domains</strong> (analogue of configuration space in operational semantics) to an <strong>answer domain</strong> (e.g. <em>Int</em> domain for programs which compute some integer value).</p></li>
+<li><p><strong>Meaning function</strong> maps the elements of the syntactic algebra to their meanings in the semantic algebra.</p></li>
+</ol>
+</section>
+<section id="meaning-function" class="slide level1">
+<h1>Meaning function</h1>
+<p>Meaning function must be homomorphic under the AST composition.<br />
+E.g. if we have some AST node <span class="math inline">\(t\)</span> = <span class="math inline">\(t(t_1, t_2, …, t_k)\)</span> and globally defined meaning function <span class="math inline">\(M\)</span> then:<br />
+<span class="math display">\[ M(t) = f_t (M(t_1), M(t_2), …, M(t_k)), \]</span><br />
+where <span class="math inline">\(f_t\)</span> is a function over the semantic domain determined by the syntactic class of <span class="math inline">\(t\)</span>.<br />
+<img src="images/meaning-function.png" /></p>
+</section>
+<section id="meaning-function-definition" class="slide level1">
+<h1>Meaning function definition</h1>
+<p>The usual notation for meaning function is <span class="math inline">\(⟦ · ⟧_{\text{syntax-domain}}\)</span>.<br />
+The body of the meaning function is usually defined in terms of untyped lambda-calculus with some syntactic sugar:</p>
+<ul>
+<li>conditional operator <strong>if</strong> … <strong>then</strong> … <strong>else</strong> with condition as a (decidable) predicate over the semantic domain</li>
+<li>pattern matching operator <strong>match</strong> ▷ pattern1 ↦ result1 … <strong>end</strong></li>
+<li>structural recursion: function can recursively call itself with arguments which are the structural parts of the original arguments</li>
+</ul>
+</section>
+<section id="example-imp" class="slide level1">
+<h1>Example: Imp'</h1>
+<p>Simple imperative language with arithmetical and boolean expressions, assignment, conditional operator and loop.</p>
+<p>Abstract syntax (omitting the operator precedence and lexical structure):</p>
+<pre><code>Program = Statement &quot;return&quot; VariableName
+
+Statement = VariableName &quot;=&quot; ArithmeticalExpression
+| &quot;skip&quot;
+| Statement (&quot;;&quot; | &quot;\n&quot;) Statement
+| &quot;if&quot; &quot;(&quot; BooleanExpression &quot;)&quot; &quot;{ &quot; Statement &quot; } else { &quot; Statement &quot; }&quot;
+| &quot;while &quot;(&quot; BooleanExpression &quot;)&quot; &quot;{ &quot; Statement  &quot;}&quot;
+
+ArithmeticalExpression = VariableName
+| IntegerNumber
+| &quot;sqrt&quot; ArithmeticalExpression
+| &quot;-&quot; ArithmeticalExpression
+| ArithmeticalExpression (&quot;+&quot; | &quot;-&quot; | &quot;*&quot; | &quot;/&quot; | &quot;%&quot;) ArithmeticalExpression
+
+BooleanExpression = ArithmeticalExpression (&quot;&lt;&quot; | &quot;&gt;&quot; | &quot;==&quot;) ArithmeticalExpression
+| &quot;!&quot; BooleanExpression
+| BooleanExpression (&quot;&amp;&amp;&quot; | &quot;||&quot; | &quot;^^&quot;)</code></pre>
+</section>
+<section id="imp-programs" class="slide level1">
+<h1>Imp' programs</h1>
+<ol type="1">
+<li><p><code>a</code>, <code>b</code>, <code>c</code> are the quadratic equation coefficients.</p>
+<pre><code>d = sqrt(b*b - 4*a*c)
+x1 = (-b + d) / 2*a
+x2 = (-b - d) / 2*a
+if (x1 &gt; x2) {
+  res = x1
+} else {
+  res = x2
+}
+return res</code></pre></li>
+<li><p>Primality test for <code>n</code>. Returns <code>0</code> if <code>n</code> is prime, otherwise returns minimal <code>n</code> divisor.</p>
+<pre><code>bound = sqrt(n)
+i = 2
+divisor=0
+while (i &lt; bound &amp;&amp; divisor == 0) {
+  if (n % i == 0) { divisor = n } else { skip };
+}
+return divisor</code></pre></li>
+</ol>
+</section>
+<section id="naive-denotational-semantics" class="slide level1">
+<h1>Naive denotational semantics</h1>
+<div class="smaller">
+<h2 id="semantic-domains">Semantic domains</h2>
+<p><em>Int</em> — integer numbers with addition, subtraction, division, modulus and integral approximation to square root and boolean-valued comparison operators (usually you want integer numbers mod <span class="math inline">\(2^32\)</span> or <span class="math inline">\(2^64\)</span>, but our language supports big integers).<br />
+<em>Bool</em> — boolean values (<em>true</em>, <em>false</em>) with logical operations.</p>
+<h2 id="expression-semantics-without-variables">Expression semantics (without variables)</h2>
+<p><span class="math inline">\(⟦ · ⟧_{\text{AE}} : \text{ArithmeticalExpression} → \text{Int}\)</span><br />
+<span class="math inline">\(⟦ \text{IntegerNumber}(i) ⟧_{\text{AE}} = ⟦i⟧_{\text{IntegerNumber}}\)</span><br />
+$⟦ \text{sqrt}(e) ⟧_{\text{AE}} = \left[ \sqrt{⟦e⟧_{\text{AE}}} \right] $<br />
+<span class="math inline">\(⟦ -e ⟧_{\text{AE}} = - ⟦e⟧_{\text{AE}}\)</span><br />
+<span class="math inline">\(⟦ e_1 \; aop \; e_2 ⟧_{\text{AE}} =⟦op⟧_{\text{AE-aop}} (⟦ e_1 ⟧_{\text{AE}}, ⟦e_2⟧_{\text{AE}})\)</span> [e.g. <span class="math inline">\(⟦\texttt{%}⟧_{\text{AE-aop}} = \text{mod}\)</span>]</p>
+<h2 id="boolean-expression-semantics">Boolean expression semantics</h2>
+abop — arithmetical-boolean operator, bbop — boolean-boolean operator.<br />
+<span class="math inline">\(⟦ · ⟧_{\text{BE}} : \text{BooleanExpression} → \text{Bool}\)</span><br />
+<span class="math inline">\(⟦ e_1 \; abop \; e_2 ⟧_{\text{BE}} = ⟦abop⟧ (⟦e_1⟧_{\text{AE}}, ⟦e_2⟧_{\text{AE}})\)</span><br />
+<span class="math inline">\(⟦\texttt{!} b ⟧_{\text{BE}} = ¬ ⟦ b ⟧\)</span><br />
+<span class="math inline">\(⟦b_1 \; bbop \; b_2 ⟧_{\text{BE}} = ⟦bbop⟧(⟦b_1⟧_{\text{BE}}, ⟦b_2⟧_{\text{BE}})\)</span>
+</div>
+</section>
+<section id="environments" class="slide level1">
+<h1>Environments</h1>
+<p>Expressions have read-only access to variables. It is represented in terms of environment (additional argument to the meaning function).<br />
+<strong>Semantic domain:</strong> <em>VariableState ≡ Identifier → Int<span class="math inline">\({}_⟂\)</span>,</em> <em>Int<span class="math inline">\({}_⟂\)</span> = Int ∪ { ⟂ }</em> with bottom (⟂) value representing undefined variable state. We will discuss this construction later, for now let us just state that <span class="math inline">\(f(x, ⊥) = f(⟂, x) = ⟂\)</span> for all defined functions.</p>
+<p>Update meaning functions:<br />
+<span class="math inline">\(⟦ · ⟧_{\text{AE}} : \color{red}{\text{VariableState} →} \text{ArithmeticalExpression} → \text{Int}\color{red}{{}_⟂}\)</span><br />
+All previously defined cases are updated to pass an environment to nested functions, for example:<br />
+<span class="math inline">\(⟦ -e ⟧ = λ env . - ⟦e⟧(env)\)</span><br />
+Now we can define the variable getter expression:<br />
+<span class="math inline">\(⟦ \text{Identifier}(I) ⟧ = λ env. env(I)\)</span></p>
+<p>Boolean expressions also depend on variable values. Previously defined cases must me updated.<br />
+<span class="math inline">\(⟦ · ⟧_{\text{BE}} : \color{red}{\text{VariableState} →} \text{BooleanExpression} → \text{Bool}\color{red}{{}_⟂}\)</span></p>
+</section>
+<section id="exceptions" class="slide level1">
+<h1>Exceptions</h1>
+<div class="smaller">
+<p>Now let us remember that we have three operators (<code>/, %, sqrt</code>) which are not universally defined over the integer numbers.<br />
+<strong>Semantic domains:</strong></p>
+<ul>
+<li>errors: <em>Error = { div-by-zero, sqrt-from-negative }</em></li>
+<li>domain sum constructor: <em>X + Error</em> are the values of either <em>X</em> or <em>Error</em>, with constructor <em>inl</em> converting <em>X</em> values to sum, constructor <em>inr</em> converting <em>Error</em> values to the sum.</li>
+</ul>
+<p><strong>Convenience function:</strong><br />
+withLeft : (f : X → Y) → X + Error → Y + Error<br />
+withLeft(f, x) = <strong>match</strong>(x)<br />
+▷ <em>inl</em> a ↦ f(a)<br />
+▷ <em>inr</em> e ↦ e<br />
+<strong>end</strong></p>
+<p><strong>Meaning functions:</strong><br />
+<span class="math inline">\(⟦ · ⟧_{\text{AE}} : \text{VariableState} → \text{ArithmeticalExpression} → \text{Int}_⟂ + \text{Error}\)</span><br />
+<span class="math inline">\(⟦ · ⟧_{\text{BE}} : \text{VariableState} → \text{BooleanExpression} → \text{Bool}_⟂ + \text{Error}\)</span></p>
+<p><strong>Example meaning function update:</strong><br />
+<span class="math inline">\(⟦ -e ⟧ = λ env . \text{withLeft}(λx.-x, ⟦e⟧(env))\)</span></p>
+</div>
+</section>
+<section id="statement-and-program-semantics" class="slide level1">
+<h1>Statement and program semantics</h1>
+<h2 id="program">Program</h2>
+<p>— receive the arguments and run statements. If statements completed without an error, get the return value.<br />
+<span class="math inline">\(⟦ · ⟧_{\text{P}} : \text{VariableState} → \text{Int}_⊥ + \text{Error}\)</span><br />
+<span class="math inline">\(⟦ s_1 ; \; \texttt{return} \; I ⟧ = λ args. \text{withLeft}(λenv . env(I), ⟦s_1⟧(args))\)</span></p>
+<h2 id="statement">Statement</h2>
+<p>Statements manipulate the variable environment not as a read-only environment, but as a read-write state.<br />
+<span class="math inline">\(⟦ · ⟧_{\text{S}} : \text{VariableState} → \text{VariableState} + \text{Error}\)</span><br />
+<span class="math inline">\(⟦ \texttt{skip} ⟧ = λenv. \text{inl}(env)\)</span><br />
+<span class="math inline">\(⟦ s_1 \; \texttt{;} \; s_2 ⟧ = λ env. \text{withLeft}(⟦s_2⟧, ⟦s_1⟧(env))\)</span><br />
+<span class="math inline">\(⟦ I \; \texttt{=} \; e ⟧ = λ env. \text{withLeft}(λi. (λJ. \text{if J=I return i else return env(J)}), ⟦e⟧(env))\)</span></p>
+</section>
+<section id="statements-2" class="slide level1">
+<h1>Statements (2)</h1>
+<p>Let us adopt two shorthand notations for withLeft:</p>
+<ul>
+<li>left composition: x &gt;&gt;= y ≡ withLeft(y, x)</li>
+<li>left variable binding: a ← b; S ≡ withLeft(λa. S, b)</li>
+</ul>
+<p><span class="math inline">\(⟦ \texttt{if} \; b_1 \; s_t \; s_f ⟧ = λ env. b&#39; ← ⟦b_1⟧(env) ;\)</span><br />
+<span class="math inline">\(\qquad\)</span> <strong>if</strong> <span class="math inline">\((b&#39; =_{\text{Bool}} \text{true})\)</span> <span class="math inline">\(⟦s_t⟧(env)\)</span><br />
+<span class="math inline">\(\qquad\)</span> <strong>else</strong> <span class="math inline">\(⟦s_f⟧(env)\)</span></p>
+<div class="fragment">
+<p>$⟦ \texttt{while} \; b \; s ⟧ = λ env. b' ← ⟦b⟧(env) ; $<br />
+<span class="math inline">\(\qquad\)</span> <strong>if</strong> <span class="math inline">\((b&#39; =_{\text{Bool}} \text{false})\)</span> <span class="math inline">\(env\)</span><br />
+<span class="math inline">\(\qquad\)</span> <strong>else</strong> <span class="math inline">\(⟦ s ⟧(env) &gt;&gt;= \color{red}{\textbf{???}}\)</span></p>
+<p>How can we define the meaning of the <code>while</code> loop? We can't just remove the structural recursion requirement: we may define terms with bad behavior in lambda-calculus.</p>
+</div>
+</section>
+<section id="fixed-point-semantics" class="slide level1">
+<h1>Fixed point semantics</h1>
+<p>Usually complex recursive functions may be defined by the means of the <strong>fixed point combinator</strong> and the <strong>generating function.</strong></p>
+<p>Example: factorial:<br />
+<span class="math display">\[n! = \left\{ \begin{array}{l}
+1, \text{if } n=0 \\
+n · (n-1)!, \text{otherwise}
+\end{array}\right.
+\]</span></p>
+<p>Generating function accepts the recursive call as another argument:<br />
+genFact = λ \color{red}{fact} . λ n .<br />
+<span class="math inline">\(\qquad\)</span> <strong>if</strong> n = 0 <strong>return</strong> 1<br />
+<span class="math inline">\(\qquad\)</span> <strong>else</strong> <strong>return</strong> n · fact(n)</p>
+<p>Suppose we call genFact first with identity function and then — by applying the genFact to result:<br />
+<span class="math inline">\(f_1 = \text{genFact}(λn.n)\)</span>, <span class="math inline">\(f_2 = \text{genFact}(f_1)\)</span>, …, <span class="math inline">\(f_k = \text{genFact}(f_k)\)</span>, …<br />
+For some good-behaving generating functions (or for some good starting arguments) such a sequence will have <strong>fixed points:</strong><br />
+<span class="math inline">\(f_∞\)</span> is a fixed point of genFact iff genFact(<span class="math inline">\(f_∞\)</span>) = <span class="math inline">\(f_∞\)</span>.</p>
+</section>
+<section id="fixed-points" class="slide level1">
+<h1>Fixed points</h1>
+<p>For the function [0, 1] → [0, 1]:<br />
+<img src="images/fixed-points.png" /></p>
+<p>To define a proper recursive function we need to find a solution to the recursive equation: gen(<span class="math inline">\(f_∞\)</span>) = <span class="math inline">\(f_∞\)</span>. Under what conditions does this equation have a solution and how can we construct it?</p>
+</section>
+<section id="least-fixed-point" class="slide level1">
+<h1>Least fixed point</h1>
+<p>We need something like this, but for our lambda-definable function space:<br />
+<strong>Banach Fixed Point Theorem.</strong> Let (X, d) be a non-empty complete metric space with a contraction mapping T : X → X. Then T admits a unique fixed-point x* in X (i.e. T(x*) = x*). Furthermore, x* can be found as follows: start with an arbitrary element <span class="math inline">\(x_0\)</span> in X and define a sequence {<span class="math inline">\(x_n\)</span>} by <span class="math inline">\(x_n\)</span> = T(<span class="math inline">\(x_{n−1}\)</span>), then <span class="math inline">\(x_n\)</span> → x*.</p>
+<p>The main contribution of D. Scott and Yu. L. Ershov which allows us to call them the creators of the denotational semantics is the construction which allows fixed points for some (<em>continuous</em>) functions.</p>
+</section>
+<section id="partial-order" class="slide level1">
+<h1>Partial order</h1>
+<p><strong>Partial order</strong> is a pair (D, ⩽) of a domain D and binary ordering relation ⩽ that is:</p>
+<ul>
+<li>reflexive (a ⩽ a)</li>
+<li>transitive (a ⩽ b, b ⩽ c ⇒ a ⩽ c)</li>
+<li>antisymmetric (a ⩽ b, b ⩽ a ⇒ a = b)</li>
+</ul>
+<p>Pair of elements in D which are not in the ordering relation are called <strong>incomparable</strong>.<br />
+Trivial example: discrete order in which all elements are incomparable. For Bool domain we usually define a discrete partial order.<br />
+Partial order is <strong>total order</strong> if there is no incomparable elements.</p>
+<p><strong>Upper bound</strong> of subset X ⊆ D is an element u ∈ D that is &quot;greater&quot; (stronger) than any element in X:<br />
+∀ x ∈ X, x ⩽ u.</p>
+<p>Some subsets may have even the <strong>least upper bound</strong> (upper bound which is &quot;less&quot; (weaker) than any other upper bound).</p>
+<p>(and antisymmetrical <strong>lower bound</strong> and <strong>greatest lower bound</strong>)</p>
+</section>
+<section id="partial-order-lifting" class="slide level1">
+<h1>Partial order lifting</h1>
+<p><strong>Bottom</strong> element (⊥) is such an element which is weaker than any element in D, <strong>top</strong> element (⊤) is such an element which is stronger than any element in D.</p>
+<p>Natural numbers ℕ with usual ordering have bottom element (0 or 1) but no top element. Discrete partial orders have neither.</p>
+<p>Any partial order D may be <strong>lifted</strong> to another partial order D<span class="math inline">\({}_⊥\)</span> that has all elements and orderings of D, but introduces new bottom element <span class="math inline">\(⊥\)</span>. Lifted discrete partial order is called <strong>flat</strong> partial order.</p>
+</section>
+<section id="partial-order-over-constructors" class="slide level1">
+<h1>Partial order over constructors</h1>
+<p>We can define the partial order over simple (non-dependent) type constructors:</p>
+<p><strong>Product:</strong> (d, e) ∈ D × E; (d, e) ⩽ (d', e') iff d ⩽ d' and e ⩽ e'<br />
+<strong>Sum:</strong> A+B; <span class="math inline">\(\qquad\)</span> <em>inl</em> a ⩽ <em>inl</em> a' iff a ⩽ a'; <span class="math inline">\(\qquad\)</span> <em>inr</em> b ⩽ <em>inr</em> b' iff b ⩽ b'.<br />
+<strong>Function:</strong> f, g ∈ D → E; <span class="math inline">\(\qquad\)</span> f ⩽ g iff ∀ d ∈ D, f(d) ⩽ g(d).<br />
+<strong>Sequence:</strong> <span class="math inline">\(D^*\)</span></p>
+<ul>
+<li><strong>prefix ordering</strong></li>
+<li><strong>sum-of-products ordering</strong><br />
+<strong>Powerdomain:</strong> <span class="math inline">\(2^D\)</span>, sets of all subsets under the subset ordering.</li>
+</ul>
+</section>
+<section id="complete-partial-orders-cpos" class="slide level1">
+<h1>Complete partial orders (CPOs)</h1>
+<p><strong>Chain</strong> is totally ordered nonempty subset of partial orer.<br />
+Partial order D is <strong>compete</strong> iff every chain in D has least upper bound (limit).</p>
+<p>Example: partial order <em>Bool</em><span class="math inline">\({}^*\)</span> is not CPO under the prefix ordering, because the chain {[], [true], [true, true], …} has the infinite sequence of <em>true</em> as a limit, which is not a finite sequence.<br />
+We can extend it with <em>Bool</em><span class="math inline">\({}^∞\)</span> (set of all infinite boolean sequences), so that Bool<span class="math inline">\({}^*\)</span> ∪ Bool<span class="math inline">\({}^∞\)</span> = <span class="math inline">\(\overline{\text{Bool}^*}\)</span> is a CPO</p>
+<p><strong>Theorem. </strong> For any CPOs D, E we can define the following CPOs under the defined orderings:<br />
+<span class="math inline">\(D_⟂\)</span>, <span class="math inline">\(D × E\)</span>, <span class="math inline">\(D + E\)</span>, <span class="math inline">\(D → E\)</span>, <span class="math inline">\(D^*\)</span> (under the sum-of-products ordering), <span class="math inline">\(\overline{D}\)</span> (under the prefix ordering).</p>
+</section>
+<section id="pointedness" class="slide level1">
+<h1>Pointedness</h1>
+<p>A partial order is <strong>pointed</strong> if it has a bottom element.</p>
+<p><strong>Theorem. </strong> For any <em>partial orders</em> D, E:<br />
+<span class="math inline">\(D_⟂\)</span> is pointed,<br />
+<span class="math inline">\(D × E\)</span> is pointed iff both D and E are pointed<br />
+<span class="math inline">\(D + E\)</span> is never pointed<br />
+<span class="math inline">\(D → E\)</span> is pointed iff E is pointed<br />
+<span class="math inline">\(D^*\)</span> under the sum-of-products ordering is never pointed<br />
+<span class="math inline">\(D^*\)</span> and <span class="math inline">\(\overline{D^*}\)</span> under the prefix ordering are always pointed.</p>
+</section>
+<section id="monotonicity-and-continuity" class="slide level1">
+<h1>Monotonicity and continuity</h1>
+<p><span class="math inline">\(f : D → E\)</span> is <strong>monotonic</strong> (D, E are CPOs) iff x ⩽ y ⇒ f(x) ⩽ f(y).<br />
+<span class="math inline">\(f : D → E\)</span> is <strong>continuous</strong> iff for any chain C ⊆ D, f(lub(C)) = lub({f(c) | c ∈ C})</p>
+<p><strong>Theorem. </strong> On finite CPOs (+ infinite CPOs with only finite chains) monotonicity implies continuity.<br />
+On any CPO continuity implies monotonicity.</p>
+</section>
+<section id="least-fixed-point-theorem" class="slide level1">
+<h1>Least Fixed Point Theorem</h1>
+<p><strong>Theorem. </strong> If D is a pointed CPO, then a continuous function<br />
+f : D → D<br />
+has a least fixed point <strong>fix</strong>(f) defined by lub{<span class="math inline">\(f^n\)</span>(⟂), n ⩾ 0}.</p>
+<p>So, if we can prove our function is</p>
+</section>
+<section id="homework-assignments" class="slide level1">
+<h1>Homework assignments</h1>
+<p><strong>Task 9.1</strong> ** Extend the Imp' denotational semantics with <code>break</code> and <code>continue</code> loop control statements.</p>
+<p><strong>Task 9.2</strong> * Define the big-step operational semantics for Imp' and make a short qualitative (textual) comparison between two definitions.</p>
+<p><strong>Task 9.3</strong> * Define a continuous meaning function for <code>while</code> loops in Imp'.</p>
+<p>Exercises in chapter 5 of [2] will pass as a one star each.</p>
+</section>
+    </div>
+  </div>
+
+
+  <script src="reveal.js/lib/js/head.min.js"></script>
+  <script src="reveal.js/js/reveal.js"></script>
+
+  <script>
+
+      // Full list of configuration options available here:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        controls: false,         // Display controls in the bottom right corner
+        progress: true,         // Display a presentation progress bar
+        history: true,          // Push each slide change to the browser history
+        fragments: true,
+        center: false,                       // Vertical centering of slides
+        maxScale: 1.5,                  // Bounds for smallest/largest possible content scale
+        slideNumber: "c / t",                // Display the page number of the current slide
+        theme: 'maxxk', // available themes are in /css/theme
+        transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+        math: {
+          mathjax: 'reveal.js/../MathJax-2.5.3/MathJax.js',
+          config: 'TeX-AMS_HTML-full'  // See http://docs.mathjax.org/en/latest/config-files.html
+        },
+
+        // Optional libraries used to extend on reveal.js
+        dependencies: [
+          { src: 'reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: 'reveal.js/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+          { src: 'reveal.js/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } },
+          { src: 'reveal.js/plugin/math/math.js', async: true },
+//          { src: 'reveal.js/plugin/search/search.js', async: true, condition: function() { return !!document.body.classList; }, }
+//          { src: 'reveal.js/plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+]});
+    </script>
+    </body>
+</html>
