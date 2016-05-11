@@ -49,3 +49,5 @@ department students as a course in foreign language.
 **27.04.2016** Operational semantics implementation ([presentation - html](presentations/08-Operational-Semantics-Implementation.html))
 
 **04.05.2016** Denotational semantics ([presentation - html](presentations/09-Denotational-semantics.html))
+
+**11.05.2016** Denotational semantics implementation: Monads ([presentation - html](presentations/10-Monads.html))

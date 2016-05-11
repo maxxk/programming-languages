@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <title></title>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <link rel="stylesheet" href="reveal.js/css/reveal.css"/>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
+  <link rel="stylesheet" href="reveal.js/css/theme/maxxk.css" id="theme">
+  <link rel="stylesheet" href="additional.css"/>
+  <link rel="stylesheet" href="reveal.js/css/highlight-github.css"/>
+  <!-- If the query includes 'print-pdf', include the PDF print sheet -->
+  <script>
+    if( window.location.search.match( /print-pdf/gi ) ) {
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = 'reveal.js/css/print/pdf.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+    }
+  </script>
+  <!--[if lt IE 9]>
+  <script src="reveal.js/lib/js/html5shiv.js"></script>
+  <![endif]-->
+
+  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+<style type="text/css">.reveal pre code{white-space: pre; font-size: 1.5em; line-height: 1.3;}
+.reveal abbr { border-bottom: 0.1pt dashed blue;}
+</style>
+
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+
+<section id="software-and-programming-language-theory" class="slide level1">
+<h1>Software and Programming Language Theory</h1>
+<h2 id="denotational-semantics-implementation">Denotational semantics implementation</h2>
+<h3 id="monads">Monads</h3>
+<h3 id="monad-transformers">Monad Transformers</h3>
+<h3 id="effects">Effects</h3>
+<h2 id="equational-reasoning">Equational reasoning</h2>
+<style>
+.twocolumn {
+  -moz-column-count: 2;
+  -webkit-column-count: 2;
+}
+.small { font-size: small !important; }
+.smaller { font-size: 0.8em !important; }
+.large { font-size: 1.5em !important; }
+.huge { font-size: 2em !important; }
+.reveal section {
+  text-align: left;
+}
+.reveal section.center {
+  text-align: center;
+}
+
+.xits {
+  font-family: "XITS Math", "XITS", "STIX", "PT Serif Caption", sans-serif !important;
+}
+</style>
+<p>Course page: <a href="https://maxxk.github.io/programming-languages-2016/" class="uri">https://maxxk.github.io/programming-languages-2016/</a><br />
+Contact author: <script type="text/javascript">
+<!--
+h='&#x67;&#x6d;&#x61;&#x69;&#108;&#46;&#x63;&#x6f;&#x6d;';a='&#64;';n='&#x6d;&#x61;&#120;&#x69;&#x6d;&#46;&#x6b;&#114;&#x69;&#118;&#x63;&#104;&#x69;&#x6b;&#x6f;&#118;';e=n+a+h;
+document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'" clas'+'s="em' + 'ail">'+e+'<\/'+'a'+'>');
+// -->
+</script><noscript>&#x6d;&#x61;&#120;&#x69;&#x6d;&#46;&#x6b;&#114;&#x69;&#118;&#x63;&#104;&#x69;&#x6b;&#x6f;&#118;&#32;&#x61;&#116;&#32;&#x67;&#x6d;&#x61;&#x69;&#108;&#32;&#100;&#x6f;&#116;&#32;&#x63;&#x6f;&#x6d;</noscript></p>
+</section>
+<section id="denotational-semantics-implementation-1" class="slide level1">
+<h1>Denotational semantics implementation</h1>
+<p>Evolution of statement meaning function for Imp' (from previous class):</p>
+<ol type="1">
+<li>Trivial case<br />
+<span class="math inline">\(⟦ · ⟧_{\text{S}} : \text{VariableState} → \text{VariableState}\)</span><br />
+<span class="math inline">\(⟦ \texttt{skip} ⟧ = λenv. env\)</span></li>
+<li>Exceptions possible during expression evaluation.<br />
+New notation: domain of answers <span class="math inline">\(\mathbf{A} = \text{VariableState} + \text{Error}\)</span><br />
+<span class="math inline">\(⟦ · ⟧_{\text{S}} : \text{VariableState} → \mathbf{A}\)</span><br />
+<span class="math inline">\(⟦ \texttt{skip} ⟧ = λenv. \color{red}{\text{inl}}(env)\)</span></li>
+<li>(Task 9.1 hint) Continuations for complex control flow, conceptually.<br />
+<span class="math inline">\(⟦ · ⟧_{\text{S}} : \text{VariableState} → (c_{break} : \text{VariableState} → \mathbf{A}) →\)</span><br />
+<span class="math inline">\(\qquad → (c_{continue} : \text{VariableState} → \mathbf{A}) → \mathbf{A}\)</span><br />
+<span class="math inline">\(⟦ \texttt{skip} ⟧ = λenv.\color{red}{c_{break}.c_{continue}}.\text{inl}(env)\)</span><br />
+...and so on (goto, input/output, dynamic memory allocation, non-determinism) ...</li>
+</ol>
+</section>
+<section id="denotational-semantics-implementation-2" class="slide level1">
+<h1>Denotational semantics implementation</h1>
+<p>Finally, for a real language we end up with four meaning functions for statements.<br />
+(Source: N. Papaspyrou. A Formal Semantics for the C Programming Language).<br />
+Note that almost a half of the domains employed are not simply-constructed, they are defined as the application of an argument to a domain-generating function.<br />
+<img src="images/papaspyrou-statement-prototype.png" /></p>
+<p>We need an approach to split the semantics to some modular functions.</p>
+</section>
+<section id="imp-expression-semantics" class="slide level1">
+<h1>Imp' expression semantics</h1>
+<p>Under normal circumstances we do not care about exceptions if they are passed through the normal computation flow, we even defined <code>withLeft</code> function for it:</p>
+<p>withLeft : (f : X → Y) → X + Error → Y + Error<br />
+withLeft(f, x) = <strong>match</strong>(x)<br />
+▷ <em>inl</em> a ↦ f(a)<br />
+▷ <em>inr</em> e ↦ e<br />
+<strong>end</strong></p>
+<ul>
+<li>left composition: x &gt;&gt;= y ≡ withLeft(y, x)</li>
+<li>left variable binding: a ← b; S ≡ withLeft(λa. S, b)</li>
+</ul>
+<p><span class="math inline">\(⟦ -e ⟧ = λ env . x ← ⟦e⟧(env) ; -x\)</span><br />
+<span class="math inline">\(⟦ \text{Identifier}(I) ⟧ = λ env. \text{inl}(env(I))\)</span></p>
+</section>
+<section id="section" class="slide level1">
+<h1>...</h1>
+<p>Now let us mark the following three parts of our notation:</p>
+<ol type="1">
+<li>The <strong>type constructor</strong> wraps a value in some way:<br />
+<span class="math inline">\(· \, + \text{Error} : \text{Type} → \text{Type}\)</span></li>
+<li><strong>inl injection operator</strong> lets us wrap an actual computation result to fit an application result of the type constructor:<br />
+<span class="math inline">\(\text{inl} : A → A + \text{Error}\)</span></li>
+<li><strong>withLeft' binding function</strong> allows us to transform the wrapped value by function defined only on the unwrapped values:<br />
+withLeft' : (f : X → Y + Error) → X + Error → Y + Error</li>
+</ol>
+<div class="fragment">
+<p>These two functions (inl and withLeft') have some nice compositional properties:</p>
+<ol type="1">
+<li>inl is a neutral element of withLeft':
+<ul>
+<li>(inl a) &gt;&gt;= f <strong>=</strong> f(a)</li>
+<li>w &gt;&gt;= inl <strong>=</strong> v</li>
+</ul></li>
+<li>Binding has some kind of composition rule:<br />
+(w &gt;&gt;= f) &gt;&gt;= g <strong>=</strong> w &gt;&gt;= (λ x. f(x) &gt;&gt;= g)</li>
+</ol>
+</div>
+</section>
+<section id="monad" class="slide level1 center smaller">
+<h1>Monad</h1>
+We are ready to define the notion of monad as a generalization of the presented construction.<br />
+<strong>Type constructor</strong><br />
+
+<div class="twocolumn">
+<div>
+M : Type → Type
+</div>
+<div>
+<span class="math inline">\(· \, + \text{Error} : \text{Type} → \text{Type}\)</span>
+</div>
+</div>
+<strong>injection operator</strong><br />
+
+<div class="twocolumn">
+<div>
+return : A → M A
+</div>
+<div>
+<span class="math inline">\(\text{inl} : A → A + \text{Error}\)</span>
+</div>
+</div>
+<strong>binding function</strong><br />
+
+<div class="twocolumn">
+<div>
+bind : (A → M B) → M A → M B<br />
+
+<div style="visibility:hidden">
+alignment
+</div>
+</div>
+<div>
+withLeft' : (f : X → Y + Error) → X + Error → Y + Error
+</div>
+</div>
+<strong>monad laws</strong><br />
+neutrality<br />
+
+<div class="twocolumn">
+<div>
+(return x) &gt;&gt;= f <strong>=</strong> f(x)<br />
+m &gt;&gt;= return <strong>=</strong> m
+</div>
+<div>
+(inl a) &gt;&gt;= f <strong>=</strong> f(a)<br />
+w &gt;&gt;= inl <strong>=</strong> v
+</div>
+</div>
+composition<br />
+
+<div class="twocolumn">
+<div>
+(w &gt;&gt;= f) &gt;&gt;= g <strong>=</strong> w &gt;&gt;= (λ x. f(x) &gt;&gt;= g)
+</div>
+<div>
+(w &gt;&gt;= f) &gt;&gt;= g <strong>=</strong> w &gt;&gt;= (λ x. f(x) &gt;&gt;= g)
+</div>
+</div>
+</section>
+<section id="monad-1" class="slide level1 smaller">
+<h1>Monad</h1>
+<p>Monad is a type constructor (wrapper) with two functions which satisfy the monad laws.<br />
+Injection operator (<code>return</code> function) allows us to &quot;jump into the monad&quot;.<br />
+The binding function <code>bind</code> allows us to define the monadic functions by the means of functions over the original domain (hiding the internal structure of the wrapper).<br />
+Remember that the result type is a parameter.</p>
+<p>We can also define some helper functions operating on the low level (working with internal structure of the wrapper).<br />
+Examples for our exception definition:</p>
+<p>throw : Error → A + Error<br />
+throw ≡ inr</p>
+<p>catch : A + Error → (Error → A + Error) → A + Error<br />
+catch ≡ λ <em>res</em>. <em>handler</em>. <strong>match</strong>(res)<br />
+▷ <em>inl</em> a ↦ res<br />
+▷ <em>inr</em> e ↦ handler(e)<br />
+<strong>end</strong></p>
+<p>⟦ a <code>/</code> b ⟧ ≡ λ env.a.b. A ← ⟦a⟧(env) ;<br />
+B ← ⟦b⟧(env) ;<br />
+<strong>match</strong>(B)<br />
+▷ 0 ↦ throw division-by-zero<br />
+▷ n ↦ return <span class="math inline">\(A \; /_ℤ \; n\)</span><br />
+<strong>end</strong></p>
+</section>
+<section id="standard-monads" class="slide level1">
+<h1>Standard monads</h1>
+<p>We can equip simpe type constructors with two functions which satisfy the monad laws and get standard monads. Examples from Haskell <code>mtl</code> library.</p>
+<h2 id="exception-monad">Exception monad</h2>
+<p>Exception E A = A + E<br />
+return x = inl x<br />
+bind f x= <strong>match</strong>(x)<br />
+▷ <em>inl</em> a ↦ f(a)<br />
+▷ <em>inr</em> e ↦ e<br />
+<strong>end</strong></p>
+<p>throw : Error → A + Error<br />
+catch : A + Error → (Error → A + Error) → A + Error</p>
+</section>
+<section id="standard-monads-1" class="slide level1">
+<h1>Standard monads</h1>
+<h2 id="reader-monad">Reader monad</h2>
+<p>The read-only environment<br />
+Reader R A = R → A<br />
+return x = λ env. x<br />
+bind f x = λ env. f(x(env))</p>
+<p>ask : Reader R A (get local state)<br />
+local : (R → R) → Reader R A → Reader R A (locally modify environment)<br />
+reader : (R → A) → Reader R A (get an environmet)</p>
+</section>
+<section id="standard-monads-2" class="slide level1">
+<h1>Standard monads</h1>
+<h2 id="writer-monad">Writer monad</h2>
+<p>Models write-only output (logging, tracing).<br />
+0 : W<br />
+⊕ : W → W → W<br />
+⊕ is associative<br />
+Writer W A = A × W<br />
+return x = (x, 0)<br />
+bind f x = let (y, w) = f(fst x) in (y, snd x + w)</p>
+<p>tell : W → Writer W True<br />
+listen : Writer W A → Writer W (A × W)<br />
+pass : Writer W (A × (W → W)) → Writer W A</p>
+</section>
+<section id="standard-monads-3" class="slide level1">
+<h1>Standard monads</h1>
+<h2 id="state-monad">State monad</h2>
+<p>Models the mutable state.</p>
+<p>State S A = S → A × S<br />
+return x = λ s. (x, s)<br />
+bind f x = λ s. let (x', s') = x in (f(x'), s')</p>
+<p>get : State S S<br />
+put : S → State S ()<br />
+modify : (S → S) → State S ()<br />
+gets : (S → A) → State S A</p>
+</section>
+<section id="standard-monads-4" class="slide level1">
+<h1>Standard monads</h1>
+<h2 id="list-monad">List monad</h2>
+<p>Models the nondeterminism.</p>
+<p>List A<br />
+return x = [x]<br />
+bind f x = map f x</p>
+<p>(helpers — all the standard functions of the list type)</p>
+</section>
+<section id="standard-monads-5" class="slide level1">
+<h1>Standard monads</h1>
+<h2 id="continuation-monad">Continuation monad</h2>
+<p>Cont R A = (A → R) → R<br />
+return x = λ k . k(x)<br />
+bind f x = λ k . x(λ m. f(m)(k))</p>
+<p>x : (A → R) → R<br />
+f : A → (B → R) → R<br />
+bind f x : Cont R B = (B → R) → R</p>
+<p>callCC : ((A → Cont R B) → Cont R A) → Cont R A</p>
+</section>
+<section id="callback-hell" class="slide level1">
+<h1>Callback hell</h1>
+<p>Missing counter-example of asynchronous computations in language without continuations (from <a href="https://maxxk.github.io/programming-languages-2016/presentations/08-Operational-Semantics-Implementation.html#/continuations-in-practice">8th presentation</a>)</p>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">function</span> <span class="at">copyFile</span>(onSuccess<span class="op">,</span> onFailure) <span class="op">{</span>
+  <span class="kw">var</span> fs <span class="op">=</span> <span class="at">require</span>(<span class="st">&#39;fs&#39;</span>)<span class="op">;</span>
+  <span class="va">fs</span>.<span class="at">readFile</span>(<span class="st">&#39;file1.txt&#39;</span><span class="op">,</span> <span class="op">{</span> <span class="dt">encoding</span><span class="op">:</span> <span class="st">&#39;utf-8&#39;</span> <span class="op">},</span> <span class="kw">function</span> (error<span class="op">,</span> data1) <span class="op">{</span>
+    <span class="cf">if</span> (error) <span class="op">{</span>
+      <span class="at">onFailure</span>(<span class="va">error</span>.<span class="at">code</span>)<span class="op">;</span>
+    <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span>
+      <span class="va">fs</span>.<span class="at">writeFile</span>(<span class="st">&#39;file2.txt&#39;</span><span class="op">,</span> data<span class="op">,</span> <span class="op">{</span> <span class="dt">encoding</span><span class="op">:</span> <span class="st">&#39;utf-8&#39;</span> <span class="op">},</span> <span class="kw">function</span> (error) <span class="op">{</span>
+        <span class="cf">if</span> (error) <span class="op">{</span>
+          <span class="at">onFailure</span>(<span class="va">error</span>.<span class="at">code</span>)<span class="op">;</span>
+        <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span>
+          <span class="at">onSuccess</span>()<span class="op">;</span>
+        <span class="op">}</span>
+      <span class="op">}</span>)<span class="op">;</span>
+    <span class="op">}</span>   
+  <span class="op">}</span>)<span class="op">;</span>
+<span class="op">}</span> </code></pre></div>
+<p>See also: <a href="https://gist.github.com/edsko/6bf6e8c93a2d1e7941b9" class="uri">https://gist.github.com/edsko/6bf6e8c93a2d1e7941b9</a></p>
+</section>
+<section id="category-theoretical-definition" class="slide level1 smaller">
+<h1>Category-theoretical definition</h1>
+<p>See textual descriptions at: <a href="https://funcool.github.io/cats/latest/#user-guide" class="uri">https://funcool.github.io/cats/latest/#user-guide</a></p>
+<p>See also: <a href="http://stackoverflow.com/questions/7220436/good-examples-of-not-a-functor-functor-applicative-monad/7220865" class="uri">http://stackoverflow.com/questions/7220436/good-examples-of-not-a-functor-functor-applicative-monad/7220865</a></p>
+</section>
+<section id="monad-transformers-1" class="slide level1">
+<h1>Monad transformers</h1>
+</section>
+<section id="extensible-effects" class="slide level1">
+<h1>Extensible Effects</h1>
+<p><a href="http://okmij.org/ftp/Haskell/extensible/index.html" class="uri">http://okmij.org/ftp/Haskell/extensible/index.html</a></p>
+</section>
+<section id="equational-reasoning-1" class="slide level1">
+<h1>Equational reasoning</h1>
+<p>[Turbak, Gifford. Section 3]</p>
+</section>
+    </div>
+  </div>
+
+
+  <script src="reveal.js/lib/js/head.min.js"></script>
+  <script src="reveal.js/js/reveal.js"></script>
+
+  <script>
+
+      // Full list of configuration options available here:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        controls: false,         // Display controls in the bottom right corner
+        progress: true,         // Display a presentation progress bar
+        history: true,          // Push each slide change to the browser history
+        fragments: true,
+        center: false,                       // Vertical centering of slides
+        maxScale: 1.5,                  // Bounds for smallest/largest possible content scale
+        slideNumber: "c / t",                // Display the page number of the current slide
+        theme: 'maxxk', // available themes are in /css/theme
+        transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+        math: {
+          mathjax: 'reveal.js/../MathJax-2.5.3/MathJax.js',
+          config: 'TeX-AMS_HTML-full'  // See http://docs.mathjax.org/en/latest/config-files.html
+        },
+
+        // Optional libraries used to extend on reveal.js
+        dependencies: [
+          { src: 'reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: 'reveal.js/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+          { src: 'reveal.js/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } },
+          { src: 'reveal.js/plugin/math/math.js', async: true },
+//          { src: 'reveal.js/plugin/search/search.js', async: true, condition: function() { return !!document.body.classList; }, }
+//          { src: 'reveal.js/plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+]});
+    </script>
+    </body>
+</html>
