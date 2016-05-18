@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <title></title>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <link rel="stylesheet" href="reveal.js/css/reveal.css"/>
+  <link rel="stylesheet" href="reveal.js/css/theme/maxxk.css" id="theme">
+  <link rel="stylesheet" href="additional.css"/>
+  <link rel="stylesheet" href="reveal.js/css/highlight-github.css"/>
+  <!-- If the query includes 'print-pdf', include the PDF print sheet -->
+  <script>
+    if( window.location.search.match( /print-pdf/gi ) ) {
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = 'reveal.js/css/print/pdf.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+    }
+  </script>
+  <!--[if lt IE 9]>
+  <script src="reveal.js/lib/js/html5shiv.js"></script>
+  <![endif]-->
+
+<style type="text/css">.reveal pre code{white-space: pre; font-size: 1.5em; line-height: 1.3;}
+.reveal abbr { border-bottom: 0.1pt dashed blue;}
+</style>
+
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+
+<section id="software-and-programming-language-theory" class="slide level1">
+<h1>Software and Programming Language Theory</h1>
+<h2 id="axiomatic-semantics">Axiomatic Semantics</h2>
+<h2 id="concluding-remarks">Concluding remarks</h2>
+<style>
+.twocolumn {
+  -moz-column-count: 2;
+  -webkit-column-count: 2;
+}
+.small { font-size: small !important; }
+.smaller { font-size: 0.8em !important; }
+.large { font-size: 1.5em !important; }
+.huge { font-size: 2em !important; }
+.reveal section {
+  text-align: left;
+}
+.reveal section.center {
+  text-align: center;
+}
+
+.xits {
+  font-family: "XITS Math", "XITS", "STIX", "PT Serif Caption", sans-serif !important;
+}
+</style>
+<p>Course page: <a href="https://maxxk.github.io/programming-languages-2016/" class="uri">https://maxxk.github.io/programming-languages-2016/</a><br />
+Contact author: <script type="text/javascript">
+<!--
+h='&#x67;&#x6d;&#x61;&#x69;&#108;&#46;&#x63;&#x6f;&#x6d;';a='&#64;';n='&#x6d;&#x61;&#120;&#x69;&#x6d;&#46;&#x6b;&#114;&#x69;&#118;&#x63;&#104;&#x69;&#x6b;&#x6f;&#118;';e=n+a+h;
+document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'" clas'+'s="em' + 'ail">'+e+'<\/'+'a'+'>');
+// -->
+</script><noscript>&#x6d;&#x61;&#120;&#x69;&#x6d;&#46;&#x6b;&#114;&#x69;&#118;&#x63;&#104;&#x69;&#x6b;&#x6f;&#118;&#32;&#x61;&#116;&#32;&#x67;&#x6d;&#x61;&#x69;&#108;&#32;&#100;&#x6f;&#116;&#32;&#x63;&#x6f;&#x6d;</noscript></p>
+</section>
+<section id="monads-bibliography" class="slide level1">
+<h1>Monads bibliography</h1>
+<ol type="1">
+<li>Moggi E. Notions of computation and monads // Information and Computation. 1991. Vol. 93, № 1. P. 55–92.</li>
+<li>Harrison W. Cheap (but functional) threads // <a href="https://www.researchgate.net/profile/William_Harrison6/publication/245648551/links/546b682b0cf2f5eb18091caa.pdf">Online</a></li>
+<li>Danielsson N.A. Operational Semantics Using the Partiality Monad // Proceedings of the 17th ACM SIGPLAN International Conference on Functional Programming. New York, NY, USA: ACM, 2012. P. 127–138.</li>
+<li>Papaspyrou N.S. A Resumption Monad Transformer and its Applications in the Semantics of Concurrency: CSD-SW-TR-2-01. Athenes, Greece: National Technical University of Athens, School of Electrical and Computer Engineering, Software Engineering Laboratory, 2001.</li>
+</ol>
+<p>Some of previously discussed papers also use the monads, for example:</p>
+<ol start="5" type="1">
+<li>Danielsson N.A. Total parser combinators // Proceedings of the 15th ACM SIGPLAN international conference on Functional programming - ICFP ’10. ACM Press, 2010. P. 285–285.</li>
+</ol>
+<p>Monad transformers:</p>
+<ol start="6" type="1">
+<li>Liang S., Hudak P., Jones M. Monad Transformers and Modular Interpreters // Conference Record of POPL'95: 22nd ACM SIGPLAN-SIGACT Symposium on Principles of Programming Languages, San Francisco, CA, January 1995.</li>
+</ol>
+<p>Extensible effects:</p>
+<ol start="7" type="1">
+<li><a href="http://okmij.org/ftp/Haskell/extensible/index.html">Papers on the page linked from previous presentation</a></li>
+<li><a href="http://docs.idris-lang.org/en/latest/effects/index.html">Idris tutorial on the programming with effects</a></li>
+</ol>
+</section>
+<section id="axiomatic-semantics-literature" class="slide level1">
+<h1>Axiomatic semantics literature</h1>
+<ol type="1">
+<li><em>Chapter 6 of</em> <strong>Winskel G. The Formal Semantics of Programming Languages. Cambridge, Massachusetts, US: MIT Press, 1993. xx+361 p.</strong></li>
+<li><em>Part IV of</em> Шилов Н.В. Основы синтаксиса, семантики, трансляции и верификации программ: учебное пособие. Новосибирск: НГУ, 2011. 292 p.</li>
+</ol>
+<p>Bibliography:</p>
+<ol start="3" type="1">
+<li>Floyd R.W. Assigning Meanings to Programs // Mathematical Aspects of Computer Science / ed. Schwartz J.T. American Mathematical Society, 1967. Vol. 19. P. 19–32.</li>
+<li>Hoare C.A.R. An axiomatic basis for computer programming // Communications of the ACM. 1969. Vol. 12, № 10. P. 576–580.</li>
+<li>Dijkstra E.W. Guarded commands, nondeterminacy and formal derivation of programs // Communications of the ACM. 1975. Vol. 18, № 8. P. 453–457.</li>
+</ol>
+<p>Further reading:</p>
+<ol start="6" type="1">
+<li><a href="http://ynot.cs.harvard.edu">Ynot</a> — Imperative programming with Hoare logic in Coq.</li>
+<li>Chen H. et al. Using Crash Hoare logic for certifying the FSCQ file system. ACM Press, 2015. P. 18–37.</li>
+</ol>
+</section>
+<section id="axiomatic-semantics-1" class="slide level1">
+<h1>Axiomatic semantics</h1>
+<p>Today we will use the following presentation (based on Winskel book) <a href="https://classes.soe.ucsc.edu/cmps203/Winter11/08-axiomatic.ppt.pdf" class="uri">https://classes.soe.ucsc.edu/cmps203/Winter11/08-axiomatic.ppt.pdf</a></p>
+</section>
+<section id="application-of-axiomatic-semantics" class="slide level1">
+<h1>Application of axiomatic semantics</h1>
+<ol type="1">
+<li>Automated verification tools (especially annotation-based).</li>
+<li>Code contracts</li>
+</ol>
+<ul>
+<li>based on the idea of axiomatic semantics, but I'm not aware about any formal proofs of soundness</li>
+<li>original implementation in Eiffel programming language (e.g. <a href="https://archive.eiffel.com/doc/online/eiffel50/intro/language/tutorial-09.html#pgfId-514761">Section 8</a> in Eiffel tutorial)<br />
+<code>require</code> statement (precondition), <code>ensure</code> statement (postcondition), <code>invariant</code> (class state invariant)</li>
+<li>probably most well-known implementation is <a href="https://github.com/Microsoft/CodeContracts">.NET CodeContracts</a> (see also <a href="http://research.microsoft.com/en-us/projects/contracts/">publications</a>)</li>
+</ul>
+</section>
+<section id="codecontracts-examples" class="slide level1">
+<h1>CodeContracts examples</h1>
+<p>```csharp<br />
+private static void Main(string[] args)<br />
+{<br />
+DoRequiresForAll(new List<string>() {&quot;test&quot;,null,&quot;foo&quot;});<br />
+}</p>
+<p>public static void DoRequiresForAll(List<string> input)<br />
+{<br />
+Contract.Requires(Contract.ForAll(input, w =&gt; w != null));<br />
+input.ForEach(Console.WriteLine);<br />
+}<br />
+```</p>
+<pre class="csharp"><code>public static string TrimAfter(string value, string suffix)
+{
+    Contract.Requires(!String.IsNullOrEmpty(suffix));
+    Contract.Requires(value != null);
+    Contract.Ensures( !Contract.Result&lt;string&gt;().EndsWith(suffix));</code></pre>
+</section>
+    </div>
+  </div>
+
+
+  <script src="reveal.js/lib/js/head.min.js"></script>
+  <script src="reveal.js/js/reveal.js"></script>
+
+  <script>
+
+      // Full list of configuration options available here:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        controls: false,         // Display controls in the bottom right corner
+        progress: true,         // Display a presentation progress bar
+        history: true,          // Push each slide change to the browser history
+        fragments: true,
+        center: false,                       // Vertical centering of slides
+        maxScale: 1.5,                  // Bounds for smallest/largest possible content scale
+        slideNumber: "c / t",                // Display the page number of the current slide
+        theme: 'maxxk', // available themes are in /css/theme
+        transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+        math: {
+          mathjax: 'reveal.js/../MathJax-2.5.3/MathJax.js',
+          config: 'TeX-AMS_HTML-full'  // See http://docs.mathjax.org/en/latest/config-files.html
+        },
+
+        // Optional libraries used to extend on reveal.js
+        dependencies: [
+          { src: 'reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: 'reveal.js/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+          { src: 'reveal.js/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } },
+          { src: 'reveal.js/plugin/math/math.js', async: true },
+//          { src: 'reveal.js/plugin/search/search.js', async: true, condition: function() { return !!document.body.classList; }, }
+//          { src: 'reveal.js/plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+]});
+    </script>
+    </body>
+</html>

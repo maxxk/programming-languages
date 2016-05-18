@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <title></title>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <link rel="stylesheet" href="reveal.js/css/reveal.css"/>
+  <link rel="stylesheet" href="reveal.js/css/theme/maxxk.css" id="theme">
+  <link rel="stylesheet" href="additional.css"/>
+  <link rel="stylesheet" href="reveal.js/css/highlight-github.css"/>
+  <!-- If the query includes 'print-pdf', include the PDF print sheet -->
+  <script>
+    if( window.location.search.match( /print-pdf/gi ) ) {
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = 'reveal.js/css/print/pdf.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+    }
+  </script>
+  <!--[if lt IE 9]>
+  <script src="reveal.js/lib/js/html5shiv.js"></script>
+  <![endif]-->
+
+<style type="text/css">.reveal pre code{white-space: pre; font-size: 1.5em; line-height: 1.3;}
+.reveal abbr { border-bottom: 0.1pt dashed blue;}
+</style>
+
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+
+<section id="questions-for-the-software-and-programming-language-theory-course-spring-2016" class="slide level1">
+<h1>Questions for the Software and programming language theory course (spring 2016)</h1>
+<ol type="1">
+<li>History of programming languages. Programming languages generations.</li>
+<li>Programming languages classification. Type systems.</li>
+<li>Programming languages classificaiton. Evaluation strategy.</li>
+<li>Programming languages classification. Programming paradigms (functional, object-oriented, logical).</li>
+<li>Syntax of programming languages. General notion. Lexical analysis. Chomsky hierarchy. BNF.</li>
+<li>Syntax of programming languages. General notion. Alternative methods of specification: PEG, TDOP.</li>
+<li>Syntax of programming languages. General notion. Implementation: attribute grammars, parser combinators.</li>
+<li>Formal syntax of programming languages. Lexical and syntax analysis models.</li>
+<li>Formal syntax. Total parser combinators.</li>
+<li>Static semantics. Name binding and scoping.</li>
+<li>Formal static semantics: mathematical models, implementation in proof assistants.</li>
+<li>Static and dynamic semantics. Type systems of the programming languages. Type checking and type inference.</li>
+<li>Type systems of the programming languages. Higher-order abstract syntax. Parametric higher-order abstract syntax.</li>
+<li>Operational semantics. Structural (small-step) operational semantics.</li>
+<li>Operational semantics. Natural (big-step) operational semantics.</li>
+<li>Operational semantics. Implementation in proof assistants.</li>
+<li>Denotational semantics. General notion. Meaning functions.</li>
+<li>Denotational semantics. Domain theory. Fixed points.</li>
+<li>Denotational semantics. Implementation: monads.</li>
+<li>Axiomatic semantics. Hoare logic. Soundness and completeness.</li>
+<li>Axiomatic semantics. Weakest common preconditions.</li>
+</ol>
+</section>
+    </div>
+  </div>
+
+
+  <script src="reveal.js/lib/js/head.min.js"></script>
+  <script src="reveal.js/js/reveal.js"></script>
+
+  <script>
+
+      // Full list of configuration options available here:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        controls: false,         // Display controls in the bottom right corner
+        progress: true,         // Display a presentation progress bar
+        history: true,          // Push each slide change to the browser history
+        fragments: true,
+        center: false,                       // Vertical centering of slides
+        maxScale: 1.5,                  // Bounds for smallest/largest possible content scale
+        slideNumber: "c / t",                // Display the page number of the current slide
+        theme: 'maxxk', // available themes are in /css/theme
+        transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+        math: {
+          mathjax: 'reveal.js/../MathJax-2.5.3/MathJax.js',
+          config: 'TeX-AMS_HTML-full'  // See http://docs.mathjax.org/en/latest/config-files.html
+        },
+
+        // Optional libraries used to extend on reveal.js
+        dependencies: [
+          { src: 'reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: 'reveal.js/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+          { src: 'reveal.js/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } },
+          { src: 'reveal.js/plugin/math/math.js', async: true },
+//          { src: 'reveal.js/plugin/search/search.js', async: true, condition: function() { return !!document.body.classList; }, }
+//          { src: 'reveal.js/plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+]});
+    </script>
+    </body>
+</html>

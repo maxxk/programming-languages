@@ -18,6 +18,8 @@ Course topics include:
 
 **Attention! Lecture at March 9th is cancelled, next lecture is scheduled for March 16th.**
 
+**Pre-term exam will be held at the last class, May 25th. [Questions for the exam](program.html)** 
+
 The course is required for 5th year Computational Mathematics
 department students as a course in foreign language.
 
@@ -51,3 +53,5 @@ department students as a course in foreign language.
 **04.05.2016** Denotational semantics ([presentation - html](presentations/09-Denotational-semantics.html))
 
 **11.05.2016** Denotational semantics implementation: Monads ([presentation - html](presentations/10-Monads.html))
+
+**18.05.2016** Axiomatic semantics ([presentation - html](presentations/11-Axiomatic-semantics.html))
