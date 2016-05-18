@@ -54,4 +54,4 @@ department students as a course in foreign language.
 
 **11.05.2016** Denotational semantics implementation: Monads ([presentation - html](presentations/10-Monads.html))
 
-**18.05.2016** Axiomatic semantics ([presentation - html](presentations/11-Axiomatic-semantics.html))
+**18.05.2016** Axiomatic semantics ([presentation - html](presentations/11-Axiomatic-Semantics.html))
