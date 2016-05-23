@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
+  <link rel="stylesheet" href="additional.css">
+  <link rel="stylesheet" href="reveal.js/css/highlight-github.css">
+  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<h1 id="software-and-programming-language-theory">Software and Programming Language Theory</h1>
+<h2 id="static-semantics">Static semantics</h2>
+<h2 id="typing">Typing</h2>
+<style>
+.twocolumn {
+  -moz-column-count: 2;
+  -webkit-column-count: 2;
+}
+.small { font-size: small !important; }
+.smaller { font-size: 0.8em !important; }
+.large { font-size: 1.5em !important; }
+.huge { font-size: 2em !important; }
+</style>
+<p>Course page: <a href="https://maxxk.github.io/programming-languages-2016/" class="uri">https://maxxk.github.io/programming-languages-2016/</a><br />
+Contact author: <script type="text/javascript">
+<!--
+h='&#x67;&#x6d;&#x61;&#x69;&#108;&#46;&#x63;&#x6f;&#x6d;';a='&#64;';n='&#x6d;&#x61;&#120;&#x69;&#x6d;&#46;&#x6b;&#114;&#x69;&#118;&#x63;&#104;&#x69;&#x6b;&#x6f;&#118;';e=n+a+h;
+document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'" clas'+'s="em' + 'ail">'+e+'<\/'+'a'+'>');
+// -->
+</script><noscript>&#x6d;&#x61;&#120;&#x69;&#x6d;&#46;&#x6b;&#114;&#x69;&#118;&#x63;&#104;&#x69;&#x6b;&#x6f;&#118;&#32;&#x61;&#116;&#32;&#x67;&#x6d;&#x61;&#x69;&#108;&#32;&#100;&#x6f;&#116;&#32;&#x63;&#x6f;&#x6d;</noscript></p>
+<h1 id="literature">Literature</h1>
+<ul>
+<li>R. Harper, Practical Foundations for Programming Languages, 2nd ed, 2016.</li>
+</ul>
+<p>Examples of static semantics for dynamically-typed language in specification of ECMAScript: <a href="http://www.ecma-international.org/ecma-262/6.0/" class="uri">http://www.ecma-international.org/ecma-262/6.0/</a></p>
+<h1 id="typing-1">Typing</h1>
+<blockquote>
+<p>The role of type system is to impose constraints on the formation of phrases that are sensitive to the context in which they occur.</p>
+</blockquote>
+<p>In practice, typing is usually specified by means of the formal inference system:</p>
+<ul>
+<li>typing judgement &quot;in context Γ the expression <span class="math inline">\(x\)</span> has type <span class="math inline">\(τ\)</span>&quot; — Γ ⊦ x : τ</li>
+<li>context Γ — set of typing judgement for already defined variables or expressions</li>
+<li>Γ, x : a ⊦ y : b</li>
+</ul>
+<h1 id="simply-typed-lambda-calculus">Simply Typed Lambda Calculus</h1>
+<p>Type: $τ ≡ b \; | \; τ_1 → τ_2 $, <span class="math inline">\(b\)</span> is an element of the set of basic types.</p>
+<p>Typing rules:</p>
+<ul>
+<li><p>$ \dfrac{c_α \text{— constant of type α}}{Γ ⊦ c : α}$</p></li>
+<li><p>$ \dfrac{Γ, x : σ ⊦ e : τ}{λx_σ.e : σ → τ}$,</p></li>
+<li><p>$ \dfrac{Γ ⊦ x : σ → τ, \qquad Γ ⊦ y : σ}{Γ ⊦ x_{σ → τ} · y_σ : τ}$</p></li>
+</ul>
+<p>Derivation — tree of rule applications which starts from empty context and ends in typing derivation for required expression.</p>
+<h1 id="example-from-harpers-practical-foundations...">Example from Harper's Practical Foundations...</h1>
+<p>Type: τ ≡ num | str</p>
+<p>Expression: e ≡ x <em>(variable)</em> | n | s <em>(number and string literals)</em> |<br />
+e + f <em>(addition)</em> | e ^ f <em>(concatenation)</em> | |e| <em>(length)</em> |<br />
+let x be e in f <em>(definition)</em></p>
+<p>Typing:<br />
+<span class="math inline">\(\dfrac{}{Γ, x : τ ⊦ x : τ}\)</span><br />
+<span class="math inline">\(\dfrac{}{Γ ⊦ s : str}\)</span><br />
+<span class="math inline">\(\dfrac{}{Γ ⊦ n : num}\)</span><br />
+<span class="math inline">\(\dfrac{Γ ⊦ e : num \qquad Γ ⊦ f : num}{Γ ⊦ e + f : num}\)</span><br />
+<span class="math inline">\(\dfrac{Γ ⊦ e : str \qquad Γ ⊦ f : str}{Γ ⊦ e ^ f : str}\)</span><br />
+<span class="math inline">\(\dfrac{Γ ⊦ e : str}{Γ ⊦ |e| : num}\)</span><br />
+<span class="math inline">\(\dfrac{Γ ⊦ e : τ \qquad Γ, x : τ ⊦ f : σ}{Γ ⊦ \mathrm{let} \; x \; \mathrm{be} \; e \mathrm{in} f : σ}\)</span></p>
+<h1 id="logical-properties-of-typing">Logical properties of typing</h1>
+<p>(usually are proved either by induction on rules or by induction on derivation)<br />
+<strong>Unicity: </strong> <em>For every typing context Γ and expression e there exists at most one τ such that <span class="math inline">\(Γ ⊦ e : τ\)</span>.</em><br />
+We usually want this property in a sane type system, it may be neccessary to use a different statement in case of subtyping (not a single type, but a single minimal/maximal type).</p>
+<p><strong>Inversion: </strong> <em>(example) If Γ ⊦ plus(a, b) : num then Γ ⊦ a : num, Γ ⊦ b : num. </em><br />
+If typing rules are complex, such principles are difficult to state and prove. But these principle is essential for e.g. type inference.</p>
+<h1 id="structural-properties-of-typing">Structural properties of typing</h1>
+<p><strong>Weakening: </strong> If Γ ⊦ e : τ then Γ, x : σ ⊦ e : τ for x ∉ Γ.<br />
+(we may add to context any number of typing judgements which do not overwrite the types of existing variables)</p>
+<p><strong>Contraction: </strong> <span class="math inline">\(\dfrac{Γ, x : A, x : A ⊦ Σ}{Γ, x : A ⊦ Σ}\)</span><br />
+(we may remove repeating judgements from context)</p>
+<p><strong>Exchange: </strong> <span class="math inline">\(\dfrac{Γ_1, x : A, Γ_2, y : B, Γ_3 ⊦ Σ}{Γ_1, y : B, Γ_2, x : A, Γ_3 ⊦ Σ}\)</span><br />
+(independent typing judgements may change order in context)</p>
+<p><strong>Substitution: </strong> If Γ, x : τ ⊦ e' : τ' and Γ ⊦ e : τ , then Γ ⊦ [e/x]e' : τ'<br />
+(expressions with the same type may be substituted)</p>
+<p><strong>Decomposition: </strong> If Γ ⊦ [e/x]e' : τ' then for every τ such that Γ ⊦ e : τ, we have Γ, x : τ ⊦ e' : τ'<br />
+(we can factor out some typed value)</p>
+<h1 id="substructural-type-systems">Substructural type systems</h1>
+<p>Some type systems lack support for some of the mentioned structural properties.</p>
+<h2 id="linear-types">Linear types</h2>
+<p>Based on the linear logic, ensures that each object is used exactly once. I.e. all objects have static lifetime controlled by type system. Doesn't support weakening and contraction.</p>
+<h2 id="affine-types">Affine types</h2>
+<p>Linear types with weakening (some variables may stay unused)</p>
+<h1 id="affine-types-1">Affine types</h1>
+<p>In C++ affine types are implemented as <code>std::unique_ptr</code>:</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">std::unique_ptr&lt;<span class="dt">int</span>&gt; p1(<span class="kw">new</span> <span class="dt">int</span>(<span class="dv">5</span>));
+std::unique_ptr&lt;<span class="dt">int</span>&gt; p2 = p1; <span class="co">//Compile error.</span>
+std::unique_ptr&lt;<span class="dt">int</span>&gt; p3 = std::move(p1); <span class="co">//Transfers ownership. p3 now owns the memory and p1 is rendered invalid.</span>
+
+p3.reset(); <span class="co">//Deletes the memory.</span>
+p1.reset(); <span class="co">//Does nothing.</span></code></pre></div>
+<div class="small">
+See also: <a href="http://homepages.inf.ed.ac.uk/wadler/topics/linear-logic.html" class="uri">http://homepages.inf.ed.ac.uk/wadler/topics/linear-logic.html</a>
+</div>
+<h1 id="linear-types-1">Linear types</h1>
+<p>Clean programming language</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="dt">AppendAB</span><span class="ot"> ::</span> <span class="dt">File</span> <span class="ot">-&gt;</span> (<span class="dt">File</span>, <span class="dt">File</span>)
+<span class="dt">AppendAB</span> file <span class="fu">=</span> (fileA, fileB)
+<span class="kw">where</span>
+    fileA <span class="fu">=</span> fwritec <span class="ch">&#39;a&#39;</span> file
+    fileB <span class="fu">=</span> fwritec <span class="ch">&#39;b&#39;</span> file <span class="co">-- compile error</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="dt">WriteAB</span><span class="ot"> ::</span> <span class="dt">File</span> <span class="ot">-&gt;</span> <span class="dt">File</span>
+<span class="dt">WriteAB</span> file <span class="fu">=</span> fileAB
+<span class="kw">where</span>
+    fileA <span class="fu">=</span> fwritec <span class="ch">&#39;a&#39;</span> file
+    fileAB <span class="fu">=</span> fwritec <span class="ch">&#39;b&#39;</span> fileA</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="dt">AppendAorB</span><span class="ot"> ::</span> <span class="dt">Bool</span> <span class="fu">*</span><span class="dt">File</span> <span class="ot">-&gt;</span> <span class="fu">*</span><span class="dt">File</span>
+<span class="dt">AppendAorB</span> cond file
+    <span class="fu">|</span> cond <span class="fu">=</span> fwritec <span class="ch">&#39;a&#39;</span> file
+    <span class="fu">|</span> otherwise <span class="fu">=</span> fwritec <span class="ch">&#39;b&#39;</span> file</code></pre></div>
+<h1 id="type-conversions">Type conversions</h1>
+<p><strong>Type conversion</strong> — mapping from the values of one type to the corresponding values of a different type. For example, integers to floating point numbers: 1 → 1.0 or strings to codepoints to integers.</p>
+<ul>
+<li><p><strong>cast</strong> — explicit type conversion</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">x = <span class="kw">static_cast</span>&lt;<span class="dt">int</span>&gt;(<span class="st">&#39;1&#39;</span>);</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode ada"><code class="sourceCode ada">x := <span class="dt">Float</span>(<span class="dv">1</span>);</code></pre></div></li>
+<li><p><strong>coercion</strong> — implicit type conversion, performed automatically.</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="dt">double</span> hilbert = <span class="dv">1</span> / (i + j + <span class="dv">1</span>);
+<span class="dt">int</span> pi = <span class="fl">3.141592653589793238462643383279502884197169399375105820974944592307816406</span>;</code></pre></div></li>
+</ul>
+<h1 id="type-conversions-1">Type conversions</h1>
+<ul>
+<li><p>some languages (Ada, Go) do not support any form of the coercion, some (Pascal) support only &quot;lossless&quot; coercions, others (C++, C#) even allow user-defined coercions.</p>
+<div class="sourceCode"><pre class="sourceCode pascal"><code class="sourceCode pascal">-- Pascal:
+<span class="kw">var</span> n: <span class="dt">Integer</span>;   x: <span class="dt">Real</span>;
+x := n;
+n := x; -- error
+n := round(x);</code></pre></div></li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode ada"><code class="sourceCode ada"><span class="co">-- Ada:</span>
+n: <span class="dt">Integer</span>; x: <span class="dt">Float</span>;
+x := n; <span class="co">-- error</span>
+n := x; <span class="co">-- error</span>
+x := <span class="dt">Float</span>(n);
+n := <span class="dt">Integer</span>(x); <span class="co">-- rounding</span></code></pre></div>
+<p><code>double</code> allow exact representation for 53-bit integers.</p>
+<h1 id="implicit-coercions">Implicit coercions</h1>
+<div class="smaller twocolumn">
+<pre class="c#"><code>public class Author
+{
+    public string First;
+    public string Last;
+    public string[] BooksArray;
+}
+
+
+
+
+public class Writer
+{
+    public string FirstName { get; set; }
+    public string LastName { get; set; }
+    public List&lt;string&gt; Books { get; set; }
+}
+</code></pre>
+<div class="small">
+Example from: <a href="http://www.codeproject.com/Articles/177153/Type-conversions-with-implicit-and-explicit-operat" class="uri">http://www.codeproject.com/Articles/177153/Type-conversions-with-implicit-and-explicit-operat</a>
+</div>
+<pre class="c#"><code>public static implicit operator Writer(Author a)
+{
+    return new Writer
+    {
+        FirstName = a.First,
+        LastName = a.Last,
+        Books = a.BooksArray != null ? a.BooksArray.ToList() : null
+    };
+}
+
+Author a = new Author
+{
+    First = &quot;Vijaya&quot;,
+    Last = &quot;Anand&quot;,
+    BooksArray = new string[] { &quot;book1&quot; }
+};
+Writer w = a; //implicitly casting from Author to Writer.</code></pre>
+</div>
+<h1 id="type-inference">Type inference</h1>
+<p>In some languages it is possible to leave &quot;holes&quot; in place of type specifiers. Type checker tries to fill these holes in process of <strong>type inference (type reconstruction).</strong></p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">std::vector&lt;std::map&lt;<span class="dt">int</span>, <span class="dt">bool</span>&gt;&gt; m;
+<span class="co">// ...</span>
+<span class="kw">for</span> (std::vector&lt;std::map&lt;<span class="dt">int</span>,<span class="dt">bool</span>&gt;&gt;::const_iterator it = v.begin();
+  it != v.end(); ++it) { <span class="co">/* ... */</span> }
+
+<span class="kw">for</span> (<span class="kw">auto</span> it=v.begin(); it != v.end(); ++it) {
+  <span class="kw">decltype</span>(it) it2;
+  <span class="co">/* ... */</span>
+}</code></pre></div>
+<h1 id="type-inference-1">Type inference</h1>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">data</span> <span class="dt">List</span> t <span class="fu">=</span> <span class="dt">Nil</span> <span class="fu">|</span> <span class="dt">Cons</span> (t, <span class="dt">List</span> t)
+
+length l <span class="fu">=</span>
+  <span class="kw">case</span> l <span class="kw">of</span>
+    <span class="dt">Nil</span> <span class="ot">-&gt;</span> <span class="dv">0</span>
+    <span class="dt">Cons</span>(x, xs) <span class="ot">-&gt;</span> <span class="dv">1</span> <span class="fu">+</span> length(xs)
+
+
+<span class="co">-- length :: List t -&gt; Integer</span></code></pre></div>
+<h1 id="hindley-milner-algorithm-w">Hindley-Milner Algorithm W</h1>
+<p>Most well-known algorithm: Hindley-Milner Algorithm W.</p>
+<p>Monotype: ordinary type, polytype has some type variables: ∀α.(Set α) → int</p>
+<p><img src="images/83c9167b8fdcefe88fce22e0b1761460.png" /></p>
+<p>Sample implementations: <a href="https://github.com/tomprimozic/type-systems" class="uri">https://github.com/tomprimozic/type-systems</a></p>
+<h1 id="algorithm-w">Algorithm W</h1>
+<pre><code>unify(ta,tb):
+  ta = find(ta)
+  tb = find(tb)
+  if both ta,tb are terms of the form D p1..pn with identical D,n then
+    unify(ta[i],tb[i]) for each corresponding ith parameter
+  else
+  if at least one of ta,tb is a type variable then
+    union(ta,tb)
+  else
+    error &#39;types do not match&#39;</code></pre>
+<h1 id="dynamic-typing">Dynamic typing</h1>
+<p>Dynamically-typed languages do usually have typing semantics as a part of their dynamic semantics. But some things (such as type conversions) usually must be specified statically.</p>
+<h1 id="subtyping">Subtyping</h1>
+<ul>
+<li>Row types, union types</li>
+</ul>
+<h1 id="implementation-of-typing">Implementation of typing</h1>
+<p>Static semantics environments → Typing environments</p>
+<p>Typing judgements are represented as indexed inductive type constructor. To each typeable node of static semantics tree we must attach the corresponding typing judgement.</p>
+<p>Example: <a href="http://mazzo.li/posts/Lambda.html" class="uri">http://mazzo.li/posts/Lambda.html</a></p>
+</body>
+</html>

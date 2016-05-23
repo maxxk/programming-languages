@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
+  <link rel="stylesheet" href="additional.css">
+  <link rel="stylesheet" href="reveal.js/css/highlight-github.css">
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<h1 id="software-and-programming-language-theory">Software and Programming Language Theory</h1>
+<h2 id="static-and-dynamic-semantics">Static and dynamic semantics</h2>
+<h2 id="scope">Scope</h2>
+<h2 id="typing">Typing</h2>
+<style>
+.twocolumn {
+  -moz-column-count: 2;
+  -webkit-column-count: 2;
+  column-count: 2;
+}
+.twocolumn div.sourceCode {
+  overflow-x: visible;
+}
+.smallish pre {
+  margin: 5px auto;
+}
+.small { font-size: small !important; }
+.smallish { font-size: 0.7em !important; }
+.smaller { font-size: 0.8em !important; }
+.large { font-size: 1.5em !important; }
+.huge { font-size: 2em !important; }
+</style>
+<p>Course page: <a href="https://maxxk.github.io/programming-languages-2016/" class="uri">https://maxxk.github.io/programming-languages-2016/</a><br />
+Contact author: <script type="text/javascript">
+<!--
+h='&#x67;&#x6d;&#x61;&#x69;&#108;&#46;&#x63;&#x6f;&#x6d;';a='&#64;';n='&#x6d;&#x61;&#120;&#x69;&#x6d;&#46;&#x6b;&#114;&#x69;&#118;&#x63;&#104;&#x69;&#x6b;&#x6f;&#118;';e=n+a+h;
+document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'" clas'+'s="em' + 'ail">'+e+'<\/'+'a'+'>');
+// -->
+</script><noscript>&#x6d;&#x61;&#120;&#x69;&#x6d;&#46;&#x6b;&#114;&#x69;&#118;&#x63;&#104;&#x69;&#x6b;&#x6f;&#118;&#32;&#x61;&#116;&#32;&#x67;&#x6d;&#x61;&#x69;&#108;&#32;&#100;&#x6f;&#116;&#32;&#x63;&#x6f;&#x6d;</noscript></p>
+<h1 id="programming-language-specification">Programming language specification</h1>
+<p><img src="graphviz-images/aa5f4656547c5b2a7ce97a49486be6e2a63b8520.svg" id="alt" /></p>
+<h1 id="syntax-concluding-remarks">Syntax (concluding remarks)</h1>
+<p>BNF has a graph structure (actually, a directed hypergraph with per-edge ordered destination nodes). Parse tree is a tree derived from the graph (when you encounter a cycle, vertex is duplicated).</p>
+<p><img src="graphviz-images/bf9e1f309d9b94e9d24da483ef8f703eb63e3c0a.svg" id="alt" /></p>
+<div class="smallish">
+<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c">term ::= factor | term &#39;+&#39; factor
+factor ::= atom | factor &#39;*&#39; atom
+atom ::= number | &#39;(&#39; term &#39;)&#39;</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c">(<span class="dv">3+2</span>)*<span class="dv">4+1</span></code></pre></div>
+</div>
+<h1 id="mechanization">Mechanization</h1>
+<div class="smaller">
+Programs are complex. In theory, you can make a mathematical description of a programming language with some assumptions. You can't usually prove properties on paper. Therefore we have to use some (mathematically correct) mechanization tools to make a precise reasoning about the program. In the present course we employ Agda and Coq as the mechanization tools.
+</div>
+<div class="twocolumn smallish">
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="kw">class</span> HashEntry
+{
+<span class="kw">private</span>:
+
+      <span class="dt">int</span> key;
+      <span class="dt">int</span> value;
+
+<span class="kw">public</span>:
+
+      HashEntry(<span class="dt">int</span> key, <span class="dt">int</span> value)
+      {
+            <span class="kw">this</span>-&gt;key = key;
+            <span class="kw">this</span>-&gt;value = value;
+      }
+
+      <span class="dt">int</span> getKey() { <span class="kw">return</span> key; }
+
+      <span class="dt">int</span> getValue() { <span class="kw">return</span> value; }
+};
+
+<span class="dt">const</span> <span class="dt">int</span> TABLE_SIZE = <span class="dv">128</span>;
+
+<span class="kw">class</span> HashMap
+{
+<span class="kw">private</span>:
+
+      HashEntry **table;
+
+<span class="kw">public</span>:
+
+      HashMap()
+      {
+            table = <span class="kw">new</span> HashEntry*[TABLE_SIZE];
+
+            <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt; TABLE_SIZE; i++)
+                  table[i] = NULL;
+      }
+
+      <span class="dt">int</span> get(<span class="dt">int</span> key)
+      {
+            <span class="dt">int</span> hash = (key % TABLE_SIZE);
+
+            <span class="kw">while</span> (table[hash] != NULL &amp;&amp; table[hash]-&gt;getKey() != key)
+                  hash = (hash + <span class="dv">1</span>) % TABLE_SIZE;
+
+            <span class="kw">if</span> (table[hash] == NULL)
+                  <span class="kw">return</span> <span class="dv">-1</span>;
+            <span class="kw">else</span>
+                  <span class="kw">return</span> table[hash]-&gt;getValue();
+      }
+
+      <span class="dt">void</span> put(<span class="dt">int</span> key, <span class="dt">int</span> value)
+      {
+            <span class="dt">int</span> hash = (key % TABLE_SIZE);
+
+            <span class="kw">while</span> (table[hash] != NULL &amp;&amp; table[hash]-&gt;getKey() != key)
+                  hash = (hash + <span class="dv">1</span>) % TABLE_SIZE;
+
+            <span class="kw">if</span> (table[hash] != NULL)
+                  <span class="kw">delete</span> table[hash];
+
+            table[hash] = <span class="kw">new</span> HashEntry(key, value);
+      }     
+
+      ~HashMap()
+      {
+            <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt; TABLE_SIZE; i++)
+                  <span class="kw">if</span> (table[i] != NULL)
+                        <span class="kw">delete</span> table[i];
+
+            <span class="kw">delete</span>[] table;
+      }
+};</code></pre></div>
+2009 nodes in an abstract syntax tree.<br />
+<img src="images/S6kW9.jpg" />
+</div>
+<div class="small">
+Example from: <a href="http://stackoverflow.com/a/11025084" class="uri">http://stackoverflow.com/a/11025084</a>
+</div>
+<h1 id="programming-language-semantics">Programming language semantics</h1>
+<dl>
+<dt>Static semantics</dt>
+<dd>static properties of programs, which can be determined without executing them
+</dd>
+<dd>variable bindings (what does variable name correspond to)
+</dd>
+<dd>static type checking (do the expressions satisfy constraints of typing system)
+</dd>
+<dt>Dynamic semantics</dt>
+<dd>how do we compute the value of expressions, statements, etc.
+</dd>
+</dl>
+<h1 id="naming">Naming</h1>
+<p>In programming languages we usually name entities</p>
+<ul>
+<li>variables</li>
+<li>function arguments</li>
+<li>classes</li>
+<li>modules</li>
+</ul>
+<h1 id="binding">Binding</h1>
+Binding is the process of assigning the meaning to a name.<br />
+
+<div class="twocolumn smaller">
+<div class="sourceCode"><pre class="sourceCode java"><code class="sourceCode java"><span class="kw">public</span> <span class="kw">class</span> SimpleDemoClass  
+{            
+     <span class="kw">public</span> <span class="dt">void</span> GetData&lt;T&gt;(T obj)  
+     {  
+        Console.<span class="fu">WriteLine</span>(<span class="st">&quot;INSIDE GetData&lt;T&gt;,&quot;</span>+ obj.<span class="fu">GetType</span>().<span class="fu">Name</span>);  
+     }        
+     <span class="kw">public</span> <span class="dt">void</span> <span class="fu">GetData</span>(<span class="dt">int</span> x)  
+     {  
+        Console.<span class="fu">WriteLine</span>(<span class="st">&quot;INSIDE GetData&quot;</span> + x.<span class="fu">GetType</span>().<span class="fu">Name</span>);  
+     }        
+     <span class="kw">public</span> <span class="dt">void</span> GetxNextData&lt;T&gt;(T obj)  
+     {  
+         <span class="fu">GetData</span>(obj);  
+     }      
+ }  </code></pre></div>
+<div class="sourceCode"><pre class="sourceCode java"><code class="sourceCode java"><span class="kw">class</span> Program  
+{  
+      Static <span class="dt">void</span> <span class="fu">Main</span>(string[] args)  
+      {    
+           SimpleDemoClass sobj = <span class="kw">new</span> <span class="fu">SimpleDemoClass</span>();  
+           sobj.<span class="fu">GetData</span>(<span class="st">&quot;data is for testing by-Devesh&quot;</span>);  
+           sobj.<span class="fu">GetData</span>(<span class="dv">95</span>);  
+           sobj.<span class="fu">GetxNextData</span>(<span class="dv">1234</span>);  
+           Console.<span class="fu">ReadKey</span>();  
+       }  
+}  </code></pre></div>
+</div>
+<div class="small">
+Example from: <a href="http://www.c-sharpcorner.com/UploadFile/deveshomar/generic-method-overloading-in-C-Sharp/" class="uri">http://www.c-sharpcorner.com/UploadFile/deveshomar/generic-method-overloading-in-C-Sharp/</a>
+</div>
+<h1 id="scope-1">Scope</h1>
+<p><em>Scope</em> of a binding is a textual region in program in which a binding is active. We may also use term <em>scope</em> to call the region of a program of maximal size in which no bindings are destroyed (masked).</p>
+<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c"><span class="dt">char</span> *a = <span class="st">&quot;QWE123\0&quot;</span>;
+<span class="dt">char</span>* fun() {
+  dobule a = <span class="dv">0</span>;
+  <span class="kw">return</span> a;
+}</code></pre></div>
+<h1 id="dynamic-scope">Dynamic scope</h1>
+<div class="twocolumn">
+<p>Some languages (like ECMAScript/JavaScript or some kinds of LISP) have a concept of the <em>dynamic scoping</em>. Binding of identifiers occurs at run-time.</p>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">var</span> a <span class="op">=</span> <span class="dv">0</span><span class="op">;</span>
+<span class="kw">function</span> <span class="at">f</span>() <span class="op">{</span>
+  <span class="kw">var</span> b <span class="op">=</span> a<span class="op">;</span>
+  <span class="cf">with</span> (<span class="op">{</span><span class="dt">a</span><span class="op">:</span> <span class="dv">1</span><span class="op">}</span>) <span class="op">{</span>
+    b <span class="op">+=</span> a<span class="op">;</span>
+  <span class="op">}</span>
+  <span class="cf">return</span> b<span class="op">;</span> <span class="co">// b = 1</span>
+<span class="op">}</span></code></pre></div>
+<p><code>this</code> in object-oriented language may be seen as either an implicit argument to a function or as a way of introducing a dynamic scope.</p>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">function</span> <span class="at">g</span>() <span class="op">{</span>
+  <span class="cf">return</span> <span class="kw">this</span>.<span class="at">x</span><span class="op">;</span>
+<span class="op">}</span>
+<span class="kw">var</span> A <span class="op">=</span> <span class="op">{</span> <span class="dt">x</span><span class="op">:</span> <span class="dv">0</span><span class="op">,</span> g <span class="op">}</span>
+<span class="kw">var</span> B <span class="op">=</span> <span class="op">{</span> <span class="dt">x</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span> g <span class="op">}</span>
+<span class="va">A</span>.<span class="at">g</span>() <span class="co">// returns 0</span>
+<span class="va">B</span>.<span class="at">g</span>() <span class="co">// returns 1</span>
+<span class="at">g</span>() <span class="co">// returns 2</span></code></pre></div>
+</div>
+<h1 id="name-overloading">Name overloading</h1>
+<div class="twocolumn smallish">
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="kw">template</span>&lt;<span class="kw">typename</span> T&gt;
+T mul(<span class="dt">int</span> i, <span class="dt">int</span> j)
+{
+   <span class="co">// If you get a compile error, it&#39;s because you did not use</span>
+   <span class="co">// one of the authorized template specializations</span>
+   <span class="dt">const</span> <span class="dt">int</span> k = <span class="dv">25</span> ; k = <span class="dv">36</span> ;
+}
+<span class="kw">template</span>&lt;&gt;
+<span class="dt">int</span> mul&lt;<span class="dt">int</span>&gt;(<span class="dt">int</span> i, <span class="dt">int</span> j)
+{
+   <span class="kw">return</span> i * j ;
+}
+
+<span class="kw">template</span>&lt;&gt;
+std::string mul&lt;std::string&gt;(<span class="dt">int</span> i, <span class="dt">int</span> j)
+{
+   <span class="kw">return</span> std::string(j, <span class="kw">static_cast</span>&lt;<span class="dt">char</span>&gt;(i)) ;
+}</code></pre></div>
+<p>If the language supports name overloading, the same identifier in the same place may have a different meaning depending on some external information (like typing). Usually in imperative languages name overloading is restricted to functions names.</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="dt">int</span> mul(<span class="dt">int</span> i, <span class="dt">int</span> j) { <span class="kw">return</span> i*j; }
+std::string mul(<span class="dt">char</span> c, <span class="dt">int</span> n) { <span class="kw">return</span> std::string(n, c); }
+
+<span class="dt">int</span> n = mul(<span class="dv">6</span>, <span class="dv">3</span>); <span class="co">// n = 18</span>
+std::string s = mul(<span class="kw">static_cast</span>&lt;<span class="dt">char</span>&gt;(<span class="dv">6</span>), <span class="dv">2</span>); <span class="co">// s = &quot;110&quot;</span>
+<span class="dt">int</span> n = mul&lt;<span class="dt">int</span>&gt;(<span class="dv">6</span>, <span class="dv">3</span>); <span class="co">// n = 18</span>
+std::string s = mul&lt;std::string&gt;(<span class="dv">54</span>, <span class="dv">2</span>); <span class="co">// s = &quot;110110&quot;</span>
+<span class="dt">short</span> n2 = mul&lt;<span class="dt">short</span>&gt;(<span class="dv">6</span>, <span class="dv">3</span>); <span class="co">// error: assignment of read-only variable ‘k’</span></code></pre></div>
+Languages supporting function overloading: C++, C#<br />
+Languages not supporting function overloading: Haskell, ECMAScript, C (but C11 has the <code>_Generic</code> keyword: <a href="http://stackoverflow.com/a/25026358" class="uri">http://stackoverflow.com/a/25026358</a>)
+</div>
+<div class="small">
+Example from: <a href="http://stackoverflow.com/questions/226144/overload-a-c-function-according-to-the-return-value" class="uri">http://stackoverflow.com/questions/226144/overload-a-c-function-according-to-the-return-value</a>
+</div>
+<h1 id="static-semantics-representation" class="smaller">Static semantics representation</h1>
+<p>Let us return to the topic of formal mechanized analysis of programs.</p>
+<p><img src="graphviz-images/ed002a3970835e74b75f748296f96716059b7048.svg" id="alt" /></p>
+<p>Syntax is a transformation from <code>String</code> to <abbr title="Abstract Syntax Tree"><code>AST</code></abbr>. Static semantics, in the same way, is a transformation from AST to AST with variable bindings information. How would we store this information?</p>
+Easier approach: generate unique names and store scope in parallel.<br />
+AST+Bindings = Σ (ast : AST /[Id := ℕ]) . (scope : Map<ℕ, AST> ) . (p : ∀ id : ℕ ∈ ast, id ∈ scope).<br />
+
+<div class="small">
+Example at: Vasenin V. A., Krivchikov M. A. Ecma-335 static formal semantics // Programming and Computer Software. — 2012. — Vol. 38, no. 4. — P. 183–188. <a href="http://dx.doi.org/10.1134/S0361768812040056" class="uri">http://dx.doi.org/10.1134/S0361768812040056</a>
+</div>
+<h1 id="higher-order-abstract-syntax" class="smaller">Higher order abstract syntax</h1>
+— the technique to capture the variable binding in abstract syntax tree (Miller, 1987; Phenning, 1988).<br />
+
+<div class="twocolumn">
+<p>Abstract syntax:</p>
+<div class="sourceCode"><pre class="sourceCode ocaml"><code class="sourceCode ocaml"><span class="kw">type</span> var = <span class="dt">string</span>
+<span class="kw">type</span> typ =
+  | <span class="dt">Bool</span>
+  | <span class="dt">Arrow</span> <span class="kw">of</span> typ * typ
+<span class="kw">type</span> exp =
+  | <span class="dt">Var</span> <span class="kw">of</span> var
+  | <span class="dt">True</span>
+  | <span class="dt">False</span>
+  | <span class="dt">App</span> <span class="kw">of</span> exp * exp
+  | <span class="dt">Abs</span> <span class="kw">of</span> var * exp</code></pre></div>
+<p>Higher-order syntax captures the name binding:</p>
+<div class="sourceCode"><pre class="sourceCode ocaml"><code class="sourceCode ocaml"><span class="kw">type</span> exp =
+  | <span class="dt">True</span>
+  | <span class="dt">False</span>
+  | <span class="dt">App</span> <span class="kw">of</span> exp * exp
+  | <span class="dt">Abs</span> <span class="kw">of</span> exp -&gt; exp</code></pre></div>
+</div>
+<p>Parametrized Higher-order syntax captures the types of variables:</p>
+<div class="sourceCode"><pre class="sourceCode ocaml"><code class="sourceCode ocaml"><span class="kw">type</span> &#39;t var
+<span class="kw">type</span> &#39;t exp =
+    | <span class="dt">Var</span> : &#39;t var -&gt; &#39;t exp
+    | <span class="dt">True</span> : <span class="dt">bool</span> exp
+    | <span class="dt">False</span> : <span class="dt">bool</span> exp
+    | <span class="dt">App</span> : (&#39;d -&gt; &#39;r) exp * &#39;d exp -&gt; &#39;r exp
+    | <span class="dt">Abs</span> : (&#39;d var -&gt; &#39;r exp) -&gt; (&#39;d -&gt; &#39;r) exp</code></pre></div>
+<p><a href="http://adam.chlipala.net/papers/PhoasICFP08/" class="uri">http://adam.chlipala.net/papers/PhoasICFP08/</a></p>
+<h1 id="ornaments">Ornaments</h1>
+<p>Conor McBride. «Ornamental Algebras, Algebraic Ornaments»</p>
+<p>One base data type defines the induction structure, basic constructors:</p>
+<div class="sourceCode"><pre class="sourceCode agda"><code class="sourceCode agda"><span class="kw">data</span> Nat <span class="kw">where</span>
+  <span class="dv">0</span> <span class="ot">:</span> Nat
+  succ <span class="ot">:</span> Nat <span class="ot">→</span> Nat</code></pre></div>
+<p>Then we place an additional data (ornament) to the leaves of the induction structure:</p>
+<div class="sourceCode"><pre class="sourceCode agda"><code class="sourceCode agda"><span class="kw">data</span> List [A <span class="ot">:</span> Set] from Nat <span class="kw">where</span>
+   List<span class="ot">_</span>A ← nil
+    <span class="ot">|</span> cons [a <span class="ot">:</span> A] <span class="ot">(</span>as <span class="ot">:</span> List<span class="ot">_</span>A<span class="ot">)</span>
+
+<span class="kw">data</span> Vec [A <span class="ot">:</span> Set] from Nat <span class="kw">where</span>
+  Vec<span class="ot">_</span>A n ← nil [q <span class="ot">:</span> n ≡ 0]
+     <span class="ot">|</span> cons [n&#39; <span class="ot">:</span> Nat][ q <span class="ot">:</span> n <span class="ot">=</span> succ n&#39; ] <span class="ot">(</span>a <span class="ot">:</span> A<span class="ot">)</span> <span class="ot">(</span>vs <span class="ot">:</span> Vec<span class="ot">_</span>A n<span class="ot">)</span></code></pre></div>
+<div class="small">
+<a href="https://personal.cis.strath.ac.uk/conor.mcbride/pub/OAAO/LitOrn.pdf" class="uri">https://personal.cis.strath.ac.uk/conor.mcbride/pub/OAAO/LitOrn.pdf</a><br />
+<a href="http://arxiv.org/pdf/1201.4801.pdf" class="uri">http://arxiv.org/pdf/1201.4801.pdf</a>
+</div>
+<h1 id="recursion">Recursion</h1>
+<div class="sourceCode"><pre class="sourceCode java"><code class="sourceCode java"><span class="kw">class</span> A { B b; }
+<span class="kw">class</span> B { A a; }</code></pre></div>
+<p>Suppose we started translating <abbr title="Abstract Syntax Tree">AST</abbr> to static semantics. Before we process second line and see that <code>B</code> is a class, what is the static semantics of <code>B</code> at the first line?</p>
+<p>Approach: fixed point (works for classical Domain Theory, doesn't work well in a constructive setting).</p>
+<p>N.S. Papaspyrou. Formal semantics of the C Programming Language (PhD thesis).</p>
+<h1 id="homework-assignments">Homework assignments</h1>
+<p><strong>Task 5.1.</strong> ** Implement a translator from simply-typed lambda calculus <abbr title="Abstract Syntax Tree">AST</abbr> to <abbr title="Higher-Order Abstract Syntax">HOAS</abbr> in Haskell or any other language of your choice (except the original OCaml) which is expressive enough to represent HOAS.</p>
+<p><strong>Task 5.2.</strong> *** Implement a translator from simply-typed lambda calculus <abbr title="Abstract Syntax Tree">AST</abbr> to <abbr title="Parametrized Higher-Order Abstract Syntax">PHOAS</abbr> in Haskell or any other language of your choice (except the original OCaml) which is expressive enough to represent PHOAS.</p>
+<h1 id="project">Project</h1>
+<p><strong>Project Step 4.</strong> Implement a static formal semantics for your programming language (in Agda or Coq). Choose one of the following approaches.</p>
+<ul>
+<li><strong>Project Step 4a.</strong> * Assign the unique identifiers (e.g. natural numbers) to each bindable identifier leaf in the AST and create the mapping between the unique identifiers and static semantics subtrees.</li>
+<li><strong>Project Step 4b.</strong> ** Use Higher-Order Abstract Syntax.</li>
+</ul>
+</body>
+</html>

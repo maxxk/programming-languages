@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
+  <link rel="stylesheet" href="additional.css">
+  <link rel="stylesheet" href="reveal.js/css/highlight-github.css">
+  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<h1 id="software-and-programming-language-theory">Software and Programming Language Theory</h1>
+<h2 id="classification-of-programming-languages">Classification of programming languages</h2>
+<h3 id="characteristics-of-programming-languages">Characteristics of programming languages</h3>
+<h3 id="how-do-programming-languages-differ-from-each-other">(How do programming languages differ from each other)</h3>
+<style>
+.twocolumn {
+  -moz-column-count: 2;
+  -webkit-column-count: 2;
+}
+.small { font-size: small !important; }
+.smaller { font-size: 0.8em !important; }
+
+
+</style>
+<p>Course page: <a href="https://maxxk.github.io/programming-languages-2016/" class="uri">https://maxxk.github.io/programming-languages-2016/</a><br />
+<span style="font-size: small">Chrome or Firefox are recommended to watch presentations; Konqueror in aud. 13-15 skips some slides. Open with Firefox and enable scripts with button “Settings”, lower right corner</span></p>
+<h1 id="literature">Literature</h1>
+<ol type="1">
+<li>B. Pierce. Types and Programming Languages. MIT Press. 2002.</li>
+<li>D. Watt. Programming Language Design Concepts. Wiley. 2004.</li>
+<li>F. Turbak, D. Gifford. Design Concepts in Programming Languages. 2008.</li>
+<li>R. Sebesta. Concepts of Programming Languages. 2012.</li>
+</ol>
+<h1 id="history-of-programming-languages">History of programming languages</h1>
+<h1 id="forth-stack-based-and-concatenative">Forth: stack-based and concatenative</h1>
+<p>Uses point-free notation (e.g. f ∘ g instead of λx. f(g(x))).</p>
+<pre class="factor"><code>: reshape ( width height -- )
+    [ 0 0 ] 2dip glViewport
+    GL_PROJECTION glMatrixMode
+    glLoadIdentity
+    -30.0 30.0 -30.0 30.0 -30.0 30.0 glOrtho
+    GL_MODELVIEW glMatrixMode ;
+
+: paint ( -- )
+    0.3 0.3 0.3 0.0 glClearColor
+    GL_COLOR_BUFFER_BIT GL_DEPTH_BUFFER_BIT bitor glClear
+    GL_SMOOTH glShadeModel
+    glLoadIdentity
+    -15.0 -15.0 0.0 glTranslatef
+    GL_TRIANGLES glBegin
+    1.0 0.0 0.0 glColor3f 0.0 0.0 glVertex2f
+    0.0 1.0 0.0 glColor3f 30.0 0.0 glVertex2f
+    0.0 0.0 1.0 glColor3f 0.0 30.0 glVertex2f
+    glEnd
+    glFlush ;
+
+M: triangle-gadget pref-dim* drop { 640 480 } ;
+M: triangle-gadget draw-gadget*
+    rect-bounds nip first2 reshape paint ;
+
+: triangle-window ( -- )
+   [ triangle-gadget new &quot;Triangle&quot; open-window ] with-ui ;
+MAIN: triangle-window</code></pre>
+<h1 id="ada-programming-language">Ada programming language</h1>
+<p><span class="small">Missing parts from previous lecture. Based on «R. Sebesta. Concepts of Programming Lanugages. 2012»</span><br />
+US Department of Defense initiated the design process of programming language in 1975. Original motivation: make a single high-level programming language for a broad range of applications, including critical embedded systems. At the time of proposal, about 450 different languages was in use by DoD contractors.</p>
+<p>In 1979 design and rationale of Ada were published in ACM SIGPLAN Notices. In October 1979 a public test and evaluation conference was held. In the conference representatives from over 100 US and Europe organizations took part.</p>
+<p>Final specification was mostly completed in 1980, revised and published in 1983. First usable compilers appeared around 1980.</p>
+<p>Revised in 1995, 2005 (both revisions featuring OOP and concurrency enhancements). Widely used in aviation.</p>
+<h1 id="ada">Ada</h1>
+<div class="sourceCode"><pre class="sourceCode ada"><code class="sourceCode ada"><span class="kw">procedure</span> Ada_Ex <span class="kw">is</span>
+  <span class="kw">type</span> Int_List_Type <span class="kw">is</span> <span class="kw">array</span> (<span class="dv">1</span>..<span class="dv">99</span>) <span class="kw">of</span> <span class="dt">Integer</span>; Int_List : Int_List_Type;
+  List_Len, Sum, Average, Result : <span class="dt">Integer</span>;
+<span class="kw">begin</span>
+  Result:= <span class="dv">0</span>;
+  Sum := <span class="dv">0</span>;
+  Get (List_Len);
+  <span class="kw">if</span> (List_Len &gt; <span class="dv">0</span>) <span class="kw">and</span> (List_Len &lt; <span class="dv">100</span>) <span class="kw">then</span>
+  <span class="co">-- Read input data into an array and compute the sum</span>
+  <span class="kw">for</span> Counter := <span class="dv">1</span> .. List_Len <span class="kw">loop</span>
+      Get (Int_List(Counter));
+      Sum := Sum + Int_List(Counter);
+  <span class="kw">end loop</span>;
+  <span class="co">-- Compute the average</span>
+  Average := Sum / List_Len;
+  <span class="co">-- Count the number of values that are &gt; average</span>
+  <span class="kw">for</span> Counter := <span class="dv">1</span> .. List_Len <span class="kw">loop</span>
+      <span class="kw">if</span> Int_List(Counter) &gt; Average <span class="kw">then</span>
+        Result:= Result+ <span class="dv">1</span>;
+      <span class="kw">end if</span>;
+  <span class="kw">end loop</span>;
+  <span class="co">-- Print result</span>
+  Put (<span class="st">&quot;The number of values &gt; average is:&quot;</span>);
+  Put (Result);
+  New_Line;
+<span class="kw">else</span>
+    Put_Line (<span class="st">&quot;Error—input list length is not legal&quot;</span>);
+<span class="kw">end if</span>;
+<span class="kw">end</span> Ada_Ex;</code></pre></div>
+<h1 id="ada-1">Ada</h1>
+<div class="sourceCode"><pre class="sourceCode ada"><code class="sourceCode ada"><span class="kw">generic</span>
+  capacity: Positive;
+<span class="kw">package</span> Queues <span class="kw">is</span>
+  <span class="kw">type</span> Queue <span class="kw">is</span> <span class="kw">limited</span> <span class="kw">private</span>;
+  <span class="co">-- A Queue value represents a queue whose elements are characters and</span>
+  <span class="co">-- whose maximum length is capacity.</span>
+  <span class="kw">procedure</span> clear (q: <span class="kw">out</span> Queue);
+  <span class="co">-- Make queue q empty.</span>
+  <span class="kw">procedure</span> add (q: <span class="kw">in</span> <span class="kw">out</span> Queue; e: <span class="kw">in</span> Character);
+  <span class="co">-- Add element e to the rear of queue q.</span>
+  <span class="kw">procedure</span> remove (q: <span class="kw">in</span> <span class="kw">out</span> Queue; e: <span class="kw">out</span> Character);
+  <span class="co">-- Remove element e from the front of queue q. private</span>
+  <span class="kw">type</span> Queue <span class="kw">is</span> <span class="kw">record</span>
+    length: <span class="dt">Integer</span> <span class="kw">range</span> <span class="dv">0</span> .. capacity;
+    front, rear: <span class="dt">Integer</span> <span class="kw">range</span> <span class="dv">0</span> .. capacity<span class="dv">-1</span>; elems: <span class="kw">array</span> (<span class="dv">0</span> .. capacity<span class="dv">-1</span>) <span class="kw">of</span> Character;
+  <span class="kw">end record</span>;
+  <span class="co">-- A queue is represented by a cyclic array, with the queued elements</span>
+  <span class="co">-- stored either in elems(front..rear-1) or in</span>
+  <span class="co">-- elems(front..capacity-1) and elems(0..rear-1).</span>
+<span class="kw">end</span> Queues;</code></pre></div>
+<h1 id="characteristics-of-programming-languages-1">Characteristics of programming languages</h1>
+<p>How the modern programming languages differ from each other?</p>
+<p>Two major categories:</p>
+<ul>
+<li>«internal» characteristic — what is representable in the language, features of any language implementation<br />
+E.g.: static vs dynamic typing</li>
+<li>«external» characteristic — features of specific language implementation<br />
+E.g. interpreted vs compiled</li>
+</ul>
+<h1 id="interpreted-vs-compiled-python">Interpreted vs compiled: Python</h1>
+<ul>
+<li><a href="https://www.python.org/">CPython</a> — interpreter (reference implementation)</li>
+<li><a href="http://pypy.org/">PyPy</a>, <a href="http://ironpython.net/">IronPython</a>, <a href="https://wiki.python.org/jython/">Jython</a> — just-in-time compiler (specific tracing JIT, .NET, JVM, respectively)</li>
+<li><a href="http://cython.org/">Cython</a>, <a href="http://nuitka.net/">Nuitka</a> — ahead-of-time compiler</li>
+</ul>
+<h1 id="imperative-programming">Imperative programming</h1>
+<p>Main entities:</p>
+<ul>
+<li>variable (abstracts memory block and register loading)</li>
+<li>command (operation on variables)</li>
+<li>procedure (sequence of commands with inputs and outputs)</li>
+</ul>
+<h1 id="object-oriented-programming">Object-oriented programming</h1>
+<p>Main entities:</p>
+<ul>
+<li>object</li>
+<li>class - a family of similar objects</li>
+</ul>
+<p>Classical concepts:</p>
+<ul>
+<li>encapsulation - hiding of irrelevant implementation details (e.g. fields)</li>
+<li>inheritance - a subclass inherits all methods of superclass, unless subclass explicitly overrides a method</li>
+<li>inclusion polymorphism (Liskov substitution principle) - objects of subclasses can be treated uniformly as an object of common superclass</li>
+</ul>
+<h1 id="prototype-based-object-oriented-programming">Prototype-based object-oriented programming</h1>
+<p>The concept of class is implemented by the means of a prototype object, which defines the common methods for objects.<br />
+Well-known implementation: JavaScript (ECMAScript)</p>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript">[<span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span>].<span class="at">sum</span>()<span class="op">;</span>
+<span class="co">// ⟶ Exception: sum is not defined</span>
+
+<span class="va">Array</span>.<span class="va">prototype</span>.<span class="at">sum</span> <span class="op">=</span> <span class="kw">function</span>() <span class="op">{</span>
+  <span class="kw">let</span> sum <span class="op">=</span> <span class="dv">0</span><span class="op">;</span>
+  <span class="cf">for</span> (<span class="kw">let</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> <span class="kw">this</span>.<span class="at">length</span><span class="op">;</span> i<span class="op">++</span>) <span class="op">{</span>
+    sum <span class="op">+=</span> <span class="kw">this</span>[i]<span class="op">;</span>
+  <span class="op">}</span>
+  <span class="cf">return</span> sum<span class="op">;</span>
+<span class="op">}</span>
+
+[<span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span>].<span class="at">sum</span>()<span class="op">;</span>
+<span class="co">// ⟶ 6</span></code></pre></div>
+<h1 id="live-programming">Live programming</h1>
+<h2 id="interactive-programming">(interactive programming)</h2>
+<p>Program components are written in the same environment as the program runs.<br />
+Original idea comes from Alan Kay's Ph.D. thesis «The Reactive Engine» (1969), which describes the live programming computer system. Smalltalk was the successor of this idea.</p>
+<p>Main example today: web browser.</p>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="va">document</span>.<span class="at">querySelector</span>(<span class="st">&#39;#live-programming h1&#39;</span>)
+  .<span class="at">addEventListener</span>(<span class="st">&#39;click&#39;</span><span class="op">,</span> <span class="kw">function</span>(e) <span class="op">{</span>
+    <span class="va">e</span>.<span class="va">target</span>.<span class="va">style</span>.<span class="at">fontSize</span><span class="op">=</span><span class="va">Math</span>.<span class="at">random</span>()<span class="op">*</span><span class="dv">70</span> <span class="op">+</span> <span class="st">&#39;pt&#39;</span><span class="op">;</span>
+  <span class="op">}</span>)</code></pre></div>
+<h1 id="type-system">Type system</h1>
+<blockquote>
+<p>A type system is a tractable syntactic method for proving the absence of certain program behaviors by classifying phrases according to the kinds of values they compute.<br />
+<span class="small">B. Pierce. Types and Programming Languages. 2002.</span></p>
+</blockquote>
+<ul>
+<li>safe and unsafe</li>
+<li>statically-checked and dynamically-checked</li>
+</ul>
+<h1 id="dynamic-typechecking">Dynamic typechecking</h1>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">function</span> <span class="at">dynamic</span>(x) <span class="op">{</span>
+  <span class="cf">return</span> x <span class="op">+</span> <span class="dv">1</span><span class="op">;</span>
+<span class="op">}</span>
+
+<span class="at">x</span>(<span class="dv">1</span>) <span class="co">// ⟶ 2</span>
+
+<span class="at">x</span>(<span class="st">&#39;1&#39;</span>) <span class="co">// ⟶ &#39;11&#39;</span>
+<span class="co">// (in some languages it returns 2)</span>
+
+<span class="at">x</span>([<span class="st">&#39;a&#39;</span><span class="op">,</span> <span class="st">&#39;b&#39;</span>]) <span class="co">// ⟶ &#39;a,b1&#39;</span>
+<span class="co">// (in some languages it may return [&#39;a&#39;, &#39;b&#39;, 1])</span></code></pre></div>
+<h1 id="optional-type-systems">Optional type systems</h1>
+<p>It is possible to provide external static type checking engine for dynamic language. It works as a statical analysis tool. Proper type systems for dynamic language are rather complex (it usually employs row-types).<br />
+Examples:</p>
+<ul>
+<li><a href="http://typedclojure.org">Typed Clojure</a></li>
+<li><a href="https://github.com/python/mypy">mypy (Python)</a></li>
+<li><a href="http://flowtype.org"><strong>Flow (Javascript, by Facebook)</strong></a></li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript">type BinaryTree <span class="op">=</span>
+  <span class="op">{</span> <span class="dt">kind</span><span class="op">:</span> <span class="st">&quot;leaf&quot;</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> number <span class="op">}</span> <span class="op">|</span>
+  <span class="op">{</span> <span class="dt">kind</span><span class="op">:</span> <span class="st">&quot;branch&quot;</span><span class="op">,</span> <span class="dt">left</span><span class="op">:</span> BinaryTree<span class="op">,</span> <span class="dt">right</span><span class="op">:</span> BinaryTree <span class="op">}</span>
+
+<span class="kw">function</span> <span class="at">sumLeaves</span>(tree<span class="op">:</span> BinaryTree)<span class="op">:</span> number <span class="op">{</span>
+  <span class="cf">if</span> (<span class="va">tree</span>.<span class="at">kind</span> <span class="op">===</span> <span class="st">&quot;leaf&quot;</span>) <span class="op">{</span>
+    <span class="cf">return</span> <span class="va">tree</span>.<span class="at">value</span><span class="op">;</span>
+  <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span>
+    <span class="cf">return</span> <span class="at">sumLeaves</span>(<span class="va">tree</span>.<span class="at">left</span>) <span class="op">+</span> <span class="at">sumLeaves</span>(<span class="va">tree</span>.<span class="at">right</span>)<span class="op">;</span>
+  <span class="op">}</span>
+<span class="op">}</span></code></pre></div>
+<h1 id="optional-typing">Optional typing</h1>
+<p>Usually external type checkers allow to use annotations as special comments (remember the model checking from the previous semester).</p>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="co">/*::</span>
+<span class="co">type BinaryTree =</span>
+<span class="co">  { kind: &quot;leaf&quot;, value: number } |</span>
+<span class="co">  { kind: &quot;branch&quot;, left: BinaryTree, right: BinaryTree }</span>
+<span class="co">*/</span>
+
+<span class="kw">function</span> <span class="at">sumLeaves</span>(tree <span class="co">/*: BinaryTree*/</span>) <span class="co">/*: number*/</span> <span class="op">{</span>
+  <span class="cf">if</span> (<span class="va">tree</span>.<span class="at">kind</span> <span class="op">===</span> <span class="st">&quot;leaf&quot;</span>) <span class="op">{</span>
+    <span class="cf">return</span> <span class="va">tree</span>.<span class="at">value</span><span class="op">;</span>
+  <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span>
+    <span class="cf">return</span> <span class="at">sumLeaves</span>(<span class="va">tree</span>.<span class="at">left</span>) <span class="op">+</span> <span class="at">sumLeaves</span>(<span class="va">tree</span>.<span class="at">right</span>)<span class="op">;</span>
+  <span class="op">}</span>
+<span class="op">}</span></code></pre></div>
+<h1 id="row-types">Row types</h1>
+<p>The data type which describes required fields (or methods) in data structure, but allows a programmer to extend fields.</p>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript">type BinaryTree <span class="op">=</span>
+  <span class="op">{</span> <span class="dt">kind</span><span class="op">:</span> <span class="st">&quot;leaf&quot;</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> number <span class="op">}</span> <span class="op">|</span>
+  <span class="op">{</span> <span class="dt">kind</span><span class="op">:</span> <span class="st">&quot;branch&quot;</span><span class="op">,</span> <span class="dt">left</span><span class="op">:</span> BinaryTree<span class="op">,</span> <span class="dt">right</span><span class="op">:</span> BinaryTree <span class="op">}</span>
+
+<span class="op">{</span> <span class="dt">kind</span><span class="op">:</span> <span class="st">&quot;leaf&quot;</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span> <span class="dt">additional</span><span class="op">:</span> <span class="st">&quot;Hey!&quot;</span> <span class="op">}</span> <span class="co">/*: BinaryTree */</span></code></pre></div>
+<h1 id="structural-typing">Structural typing</h1>
+<h2 id="duck-typing">Duck typing</h2>
+<blockquote>
+<p>When I see a bird that walks like a duck and swims like a duck and quacks like a duck, I can call that bird a duck.<br />
+<span class="small">J. Riley</span></p>
+</blockquote>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">function</span> <span class="at">addAB</span>(x <span class="co">/*: { a: number, b: number } */</span>) <span class="co">/*: number */</span> <span class="op">{</span>
+  <span class="cf">return</span> <span class="va">x</span>.<span class="at">a</span> <span class="op">+</span> <span class="va">x</span>.<span class="at">b</span><span class="op">;</span>
+<span class="op">}</span></code></pre></div>
+<h1 id="functional-programming">Functional programming</h1>
+<p>Primary entities:</p>
+<ul>
+<li>expression (way of compute new values from old)</li>
+<li>function (a composition of expressions)</li>
+<li>parametric polymorphism (means of making the same operations on different variables)</li>
+</ul>
+<p>Programs are created by composing functions and usually by avoiding <em>mutable state</em>.</p>
+<h1 id="currying-and-partial-application">Currying and partial application</h1>
+<p>People say: language support functional programming if the functions are the first-class citizens.<br />
+The core point of this definition can be reduced to implementability of two operations: currying and partial application.</p>
+<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c"><span class="dt">double</span> fmax(<span class="dt">double</span> a, <span class="dt">double</span> b);</code></pre></div>
+<p>Curry: make from two-argument function a function which returns an another function.<br />
+fmax : (a : double) × (b : double) → double<br />
+curry(fmax) : (a : double) → ((b : double) → double)</p>
+<p>Partial application:<br />
+curry(fmax) · 0 : (b : double) → double</p>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">function</span> <span class="at">fmax</span>(a<span class="op">,</span> b) <span class="op">{</span> <span class="cf">return</span> a <span class="op">&lt;</span> b <span class="op">?</span> b : a <span class="op">}</span>
+<span class="kw">function</span> <span class="at">curry2</span>(func) <span class="op">{</span> <span class="cf">return</span> <span class="kw">function</span>(x) <span class="op">{</span> <span class="cf">return</span> <span class="kw">function</span>(y) <span class="op">{</span> <span class="cf">return</span> <span class="at">func</span>(x<span class="op">,</span> y) <span class="op">}</span> <span class="op">}</span> <span class="op">}</span>
+<span class="kw">const</span> curried_fmax <span class="op">=</span> <span class="at">curry2</span>(fmax)<span class="op">;</span>
+<span class="kw">const</span> nonnegative <span class="op">=</span> <span class="at">curried_fmax</span>(<span class="dv">0</span>)<span class="op">;</span>
+<span class="va">Math</span>.<span class="at">sqrt</span>(<span class="at">nonnegative</span>(z))<span class="op">;</span></code></pre></div>
+<h1 id="pure-functional-programming">Pure functional programming</h1>
+<ul>
+<li><strong>Pure function</strong> — a function for which the output depends only on the values of its arguments (no global mutable state).</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">function</span> <span class="at">pure</span>(x) <span class="op">{</span>
+  <span class="cf">return</span> x<span class="dv">+1</span><span class="op">;</span>
+<span class="op">}</span>
+
+<span class="at">pure</span>(<span class="dv">1</span>) <span class="co">/* ⟶ 2 */</span>
+<span class="at">pure</span>(<span class="dv">1</span>) <span class="co">/* ⟶ 2 */</span>
+
+<span class="va">Array</span>.<span class="va">prototype</span>.<span class="at">impure</span> <span class="op">=</span> <span class="kw">function</span>(x) <span class="op">{</span>
+  <span class="kw">this</span>.<span class="at">push</span>(x)<span class="op">;</span> <span class="co">/* mutation */</span>
+  <span class="cf">return</span> <span class="kw">this</span>.<span class="at">length</span><span class="op">;</span>
+<span class="op">}</span>
+
+<span class="kw">var</span> x <span class="op">=</span> []<span class="op">;</span>
+<span class="va">x</span>.<span class="at">impure</span>(<span class="dv">1</span>) <span class="co">/* ⟶ 1 */</span>
+<span class="va">x</span>.<span class="at">impure</span>(<span class="dv">1</span>) <span class="co">/* ⟶ 2 */</span></code></pre></div>
+<h1 id="pure-functional-programming-1">Pure functional programming</h1>
+<p>Example: Haskell<br />
+Advantage: an order of computation is insignificant. An optimizing compiler may translate functional program by taking advantage of mutable state.</p>
+<p><strong>Tail recursion</strong></p>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">function</span> <span class="at">factorial_</span>(n<span class="op">,</span> accumulator) <span class="op">{</span>
+  <span class="cf">return</span> n <span class="op">==</span> <span class="dv">0</span> <span class="op">?</span> accumulator : <span class="at">factorial_</span>(n<span class="dv">-1</span><span class="op">,</span> accumulator)<span class="op">;</span>
+<span class="op">}</span>
+<span class="kw">function</span> <span class="at">factorial</span>(x) <span class="op">{</span> <span class="cf">return</span> <span class="at">factorial_</span>(x<span class="op">,</span> <span class="dv">1</span>) <span class="op">}</span></code></pre></div>
+<div class="incremental">
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="co">/* Is translated to: */</span>
+<span class="kw">function</span> <span class="at">factorial_</span>(n<span class="op">,</span> accumulator) <span class="op">{</span>
+<span class="dt">START</span><span class="op">:</span> <span class="cf">do</span> <span class="op">{</span>
+    <span class="cf">if</span> (n <span class="op">==</span> <span class="dv">0</span>) <span class="cf">return</span> accumulator<span class="op">;</span>
+    accumulator <span class="op">*=</span> n<span class="op">;</span>
+    n <span class="op">-=</span> <span class="dv">1</span><span class="op">;</span>
+    <span class="cf">continue</span> START<span class="op">;</span>
+  <span class="op">}</span> <span class="cf">while</span>(<span class="dv">0</span>)
+<span class="op">}</span></code></pre></div>
+</div>
+<h1 id="polymorphism">Polymorphism</h1>
+<ul>
+<li>a means of making the same operations for different arguments.</li>
+</ul>
+<h2 id="ad-hoc-polymorphism">Ad-hoc polymorphism</h2>
+<h2 id="subtype-polymorphism">Subtype polymorphism</h2>
+<p>(polymorphism in OOP sense)</p>
+<h2 id="parametric-polymorphism">Parametric polymorphism</h2>
+<h2 id="higher-order-polymorphism">Higher-order polymorphism</h2>
+<h1 id="ad-hoc-polymorphism-1">Ad-hoc polymorphism</h1>
+<p>Function (operator) overloading — the same name for different types corresponds to the different implementations. Example: C++</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="dt">int</span> volume(<span class="dt">int</span> s)
+{
+    <span class="kw">return</span> s*s*s;
+}
+
+<span class="co">// volume of a cylinder</span>
+<span class="dt">double</span> volume(<span class="dt">double</span> r, <span class="dt">int</span> h)
+{
+    <span class="kw">return</span> <span class="fl">3.14</span>*r*r*<span class="kw">static_cast</span>&lt;<span class="dt">double</span>&gt;(h);
+}
+<span class="co">// volume of a cuboid</span>
+<span class="dt">long</span> volume(<span class="dt">long</span> l, <span class="dt">int</span> b, <span class="dt">int</span> h)
+{
+    <span class="kw">return</span> l*b*h;
+}</code></pre></div>
+<h1 id="subtype-polymorphism-1">Subtype polymorphism</h1>
+<p>The same function for subtype may call different implementations</p>
+<div class="sourceCode"><pre class="sourceCode java"><code class="sourceCode java"><span class="kw">abstract</span> <span class="kw">class</span> Animal {
+    <span class="kw">abstract</span> String <span class="fu">talk</span>();
+}
+
+<span class="kw">class</span> Cat <span class="kw">extends</span> Animal {
+    String <span class="fu">talk</span>() {
+        <span class="kw">return</span> <span class="st">&quot;Meow!&quot;</span>;
+    }
+}
+
+<span class="kw">class</span> Dog <span class="kw">extends</span> Animal {
+    String <span class="fu">talk</span>() {
+        <span class="kw">return</span> <span class="st">&quot;Woof!&quot;</span>;
+    }
+}</code></pre></div>
+<h1 id="parametric-polymorphism-1">Parametric polymorphism</h1>
+<p>Some <em>generic</em> parameters may be substituted to the function which describe the types of the subprogram parameters.</p>
+<div class="sourceCode"><pre class="sourceCode java"><code class="sourceCode java"><span class="kw">public</span> <span class="kw">class</span> MyClass&lt;T, U, V, W&gt;
+    where T : <span class="kw">class</span>,        <span class="co">// T should be a reference type (array, class, delegate, interface)</span>
+        <span class="kw">new</span>()               <span class="co">// T should have a public constructor with no parameters</span>
+    where U : struct        <span class="co">// U should be a value type (byte, double, float, int, long, struct, uint, etc.)</span>
+    where V : MyOtherClass, <span class="co">// V should be derived from MyOtherClass</span>
+        IEnumerable&lt;U&gt;      <span class="co">// V should implement IEnumerable&lt;U&gt;</span>
+    where W : T,            <span class="co">// W should be derived from T</span>
+        IDisposable         <span class="co">// W should implement IDisposable</span>
+{
+    <span class="kw">public</span> <span class="fu">MyClass</span>(U u, V v, W w) {
+      var t = <span class="kw">new</span> <span class="fu">T</span>();
+      var u2 = u; <span class="co">// make a copy (value-type)</span>
+      <span class="fu">foreach</span> (var e in v) {
+        <span class="co">/* ... */</span>
+      }
+      w.<span class="fu">Dispose</span>();
+    }
+}</code></pre></div>
+<h1 id="higher-order-polymorphism-1">Higher order polymorphism</h1>
+<p>The generic parameters can be parametrized as well by some means of type-level computation. Example: functor.<br />
+Reminder: a functor <span class="math inline">\(F\)</span> is a pair of an object-map <span class="math display">\[ F : A → B \]</span> and an arrow-map <span class="math display">\[ fmap : (a_1 → a_2) → (F(a_1) → F(a_2))\]</span></p>
+<div class="sourceCode"><pre class="sourceCode java"><code class="sourceCode java"><span class="co">/* not actually possible in Java or C# */</span>
+<span class="kw">interface</span> Functor&lt;F&lt;*&gt;&gt; {
+  F&lt;B&gt; fmap&lt;A, B&gt;(F&lt;A&gt; a, Function&lt;A, B&gt; f);
+}</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">class</span>  <span class="dt">Functor</span> f  <span class="kw">where</span>
+<span class="ot">    fmap ::</span> (a <span class="ot">-&gt;</span> b) <span class="ot">-&gt;</span> f a <span class="ot">-&gt;</span> f b
+
+<span class="co">-- elementwise map is a functor on lists</span>
+<span class="kw">instance</span>  <span class="dt">Functor</span> []  <span class="kw">where</span>
+    fmap <span class="fu">=</span> map</code></pre></div>
+<h1 id="evaluation-strategy">Evaluation strategy</h1>
+<h2 id="strict-vs-non-strict-evaluation">Strict vs Non-strict evaluation</h2>
+<p>Strict (eager) evaluation: all function arguments are evaluated before call.</p>
+<p>Non-strict (lazy) evaluation: function arguments are evaluated only when used.</p>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">function</span> <span class="at">f</span>(a<span class="op">,</span> b<span class="op">,</span> c) <span class="op">{</span> <span class="cf">return</span> a<span class="op">+</span>b<span class="op">;</span> <span class="op">}</span>
+<span class="kw">function</span> ⟂() <span class="op">{</span> <span class="cf">while</span>(<span class="kw">true</span>) <span class="op">{}</span> <span class="op">}</span>
+<span class="at">f</span>(<span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> ⟂())
+<span class="co">// Strict evaluation ⟶ ⟂</span>
+<span class="co">// Non-strict evaluation ⟶ 3</span></code></pre></div>
+<h1 id="strict-evaluation">Strict evaluation</h1>
+<p><code>void example(int a, int* b, vector&lt;int&gt; v)</code></p>
+<dl>
+<dt>call-by-value</dt>
+<dd>(like in C for non-pointer arguments) arguments are copied to the callee memory, callee-made changes are <em>not visible</em> to caller
+</dd>
+<dt>call-by-reference</dt>
+<dd>(like pointer arguments in C or reference arguments in C++) callee gets references to the arguments, callee-made changes are <em>visible</em> to caller
+</dd>
+<dt>call-by-sharing</dt>
+<dd>arguments are placed on the shared heap, they can't be reassigned, but can be changed
+</dd>
+</dl>
+<h1 id="lazy-evaluation">Lazy evaluation</h1>
+<dl>
+<dt>call-by-name</dt>
+<dd>(Algol-60) arguments are directly substituted to caller code (as a terms in lambda-calculus)
+</dd>
+<dt>call-by-need</dt>
+<dd>(Haskell) the result of argument computation is cached (so that the two different substitutions of the same argument share the same result)
+</dd>
+</dl>
+<h1 id="macro-expansion">Macro expansion</h1>
+<dl>
+<dt>call-by-macro-expansion</dt>
+<dd>(TeX, C preprocessor) substitute the macros with its body it the source code, possibly capturing identifiers.
+</dd>
+</dl>
+<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c"><span class="ot">#define MACRO(a) (a &lt; b)</span>
+
+<span class="dt">int</span> f(<span class="dt">int</span> b) {
+  <span class="kw">return</span> MACRO(<span class="dv">0</span>);
+}
+
+<span class="dt">int</span> g(<span class="dt">int</span> a) {
+  <span class="kw">return</span> MACRO(<span class="dv">0</span>) <span class="co">// error: b not defined</span>
+}</code></pre></div>
+<h1 id="hygienic-macros">Hygienic macros</h1>
+<ul>
+<li>macro-system which prevents (accidential) capture of identifier.</li>
+</ul>
+<pre class="nemerle"><code>macro ReverseFor (i, begin, body)
+syntax (&quot;for_&quot;, &quot;(&quot;, begin, &quot;)&quot;, body)
+{
+  &lt;[ for (int i = $begin; $i &gt;= 0; i--) $body ]&gt;
+}</code></pre>
+<pre class="nemerle"><code>for_ (n) print(i); // Error: i is not defined</code></pre>
+<h1 id="homework-assignments">Homework assignments</h1>
+<p><strong>Task 2.1</strong>* Select 5 <a href="https://www.random.org/integer-sets/">random</a> programming languages (e.g. from <a href="https://github.com/github/linguist/tree/master/vendor/grammars">GitHub highlighting repository</a> or from <a href="https://en.wikipedia.org/wiki/List_of_programming_languages">Wikipedia</a>). Describe each of them in terms of features you learned today and at the next lectures (~1 page, language primary focus, typing system, main features, reference implementation features).</p>
+</body>
+</html>
