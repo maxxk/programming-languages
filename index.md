@@ -18,7 +18,9 @@ Course topics include:
 
 **Attention! Lecture at March 9th is cancelled, next lecture is scheduled for March 16th.**
 
-**Pre-term exam will be held at the last class, May 25th. [Questions for the exam](program.html)** 
+**Pre-term exam will be held at the last class, May 25th. [Questions for the exam](program.html)**
+
+After you passed the exam please take time to complete the survey (in Russian): http://goo.gl/forms/fQmutT4I9HbDH4gI2 
 
 The course is required for 5th year Computational Mathematics
 department students as a course in foreign language.
