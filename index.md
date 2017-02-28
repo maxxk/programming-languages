@@ -14,7 +14,9 @@ Course topics include:
 * specification of domain-specific programming languages
 * static typing and type inference
 
-**Wednesday, 12:30-14:05, aud. 13-15, starting March 2nd.**
+**Thursday, 15:00-16:35, aud. 13-15, starting March 2nd.**
+
+<!--
 
 **Attention! Lecture at March 9th is cancelled, next lecture is scheduled for March 16th.**
 
@@ -67,4 +69,4 @@ department students as a course in foreign language.
 [presentation - html](presentations/10-Monads.html) [single page - html](presentations/10-Monads-print.html)
 
 **18.05.2016** Axiomatic semantics 
-[presentation - html](presentations/11-Axiomatic-Semantics.html) [single page - html](presentations/11-Axiomatic-Semantics-print.html)
+[presentation - html](presentations/11-Axiomatic-Semantics.html) [single page - html](presentations/11-Axiomatic-Semantics-print.html)-->
