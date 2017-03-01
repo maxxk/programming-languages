@@ -1,0 +1,3 @@
+[submodule "presentations/xits-math"]
+	path = presentations/xits-math
+	url = https://github.com/khaledhosny/xits-math.git
