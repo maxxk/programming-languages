@@ -11,3 +11,4 @@ github_username:  maxxk
 
 # Build settings
 markdown: kramdown
+exclude: [ "presentations" ]
