@@ -31,7 +31,7 @@ Instructor — Maxim A. Krivchikov, senior researcher,
 Lomonosov Moscow State University
 maxim.krivchikov@gmail.com
 
-Course page: https://maxxk.github.io/programming-languages-2016/
+Course page: https://maxxk.github.io/programming-languages/
 <span style="font-size: 0.5em">Chrome or Firefox are recommended to watch presentations; Konqueror in aud. 13-15 skips some slides. Open with Firefox and enable scripts with button “Settings”, lower right corner</span>
 
 # Quick recap
