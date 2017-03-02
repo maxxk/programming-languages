@@ -164,7 +164,7 @@ Expressions have read-only access to variables. It is represented in terms of en
 **Semantic domain:** *VariableState ≡ Identifier → Int${}_⟂$,*  *Int${}_⟂$ = Int ∪ { ⟂ }* with bottom (⟂) value representing undefined variable state. We will discuss this construction later, for now let us just state that $f(x, ⊥) = f(⟂, x) = ⟂$ for all defined functions.
 
 Update meaning functions:
-$⟦ · ⟧_{\text{AE}} : \color{red}{\text{VariableState} →} \text{ArithmeticalExpression} → \text{Int}\color{red}{{}_⟂}$
+$⟦ · ⟧_{\text{AE}} : \color{red}{\text{VariableState} →} \text{ArithmeticalExpression} → \text{Int}\color{red}{ {}_⟂}$
 All previously defined cases are updated to pass an environment to nested functions, for example:
 $⟦ -e ⟧ = λ env . - ⟦e⟧(env)$
 Now we can define the variable getter expression:
