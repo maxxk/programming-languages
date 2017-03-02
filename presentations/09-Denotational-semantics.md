@@ -149,7 +149,7 @@ $⟦ · ⟧_{\text{AE}} : \text{ArithmeticalExpression} → \text{Int}$
 $⟦ \text{IntegerNumber}(i) ⟧_{\text{AE}} = ⟦i⟧_{\text{IntegerNumber}}$
 $⟦ \text{sqrt}(e) ⟧_{\text{AE}} = \left[ \sqrt{⟦e⟧_{\text{AE}}} \right] $
 $⟦ -e ⟧_{\text{AE}} = - ⟦e⟧_{\text{AE}}$
-$⟦ e_1 \; aop \; e_2 ⟧_{\text{AE}} =⟦op⟧_{\text{AE-aop}} (⟦ e_1 ⟧_{\text{AE}},  ⟦e_2⟧_{\text{AE}})$ [e.g. $⟦\texttt{%}⟧_{\text{AE-aop}} = \text{mod}$]
+$⟦ e_1 \; aop \; e_2 ⟧_{\text{AE}} =⟦op⟧_{\text{AE-aop}} (⟦ e_1 ⟧_{\text{AE}},  ⟦e_2⟧_{\text{AE}})$ [e.g. $⟦\texttt{}⟧_{\text{AE-aop}} = \text{mod}$]
 
 ## Boolean expression semantics
 abop — arithmetical-boolean operator, bbop — boolean-boolean operator.
