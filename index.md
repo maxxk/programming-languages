@@ -16,21 +16,11 @@ Course topics include:
 
 **Thursday, 15:00-16:35, aud. 13-15, starting March 2nd.**
 
-<!--
-
-**Attention! Lecture at March 9th is cancelled, next lecture is scheduled for March 16th.**
-
-**Pre-term exam will be held at the last class, May 25th. [Questions for the exam](program.html)**
-
-After you passed the exam please take time to complete [the survey (in Russian).](http://goo.gl/forms/fQmutT4I9HbDH4gI2)  
-
-The course is required for 5th year Computational Mathematics
-department students as a course in foreign language.
 
 **2.03.2016** Introduction. History of programming languages. 
-[presentation - html](presentations/01-Introduction.html) [single page - html](presentations/01-Introduction-print.html)
+[presentation - html](presentations/01-Introduction.html)
 
-**16.03.2016** Classification of programming languages. 
+<!--**16.03.2016** Classification of programming languages. 
 [presentation - html](presentations/02-Classification.html) [single page - html](presentations/02-Classification-print.html)
 
 **23.03.2016** Specification of programming language. Syntax. 

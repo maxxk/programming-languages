@@ -1,4 +1,4 @@
-# Software and Programming Language Theory
+# Software and Programming Language Theory {.center }
 ## Introduction
 ### History of programming languages
 ### Classification of programming languages
@@ -7,75 +7,151 @@
   -moz-column-count: 2;
   -webkit-column-count: 2;
 }
-.small { font-size: small !important; }
-.smaller { font-size: 0.8em !important; }
+.flex {
+  display:flex;
+  align-items:center;
+  justify-content: center;
+}
+
+.flex-column {
+  display: flex;
+  justify-content: center;
+}
+
+.slider section .fullwidth img {
+  min-width: 90%;
+  width: 90%;
+  object-fit: cover;
+  /* position: relative; */
+}
 
 </style>
 
-Instructor — Maxim A. Krivchikov, researcher,
-Institute of Mechanics, Lomonosov Moscow State University
+Instructor — Maxim A. Krivchikov, senior researcher,
+Lomonosov Moscow State University
 maxim.krivchikov@gmail.com
 
 Course page: https://maxxk.github.io/programming-languages-2016/
-<span style="font-size: small">Chrome or Firefox are recommended to watch presentations; Konqueror in aud. 13-15 skips some slides. Open with Firefox and enable scripts with button “Settings”, lower right corner</span>
+<span style="font-size: 0.5em">Chrome or Firefox are recommended to watch presentations; Konqueror in aud. 13-15 skips some slides. Open with Firefox and enable scripts with button “Settings”, lower right corner</span>
 
 # Quick recap
 ## Previous semester — Formal models of computation
 - the mathematical point of view to the problem of software verification
 - evolution of the idea of type in the foundations of mathematics
 
-
-<div class="fragment">
 ## Present semester — Formal models of programming languages
 - what is the current state of the art in programming languages
 - how to describe actual programming languages in mathematical terms
 - is the convergence between “mathematical” and “software engineering” approaches possible
-</div>
 
-# How many programming languages you have acquaintance with?
+# How many programming languages you have acquaintance with? {.flex}
 (to have acquaintance with programming language ≈ can write something more sophisticated than Hello World in less than an hour)
 
-. . .
 
-## GitHub can detect 238 programming languages
-(it is the lower bound of the count of programming languages which are used by more than one person)
-https://github.com/github/linguist/tree/master/vendor/grammars
+# GitHub can detect 277 programming languages {.flex}
+
+Last year it was 238!
+
+This figure is the lower bound of the count of programming languages which are used by more than one person.
+
+<div style="display: block; position: absolute; bottom: 30vh; font-size: 0.8em;">
+Source: https://github.com/github/linguist/tree/master/vendor/grammars
+</div>
 
 # Programming language
 
-A system of precisely defined symbols and rules devised for writing computer programs.
-~ Oxford Dictionary
+> A system of precisely defined symbols and rules devised for writing computer programs.
+> — <cite>Oxford Dictionary</cite>
 
-An artificial language used to write instructions that can be translated into machine language and then executed by a computer.
-~ The American Heritage Dictionary of the English language
+> An artificial language used to write instructions that can be translated into machine language and then executed by a computer.
+> — <cite>The American Heritage Dictionary of the English language</cite>
 
 
 # History of programming languages
 
 Sources for the further research:
+
+1. C. Petzold. Code: The Hidden Language of Computer Hardware and Software. Microsoft Press, 2000.
 1. В.А. Васенин, М.А. Кривчиков. Формальные модели программ и языков программирования. Часть 1. Библиографический обзор 1930—1989 гг.
 2. http://cdn.oreillystatic.com/news/graphics/prog_lang_poster.pdf
 3. https://en.wikipedia.org/wiki/Timeline_of_programming_languages
 4. Historic machine emulators http://www.historicsimulations.com/ZuseZ3.html
 
-# I. Generation-based history and classification
+# Generation-based history and classification {.flex}
 
 # Zuse Z3
-<span style="font-size: small">Image source: [Wikimedia Foundation](https://commons.wikimedia.org/wiki/File:Z3_Deutsches_Museum.JPG)</span>
+<span style="font-size: 0.5em">Image source: [Wikimedia Foundation](https://commons.wikimedia.org/wiki/File:Z3_Deutsches_Museum.JPG)</span>
 ![](images/Z3_Deutsches_Museum.jpg)
 
 # Zuse Z3 (1941)
-<span style="font-size: small">Image source: [Deutsches Museum](http://www.deutsches-museum.de/en/exhibitions/communication/computers/universal-computers/)</span>
+<span style="font-size: 0.5em">Image source: [Deutsches Museum](http://www.deutsches-museum.de/en/exhibitions/communication/computers/universal-computers/)</span>
+<div class="fullwidth">
 ![](images/CD_62419_Zuse-Lochstreifen-Z5.jpg)
+</div>
 
 # Zuse Z3
 <span style="font-size:small">Image source: https://www.linuxvoice.com/konrad-zuse-nearly-the-german-turing-5/</span>
+
+<div class="fullwidth" style="max-height: 60%; height: 60%; max-width: 55%">
 ![](images/z3sim-large6.jpg)
+</div>
 
 Some of the early machines (not Zuse Z3) were programmed by rewiring. These machines are not actually automatic programmable computers.
 
-# Assembly languages
-## 2GL (second-generation programming languages)
+# Simple CPU
+<span style="font-size: 0.5em">Source: C.Petzold. Code</span>
+<div style="height:80%;">
+![](images/petzold-cpu.png)
+</div>
+
+# Machine code
+Binary representation of elementary instructions which can be executed directly on CPU.
+## 1GL (first-generation programming languages)
+See also: Bootstrapping a simple compiler from nothing - 1GL to 3GL
+http://homepage.ntlworld.com/edmund.grimley-evans/bcompiler.html
+https://github.com/smtlaissezfaire/bcompiler
+```x86asm
+# _start:
+  e8 25 00 00 00    # call  gethex
+  c1 e0 04          # sall  $4,%eax
+  50                # push  %eax
+  e8 1c 00 00 00    # call  gethex
+  01 04 24          # add  %eax,(%esp)
+  e8 03 00 00 00    # call  putchar
+  58                # pop  %eax
+  eb e7             # jmp  _start
+
+# +25
+# putchar:
+  31 db      # xor  %ebx,%ebx
+  43      # inc  %ebx
+  8d 4c 24 04    # lea  4(%esp),%ecx
+  89 da      # mov  %ebx,%edx
+  b8 04 00 00 00    # mov  $4,%eax
+  cd 80      # int  $0x80
+  c3      # ret
+```
+
+# Microcode
+Current CPUs are not hardwired. The connections between logic units at the opcode execution time are maintained by the microcode — sequence of bit packages describing the signals at each clock.
+<div class="twocolumn">
+
+  <div class="fullwidth">
+  ![](images/gemini-microinstruction.gif)
+  </div>
+  <div style="font-size: 0.5em">
+  Source: http://www.cs.indiana.edu/~jwmills/EDUCATION.NOTEBOOK/b443/b443.gemini.html
+  See also:
+  http://www.bedroomlan.org/projects/mcasm
+  http://williams.comp.ncat.edu/COMP375/Microcode.pdf
+  http://minnie.tuhs.org/CompArch/Tutes/week04.html
+  </div>
+  <div class="fullwidth" style="max-width: 80%">
+  ![](images/gemini-microarchitecture.gif)
+  </div>
+</div>
+
+# 2GL (second-generation programming languages)
 Opcode (mnemonic): `add`, `sub`, `jmp`, `je`, `and`, `mov`
 Operand: register, constant value, flag, memory, label
 Label: get offset at the specified point
@@ -112,55 +188,18 @@ zstr_count:
 ```
 </div>
 
-# Machine code
-Assembly instructions are converted into the machine code: binary representation of elementary instructions which can be executed directly on CPU.
-<span style="font-size: small:">http://www.c-jump.com/CIS77/CPU/IsaDesign/lecture.html</span>
+# Assembly languages
+Assembly instructions are converted into the machine code. 
+<span style="font-size: 0.5em:">http://www.c-jump.com/CIS77/CPU/IsaDesign/lecture.html</span>
 Simplifed x86-like instruction encoding
+
+<div class="fullwidth">
 ![](images/simple_encoding.png)
-
-# Machine code
-## 1GL (first-generation programming languages)
-See also: Bootstrapping a simple compiler from nothing - 1GL to 3GL
-http://homepage.ntlworld.com/edmund.grimley-evans/bcompiler.html
-https://github.com/smtlaissezfaire/bcompiler
-```x86asm
-# _start:
-  e8 25 00 00 00    # call  gethex
-  c1 e0 04          # sall  $4,%eax
-  50                # push  %eax
-  e8 1c 00 00 00    # call  gethex
-  01 04 24          # add  %eax,(%esp)
-  e8 03 00 00 00    # call  putchar
-  58                # pop  %eax
-  eb e7             # jmp  _start
-
-# +25
-# putchar:
-  31 db      # xor  %ebx,%ebx
-  43      # inc  %ebx
-  8d 4c 24 04    # lea  4(%esp),%ecx
-  89 da      # mov  %ebx,%edx
-  b8 04 00 00 00    # mov  $4,%eax
-  cd 80      # int  $0x80
-  c3      # ret
-```
-
-# Microcode ↓
-Current CPUs are not hardwired. The connections between logic units at the opcode execution time are maintained by the microcode — sequence of bit packages describing the signals at each clock.
-<div class="twocolumn">
-  ![](images/gemini-microinstruction.gif)
-  <div style="font-size: small">
-  Source: http://www.cs.indiana.edu/~jwmills/EDUCATION.NOTEBOOK/b443/b443.gemini.html
-  See also:
-  http://www.bedroomlan.org/projects/mcasm
-  http://williams.comp.ncat.edu/COMP375/Microcode.pdf
-  http://minnie.tuhs.org/CompArch/Tutes/week04.html
-  </div>
-  ![](images/gemini-microarchitecture.gif)
 </div>
 
 
-# Macroassembler ↑
+# Macroassembler 
+## "2.5 generation" language
 Macroassemblers allow macros: special directives with parameters which can be substituted at the assembly time.
 <div class="twocolumn">
 ```x86asm
@@ -233,9 +272,7 @@ int main(int argc, char **argv) {
     }
 }
 ```
-<!--
-```
--->
+
 # 4GL: Data querying and manipulation languages
 Fourth-generation languages are declarative, mostly concerned with data manipulation.
 <div class="twocolumn">
@@ -274,7 +311,7 @@ Some disadvantages of 4GL:
 - complicated development process, compatibility problems
 
 # 5GL: Logical inference and constraint-based
-Fifth-generation languages are the ultimate dream of software engineers in 1980s :)
+Fifth-generation languages were the ultimate dream of software engineers in 1980s :)
 Example: Prolog, Datalog
 Programmer specifies the model and formulates the task. The runtime solves the specified constraints using some knowledge-inference engines (first-order inferene, frame inference).
 
@@ -308,7 +345,7 @@ zebra(Owner).
 Fortran, Cobol, Algol, Lisp
 
 ## Languages which gave start to important concepts
-ML, Prolog, Smalltalk, Forth, APL
+ML, Prolog, Smalltalk, Forth, APL, Refal, Haskell
 
 
 # FORTRAN: the first widely-used high-level language
@@ -467,6 +504,7 @@ ref vector col = m[,2];  # define a ref (pointer) to the 2nd column #
 mode node = union (real, int, compl, string),
      list = struct (node val, ref list next);
 node n := "1234";
+
 # tagged unions #
 case n in
    (real r):   print(("real:", r)),
@@ -594,9 +632,132 @@ Executed from right to left, this means:
     * Logically negate (not) values in the vector (change zeros to ones and ones to zeros) (∼, logical not or Tilde operator), i.e. 1 1 0 1 0
 - Select the items in R for which the corresponding element is 1 (/ compress operator), i.e. 2 3 5
 
+# Refal (REcursive Functions ALGOrithmic Language)
+
+Created in Soviet Union in 1968 by Valentin F. Turchin.
+
+Recursive term rewriting language, based on Markov Algorithms.
+Original concept of Refal was the metalanguage for programming language syntax and semantics.
+Features advanced pattern-matching.
+
+Example: Palindrome
+
+```
+ Pal { = True;
+    s.1 = True;
+    s.1 e.2 s.1 = <Pal e.2>;
+    e.1 = False;  }
+```
+
+Implementations:
+
+1. CMC MSU Refal-2 https://github.com/cmc-msu-ai/refal
+2. BMSTU Refal → C compiler
+  - https://github.com/rfatkullin/bmstu-refal-compiler
+  - https://github.com/rfatkullin/bmstu-refal-runtime
+  
+
+
+# Refal Example: untyped lambda-calculus interpreter
+
+<div class="twocolumn">
+
+```
+Wait = <Card> = ;
+
+Subst { 
+    s.var t.value s.var e.rest s.x1 
+      = t.value <Subst s.var t.value e.rest> ;
+    s.var t.value (λ s.var e.body) e.rest 
+      = (λ s.var e.body) <Subst s.var t.value e.rest> ;
+    s.var t.value (e.inside) e.rest 
+      = (<Subst s.var t.value e.inside>) 
+        <Subst s.var t.value e.rest> ;
+    s.var t.value s.other e.rest 
+      = s.other <Subst s.var t.value e.rest> ;
+    s.var t.value = ;
+}
+
+Beta {
+    (( e.double )) e.rest = Step (e.double) e.rest ;
+    (λ s.var '.'  e.body) t.value e.rest =
+        Step <Subst s.var t.value e.body> e.rest ;
+    (λ s.var '.'  e.body) =
+        <Beta e.body> : s.state e.result = 
+        s.state (λ s.var '.' e.result) ;
+    (e.1) e.rest =
+        <Beta e.1> => {
+            Step e.result = Step (e.result) e.rest ;
+            Stuck e.result = <Beta e.rest> 
+              : s.state e.result2 =
+                s.state (e.result) e.result2 ;
+        } ;
+    t.neutral e.rest =
+        <Beta e.rest> : s.state e.result =
+        s.state t.neutral e.result ;
+    = Stuck;
+}
+
+Loop {
+    e.val = 
+        <Beta e.val> : s.state e.res =
+        <Print s.state> <Print <PPrint ('    ') e.res>> =
+        s.state => {
+            Step = <Loop <Wait> e.res> ;
+            Stuck = <Print DONE> ;
+        } 
+}
+
+Omega = (λ x '.' x x) (λ y '.' y y) ;
+Y = (λ yF '.' (λ yX '.' yF (yX yX)) (λ yX '.' yF (yX yX))) ;
+Comp = (λ f '.' (λ g '.' (λ x '.' (g (f x)))));
+
+$ENTRY Go {
+ =   <Print <PPrint () <Y> <Fact> 3>>
+  <Loop <Y> <Fact> 3> ;
+}
+```
+
+</div>
+
+
 # Homework assignments
-**Tasks 1.1–1.3** (no more than 7* in total, use different languages)
-Implement something non-trivial (more than 150 lines in equivalent C code) in language from list:
-- Forth, APL or J (*** each)
-- Fortran, Algol (60 or 68), Prolog, Standard ML or Caml or OCaml, Smalltalk (** each)
-- Haskell, Scheme or Clojure or Common Lisp (* each)
+**Task 1.1** (at most 7* in total, at most one language from category, you can use modern implementations/dialects)
+
+Implement something non-trivial (more than 200 lines in equivalent C code) in languages from list:
+
+<div class="twocolumn">
+
+- Forth **
+- APL, J **
+- Refal **
+- Idris, Agda, Coq **
+- Prolog **
+- Scheme, Racket, Clojure, Common LISP or Emacs LISP **
+- Haskell *
+- Smalltalk *
+- Fortran *
+- Algol *
+- Ada *
+
+</div>
+
+# Project
+Let's write a specification of a toy programming language. In total you will get at least 10 stars.
+Choose a single application area and try to imagine a simple programming language which is more convenient to use in that area than, for example, C.
+
+**Project Step 1.\*** Write a "design document" (short informal description, 1-4 pages, in English) of a toy programming language of your choice. Design document must include the following information:
+- what is the main focus of the language
+- examples of language statements and results of evaluation for such statements
+
+Language must support variables or named function arguments.
+
+# Sample project ideas
+- html templating engine
+- diagram drawing
+- document markup
+- arithmetical expressions with units of measurement
+- linear algebra
+- asynchronous control
+- shared-memory concurrency
+- distributed-memory concurrency

@@ -1,13 +1,12 @@
-<!DOCTYPE html>
-<html>
-<head>
+<!DOCTYPE html><html><head>
   <meta charset="utf-8">
   <meta name="generator" content="pandoc">
   <title></title>
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <link rel="stylesheet" href="reveal.js/css/reveal.css"/>
+  <link rel="stylesheet" href="slider.css">
+  <style type="text/css">code{white-space: pre;}</style>
   <style type="text/css">
 div.sourceCode { overflow-x: auto; }
 table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
@@ -45,33 +44,16 @@ code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Ann
 code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
 code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
   </style>
-  <link rel="stylesheet" href="reveal.js/css/theme/maxxk.css" id="theme">
-  <link rel="stylesheet" href="additional.css"/>
-  <link rel="stylesheet" href="reveal.js/css/highlight-github.css"/>
-  <!-- If the query includes 'print-pdf', include the PDF print sheet -->
-  <script>
-    if( window.location.search.match( /print-pdf/gi ) ) {
-      var link = document.createElement( 'link' );
-      link.rel = 'stylesheet';
-      link.type = 'text/css';
-      link.href = 'reveal.js/css/print/pdf.css';
-      document.getElementsByTagName( 'head' )[0].appendChild( link );
-    }
-  </script>
-  <!--[if lt IE 9]>
-  <script src="reveal.js/lib/js/html5shiv.js"></script>
-  <![endif]-->
-<style type="text/css">.reveal pre code{white-space: pre; font-size: 1.5em; line-height: 1.3;}
-.reveal abbr { border-bottom: 0.1pt dashed blue;}
-</style>
-
 </head>
 <body>
-  <div class="reveal">
-    <div class="slides">
+  <div style="width: 640px;height: 400px;">
+  <input id="slider-max" type="checkbox" checked="">
+   <article class="slider slider-indicator">
+   <a id="slider-default"></a>
+   <label for="slider-max" title="Maximize"></label>
 
 
-<section id="software-and-programming-language-theory" class="slide level1">
+<section id="software-and-programming-language-theory" class="slide level1 center">
 <h1>Software and Programming Language Theory</h1>
 <h2 id="introduction">Introduction</h2>
 <h3 id="history-of-programming-languages">History of programming languages</h3>
@@ -81,91 +63,165 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
   -moz-column-count: 2;
   -webkit-column-count: 2;
 }
-.small { font-size: small !important; }
-.smaller { font-size: 0.8em !important; }
+.flex {
+  display:flex;
+  align-items:center;
+  justify-content: center;
+}
+
+.flex-column {
+  display: flex;
+  justify-content: center;
+}
+
+.slider section .fullwidth img {
+  min-width: 90%;
+  width: 90%;
+  object-fit: cover;
+  /* position: relative; */
+}
 
 </style>
-<p>Instructor — Maxim A. Krivchikov, researcher,<br />
-Institute of Mechanics, Lomonosov Moscow State University<br />
-<script type="text/javascript">
-<!--
-h='&#x67;&#x6d;&#x61;&#x69;&#108;&#46;&#x63;&#x6f;&#x6d;';a='&#64;';n='&#x6d;&#x61;&#120;&#x69;&#x6d;&#46;&#x6b;&#114;&#x69;&#118;&#x63;&#104;&#x69;&#x6b;&#x6f;&#118;';e=n+a+h;
-document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'" clas'+'s="em' + 'ail">'+e+'<\/'+'a'+'>');
-// -->
-</script><noscript>&#x6d;&#x61;&#120;&#x69;&#x6d;&#46;&#x6b;&#114;&#x69;&#118;&#x63;&#104;&#x69;&#x6b;&#x6f;&#118;&#32;&#x61;&#116;&#32;&#x67;&#x6d;&#x61;&#x69;&#108;&#32;&#100;&#x6f;&#116;&#32;&#x63;&#x6f;&#x6d;</noscript></p>
-<p>Course page: <a href="https://maxxk.github.io/programming-languages-2016/" class="uri">https://maxxk.github.io/programming-languages-2016/</a><br />
-<span style="font-size: small">Chrome or Firefox are recommended to watch presentations; Konqueror in aud. 13-15 skips some slides. Open with Firefox and enable scripts with button “Settings”, lower right corner</span></p>
-</section>
+<p>Instructor — Maxim A. Krivchikov, senior researcher,<br>
+Lomonosov Moscow State University<br>
+<a href="mailto:maxim.krivchikov@gmail.com" class="email">maxim.krivchikov@gmail.com</a></p>
+<p>Course page: <a href="https://maxxk.github.io/programming-languages-2016/" class="uri">https://maxxk.github.io/programming-languages-2016/</a><br>
+<span style="font-size: 0.5em">Chrome or Firefox are recommended to watch presentations; Konqueror in aud. 13-15 skips some slides. Open with Firefox and enable scripts with button “Settings”, lower right corner</span></p>
+</section><div><a class="slider-prev"></a><a class="slider-next" href="#quick-recap"></a></div>
 <section id="quick-recap" class="slide level1">
 <h1>Quick recap</h1>
 <h2 id="previous-semester-formal-models-of-computation">Previous semester — Formal models of computation</h2>
 <ul>
-<li>the mathematical point of view to the problem of software verification</li>
-<li>evolution of the idea of type in the foundations of mathematics</li>
+<li class="fragment">the mathematical point of view to the problem of software verification</li>
+<li class="fragment">evolution of the idea of type in the foundations of mathematics</li>
 </ul>
-<div class="fragment">
 <h2 id="present-semester-formal-models-of-programming-languages">Present semester — Formal models of programming languages</h2>
 <ul>
-<li>what is the current state of the art in programming languages</li>
-<li>how to describe actual programming languages in mathematical terms</li>
-<li>is the convergence between “mathematical” and “software engineering” approaches possible</li>
+<li class="fragment">what is the current state of the art in programming languages</li>
+<li class="fragment">how to describe actual programming languages in mathematical terms</li>
+<li class="fragment">is the convergence between “mathematical” and “software engineering” approaches possible</li>
 </ul>
-</div>
-</section>
-<section id="how-many-programming-languages-you-have-acquaintance-with" class="slide level1">
+</section><div><a class="slider-prev" href="#software-and-programming-language-theory"></a><a class="slider-next" href="#how-many-programming-languages-you-have-acquaintance-with"></a></div>
+<section id="how-many-programming-languages-you-have-acquaintance-with" class="slide level1 flex">
 <h1>How many programming languages you have acquaintance with?</h1>
 <p>(to have acquaintance with programming language ≈ can write something more sophisticated than Hello World in less than an hour)</p>
-<div class="fragment">
-<h2 id="github-can-detect-238-programming-languages">GitHub can detect 238 programming languages</h2>
-<p>(it is the lower bound of the count of programming languages which are used by more than one person)<br />
-<a href="https://github.com/github/linguist/tree/master/vendor/grammars" class="uri">https://github.com/github/linguist/tree/master/vendor/grammars</a></p>
+</section><div><a class="slider-prev" href="#quick-recap"></a><a class="slider-next" href="#github-can-detect-277-programming-languages"></a></div>
+<section id="github-can-detect-277-programming-languages" class="slide level1 flex">
+<h1>GitHub can detect 277 programming languages</h1>
+<p>Last year it was 238!</p>
+<p>This figure is the lower bound of the count of programming languages which are used by more than one person.</p>
+<div style="display: block; position: absolute; bottom: 30vh; font-size: 0.8em;">
+Source: <a href="https://github.com/github/linguist/tree/master/vendor/grammars" class="uri">https://github.com/github/linguist/tree/master/vendor/grammars</a>
 </div>
-</section>
+</section><div><a class="slider-prev" href="#how-many-programming-languages-you-have-acquaintance-with"></a><a class="slider-next" href="#programming-language"></a></div>
 <section id="programming-language" class="slide level1">
 <h1>Programming language</h1>
-<dl>
-<dt>A system of precisely defined symbols and rules devised for writing computer programs.</dt>
-<dd>Oxford Dictionary
-</dd>
-<dt>An artificial language used to write instructions that can be translated into machine language and then executed by a computer.</dt>
-<dd>The American Heritage Dictionary of the English language
-</dd>
-</dl>
-</section>
+<blockquote>
+<p>A system of precisely defined symbols and rules devised for writing computer programs.<br>
+— <cite>Oxford Dictionary</cite></p>
+</blockquote>
+<blockquote>
+<p>An artificial language used to write instructions that can be translated into machine language and then executed by a computer.<br>
+— <cite>The American Heritage Dictionary of the English language</cite></p>
+</blockquote>
+</section><div><a class="slider-prev" href="#github-can-detect-277-programming-languages"></a><a class="slider-next" href="#history-of-programming-languages-1"></a></div>
 <section id="history-of-programming-languages-1" class="slide level1">
 <h1>History of programming languages</h1>
 <p>Sources for the further research:</p>
 <ol type="1">
-<li>В.А. Васенин, М.А. Кривчиков. Формальные модели программ и языков программирования. Часть 1. Библиографический обзор 1930—1989 гг.</li>
-<li><a href="http://cdn.oreillystatic.com/news/graphics/prog_lang_poster.pdf" class="uri">http://cdn.oreillystatic.com/news/graphics/prog_lang_poster.pdf</a></li>
-<li><a href="https://en.wikipedia.org/wiki/Timeline_of_programming_languages" class="uri">https://en.wikipedia.org/wiki/Timeline_of_programming_languages</a></li>
-<li>Historic machine emulators <a href="http://www.historicsimulations.com/ZuseZ3.html" class="uri">http://www.historicsimulations.com/ZuseZ3.html</a></li>
+<li class="fragment">C. Petzold. Code: The Hidden Language of Computer Hardware and Software. Microsoft Press, 2000.</li>
+<li class="fragment">В.А. Васенин, М.А. Кривчиков. Формальные модели программ и языков программирования. Часть 1. Библиографический обзор 1930—1989 гг.</li>
+<li class="fragment"><a href="http://cdn.oreillystatic.com/news/graphics/prog_lang_poster.pdf" class="uri">http://cdn.oreillystatic.com/news/graphics/prog_lang_poster.pdf</a></li>
+<li class="fragment"><a href="https://en.wikipedia.org/wiki/Timeline_of_programming_languages" class="uri">https://en.wikipedia.org/wiki/Timeline_of_programming_languages</a></li>
+<li class="fragment">Historic machine emulators <a href="http://www.historicsimulations.com/ZuseZ3.html" class="uri">http://www.historicsimulations.com/ZuseZ3.html</a></li>
 </ol>
-</section>
-<section id="i.-generation-based-history-and-classification" class="slide level1">
-<h1>I. Generation-based history and classification</h1>
-</section>
+</section><div><a class="slider-prev" href="#programming-language"></a><a class="slider-next" href="#generation-based-history-and-classification"></a></div>
+<section id="generation-based-history-and-classification" class="slide level1 flex">
+<h1>Generation-based history and classification</h1>
+</section><div><a class="slider-prev" href="#history-of-programming-languages-1"></a><a class="slider-next" href="#zuse-z3"></a></div>
 <section id="zuse-z3" class="slide level1">
 <h1>Zuse Z3</h1>
-<p><span style="font-size: small">Image source: <a href="https://commons.wikimedia.org/wiki/File:Z3_Deutsches_Museum.JPG">Wikimedia Foundation</a></span><br />
-<img src="images/Z3_Deutsches_Museum.jpg" alt="" /></p>
-</section>
+<p><span style="font-size: 0.5em">Image source: <a href="https://commons.wikimedia.org/wiki/File:Z3_Deutsches_Museum.JPG">Wikimedia Foundation</a></span><br>
+<img src="images/Z3_Deutsches_Museum.jpg"></p>
+</section><div><a class="slider-prev" href="#generation-based-history-and-classification"></a><a class="slider-next" href="#zuse-z3-1941"></a></div>
 <section id="zuse-z3-1941" class="slide level1">
 <h1>Zuse Z3 (1941)</h1>
-<p><span style="font-size: small">Image source: <a href="http://www.deutsches-museum.de/en/exhibitions/communication/computers/universal-computers/">Deutsches Museum</a></span><br />
-<img src="images/CD_62419_Zuse-Lochstreifen-Z5.jpg" alt="" /></p>
-</section>
+<span style="font-size: 0.5em">Image source: <a href="http://www.deutsches-museum.de/en/exhibitions/communication/computers/universal-computers/">Deutsches Museum</a></span><br>
+
+<div class="fullwidth">
+<img src="images/CD_62419_Zuse-Lochstreifen-Z5.jpg">
+</div>
+</section><div><a class="slider-prev" href="#zuse-z3"></a><a class="slider-next" href="#zuse-z3-1"></a></div>
 <section id="zuse-z3-1" class="slide level1">
 <h1>Zuse Z3</h1>
-<p><span style="font-size:small">Image source: <a href="https://www.linuxvoice.com/konrad-zuse-nearly-the-german-turing-5/" class="uri">https://www.linuxvoice.com/konrad-zuse-nearly-the-german-turing-5/</a></span><br />
-<img src="images/z3sim-large6.jpg" alt="" /></p>
+<p><span style="font-size:small">Image source: <a href="https://www.linuxvoice.com/konrad-zuse-nearly-the-german-turing-5/" class="uri">https://www.linuxvoice.com/konrad-zuse-nearly-the-german-turing-5/</a></span></p>
+<div class="fullwidth" style="max-height: 60%; height: 60%; max-width: 55%">
+<img src="images/z3sim-large6.jpg">
+</div>
 <p>Some of the early machines (not Zuse Z3) were programmed by rewiring. These machines are not actually automatic programmable computers.</p>
-</section>
-<section id="assembly-languages" class="slide level1">
-<h1>Assembly languages</h1>
-<h2 id="gl-second-generation-programming-languages">2GL (second-generation programming languages)</h2>
-<p>Opcode (mnemonic): <code>add</code>, <code>sub</code>, <code>jmp</code>, <code>je</code>, <code>and</code>, <code>mov</code><br />
-Operand: register, constant value, flag, memory, label<br />
+</section><div><a class="slider-prev" href="#zuse-z3-1941"></a><a class="slider-next" href="#simple-cpu"></a></div>
+<section id="simple-cpu" class="slide level1">
+<h1>Simple CPU</h1>
+<span style="font-size: 0.5em">Source: C.Petzold. Code</span><br>
+
+<div style="height:80%;">
+<img src="images/petzold-cpu.png">
+</div>
+</section><div><a class="slider-prev" href="#zuse-z3-1"></a><a class="slider-next" href="#machine-code"></a></div>
+<section id="machine-code" class="slide level1">
+<h1>Machine code</h1>
+<p>Binary representation of elementary instructions which can be executed directly on CPU.</p>
+<h2 id="gl-first-generation-programming-languages">1GL (first-generation programming languages)</h2>
+<p>See also: Bootstrapping a simple compiler from nothing - 1GL to 3GL<br>
+<a href="http://homepage.ntlworld.com/edmund.grimley-evans/bcompiler.html" class="uri">http://homepage.ntlworld.com/edmund.grimley-evans/bcompiler.html</a><br>
+<a href="https://github.com/smtlaissezfaire/bcompiler" class="uri">https://github.com/smtlaissezfaire/bcompiler</a></p>
+<pre class="x86asm"><code># _start:
+  e8 25 00 00 00    # call  gethex
+  c1 e0 04          # sall  $4,%eax
+  50                # push  %eax
+  e8 1c 00 00 00    # call  gethex
+  01 04 24          # add  %eax,(%esp)
+  e8 03 00 00 00    # call  putchar
+  58                # pop  %eax
+  eb e7             # jmp  _start
+
+# +25
+# putchar:
+  31 db      # xor  %ebx,%ebx
+  43      # inc  %ebx
+  8d 4c 24 04    # lea  4(%esp),%ecx
+  89 da      # mov  %ebx,%edx
+  b8 04 00 00 00    # mov  $4,%eax
+  cd 80      # int  $0x80
+  c3      # ret</code></pre>
+</section><div><a class="slider-prev" href="#simple-cpu"></a><a class="slider-next" href="#microcode"></a></div>
+<section id="microcode" class="slide level1">
+<h1>Microcode</h1>
+Current CPUs are not hardwired. The connections between logic units at the opcode execution time are maintained by the microcode — sequence of bit packages describing the signals at each clock.<br>
+
+<div class="twocolumn">
+<div class="fullwidth">
+<img src="images/gemini-microinstruction.gif"><br>
+
+</div>
+<div style="font-size: 0.5em">
+Source: <a href="http://www.cs.indiana.edu/~jwmills/EDUCATION.NOTEBOOK/b443/b443.gemini.html" class="uri">http://www.cs.indiana.edu/~jwmills/EDUCATION.NOTEBOOK/b443/b443.gemini.html</a><br>
+See also:<br>
+<a href="http://www.bedroomlan.org/projects/mcasm" class="uri">http://www.bedroomlan.org/projects/mcasm</a><br>
+<a href="http://williams.comp.ncat.edu/COMP375/Microcode.pdf" class="uri">http://williams.comp.ncat.edu/COMP375/Microcode.pdf</a><br>
+<a href="http://minnie.tuhs.org/CompArch/Tutes/week04.html" class="uri">http://minnie.tuhs.org/CompArch/Tutes/week04.html</a><br>
+
+</div>
+<div class="fullwidth" style="max-width: 80%">
+<img src="images/gemini-microarchitecture.gif"><br>
+
+</div>
+</div>
+</section><div><a class="slider-prev" href="#machine-code"></a><a class="slider-next" href="#gl-second-generation-programming-languages"></a></div>
+<section id="gl-second-generation-programming-languages" class="slide level1">
+<h1>2GL (second-generation programming languages)</h1>
+<p>Opcode (mnemonic): <code>add</code>, <code>sub</code>, <code>jmp</code>, <code>je</code>, <code>and</code>, <code>mov</code><br>
+Operand: register, constant value, flag, memory, label<br>
 Label: get offset at the specified point</p>
 <div style="-webkit-column-count: 2; -moz-column-count: 2">
 <pre class="x86asm"><code>global  strlen
@@ -193,61 +249,20 @@ repne  scasb
 .done:
   ret</code></pre>
 </div>
-</section>
-<section id="machine-code" class="slide level1">
-<h1>Machine code</h1>
-<p>Assembly instructions are converted into the machine code: binary representation of elementary instructions which can be executed directly on CPU.<br />
-<span style="font-size: small:"><a href="http://www.c-jump.com/CIS77/CPU/IsaDesign/lecture.html" class="uri">http://www.c-jump.com/CIS77/CPU/IsaDesign/lecture.html</a></span><br />
-Simplifed x86-like instruction encoding<br />
-<img src="images/simple_encoding.png" alt="" /></p>
-</section>
-<section id="machine-code-1" class="slide level1">
-<h1>Machine code</h1>
-<h2 id="gl-first-generation-programming-languages">1GL (first-generation programming languages)</h2>
-<p>See also: Bootstrapping a simple compiler from nothing - 1GL to 3GL<br />
-<a href="http://homepage.ntlworld.com/edmund.grimley-evans/bcompiler.html" class="uri">http://homepage.ntlworld.com/edmund.grimley-evans/bcompiler.html</a><br />
-<a href="https://github.com/smtlaissezfaire/bcompiler" class="uri">https://github.com/smtlaissezfaire/bcompiler</a></p>
-<pre class="x86asm"><code># _start:
-  e8 25 00 00 00    # call  gethex
-  c1 e0 04          # sall  $4,%eax
-  50                # push  %eax
-  e8 1c 00 00 00    # call  gethex
-  01 04 24          # add  %eax,(%esp)
-  e8 03 00 00 00    # call  putchar
-  58                # pop  %eax
-  eb e7             # jmp  _start
-
-# +25
-# putchar:
-  31 db      # xor  %ebx,%ebx
-  43      # inc  %ebx
-  8d 4c 24 04    # lea  4(%esp),%ecx
-  89 da      # mov  %ebx,%edx
-  b8 04 00 00 00    # mov  $4,%eax
-  cd 80      # int  $0x80
-  c3      # ret</code></pre>
-</section>
-<section id="microcode" class="slide level1">
-<h1>Microcode ↓</h1>
-Current CPUs are not hardwired. The connections between logic units at the opcode execution time are maintained by the microcode — sequence of bit packages describing the signals at each clock.<br />
-
-<div class="twocolumn">
-<img src="images/gemini-microinstruction.gif" alt="" /><br />
-
-<div style="font-size: small">
-Source: <a href="http://www.cs.indiana.edu/~jwmills/EDUCATION.NOTEBOOK/b443/b443.gemini.html" class="uri">http://www.cs.indiana.edu/~jwmills/EDUCATION.NOTEBOOK/b443/b443.gemini.html</a><br />
- See also:<br />
- <a href="http://www.bedroomlan.org/projects/mcasm" class="uri">http://www.bedroomlan.org/projects/mcasm</a><br />
- <a href="http://williams.comp.ncat.edu/COMP375/Microcode.pdf" class="uri">http://williams.comp.ncat.edu/COMP375/Microcode.pdf</a><br />
- <a href="http://minnie.tuhs.org/CompArch/Tutes/week04.html" class="uri">http://minnie.tuhs.org/CompArch/Tutes/week04.html</a><br />
-
+</section><div><a class="slider-prev" href="#microcode"></a><a class="slider-next" href="#assembly-languages"></a></div>
+<section id="assembly-languages" class="slide level1">
+<h1>Assembly languages</h1>
+<p>Assembly instructions are converted into the machine code.<br>
+<span style="font-size: 0.5em:"><a href="http://www.c-jump.com/CIS77/CPU/IsaDesign/lecture.html" class="uri">http://www.c-jump.com/CIS77/CPU/IsaDesign/lecture.html</a></span><br>
+Simplifed x86-like instruction encoding</p>
+<div class="fullwidth">
+<img src="images/simple_encoding.png">
 </div>
-<img src="images/gemini-microarchitecture.gif" alt="" />
-</div>
-</section>
+</section><div><a class="slider-prev" href="#gl-second-generation-programming-languages"></a><a class="slider-next" href="#macroassembler"></a></div>
 <section id="macroassembler" class="slide level1">
-<h1>Macroassembler ↑</h1>
-Macroassemblers allow macros: special directives with parameters which can be substituted at the assembly time.<br />
+<h1>Macroassembler</h1>
+<h2 id="generation-language">"2.5 generation" language</h2>
+Macroassemblers allow macros: special directives with parameters which can be substituted at the assembly time.<br>
 
 <div class="twocolumn">
 <pre class="x86asm"><code>ForLp           macro   LCV, Start, Stop
@@ -284,7 +299,7 @@ stax    x, J, I         ;Store to X[J][I]
 Next    J
 Next    I</code></pre>
 </div>
-</section>
+</section><div><a class="slider-prev" href="#assembly-languages"></a><a class="slider-next" href="#high-level-programming-languages"></a></div>
 <section id="high-level-programming-languages" class="slide level1">
 <h1>High-level programming languages</h1>
 <h2 id="gl-third-generation-programming-languages">3GL (third-generation programming languages)</h2>
@@ -296,31 +311,28 @@ Next    I</code></pre>
 
 <span class="dt">int</span> main(<span class="dt">int</span> argc, <span class="dt">char</span> **argv) {
     <span class="dt">int</span> clk_id = CLOCK_REALTIME;
-    <span class="dt">const</span> uint TIME_FMT = strlen(<span class="st">&quot;2012-12-31 12:59:59.123456789&quot;</span>) + <span class="dv">1</span>;
+    <span class="dt">const</span> uint TIME_FMT = strlen(<span class="st">"2012-12-31 12:59:59.123456789"</span>) + <span class="dv">1</span>;
     <span class="dt">char</span> timestr[TIME_FMT];
 
     <span class="kw">struct</span> timespec ts, res;
-    <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt; <span class="dv">100</span>; i++) {
+    <span class="cf">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt; <span class="dv">100</span>; i++) {
       clock_getres(clk_id, &amp;res);
       clock_gettime(clk_id, &amp;ts);
     }
 
-    <span class="kw">if</span> (timespec2str(timestr, TIME_FMT, &amp;ts) != <span class="dv">0</span>) {
-        printf(<span class="st">&quot;timespec2str failed!</span><span class="ch">\n</span><span class="st">&quot;</span>);
-        <span class="kw">return</span> EXIT_FAILURE;
-    } <span class="kw">else</span> {
+    <span class="cf">if</span> (timespec2str(timestr, TIME_FMT, &amp;ts) != <span class="dv">0</span>) {
+        printf(<span class="st">"timespec2str failed!</span><span class="sc">\n</span><span class="st">"</span>);
+        <span class="cf">return</span> EXIT_FAILURE;
+    } <span class="cf">else</span> {
         <span class="dt">unsigned</span> <span class="dt">long</span> resol = res.tv_sec * NANO + res.tv_nsec;
-        printf(<span class="st">&quot;CLOCK_REALTIME: res=%ld ns, time=%s</span><span class="ch">\n</span><span class="st">&quot;</span>, resol, timestr);
-        <span class="kw">return</span> EXIT_SUCCESS;
+        printf(<span class="st">"CLOCK_REALTIME: res=%ld ns, time=%s</span><span class="sc">\n</span><span class="st">"</span>, resol, timestr);
+        <span class="cf">return</span> EXIT_SUCCESS;
     }
 }</code></pre></div>
-<!--
-```
--->
-</section>
+</section><div><a class="slider-prev" href="#macroassembler"></a><a class="slider-next" href="#gl-data-querying-and-manipulation-languages"></a></div>
 <section id="gl-data-querying-and-manipulation-languages" class="slide level1">
 <h1>4GL: Data querying and manipulation languages</h1>
-Fourth-generation languages are declarative, mostly concerned with data manipulation.<br />
+Fourth-generation languages are declarative, mostly concerned with data manipulation.<br>
 
 <div class="twocolumn">
 <div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">select</span>  quartile,  
@@ -339,33 +351,33 @@ Fourth-generation languages are declarative, mostly concerned with data manipula
 ) user_spend_quartiles
 <span class="kw">group</span> <span class="kw">by</span> <span class="dv">1</span>
 <span class="kw">order</span> <span class="kw">by</span> <span class="fu">ntile</span> <span class="kw">asc</span></code></pre></div>
-<img src="images/ntiles.png" alt="" /><br />
+<img src="images/ntiles.png"><br>
 
 <div class="small">
 Source: <a href="https://www.periscopedata.com/blog/window-functions-by-example.html" class="uri">https://www.periscopedata.com/blog/window-functions-by-example.html</a>
 </div>
 </div>
 <p>SQL (without cursors and imperative extensions) is probably the only successful general fourth generation language.</p>
-</section>
+</section><div><a class="slider-prev" href="#high-level-programming-languages"></a><a class="slider-next" href="#gl-data-querying-and-manipulation-languages-1"></a></div>
 <section id="gl-data-querying-and-manipulation-languages-1" class="slide level1">
 <h1>4GL: Data querying and manipulation languages</h1>
 <p>Also include: report and form-generation languages (ABAP, dBase, FoxPro), wide range of domain specific declarative languages (Wolfram Language, AMPL, MATLAB).</p>
 <p>Some features of modern high-level programming languages take roots in 4GL (e.g. list comprehensions).</p>
 <p>Some disadvantages of 4GL:</p>
 <ul>
-<li>syntax is very verbose, unneccessary mimics natural languge</li>
-<li>complicated debugging</li>
-<li>unpredictable performance (and, usually, in orders of magnutude slower than for implementation in general-purpose programming language)</li>
-<li>complicated development process, compatibility problems</li>
+<li class="fragment">syntax is very verbose, unneccessary mimics natural languge</li>
+<li class="fragment">complicated debugging</li>
+<li class="fragment">unpredictable performance (and, usually, in orders of magnutude slower than for implementation in general-purpose programming language)</li>
+<li class="fragment">complicated development process, compatibility problems</li>
 </ul>
-</section>
+</section><div><a class="slider-prev" href="#gl-data-querying-and-manipulation-languages"></a><a class="slider-next" href="#gl-logical-inference-and-constraint-based"></a></div>
 <section id="gl-logical-inference-and-constraint-based" class="slide level1">
 <h1>5GL: Logical inference and constraint-based</h1>
-<p>Fifth-generation languages are the ultimate dream of software engineers in 1980s :)<br />
-Example: Prolog, Datalog<br />
+<p>Fifth-generation languages were the ultimate dream of software engineers in 1980s :)<br>
+Example: Prolog, Datalog<br>
 Programmer specifies the model and formulates the task. The runtime solves the specified constraints using some knowledge-inference engines (first-order inferene, frame inference).</p>
 <p>You can try Prolog here: <a href="http://swish.swi-prolog.org/example/houses_puzzle.pl" class="uri">http://swish.swi-prolog.org/example/houses_puzzle.pl</a></p>
-</section>
+</section><div><a class="slider-prev" href="#gl-data-querying-and-manipulation-languages-1"></a><a class="slider-next" href="#einstein-riddle-who-keeps-zebra-in-prolog"></a></div>
 <section id="einstein-riddle-who-keeps-zebra-in-prolog" class="slide level1">
 <h1>Einstein riddle (who keeps zebra?) in Prolog</h1>
 <div class="sourceCode"><pre class="sourceCode prolog"><code class="sourceCode prolog">neigh(<span class="dt">Left</span><span class="kw">,</span> <span class="dt">Right</span><span class="kw">,</span> <span class="dt">List</span>) <span class="kw">:-</span>
@@ -384,41 +396,41 @@ zebraowner(<span class="dt">Houses</span><span class="kw">,</span> <span class="
 zebra(<span class="dt">X</span>) <span class="kw">:-</span> zebraowner([<span class="dt">_</span>, <span class="dt">_</span>, <span class="dt">_</span>]<span class="kw">,</span> <span class="dt">X</span>)<span class="kw">.</span></code></pre></div>
 <pre><code>zebra(Owner).
 &gt; Owner = japanese</code></pre>
-</section>
+</section><div><a class="slider-prev" href="#gl-logical-inference-and-constraint-based"></a><a class="slider-next" href="#ii.-influential-programming-languages"></a></div>
 <section id="ii.-influential-programming-languages" class="slide level1">
 <h1>II. Influential programming languages</h1>
 <h2 id="first-widespread-programming-languages">First widespread programming languages</h2>
 <p>Fortran, Cobol, Algol, Lisp</p>
 <h2 id="languages-which-gave-start-to-important-concepts">Languages which gave start to important concepts</h2>
-<p>ML, Prolog, Smalltalk, Forth, APL</p>
-</section>
+<p>ML, Prolog, Smalltalk, Forth, APL, Refal, Haskell</p>
+</section><div><a class="slider-prev" href="#einstein-riddle-who-keeps-zebra-in-prolog"></a><a class="slider-next" href="#fortran-the-first-widely-used-high-level-language"></a></div>
 <section id="fortran-the-first-widely-used-high-level-language" class="slide level1">
 <h1>FORTRAN: the first widely-used high-level language</h1>
-<p>FORmula TRANslator. John Backus, Peter Naur, 1950s</p>
-<div class="sourceCode"><pre class="sourceCode fortran"><code class="sourceCode fortran"><span class="co">C AREA OF A TRIANGLE - HERON&#39;S FORMULA</span>
+<p>FORmula TRANslator. John Backus, 1950s</p>
+<div class="sourceCode"><pre class="sourceCode fortran"><code class="sourceCode fortran"><span class="co">C AREA OF A TRIANGLE - HERON'S FORMULA</span>
 <span class="co">C INPUT - CARD READER UNIT 5, INTEGER INPUT</span>
 <span class="co">C OUTPUT - LINE PRINTER UNIT 6, REAL OUTPUT</span>
 <span class="co">C INPUT ERROR DISPLAY ERROR OUTPUT CODE 1 IN JOB CONTROL LISTING</span>
       <span class="dt">INTEGER</span> A,B,C
       <span class="fu">READ(</span><span class="dv">5</span>,<span class="dv">501</span><span class="fu">)</span> A,B,C
   <span class="dv">501</span> <span class="fu">FORMAT(</span>3I5<span class="fu">)</span>
-      <span class="kw">IF</span>(A<span class="kw">.EQ.</span><span class="dv">0</span> <span class="kw">.OR.</span> B<span class="kw">.EQ.</span><span class="dv">0</span> <span class="kw">.OR.</span> C<span class="kw">.EQ.</span><span class="dv">0</span>) <span class="kw">STOP</span> <span class="dv">1</span>
+      <span class="kw">IF</span>(A<span class="op">.EQ.</span><span class="dv">0</span> <span class="op">.OR.</span> B<span class="op">.EQ.</span><span class="dv">0</span> <span class="op">.OR.</span> C<span class="op">.EQ.</span><span class="dv">0</span>) <span class="kw">STOP</span> <span class="dv">1</span>
       S <span class="kw">=</span> (A <span class="kw">+</span> B <span class="kw">+</span> C) <span class="kw">/</span> <span class="fl">2.0</span>
-      AREA <span class="kw">=</span> <span class="kw">SQRT</span>( S <span class="kw">*</span> (S <span class="kw">-</span> A) <span class="kw">*</span> (S <span class="kw">-</span> B) <span class="kw">*</span> (S <span class="kw">-</span> C) )
+      AREA <span class="kw">=</span> <span class="bu">SQRT</span>( S <span class="kw">*</span> (S <span class="kw">-</span> A) <span class="kw">*</span> (S <span class="kw">-</span> B) <span class="kw">*</span> (S <span class="kw">-</span> C) )
       <span class="fu">WRITE(</span><span class="dv">6</span>,<span class="dv">601</span><span class="fu">)</span> A,B,C,AREA
   <span class="dv">601</span> <span class="fu">FORMAT(</span>4H A<span class="kw">=</span> ,I5,5H  B<span class="kw">=</span> ,I5,5H  C<span class="kw">=</span> ,I5,8H  AREA<span class="kw">=</span> ,F10.2,12HSQUARE UNITS<span class="fu">)</span>
       <span class="kw">STOP</span>
       <span class="kw">END</span></code></pre></div>
-</section>
+</section><div><a class="slider-prev" href="#ii.-influential-programming-languages"></a><a class="slider-next" href="#fortran-is-alive"></a></div>
 <section id="fortran-is-alive" class="slide level1">
 <h1>Fortran is alive</h1>
-<p>Fortran 2008 is out, next revision (Fortran 2015) is to be standartized in 2018.<br />
+<p>Fortran 2008 is out, next revision (Fortran 2015) is to be standartized in 2018.<br>
 <a href="http://www.fortran.bcs.org/2012/nm_talk.pdf" class="uri">http://www.fortran.bcs.org/2012/nm_talk.pdf</a></p>
 <div class="sourceCode"><pre class="sourceCode fortran"><code class="sourceCode fortran"><span class="kw">do</span> i <span class="kw">=</span> this_image(), limit, num_images()
-    pi <span class="kw">=</span> pi <span class="kw">+</span> (<span class="kw">-</span><span class="dv">1</span>)<span class="kw">**</span>(i<span class="kw">+</span><span class="dv">1</span>) <span class="kw">/</span> <span class="kw">real</span>( <span class="dv">2</span><span class="kw">*</span>i<span class="kw">-</span><span class="dv">1</span>, <span class="fu">kind</span><span class="kw">=</span>rk )
+    pi <span class="kw">=</span> pi <span class="kw">+</span> (<span class="kw">-</span><span class="dv">1</span>)<span class="kw">**</span>(i<span class="kw">+</span><span class="dv">1</span>) <span class="kw">/</span> <span class="bu">real</span>( <span class="dv">2</span><span class="kw">*</span>i<span class="kw">-</span><span class="dv">1</span>, <span class="fu">kind</span><span class="kw">=</span>rk )
 <span class="kw">end do</span>
     sync <span class="fu">all</span> <span class="co">! global barrier</span>
-<span class="kw">if</span> (img <span class="kw">.eq.</span> <span class="dv">1</span>) <span class="kw">then</span>
+<span class="kw">if</span> (img <span class="op">.eq.</span> <span class="dv">1</span>) <span class="kw">then</span>
     <span class="kw">do</span> i <span class="kw">=</span> <span class="dv">2</span>, nimgs
         pi <span class="kw">=</span> pi <span class="kw">+</span> pi<span class="kw">[</span>i<span class="kw">]</span>
     <span class="kw">end do</span>
@@ -426,17 +438,17 @@ zebra(<span class="dt">X</span>) <span class="kw">:-</span> zebraowner([<span cl
 <span class="kw">end if</span></code></pre></div>
 <p>Equivalent to MPI code:</p>
 <div class="sourceCode"><pre class="sourceCode fortran"><code class="sourceCode fortran"><span class="kw">do</span> i <span class="kw">=</span> rank<span class="kw">+</span><span class="dv">1</span>, limit, nprocs
-    pi <span class="kw">=</span> pi <span class="kw">+</span> (<span class="kw">-</span><span class="dv">1</span>)<span class="kw">**</span>(i<span class="kw">+</span><span class="dv">1</span>) <span class="kw">/</span> <span class="kw">real</span>( <span class="dv">2</span><span class="kw">*</span>i<span class="kw">-</span><span class="dv">1</span>, <span class="fu">kind</span><span class="kw">=</span>rk )
+    pi <span class="kw">=</span> pi <span class="kw">+</span> (<span class="kw">-</span><span class="dv">1</span>)<span class="kw">**</span>(i<span class="kw">+</span><span class="dv">1</span>) <span class="kw">/</span> <span class="bu">real</span>( <span class="dv">2</span><span class="kw">*</span>i<span class="kw">-</span><span class="dv">1</span>, <span class="fu">kind</span><span class="kw">=</span>rk )
 <span class="kw">end do</span>
 <span class="kw">call</span> MPI_REDUCE( pi, picalc, <span class="dv">1</span>, MPI_DOUBLE_PRECISION, <span class="kw">&amp;</span>
     MPI_SUM, <span class="dv">0</span>, MPI_COMM_WORLD, ierr )
 picalc <span class="kw">=</span> picalc <span class="kw">*</span> <span class="fl">4.0_rk</span></code></pre></div>
-</section>
+</section><div><a class="slider-prev" href="#fortran-the-first-widely-used-high-level-language"></a><a class="slider-next" href="#cobol-common-business-oriented-language"></a></div>
 <section id="cobol-common-business-oriented-language" class="slide level1">
 <h1>COBOL: COmmon Business-Oriented Language</h1>
 <p>One of the first languages initially designed without any academic (computer science) influence.</p>
 <p>Nowadays, as I have probably already mentioned in an introduction of the previous course, COBOL is the canonical example of legacy code: more than a half of an entrprises (in US) use several billions lines of COBOL code in their everyday activity. The migration cost is very high, so in short future COBOL share won't drop significantly.</p>
-</section>
+</section><div><a class="slider-prev" href="#fortran-is-alive"></a><a class="slider-next" href="#cobol-4gl-beginnings"></a></div>
 <section id="cobol-4gl-beginnings" class="slide level1">
 <h1>COBOL: 4GL beginnings</h1>
 <div class="smaller">
@@ -446,22 +458,22 @@ picalc <span class="kw">=</span> picalc <span class="kw">*</span> <span class="f
          CONTROLS seller-name.
 
      01  TYPE PAGE HEADING.
-         03  COL 1                    VALUE &quot;Sales Report&quot;.
-         03  COL 74                   VALUE &quot;Page&quot;.
+         03  COL 1                    VALUE "Sales Report".
+         03  COL 74                   VALUE "Page".
          03  COL 79                   PIC Z9 SOURCE PAGE-COUNTER.
 
      01  sales-on-day TYPE DETAIL, LINE + 1.
-         03  COL 3                    VALUE &quot;Sales on&quot;.
+         03  COL 3                    VALUE "Sales on".
          03  COL 12                   PIC 99/99/9999 SOURCE sales-date.
-         03  COL 21                   VALUE &quot;were&quot;.
+         03  COL 21                   VALUE "were".
          03  COL 26                   PIC $$$$9.99 SOURCE sales-amount.
 
      01  invalid-sales TYPE DETAIL, LINE + 1.
-         03  COL 3                    VALUE &quot;INVALID RECORD:&quot;.
+         03  COL 3                    VALUE "INVALID RECORD:".
          03  COL 19                   PIC X(34) SOURCE sales-record.
 
      01  TYPE CONTROL HEADING seller-name, LINE + 2.
-         03  COL 1                    VALUE &quot;Seller:&quot;.
+         03  COL 1                    VALUE "Seller:".
          03  COL 9                    PIC X(30) SOURCE seller-name.</code></pre>
 <pre class="cobol"><code>OPEN INPUT sales, OUTPUT report-out
           INITIATE sales-report
@@ -484,12 +496,12 @@ picalc <span class="kw">=</span> picalc <span class="kw">*</span> <span class="f
           CLOSE sales, report-out
           .</code></pre>
 </div>
-</section>
+</section><div><a class="slider-prev" href="#cobol-common-business-oriented-language"></a><a class="slider-next" href="#abap-cobol-successor"></a></div>
 <section id="abap-cobol-successor" class="slide level1">
 <h1>ABAP: COBOL successor</h1>
 <pre class="abap"><code>REPORT ZSOURCE2307.
 * List of the current program
-WRITE / &#39;I am program ZSOURCE2307&#39;.
+WRITE / 'I am program ZSOURCE2307'.
 * External perform
 PERFORM EXTFORM IN PROGRAM ZSOURCE2308.
 
@@ -497,17 +509,17 @@ Program 2
 REPORT ZSOURCE2308.
 * Form definition
 FORM EXTFORM.
-if sy-cprog &lt;&gt; &#39;ZSOURCE2307&#39;.
-  WRITE / &#39;I am extform in program ZSOURCE2308.&#39;.
+if sy-cprog &lt;&gt; 'ZSOURCE2307'.
+  WRITE / 'I am extform in program ZSOURCE2308.'.
 endif.
 ENDFORM.</code></pre>
-</section>
+</section><div><a class="slider-prev" href="#cobol-4gl-beginnings"></a><a class="slider-next" href="#algol"></a></div>
 <section id="algol" class="slide level1">
 <h1>ALGOL</h1>
 <p>ALGOrithmic Language, first implementation in 1958 (known as International Algebraic Language, IAL).</p>
 <p>Developed by joint committee of American and Soviet computer scientists, after standartization was immediately adopted as GOST standart in USSR. John Backus (one of FORTRAN creators), John McCarthy (creator of LISP), Peter Naur (creator of BNF grammar specification formalism), Edsger Dijkstra (no need to introduce :) took part in the original development. Algol 60 and Algol 68 followed.</p>
 <p>At the next 2 slides there are code examples in Algol 68, which is different from the most widespread Algol 60.</p>
-</section>
+</section><div><a class="slider-prev" href="#abap-cobol-successor"></a><a class="slider-next" href="#algol-1"></a></div>
 <section id="algol-1" class="slide level1">
 <h1>ALGOL</h1>
 <pre class="algol"><code>proc abs max = ([,]real a, ref real y, ref int i, k)real:
@@ -525,7 +537,7 @@ begin
    od;
    y
 end # abs max #</code></pre>
-</section>
+</section><div><a class="slider-prev" href="#algol"></a><a class="slider-next" href="#algol-2"></a></div>
 <section id="algol-2" class="slide level1">
 <h1>ALGOL</h1>
 <div class="smaller">
@@ -534,14 +546,15 @@ ref vector col = m[,2];  # define a ref (pointer) to the 2nd column #
 
 mode node = union (real, int, compl, string),
      list = struct (node val, ref list next);
-node n := &quot;1234&quot;;
+node n := "1234";
+
 # tagged unions #
 case n in
-   (real r):   print((&quot;real:&quot;, r)),
-   (int i):    print((&quot;int:&quot;, i)),
-   (compl c):  print((&quot;compl:&quot;, c)),
-   (string s): print((&quot;string:&quot;, s))
-   out         print((&quot;?:&quot;, n))
+   (real r):   print(("real:", r)),
+   (int i):    print(("int:", i)),
+   (compl c):  print(("compl:", c)),
+   (string s): print(("string:", s))
+   out         print(("?:", n))
 esac</code></pre>
 <pre class="algol"><code>prio max = 9;
 # Custom operators with overloading! #
@@ -554,19 +567,19 @@ op max = ([]real a) real:
     for i from lwb a + 1 to upb a do ( a[i]&gt;out | out:=a[i] ) od;
     out)</code></pre>
 </div>
-</section>
+</section><div><a class="slider-prev" href="#algol-1"></a><a class="slider-next" href="#lisp"></a></div>
 <section id="lisp" class="slide level1">
 <h1>LISP</h1>
 <h2 id="dynamic-typing-functional-programming-macros">dynamic typing, functional programming, macros</h2>
 <p>Introduced by John McCarthy in 1958, based on lambda-calculus. One of the most popular languages for AI development in time span from 1960s to the end of 1980s.</p>
 <p>Today there are 3 widespread dialects:</p>
 <ul>
-<li>Scheme (minimal and extensible)</li>
-<li>Common LISP (large system with rich standard library)</li>
-<li>Clojure (LISP dialect for Java ecosystem)</li>
+<li class="fragment">Scheme (minimal and extensible)</li>
+<li class="fragment">Common LISP (large system with rich standard library)</li>
+<li class="fragment">Clojure (LISP dialect for Java ecosystem)</li>
 </ul>
 <p>See also: <a href="http://www.flownet.com/gat/papers/lisp-java.pdf" class="uri">http://www.flownet.com/gat/papers/lisp-java.pdf</a></p>
-</section>
+</section><div><a class="slider-prev" href="#algol-2"></a><a class="slider-next" href="#lisp-1"></a></div>
 <section id="lisp-1" class="slide level1">
 <h1>LISP</h1>
 <pre class="sbcl"><code>(defun get-from-list(list pred)
@@ -577,15 +590,15 @@ op max = ([]real a) real:
         (setf ans (nth i list))))))
 
  (defun get-max(list)
-   (get-from-list list #&#39;&gt;))
+   (get-from-list list #'&gt;))
 
  (defun get-min(list)
-   (get-from-list list #&#39;&lt;))</code></pre>
+   (get-from-list list #'&lt;))</code></pre>
 <pre><code>(defmacro multi-run (times &amp;body algo-call)
    `(loop for ,(gensym) below ,times collect (progn ,@algo-call)))
 
-(multi-run 50 (solve-prob test-case (make-instance &#39;tabu-search)))</code></pre>
-</section>
+(multi-run 50 (solve-prob test-case (make-instance 'tabu-search)))</code></pre>
+</section><div><a class="slider-prev" href="#lisp"></a><a class="slider-next" href="#smalltalk-object-oriented-programming"></a></div>
 <section id="smalltalk-object-oriented-programming" class="slide level1">
 <h1>Smalltalk: object-oriented programming</h1>
 <p>Message-based, prototype-based object-oriented programming</p>
@@ -595,14 +608,14 @@ rectangles := OrderedCollection
   with: (Rectangle left: 10 right: 10 top: 110 bottom: 210).
 aPoint := Point x: 20 y: 20.
 collisions := rectangles select: [:aRect | aRect containsPoint: aPoint].</code></pre>
-</section>
+</section><div><a class="slider-prev" href="#lisp-1"></a><a class="slider-next" href="#prolog-logical-constraint-based-programming"></a></div>
 <section id="prolog-logical-constraint-based-programming" class="slide level1">
 <h1>Prolog: logical (constraint-based) programming</h1>
-<p>(already mentioned at 5GL section)<br />
-<a href="https://skilldrick.github.io/easyforth/#snake" class="uri">https://skilldrick.github.io/easyforth/#snake</a></p>
-</section>
+<p>(already mentioned at 5GL section)</p>
+</section><div><a class="slider-prev" href="#smalltalk-object-oriented-programming"></a><a class="slider-next" href="#forth-stack-based-programming"></a></div>
 <section id="forth-stack-based-programming" class="slide level1">
 <h1>Forth: stack-based programming</h1>
+<p><a href="https://skilldrick.github.io/easyforth/#snake" class="uri">https://skilldrick.github.io/easyforth/#snake</a></p>
 <pre class="forth"><code>: move-up  -1 snake-y-head +! ;
 : move-left  -1 snake-x-head +! ;
 : move-down  1 snake-y-head +! ;
@@ -620,10 +633,10 @@ collisions := rectangles select: [:aRect | aRect containsPoint: aPoint].</code><
     i snake-x @ i 1 + snake-x !
     i snake-y @ i 1 + snake-y !
   -1 +loop ;</code></pre>
-</section>
+</section><div><a class="slider-prev" href="#prolog-logical-constraint-based-programming"></a><a class="slider-next" href="#apl-array-programming"></a></div>
 <section id="apl-array-programming" class="slide level1">
 <h1>APL: array programming</h1>
-<p>Array Programming Languages syntax uses special graphical symbols to define array operations.<br />
+<p>Array Programming Languages syntax uses special graphical symbols to define array operations.<br>
 Example program (Game of Life simulator):</p>
 <blockquote>
 <p>life←{↑1 ⍵∨.∧3 4=+/,¯1 0 1∘.⊖¯1 0 1∘.⌽⊂⍵}</p>
@@ -634,9 +647,9 @@ Example program (Game of Life simulator):</p>
 </blockquote>
 <p>i.e. 0 = mod(log(input(),2),1)</p>
 <p>Unicode standard has some APL-specific symbols.</p>
-<p>Advantage: extremely concise (short) programs. Its ASCII-successor J is very popular in &quot;coding golf&quot; competitions.</p>
+<p>Advantage: extremely concise (short) programs. Its ASCII-successor J is very popular in "coding golf" competitions.</p>
 <p>Disadvantage: unreadable programs.</p>
-</section>
+</section><div><a class="slider-prev" href="#forth-stack-based-programming"></a><a class="slider-next" href="#apl-example"></a></div>
 <section id="apl-example" class="slide level1">
 <h1>APL example</h1>
 <p>Prime numbers example (from Wikipedia):</p>
@@ -645,63 +658,185 @@ Example program (Game of Life simulator):</p>
 </blockquote>
 <p>Executed from right to left, this means:</p>
 <ul>
-<li>ιR (Iota) = integers from 1 to R (if R = 6, ιR is 1 2 3 4 5 6)</li>
-<li>Drop first element of this vector (↓ function), i.e. 1. So 1↓ιR is 2 3 4 5 6</li>
-<li>Set R to the new vector (←, assignment primitive), i.e. 2 3 4 5 6</li>
-<li>The / compress function is dyadic (binary) and the interpreter first evaluates its left argument (entirely in parentheses):
+<li class="fragment">ιR (Iota) = integers from 1 to R (if R = 6, ιR is 1 2 3 4 5 6)</li>
+<li class="fragment">Drop first element of this vector (↓ function), i.e. 1. So 1↓ιR is 2 3 4 5 6</li>
+<li class="fragment">Set R to the new vector (←, assignment primitive), i.e. 2 3 4 5 6</li>
+<li class="fragment">The / compress function is dyadic (binary) and the interpreter first evaluates its left argument (entirely in parentheses):
 <ul>
-<li>Generate outer product of R multiplied by R (°.× operator)</li>
-<li>Build a vector the same length as R with 1 in each place where the corresponding number in R is in the outer product matrix (∈, set inclusion or element of or Epsilon operator), i.e. 0 0 1 0 1</li>
-<li>Logically negate (not) values in the vector (change zeros to ones and ones to zeros) (∼, logical not or Tilde operator), i.e. 1 1 0 1 0</li>
+<li class="fragment">Generate outer product of R multiplied by R (°.× operator)</li>
+<li class="fragment">Build a vector the same length as R with 1 in each place where the corresponding number in R is in the outer product matrix (∈, set inclusion or element of or Epsilon operator), i.e. 0 0 1 0 1</li>
+<li class="fragment">Logically negate (not) values in the vector (change zeros to ones and ones to zeros) (∼, logical not or Tilde operator), i.e. 1 1 0 1 0</li>
 </ul></li>
-<li>Select the items in R for which the corresponding element is 1 (/ compress operator), i.e. 2 3 5</li>
+<li class="fragment">Select the items in R for which the corresponding element is 1 (/ compress operator), i.e. 2 3 5</li>
 </ul>
-</section>
+</section><div><a class="slider-prev" href="#apl-array-programming"></a><a class="slider-next" href="#refal-recursive-functions-algorithmic-language"></a></div>
+<section id="refal-recursive-functions-algorithmic-language" class="slide level1">
+<h1>Refal (REcursive Functions ALGOrithmic Language)</h1>
+<p>Created in Soviet Union in 1968 by Valentin F. Turchin.</p>
+<p>Recursive term rewriting language, based on Markov Algorithms.<br>
+Original concept of Refal was the metalanguage for programming language syntax and semantics.<br>
+Features advanced pattern-matching.</p>
+<p>Example: Palindrome</p>
+<pre><code> Pal { = True;
+    s.1 = True;
+    s.1 e.2 s.1 = &lt;Pal e.2&gt;;
+    e.1 = False;  }</code></pre>
+<p>Implementations:</p>
+<ol type="1">
+<li class="fragment">CMC MSU Refal-2 <a href="https://github.com/cmc-msu-ai/refal" class="uri">https://github.com/cmc-msu-ai/refal</a></li>
+<li class="fragment">BMSTU Refal → C compiler</li>
+</ol>
+<ul>
+<li class="fragment"><a href="https://github.com/rfatkullin/bmstu-refal-compiler" class="uri">https://github.com/rfatkullin/bmstu-refal-compiler</a></li>
+<li class="fragment"><a href="https://github.com/rfatkullin/bmstu-refal-runtime" class="uri">https://github.com/rfatkullin/bmstu-refal-runtime</a></li>
+</ul>
+</section><div><a class="slider-prev" href="#apl-example"></a><a class="slider-next" href="#refal-example-untyped-lambda-calculus-interpreter"></a></div>
+<section id="refal-example-untyped-lambda-calculus-interpreter" class="slide level1">
+<h1>Refal Example: untyped lambda-calculus interpreter</h1>
+<div class="twocolumn">
+<pre><code>Wait = &lt;Card&gt; = ;
+
+Subst { 
+    s.var t.value s.var e.rest s.x1 
+      = t.value &lt;Subst s.var t.value e.rest&gt; ;
+    s.var t.value (λ s.var e.body) e.rest 
+      = (λ s.var e.body) &lt;Subst s.var t.value e.rest&gt; ;
+    s.var t.value (e.inside) e.rest 
+      = (&lt;Subst s.var t.value e.inside&gt;) 
+        &lt;Subst s.var t.value e.rest&gt; ;
+    s.var t.value s.other e.rest 
+      = s.other &lt;Subst s.var t.value e.rest&gt; ;
+    s.var t.value = ;
+}
+
+Beta {
+    (( e.double )) e.rest = Step (e.double) e.rest ;
+    (λ s.var '.'  e.body) t.value e.rest =
+        Step &lt;Subst s.var t.value e.body&gt; e.rest ;
+    (λ s.var '.'  e.body) =
+        &lt;Beta e.body&gt; : s.state e.result = 
+        s.state (λ s.var '.' e.result) ;
+    (e.1) e.rest =
+        &lt;Beta e.1&gt; =&gt; {
+            Step e.result = Step (e.result) e.rest ;
+            Stuck e.result = &lt;Beta e.rest&gt; 
+              : s.state e.result2 =
+                s.state (e.result) e.result2 ;
+        } ;
+    t.neutral e.rest =
+        &lt;Beta e.rest&gt; : s.state e.result =
+        s.state t.neutral e.result ;
+    = Stuck;
+}
+
+Loop {
+    e.val = 
+        &lt;Beta e.val&gt; : s.state e.res =
+        &lt;Print s.state&gt; &lt;Print &lt;PPrint ('    ') e.res&gt;&gt; =
+        s.state =&gt; {
+            Step = &lt;Loop &lt;Wait&gt; e.res&gt; ;
+            Stuck = &lt;Print DONE&gt; ;
+        } 
+}
+
+Omega = (λ x '.' x x) (λ y '.' y y) ;
+Y = (λ yF '.' (λ yX '.' yF (yX yX)) (λ yX '.' yF (yX yX))) ;
+Comp = (λ f '.' (λ g '.' (λ x '.' (g (f x)))));
+
+$ENTRY Go {
+ =   &lt;Print &lt;PPrint () &lt;Y&gt; &lt;Fact&gt; 3&gt;&gt;
+  &lt;Loop &lt;Y&gt; &lt;Fact&gt; 3&gt; ;
+}</code></pre>
+</div>
+</section><div><a class="slider-prev" href="#refal-recursive-functions-algorithmic-language"></a><a class="slider-next" href="#homework-assignments"></a></div>
 <section id="homework-assignments" class="slide level1">
 <h1>Homework assignments</h1>
-<p><strong>Tasks 1.1–1.3</strong> (no more than 7* in total, use different languages)<br />
-Implement something non-trivial (more than 150 lines in equivalent C code) in language from list:</p>
+<p><strong>Task 1.1</strong> (at most 7* in total, at most one language from category, you can use modern implementations/dialects)</p>
+<p>Implement something non-trivial (more than 200 lines in equivalent C code) in languages from list:</p>
+<div class="twocolumn">
 <ul>
-<li>Forth, APL or J (*** each)</li>
-<li>Fortran, Algol (60 or 68), Prolog, Standard ML or Caml or OCaml, Smalltalk (** each)</li>
-<li>Haskell, Scheme or Clojure or Common Lisp (* each)</li>
+<li class="fragment">Forth **</li>
+<li class="fragment">APL, J **</li>
+<li class="fragment">Refal **</li>
+<li class="fragment">Idris, Agda, Coq **</li>
+<li class="fragment">Prolog **</li>
+<li class="fragment">Scheme, Racket, Clojure, Common LISP or Emacs LISP **</li>
+<li class="fragment">Haskell *</li>
+<li class="fragment">Smalltalk *</li>
+<li class="fragment">Fortran *</li>
+<li class="fragment">Algol *</li>
+<li class="fragment">Ada *</li>
 </ul>
-</section>
-    </div>
+</div>
+</section><div><a class="slider-prev" href="#refal-example-untyped-lambda-calculus-interpreter"></a><a class="slider-next" href="#project"></a></div>
+<section id="project" class="slide level1">
+<h1>Project</h1>
+<p>Let's write a specification of a toy programming language. In total you will get at least 10 stars.<br>
+Choose a single application area and try to imagine a simple programming language which is more convenient to use in that area than, for example, C.</p>
+<p><strong>Project Step 1.*</strong> Write a "design document" (short informal description, 1-4 pages, in English) of a toy programming language of your choice. Design document must include the following information:</p>
+<ul>
+<li class="fragment">what is the main focus of the language</li>
+<li class="fragment">examples of language statements and results of evaluation for such statements</li>
+</ul>
+<p>Language must support variables or named function arguments.</p>
+</section><div><a class="slider-prev" href="#homework-assignments"></a><a class="slider-next" href="#sample-project-ideas"></a></div>
+<section id="sample-project-ideas" class="slide level1">
+<h1>Sample project ideas</h1>
+<ul>
+<li class="fragment">html templating engine</li>
+<li class="fragment">diagram drawing</li>
+<li class="fragment">document markup</li>
+<li class="fragment">arithmetical expressions with units of measurement</li>
+<li class="fragment">linear algebra</li>
+<li class="fragment">asynchronous control</li>
+<li class="fragment">shared-memory concurrency</li>
+<li class="fragment">distributed-memory concurrency</li>
+</ul>
+</section><div><a class="slider-prev" href="#project"></a><a class="slider-next"></a></div>
+
+<!-- start page -->
+   <div id="slider">
+       <a href="#software-and-programming-language-theory" class="slider-start">PLAY</a>
+   </div>
+
+   <!-- progressbar container -->
+   <div class="slider-progress"></div>
+   </article>
   </div>
 
+  
+  <script type="text/javascript">
+  document.addEventListener("keydown", function(e) {
+     if (e.altKey || e.ctrlKey || e.metaKey || e.shiftKey) { return; }
+     switch (e.keyCode) {
+       case 35: // End
+          var arr = document.querySelectorAll("a.slider-next:link");
+          var a = arr[arr.length - 1];
+          if (a && a.href) {
+            window.location = a.href;
+          }
+          break;
+       case 36: // Home
+          var a = document.querySelector("a.slider-start");
+          if (a && a.href) {
+            window.location = a.href;
+          }
+          break;
+       case 37: // left arrow
+         var a = document.querySelector("section:target ~ div a.slider-prev");
+         if (a && a.href) {
+           window.location = a.href;
+         }
+         break;
+       case 39: // right arrow
+         var a = document.querySelector("section:target ~ div a.slider-next");
+         if (a && a.href) {
+           window.location = a.href;
+         }
+         break;
+     }
+  });
+  </script>
+  
 
-  <script src="reveal.js/lib/js/head.min.js"></script>
-  <script src="reveal.js/js/reveal.js"></script>
-
-  <script>
-
-      // Full list of configuration options available here:
-      // https://github.com/hakimel/reveal.js#configuration
-      Reveal.initialize({
-        controls: false,         // Display controls in the bottom right corner
-        progress: true,         // Display a presentation progress bar
-        history: true,          // Push each slide change to the browser history
-        fragments: true,
-        center: true,                       // Vertical centering of slides
-        maxScale: 1.5,                  // Bounds for smallest/largest possible content scale
-        slideNumber: "c / t",                // Display the page number of the current slide
-        theme: 'maxxk', // available themes are in /css/theme
-        transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
-        math: {
-          mathjax: 'reveal.js/../MathJax-2.5.3/MathJax.js',
-          config: 'TeX-AMS_HTML-full'  // See http://docs.mathjax.org/en/latest/config-files.html
-        },
-
-        // Optional libraries used to extend on reveal.js
-        dependencies: [
-          { src: 'reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
-          { src: 'reveal.js/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
-          { src: 'reveal.js/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } },
-          { src: 'reveal.js/plugin/math/math.js', async: true },
-//          { src: 'reveal.js/plugin/search/search.js', async: true, condition: function() { return !!document.body.classList; }, }
-//          { src: 'reveal.js/plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
-]});
-    </script>
-    </body>
-</html>
+</body></html>

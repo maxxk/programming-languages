@@ -229,9 +229,23 @@
 #slider-max:checked + .slider > section + div > span {
   width: 20px;
 }
+
+@font-face {
+  font-family: XITSMath;
+  src: local("XITS Math"), local("STIX Math"), url(xits-math/xits-math.otf), url(xits-math/webfonts/xits-math.woff);
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: XITSMath;
+  src: local("XITS Math Bold"), local("STIX Math"), url(xits-math/xits-mathbold.otf), url(xits-math/webfonts/xits-mathbold.woff);
+  font-weight: bold;
+}
+
 .slider > section {
   font-size: 16px;
-  font-family: "XITS Math", "STIX Math", serif;
+  font-size: 2.5vw;
+  font-family: XITSMath, serif;
   color: #333;
 }
 .slider > section .vertical-center, .slider > section.vertical-center h1 {
@@ -423,6 +437,8 @@
 }
 #slider-max:checked + .slider > section {
   font-size: 32px;
+  font-size: 2vw;
+
 }
 #slider-max {
   display: none;
