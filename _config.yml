@@ -11,5 +11,5 @@ github_username:  maxxk
 
 # Build settings
 markdown: kramdown
-exclude: [ "presentations" ]
-keep_files: [ "presentations" ]
+exclude: [ "presentations/*.md" ]
+keep_files: [ "presentations/*.html" ]
