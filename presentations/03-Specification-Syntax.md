@@ -7,13 +7,10 @@
   -moz-column-count: 2;
   -webkit-column-count: 2;
 }
-.small { font-size: small !important; }
-.smaller { font-size: 0.8em !important; }
-.large { font-size: 1.5em !important; }
-.huge { font-size: 2em !important; }
+.small { font-size: smaller ; }
 </style>
 
-Course page: https://maxxk.github.io/programming-languages-2016/
+Course page: https://maxxk.github.io/programming-languages/
 Contact author: maxim.krivchikov@gmail.com
 
 # Additions
@@ -69,16 +66,20 @@ Syntax of a programming language is concerned with the form of programs: how exp
 
 How can we write the program and how the compiler/interpreter expects it to be formed.
 
-# Syntax: example {#syntax-example}
+# Syntax: example
+http://stackoverflow.com/questions/5508110/why-is-this-program-erroneously-rejected-by-three-c-compilers/5514384#5514384
+
+# Syntax: example 
 <span class="small">Example based on F. Turbak, D. Gifford. Design Concepts in Programming Languages</span>
 Suppose we want to compute the sum of the product of *v* and *w* and the quotient of *y* and *z*.
 Syntax representations:
-> - mathematical expression: $v·w + \dfrac{y}{z}$
+> - mathematical expression: v·w + <div style="display: inline-flex; flex-direction: column; justify-content: center;"><div style="border-bottom: 2pt solid black;">y</div><div>z</div></div>
 > - traditional infix notation: `v*w + y/z`
 > - LISP prefix S-expression: `(+ (* v w) (/ y z))`
 > - reverse polish notation / stack calculator: `v w * y z / +`
-> - some [visual "syntax"](https://scratch.mit.edu/projects/102624309/#editor)
+> - some [visual "syntax"](https://blockly-demo.appspot.com/static/demos/blockfactory/index.html)
 > ![](images/scratch-syntax.png)
+> - graph-based syntax http://app.flowhub.io/#example/6699161 https://noflojs.org/example/
 
 # Semantics
 Semantics of a programming language is concerned with the meaning of programs: how a well-formed program may be expected to behave when executed on a computer.
@@ -354,6 +355,12 @@ int main() {
 
 <span class="small">http://stackoverflow.com/questions/14589346/is-c-context-free-or-context-sensitive</span>
 
+# Home reading
+Kenneth E. Iverson (the creator of APL). Notation as a Tool of Thought. 
+1979 ACM Turing Award Lecture
+
+http://www.jsoftware.com/papers/tot.htm
+
 # Homework assignments
 **Task 3.1**** Implement parser combinators a programming language of your choice. Must be implemented at least the following combinators:
 - string or regex parser
@@ -361,3 +368,14 @@ int main() {
 - Kleene star
 - composition (a ∘ b: parse a, pass result to b; if b fails, whole composition fails)
 - lookahead (a | b : parse a, try parse b, if b succeeds, continue parsing from the last part of a)
+
+**Task 3.2a*** Define a grammar for a non-trivial subset of an existing programming language in BNF, PEG or parser combinators.
+**Task 3.2b**** Implement a parser for a non-trivial subset of an existing programming language (preferrably in PEG.js, but you can use tool of your choice). 
+
+# Project 
+
+**Project Step 1 (design document) due date is March 23rd**
+
+**Project Step 2 (due April 6th).** Define an abstract syntax tree for the language in S-expression terms.
+
+**Project Step 2' (optional, task 3.2b).**** Design a simple concrete syntax specification (in BNF or any other formalism) and implement a parser for the language (from sequence of characters to abstract syntax tree conforming to Step 2 specification)

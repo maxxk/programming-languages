@@ -17,18 +17,16 @@ Course topics include:
 **Thursday, 15:00-16:35, aud. 13-15, starting March 2nd.**
 
 
-**2.03.2016** Introduction. History of programming languages. 
+**2.03.2017** Introduction. History of programming languages. 
 [presentation - html](presentations/01-Introduction.html)
 
-**9.03.2016** Classification of programming languages. 
+**9.03.2017** Classification of programming languages. 
 [presentation - html](presentations/02-Classification.html) 
 
-<!--
+**16.03.2017** Specification of programming language. Syntax. 
+[presentation - html](presentations/03-Specification-Syntax.html) 
 
-**23.03.2016** Specification of programming language. Syntax. 
-[presentation - html](presentations/03-Specification-Syntax.html) [single page - html](presentations/03-Specification-Syntax-print.html)
-
-**30.03.2016** Formal syntax analysis. Syntax extensions. 
+<!-- **30.03.2016** Formal syntax analysis. Syntax extensions. 
 [presentation - html](presentations/04-Macros-Parsing.html) [single page - html](presentations/04-Macros-Parsing-print.html)
 
 ***Update: Task 4.1 *** (6*). Implement Danielsson's Total Parser Combinators in Coq.
