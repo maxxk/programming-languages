@@ -372,6 +372,8 @@ http://www.jsoftware.com/papers/tot.htm
 **Task 3.2a*** Define a grammar for a non-trivial subset of an existing programming language in BNF, PEG or parser combinators.
 **Task 3.2b**** Implement a parser for a non-trivial subset of an existing programming language (preferrably in PEG.js, but you can use tool of your choice). 
 
+**Task 3.3*** Define a regular expression for C/C++ floating point numbers. You can use the following tool: https://regex101.com/
+
 # Project 
 
 **Project Step 1 (design document) due date is March 23rd**
