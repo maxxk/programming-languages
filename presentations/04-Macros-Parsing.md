@@ -1,5 +1,6 @@
 # Software and Programming Language Theory
-## Project
+
+## Notation and proof assistants
 ## Formal syntax analysis
 ## Macros as a part of syntax
 
@@ -14,32 +15,197 @@
 .huge { font-size: 2em !important; }
 </style>
 
-Course page: https://maxxk.github.io/programming-languages-2016/
+Course page: https://maxxk.github.io/programming-languages/
 Contact author: maxim.krivchikov@gmail.com
 
-# Project
-Let's write a verifiable implementation of a toy programming language. In total you will get at least 10 stars.
+# Programming language specification
+```{.graphviz .dot}
+digraph Spec {
+  edge [minlen=3.0];
 
-**Task 1.1*** _(addition)_ Coq, Agda; Idris (if you feel adventurous).
+  { rank=same; Syntax, Semantics, Pragmatics };
+  Specification -> Syntax;
+  Specification -> Semantics;
+  Specification -> Pragmatics;
+  Syntax -> Grammar [label="Specification"];
+  Syntax -> "Parse Tree" [label="Proof"];
+  Syntax -> AST [label="Corollary"];  
+}
+```
+# BNF formally
+BNF has a graph structure (actually, a directed hypergraph with per-edge ordered destination nodes). Parse tree is a tree derived from the graph (when you encounter a cycle, vertex is duplicated).
+```{.graphviz .dot}
+digraph Syntax {
+  { rank=same; term, factor, atom };
+  term -> factor;
+  term -> seq_term;
+  seq_term -> term [label="1"];
+  seq_term -> "'+'" [label="2"];
+  seq_term -> factor [label="3"];
 
-**Project Step 1.*** Write a "design document" (short informal description, 1-4 pages, in English) of a toy programming language of your choice. Design document must include the following information:
-- what is the main focus of the language
-- examples of language statements and results of evaluation for such statements
+  factor -> atom;
+  factor -> seq_factor;
+  seq_factor -> factor [label="1"];
+  seq_factor -> "'*'" [label="2"];
+  seq_factor -> atom [label="3"];
 
-Language must support variables or named function arguments.
+  atom -> number;
+  atom -> seq_atom;
+  seq_atom -> "(" [label="1"];
+  seq_atom -> term [label="2"];
+  seq_atom ->  ")" [label="3"];
+}
+```
 
-# Project ideas
-- (simple) Imp (simple imperative programming language)
-- (simple) Simply-typed lambda calculus with natural number operations (simple functional programming language)
-- (simple) mathematical expression calculator with variables, elementary functions and symbolic differentiation
-- (medium) Lisp-ish (dynamic functional, simple syntax)
-- (medium) Smalltalk-ish (dynamic object-oriented)
-- (medium) SQL-like declarative language
-- (hard) Refal-ish (pattern matching-based, like Markov algorithms), or, easier, regex engine or some parser generator
-- any nontrivial domain-specific language
+<div class="smallish">
+```c
+term ::= factor | term '+' factor
+factor ::= atom | factor '*' atom
+atom ::= number | '(' term ')'
+```
+```c
+(3+2)*4+1
+```
+</div>
+
+# Mechanization
+<div class="smaller">
+Programs are complex. In theory, you can make a mathematical description of a programming language with some assumptions. You can't usually prove properties on paper. Therefore we have to use some (mathematically correct) mechanization tools to make a precise reasoning about  the program. In the present course we employ Agda and Coq as the mechanization tools.
+</div>
+
+<div class="twocolumn" style="font-size: 0.5em;">
+```c++
+class HashEntry
+{
+private:
+
+      int key;
+      int value;
+
+public:
+
+      HashEntry(int key, int value)
+      {
+            this->key = key;
+            this->value = value;
+      }
+
+      int getKey() { return key; }
+
+      int getValue() { return value; }
+};
+
+const int TABLE_SIZE = 128;
+
+class HashMap
+{
+private:
+
+      HashEntry **table;
+
+public:
+
+      HashMap()
+      {
+            table = new HashEntry*[TABLE_SIZE];
+
+            for (int i = 0; i < TABLE_SIZE; i++)
+                  table[i] = NULL;
+      }
+
+      int get(int key)
+      {
+            int hash = (key % TABLE_SIZE);
+
+            while (table[hash] != NULL && table[hash]->getKey() != key)
+                  hash = (hash + 1) % TABLE_SIZE;
+
+            if (table[hash] == NULL)
+                  return -1;
+            else
+                  return table[hash]->getValue();
+      }
+
+      void put(int key, int value)
+      {
+            int hash = (key % TABLE_SIZE);
+
+            while (table[hash] != NULL && table[hash]->getKey() != key)
+                  hash = (hash + 1) % TABLE_SIZE;
+
+            if (table[hash] != NULL)
+                  delete table[hash];
+
+            table[hash] = new HashEntry(key, value);
+      }     
+
+      ~HashMap()
+      {
+            for (int i = 0; i < TABLE_SIZE; i++)
+                  if (table[i] != NULL)
+                        delete table[i];
+
+            delete[] table;
+      }
+};
+```
+2009 nodes in an abstract syntax tree.
+![](images/S6kW9.jpg)
+</div>
+<div class="small">Example from: http://stackoverflow.com/a/11025084</div>
+
+# Notation
+A → B
+~ function from type A to type B
+
+(a : A) → B(a) 
+~ dependent function (dependent product) mapping an element *a* of type A to representative B(a) of 
+family B : A → Type
+
+A + B 
+~ sum type (either an element of A or element of B)
+inl : A → A + B
+inr : B → A + B 
+
+A × B 
+~ product type (ordered pair of elements from A and B)
+(a, b) : A × B
+
+(a : A) × B(a) 
+~ dependent sum, an ordered pair of element *a* from A and element from representative B(a) of 
+family B : A → Type
+
+
+# Inductive types
+```
+term ::= factor | term '+' factor
+factor ::= atom | factor '*' atom
+atom ::= number | '(' term ')'
+```
+
+Abstract syntax tree for the grammar is defined by three mutually inductive types:
+
+```
+Term   = TFactor (f : Factor) | TSum (t : Term) (f : Factor)
+Factor = FAtom (a : Atom)     | FProduct (f : Factor) (a : Atom)
+Atom   = ANumber (n : Number) | AGroup (t : Term)
+```
+
+# Pattern matching
+
+An interpreter for an abstract syntax tree from previous slide is defined with pattern matching (case analysis) on inductive type constructors:
+interpretTerm : Term → Number
+interpretTerm (TFactor f) = interpretFactor f
+interpretTerm (TSum t f) = (interpretTerm t) + (interpretFactor f)
+interpretFactor : Factor → Number
+interpretFactor (FAtom a) = interpretAtom a
+interpretFactor (FProduct f a) = (interpretFactor f) * (interpretAtom a)
+interpretAtom : Atom → Number
+interpretAtom (ANumber n) = n
+interpretAtom (AGroup t) = interpretTerm t
 
 # Proof assistants: Coq and Agda
-Coq and Agda are the proof assistants based on dependently-typed lambda calculus ([remember the previous semester](https://maxxk.github.io/formal-models-2015/)).
+Coq and Agda are the proof assistants based on dependently-typed lambda calculus ([remember the previous semester](https://maxxk.github.io/formal-models/)).
 
 ## Coq
 ML-like syntax.
@@ -139,16 +305,16 @@ Definition head A n (vec : Vector A (S n)) : A := head' vec.
 
 # Formal syntax analysis
 Parser is a function which implements syntax analysis.
-Suppose we have defined some language grammar G (represented as AST) and implemented a parser P.
+Suppose we have defined a syntax as a grammar G and an abstract syntax tree and implemented a parser P.
 
-P : String → G?
+P : String → AST + SyntaxError
 
 How can we make sure that our parser will:
 1. accept all strings from G-defined language.
 2. not accept any string outside of G-defined language.
 3. will terminate for every finite input.
 
-# Couldn't we just write a parser in Agda?
+# Couldn't we just write a parser in a proof assistant?
 From the previous class: left recursion.
 ```
 term ::= factor | term '+' factor
@@ -339,6 +505,8 @@ Next    I
 # Preprocessors
 Preprocessor is a program which operates on input data for some other program. Preprocessors may be used to provide primitive macro facilities.
 
+Preprocessor : String → String
+
 # C preprocessor
 ```c
 #include <math.h>
@@ -378,6 +546,8 @@ DECLARE_STRUCT_TYPE(g_object);
 
 # M4 / T4
 
+Some external preprocessors feature complex programming languages for template transformations:
+
 ```csharp
 public class Decorator: <#= interface.FullName #>
 {    // …
@@ -388,12 +558,141 @@ public class Decorator: <#= interface.FullName #>
 }
 ```
 # LISP Reader Macros
+In LISP there are different kinds of macros: ordinary macros which transfrom abstract syntax tree and reader macros which transform a string to an abstract syntax tree.
 
-# Perl
+ReaderMacro : String × (genericReader : String → AST) → AST
+
+In LISP reader macros are implemented by means of modifying *read table:* a mapping from characters to further actions.
+ReadTable : Char → (String → AST)
+Reader : (readtable : ReadTable) → (nexttable : Char → ReadTable) → String → AST
+
+See an example at: https://gist.github.com/chaitanyagupta/9324402
+
+# TeX
+TeX is actually built around reader macros:
+https://en.wikibooks.org/wiki/TeX/catcode
+
+```
+0 = Escape character, normally \
+1 = Begin grouping, normally {
+2 = End grouping, normally }
+3 = Math shift, normally $
+4 = Alignment tab, normally &
+5 = End of line, normally <return>
+6 = Parameter, normally #
+7 = Superscript, normally ^
+8 = Subscript, normally _
+9 = Ignored character, normally <null>
+10 = Space, normally <space> and <tab>
+11 = Letter, normally only contains the letters a,...,z and A,...,Z. These characters can be used in command names
+12 = Other, normally everything else not listed in the other categories
+13 = Active character, for example ~
+14 = Comment character, normally %
+15 = Invalid character, normally <delete>
+```
+
+```latex
+% \makeatletter substitute:
+\hello@ % is two tokens \hello  @ by default
+
+% make @ an ordinary letter
+\catcode`\@=11\relax 
+
+\hello@ % is a single token \hello@
+
+```
+
+# LISP Macros
+
+Macro : AST → AST
+
+Macros transform program AST at some stage before the evaluation.
+
+Example: short-circuit evaluation
+
+C:
+```c
+A() 
+  && B() // only run if A returned non-zero
+  && C(); // only run if both A and B returned non-zero
+
+and(A(), B(), C()) // will evaluate A(), B() and C() before going inside and 
+```
+
+LISP:
+```scheme
+(defmacro && (expr1 &rest exprs)
+    `(if ,expr1
+         (&& ,@exprs)
+         nil))
+
+(&& (A) (B) (C))
+```
+
+# LISP Macros
+Complex example: SQL-like queries in LISP:
+https://marijnhaverbeke.nl/postmodern/s-sql.html
+
+```scheme
+(:select (:+ 'field-1 100) 'field-5
+   :from (:as 'my-table 'x)
+   :left-join 'your-table :on (:= 'x.field-2 'your-table.field-1)
+   :where (:not-null 'a.field-3))
+```
+
+# LISP Macros
+
+The evaluation of macro invocation is split in two stages: expansion-time (first stage, in compiler) and run-time (second stage, in program). 
+
+Macro code starts running in expansion-time.
+The run-time is separated from expansion-time with *quotation* operators:
+- `'` — quote
+- `` ` `` — quasiquote, allowing for unquoting with operator `,`
+
+Examples:
+- `(f a b c)` – call function `f` with arguments `a`, `b`, `c` and replace macro invocation node in AST with the result
+- `'(f a b c)` – return list (AST) with symbols `f`, `a`, `b`, `c` as its elements 
+- `` `(f a b ,(+ 1 2)) `` – evaluate `(+ 1 2)` at expansion time and return list `(f a b 3)` 
+
+What the code from the previous example does?
+```scheme
+`(if ,expr1
+         (&& ,@exprs)
+         nil))
+```
+
+# Macros in Rust
+```rust
+macro_rules! vec {
+    ( $( $x:expr ),* ) => {
+        {
+            let mut temp_vec = Vec::new();
+            $(
+                temp_vec.push($x);
+            )*
+            temp_vec
+        }
+    };
+}
+```
+
+```rust
+let x: Vec<u32> = vec![1, 2, 3]; 
+// expanded:
+let x : Vec<u32> = {
+  let mut temp_vec_1234 = Vec::new();
+  temp_vec.push(1);
+  temp_vec.push(2);
+  temp_vec.push(3);
+  temp_vec
+}
+```
 
 # Homework assignments
 
-**Task 4.2a*** Write (manually) an extensible parser for LISP-like symbolic expressions (subset of ["R7RS small"](http://www.scheme-reports.org) Scheme specification). Whitespace, identifier and number specifications are omitted as a trivial exercise.
+**Task 4.1** (6*) Implement Danielsson's Total Parser Combinators in Coq.
+
+**Task 4.2a*** Write (manually) an extensible parser for LISP-like symbolic expressions (subset of ["R7RS small"](http://www.scheme-reports.org) Scheme specification). Whitespace, identifier and number specifications are omitted as a trivial exercise. 
 ```
 <datum> ::= <atom> <optional whitespace> | <list> <optional whitespace>
 <atom> ::= <identifier> | <number> | <string>
@@ -404,7 +703,7 @@ public class Decorator: <#= interface.FullName #>
 
 # Homework assignments
 
-**Task 4.2b**** Implement reader macros for a subset of a context-free grammar as an interpreter from s-expressions to parser extension.
+**Task 4.2b**** Implement reader macros for a subset of a context-free grammar as an interpreter from s-expressions to parser extension. It'll be easier to implement in some lanugage featuring `eval` command (like JavaScript, Python or LISP family)
 ```scheme
 (reader-macro <start-string> <stop-string> <grammar>)
 ; Example:
@@ -416,21 +715,3 @@ public class Decorator: <#= interface.FullName #>
 ```
 
 **Task 4.2c*** Write a reader macro for infix arithmetical expressions (addition, multiplication, brackets).
-
-# Project
-**Project Step 2.*** Implement an abstract syntax tree type for the language.
-Example (I didn't check it in Agda):
-```agda
-mutual
-  data Term where
-    TFactor : Factor → Term
-    TAdd : Term → Factor → Term
-  data Factor where
-    FAtom : Atom → Factor
-    FMult : Factor → Atom → Factor
-  data Atom where
-    ANumber : Nat → Atom
-    AGroup : Term → Atom
-```
-
-**Project Step 3.*** Use one of the formally verified parser implementation approaches do define a parser for the language.

@@ -26,9 +26,10 @@ Course topics include:
 **16.03.2017** Specification of programming language. Syntax. 
 [presentation - html](presentations/03-Specification-Syntax.html) 
 
-<!-- **30.03.2016** Formal syntax analysis. Syntax extensions. 
-[presentation - html](presentations/04-Macros-Parsing.html) [single page - html](presentations/04-Macros-Parsing-print.html)
+**23.03.2017** Formal syntax analysis. Syntax extensions. 
+[presentation - html](presentations/04-Macros-Parsing.html) 
 
+<!--
 ***Update: Task 4.1 *** (6*). Implement Danielsson's Total Parser Combinators in Coq.
 
 **06.04.2016** Static semantics. Naming, Bindings and Scope. 
