@@ -275,6 +275,6 @@ N.S. Papaspyrou. Formal semantics of the C Programming Language (PhD thesis).
 **Task 5.2.** *** Implement a translator from simply-typed lambda calculus <abbr title="Abstract Syntax Tree">AST</abbr> to <abbr title="Parametrized Higher-Order Abstract Syntax">PHOAS</abbr> in Haskell or any other language of your choice (except the original OCaml) which is expressive enough to represent PHOAS.
 
 # Project
-**Project Step 4.** Implement a static formal semantics for your programming language (in Agda or Coq). Choose one of the following approaches.
-- **Project Step 4a.** *  Assign the unique identifiers (e.g. natural numbers) to each bindable identifier leaf in the AST and create the mapping between the unique identifiers and static semantics subtrees.
-- **Project Step 4b.** ** Use Higher-Order Abstract Syntax.
+**Project Step 3.** Implement a static formal semantics for your programming language (in Agda or Coq). Choose one of the following approaches.
+- **Project Step 3a.** *  Assign the unique identifiers (e.g. natural numbers) to each bindable identifier leaf in the AST and create the mapping between the unique identifiers and static semantics subtrees.
+- **Project Step 3b.** ** Use Higher-Order Abstract Syntax.
