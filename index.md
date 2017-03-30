@@ -29,11 +29,10 @@ Course topics include:
 **23.03.2017** Formal syntax analysis. Syntax extensions. 
 [presentation - html](presentations/04-Macros-Parsing.html) 
 
-<!--
-***Update: Task 4.1 *** (6*). Implement Danielsson's Total Parser Combinators in Coq.
+**30.03.2017** Static semantics. Naming, Bindings and Scope. 
+[presentation - html](presentations/05-Static-Semantics.html)
 
-**06.04.2016** Static semantics. Naming, Bindings and Scope. 
-[presentation - html](presentations/05-Static-Semantics.html) [single page - html](presentations/05-Static-Semantics-print.html) 
+<!--
 
 ***Update: Tasks and Project Step 4***.
 **Task 5.1.** ** Implement a translator from simply-typed lambda calculus <abbr title="Abstract Syntax Tree">AST</abbr> to <abbr title="Higher-Order Abstract Syntax">HOAS</abbr> in Haskell or any other language of your choice (except the original OCaml) which is expressive enough to represent HOAS.

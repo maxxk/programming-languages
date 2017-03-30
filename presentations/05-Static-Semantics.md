@@ -172,7 +172,7 @@ Languages not supporting function overloading: Haskell, ECMAScript, C (but C11 h
 </div>
 <div class="small">Example from: http://stackoverflow.com/questions/226144/overload-a-c-function-according-to-the-return-value</div>
 
-# Static semantics representation {.smaller}
+# Static semantics representation
 Let us return to the topic of formal mechanized analysis of programs.
 ```{.graphviz .dot}
 digraph  G {
@@ -184,10 +184,12 @@ digraph  G {
 Syntax is a transformation from `String` to <abbr title="Abstract Syntax Tree">`AST`</abbr>. Static semantics, in the same way, is a transformation from AST to AST with variable bindings information. How would we store this information?
 
 Easier approach: generate unique names and store scope in parallel.
-AST+Bindings = Σ (ast : AST /[Id := ℕ]) . (scope :  Map<ℕ, AST> ) . (p : ∀ id : ℕ ∈ ast, id ∈ scope).
+
+AST+Bindings = Σ (ast : AST /[Id := ℕ]) . (scope :  Map<ℕ, AST> ) . (p : ∀ { id : ℕ } ∈ ast, id ∈ scope).
+
 <div class="small">Example at: Vasenin V. A., Krivchikov M. A. Ecma-335 static formal semantics // Programming and Computer Software. — 2012. — Vol. 38, no. 4. — P. 183–188. http://dx.doi.org/10.1134/S0361768812040056</div>
 
-# Higher order abstract syntax {.smaller}
+# Higher order abstract syntax
 — the technique to capture the variable binding in abstract syntax tree (Miller, 1987; Phenning, 1988).
 <div class="twocolumn">
 Abstract syntax:
@@ -204,6 +206,7 @@ type exp =
   | Abs of var * exp
 ```
 Higher-order syntax captures the name binding:
+<div>
 ```ocaml
 type exp =
   | True
@@ -224,6 +227,7 @@ type 't exp =
 ```
 
 http://adam.chlipala.net/papers/PhoasICFP08/
+</div>
 
 # Ornaments
 Conor McBride. «Ornamental Algebras, Algebraic Ornaments»

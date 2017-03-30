@@ -2,9 +2,9 @@
 layout: default
 ---
 
-# Project Step 1 Example
+# Project Example
 
-## Design document
+## Step 1. Design document
 
 The proposed language is a simplified version of REFAL programming language extended by static typing.
 The language is oriented towards list rewriting. It features a pattern-matching facility and recursive functions.
@@ -59,3 +59,34 @@ Each function has a type. Type may be defined as a special function (of type `Ty
 ```
 
 The compiler may check types statically, rejecting the programs for which it can't prove type safety.
+
+## Step 2. Abstract syntax
+
+### BNF-like representation
+
+```
+<identifier> ::= [a-zA-Z_][a-zA-Z0-9_]*
+<variable-type> ::= s | i | w | e
+<right-hand-side> ::= (<rhs-item>)*
+<left-hand-side> ::= (<lhs-item>)*
+<rhs-item> ::= <call> | <lhs-item>
+<lhs-item> ::= <constant> | <variable>
+<variable> ::= <variable-type> "." <identifier>
+<call> ::= "<" <right-hand-side> ">"
+<constant> ::= <integer> | <identifier>
+<statement> ::= <left-hand-side> "=" <right-hand-side> ";"
+<function> ::= <identifier> ":" <type> "{" (<statement>)+ "}"
+<type> ::= "Type" | "Symbol" | "Integer" | <left-hand-side> "->" <right-hand-side>
+```
+### Tree representation
+
+Undefined: `Integer`, `Identifier`
+
+```haskell
+data VariableType = Literal | VInteger | Symbol | Sequence 
+data LeftHandSideItem = Int Integer | Symbol Identifier | Variable VariableType Identifier
+data RightHandSideItem = Call [RightHandSideItem] | Value LeftHandSideItem
+data Statement = Statement [LeftHandSideItem] [RightHandSideItem]
+data Type = Type | TSymbol | TInt | TFun [LeftHandSideItem] [RightHandSideItem]
+data Function = Function Identifier Type [Statement]
+```

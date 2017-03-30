@@ -1,13 +1,12 @@
-<!DOCTYPE html>
-<html>
-<head>
+<!DOCTYPE html><html><head>
   <meta charset="utf-8">
   <meta name="generator" content="pandoc">
   <title></title>
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <link rel="stylesheet" href="reveal.js/css/reveal.css"/>
+  <link rel="stylesheet" href="slider.css">
+  <style type="text/css">code{white-space: pre;}</style>
   <style type="text/css">
 div.sourceCode { overflow-x: auto; }
 table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
@@ -45,31 +44,13 @@ code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Ann
 code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
 code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
   </style>
-  <link rel="stylesheet" href="reveal.js/css/theme/maxxk.css" id="theme">
-  <link rel="stylesheet" href="additional.css"/>
-  <link rel="stylesheet" href="reveal.js/css/highlight-github.css"/>
-  <!-- If the query includes 'print-pdf', include the PDF print sheet -->
-  <script>
-    if( window.location.search.match( /print-pdf/gi ) ) {
-      var link = document.createElement( 'link' );
-      link.rel = 'stylesheet';
-      link.type = 'text/css';
-      link.href = 'reveal.js/css/print/pdf.css';
-      document.getElementsByTagName( 'head' )[0].appendChild( link );
-    }
-  </script>
-  <!--[if lt IE 9]>
-  <script src="reveal.js/lib/js/html5shiv.js"></script>
-  <![endif]-->
-
-<style type="text/css">.reveal pre code{white-space: pre; font-size: 1.5em; line-height: 1.3;}
-.reveal abbr { border-bottom: 0.1pt dashed blue;}
-</style>
-
 </head>
 <body>
-  <div class="reveal">
-    <div class="slides">
+  <div style="width: 640px;height: 400px;">
+  <input id="slider-max" type="checkbox" checked="">
+   <article class="slider slider-indicator">
+   <a id="slider-default"></a>
+   <label for="slider-max" title="Maximize"></label>
 
 
 <section id="software-and-programming-language-theory" class="slide level1">
@@ -95,154 +76,52 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 .large { font-size: 1.5em !important; }
 .huge { font-size: 2em !important; }
 </style>
-<p>Course page: <a href="https://maxxk.github.io/programming-languages-2016/" class="uri">https://maxxk.github.io/programming-languages-2016/</a><br />
-Contact author: <script type="text/javascript">
-<!--
-h='&#x67;&#x6d;&#x61;&#x69;&#108;&#46;&#x63;&#x6f;&#x6d;';a='&#64;';n='&#x6d;&#x61;&#120;&#x69;&#x6d;&#46;&#x6b;&#114;&#x69;&#118;&#x63;&#104;&#x69;&#x6b;&#x6f;&#118;';e=n+a+h;
-document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'" clas'+'s="em' + 'ail">'+e+'<\/'+'a'+'>');
-// -->
-</script><noscript>&#x6d;&#x61;&#120;&#x69;&#x6d;&#46;&#x6b;&#114;&#x69;&#118;&#x63;&#104;&#x69;&#x6b;&#x6f;&#118;&#32;&#x61;&#116;&#32;&#x67;&#x6d;&#x61;&#x69;&#108;&#32;&#100;&#x6f;&#116;&#32;&#x63;&#x6f;&#x6d;</noscript></p>
-</section>
+<p>Course page: <a href="https://maxxk.github.io/programming-languages-2016/" class="uri">https://maxxk.github.io/programming-languages-2016/</a><br>
+Contact author: <a href="mailto:maxim.krivchikov@gmail.com" class="email">maxim.krivchikov@gmail.com</a></p>
+</section><div><a class="slider-prev"></a><a class="slider-next" href="#programming-language-specification"></a></div>
 <section id="programming-language-specification" class="slide level1">
 <h1>Programming language specification</h1>
-<p><img src="graphviz-images/aa5f4656547c5b2a7ce97a49486be6e2a63b8520.svg" id="alt" /></p>
-</section>
-<section id="syntax-concluding-remarks" class="slide level1">
-<h1>Syntax (concluding remarks)</h1>
-<p>BNF has a graph structure (actually, a directed hypergraph with per-edge ordered destination nodes). Parse tree is a tree derived from the graph (when you encounter a cycle, vertex is duplicated).</p>
-<p><img src="graphviz-images/bf9e1f309d9b94e9d24da483ef8f703eb63e3c0a.svg" id="alt" /></p>
-<div class="smallish">
-<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c">term ::= factor | term &#39;+&#39; factor
-factor ::= atom | factor &#39;*&#39; atom
-atom ::= number | &#39;(&#39; term &#39;)&#39;</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c">(<span class="dv">3+2</span>)*<span class="dv">4+1</span></code></pre></div>
-</div>
-</section>
-<section id="mechanization" class="slide level1">
-<h1>Mechanization</h1>
-<div class="smaller">
-Programs are complex. In theory, you can make a mathematical description of a programming language with some assumptions. You can't usually prove properties on paper. Therefore we have to use some (mathematically correct) mechanization tools to make a precise reasoning about the program. In the present course we employ Agda and Coq as the mechanization tools.
-</div>
-<div class="twocolumn smallish">
-<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="kw">class</span> HashEntry
-{
-<span class="kw">private</span>:
-
-      <span class="dt">int</span> key;
-      <span class="dt">int</span> value;
-
-<span class="kw">public</span>:
-
-      HashEntry(<span class="dt">int</span> key, <span class="dt">int</span> value)
-      {
-            <span class="kw">this</span>-&gt;key = key;
-            <span class="kw">this</span>-&gt;value = value;
-      }
-
-      <span class="dt">int</span> getKey() { <span class="kw">return</span> key; }
-
-      <span class="dt">int</span> getValue() { <span class="kw">return</span> value; }
-};
-
-<span class="dt">const</span> <span class="dt">int</span> TABLE_SIZE = <span class="dv">128</span>;
-
-<span class="kw">class</span> HashMap
-{
-<span class="kw">private</span>:
-
-      HashEntry **table;
-
-<span class="kw">public</span>:
-
-      HashMap()
-      {
-            table = <span class="kw">new</span> HashEntry*[TABLE_SIZE];
-
-            <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt; TABLE_SIZE; i++)
-                  table[i] = NULL;
-      }
-
-      <span class="dt">int</span> get(<span class="dt">int</span> key)
-      {
-            <span class="dt">int</span> hash = (key % TABLE_SIZE);
-
-            <span class="kw">while</span> (table[hash] != NULL &amp;&amp; table[hash]-&gt;getKey() != key)
-                  hash = (hash + <span class="dv">1</span>) % TABLE_SIZE;
-
-            <span class="kw">if</span> (table[hash] == NULL)
-                  <span class="kw">return</span> <span class="dv">-1</span>;
-            <span class="kw">else</span>
-                  <span class="kw">return</span> table[hash]-&gt;getValue();
-      }
-
-      <span class="dt">void</span> put(<span class="dt">int</span> key, <span class="dt">int</span> value)
-      {
-            <span class="dt">int</span> hash = (key % TABLE_SIZE);
-
-            <span class="kw">while</span> (table[hash] != NULL &amp;&amp; table[hash]-&gt;getKey() != key)
-                  hash = (hash + <span class="dv">1</span>) % TABLE_SIZE;
-
-            <span class="kw">if</span> (table[hash] != NULL)
-                  <span class="kw">delete</span> table[hash];
-
-            table[hash] = <span class="kw">new</span> HashEntry(key, value);
-      }     
-
-      ~HashMap()
-      {
-            <span class="kw">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt; TABLE_SIZE; i++)
-                  <span class="kw">if</span> (table[i] != NULL)
-                        <span class="kw">delete</span> table[i];
-
-            <span class="kw">delete</span>[] table;
-      }
-};</code></pre></div>
-2009 nodes in an abstract syntax tree.<br />
-<img src="images/S6kW9.jpg" />
-</div>
-<div class="small">
-Example from: <a href="http://stackoverflow.com/a/11025084" class="uri">http://stackoverflow.com/a/11025084</a>
-</div>
-</section>
+<p><img src="graphviz-images/aa5f4656547c5b2a7ce97a49486be6e2a63b8520.svg"></p>
+</section><div><a class="slider-prev" href="#software-and-programming-language-theory"></a><a class="slider-next" href="#programming-language-semantics"></a></div>
 <section id="programming-language-semantics" class="slide level1">
 <h1>Programming language semantics</h1>
 <dl>
-<dt>Static semantics</dt>
-<dd>static properties of programs, which can be determined without executing them
+<dt class="fragment">Static semantics</dt>
+<dd class="fragment">static properties of programs, which can be determined without executing them
 </dd>
-<dd>variable bindings (what does variable name correspond to)
+<dd class="fragment">variable bindings (what does variable name correspond to)
 </dd>
-<dd>static type checking (do the expressions satisfy constraints of typing system)
+<dd class="fragment">static type checking (do the expressions satisfy constraints of typing system)
 </dd>
-<dt>Dynamic semantics</dt>
-<dd>how do we compute the value of expressions, statements, etc.
+<dt class="fragment">Dynamic semantics</dt>
+<dd class="fragment">how do we compute the value of expressions, statements, etc.
 </dd>
 </dl>
-</section>
+</section><div><a class="slider-prev" href="#programming-language-specification"></a><a class="slider-next" href="#naming"></a></div>
 <section id="naming" class="slide level1">
 <h1>Naming</h1>
 <p>In programming languages we usually name entities</p>
 <ul>
-<li>variables</li>
-<li>function arguments</li>
-<li>classes</li>
-<li>modules</li>
+<li class="fragment">variables</li>
+<li class="fragment">function arguments</li>
+<li class="fragment">classes</li>
+<li class="fragment">modules</li>
 </ul>
-</section>
+</section><div><a class="slider-prev" href="#programming-language-semantics"></a><a class="slider-next" href="#binding"></a></div>
 <section id="binding" class="slide level1">
 <h1>Binding</h1>
-Binding is the process of assigning the meaning to a name.<br />
+Binding is the process of assigning the meaning to a name.<br>
 
 <div class="twocolumn smaller">
 <div class="sourceCode"><pre class="sourceCode java"><code class="sourceCode java"><span class="kw">public</span> <span class="kw">class</span> SimpleDemoClass  
 {            
      <span class="kw">public</span> <span class="dt">void</span> GetData&lt;T&gt;(T obj)  
      {  
-        Console.<span class="fu">WriteLine</span>(<span class="st">&quot;INSIDE GetData&lt;T&gt;,&quot;</span>+ obj.<span class="fu">GetType</span>().<span class="fu">Name</span>);  
+        <span class="bu">Console</span>.<span class="fu">WriteLine</span>(<span class="st">"INSIDE GetData&lt;T&gt;,"</span>+ obj.<span class="fu">GetType</span>().<span class="fu">Name</span>);  
      }        
      <span class="kw">public</span> <span class="dt">void</span> <span class="fu">GetData</span>(<span class="dt">int</span> x)  
      {  
-        Console.<span class="fu">WriteLine</span>(<span class="st">&quot;INSIDE GetData&quot;</span> + x.<span class="fu">GetType</span>().<span class="fu">Name</span>);  
+        <span class="bu">Console</span>.<span class="fu">WriteLine</span>(<span class="st">"INSIDE GetData"</span> + x.<span class="fu">GetType</span>().<span class="fu">Name</span>);  
      }        
      <span class="kw">public</span> <span class="dt">void</span> GetxNextData&lt;T&gt;(T obj)  
      {  
@@ -254,26 +133,26 @@ Binding is the process of assigning the meaning to a name.<br />
       Static <span class="dt">void</span> <span class="fu">Main</span>(string[] args)  
       {    
            SimpleDemoClass sobj = <span class="kw">new</span> <span class="fu">SimpleDemoClass</span>();  
-           sobj.<span class="fu">GetData</span>(<span class="st">&quot;data is for testing by-Devesh&quot;</span>);  
+           sobj.<span class="fu">GetData</span>(<span class="st">"data is for testing by-Devesh"</span>);  
            sobj.<span class="fu">GetData</span>(<span class="dv">95</span>);  
            sobj.<span class="fu">GetxNextData</span>(<span class="dv">1234</span>);  
-           Console.<span class="fu">ReadKey</span>();  
+           <span class="bu">Console</span>.<span class="fu">ReadKey</span>();  
        }  
 }  </code></pre></div>
 </div>
 <div class="small">
 Example from: <a href="http://www.c-sharpcorner.com/UploadFile/deveshomar/generic-method-overloading-in-C-Sharp/" class="uri">http://www.c-sharpcorner.com/UploadFile/deveshomar/generic-method-overloading-in-C-Sharp/</a>
 </div>
-</section>
+</section><div><a class="slider-prev" href="#naming"></a><a class="slider-next" href="#scope-1"></a></div>
 <section id="scope-1" class="slide level1">
 <h1>Scope</h1>
 <p><em>Scope</em> of a binding is a textual region in program in which a binding is active. We may also use term <em>scope</em> to call the region of a program of maximal size in which no bindings are destroyed (masked).</p>
-<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c"><span class="dt">char</span> *a = <span class="st">&quot;QWE123\0&quot;</span>;
+<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c"><span class="dt">char</span> *a = <span class="st">"QWE123\0"</span>;
 <span class="dt">char</span>* fun() {
   dobule a = <span class="dv">0</span>;
-  <span class="kw">return</span> a;
+  <span class="cf">return</span> a;
 }</code></pre></div>
-</section>
+</section><div><a class="slider-prev" href="#binding"></a><a class="slider-next" href="#dynamic-scope"></a></div>
 <section id="dynamic-scope" class="slide level1">
 <h1>Dynamic scope</h1>
 <div class="twocolumn">
@@ -296,89 +175,91 @@ Example from: <a href="http://www.c-sharpcorner.com/UploadFile/deveshomar/generi
 <span class="va">B</span>.<span class="at">g</span>() <span class="co">// returns 1</span>
 <span class="at">g</span>() <span class="co">// returns 2</span></code></pre></div>
 </div>
-</section>
+</section><div><a class="slider-prev" href="#scope-1"></a><a class="slider-next" href="#name-overloading"></a></div>
 <section id="name-overloading" class="slide level1">
 <h1>Name overloading</h1>
 <div class="twocolumn smallish">
 <div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="kw">template</span>&lt;<span class="kw">typename</span> T&gt;
 T mul(<span class="dt">int</span> i, <span class="dt">int</span> j)
 {
-   <span class="co">// If you get a compile error, it&#39;s because you did not use</span>
+   <span class="co">// If you get a compile error, it's because you did not use</span>
    <span class="co">// one of the authorized template specializations</span>
-   <span class="dt">const</span> <span class="dt">int</span> k = <span class="dv">25</span> ; k = <span class="dv">36</span> ;
+   <span class="at">const</span> <span class="dt">int</span> k = <span class="dv">25</span> ; k = <span class="dv">36</span> ;
 }
 <span class="kw">template</span>&lt;&gt;
 <span class="dt">int</span> mul&lt;<span class="dt">int</span>&gt;(<span class="dt">int</span> i, <span class="dt">int</span> j)
 {
-   <span class="kw">return</span> i * j ;
+   <span class="cf">return</span> i * j ;
 }
 
 <span class="kw">template</span>&lt;&gt;
-std::string mul&lt;std::string&gt;(<span class="dt">int</span> i, <span class="dt">int</span> j)
+<span class="bu">std::</span>string mul&lt;<span class="bu">std::</span>string&gt;(<span class="dt">int</span> i, <span class="dt">int</span> j)
 {
-   <span class="kw">return</span> std::string(j, <span class="kw">static_cast</span>&lt;<span class="dt">char</span>&gt;(i)) ;
+   <span class="cf">return</span> <span class="bu">std::</span>string(j, <span class="kw">static_cast</span>&lt;<span class="dt">char</span>&gt;(i)) ;
 }</code></pre></div>
 <p>If the language supports name overloading, the same identifier in the same place may have a different meaning depending on some external information (like typing). Usually in imperative languages name overloading is restricted to functions names.</p>
-<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="dt">int</span> mul(<span class="dt">int</span> i, <span class="dt">int</span> j) { <span class="kw">return</span> i*j; }
-std::string mul(<span class="dt">char</span> c, <span class="dt">int</span> n) { <span class="kw">return</span> std::string(n, c); }
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="dt">int</span> mul(<span class="dt">int</span> i, <span class="dt">int</span> j) { <span class="cf">return</span> i*j; }
+<span class="bu">std::</span>string mul(<span class="dt">char</span> c, <span class="dt">int</span> n) { <span class="cf">return</span> <span class="bu">std::</span>string(n, c); }
 
 <span class="dt">int</span> n = mul(<span class="dv">6</span>, <span class="dv">3</span>); <span class="co">// n = 18</span>
-std::string s = mul(<span class="kw">static_cast</span>&lt;<span class="dt">char</span>&gt;(<span class="dv">6</span>), <span class="dv">2</span>); <span class="co">// s = &quot;110&quot;</span>
+<span class="bu">std::</span>string s = mul(<span class="kw">static_cast</span>&lt;<span class="dt">char</span>&gt;(<span class="dv">6</span>), <span class="dv">2</span>); <span class="co">// s = "110"</span>
 <span class="dt">int</span> n = mul&lt;<span class="dt">int</span>&gt;(<span class="dv">6</span>, <span class="dv">3</span>); <span class="co">// n = 18</span>
-std::string s = mul&lt;std::string&gt;(<span class="dv">54</span>, <span class="dv">2</span>); <span class="co">// s = &quot;110110&quot;</span>
+<span class="bu">std::</span>string s = mul&lt;<span class="bu">std::</span>string&gt;(<span class="dv">54</span>, <span class="dv">2</span>); <span class="co">// s = "110110"</span>
 <span class="dt">short</span> n2 = mul&lt;<span class="dt">short</span>&gt;(<span class="dv">6</span>, <span class="dv">3</span>); <span class="co">// error: assignment of read-only variable ‘k’</span></code></pre></div>
-Languages supporting function overloading: C++, C#<br />
+Languages supporting function overloading: C++, C#<br>
 Languages not supporting function overloading: Haskell, ECMAScript, C (but C11 has the <code>_Generic</code> keyword: <a href="http://stackoverflow.com/a/25026358" class="uri">http://stackoverflow.com/a/25026358</a>)
 </div>
 <div class="small">
 Example from: <a href="http://stackoverflow.com/questions/226144/overload-a-c-function-according-to-the-return-value" class="uri">http://stackoverflow.com/questions/226144/overload-a-c-function-according-to-the-return-value</a>
 </div>
-</section>
-<section id="static-semantics-representation" class="slide level1 smaller">
+</section><div><a class="slider-prev" href="#dynamic-scope"></a><a class="slider-next" href="#static-semantics-representation"></a></div>
+<section id="static-semantics-representation" class="slide level1">
 <h1>Static semantics representation</h1>
 <p>Let us return to the topic of formal mechanized analysis of programs.</p>
-<p><img src="graphviz-images/ed002a3970835e74b75f748296f96716059b7048.svg" id="alt" /></p>
+<p><img src="graphviz-images/ed002a3970835e74b75f748296f96716059b7048.svg"></p>
 <p>Syntax is a transformation from <code>String</code> to <abbr title="Abstract Syntax Tree"><code>AST</code></abbr>. Static semantics, in the same way, is a transformation from AST to AST with variable bindings information. How would we store this information?</p>
-Easier approach: generate unique names and store scope in parallel.<br />
-AST+Bindings = Σ (ast : AST /[Id := ℕ]) . (scope : Map<ℕ, AST> ) . (p : ∀ id : ℕ ∈ ast, id ∈ scope).<br />
-
+<p>Easier approach: generate unique names and store scope in parallel.</p>
+<p>AST+Bindings = Σ (ast : AST /[Id := ℕ]) . (scope : Map&lt;ℕ, AST&gt; ) . (p : ∀ { id : ℕ } ∈ ast, id ∈ scope).</p>
 <div class="small">
 Example at: Vasenin V. A., Krivchikov M. A. Ecma-335 static formal semantics // Programming and Computer Software. — 2012. — Vol. 38, no. 4. — P. 183–188. <a href="http://dx.doi.org/10.1134/S0361768812040056" class="uri">http://dx.doi.org/10.1134/S0361768812040056</a>
 </div>
-</section>
-<section id="higher-order-abstract-syntax" class="slide level1 smaller">
+</section><div><a class="slider-prev" href="#name-overloading"></a><a class="slider-next" href="#higher-order-abstract-syntax"></a></div>
+<section id="higher-order-abstract-syntax" class="slide level1">
 <h1>Higher order abstract syntax</h1>
-— the technique to capture the variable binding in abstract syntax tree (Miller, 1987; Phenning, 1988).<br />
+— the technique to capture the variable binding in abstract syntax tree (Miller, 1987; Phenning, 1988).<br>
 
 <div class="twocolumn">
 <p>Abstract syntax:</p>
 <div class="sourceCode"><pre class="sourceCode ocaml"><code class="sourceCode ocaml"><span class="kw">type</span> var = <span class="dt">string</span>
 <span class="kw">type</span> typ =
-  | <span class="dt">Bool</span>
-  | <span class="dt">Arrow</span> <span class="kw">of</span> typ * typ
-<span class="kw">type</span> exp =
-  | <span class="dt">Var</span> <span class="kw">of</span> var
-  | <span class="dt">True</span>
-  | <span class="dt">False</span>
-  | <span class="dt">App</span> <span class="kw">of</span> exp * exp
-  | <span class="dt">Abs</span> <span class="kw">of</span> var * exp</code></pre></div>
-<p>Higher-order syntax captures the name binding:</p>
-<div class="sourceCode"><pre class="sourceCode ocaml"><code class="sourceCode ocaml"><span class="kw">type</span> exp =
-  | <span class="dt">True</span>
-  | <span class="dt">False</span>
-  | <span class="dt">App</span> <span class="kw">of</span> exp * exp
-  | <span class="dt">Abs</span> <span class="kw">of</span> exp -&gt; exp</code></pre></div>
+  | Bool
+  | Arrow <span class="kw">of</span> typ * typ
+<span class="kw">type</span> <span class="dt">exp</span> =
+  | Var <span class="kw">of</span> var
+  | True
+  | False
+  | App <span class="kw">of</span> <span class="dt">exp</span> * <span class="dt">exp</span>
+  | Abs <span class="kw">of</span> var * <span class="dt">exp</span></code></pre></div>
+Higher-order syntax captures the name binding:<br>
+
+<div>
+<div class="sourceCode"><pre class="sourceCode ocaml"><code class="sourceCode ocaml"><span class="kw">type</span> <span class="dt">exp</span> =
+  | True
+  | False
+  | App <span class="kw">of</span> <span class="dt">exp</span> * <span class="dt">exp</span>
+  | Abs <span class="kw">of</span> <span class="dt">exp</span> -&gt; <span class="dt">exp</span></code></pre></div>
 </div>
 <p>Parametrized Higher-order syntax captures the types of variables:</p>
-<div class="sourceCode"><pre class="sourceCode ocaml"><code class="sourceCode ocaml"><span class="kw">type</span> &#39;t var
-<span class="kw">type</span> &#39;t exp =
-    | <span class="dt">Var</span> : &#39;t var -&gt; &#39;t exp
-    | <span class="dt">True</span> : <span class="dt">bool</span> exp
-    | <span class="dt">False</span> : <span class="dt">bool</span> exp
-    | <span class="dt">App</span> : (&#39;d -&gt; &#39;r) exp * &#39;d exp -&gt; &#39;r exp
-    | <span class="dt">Abs</span> : (&#39;d var -&gt; &#39;r exp) -&gt; (&#39;d -&gt; &#39;r) exp</code></pre></div>
-<p><a href="http://adam.chlipala.net/papers/PhoasICFP08/" class="uri">http://adam.chlipala.net/papers/PhoasICFP08/</a></p>
-</section>
+<div class="sourceCode"><pre class="sourceCode ocaml"><code class="sourceCode ocaml"><span class="kw">type</span> 't var
+<span class="kw">type</span> 't <span class="dt">exp</span> =
+    | Var : 't var -&gt; 't <span class="dt">exp</span>
+    | True : <span class="dt">bool</span> <span class="dt">exp</span>
+    | False : <span class="dt">bool</span> <span class="dt">exp</span>
+    | App : ('d -&gt; 'r) <span class="dt">exp</span> * 'd <span class="dt">exp</span> -&gt; 'r <span class="dt">exp</span>
+    | Abs : ('d var -&gt; 'r <span class="dt">exp</span>) -&gt; ('d -&gt; 'r) <span class="dt">exp</span></code></pre></div>
+<a href="http://adam.chlipala.net/papers/PhoasICFP08/" class="uri">http://adam.chlipala.net/papers/PhoasICFP08/</a>
+</div>
+</section><div><a class="slider-prev" href="#static-semantics-representation"></a><a class="slider-next" href="#ornaments"></a></div>
 <section id="ornaments" class="slide level1">
 <h1>Ornaments</h1>
 <p>Conor McBride. «Ornamental Algebras, Algebraic Ornaments»</p>
@@ -393,12 +274,12 @@ Example at: Vasenin V. A., Krivchikov M. A. Ecma-335 static formal semantics // 
 
 <span class="kw">data</span> Vec [A <span class="ot">:</span> Set] from Nat <span class="kw">where</span>
   Vec<span class="ot">_</span>A n ← nil [q <span class="ot">:</span> n ≡ 0]
-     <span class="ot">|</span> cons [n&#39; <span class="ot">:</span> Nat][ q <span class="ot">:</span> n <span class="ot">=</span> succ n&#39; ] <span class="ot">(</span>a <span class="ot">:</span> A<span class="ot">)</span> <span class="ot">(</span>vs <span class="ot">:</span> Vec<span class="ot">_</span>A n<span class="ot">)</span></code></pre></div>
+     <span class="ot">|</span> cons [n' <span class="ot">:</span> Nat][ q <span class="ot">:</span> n <span class="ot">=</span> succ n' ] <span class="ot">(</span>a <span class="ot">:</span> A<span class="ot">)</span> <span class="ot">(</span>vs <span class="ot">:</span> Vec<span class="ot">_</span>A n<span class="ot">)</span></code></pre></div>
 <div class="small">
-<a href="https://personal.cis.strath.ac.uk/conor.mcbride/pub/OAAO/LitOrn.pdf" class="uri">https://personal.cis.strath.ac.uk/conor.mcbride/pub/OAAO/LitOrn.pdf</a><br />
+<a href="https://personal.cis.strath.ac.uk/conor.mcbride/pub/OAAO/LitOrn.pdf" class="uri">https://personal.cis.strath.ac.uk/conor.mcbride/pub/OAAO/LitOrn.pdf</a><br>
 <a href="http://arxiv.org/pdf/1201.4801.pdf" class="uri">http://arxiv.org/pdf/1201.4801.pdf</a>
 </div>
-</section>
+</section><div><a class="slider-prev" href="#higher-order-abstract-syntax"></a><a class="slider-next" href="#recursion"></a></div>
 <section id="recursion" class="slide level1">
 <h1>Recursion</h1>
 <div class="sourceCode"><pre class="sourceCode java"><code class="sourceCode java"><span class="kw">class</span> A { B b; }
@@ -406,55 +287,64 @@ Example at: Vasenin V. A., Krivchikov M. A. Ecma-335 static formal semantics // 
 <p>Suppose we started translating <abbr title="Abstract Syntax Tree">AST</abbr> to static semantics. Before we process second line and see that <code>B</code> is a class, what is the static semantics of <code>B</code> at the first line?</p>
 <p>Approach: fixed point (works for classical Domain Theory, doesn't work well in a constructive setting).</p>
 <p>N.S. Papaspyrou. Formal semantics of the C Programming Language (PhD thesis).</p>
-</section>
+</section><div><a class="slider-prev" href="#ornaments"></a><a class="slider-next" href="#homework-assignments"></a></div>
 <section id="homework-assignments" class="slide level1">
 <h1>Homework assignments</h1>
 <p><strong>Task 5.1.</strong> ** Implement a translator from simply-typed lambda calculus <abbr title="Abstract Syntax Tree">AST</abbr> to <abbr title="Higher-Order Abstract Syntax">HOAS</abbr> in Haskell or any other language of your choice (except the original OCaml) which is expressive enough to represent HOAS.</p>
 <p><strong>Task 5.2.</strong> *** Implement a translator from simply-typed lambda calculus <abbr title="Abstract Syntax Tree">AST</abbr> to <abbr title="Parametrized Higher-Order Abstract Syntax">PHOAS</abbr> in Haskell or any other language of your choice (except the original OCaml) which is expressive enough to represent PHOAS.</p>
-</section>
+</section><div><a class="slider-prev" href="#recursion"></a><a class="slider-next" href="#project"></a></div>
 <section id="project" class="slide level1">
 <h1>Project</h1>
 <p><strong>Project Step 4.</strong> Implement a static formal semantics for your programming language (in Agda or Coq). Choose one of the following approaches.</p>
 <ul>
-<li><strong>Project Step 4a.</strong> * Assign the unique identifiers (e.g. natural numbers) to each bindable identifier leaf in the AST and create the mapping between the unique identifiers and static semantics subtrees.</li>
-<li><strong>Project Step 4b.</strong> ** Use Higher-Order Abstract Syntax.</li>
+<li class="fragment"><strong>Project Step 4a.</strong> * Assign the unique identifiers (e.g. natural numbers) to each bindable identifier leaf in the AST and create the mapping between the unique identifiers and static semantics subtrees.</li>
+<li class="fragment"><strong>Project Step 4b.</strong> ** Use Higher-Order Abstract Syntax.</li>
 </ul>
-</section>
-    </div>
+</section><div><a class="slider-prev" href="#homework-assignments"></a><a class="slider-next"></a></div>
+
+<!-- start page -->
+   <div id="slider">
+       <a href="#software-and-programming-language-theory" class="slider-start">PLAY</a>
+   </div>
+
+   <!-- progressbar container -->
+   <div class="slider-progress"></div>
+   </article>
   </div>
 
+  
+  <script type="text/javascript">
+  document.addEventListener("keydown", function(e) {
+     if (e.altKey || e.ctrlKey || e.metaKey || e.shiftKey) { return; }
+     switch (e.keyCode) {
+       case 35: // End
+          var arr = document.querySelectorAll("a.slider-next:link");
+          var a = arr[arr.length - 1];
+          if (a && a.href) {
+            window.location = a.href;
+          }
+          break;
+       case 36: // Home
+          var a = document.querySelector("a.slider-start");
+          if (a && a.href) {
+            window.location = a.href;
+          }
+          break;
+       case 37: // left arrow
+         var a = document.querySelector("section:target ~ div a.slider-prev");
+         if (a && a.href) {
+           window.location = a.href;
+         }
+         break;
+       case 39: // right arrow
+         var a = document.querySelector("section:target ~ div a.slider-next");
+         if (a && a.href) {
+           window.location = a.href;
+         }
+         break;
+     }
+  });
+  </script>
+  
 
-  <script src="reveal.js/lib/js/head.min.js"></script>
-  <script src="reveal.js/js/reveal.js"></script>
-
-  <script>
-
-      // Full list of configuration options available here:
-      // https://github.com/hakimel/reveal.js#configuration
-      Reveal.initialize({
-        controls: false,         // Display controls in the bottom right corner
-        progress: true,         // Display a presentation progress bar
-        history: true,          // Push each slide change to the browser history
-        fragments: true,
-        center: false,                       // Vertical centering of slides
-        maxScale: 1.5,                  // Bounds for smallest/largest possible content scale
-        slideNumber: "c / t",                // Display the page number of the current slide
-        theme: 'maxxk', // available themes are in /css/theme
-        transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
-        math: {
-          mathjax: 'reveal.js/../MathJax-2.5.3/MathJax.js',
-          config: 'TeX-AMS_HTML-full'  // See http://docs.mathjax.org/en/latest/config-files.html
-        },
-
-        // Optional libraries used to extend on reveal.js
-        dependencies: [
-          { src: 'reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
-          { src: 'reveal.js/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
-          { src: 'reveal.js/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } },
-          { src: 'reveal.js/plugin/math/math.js', async: true },
-//          { src: 'reveal.js/plugin/search/search.js', async: true, condition: function() { return !!document.body.classList; }, }
-//          { src: 'reveal.js/plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
-]});
-    </script>
-    </body>
-</html>
+</body></html>
