@@ -1,39 +1,19 @@
-<!DOCTYPE html>
-<html>
-<head>
+<!DOCTYPE html><html><head>
   <meta charset="utf-8">
   <meta name="generator" content="pandoc">
   <title></title>
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <link rel="stylesheet" href="reveal.js/css/reveal.css"/>
-  <link rel="stylesheet" href="reveal.js/css/theme/maxxk.css" id="theme">
-  <link rel="stylesheet" href="additional.css"/>
-  <link rel="stylesheet" href="reveal.js/css/highlight-github.css"/>
-  <!-- If the query includes 'print-pdf', include the PDF print sheet -->
-  <script>
-    if( window.location.search.match( /print-pdf/gi ) ) {
-      var link = document.createElement( 'link' );
-      link.rel = 'stylesheet';
-      link.type = 'text/css';
-      link.href = 'reveal.js/css/print/pdf.css';
-      document.getElementsByTagName( 'head' )[0].appendChild( link );
-    }
-  </script>
-  <!--[if lt IE 9]>
-  <script src="reveal.js/lib/js/html5shiv.js"></script>
-  <![endif]-->
-
-  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
-<style type="text/css">.reveal pre code{white-space: pre; font-size: 1.5em; line-height: 1.3;}
-.reveal abbr { border-bottom: 0.1pt dashed blue;}
-</style>
-
+  <link rel="stylesheet" href="slider.css">
+  <style type="text/css">code{white-space: pre;}</style>
 </head>
 <body>
-  <div class="reveal">
-    <div class="slides">
+  <div style="width: 640px;height: 400px;">
+  <input id="slider-max" type="checkbox" checked="">
+   <article class="slider slider-indicator">
+   <a id="slider-default"></a>
+   <label for="slider-max" title="Maximize"></label>
 
 
 <section id="software-and-programming-language-theory" class="slide level1">
@@ -49,22 +29,27 @@
 .smaller { font-size: 0.8em !important; }
 .large { font-size: 1.5em !important; }
 .huge { font-size: 2em !important; }
-.reveal section {
-  text-align: left;
+.inference table {
+    display: inline-block;
+    padding: 1em;
 }
+
+.inference table th {
+    font-weight: normal;
+    border-bottom: 2px solid black;
+}
+.ib {
+    display: inline-block;
+}
+
 </style>
-<p>Course page: <a href="https://maxxk.github.io/programming-languages-2016/" class="uri">https://maxxk.github.io/programming-languages-2016/</a><br />
-Contact author: <script type="text/javascript">
-<!--
-h='&#x67;&#x6d;&#x61;&#x69;&#108;&#46;&#x63;&#x6f;&#x6d;';a='&#64;';n='&#x6d;&#x61;&#120;&#x69;&#x6d;&#46;&#x6b;&#114;&#x69;&#118;&#x63;&#104;&#x69;&#x6b;&#x6f;&#118;';e=n+a+h;
-document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'" clas'+'s="em' + 'ail">'+e+'<\/'+'a'+'>');
-// -->
-</script><noscript>&#x6d;&#x61;&#120;&#x69;&#x6d;&#46;&#x6b;&#114;&#x69;&#118;&#x63;&#104;&#x69;&#x6b;&#x6f;&#118;&#32;&#x61;&#116;&#32;&#x67;&#x6d;&#x61;&#x69;&#108;&#32;&#100;&#x6f;&#116;&#32;&#x63;&#x6f;&#x6d;</noscript></p>
-</section>
+<p>Course page: <a href="https://maxxk.github.io/programming-languages/" class="uri">https://maxxk.github.io/programming-languages/</a><br>
+Contact author: <a href="mailto:maxim.krivchikov@gmail.com" class="email">maxim.krivchikov@gmail.com</a></p>
+</section><div><a class="slider-prev"></a><a class="slider-next" href="#programming-language-specification"></a></div>
 <section id="programming-language-specification" class="slide level1">
 <h1>Programming language specification</h1>
-<p><img src="graphviz-images/bbe727775038043af9c9c955731db5637b7b6712.svg" id="alt" /></p>
-</section>
+<p><img src="graphviz-images/bbe727775038043af9c9c955731db5637b7b6712.svg"></p>
+</section><div><a class="slider-prev" href="#software-and-programming-language-theory"></a><a class="slider-next" href="#dynamic-semantics-1"></a></div>
 <section id="dynamic-semantics-1" class="slide level1">
 <h1>Dynamic semantics</h1>
 <p>— the semantics of the programming language statements at the run time.</p>
@@ -75,20 +60,19 @@ document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'" clas'+'s="em' + 'ail">'+e+'<\
 <p>The meaning of the program is defined in terms of effects on the program statements on assertions about the program state.</p>
 <h3 id="denotational-semantics">Denotational Semantics</h3>
 <p>The meaning of the program is formalized as a mathematical object (denotation).</p>
-</section>
+</section><div><a class="slider-prev" href="#programming-language-specification"></a><a class="slider-next" href="#operational-semantics-1"></a></div>
 <section id="operational-semantics-1" class="slide level1">
 <h1>Operational semantics</h1>
-<p>(the most direct for imperative programmer)<br />
-Program execution may be understood as a step-by-step process that evolves by mechanical application of a fixed set of rules.<br />
+<p>Program execution may be understood as a step-by-step process that evolves by mechanical application of a fixed set of rules.<br>
 Rules describe how language constructs affect the state of some <em>abstract machine</em> that provides the mathematical model of computation. Each state of the abstract machine is called <em>configuration</em>.</p>
 <div class="smaller">
 F. Turbak, D. Gifford. Design Concepts in Programming Languages. Chapter 3. Operational Semantics.
 </div>
-</section>
+</section><div><a class="slider-prev" href="#dynamic-semantics-1"></a><a class="slider-next" href="#operational-execution-model"></a></div>
 <section id="operational-execution-model" class="slide level1">
 <h1>Operational execution model</h1>
-<p><img src="graphviz-images/429fa226b1a0a9d035e722469c0d820109989672.svg" id="alt" /></p>
-</section>
+<p><img src="graphviz-images/429fa226b1a0a9d035e722469c0d820109989672.svg"></p>
+</section><div><a class="slider-prev" href="#operational-semantics-1"></a><a class="slider-next" href="#big-step-and-small-step-operational-semantics"></a></div>
 <section id="big-step-and-small-step-operational-semantics" class="slide level1">
 <h1>Big-step and small-step operational semantics</h1>
 <p>Small-step operational semantics (Structural Operational Semantics, SOS): step-by-step transformation of configurations in abstract machine is defined by set of rewrite rules.</p>
@@ -96,147 +80,182 @@ F. Turbak, D. Gifford. Design Concepts in Programming Languages. Chapter 3. Oper
 Gordon D. Plotkin. A Structural Approach to Operational Semantics. (1981) Tech. Rep. DAIMI FN-19, Computer Science Department, Aarhus University, Aarhus, Denmark. (Reprinted with corrections in J. Log. Algebr. Program. 60-61: 17-139 (2004)
 </div>
 <p>Big-step operational semantics (natural semantics): program execution is described in terms of recursive evaluation of subphrases of a program. Each nontrivial syntactic domain (subset of abstract syntax tree constructors) has some specific evaluation relation.</p>
-</section>
+</section><div><a class="slider-prev" href="#operational-execution-model"></a><a class="slider-next" href="#structural-operational-semantics"></a></div>
 <section id="structural-operational-semantics" class="slide level1">
 <h1>Structural operational semantics</h1>
 <h2 id="set-theoretic-abstract-machine-model">Set-theoretic abstract machine model</h2>
 <p>Consider programming language L with well-formed, well-typed programs P ∈ Prog, inputs I ∈ Inputs and answers A ∈ AnsExp.</p>
 <p>Structural operational semantics for L is five-tuple S = 〈 CF, ⇒, FC, IF, OF 〉</p>
 <ul>
-<li>cf ∈ CF — <strong>domain of configurations</strong> for an abstract machine</li>
-<li>⇒ — <strong>transition relation</strong>, &quot;⇒&quot; ⊆ CF × CF. Two configurations are in transition relation iff there is a <strong>(one step) transition</strong> from cf to cf'<br />
+<li class="fragment">cf ∈ CF — <strong>domain of configurations</strong> for an abstract machine</li>
+<li class="fragment">⇒ — <strong>transition relation</strong>, "⇒" ⊆ CF × CF. Two configurations are in transition relation iff there is a <strong>(one step) transition</strong> from cf to cf'<br>
 cf ⇒ cf' ⇔ 〈 cf, cf' 〉 ∈ ⇒</li>
 </ul>
-<p><span class="math inline">\(⇒^*\)</span> — reflexive transitive closure of ⇒. Sequence of transitions cf <span class="math inline">\(⇒^*\)</span> cf' is called <strong>transition path</strong>.</p>
-<p>Configuration cf is <strong>reducible</strong> if there is some cf' such that cf ⇒ cf', otherwisf cf is <strong>irreducible</strong>.</p>
-<p>Transition relation <span class="math inline">\(⇒\)</span> is <strong>deterministic</strong> if for every cf there is exactly one <span class="math inline">\(cf&#39;\)</span>, otherwise ⇒ is <strong>nondeterministic</strong>.</p>
-</section>
+<p><span class="math inline">⇒<sup>*</sup></span> — reflexive transitive closure of ⇒. Sequence of transitions cf <span class="math inline">⇒<sup>*</sup></span> cf' is called <strong>transition path</strong>.</p>
+<p>Configuration cf is <strong>reducible</strong> if there is some cf' such that cf ⇒ cf', otherwise cf is <strong>irreducible</strong>.</p>
+<p>Transition relation <span class="math inline">⇒</span> is <strong>deterministic</strong> if for every cf there is exactly one <span class="math inline"><em>c</em><em>f</em>′</span>, otherwise ⇒ is <strong>nondeterministic</strong>.</p>
+</section><div><a class="slider-prev" href="#big-step-and-small-step-operational-semantics"></a><a class="slider-next" href="#structural-operational-semantics-1"></a></div>
 <section id="structural-operational-semantics-1" class="slide level1">
 <h1>Structural operational semantics</h1>
 <p>Structural operational semantics for language L is five-tuple S = 〈 CF, ⇒, FC, IF, OF 〉</p>
 <ul>
-<li>Irreducible — all irreducible configurations</li>
-<li>FC — set of <strong>final configurations</strong> which yield the correct answer, FC ⊂ Irreducible</li>
-<li><p>Stuck = Irreducible / FC — set of stuck states, nonfinal irreducible configurations (e.g. error states)</p></li>
-<li><p>IF : (Prog × Inputs) → CF — <strong>input function</strong>, transforms a program and its inputs to an initial configuration</p></li>
-<li><p>OF : FC → AnsExp — <strong>output function</strong>, maps a program and its inputs to an initial configuration</p></li>
+<li class="fragment">Irreducible — all irreducible configurations</li>
+<li class="fragment">FC — set of <strong>final configurations</strong> which yield the correct answer, FC ⊂ Irreducible</li>
+<li class="fragment"><p>Stuck = Irreducible / FC — set of stuck states, nonfinal irreducible configurations (e.g. error states)</p></li>
+<li class="fragment"><p>IF : (Prog × Inputs) → CF — <strong>input function</strong>, transforms a program and its inputs to an initial configuration</p></li>
+<li class="fragment"><p>OF : FC → AnsExp — <strong>output function</strong>, maps a program and its inputs to an initial configuration</p></li>
 </ul>
-</section>
+</section><div><a class="slider-prev" href="#structural-operational-semantics"></a><a class="slider-next" href="#program-behavior"></a></div>
 <section id="program-behavior" class="slide level1">
 <h1>Program behavior</h1>
 <p>Outcome = AnsExp + ErrorResult (+ — disjoint union)</p>
-<p>Deterministic behavior, if <span class="math inline">\(⇒\)</span> is deterministic:<br />
-<span class="math display">\[
-beh_{det} : (\mathrm{Prog} × \mathrm{Inputs}) → \mathrm{Outcome}
-\]</span><br />
-<span class="math display">\[
-beh_{det} 〈 P, I 〉 = \left\{ \begin{array}{lcl}
-AnsExp ↦ Outcome (OF cf) &amp; \text{if } &amp; IF 〈P, I〉 ⇒^* cf ∈ FC, \\
-ErrorResult &amp; \text{if } &amp; IF 〈P, I〉 ⇒^* cf ∈ Stuck, \\
-∞ &amp; \text{if } &amp; IF 〈P, I〉 ⇒^∞.
-\end{array} \right.
-\]</span></p>
-</section>
+<p>Deterministic behavior, if <span class="math inline">⇒</span> is deterministic:<br>
+<span class="math inline"><em>b</em><em>e</em><em>h</em><sub><em>d</em><em>e</em><em>t</em></sub></span> : (Prog × Inputs) → Outcome<br>
+<span class="math inline"><em>b</em><em>e</em><em>h</em><sub><em>d</em><em>e</em><em>t</em></sub></span> 〈 P, I 〉 | IF 〈 P, I 〉 <span class="math inline">⇒<sup>*</sup></span> cf ∈ FC = AnsExp ↦ Outcome (OF cf)<br>
+<span class="math inline"><em>b</em><em>e</em><em>h</em><sub><em>d</em><em>e</em><em>t</em></sub></span> 〈 P, I 〉 | IF 〈 P, I 〉 <span class="math inline">⇒<sup>*</sup></span> cf ∈ Stuck = ErrorResult<br>
+<span class="math inline"><em>b</em><em>e</em><em>h</em><sub><em>d</em><em>e</em><em>t</em></sub></span> 〈 P, I 〉 | IF 〈 P, I 〉 <span class="math inline">⇒<sup>∞</sup></span> = ∞</p>
+</section><div><a class="slider-prev" href="#structural-operational-semantics-1"></a><a class="slider-next" href="#non-deterministic-behavior"></a></div>
 <section id="non-deterministic-behavior" class="slide level1">
 <h1>Non-deterministic behavior</h1>
-<p><span class="math inline">\(\mathcal{P}(A)\)</span> — powerset of <span class="math inline">\(A\)</span>.</p>
-<p><span class="math display">\[
-beh : (\mathrm{Prog} × \mathrm{Inputs}) → \mathcal{P}(\mathrm{Outcome})
-\]</span></p>
-<p><span class="math display">\[
-o ∈ beh( 〈P, I〉 ) \; \mathrm{if} \; \left\{ \begin{array}{lcl}
-o = AnsExp ↦ Outcome (OF cf) &amp; \text{and} &amp; (IF 〈P, I〉 ⇒^* cf ∈ FC \\
-o ∈ ErrorResult &amp; \text{and} &amp; IF 〈 P, I 〉 ⇒^* cf ∈ Stuck \\
-o = ∞ &amp; \text{and} &amp; IF 〈P, I〉 ⇒^∞
-\end{array}\right.
-\]</span></p>
-</section>
-<section id="rewrite-rules" class="slide level1">
+<p><span class="math inline">𝒫(<em>A</em>)</span> — powerset of <span class="math inline"><em>A</em></span>.</p>
+<p><br><span class="math display"><em>b</em><em>e</em><em>h</em> : (<em>P</em><em>r</em><em>o</em><em>g</em> × <em>I</em><em>n</em><em>p</em><em>u</em><em>t</em><em>s</em>)→𝒫(<em>O</em><em>u</em><em>t</em><em>c</em><em>o</em><em>m</em><em>e</em>)</span><br><br>
+o ∈ beh( 〈P, I〉 ) <strong>if</strong> o = AnsExp ↦ Outcome (OF cf) <strong>and</strong> IF 〈P, I〉 <span class="math inline">⇒<sup>*</sup></span> cf ∈ FC<br>
+o ∈ beh( 〈P, I〉 ) <strong>if</strong> o ∈ ErrorResult <strong>and</strong> IF 〈 P, I 〉 <span class="math inline">⇒<sup>*</sup></span> cf ∈ Stuck<br>
+o ∈ beh( 〈P, I〉 ) <strong>if</strong> o = ∞ <strong>and</strong> IF 〈P, I〉 <span class="math inline">⇒<sup>∞</sup></span></p>
+</section><div><a class="slider-prev" href="#program-behavior"></a><a class="slider-next" href="#rewrite-rules"></a></div>
+<section id="rewrite-rules" class="slide level1 inference">
 <h1>Rewrite rules</h1>
 <p>Usually relations on complex domains are specified in terms of <strong>formal inference system.</strong></p>
-<p><span class="math display">\[
-\dfrac{antecedents}{consequences} [name]
-\]</span></p>
-<p><span class="math inline">\(antecedents = ⊘\)</span> ⇒ rule is called <strong>axiom</strong>, otherwise <strong>progress rule</strong>.</p>
-<p>Example axiom for stack-based language (placing constant on stack; configuration state = 〈 command sequence, stack 〉):</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">antecendents</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">consequents</td>
+</tr>
+</tbody>
+</table>
+<div class="ib">
+[name]
+</div>
+<p><span class="math inline"><em>a</em><em>n</em><em>t</em><em>e</em><em>c</em><em>e</em><em>d</em><em>e</em><em>n</em><em>t</em><em>s</em> = ⊘</span> ⇒ rule is called <strong>axiom</strong>, otherwise <strong>progress rule</strong>.</p>
+<p>Example axiom for stack-based language (placing constant on stack;<br>
+configuration state = 〈 command sequence, stack 〉):</p>
 <p>〈 N . Q, S〉 ⇒ 〈 Q, N . S 〉 [num]</p>
+<p>〈 (Q) . R, S〉 ⇒ 〈 R, (Q) . S 〉 [seq]</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">S = S1 . S2 . Sn</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">〈 swap . Q, S〉 ⇒ 〈 Q, S2 . S1 . Sn 〉</td>
+</tr>
+</tbody>
+</table>
+<div class="ib">
+[seq]
+</div>
 <p>If cf is a configuration in which first command in sequence is constant, then there is a transition from cf to cf' in which constant is moved from command sequence to the top of the stack.</p>
-</section>
+</section><div><a class="slider-prev" href="#non-deterministic-behavior"></a><a class="slider-next" href="#example-structural-operational-semantics-execution"></a></div>
 <section id="example-structural-operational-semantics-execution" class="slide level1">
 <h1>Example structural operational semantics execution</h1>
-<p><img src="images/postfix-sos.png" /></p>
-</section>
+<p><img src="images/postfix-sos.png"></p>
+</section><div><a class="slider-prev" href="#rewrite-rules"></a><a class="slider-next" href="#subexpression-evaluation"></a></div>
 <section id="subexpression-evaluation" class="slide level1">
 <h1>Subexpression evaluation</h1>
-<p><img src="images/elmm-transition.png" /></p>
-</section>
+<p><img src="images/elmm-transition.png"></p>
+</section><div><a class="slider-prev" href="#example-structural-operational-semantics-execution"></a><a class="slider-next" href="#evaluation-contexts"></a></div>
 <section id="evaluation-contexts" class="slide level1">
 <h1>Evaluation contexts</h1>
-<p><img src="images/evaluation-contexts.png" /></p>
-</section>
+<p><img src="images/evaluation-contexts.png"></p>
+</section><div><a class="slider-prev" href="#subexpression-evaluation"></a><a class="slider-next" href="#big-step-operational-semantics"></a></div>
 <section id="big-step-operational-semantics" class="slide level1">
 <h1>Big-step operational semantics</h1>
 <p>Big-step operational semantics (natural semantics): program execution is described in terms of recursive evaluation of subphrases of a program. Each nontrivial syntactic domain (subset of abstract syntax tree constructors) has some specific evaluation relation.</p>
-<p>E.g. $ →_{NE}$ for numerical expressions and <span class="math inline">\(→_{Prog}\)</span> for programs.</p>
-</section>
+<p>E.g. <span class="math inline">→<sub><em>N</em><em>E</em></sub></span> for numerical expressions and <span class="math inline">→<sub><em>P</em><em>r</em><em>o</em><em>g</em></sub></span> for programs.</p>
+</section><div><a class="slider-prev" href="#evaluation-contexts"></a><a class="slider-next" href="#big-step-operational-semantics-1"></a></div>
 <section id="big-step-operational-semantics-1" class="slide level1">
 <h1>Big-step operational semantics</h1>
-<p><img src="images/big-step-elm.png" /></p>
-</section>
+<p><img src="images/big-step-elm.png"></p>
+</section><div><a class="slider-prev" href="#big-step-operational-semantics"></a><a class="slider-next" href="#language-properties"></a></div>
 <section id="language-properties" class="slide level1">
 <h1>Language properties</h1>
 <p>Usually operational semantics is used to prove some of the following properties:</p>
 <ul>
-<li>universality: the language can express all computable programs;</li>
-<li>determinism: the set of possible outcomes from executing a program on any<br />
+<li class="fragment">universality: the language can express all computable programs;</li>
+<li class="fragment">determinism: the set of possible outcomes from executing a program on any<br>
 particular inputs is a singleton;</li>
-<li>strong normalization: all programs are guaranteed to terminate on all inputs<br />
+<li class="fragment">strong normalization: all programs are guaranteed to terminate on all inputs<br>
 (i.e., it is not possible to express an infinite loop);</li>
-<li>static checkability: a class of program errors can be found by static analysis<br />
+<li class="fragment">static checkability: a class of program errors can be found by static analysis<br>
 without resorting to execution;</li>
-<li>referential transparency: different occurrences of an expression within the<br />
+<li class="fragment">referential transparency: different occurrences of an expression within the<br>
 same context always have the same meaning.</li>
 </ul>
-</section>
+</section><div><a class="slider-prev" href="#big-step-operational-semantics-1"></a><a class="slider-next" href="#example-proof-of-termination"></a></div>
 <section id="example-proof-of-termination" class="slide level1">
 <h1>Example proof of termination</h1>
 <p>Turbak, Gifford. p. 85</p>
-</section>
-    </div>
+</section><div><a class="slider-prev" href="#language-properties"></a><a class="slider-next" href="#k-framework"></a></div>
+<section id="k-framework" class="slide level1">
+<h1>K Framework</h1>
+<p><a href="http://www.kframework.org/index.php/Main_Page" class="uri">http://www.kframework.org/index.php/Main_Page</a></p>
+</section><div><a class="slider-prev" href="#example-proof-of-termination"></a><a class="slider-next" href="#homework-assignments"></a></div>
+<section id="homework-assignments" class="slide level1">
+<h1>Homework Assignments</h1>
+<p>Turbak, Gifford.<br>
+Exercises 3.3, 3.4, 3.5, 3.6, 3.10a, 3.10b, 3.18, 3.19, 3.22, 3.24, 3.25 (one star each, at most 3 stars)</p>
+</section><div><a class="slider-prev" href="#k-framework"></a><a class="slider-next"></a></div>
+
+<!-- start page -->
+   <div id="slider">
+       <a href="#software-and-programming-language-theory" class="slider-start">PLAY</a>
+   </div>
+
+   <!-- progressbar container -->
+   <div class="slider-progress"></div>
+   </article>
   </div>
 
+  
+  <script type="text/javascript">
+  document.addEventListener("keydown", function(e) {
+     if (e.altKey || e.ctrlKey || e.metaKey || e.shiftKey) { return; }
+     switch (e.keyCode) {
+       case 35: // End
+          var arr = document.querySelectorAll("a.slider-next:link");
+          var a = arr[arr.length - 1];
+          if (a && a.href) {
+            window.location = a.href;
+          }
+          break;
+       case 36: // Home
+          var a = document.querySelector("a.slider-start");
+          if (a && a.href) {
+            window.location = a.href;
+          }
+          break;
+       case 37: // left arrow
+         var a = document.querySelector("section:target ~ div a.slider-prev");
+         if (a && a.href) {
+           window.location = a.href;
+         }
+         break;
+       case 39: // right arrow
+         var a = document.querySelector("section:target ~ div a.slider-next");
+         if (a && a.href) {
+           window.location = a.href;
+         }
+         break;
+     }
+  });
+  </script>
+  
 
-  <script src="reveal.js/lib/js/head.min.js"></script>
-  <script src="reveal.js/js/reveal.js"></script>
-
-  <script>
-
-      // Full list of configuration options available here:
-      // https://github.com/hakimel/reveal.js#configuration
-      Reveal.initialize({
-        controls: false,         // Display controls in the bottom right corner
-        progress: true,         // Display a presentation progress bar
-        history: true,          // Push each slide change to the browser history
-        fragments: true,
-        center: false,                       // Vertical centering of slides
-        maxScale: 1.5,                  // Bounds for smallest/largest possible content scale
-        slideNumber: "c / t",                // Display the page number of the current slide
-        theme: 'maxxk', // available themes are in /css/theme
-        transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
-        math: {
-          mathjax: 'reveal.js/../MathJax-2.5.3/MathJax.js',
-          config: 'TeX-AMS_HTML-full'  // See http://docs.mathjax.org/en/latest/config-files.html
-        },
-
-        // Optional libraries used to extend on reveal.js
-        dependencies: [
-          { src: 'reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
-          { src: 'reveal.js/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
-          { src: 'reveal.js/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } },
-          { src: 'reveal.js/plugin/math/math.js', async: true },
-//          { src: 'reveal.js/plugin/search/search.js', async: true, condition: function() { return !!document.body.classList; }, }
-//          { src: 'reveal.js/plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
-]});
-    </script>
-    </body>
-</html>
+</body></html>

@@ -35,10 +35,11 @@ Course topics include:
 **06.04.2017** Static semantics. Domain constraints. Typing.
 [presentation - html](presentations/06-Typing.html) 
 
-<!--
-**13.04.2017** Operational semantics 
-[presentation - html](presentations/07-Operational-Semantics.html) [single page - html](presentations/07-Operational-Semantics-print.html)
 
+**13.04.2017** Operational semantics 
+[presentation - html](presentations/07-Operational-Semantics.html)
+
+<!--
 **20.04.2017** Operational semantics implementation 
 [presentation - html](presentations/08-Operational-Semantics-Implementation.html) [single page - html](presentations/08-Operational-Semantics-Implementation-print.html)
 

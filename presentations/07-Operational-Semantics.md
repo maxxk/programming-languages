@@ -11,12 +11,22 @@
 .smaller { font-size: 0.8em !important; }
 .large { font-size: 1.5em !important; }
 .huge { font-size: 2em !important; }
-.reveal section {
-  text-align: left;
+.inference table {
+    display: inline-block;
+    padding: 1em;
 }
+
+.inference table th {
+    font-weight: normal;
+    border-bottom: 2px solid black;
+}
+.ib {
+    display: inline-block;
+}
+
 </style>
 
-Course page: https://maxxk.github.io/programming-languages-2016/
+Course page: https://maxxk.github.io/programming-languages/
 Contact author: maxim.krivchikov@gmail.com
 
 # Programming language specification
@@ -52,7 +62,7 @@ The meaning of the program is defined in terms of effects on the program stateme
 The meaning of the program is formalized as a mathematical object (denotation).
 
 # Operational semantics
-(the most direct for imperative programmer)
+
 Program execution may be understood as a step-by-step process that evolves by mechanical application of a fixed set of rules.
 Rules describe how language constructs affect the state of some *abstract machine* that provides the mathematical model of computation. Each state of the abstract machine is called *configuration*.
 
@@ -97,7 +107,7 @@ cf ⇒ cf' ⇔ 〈 cf, cf' 〉 ∈ ⇒
 
 $⇒^*$ — reflexive transitive closure of ⇒. Sequence of transitions cf $⇒^*$ cf' is called **transition path**.
 
-Configuration cf is __reducible__ if there is some cf' such that cf ⇒ cf', otherwisf cf is __irreducible__.
+Configuration cf is __reducible__ if there is some cf' such that cf ⇒ cf', otherwise cf is __irreducible__.
 
 Transition relation $⇒$ is __deterministic__ if for every cf there is exactly one $cf'$, otherwise ⇒ is __nondeterministic__.
 
@@ -115,16 +125,11 @@ Structural operational semantics for language L is five-tuple S = 〈 CF, ⇒, F
 Outcome = AnsExp + ErrorResult (+ — disjoint union)
 
 Deterministic behavior, if $⇒$ is deterministic:
-$$
-beh_{det} : (\mathrm{Prog} × \mathrm{Inputs}) → \mathrm{Outcome}
-$$
-$$
-beh_{det} 〈 P, I 〉 = \left\{ \begin{array}{lcl}
-AnsExp ↦ Outcome (OF cf) & \text{if } & IF 〈P, I〉 ⇒^* cf ∈ FC, \\
-ErrorResult & \text{if } & IF 〈P, I〉 ⇒^* cf ∈ Stuck, \\
-∞ & \text{if } & IF 〈P, I〉 ⇒^∞.
-\end{array} \right.
-$$
+$beh_{det}$ : (Prog × Inputs) → Outcome
+$beh_{det}$ 〈 P, I 〉 | IF 〈 P, I 〉 $⇒^*$ cf ∈ FC = AnsExp ↦ Outcome (OF cf)
+$beh_{det}$ 〈 P, I 〉 | IF 〈 P, I 〉 $⇒^*$ cf ∈ Stuck = ErrorResult
+$beh_{det}$ 〈 P, I 〉 | IF 〈 P, I 〉 $⇒^∞$ = ∞
+
 
 # Non-deterministic behavior
 $\mathcal{P}(A)$ — powerset of $A$.
@@ -132,27 +137,33 @@ $\mathcal{P}(A)$ — powerset of $A$.
 $$
 beh : (\mathrm{Prog} × \mathrm{Inputs}) → \mathcal{P}(\mathrm{Outcome})
 $$
+o ∈ beh( 〈P, I〉 ) **if** o = AnsExp ↦ Outcome (OF cf) **and** IF 〈P, I〉 $⇒^*$ cf ∈ FC 
+o ∈ beh( 〈P, I〉 ) **if** o ∈ ErrorResult **and** IF 〈 P, I 〉 $⇒^*$ cf ∈ Stuck
+o ∈ beh( 〈P, I〉 ) **if** o = ∞ **and** IF 〈P, I〉 $⇒^∞$
 
-$$
-o ∈ beh( 〈P, I〉 ) \; \mathrm{if} \; \left\{ \begin{array}{lcl}
-o = AnsExp ↦ Outcome (OF cf) & \text{and} & (IF 〈P, I〉 ⇒^* cf ∈ FC \\
-o ∈ ErrorResult & \text{and} & IF 〈 P, I 〉 ⇒^* cf ∈ Stuck \\
-o = ∞ & \text{and} & IF 〈P, I〉 ⇒^∞
-\end{array}\right.
-$$
-
-# Rewrite rules
+# Rewrite rules {.inference}
 Usually relations on complex domains are specified in terms of **formal inference system.**
 
-$$
-\dfrac{antecedents}{consequences} [name]
-$$
+  antecendents
+ --------------
+  consequents
+  
+<div class="ib">[name]</div>
 
 $antecedents = ⊘$ ⇒ rule is called **axiom**, otherwise **progress rule**.
 
-Example axiom for stack-based language (placing constant on stack; configuration state = 〈 command sequence, stack 〉):
+Example axiom for stack-based language (placing constant on stack; 
+configuration state = 〈 command sequence, stack 〉):
 
 〈 N . Q, S〉 ⇒ 〈 Q, N . S 〉 [num]
+
+〈 (Q) . R, S〉 ⇒ 〈 R, (Q) . S 〉 [seq]
+
+   S = S1 . S2 . Sn
+ ------------------------------------
+  〈 swap . Q, S〉 ⇒ 〈 Q, S2 . S1 . Sn 〉 
+  
+<div class="ib">[seq]</div>
 
 If cf is a configuration in which first command in sequence is constant, then there is a transition from cf to cf' in which constant is moved from command sequence to the top of the stack.
 
@@ -168,7 +179,7 @@ If cf is a configuration in which first command in sequence is constant, then th
 # Big-step operational semantics
 Big-step operational semantics (natural semantics): program execution is described in terms of recursive evaluation of subphrases of a program. Each nontrivial syntactic domain (subset of abstract syntax tree constructors) has some specific evaluation relation.
 
-E.g. $ →_{NE}$ for numerical expressions and $→_{Prog}$ for programs.
+E.g. $→_{NE}$ for numerical expressions and $→_{Prog}$ for programs.
 
 # Big-step operational semantics
 ![](images/big-step-elm.png)
@@ -187,3 +198,10 @@ same context always have the same meaning.
 
 # Example proof of termination
 Turbak, Gifford. p. 85
+
+# K Framework 
+http://www.kframework.org/index.php/Main_Page
+
+# Homework Assignments
+Turbak, Gifford.
+Exercises 3.3, 3.4, 3.5, 3.6, 3.10a, 3.10b, 3.18, 3.19, 3.22, 3.24, 3.25 (one star each, at most 3 stars)
