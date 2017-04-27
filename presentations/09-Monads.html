@@ -1,0 +1,547 @@
+<!DOCTYPE html><html><head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <title></title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <link rel="stylesheet" href="slider.css">
+  <style type="text/css">code{white-space: pre;}</style>
+</head>
+<body>
+  <div style="width: 640px;height: 400px;">
+  <input id="slider-max" type="checkbox" checked="">
+   <article class="slider slider-indicator">
+   <a id="slider-default"></a>
+   <label for="slider-max" title="Maximize"></label>
+
+
+<section id="software-and-programming-language-theory" class="slide level1">
+<h1>Software and Programming Language Theory</h1>
+<h2 id="denotational-semantics-implementation">Denotational semantics implementation</h2>
+<h3 id="monads">Monads</h3>
+<h3 id="monad-transformers">Monad Transformers</h3>
+<h3 id="effects">Effects</h3>
+<h2 id="domains-and-fixed-point-semantics">Domains and Fixed point semantics</h2>
+<style>
+.twocolumn {
+  -moz-column-count: 2;
+  -webkit-column-count: 2;
+}
+.small { font-size: small !important; }
+.smaller { font-size: 0.8em }
+.large { font-size: 1.5em !important; }
+.huge { font-size: 2em !important; }
+
+.xits {
+  font-family: "XITS Math", "XITS", "STIX", "PT Serif Caption", sans-serif !important;
+}
+.my-code, .my-code p {
+  white-space: pre-wrap;
+  text-indent: 0 !important;
+  line-height: 0.6 !important;
+}
+</style>
+<p>Course page: <a href="https://maxxk.github.io/programming-languages-2016/" class="uri">https://maxxk.github.io/programming-languages-2016/</a><br>
+Contact author: <a href="mailto:maxim.krivchikov@gmail.com" class="email">maxim.krivchikov@gmail.com</a></p>
+</section><div><a class="slider-prev"></a><a class="slider-next" href="#previous-class-imp"></a></div>
+<section id="previous-class-imp" class="slide level1">
+<h1>Previous class: Imp'</h1>
+<p>Simple imperative language with arithmetical and boolean expressions, assignment, conditional operator and loop.</p>
+<p>Abstract syntax (omitting the operator precedence and lexical structure):</p>
+<pre><code>Program = Statement "return" VariableName
+
+Statement = VariableName "=" ArithmeticalExpression
+| "skip"
+| Statement (";" | "\n") Statement
+| "if" "(" BooleanExpression ")" "{ " Statement " } else { " Statement " }"
+| "while "(" BooleanExpression ")" "{ " Statement  "}"
+
+ArithmeticalExpression = VariableName
+| IntegerNumber
+| "sqrt" ArithmeticalExpression
+| "-" ArithmeticalExpression
+| ArithmeticalExpression ("+" | "-" | "*" | "/" | "%") ArithmeticalExpression
+
+BooleanExpression = ArithmeticalExpression ("&lt;" | "&gt;" | "==") ArithmeticalExpression
+| "!" BooleanExpression
+| BooleanExpression ("&amp;&amp;" | "||" | "^^")</code></pre>
+</section><div><a class="slider-prev" href="#software-and-programming-language-theory"></a><a class="slider-next" href="#previous-class-imp-programs"></a></div>
+<section id="previous-class-imp-programs" class="slide level1">
+<h1>Previous class: Imp' programs</h1>
+<ol type="1">
+<li class="fragment"><p><code>a</code>, <code>b</code>, <code>c</code> are the quadratic equation coefficients.</p>
+<pre><code>d = sqrt(b*b - 4*a*c)
+x1 = (-b + d) / 2*a
+x2 = (-b - d) / 2*a
+if (x1 &gt; x2) {
+  res = x1
+} else {
+  res = x2
+}
+return res</code></pre></li>
+<li class="fragment"><p>Primality test for <code>n</code>. Returns <code>0</code> if <code>n</code> is prime, otherwise returns minimal <code>n</code> divisor.</p>
+<pre><code>bound = sqrt(n)
+i = 2
+divisor=0
+while (i &lt; bound &amp;&amp; divisor == 0) {
+  if (n % i == 0) { divisor = n } else { skip };
+}
+return divisor</code></pre></li>
+</ol>
+</section><div><a class="slider-prev" href="#previous-class-imp"></a><a class="slider-next" href="#denotational-semantics-implementation-1"></a></div>
+<section id="denotational-semantics-implementation-1" class="slide level1">
+<h1>Denotational semantics implementation</h1>
+<p>Evolution of statement meaning function for Imp' (from previous class):</p>
+<ol type="1">
+<li class="fragment">Trivial case<br>
+<span class="math inline">⟦ · ⟧<sub>S</sub> : VariableState → VariableState</span><br>
+<span class="math inline">⟦<code>skip</code>⟧=<em>λ</em><em>e</em><em>n</em><em>v</em>.<em>e</em><em>n</em><em>v</em></span></li>
+<li class="fragment">Exceptions possible during expression evaluation.<br>
+New notation: domain of answers <span class="math inline"><strong>A</strong> = VariableState + Error</span><br>
+<span class="math inline">⟦ · ⟧<sub>S</sub> : VariableState → <strong>A</strong></span><br>
+<span class="math inline">⟦<code>skip</code>⟧=<em>λ</em><em>e</em><em>n</em><em>v</em>.inl(<em>e</em><em>n</em><em>v</em>)</span></li>
+<li class="fragment">Continuations for complex control flow, conceptually.<br>
+<span class="math inline">⟦ · ⟧<sub>S</sub> : VariableState → (<em>c</em><sub><em>b</em><em>r</em><em>e</em><em>a</em><em>k</em></sub> : VariableState → <strong>A</strong>)→</span><br>
+<span class="math inline">   → (<em>c</em><sub><em>c</em><em>o</em><em>n</em><em>t</em><em>i</em><em>n</em><em>u</em><em>e</em></sub> : VariableState → <strong>A</strong>)→<strong>A</strong></span><br>
+<span class="math inline">⟦<code>skip</code>⟧=<em>λ</em><em>e</em><em>n</em><em>v</em>.<em>c</em><sub><em>b</em><em>r</em><em>e</em><em>a</em><em>k</em></sub>.<em>c</em><sub><em>c</em><em>o</em><em>n</em><em>t</em><em>i</em><em>n</em><em>u</em><em>e</em></sub>.inl(<em>e</em><em>n</em><em>v</em>)</span><br>
+...and so on (goto, input/output, dynamic memory allocation, non-determinism) ...</li>
+</ol>
+</section><div><a class="slider-prev" href="#previous-class-imp-programs"></a><a class="slider-next" href="#denotational-semantics-implementation-2"></a></div>
+<section id="denotational-semantics-implementation-2" class="slide level1">
+<h1>Denotational semantics implementation</h1>
+<p>Finally, for a real language we end up with four meaning functions for statements.<br>
+(Source: N. Papaspyrou. A Formal Semantics for the C Programming Language).<br>
+Note that almost a half of the domains employed are not simply-constructed, they are defined as the application of an argument to a domain-generating function.<br>
+<img src="images/papaspyrou-statement-prototype.png"></p>
+<p>We need an approach to split the semantics to some modular functions.</p>
+</section><div><a class="slider-prev" href="#denotational-semantics-implementation-1"></a><a class="slider-next" href="#imp-expression-semantics"></a></div>
+<section id="imp-expression-semantics" class="slide level1">
+<h1>Imp' expression semantics</h1>
+<p>Under normal circumstances we do not care about exceptions if they are passed through the normal computation flow, we even defined <code>withLeft</code> function for it:</p>
+<p>withLeft : (f : X → Y) → X + Error → Y + Error<br>
+withLeft(f, x) = <strong>match</strong>(x)<br>
+▷ <em>inl</em> a ↦ f(a)<br>
+▷ <em>inr</em> e ↦ e<br>
+<strong>end</strong></p>
+<ul>
+<li class="fragment">left composition: x &gt;&gt;= y ≡ withLeft(y, x)</li>
+<li class="fragment">left variable binding: a ← b; S ≡ withLeft(λa. S, b)</li>
+</ul>
+<p><span class="math inline">⟦ − <em>e</em>⟧=<em>λ</em><em>e</em><em>n</em><em>v</em>.<em>x</em> ← ⟦<em>e</em>⟧(<em>e</em><em>n</em><em>v</em>); − <em>x</em></span><br>
+<span class="math inline">⟦Identifier(<em>I</em>)⟧ = <em>λ</em><em>e</em><em>n</em><em>v</em>.inl(<em>e</em><em>n</em><em>v</em>(<em>I</em>))</span></p>
+</section><div><a class="slider-prev" href="#denotational-semantics-implementation-2"></a><a class="slider-next" href="#section"></a></div>
+<section id="section" class="slide level1">
+<h1>...</h1>
+<p>Now let us mark the following three parts of our notation:</p>
+<ol type="1">
+<li class="fragment">The <strong>type constructor</strong> wraps a value in some way:<br>
+<span class="math inline">·  + Error : Type → Type</span></li>
+<li class="fragment"><strong>inl injection operator</strong> lets us wrap an actual computation result to fit an application result of the type constructor:<br>
+<span class="math inline">inl : <em>A</em> → <em>A</em> + Error</span></li>
+<li class="fragment"><strong>withLeft' binding function</strong> allows us to transform the wrapped value by function defined only on the unwrapped values:<br>
+withLeft' : (f : X → Y + Error) → X + Error → Y + Error</li>
+</ol>
+<div class="fragment">
+<p>These two functions (inl and withLeft') have some nice compositional properties:</p>
+<ol type="1">
+<li class="fragment">inl is a neutral element of withLeft':
+<ul>
+<li class="fragment">(inl a) &gt;&gt;= f <strong>=</strong> f(a)</li>
+<li class="fragment">w &gt;&gt;= inl <strong>=</strong> v</li>
+</ul></li>
+<li class="fragment">Binding has some kind of composition rule:<br>
+(w &gt;&gt;= f) &gt;&gt;= g <strong>=</strong> w &gt;&gt;= (λ x. f(x) &gt;&gt;= g)</li>
+</ol>
+</div>
+</section><div><a class="slider-prev" href="#imp-expression-semantics"></a><a class="slider-next" href="#monad"></a></div>
+<section id="monad" class="slide level1 center">
+<h1>Monad</h1>
+We are ready to define the notion of monad as a generalization of the presented construction.<br>
+<strong>Type constructor</strong><br>
+
+<div class="twocolumn">
+<div>
+M : Type → Type
+</div>
+<div>
+<span class="math inline">·  + Error : Type → Type</span>
+</div>
+</div>
+<strong>injection operator</strong><br>
+
+<div class="twocolumn">
+<div>
+return : A → M A
+</div>
+<div>
+<span class="math inline">inl : <em>A</em> → <em>A</em> + Error</span>
+</div>
+</div>
+<strong>binding function</strong><br>
+
+<div class="twocolumn">
+<div>
+bind : (A → M B) → M A → M B<br>
+
+<div style="visibility:hidden">
+alignment
+</div>
+</div>
+<div>
+withLeft' : (f : X → Y + Error) → X + Error → Y + Error
+</div>
+</div>
+<strong>monad laws</strong><br>
+neutrality<br>
+
+<div class="twocolumn">
+<div>
+(return x) &gt;&gt;= f <strong>=</strong> f(x)<br>
+m &gt;&gt;= return <strong>=</strong> m
+</div>
+<div>
+(inl a) &gt;&gt;= f <strong>=</strong> f(a)<br>
+w &gt;&gt;= inl <strong>=</strong> v
+</div>
+</div>
+composition<br>
+
+<div class="twocolumn">
+<div>
+(w &gt;&gt;= f) &gt;&gt;= g <strong>=</strong> w &gt;&gt;= (λ x. f(x) &gt;&gt;= g)
+</div>
+<div>
+(w &gt;&gt;= f) &gt;&gt;= g <strong>=</strong> w &gt;&gt;= (λ x. f(x) &gt;&gt;= g)
+</div>
+</div>
+</section><div><a class="slider-prev" href="#section"></a><a class="slider-next" href="#monad-1"></a></div>
+<section id="monad-1" class="slide level1 smaller">
+<h1>Monad</h1>
+<p>Monad is a type constructor (wrapper) with two functions which satisfy the monad laws.<br>
+Injection operator (<code>return</code> function) allows us to "jump into the monad".<br>
+The binding function <code>bind</code> allows us to define the monadic functions by the means of functions over the original domain (hiding the internal structure of the wrapper). Remember that the result type is a parameter.</p>
+<p>We can also define some helper functions operating on the low level (working with internal structure of the wrapper).<br>
+Examples for our exception definition:</p>
+<div class="my-code">
+<p>throw : Error → A + Error<br>
+throw ≡ inr</p>
+<p>catch : A + Error → (Error → A + Error) → A + Error<br>
+catch ≡ λ <em>res</em>. <em>handler</em>. <strong>match</strong>(res)<br>
+▷ <em>inl</em> a ↦ res<br>
+▷ <em>inr</em> e ↦ handler(e)<br>
+<strong>end</strong></p>
+⟦ a / b ⟧ ≡ λ env.a.b. A ← ⟦a⟧(env) ;<br>
+B ← ⟦b⟧(env) ;<br>
+<strong>match</strong>(B)<br>
+▷ 0 ↦ throw division-by-zero<br>
+▷ n ↦ return <span class="math inline"><em>A</em> /<sub><em>ℤ</em></sub> <em>n</em></span><br>
+<strong>end</strong>
+</div>
+</section><div><a class="slider-prev" href="#monad"></a><a class="slider-next" href="#standard-monads"></a></div>
+<section id="standard-monads" class="slide level1">
+<h1>Standard monads</h1>
+<p>We can equip simpe type constructors with two functions which satisfy the monad laws and get standard monads. Examples from Haskell <code>mtl</code> library.</p>
+<h2 id="exception-monad">Exception monad</h2>
+<div class="my-code">
+Exception E A = A + E<br>
+return x = inl x<br>
+bind f x= <strong>match</strong>(x)<br>
+▷ <em>inl</em> a ↦ f(a)<br>
+▷ <em>inr</em> e ↦ e<br>
+<strong>end</strong>
+</div>
+<div class="my-code">
+throw : Error → A + Error<br>
+catch : A + Error → (Error → A + Error) → A + Error
+</div>
+</section><div><a class="slider-prev" href="#monad-1"></a><a class="slider-next" href="#standard-monads-1"></a></div>
+<section id="standard-monads-1" class="slide level1">
+<h1>Standard monads</h1>
+<h2 id="reader-monad">Reader monad</h2>
+The read-only environment<br>
+
+<div class="my-code">
+Reader R A = R → A<br>
+return x = λ env. x<br>
+bind f x = λ env. f(x(env))
+</div>
+<div class="my-code">
+ask : Reader R A (get local state)<br>
+local : (R → R) → Reader R A → Reader R A (locally modify environment)<br>
+reader : (R → A) → Reader R A (get an environmet)
+</div>
+</section><div><a class="slider-prev" href="#standard-monads"></a><a class="slider-next" href="#standard-monads-2"></a></div>
+<section id="standard-monads-2" class="slide level1">
+<h1>Standard monads</h1>
+<h2 id="writer-monad">Writer monad</h2>
+<p>Models write-only output (logging, tracing).<br>
+0 : W<br>
+⊕ : W → W → W<br>
+⊕ is associative</p>
+<div class="my-code">
+Writer W A = A × W<br>
+return x = (x, 0)<br>
+bind f x = let (y, w) = f(fst x) in (y, snd x + w)
+</div>
+<div class="my-code">
+tell : W → Writer W True<br>
+listen : Writer W A → Writer W (A × W)<br>
+pass : Writer W (A × (W → W)) → Writer W A
+</div>
+</section><div><a class="slider-prev" href="#standard-monads-1"></a><a class="slider-next" href="#standard-monads-3"></a></div>
+<section id="standard-monads-3" class="slide level1">
+<h1>Standard monads</h1>
+<h2 id="state-monad">State monad</h2>
+<p>Models the mutable state.</p>
+<div class="my-code">
+State S A = S → A × S<br>
+return x = λ s. (x, s)<br>
+bind f x = λ s. let (x', s') = x in (f(x'), s')
+</div>
+<div class="my-code">
+get : State S S<br>
+put : S → State S ()<br>
+modify : (S → S) → State S ()<br>
+gets : (S → A) → State S A
+</div>
+</section><div><a class="slider-prev" href="#standard-monads-2"></a><a class="slider-next" href="#standard-monads-4"></a></div>
+<section id="standard-monads-4" class="slide level1">
+<h1>Standard monads</h1>
+<h2 id="list-monad">List monad</h2>
+<p>Models the nondeterminism.</p>
+<div class="my-code">
+List A<br>
+return x = [x]<br>
+bind f x = map f x
+</div>
+<p>(helpers — all the standard functions of the list type)</p>
+</section><div><a class="slider-prev" href="#standard-monads-3"></a><a class="slider-next" href="#standard-monads-5"></a></div>
+<section id="standard-monads-5" class="slide level1">
+<h1>Standard monads</h1>
+<h2 id="continuation-monad">Continuation monad</h2>
+<p>Models a complex control flow.</p>
+<div class="my-code">
+Cont R A = (A → R) → R<br>
+return x = λ k . k(x)<br>
+bind f x = λ k . x(λ m. f(m)(k))
+</div>
+<div class="my-code">
+x : (A → R) → R<br>
+f : A → (B → R) → R<br>
+bind f x : Cont R B = (B → R) → R
+</div>
+<div class="my-code">
+callCC : ((A → Cont R B) → Cont R A) → Cont R A
+</div>
+<p>See also: <a href="https://gist.github.com/edsko/6bf6e8c93a2d1e7941b9" class="uri">https://gist.github.com/edsko/6bf6e8c93a2d1e7941b9</a></p>
+</section><div><a class="slider-prev" href="#standard-monads-4"></a><a class="slider-next" href="#category-theoretical-definition"></a></div>
+<section id="category-theoretical-definition" class="slide level1 smaller">
+<h1>Category-theoretical definition</h1>
+<p><a href="http://james-iry.blogspot.ru/2009/05/brief-incomplete-and-mostly-wrong.html">A monad is just a monoid in category of endofunctors :)</a></p>
+<p>See textual descriptions at: <a href="https://funcool.github.io/cats/latest/#user-guide" class="uri">https://funcool.github.io/cats/latest/#user-guide</a></p>
+<p>See also: <a href="http://stackoverflow.com/questions/7220436/good-examples-of-not-a-functor-functor-applicative-monad/7220865" class="uri">http://stackoverflow.com/questions/7220436/good-examples-of-not-a-functor-functor-applicative-monad/7220865</a></p>
+</section><div><a class="slider-prev" href="#standard-monads-5"></a><a class="slider-next" href="#monad-transformers-1"></a></div>
+<section id="monad-transformers-1" class="slide level1">
+<h1>Monad transformers</h1>
+<p>Monad transformer is the following construction:</p>
+<p>A transformer for type constructor:<br>
+t : (Type → Type) → Type → Type</p>
+<p>A way to obtain monad implementations for transformed monads:<br>
+∀ m, Monad m → Monad (t m)</p>
+<p>Lifting operator:<br>
+lift : ∀ (a : Type), m a → (t m) a<br>
+lift . return = return<br>
+lift (m &gt;&gt;= k) = (lift m) &gt;&gt;= (lift ∘ k)</p>
+<p>The purpose of the monad transformer is to obtain a single object representing a stack of monads.</p>
+</section><div><a class="slider-prev" href="#category-theoretical-definition"></a><a class="slider-next" href="#extensible-effects"></a></div>
+<section id="extensible-effects" class="slide level1">
+<h1>Extensible Effects</h1>
+<p><a href="http://okmij.org/ftp/Haskell/extensible/index.html" class="uri">http://okmij.org/ftp/Haskell/extensible/index.html</a></p>
+<p><a href="http://docs.idris-lang.org/en/latest/effects/" class="uri">http://docs.idris-lang.org/en/latest/effects/</a></p>
+</section><div><a class="slider-prev" href="#monad-transformers-1"></a><a class="slider-next" href="#domains-and-fixed-points"></a></div>
+<section id="domains-and-fixed-points" class="slide level1">
+<h1>Domains and Fixed Points</h1>
+</section><div><a class="slider-prev" href="#extensible-effects"></a><a class="slider-next" href="#loop-semantics"></a></div>
+<section id="loop-semantics" class="slide level1">
+<h1>Loop semantics</h1>
+<div class="my-code">
+⟦ <code>while</code> b s ⟧ = λ env. b' ← ⟦b⟧(env) ;<br>
+<span style="padding-left: 2em;"></span> <strong>if</strong> <span class="math inline">(<em>b</em>′=<sub>Bool</sub>false)</span> env<br>
+<span style="padding-left: 2em;"></span> <strong>else</strong> ⟦ s ⟧(env) &gt;&gt;= ???
+</div>
+<p>How can we define the meaning of the <code>while</code> loop? We can't just remove the structural recursion requirement: we may define terms with bad behavior in lambda-calculus.</p>
+</section><div><a class="slider-prev" href="#domains-and-fixed-points"></a><a class="slider-next" href="#fixed-point-semantics"></a></div>
+<section id="fixed-point-semantics" class="slide level1">
+<h1>Fixed point semantics</h1>
+<p>Usually complex recursive functions may be defined by the means of the <strong>fixed point combinator</strong> and the <strong>generating function.</strong></p>
+<p>Example: factorial:<br>
+n! = 1 if n=0<br>
+n! = n · (n-1)! otherwise</p>
+<p>Generating function accepts the recursive call as another argument:<br>
+genFact = λ <em>fact</em> . λ n .<br>
+<span class="math inline">  </span> <strong>if</strong> n = 0 <strong>return</strong> 1<br>
+<span class="math inline">  </span> <strong>else</strong> <strong>return</strong> n · <em>fact</em>(n)</p>
+<p>Suppose we call genFact first with identity function and then — by applying the genFact to result:<br>
+<span class="math inline"><em>f</em><sub>1</sub> = genFact(<em>λ</em><em>n</em>.<em>n</em>)</span>, <span class="math inline"><em>f</em><sub>2</sub> = genFact(<em>f</em><sub>1</sub>)</span>, …, <span class="math inline"><em>f</em><sub><em>k</em></sub> = genFact(<em>f</em><sub><em>k</em> − 1</sub>)</span>, …<br>
+For some good-behaving generating functions (or for some good starting arguments) such a sequence will have <strong>fixed points:</strong><br>
+<span class="math inline"><em>f</em><sub>∞</sub></span> is a fixed point of genFact iff genFact(<span class="math inline"><em>f</em><sub>∞</sub></span>) = <span class="math inline"><em>f</em><sub>∞</sub></span>.</p>
+</section><div><a class="slider-prev" href="#loop-semantics"></a><a class="slider-next" href="#fixed-points"></a></div>
+<section id="fixed-points" class="slide level1">
+<h1>Fixed points</h1>
+<p>For the function [0, 1] → [0, 1]:<br>
+<img src="images/fixed-points.png"></p>
+<p>To define a proper recursive function we need to find a solution to the recursive equation: gen(<span class="math inline"><em>f</em><sub>∞</sub></span>) = <span class="math inline"><em>f</em><sub>∞</sub></span>. Under what conditions does this equation have a solution and how can we construct it?</p>
+</section><div><a class="slider-prev" href="#fixed-point-semantics"></a><a class="slider-next" href="#least-fixed-point"></a></div>
+<section id="least-fixed-point" class="slide level1">
+<h1>Least fixed point</h1>
+<p>We need something like this, but for our lambda-definable function space:<br>
+<strong>Banach Fixed Point Theorem.</strong> Let (X, d) be a non-empty complete metric space with a contraction mapping T : X → X. Then T admits a unique fixed-point x* in X (i.e. T(x*) = x*). Furthermore, x* can be found as follows: start with an arbitrary element <span class="math inline"><em>x</em><sub>0</sub></span> in X and define a sequence {<span class="math inline"><em>x</em><sub><em>n</em></sub></span>} by <span class="math inline"><em>x</em><sub><em>n</em></sub></span> = T(<span class="math inline"><em>x</em><sub><em>n</em> − 1</sub></span>), then <span class="math inline"><em>x</em><sub><em>n</em></sub></span> → x*.</p>
+<p>The main contribution of D. Scott and Yu. L. Ershov which allows us to call them the creators of the denotational semantics is the construction which allows fixed points for some (<em>continuous</em>) functions.</p>
+</section><div><a class="slider-prev" href="#fixed-points"></a><a class="slider-next" href="#partial-order"></a></div>
+<section id="partial-order" class="slide level1">
+<h1>Partial order</h1>
+<p><strong>Partial order</strong> is a pair (D, ⩽) of a domain D and binary ordering relation ⩽ that is:</p>
+<ul>
+<li class="fragment">reflexive (a ⩽ a)</li>
+<li class="fragment">transitive (a ⩽ b, b ⩽ c ⇒ a ⩽ c)</li>
+<li class="fragment">antisymmetric (a ⩽ b, b ⩽ a ⇒ a = b)</li>
+</ul>
+<p>Pair of elements in D which are not in the ordering relation are called <strong>incomparable</strong>.<br>
+Trivial example: discrete order in which all elements are incomparable. For Bool domain we usually define a discrete partial order.<br>
+Partial order is <strong>total order</strong> if there is no incomparable elements.</p>
+<p><strong>Upper bound</strong> of subset X ⊆ D is an element u ∈ D that is "greater" (stronger) than any element in X:<br>
+∀ x ∈ X, x ⩽ u.</p>
+<p>Some subsets may have even the <strong>least upper bound</strong> (upper bound which is "less" (weaker) than any other upper bound).</p>
+<p>(and antisymmetrical <strong>lower bound</strong> and <strong>greatest lower bound</strong>)</p>
+</section><div><a class="slider-prev" href="#least-fixed-point"></a><a class="slider-next" href="#partial-order-lifting"></a></div>
+<section id="partial-order-lifting" class="slide level1">
+<h1>Partial order lifting</h1>
+<p><strong>Bottom</strong> element (⊥) is such an element which is weaker than any element in D, <strong>top</strong> element (⊤) is such an element which is stronger than any element in D.</p>
+<p>Natural numbers ℕ with usual ordering have bottom element (0 or 1) but no top element. Discrete partial orders have neither.</p>
+<p>Any partial order D may be <strong>lifted</strong> to another partial order D<span class="math inline"><sub>⊥</sub></span> that has all elements and orderings of D, but introduces new bottom element <span class="math inline">⊥</span>. Lifted discrete partial order is called <strong>flat</strong> partial order.</p>
+</section><div><a class="slider-prev" href="#partial-order"></a><a class="slider-next" href="#partial-order-over-constructors"></a></div>
+<section id="partial-order-over-constructors" class="slide level1">
+<h1>Partial order over constructors</h1>
+<p>We can define the partial order over simple (non-dependent) type constructors:</p>
+<p><strong>Product:</strong> (d, e) ∈ D × E; (d, e) ⩽ (d', e') iff d ⩽ d' and e ⩽ e'<br>
+<strong>Sum:</strong> A+B; <span class="math inline">  </span> <em>inl</em> a ⩽ <em>inl</em> a' iff a ⩽ a'; <span class="math inline">  </span> <em>inr</em> b ⩽ <em>inr</em> b' iff b ⩽ b'.<br>
+<strong>Function:</strong> f, g ∈ D → E; <span class="math inline">  </span> f ⩽ g iff ∀ d ∈ D, f(d) ⩽ g(d).<br>
+<strong>Sequence:</strong> <span class="math inline"><em>D</em><sup>*</sup></span></p>
+<ul>
+<li class="fragment"><strong>prefix ordering</strong></li>
+<li class="fragment"><strong>sum-of-products ordering</strong><br>
+<strong>Powerdomain:</strong> <span class="math inline">2<sup><em>D</em></sup></span>, sets of all subsets under the subset ordering.</li>
+</ul>
+</section><div><a class="slider-prev" href="#partial-order-lifting"></a><a class="slider-next" href="#complete-partial-orders-cpos"></a></div>
+<section id="complete-partial-orders-cpos" class="slide level1">
+<h1>Complete partial orders (CPOs)</h1>
+<p><strong>Chain</strong> is totally ordered nonempty subset of partial orer.<br>
+Partial order D is <strong>complete</strong> iff every chain in D has least upper bound (limit).</p>
+<p>Example: partial order <em>Bool</em><span class="math inline"><sup>*</sup></span> is not CPO under the prefix ordering, because the chain {[], [true], [true, true], …} has the infinite sequence of <em>true</em> as a limit, which is not a finite sequence.<br>
+We can extend it with <em>Bool</em><span class="math inline"><sup>∞</sup></span> (set of all infinite boolean sequences), so that Bool<span class="math inline"><sup>*</sup></span> ∪ Bool<span class="math inline"><sup>∞</sup></span> = <span class="math inline"><strong>B</strong><strong>o</strong><strong>o</strong><strong>l</strong><sup>*</sup></span> is a CPO</p>
+<p><strong>Theorem. </strong> For any CPOs D, E we can define the following CPOs under the defined orderings:<br>
+<span class="math inline"><em>D</em><sub>⟂</sub></span>, <span class="math inline"><em>D</em> × <em>E</em></span>, <span class="math inline"><em>D</em> + <em>E</em></span>, <span class="math inline"><em>D</em> → <em>E</em></span>, <span class="math inline"><em>D</em><sup>*</sup></span> (under the sum-of-products ordering), <span class="math inline"><strong>D</strong></span> (under the prefix ordering).</p>
+</section><div><a class="slider-prev" href="#partial-order-over-constructors"></a><a class="slider-next" href="#pointedness"></a></div>
+<section id="pointedness" class="slide level1">
+<h1>Pointedness</h1>
+<p>A partial order is <strong>pointed</strong> if it has a bottom element.</p>
+<p><strong>Theorem. </strong> For any <em>partial orders</em> D, E:<br>
+<span class="math inline"><em>D</em><sub>⟂</sub></span> is pointed,<br>
+<span class="math inline"><em>D</em> × <em>E</em></span> is pointed iff both D and E are pointed<br>
+<span class="math inline"><em>D</em> + <em>E</em></span> is never pointed<br>
+<span class="math inline"><em>D</em> → <em>E</em></span> is pointed iff E is pointed<br>
+<span class="math inline"><em>D</em><sup>*</sup></span> under the sum-of-products ordering is never pointed<br>
+<span class="math inline"><em>D</em><sup>*</sup></span> and <span class="math inline">$\overline{D^*}$</span> under the prefix ordering are always pointed.</p>
+</section><div><a class="slider-prev" href="#complete-partial-orders-cpos"></a><a class="slider-next" href="#monotonicity-and-continuity"></a></div>
+<section id="monotonicity-and-continuity" class="slide level1">
+<h1>Monotonicity and continuity</h1>
+<p><span class="math inline"><em>f</em> : <em>D</em> → <em>E</em></span> is <strong>monotonic</strong> (D, E are CPOs) iff x ⩽ y ⇒ f(x) ⩽ f(y).<br>
+<span class="math inline"><em>f</em> : <em>D</em> → <em>E</em></span> is <strong>continuous</strong> iff for any chain C ⊆ D, f(lub(C)) = lub({f(c) | c ∈ C})</p>
+<p><strong>Theorem. </strong> On finite CPOs (+ infinite CPOs with only finite chains) monotonicity implies continuity.<br>
+On any CPO continuity implies monotonicity.</p>
+</section><div><a class="slider-prev" href="#pointedness"></a><a class="slider-next" href="#least-fixed-point-theorem"></a></div>
+<section id="least-fixed-point-theorem" class="slide level1">
+<h1>Least Fixed Point Theorem</h1>
+<p><strong>Theorem. </strong> If D is a pointed CPO, then a continuous function<br>
+f : D → D<br>
+has a least fixed point <strong>fix</strong>(f) defined by lub{<span class="math inline"><em>f</em><sup><em>n</em></sup></span>(⟂), n ⩾ 0}.</p>
+<p>So, if we can prove our function is continuous, we can use fixed point combinators.</p>
+</section><div><a class="slider-prev" href="#monotonicity-and-continuity"></a><a class="slider-next" href="#monads-bibliography"></a></div>
+<section id="monads-bibliography" class="slide level1">
+<h1>Monads bibliography</h1>
+<ol type="1">
+<li class="fragment">Moggi E. Notions of computation and monads // Information and Computation. 1991. Vol. 93, № 1. P. 55–92.</li>
+<li class="fragment">Harrison W. Cheap (but functional) threads // <a href="https://www.researchgate.net/profile/William_Harrison6/publication/245648551/links/546b682b0cf2f5eb18091caa.pdf">Online</a></li>
+<li class="fragment">Danielsson N.A. Operational Semantics Using the Partiality Monad // Proceedings of the 17th ACM SIGPLAN International Conference on Functional Programming. New York, NY, USA: ACM, 2012. P. 127–138.</li>
+<li class="fragment">Papaspyrou N.S. A Resumption Monad Transformer and its Applications in the Semantics of Concurrency: CSD-SW-TR-2-01. Athenes, Greece: National Technical University of Athens, School of Electrical and Computer Engineering, Software Engineering Laboratory, 2001.</li>
+</ol>
+<p>Some of previously discussed papers also use the monads, for example:</p>
+<ol start="5" type="1">
+<li class="fragment">Danielsson N.A. Total parser combinators // Proceedings of the 15th ACM SIGPLAN international conference on Functional programming - ICFP ’10. ACM Press, 2010. P. 285–285.</li>
+</ol>
+<p>Monad transformers:</p>
+<ol start="6" type="1">
+<li class="fragment">Liang S., Hudak P., Jones M. Monad Transformers and Modular Interpreters // Conference Record of POPL'95: 22nd ACM SIGPLAN-SIGACT Symposium on Principles of Programming Languages, San Francisco, CA, January 1995.</li>
+</ol>
+<p>Extensible effects:</p>
+<ol start="7" type="1">
+<li class="fragment"><a href="http://okmij.org/ftp/Haskell/extensible/index.html">Papers on the page linked from previous presentation</a></li>
+<li class="fragment"><a href="http://docs.idris-lang.org/en/latest/effects/index.html">Idris tutorial on the programming with effects</a></li>
+</ol>
+</section><div><a class="slider-prev" href="#least-fixed-point-theorem"></a><a class="slider-next" href="#homework-assignments"></a></div>
+<section id="homework-assignments" class="slide level1">
+<h1>Homework assignments</h1>
+<p><strong>Task 9.1</strong> ** Extend the Imp' denotational semantics with <code>break</code> and <code>continue</code> loop control statements.</p>
+<p><strong>Task 9.2</strong> * Define the big-step operational semantics for Imp' and make a short qualitative (textual) comparison between two definitions.</p>
+<p><strong>Task 9.3</strong> * Define a continuous meaning function for <code>while</code> loops in Imp'.</p>
+<p><strong>Task 9.4</strong> *** For all "Standard monads" in this presentation prove that operators and helper functions are continuous.</p>
+<p>Exercises in chapter 5 of Turbak, Gifford will pass as a one star each.</p>
+</section><div><a class="slider-prev" href="#monads-bibliography"></a><a class="slider-next"></a></div>
+
+<!-- start page -->
+   <div id="slider">
+       <a href="#software-and-programming-language-theory" class="slider-start">PLAY</a>
+   </div>
+
+   <!-- progressbar container -->
+   <div class="slider-progress"></div>
+   </article>
+  </div>
+
+  
+  <script type="text/javascript">
+  document.addEventListener("keydown", function(e) {
+     if (e.altKey || e.ctrlKey || e.metaKey || e.shiftKey) { return; }
+     switch (e.keyCode) {
+       case 35: // End
+          var arr = document.querySelectorAll("a.slider-next:link");
+          var a = arr[arr.length - 1];
+          if (a && a.href) {
+            window.location = a.href;
+          }
+          break;
+       case 36: // Home
+          var a = document.querySelector("a.slider-start");
+          if (a && a.href) {
+            window.location = a.href;
+          }
+          break;
+       case 37: // left arrow
+         var a = document.querySelector("section:target ~ div a.slider-prev");
+         if (a && a.href) {
+           window.location = a.href;
+         }
+         break;
+       case 39: // right arrow
+         var a = document.querySelector("section:target ~ div a.slider-next");
+         if (a && a.href) {
+           window.location = a.href;
+         }
+         break;
+     }
+  });
+  </script>
+  
+
+</body></html>

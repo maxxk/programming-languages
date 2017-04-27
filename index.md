@@ -39,15 +39,17 @@ Course topics include:
 **13.04.2017** Operational semantics 
 [presentation - html](presentations/07-Operational-Semantics.html)
 
+**20.04.2017** Denotational semantics example
+[presentation - html, with parts in Russian](presentations/08-Denotational-semantics-example.html) 
+
+**27.04.2017** Denotational semantics implementation: Monads, Fixed points
+[presentation - html](presentations/09-Monads.html) 
+
+
 <!--
 **20.04.2017** Operational semantics implementation 
 [presentation - html](presentations/08-Operational-Semantics-Implementation.html) [single page - html](presentations/08-Operational-Semantics-Implementation-print.html)
 
-**27.04.2017** Denotational semantics 
-[presentation - html](presentations/09-Denotational-semantics.html) [single page - html](presentations/09-Denotational-semantics-print.html)
-
-**04.05.2017** Denotational semantics implementation: Monads 
-[presentation - html](presentations/10-Monads.html) [single page - html](presentations/10-Monads-print.html)
 
 **11.05.2017** Axiomatic semantics 
 [presentation - html](presentations/11-Axiomatic-Semantics.html) [single page - html](presentations/11-Axiomatic-Semantics-print.html)
