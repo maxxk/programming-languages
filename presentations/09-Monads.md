@@ -25,7 +25,7 @@
 }
 </style>
 
-Course page: https://maxxk.github.io/programming-languages-2016/
+Course page: https://maxxk.github.io/programming-languages/
 Contact author: maxim.krivchikov@gmail.com
 
 # Previous class: Imp'
