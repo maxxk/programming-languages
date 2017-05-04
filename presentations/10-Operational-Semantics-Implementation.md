@@ -1,7 +1,5 @@
 # Software and Programming Language Theory
 ## Mechanized semantics
-### Monads and Monad Transformers
-## Implementation of operational semantics
 ### CompCert verified C compiler
 
 <style>
@@ -13,19 +11,26 @@
 .smaller { font-size: 0.8em !important; }
 .large { font-size: 1.5em !important; }
 .huge { font-size: 2em !important; }
-.reveal section {
-  text-align: left;
+.inference table {
+    display: inline-block;
+    padding: 1em;
 }
+
+.inference table th {
+    font-weight: normal;
+    border-bottom: 2px solid black;
+}
+.ib {
+    display: inline-block;
+}
+
 </style>
 
-Course page: https://maxxk.github.io/programming-languages-2016/
+Course page: https://maxxk.github.io/programming-languages/
 Contact author: maxim.krivchikov@gmail.com
 
 
 # Mechanized Semantics for the Clight Subset of the C Language
-<div class="small">
-Blazy S., Leroy X. Mechanized Semantics for the Clight Subset of the C Language // Journal of Automated Reasoning. 2009. Vol. 43, № 3. P. 263–288. http://dx.doi.org/10.1007/s10817-009-9148-3
-</div>
 
 Big-step operational semantics for a subset of the C programming language. Implemented in Coq for CompCert certifying C compiler.
 
@@ -34,6 +39,16 @@ Links:
 2. Source code repository: https://github.com/AbsInt/CompCert (non-free software, see license: https://github.com/AbsInt/CompCert/blob/master/LICENSE)
 3. Complete commented (literate) Coq source code: http://compcert.inria.fr/doc/index.html
 4. Full source code for the article: http://compcert.inria.fr/doc/html/Clight.html
+
+# Bibliography
+1. Jourdan J.-H., Leroy X., Pottier F. Validating LR(1) Parsers // Proceedings of the 21st European Symposium on Programming. 2012. Vol. 7211. P. 397–416.
+2. Blazy R., Dargaye Z., Leroy X. Formal Verification of a C Compiler Front-End // FM 2006: Formal Methods. Springer Berlin Heidelberg, 2006. P. 460–475.
+3. Leroy X. Formal Verification of a Realistic Compiler // Communications of the ACM. 2009. Vol. 52, № 7. P. 107–115.
+4. Boldo S. et al. Verified Compilation of Floating-Point Computations // Journal of Automated Reasoning. 2015. Vol. 54, № 2. P. 135–163.
+5. Blazy S., Leroy X. Mechanized Semantics for the Clight Subset of the C Language // Journal of Automated Reasoning. 2009. Vol. 43, № 3. P. 263–288.
+6. Leroy X. Formal Certification of a Compiler Back-end or: Programming a Compiler with a Proof Assistant // Conference Record of the 33rd ACM SIGPLAN-SIGACT Symposium on Principles of Programming Languages. New York, NY, USA: ACM, 2006. P. 42–54.
+7. Leroy X., Blazy S. Formal Verification of a C-like Memory Model and Its Uses for Verifying Program Transformations // J Autom Reasoning. 2008. Vol. 41, № 1. P. 1–31.
+
 
 # Clight language
 — intermediate representation of C programs (source code in C is desugared into Clight).
@@ -47,6 +62,7 @@ Links:
 
 # Clight abstract syntax
 ## Expressions
+```
 Inductive expr : Type :=
   (* integer literal, e.g. `1234` \*)
   | Econst_int : int → type → expr
@@ -55,9 +71,11 @@ Inductive expr : Type :=
   (* type cast, e.g. `(float)x` \*)
   | Ecast : expr → type → expr
   | …
+```
 
 # Clight abstract syntax
 ## Statements
+```
 Inductive statement : Type :=
   (* do nothing \*)
   | Sskip : statement
@@ -68,6 +86,7 @@ Inductive statement : Type :=
   | Sbreak : statement
   | Scontinue : statement
   | …
+```
 
 # Clight loop desugaring
 ```
@@ -128,7 +147,7 @@ Axiom:
 Same judgement in different notation:
 G, E ⊦ Econst_int i ty ⇒ Vint i   [eval_Econst_int]
 
-# Evaluation relations
+# Evaluation relations {.inference}
 Premises (antecedents) are represented as a constructor arguments:
 
 Rule:
@@ -141,9 +160,11 @@ Rule:
 ```
 
 Different notation:
-$$\dfrac{\text{a1 ⇒ v1; a2 ⇒ v2; a1 `op` a2} ⇒_{\text{binop}} \text{v}}
-{\text{[ty] a1 `op` a2 ⇒ v}} [\text{eval_Ebinop}]
-$$
+
+
+  a1 ⇒ v1; a2 ⇒ v2; a1 `op` a2 $⇒_{\text{binop}}$ v
+ ---------------------------------------------------
+  [ty] a1 `op` a2 ⇒ v
 
 `sem_binary_op` (binop) is a decidable relation, hence we may represent it as a function.
 
@@ -175,6 +196,28 @@ Continuation may be understood as dynamic `goto` instruction. By using continuat
 C# `async`/`await` asynchronous execution keywords.
 ![](images/IC612215.png)
 <div class=small>Image source: https://msdn.microsoft.com/en-us/library/hh191443.aspx</div>
+
+# Callback hell 
+Missing counter-example of asynchronous computations in language without continuations
+```javascript
+function copyFile(onSuccess, onFailure) {
+  var fs = require('fs');
+  fs.readFile('file1.txt', { encoding: 'utf-8' }, function (error, data1) {
+    if (error) {
+      onFailure(error.code);
+    } else {
+      fs.writeFile('file2.txt', data, { encoding: 'utf-8' }, function (error) {
+        if (error) {
+          onFailure(error.code);
+        } else {
+          onSuccess();
+        }
+      });
+    }   
+  });
+} 
+```
+
 
 # Continuations for Clight semantics
 ```
@@ -250,3 +293,4 @@ Inductive step: state -> trace -> state -> Prop :=
     step (State f Sbreak (Kloop2 s1 s2 k) e le m)
       E0 (State f Sskip k e le m)
 ```
+

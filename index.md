@@ -45,12 +45,10 @@ Course topics include:
 **27.04.2017** Denotational semantics implementation: Monads, Fixed points
 [presentation - html](presentations/09-Monads.html) 
 
+**04.05.2017** Mechanized semantics (Operational semantics implementation)
+[presentation - html](presentations/10-Operational-Semantics-Implementation.html)
 
 <!--
-**20.04.2017** Operational semantics implementation 
-[presentation - html](presentations/08-Operational-Semantics-Implementation.html) [single page - html](presentations/08-Operational-Semantics-Implementation-print.html)
-
-
 **11.05.2017** Axiomatic semantics 
 [presentation - html](presentations/11-Axiomatic-Semantics.html) [single page - html](presentations/11-Axiomatic-Semantics-print.html)
 

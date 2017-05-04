@@ -1,0 +1,404 @@
+<!DOCTYPE html><html><head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <title></title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <link rel="stylesheet" href="slider.css">
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
+</head>
+<body>
+  <div style="width: 640px;height: 400px;">
+  <input id="slider-max" type="checkbox" checked="">
+   <article class="slider slider-indicator">
+   <a id="slider-default"></a>
+   <label for="slider-max" title="Maximize"></label>
+
+
+<section id="software-and-programming-language-theory" class="slide level1">
+<h1>Software and Programming Language Theory</h1>
+<h2 id="mechanized-semantics">Mechanized semantics</h2>
+<h3 id="monads-and-monad-transformers">Monads and Monad Transformers</h3>
+<h2 id="implementation-of-operational-semantics">Implementation of operational semantics</h2>
+<h3 id="compcert-verified-c-compiler">CompCert verified C compiler</h3>
+<style>
+.twocolumn {
+  -moz-column-count: 2;
+  -webkit-column-count: 2;
+}
+.small { font-size: small !important; }
+.smaller { font-size: 0.8em !important; }
+.large { font-size: 1.5em !important; }
+.huge { font-size: 2em !important; }
+.inference table {
+    display: inline-block;
+    padding: 1em;
+}
+
+.inference table th {
+    font-weight: normal;
+    border-bottom: 2px solid black;
+}
+.ib {
+    display: inline-block;
+}
+
+</style>
+<p>Course page: <a href="https://maxxk.github.io/programming-languages/" class="uri">https://maxxk.github.io/programming-languages/</a><br>
+Contact author: <a href="mailto:maxim.krivchikov@gmail.com" class="email">maxim.krivchikov@gmail.com</a></p>
+</section><div><a class="slider-prev"></a><a class="slider-next" href="#mechanized-semantics-for-the-clight-subset-of-the-c-language"></a></div>
+<section id="mechanized-semantics-for-the-clight-subset-of-the-c-language" class="slide level1">
+<h1>Mechanized Semantics for the Clight Subset of the C Language</h1>
+<p>Big-step operational semantics for a subset of the C programming language. Implemented in Coq for CompCert certifying C compiler.</p>
+<p>Links:</p>
+<ol type="1">
+<li class="fragment">Official site: <a href="http://compcert.inria.fr/" class="uri">http://compcert.inria.fr/</a></li>
+<li class="fragment">Source code repository: <a href="https://github.com/AbsInt/CompCert" class="uri">https://github.com/AbsInt/CompCert</a> (non-free software, see license: <a href="https://github.com/AbsInt/CompCert/blob/master/LICENSE" class="uri">https://github.com/AbsInt/CompCert/blob/master/LICENSE</a>)</li>
+<li class="fragment">Complete commented (literate) Coq source code: <a href="http://compcert.inria.fr/doc/index.html" class="uri">http://compcert.inria.fr/doc/index.html</a></li>
+<li class="fragment">Full source code for the article: <a href="http://compcert.inria.fr/doc/html/Clight.html" class="uri">http://compcert.inria.fr/doc/html/Clight.html</a></li>
+</ol>
+</section><div><a class="slider-prev" href="#software-and-programming-language-theory"></a><a class="slider-next" href="#bibliography"></a></div>
+<section id="bibliography" class="slide level1">
+<h1>Bibliography</h1>
+<ol type="1">
+<li class="fragment">Jourdan J.-H., Leroy X., Pottier F. Validating LR(1) Parsers // Proceedings of the 21st European Symposium on Programming. 2012. Vol. 7211. P. 397–416.</li>
+<li class="fragment">Blazy R., Dargaye Z., Leroy X. Formal Verification of a C Compiler Front-End // FM 2006: Formal Methods. Springer Berlin Heidelberg, 2006. P. 460–475.</li>
+<li class="fragment">Leroy X. Formal Verification of a Realistic Compiler // Communications of the ACM. 2009. Vol. 52, № 7. P. 107–115.</li>
+<li class="fragment">Boldo S. et al. Verified Compilation of Floating-Point Computations // Journal of Automated Reasoning. 2015. Vol. 54, № 2. P. 135–163.</li>
+<li class="fragment">Blazy S., Leroy X. Mechanized Semantics for the Clight Subset of the C Language // Journal of Automated Reasoning. 2009. Vol. 43, № 3. P. 263–288.</li>
+<li class="fragment">Leroy X. Formal Certification of a Compiler Back-end or: Programming a Compiler with a Proof Assistant // Conference Record of the 33rd ACM SIGPLAN-SIGACT Symposium on Principles of Programming Languages. New York, NY, USA: ACM, 2006. P. 42–54.</li>
+<li class="fragment">Leroy X., Blazy S. Formal Verification of a C-like Memory Model and Its Uses for Verifying Program Transformations // J Autom Reasoning. 2008. Vol. 41, № 1. P. 1–31.</li>
+</ol>
+</section><div><a class="slider-prev" href="#mechanized-semantics-for-the-clight-subset-of-the-c-language"></a><a class="slider-next" href="#clight-language"></a></div>
+<section id="clight-language" class="slide level1">
+<h1>Clight language</h1>
+<p>— intermediate representation of C programs (source code in C is desugared into Clight).</p>
+<ul>
+<li class="fragment">no concrete syntax (but for the sake of readability we sometimes will use C-like syntax)</li>
+<li class="fragment">no string literals (replaced with pointers to static data section)</li>
+<li class="fragment">all expressions are pure: assignment is a statement, increment/decrement operators are disabled etc. (behavior of some constructions, unspecified by the specification, is specified at the C → Clight translation stage, e.g. order of evaluation of function arguments)</li>
+<li class="fragment">all expressions are annotated with types</li>
+<li class="fragment">temporary variables are introduced</li>
+<li class="fragment">function call is a statement with result assigned to temporary variable</li>
+<li class="fragment"><code>for</code>, <code>while</code> and <code>do ... while</code> loops are desugared into a single construction <code>loop &lt;first&gt; &lt;next&gt;</code></li>
+</ul>
+</section><div><a class="slider-prev" href="#bibliography"></a><a class="slider-next" href="#clight-abstract-syntax"></a></div>
+<section id="clight-abstract-syntax" class="slide level1">
+<h1>Clight abstract syntax</h1>
+<h2 id="expressions">Expressions</h2>
+<pre><code>Inductive expr : Type :=
+  (* integer literal, e.g. `1234` \*)
+  | Econst_int : int → type → expr
+  (* binary operation, e.g. `a+b` \*)
+  | Ebinop : binary_operation → expr → expr → type → expr
+  (* type cast, e.g. `(float)x` \*)
+  | Ecast : expr → type → expr
+  | …</code></pre>
+</section><div><a class="slider-prev" href="#clight-language"></a><a class="slider-next" href="#clight-abstract-syntax-1"></a></div>
+<section id="clight-abstract-syntax-1" class="slide level1">
+<h1>Clight abstract syntax</h1>
+<h2 id="statements">Statements</h2>
+<pre><code>Inductive statement : Type :=
+  (* do nothing \*)
+  | Sskip : statement
+  (* assignment `lvalue = rvalue`, lvalue may contain e.g. pointer arithmetics \*)
+  | Sassign : expr → expr → statement
+  (* desugared loop \*)
+  | Sloop : statement → statement → statement
+  | Sbreak : statement
+  | Scontinue : statement
+  | …</code></pre>
+</section><div><a class="slider-prev" href="#clight-abstract-syntax"></a><a class="slider-next" href="#clight-loop-desugaring"></a></div>
+<section id="clight-loop-desugaring" class="slide level1">
+<h1>Clight loop desugaring</h1>
+<pre><code>Definition Swhile (e: expr) (s: statement) :=
+  Sloop (Ssequence (Sifthenelse e Sskip Sbreak) s) Sskip.
+
+Definition Sdowhile (s: statement) (e: expr) :=
+  Sloop s (Sifthenelse e Sskip Sbreak).
+
+Definition Sfor (s1: statement) (e2: expr) (s3: statement) (s4: statement) :=
+  Ssequence s1 (Sloop (Ssequence (Sifthenelse e2 Sskip Sbreak) s3) s4).</code></pre>
+</section><div><a class="slider-prev" href="#clight-abstract-syntax-1"></a><a class="slider-next" href="#clight-static-semantics"></a></div>
+<section id="clight-static-semantics" class="slide level1">
+<h1>Clight static semantics</h1>
+<h2 id="global-environment">Global environment</h2>
+<p>G maps names of functions and global variables to memory block references, and function pointers to their definitions.</p>
+<h2 id="local-and-temporary-environments">Local and temporary environments</h2>
+<p>The local environment E maps local variables to memory block references with types.<br>
+The temporary environemnt maps local temporaries to values.</p>
+</section><div><a class="slider-prev" href="#clight-loop-desugaring"></a><a class="slider-next" href="#clight-operational-semantics-overview"></a></div>
+<section id="clight-operational-semantics-overview" class="slide level1">
+<h1>Clight operational semantics overview</h1>
+<p>Big-step operational semantcs. 10 evaluation relations are defined:</p>
+<ol type="1">
+<li class="fragment">G, E ⊦ a, M ⇐ L — evaluation of expressions in l-value position, i.e. targets of assignment</li>
+<li class="fragment">G, E ⊦ a, M ⇒ v — evaluation of expressions in r-value position</li>
+<li class="fragment">G, E ⊦ [a], M ⇒ [v] — evaluation of lists of expression, e.g. function call arguments</li>
+<li class="fragment">G, E ⊦ s, M ⇒ out, M' — evaluation of statements, terminating case, M and M' are memory states</li>
+<li class="fragment">G, E ⊦ sw, M ⇒ out, M' — execution of the <code>switch</code> cases</li>
+<li class="fragment">G ⊦ Fd([v]), M ⇒ v, M' — evaluation of function invocation, terminating case</li>
+<li class="fragment"><p>G, E ⊦ s, M ⇒ ∞ — evaluation of statements, diverging case<br>
+8, 9. — diverging evaluation of <code>switch</code> cases and function invocation</p></li>
+<li class="fragment"><p>P ⇒ B — execution of the whole program</p></li>
+</ol>
+</section><div><a class="slider-prev" href="#clight-static-semantics"></a><a class="slider-next" href="#indexed-inductive-types"></a></div>
+<section id="indexed-inductive-types" class="slide level1">
+<h1>Indexed inductive types</h1>
+<p>Simple inductive types — represented by a set of constructors, all values have same type (see expressions and statements above).<br>
+Indexed inductive types — represented by a set of constructors and some index type. Each instance of indexed inductive type is a separate type.<br>
+Example (from <a href="http://maxxk.github.io/formal-models-2015/pdf/08-Inductive.pdf">previous semester</a>):<br>
+Even : ℕ → Type :=<br>
+| even_zero : Even 0<br>
+| even_plus_2 : forall (k : ℕ), Even(k) → Even(k+2)</p>
+<p><em>Even 0,</em> <em>Even 2</em> and <em>Even 4</em> are of different types (but <em>Even 2</em> and <em>Even 4</em> are constructed by call of the same constructor <em>even_plus_2</em>).</p>
+</section><div><a class="slider-prev" href="#clight-operational-semantics-overview"></a><a class="slider-next" href="#evaluation-relations-in-dependently-typed-specification-language"></a></div>
+<section id="evaluation-relations-in-dependently-typed-specification-language" class="slide level1">
+<h1>Evaluation relations in dependently-typed specification language</h1>
+<p>Evaluation relations are defined as an indexed inductive type. It is common way of definition for possibly-undecidable relations.</p>
+<p>Inductive eval_expr (G : global) (L : local) : expr → val → Type (* expr ⇒ val *)</p>
+<p>Two indices:</p>
+<ul>
+<li class="fragment"><em>expr</em> — left hand side of relation</li>
+<li class="fragment"><em>val</em> — right hand side of relation</li>
+</ul>
+<p>Individual judgements are represented as the constructors for the indexed inductive type.<br>
+Axiom:<br>
+| eval_Econst_int : forall (i : int, ty : Ctype), eval_expr (Econst_int i ty) (Vint i)<br>
+Same judgement in different notation:<br>
+G, E ⊦ Econst_int i ty ⇒ Vint i [eval_Econst_int]</p>
+</section><div><a class="slider-prev" href="#indexed-inductive-types"></a><a class="slider-next" href="#evaluation-relations"></a></div>
+<section id="evaluation-relations" class="slide level1 inference">
+<h1>Evaluation relations</h1>
+<p>Premises (antecedents) are represented as a constructor arguments:</p>
+<p>Rule:</p>
+<pre><code>| eval_Ebinop : forall op a1 a2 ty v1 v2 v,
+    eval_expr a1 v1 →
+    eval_expr a2 v2 →
+    sem_binary_op G op v1 (typeof a1) v2 (typeof a2) m = Some v →
+    eval_expr (Ebinop op a1 a2 ty) v</code></pre>
+<p>Different notation:</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">a1 ⇒ v1; a2 ⇒ v2; a1 <code>op</code> a2 <span class="math inline">⇒<sub>binop</sub></span> v</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">[ty] a1 <code>op</code> a2 ⇒ v</td>
+</tr>
+</tbody>
+</table>
+<p><code>sem_binary_op</code> (binop) is a decidable relation, hence we may represent it as a function.</p>
+</section><div><a class="slider-prev" href="#evaluation-relations-in-dependently-typed-specification-language"></a><a class="slider-next" href="#expression-evaluation-and-static-semantics"></a></div>
+<section id="expression-evaluation-and-static-semantics" class="slide level1">
+<h1>Expression evaluation and static semantics</h1>
+<p>We have environments G and E as a parameters, so we can use them in premises of definition.<br>
+<code>expr</code> — relation left hand side;<br>
+<code>block, int</code> — right hand side (memory block and offset)</p>
+<pre><code>Inductive eval_lvalue (E : local) (G : global): expr → block → int → Prop :=
+| eval_Evar_local : forall id  l  ty,
+    E ! id = Some(l, ty) →
+    eval_lvalue (Evar id ty) l Int.zero
+| eval_Evar_global : forall id l ty,
+    E ! id = None →
+    Genv.find_symbol G id = Some l →
+    eval_lvalue (Evar id ty) l Int.zero
+| …</code></pre>
+<p>Note that both <code>eval_Evar_local</code> and <code>eval_Evar_global</code> have the same left hand side but different premises.</p>
+</section><div><a class="slider-prev" href="#evaluation-relations"></a><a class="slider-next" href="#statement-evaluation"></a></div>
+<section id="statement-evaluation" class="slide level1">
+<h1>Statement evaluation</h1>
+<h2 id="how-can-we-represent-the-evaluation-of-sequence-of-imperative-language-statements-in-pure-functional-programming-language">How can we represent the evaluation of sequence of imperative language statements in pure functional programming language?</h2>
+</section><div><a class="slider-prev" href="#expression-evaluation-and-static-semantics"></a><a class="slider-next" href="#continuations"></a></div>
+<section id="continuations" class="slide level1">
+<h1>Continuations</h1>
+<p>Continuation is a representation of execution state of a program (for example, the call stack) at a certain point of time.<br>
+Continuation may be understood as dynamic <code>goto</code> instruction. By using continuations we may jump between different places of a program preserving the context of each.</p>
+</section><div><a class="slider-prev" href="#statement-evaluation"></a><a class="slider-next" href="#continuations-in-practice"></a></div>
+<section id="continuations-in-practice" class="slide level1">
+<h1>Continuations in practice</h1>
+C# <code>async</code>/<code>await</code> asynchronous execution keywords.<br>
+<img src="images/IC612215.png"><br>
+
+<div class="small">
+Image source: <a href="https://msdn.microsoft.com/en-us/library/hh191443.aspx" class="uri">https://msdn.microsoft.com/en-us/library/hh191443.aspx</a>
+</div>
+</section><div><a class="slider-prev" href="#continuations"></a><a class="slider-next" href="#callback-hell"></a></div>
+<section id="callback-hell" class="slide level1">
+<h1>Callback hell</h1>
+<p>Missing counter-example of asynchronous computations in language without continuations</p>
+<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">function</span> <span class="at">copyFile</span>(onSuccess<span class="op">,</span> onFailure) <span class="op">{</span>
+  <span class="kw">var</span> fs <span class="op">=</span> <span class="at">require</span>(<span class="st">'fs'</span>)<span class="op">;</span>
+  <span class="va">fs</span>.<span class="at">readFile</span>(<span class="st">'file1.txt'</span><span class="op">,</span> <span class="op">{</span> <span class="dt">encoding</span><span class="op">:</span> <span class="st">'utf-8'</span> <span class="op">},</span> <span class="kw">function</span> (error<span class="op">,</span> data1) <span class="op">{</span>
+    <span class="cf">if</span> (error) <span class="op">{</span>
+      <span class="at">onFailure</span>(<span class="va">error</span>.<span class="at">code</span>)<span class="op">;</span>
+    <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span>
+      <span class="va">fs</span>.<span class="at">writeFile</span>(<span class="st">'file2.txt'</span><span class="op">,</span> data<span class="op">,</span> <span class="op">{</span> <span class="dt">encoding</span><span class="op">:</span> <span class="st">'utf-8'</span> <span class="op">},</span> <span class="kw">function</span> (error) <span class="op">{</span>
+        <span class="cf">if</span> (error) <span class="op">{</span>
+          <span class="at">onFailure</span>(<span class="va">error</span>.<span class="at">code</span>)<span class="op">;</span>
+        <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span>
+          <span class="at">onSuccess</span>()<span class="op">;</span>
+        <span class="op">}</span>
+      <span class="op">}</span>)<span class="op">;</span>
+    <span class="op">}</span>   
+  <span class="op">}</span>)<span class="op">;</span>
+<span class="op">}</span> </code></pre></div>
+</section><div><a class="slider-prev" href="#continuations-in-practice"></a><a class="slider-next" href="#continuations-for-clight-semantics"></a></div>
+<section id="continuations-for-clight-semantics" class="slide level1">
+<h1>Continuations for Clight semantics</h1>
+<pre><code>Inductive cont: Type :=
+  | Kstop: cont
+  (* Kseq s2 k = after s1 in s1;s2 *)
+  | Kseq: statement -&gt; cont -&gt; cont
+  (* Kloop1 s1 s2 k = after s1 in Sloop s1 s2 *)
+  | Kloop1: statement -&gt; statement -&gt; cont -&gt; cont
+  (* Kloop1 s1 s2 k = after s2 in Sloop s1 s2 *)
+  | Kloop2: statement -&gt; statement -&gt; cont -&gt; cont
+  (* catches break statements arising out of switch *)
+  | Kswitch: cont -&gt; cont
+  | Kcall: option ident -&gt; (* where to store result *)
+           function -&gt; (* calling function *)
+           env -&gt; (* local env of calling function *)
+           temp_env -&gt; (* temporary env of calling function *)
+           cont -&gt; cont.</code></pre>
+<p>Note that <code>Kcall</code> continuation constructor contains the definition and environments of calling function to be restored.</p>
+</section><div><a class="slider-prev" href="#callback-hell"></a><a class="slider-next" href="#state"></a></div>
+<section id="state" class="slide level1">
+<h1>State</h1>
+<p>Statements may modify memory state</p>
+<pre><code>Inductive state: Type :=
+  | State
+      (f: function)
+      (s: statement)
+      (k: cont)
+      (e: env)
+      (le: temp_env)
+      (m: mem) : state
+  | Callstate
+      (fd: fundef)
+      (args: list val)
+      (k: cont)
+      (m: mem) : state
+  | Returnstate
+      (res: val)
+      (k: cont)
+      (m: mem) : state.</code></pre>
+</section><div><a class="slider-prev" href="#continuations-for-clight-semantics"></a><a class="slider-next" href="#sequence-statement-evaluation-judgement"></a></div>
+<section id="sequence-statement-evaluation-judgement" class="slide level1">
+<h1>Sequence statement evaluation judgement</h1>
+<pre><code>Inductive step: state -&gt; trace -&gt; state -&gt; Prop :=
+
+  | step_assign: forall f a1 a2 k e le m loc ofs v2 v m',
+      eval_lvalue e le m a1 loc ofs -&gt;
+      eval_expr e le m a2 v2 -&gt;
+      sem_cast v2 (typeof a2) (typeof a1) = Some v -&gt;
+      assign_loc ge (typeof a1) m loc ofs v m' -&gt;
+      step (State f (Sassign a1 a2) k e le m)
+        E0 (State f Sskip k e le m')</code></pre>
+</section><div><a class="slider-prev" href="#state"></a><a class="slider-next" href="#loop-statement-evaluation-judgements"></a></div>
+<section id="loop-statement-evaluation-judgements" class="slide level1">
+<h1>Loop statement evaluation judgements</h1>
+<pre><code>| step_loop: forall f s1 s2 k e le m,
+    step (State f (Sloop s1 s2) k e le m)
+      E0 (State f s1 (Kloop1 s1 s2 k) e le m)
+| step_skip_or_continue_loop1: forall f s1 s2 k e le m x,
+    x = Sskip \/ x = Scontinue -&gt;
+    step (State f x (Kloop1 s1 s2 k) e le m)
+      E0 (State f s2 (Kloop2 s1 s2 k) e le m)
+| step_break_loop1: forall f s1 s2 k e le m,
+    step (State f Sbreak (Kloop1 s1 s2 k) e le m)
+      E0 (State f Sskip k e le m)
+| step_skip_loop2: forall f s1 s2 k e le m,
+    step (State f Sskip (Kloop2 s1 s2 k) e le m)
+      E0 (State f (Sloop s1 s2) k e le m)
+| step_break_loop2: forall f s1 s2 k e le m,
+    step (State f Sbreak (Kloop2 s1 s2 k) e le m)
+      E0 (State f Sskip k e le m)</code></pre>
+</section><div><a class="slider-prev" href="#sequence-statement-evaluation-judgement"></a><a class="slider-next"></a></div>
+
+<!-- start page -->
+   <div id="slider">
+       <a href="#software-and-programming-language-theory" class="slider-start">PLAY</a>
+   </div>
+
+   <!-- progressbar container -->
+   <div class="slider-progress"></div>
+   </article>
+  </div>
+
+  
+  <script type="text/javascript">
+  document.addEventListener("keydown", function(e) {
+     if (e.altKey || e.ctrlKey || e.metaKey || e.shiftKey) { return; }
+     switch (e.keyCode) {
+       case 35: // End
+          var arr = document.querySelectorAll("a.slider-next:link");
+          var a = arr[arr.length - 1];
+          if (a && a.href) {
+            window.location = a.href;
+          }
+          break;
+       case 36: // Home
+          var a = document.querySelector("a.slider-start");
+          if (a && a.href) {
+            window.location = a.href;
+          }
+          break;
+       case 37: // left arrow
+         var a = document.querySelector("section:target ~ div a.slider-prev");
+         if (a && a.href) {
+           window.location = a.href;
+         }
+         break;
+       case 39: // right arrow
+         var a = document.querySelector("section:target ~ div a.slider-next");
+         if (a && a.href) {
+           window.location = a.href;
+         }
+         break;
+     }
+  });
+  </script>
+  
+
+</body></html>
