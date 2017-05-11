@@ -48,9 +48,9 @@ Course topics include:
 **04.05.2017** Mechanized semantics (Operational semantics implementation)
 [presentation - html](presentations/10-Operational-Semantics-Implementation.html)
 
-<!--
 **11.05.2017** Axiomatic semantics 
-[presentation - html](presentations/11-Axiomatic-Semantics.html) [single page - html](presentations/11-Axiomatic-Semantics-print.html)
+[presentation - html](presentations/11-Axiomatic-Semantics.html)
+<!--
 
 **18.05.2017** Exam
 -->

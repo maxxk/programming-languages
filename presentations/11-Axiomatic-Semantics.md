@@ -23,24 +23,10 @@
 }
 </style>
 
-Course page: https://maxxk.github.io/programming-languages-2016/
+Course page: https://maxxk.github.io/programming-languages/
 Contact author: maxim.krivchikov@gmail.com
 
-# Monads bibliography
-1. Moggi E. Notions of computation and monads // Information and Computation. 1991. Vol. 93, № 1. P. 55–92.
-2. Harrison W. Cheap (but functional) threads //  [Online](https://www.researchgate.net/profile/William_Harrison6/publication/245648551/links/546b682b0cf2f5eb18091caa.pdf)
-3. Danielsson N.A. Operational Semantics Using the Partiality Monad // Proceedings of the 17th ACM SIGPLAN International Conference on Functional Programming. New York, NY, USA: ACM, 2012. P. 127–138.
-4. Papaspyrou N.S. A Resumption Monad Transformer and its Applications in the Semantics of Concurrency: CSD-SW-TR-2-01. Athenes, Greece: National Technical University of Athens, School of Electrical and Computer Engineering, Software Engineering Laboratory, 2001.
 
-Some of previously discussed papers also use the monads, for example:
-5. Danielsson N.A. Total parser combinators // Proceedings of the 15th ACM SIGPLAN international conference on Functional programming - ICFP ’10. ACM Press, 2010. P. 285–285. 
-
-Monad transformers: 
-6. Liang S., Hudak P., Jones M. Monad Transformers and Modular Interpreters // Conference Record of POPL'95: 22nd ACM SIGPLAN-SIGACT Symposium on Principles of Programming Languages, San Francisco, CA, January 1995. 
-
-Extensible effects: 
-7. [Papers on the page linked from previous presentation](http://okmij.org/ftp/Haskell/extensible/index.html)
-8. [Idris tutorial on the programming with effects](http://docs.idris-lang.org/en/latest/effects/index.html)
 
 # Axiomatic semantics literature
 1. *Chapter 6 of* **Winskel G. The Formal Semantics of Programming Languages. Cambridge, Massachusetts, US: MIT Press, 1993. xx+361 p.**
@@ -69,7 +55,8 @@ Today we will use the following presentation (based on Winskel book) https://cla
   
 # CodeContracts examples
 
-  ```csharp
+
+```csharp
 private static void Main(string[] args)
 {
     DoRequiresForAll(new List<string>() {"test",null,"foo"});
@@ -80,7 +67,7 @@ public static void DoRequiresForAll(List<string> input)
     Contract.Requires(Contract.ForAll(input, w => w != null));
     input.ForEach(Console.WriteLine);
 }
-  ```
+```
 
 ```csharp
 public static string TrimAfter(string value, string suffix)
