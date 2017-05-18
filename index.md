@@ -50,7 +50,8 @@ Course topics include:
 
 **11.05.2017** Axiomatic semantics 
 [presentation - html](presentations/11-Axiomatic-Semantics.html)
-<!--
 
-**18.05.2017** Exam
--->
+**18.05.2017** Domain-specific languages. Intermediate representations
+[presentation - html](presentations/12-IR-DSL.html)
+
+**25.05.2017** Exam

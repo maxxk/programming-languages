@@ -1,0 +1,576 @@
+<!DOCTYPE html><html><head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <title></title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <link rel="stylesheet" href="slider.css">
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
+</head>
+<body>
+  <div style="width: 640px;height: 400px;">
+  <input id="slider-max" type="checkbox" checked="">
+   <article class="slider slider-indicator">
+   <a id="slider-default"></a>
+   <label for="slider-max" title="Maximize"></label>
+
+
+<section id="software-and-programming-language-theory" class="slide level1">
+<h1>Software and Programming Language Theory</h1>
+<h2 id="domain-specific-languages">Domain-specific languages</h2>
+<h2 id="intermediate-representation-languages">Intermediate representation languages</h2>
+<style>
+.twocolumn {
+  -moz-column-count: 2;
+  -webkit-column-count: 2;
+}
+.small { font-size: small !important; }
+.smaller { font-size: 0.8em !important; }
+.large { font-size: 1.5em !important; }
+.huge { font-size: 2em !important; }
+</style>
+<p>Course page: <a href="https://maxxk.github.io/programming-languages/" class="uri">https://maxxk.github.io/programming-languages/</a><br>
+Contact author: <a href="mailto:maxim.krivchikov@gmail.com" class="email">maxim.krivchikov@gmail.com</a></p>
+</section><div><a class="slider-prev"></a><a class="slider-next" href="#domain-specific-languages-1"></a></div>
+<section id="domain-specific-languages-1" class="slide level1">
+<h1>Domain-specific languages</h1>
+<p><a href="https://cacm.acm.org/magazines/2011/7/109910-dsl-for-the-uninitiated/fulltext" class="uri">https://cacm.acm.org/magazines/2011/7/109910-dsl-for-the-uninitiated/fulltext</a></p>
+<p>Domain-specific programming language is a language which is targetet to the specific application domain.</p>
+</section><div><a class="slider-prev" href="#software-and-programming-language-theory"></a><a class="slider-next" href="#example-html-and-css"></a></div>
+<section id="example-html-and-css" class="slide level1">
+<h1>Example: HTML and CSS</h1>
+<p>Domain: text markup (HTML) and hierarchical styling (CSS).</p>
+<div class="sourceCode"><pre class="sourceCode css"><code class="sourceCode css">form &gt; label &gt; <span class="fl">.redtext</span> <span class="kw">{</span>
+    <span class="kw">color:</span> <span class="dt">red</span><span class="kw">;</span>
+<span class="kw">}</span>
+
+<span class="fl">.redtext</span><span class="dv">:hover</span> <span class="kw">{</span>
+    <span class="kw">border:</span> <span class="dt">solid</span> <span class="dt">green</span> <span class="dt">1px</span><span class="kw">;</span>
+<span class="kw">}</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode html"><code class="sourceCode html"><span class="kw">&lt;span</span><span class="ot"> class=</span><span class="st">"redtext"</span><span class="kw">&gt;</span>No red text<span class="kw">&lt;/label&gt;</span>
+<span class="kw">&lt;form&gt;</span>
+<span class="kw">&lt;label</span><span class="ot"> for=</span><span class="st">"name"</span><span class="ot"> class=</span><span class="st">"redtext"</span><span class="kw">&gt;&lt;span</span><span class="ot"> class=</span><span class="st">"redtext"</span><span class="kw">&gt;</span>Name<span class="kw">&lt;/span&gt;&lt;/label&gt;&lt;input</span><span class="ot"> type=</span><span class="st">"text"</span><span class="ot"> name=</span><span class="st">"name"</span><span class="kw">&gt;</span>
+<span class="kw">&lt;label</span><span class="ot"> for=</span><span class="st">"birthday"</span><span class="kw">&gt;</span>Birthday<span class="kw">&lt;/label&gt;&lt;input</span><span class="ot"> type=</span><span class="st">"date"</span><span class="ot"> name=</span><span class="st">"birthday"</span><span class="kw">&gt;</span>
+<span class="kw">&lt;/form&gt;</span></code></pre></div>
+<style type="text/css">
+form > label > .redtext {
+    color: red;
+}
+
+.redtext:hover {
+    border: solid green 1px;
+}
+
+</style>
+<span class="redtext">No red text</span><br>
+
+<form>
+<label for="name" class="redtext"><span class="redtext">Name</span></label><input type="text" name="name"><br>
+<label for="birthday">Birthday</label><input type="date" name="birthday">
+</form>
+</section><div><a class="slider-prev" href="#domain-specific-languages-1"></a><a class="slider-next" href="#example-unix-shell"></a></div>
+<section id="example-unix-shell" class="slide level1">
+<h1>Example: UNIX shell</h1>
+<p>Domain: OS process, input/output management, pipelining</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="fu">diff</span> <span class="op">&lt;(</span><span class="fu">ls</span> <span class="va">$first_directory</span><span class="op">)</span> <span class="op">&lt;(</span><span class="fu">ls</span> <span class="va">$second_directory</span><span class="op">)</span>
+
+
+<span class="fu">sort</span> -k 9 <span class="op">&lt;(</span><span class="fu">ls</span> -l /bin<span class="op">)</span> <span class="op">&lt;(</span><span class="fu">ls</span> -l /usr/bin<span class="op">)</span> <span class="op">&lt;(</span><span class="fu">ls</span> -l /usr/X11R6/bin<span class="op">)</span>
+<span class="co"># Lists all the files in the 3 main 'bin' directories, and sorts by filename.</span>
+<span class="co"># Note that three (count 'em) distinct commands are fed to 'sort'.</span>
+
+<span class="fu">ping</span> <span class="va">$(</span><span class="fu">hostname</span><span class="va">)</span></code></pre></div>
+</section><div><a class="slider-prev" href="#example-html-and-css"></a><a class="slider-next" href="#example-grgen"></a></div>
+<section id="example-grgen" class="slide level1 twocolumn">
+<h1>Example: GrGen</h1>
+<p>Domain: graph modeling and rewriting<br>
+<a href="http://www.info.uni-karlsruhe.de/software/grgen/" class="uri">http://www.info.uni-karlsruhe.de/software/grgen/</a><br>
+<a href="https://en.wikipedia.org/wiki/GrGen" class="uri">https://en.wikipedia.org/wiki/GrGen</a></p>
+<pre><code>node class GridNode {
+    food:int;
+    pheromones:int;
+}
+node class GridCornerNode extends GridNode;
+node class AntHill extends GridNode {
+    foodCountdown:int = 10;
+}
+node class Ant {
+    hasFood:boolean;
+}
+
+edge class GridEdge connect GridNode[1] -&gt; GridNode[1];
+edge class PathToHill extends GridEdge;
+edge class AntPosition;</code></pre>
+<pre><code>rule TakeFood(curAnt:Ant)
+{
+    curAnt -:AntPosition-&gt; n:GridNode\AntHill;
+    if { !curAnt.hasFood &amp;&amp; n.food &gt; 0; }
+    modify {
+        eval {
+            curAnt.hasFood = true;
+            n.food = n.food - 1;
+        }
+    }
+}
+
+rule SearchAlongPheromones(curAnt:Ant)
+{
+    curAnt -oldPos:AntPosition-&gt; old:GridNode &lt;-:PathToHill- new:GridNode;
+    if { new.pheromones &gt; 9; }
+    modify {
+        delete(oldPos);
+        curAnt -:AntPosition-&gt; new;
+    }
+}
+
+test ReachedEndOfWorld(curAnt:Ant) : (GridNode)
+{
+    curAnt -:AntPosition-&gt; n:GridNode\AntHill;
+    negative { 
+        n &lt;-:PathToHill-;
+    }
+    return (n);
+}</code></pre>
+</section><div><a class="slider-prev" href="#example-unix-shell"></a><a class="slider-next" href="#example-blockchain-contract-languages"></a></div>
+<section id="example-blockchain-contract-languages" class="slide level1">
+<h1>Example: blockchain contract languages</h1>
+<p><a href="https://blog.chain.com/announcing-ivy-playground-395364675d0a" class="uri">https://blog.chain.com/announcing-ivy-playground-395364675d0a</a></p>
+<pre><code>contract CallOption(
+  strikePrice: Amount,
+  strikeCurrency: Asset,
+  seller: Program,
+  buyerKey: PublicKey,
+  expiration: Time
+) locks underlying {
+  clause exercise(
+    buyerSig: Signature
+  ) requires payment: strikePrice of strikeCurrency {
+    verify before(expiration)
+    verify checkTxSig(buyerKey, buyerSig)
+    lock payment with seller
+    unlock underlying
+  }
+  clause expire() {
+    verify after(expiration)
+    lock underlying with seller
+  }
+}</code></pre>
+</section><div><a class="slider-prev" href="#example-grgen"></a><a class="slider-next" href="#blockchain-contract-languages"></a></div>
+<section id="blockchain-contract-languages" class="slide level1 twocolumn">
+<h1>Blockchain contract languages</h1>
+<p><a href="http://solidity.readthedocs.io/en/latest/" class="uri">http://solidity.readthedocs.io/en/latest/</a></p>
+<pre><code>pragma solidity ^0.4.11;
+
+contract SimpleAuction {
+    address public beneficiary;
+    uint public auctionStart;
+    uint public biddingTime;
+
+    address public highestBidder;
+    uint public highestBid;
+
+    mapping(address =&gt; uint) pendingReturns;
+
+    bool ended;
+
+    event HighestBidIncreased(address bidder, uint amount);
+    event AuctionEnded(address winner, uint amount);
+
+    function SimpleAuction(
+        uint _biddingTime,
+        address _beneficiary
+    ) {
+        beneficiary = _beneficiary;
+        auctionStart = now;
+        biddingTime = _biddingTime;
+    }
+
+    function bid() payable {
+        require(now &lt;= (auctionStart + biddingTime));
+
+        require(msg.value &gt; highestBid);
+
+        if (highestBidder != 0) {
+            pendingReturns[highestBidder] += highestBid;
+        }
+        highestBidder = msg.sender;
+        highestBid = msg.value;
+        HighestBidIncreased(msg.sender, msg.value);
+    }
+
+    function withdraw() returns (bool) {
+        var amount = pendingReturns[msg.sender];
+        if (amount &gt; 0) {
+            pendingReturns[msg.sender] = 0;
+
+            if (!msg.sender.send(amount)) {
+                pendingReturns[msg.sender] = amount;
+                return false;
+            }
+        }
+        return true;
+    }
+
+    function auctionEnd() {
+        require(now &gt;= (auctionStart + biddingTime)); // auction did not yet end
+        require(!ended); // this function has already been called
+
+        ended = true;
+        AuctionEnded(highestBidder, highestBid);
+
+        beneficiary.transfer(highestBid);
+    }
+}</code></pre>
+</section><div><a class="slider-prev" href="#example-blockchain-contract-languages"></a><a class="slider-next" href="#embedded-and-external-dsls"></a></div>
+<section id="embedded-and-external-dsls" class="slide level1">
+<h1>Embedded and external DSLs</h1>
+<p>External DSL (all previous examples) — programming language with its own syntax and tools (translator).</p>
+<p>Embedded DSL (internal DSL, following examples) uses facilities of some general-purpose host language.</p>
+<h2 id="linq">LINQ</h2>
+<p>Domain: declarative relational queries</p>
+<div class="twocolumn">
+<div class="sourceCode"><pre class="sourceCode csharp"><code class="sourceCode cs"><span class="kw">using</span> (ServiceContext svcContext = <span class="kw">new</span> <span class="fu">ServiceContext</span>(_serviceProxy))
+{
+ <span class="dt">var</span> query_join4 = from a <span class="kw">in</span> svcContext.<span class="fu">AccountSet</span>
+                   join c <span class="kw">in</span> svcContext.<span class="fu">ContactSet</span>
+                   on a.<span class="fu">PrimaryContactId</span>.<span class="fu">Id</span> equals c.<span class="fu">ContactId</span>
+                   join l <span class="kw">in</span> svcContext.<span class="fu">LeadSet</span>
+                   on a.<span class="fu">OriginatingLeadId</span>.<span class="fu">Id</span> equals l.<span class="fu">LeadId</span>
+                   select <span class="kw">new</span>
+                   {
+                    contact_name = c.<span class="fu">FullName</span>,
+                    account_name = a.<span class="fu">Name</span>,
+                    lead_name = l.<span class="fu">FullName</span>
+                   };
+ <span class="kw">foreach</span> (var c <span class="kw">in</span> query_join4)
+ {
+  System.<span class="fu">Console</span>.<span class="fu">WriteLine</span>(c.<span class="fu">contact_name</span> +
+   <span class="st">"  "</span> +
+   c.<span class="fu">account_name</span> +
+   <span class="st">"  "</span> +
+   c.<span class="fu">lead_name</span>);
+ }
+}</code></pre></div>
+<p>Query is translated into something like this:</p>
+<div class="sourceCode"><pre class="sourceCode csharp"><code class="sourceCode cs">svcContext.<span class="fu">AccountSet</span>.<span class="fu">All</span>()
+    .<span class="fu">Join</span>(svcContext.<span class="fu">ContactSet</span>, (a, c) =&gt; a.<span class="fu">PrimaryContactId</span>.<span class="fu">Id</span> == c.<span class="fu">ContactId</span>)
+    .<span class="fu">Join</span>(svcContext.<span class="fu">LeadSet</span>, (a, c, l) =&gt; a.<span class="fu">OriginatingLeadId</span>.<span class="fu">Id</span> == l.<span class="fu">LeadId</span>)
+    .<span class="fu">Select</span>((a, c, l) =&gt; <span class="kw">new</span> AnonymousStruct123 {
+        contact_name = c.<span class="fu">FullName</span>,
+        account_name = a.<span class="fu">Name</span>,
+        lead_name = l.<span class="fu">FullName</span>
+    })</code></pre></div>
+<div>
+</div></div></section><div><a class="slider-prev" href="#blockchain-contract-languages"></a><a class="slider-next" href="#example-haskell-edsls"></a></div>
+<section id="example-haskell-edsls" class="slide level1">
+<h1>Example: Haskell eDSLs</h1>
+<p><a href="https://github.com/bitemyapp/esqueleto" class="uri">https://github.com/bitemyapp/esqueleto</a></p>
+<p>All "keywords" and "operators" are ordinary functions in Haskell (except <code>do</code>, <code>$</code> and lambda-abstraction)</p>
+<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">let</span> complexQuery <span class="fu">=</span>
+    from <span class="fu">$</span> \(p1 <span class="ot">`InnerJoin`</span> p2) <span class="ot">-&gt;</span> <span class="kw">do</span>
+    on (p1 <span class="fu">^.</span> <span class="dt">PersonName</span> <span class="fu">==.</span> p2 <span class="fu">^.</span> <span class="dt">PersonName</span>)
+    where_ (p1 <span class="fu">^.</span> <span class="dt">PersonFavNum</span> <span class="fu">&gt;.</span> val <span class="dv">2</span>)
+    orderBy [desc (p2 <span class="fu">^.</span> <span class="dt">PersonAge</span>)]
+    limit <span class="dv">3</span>
+    offset <span class="dv">9</span>
+    groupBy (p1 <span class="fu">^.</span> <span class="dt">PersonId</span>)
+    having (countRows <span class="fu">&lt;.</span> val (<span class="dv">0</span><span class="ot"> ::</span> <span class="dt">Int</span>))
+    return (p1, p2)</code></pre></div>
+</section><div><a class="slider-prev" href="#embedded-and-external-dsls"></a><a class="slider-next" href="#example-ruby-edsls"></a></div>
+<section id="example-ruby-edsls" class="slide level1">
+<h1>Example: Ruby eDSLs</h1>
+<p><a href="http://squib.rocks/" class="uri">http://squib.rocks/</a></p>
+</section><div><a class="slider-prev" href="#example-haskell-edsls"></a><a class="slider-next" href="#example-lisp-dsls"></a></div>
+<section id="example-lisp-dsls" class="slide level1">
+<h1>Example: Lisp DSLs</h1>
+<p><a href="http://swizard.info/articles/solitaire/article.html" class="uri">http://swizard.info/articles/solitaire/article.html</a></p>
+<div class="sourceCode"><pre class="sourceCode cl"><code class="sourceCode commonlisp"><span class="co">;; Define cards</span>
+(slt/defcards (suites (S C H D))
+              (ranks (A <span class="dv">2</span> <span class="dv">3</span> <span class="dv">4</span> <span class="dv">5</span> <span class="dv">6</span> <span class="dv">7</span> <span class="dv">8</span> <span class="dv">9</span> T J Q K))
+              (colors ((black (S C)) (red (H D)))))
+
+
+<span class="co">;; Define card piles </span>
+(slt/defpiles (stock (<span class="dv">24</span>))
+              (waste (<span class="dv">0</span>))
+              (foundation (<span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span>))
+              (tableau (<span class="dv">1</span> <span class="dv">2</span> <span class="dv">3</span> <span class="dv">4</span> <span class="dv">5</span> <span class="dv">6</span> <span class="dv">7</span>)))
+
+<span class="co">;; Reveal stock -&gt; waste</span>
+(slt/defrule ((pile s stock) (pile w waste) (top-card c (on s) unknown))
+  (reveal-top s)
+  (move-top s w))
+
+<span class="co">;; Reveal tableau</span>
+(slt/defrule ((pile tb tableau) (top-card c (on tb) unknown))
+  (reveal-top tb))
+
+<span class="co">;; Move King from waste to empty tableau</span>
+(slt/defrule ((pile w waste) (pile tb tableau) (top-card cw (on w) K) (top-card ct (on tb) empty))
+  (move-top w tb))</code></pre></div>
+</section><div><a class="slider-prev" href="#example-ruby-edsls"></a><a class="slider-next" href="#language-oriented-programming"></a></div>
+<section id="language-oriented-programming" class="slide level1">
+<h1>Language-oriented programming</h1>
+<p>Ward, MP. “Language-Oriented Programming.” Software - Concepts and Tools 15, no. 4 (1994): 147–61.<br>
+<a href="http://www.cse.dmu.ac.uk/~mward/martin/papers/middle-out-t.pdf" class="uri">http://www.cse.dmu.ac.uk/~mward/martin/papers/middle-out-t.pdf</a></p>
+<p>This paper describes the concept of language oriented programming which is a novel way of<br>
+organising the development of a large software system, leading to a different structure for the<br>
+finished product. The approach starts by developing a formally specified, domain-oriented, very<br>
+high-level language which is designed to be well-suited to developing “this kind of program”.<br>
+The development process then splits into two independent stages: (1) Implement the system<br>
+using this “middle level” language, and (2) Implement a compiler or translator or interpreter<br>
+for the language, using existing technology.</p>
+<p><a href="http://www.onboard.jetbrains.com/articles/04/10/lop/" class="uri">http://www.onboard.jetbrains.com/articles/04/10/lop/</a><br>
+<a href="https://www.martinfowler.com/articles/languageWorkbench.html" class="uri">https://www.martinfowler.com/articles/languageWorkbench.html</a></p>
+</section><div><a class="slider-prev" href="#example-lisp-dsls"></a><a class="slider-next" href="#example-jetbrains-mps"></a></div>
+<section id="example-jetbrains-mps" class="slide level1">
+<h1>Example: JetBrains MPS</h1>
+<p><a href="https://www.jetbrains.com/mps/" class="uri">https://www.jetbrains.com/mps/</a><br>
+<a href="https://confluence.jetbrains.com/display/MPSD20171/Shapes+-+an+introductory+MPS+tutorial" class="uri">https://confluence.jetbrains.com/display/MPSD20171/Shapes+-+an+introductory+MPS+tutorial</a></p>
+</section><div><a class="slider-prev" href="#language-oriented-programming"></a><a class="slider-next" href="#language-composition"></a></div>
+<section id="language-composition" class="slide level1">
+<h1>Language composition</h1>
+<ul>
+<li class="fragment">some syntax subtrees may be common for different languages, for example, boolean and arithmetical expressions</li>
+<li class="fragment">we can decompose some existing language to a separate parts, for example in CSS there is a selector syntax and property syntax:</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode css"><code class="sourceCode css">form &gt; label &gt; <span class="fl">.redtext</span> <span class="kw">{</span>
+    <span class="kw">color:</span> <span class="dt">red</span><span class="kw">;</span>
+<span class="kw">}</span>
+
+<span class="fl">.redtext</span><span class="dv">:hover</span> <span class="kw">{</span>
+    <span class="kw">border:</span> <span class="dt">solid</span> <span class="dt">green</span> <span class="dt">1px</span><span class="kw">;</span>
+<span class="kw">}</span></code></pre></div>
+<p>selectors language is reused in JavaScript (in jQuery library and document.querySelector function)</p>
+<ul>
+<li class="fragment">some well-designed programming libraries usually are some kind of embedded DSLs</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode python"><code class="sourceCode python"><span class="im">from</span> django.db.models <span class="im">import</span> F, Sum, Value <span class="im">as</span> V
+<span class="im">from</span> django.db.models.functions <span class="im">import</span> Coalesce
+
+InvoiceItem.objects.values(<span class="st">'id'</span>, <span class="st">'amount'</span>).annotate(
+    to_pay<span class="op">=</span>F(<span class="st">'amount'</span>) <span class="op">-</span> Coalesce(Sum(<span class="st">'paymentdistribution__amount'</span>), V(<span class="dv">0</span>))
+).order_by(<span class="st">'-to_pay'</span>)</code></pre></div>
+<ul>
+<li class="fragment">problems: syntax composition (how to write parser which can detect language boundaries), language interoperability</li>
+</ul>
+</section><div><a class="slider-prev" href="#example-jetbrains-mps"></a><a class="slider-next" href="#towards-intermediate-representation-languages"></a></div>
+<section id="towards-intermediate-representation-languages" class="slide level1">
+<h1>Towards intermediate representation languages</h1>
+<ul>
+<li class="fragment">language-oriented approach presumes the extensive usage of different DSLs</li>
+<li class="fragment">problem 1: how to write the effecient translators for these languages?</li>
+<li class="fragment">problem 2: how do languages interoperate with each other?</li>
+</ul>
+</section><div><a class="slider-prev" href="#language-composition"></a><a class="slider-next" href="#intermediate-representation"></a></div>
+<section id="intermediate-representation" class="slide level1">
+<h1>Intermediate representation</h1>
+<p>Intermediate representation programming language is a special case of programming language which serves as an interface between some stages of program translation. Intermediate representations usually are not used by humans, have no concrete syntax (except for the purposes of debugging).</p>
+<ul>
+<li class="fragment">DSLs interoperability can be represented in terms of a common intermediate representation</li>
+<li class="fragment">common intermediate representation may have formal specification (in this case the semantics of DSL is specified in terms of translation)</li>
+</ul>
+</section><div><a class="slider-prev" href="#towards-intermediate-representation-languages"></a><a class="slider-next" href="#classification"></a></div>
+<section id="classification" class="slide level1">
+<h1>Classification</h1>
+<p>(my classification, paper is in print)</p>
+<h2 id="low-level-intermediate-representations">Low-level intermediate representations</h2>
+<h2 id="bytecode-application-virtual-machines">Bytecode application virtual machines</h2>
+<h2 id="bytecode-for-imperative-languages">Bytecode for imperative languages</h2>
+<h2 id="bytecode-for-functional-languages">Bytecode for functional languages</h2>
+<h2 id="typed-control-flow-graphs">Typed control flow graphs</h2>
+<h2 id="high-level-language-specific-representations">High-level language-specific representations</h2>
+</section><div><a class="slider-prev" href="#intermediate-representation"></a><a class="slider-next" href="#low-level-intermediate-representations-1"></a></div>
+<section id="low-level-intermediate-representations-1" class="slide level1">
+<h1>Low-level intermediate representations</h1>
+<ul>
+<li class="fragment">linear code structure</li>
+<li class="fragment">data types are specified in terms of memory layout</li>
+<li class="fragment">instruction set is close to machine/assembly language</li>
+</ul>
+</section><div><a class="slider-prev" href="#classification"></a><a class="slider-next" href="#low-level-intermediate-representation"></a></div>
+<section id="low-level-intermediate-representation" class="slide level1">
+<h1>Low-level intermediate representation</h1>
+<ul>
+<li class="fragment">three-address code, abstract representation, see "Dragon book" (Aho, Seti, Ullman "Compilers: Principles, Techniques, and Tools")
+<ul>
+<li class="fragment">each instruction has opcode and at most 3 operands ("addresses")</li>
+</ul></li>
+<li class="fragment">RTL (register transfer language), abstract representation
+<ul>
+<li class="fragment">GCC uses RTL</li>
+</ul></li>
+<li class="fragment">SSA (static single assignment form), abstract representation</li>
+<li class="fragment">each memory cell state is enumerated, conditional operators use special "phi-function" to determine what state to assign after branching</li>
+<li class="fragment">LLVM is based on SSA
+<ul>
+<li class="fragment"><a href="http://llvm.org/" class="uri">http://llvm.org/</a></li>
+<li class="fragment"><a href="http://www.cis.upenn.edu/~stevez/vellvm/" class="uri">http://www.cis.upenn.edu/~stevez/vellvm/</a></li>
+</ul></li>
+<li class="fragment">TAL (typed assembly language) is formally specified low-level intermediate representation,<br>
+code blocks are represented by triples (H — heap state, R — register state, I — instruction sequence)<br>
+Morrisett G. et al. From System F to Typed Assembly Language // ACM Trans. Program. Lang. Syst. 1999. Т. 21, № 3. Сс. 527–568.</li>
+</ul>
+</section><div><a class="slider-prev" href="#low-level-intermediate-representations-1"></a><a class="slider-next" href="#bytecode-application-virtual-machines-1"></a></div>
+<section id="bytecode-application-virtual-machines-1" class="slide level1">
+<h1>Bytecode application virtual machines</h1>
+<ul>
+<li class="fragment">linear code structure</li>
+<li class="fragment">high-level instructions</li>
+<li class="fragment">high-level (usually memory layout-independent) date type representation</li>
+<li class="fragment">typing, first-order polymorphism</li>
+</ul>
+</section><div><a class="slider-prev" href="#low-level-intermediate-representation"></a><a class="slider-next" href="#bytecode-for-imperative-languages-1"></a></div>
+<section id="bytecode-for-imperative-languages-1" class="slide level1">
+<h1>Bytecode for imperative languages</h1>
+<ul>
+<li class="fragment"><p>CLI/JVM<br>
+ISO. ISO/IEC 23271:2003: Information technology — Common Language Infrastructure.</p>
+<p>Examples of high-level instruction: <code>ldfld</code>, <code>callvirt</code>, <code>isinstance</code></p></li>
+<li class="fragment"><p>Vortex IL<br>
+Dean J. et al. Vortex: An Optimizing Compiler for Object-oriented Languages // Proceedings of the 11th ACM SIGPLAN Conference on Object-oriented Programming, Systems, Languages, and Applications. New York, NY, USA: ACM, 1996. Сс. 83–100.</p></li>
+</ul>
+<pre><code>class Square isa Rhombus, Quadrilateral;
+method draw__6Square_int(this, color):void;
+associate draw__6Square_int with draw__5Shape_int(@Square, @any)
+
+send draw__5Shape_int(s, color)</code></pre>
+</section><div><a class="slider-prev" href="#bytecode-application-virtual-machines-1"></a><a class="slider-next" href="#bytecode-for-functional-languages-1"></a></div>
+<section id="bytecode-for-functional-languages-1" class="slide level1">
+<h1>Bytecode for functional languages</h1>
+<ul>
+<li class="fragment">usually untyped</li>
+<li class="fragment"><p>supports closure creation at the level of bytecode</p></li>
+<li class="fragment"><p>ZINC — intermediate representation for ML-family languages<br>
+Leroy X. The ZINC experiment: an economical implementation of the ML language: Technical report. INRIA, 1990.</p></li>
+<li class="fragment"><p>Python bytecode<br>
+<a href="https://laanwj.github.io/2011/5/4/python-bytecode-archeology" class="uri">https://laanwj.github.io/2011/5/4/python-bytecode-archeology</a><br>
+example instructions: LOAD_CLOSURE, MAP_ADD (add item to dictionary)</p></li>
+<li class="fragment"><p>Warren's Abstract Machine (for Prolog language)<br>
+Aït-Kaci H. Warren’s Abstract Machine: A Tutorial Reconstruction. Cambridge, Mass: The MIT Press, 1991. 114 с.<br>
+example instructions: <code>try_me_else</code> (representation of choice list), <code>unify_constant</code></p>
+<pre><code> girl(sally).
+ girl(jane).
+
+ boy(B) :- \+ girl(B).</code></pre>
+<pre><code>predicate(girl/1):
+    switch_on_term(2,1,fail,fail,fail),
+label(1): switch_on_atom([(sally,3),(jane,5)])
+label(2): try_me_else(4)
+label(3): get_atom(sally,0)
+        proceed
+label(4): trust_me_else_fail
+label(5): get_atom(jane,0)
+        proceed
+
+predicate(boy/1):
+    get_variable(x(1),0)
+    put_structure(girl/1,0)
+    unify_local_value(x(1))
+    execute((\+)/1)])</code></pre></li>
+</ul>
+</section><div><a class="slider-prev" href="#bytecode-for-imperative-languages-1"></a><a class="slider-next" href="#typed-control-flow-graphss"></a></div>
+<section id="typed-control-flow-graphss" class="slide level1">
+<h1>Typed control flow graphss</h1>
+<ul>
+<li class="fragment">graph-based code structure (special constructions at join points are used instead of labels and jump instructions)<br>
+Leißa R., Köster M., Hack S. A graph-based higher-order intermediate representation // 2015 IEEE/ACM International Symposium on Code Generation and Optimization (CGO). 2015. Сс. 202–212.</li>
+</ul>
+</section><div><a class="slider-prev" href="#bytecode-for-functional-languages-1"></a><a class="slider-next" href="#high-level-language-specific-representations-1"></a></div>
+<section id="high-level-language-specific-representations-1" class="slide level1">
+<h1>High-level language-specific representations</h1>
+<ul>
+<li class="fragment">Clight in CompCert (previously discussed)</li>
+<li class="fragment">LISP (and, less frequently, Forth) also can be used as high-level general-purpose representations</li>
+</ul>
+</section><div><a class="slider-prev" href="#typed-control-flow-graphss"></a><a class="slider-next" href="#nanopass-compiler"></a></div>
+<section id="nanopass-compiler" class="slide level1">
+<h1>Nanopass compiler</h1>
+<p>D. Sarkar, O. Waddell, and R. K. Dybvig. A nanopass infrastructure for compiler education. In ICFP ’04: Proceedings of the ninth ACM SIGPLAN International Conference on Functional Programming, pages 201–212, New York, NY, USA, 2004. ACM.</p>
+<p>Translation pipeline is specified in terms of ~50 simple transformation steps between languages. Nanopass framework provides the specification DSL for languages. Languages may be specified in terms of modification of output languages from previous pass.</p>
+</section><div><a class="slider-prev" href="#high-level-language-specific-representations-1"></a><a class="slider-next"></a></div>
+
+<!-- start page -->
+   <div id="slider">
+       <a href="#software-and-programming-language-theory" class="slider-start">PLAY</a>
+   </div>
+
+   <!-- progressbar container -->
+   <div class="slider-progress"></div>
+   </article>
+  </div>
+
+  
+  <script type="text/javascript">
+  document.addEventListener("keydown", function(e) {
+     if (e.altKey || e.ctrlKey || e.metaKey || e.shiftKey) { return; }
+     switch (e.keyCode) {
+       case 35: // End
+          var arr = document.querySelectorAll("a.slider-next:link");
+          var a = arr[arr.length - 1];
+          if (a && a.href) {
+            window.location = a.href;
+          }
+          break;
+       case 36: // Home
+          var a = document.querySelector("a.slider-start");
+          if (a && a.href) {
+            window.location = a.href;
+          }
+          break;
+       case 37: // left arrow
+         var a = document.querySelector("section:target ~ div a.slider-prev");
+         if (a && a.href) {
+           window.location = a.href;
+         }
+         break;
+       case 39: // right arrow
+         var a = document.querySelector("section:target ~ div a.slider-next");
+         if (a && a.href) {
+           window.location = a.href;
+         }
+         break;
+     }
+  });
+  </script>
+  
+
+</body></html>
