@@ -31,7 +31,8 @@ Instructor — Maxim A. Krivchikov, senior researcher,
 Lomonosov Moscow State University
 maxim.krivchikov@gmail.com
 
-Course page: https://maxxk.github.io/programming-languages/
+https://maxxk.github.io/programming-languages/
+
 <span style="font-size: 0.5em">Chrome or Firefox are recommended to watch presentations; Konqueror in aud. 13-15 skips some slides. Open with Firefox and enable scripts with button “Settings”, lower right corner</span>
 
 # Quick recap
@@ -44,19 +45,18 @@ Course page: https://maxxk.github.io/programming-languages/
 - how to describe actual programming languages in mathematical terms
 - is the convergence between “mathematical” and “software engineering” approaches possible
 
-# How many programming languages you have acquaintance with? {.flex}
+# How many programming languages you have acquaintance with?
 (to have acquaintance with programming language ≈ can write something more sophisticated than Hello World in less than an hour)
 
 
-# GitHub can detect 277 programming languages {.flex}
+# GitHub can detect 299 programming languages
 
-Last year it was 238!
+Last year (2017) it was 277!
 
 This figure is the lower bound of the count of programming languages which are used by more than one person.
 
-<div style="display: block; position: absolute; bottom: 30vh; font-size: 0.8em;">
 Source: https://github.com/github/linguist/tree/master/vendor/grammars
-</div>
+
 
 # Programming language
 
@@ -190,7 +190,9 @@ zstr_count:
 
 # Assembly languages
 Assembly instructions are converted into the machine code. 
+
 <span style="font-size: 0.5em:">http://www.c-jump.com/CIS77/CPU/IsaDesign/lecture.html</span>
+
 Simplifed x86-like instruction encoding
 
 <div class="fullwidth">
@@ -307,7 +309,7 @@ Some features of modern high-level programming languages take roots in 4GL (e.g.
 Some disadvantages of 4GL:
 - syntax is very verbose, unneccessary mimics natural languge
 - complicated debugging
-- unpredictable performance (and, usually, in orders of magnutude slower than for implementation in general-purpose programming language)
+- unpredictable performance (and, usually, in orders of magnutude slower than an implementation in general-purpose programming language)
 - complicated development process, compatibility problems
 
 # 5GL: Logical inference and constraint-based
@@ -344,12 +346,12 @@ zebra(Owner).
 ## First widespread programming languages
 Fortran, Cobol, Algol, Lisp
 
-## Languages which gave start to important concepts
+## Languages which introduced some important concepts
 ML, Prolog, Smalltalk, Forth, APL, Refal, Haskell
 
 
 # FORTRAN: the first widely-used high-level language
-FORmula TRANslator. John Backus, 1950s
+FORmula TRANslator. John Backus, IBM, 1954-57
 ```fortran
 C AREA OF A TRIANGLE - HERON'S FORMULA
 C INPUT - CARD READER UNIT 5, INTEGER INPUT
@@ -368,7 +370,8 @@ C INPUT ERROR DISPLAY ERROR OUTPUT CODE 1 IN JOB CONTROL LISTING
 ```
 
 # Fortran is alive
-Fortran 2008 is out, next revision (Fortran 2015) is to be standartized in 2018.
+Fortran 2008 is out, next revision (Fortran 2018) is to be standartized later in 2018.
+
 http://www.fortran.bcs.org/2012/nm_talk.pdf
 
 ```fortran
@@ -395,10 +398,11 @@ picalc = picalc * 4.0_rk
 ```
 
 # COBOL: COmmon Business-Oriented Language
+Grace M. Hopper, CODASYL consortium, 1959.
 
 One of the first languages initially designed without any academic (computer science) influence.
 
-Nowadays, as I have probably already mentioned in an introduction of the previous course, COBOL is the canonical example of legacy code: more than a half of an entrprises (in US) use several billions lines of COBOL code in their everyday activity. The migration cost is very high, so in short future COBOL share won't drop significantly.
+Nowadays, as I have probably already mentioned in an introduction of the previous course, COBOL programs represent the canonical example of legacy code: more than a half of an enterprises (in US) use several billions lines of COBOL code in their everyday activity. The migration cost is very high, so in short future COBOL share won't drop significantly.
 
 # COBOL: 4GL beginnings
 <div class="smaller">
@@ -451,7 +455,8 @@ OPEN INPUT sales, OUTPUT report-out
 ```
 </div>
 
-# ABAP: COBOL successor
+# ABAP (contemporary COBOL successor, SAP ERP)
+SAP SE, ~1981-83.
 ```abap
 REPORT ZSOURCE2307.
 * List of the current program
@@ -474,7 +479,7 @@ ALGOrithmic Language, first implementation in 1958 (known as International Algeb
 
 Developed by joint committee of American and Soviet computer scientists, after standartization was immediately adopted as GOST standart in USSR. John Backus (one of FORTRAN creators), John McCarthy (creator of LISP), Peter Naur (creator of BNF grammar specification formalism), Edsger Dijkstra (no need to introduce :) took part in the original development. Algol 60 and Algol 68 followed.
 
-At the next 2 slides there are code examples in Algol 68, which is different from the most widespread Algol 60.
+Code examples in the following slides are in Algol 68, which is different from the most widespread Algol 60.
 
 # ALGOL
 ```algol
@@ -534,7 +539,7 @@ op max = ([]real a) real:
 Introduced by John McCarthy in 1958, based on lambda-calculus. One of the most popular languages for AI development in time span from 1960s to the end of 1980s.
 
 Today there are 3 widespread dialects:
-- Scheme (minimal and extensible)
+- Scheme (minimal and extensible, see also ["Lambda: the ultimate ..." papers](http://library.readscheme.org/page1.html))
 - Common LISP (large system with rich standard library)
 - Clojure (LISP dialect for Java ecosystem)
 
@@ -564,6 +569,8 @@ See also: http://www.flownet.com/gat/papers/lisp-java.pdf
 ```
 
 # Smalltalk: object-oriented programming
+Alan Kay et al., Xerox PARC, 1972
+
 Message-based, prototype-based object-oriented programming
 ```smalltalk
 | rectangles aPoint collisions |
@@ -575,9 +582,11 @@ collisions := rectangles select: [:aRect | aRect containsPoint: aPoint].
 ```
 
 # Prolog: logical (constraint-based) programming
+Alain Colmerauer, 1972.
 (already mentioned at 5GL section)
 
 # Forth: stack-based programming
+Charles H. Moore, 1970.
 https://skilldrick.github.io/easyforth/#snake
 ```forth
 : move-up  -1 snake-y-head +! ;
@@ -600,6 +609,7 @@ https://skilldrick.github.io/easyforth/#snake
 ```
 
 # APL: array programming
+Kenneth Iverson, IBM, 1964.
 Array Programming Languages syntax uses special graphical symbols to define array operations.
 Example program (Game of Life simulator):
 
@@ -616,6 +626,8 @@ Unicode standard has some APL-specific symbols.
 Advantage: extremely concise (short) programs. Its ASCII-successor J is very popular in "coding golf" competitions.
 
 Disadvantage: unreadable programs.
+
+http://tryapl.org/
 
 # APL example
 Prime numbers example (from Wikipedia):
@@ -743,7 +755,7 @@ Implement something non-trivial (more than 200 lines in equivalent C code) in la
 </div>
 
 # Project
-Let's write a specification of a toy programming language. In total you will get at least 10 stars.
+Alternatively you can write a specification of a toy programming language. In total you will get at least 10 stars.
 Choose a single application area and try to imagine a simple programming language which is more convenient to use in that area than, for example, C.
 
 **Project Step 1.\*** Write a "design document" (short informal description, 1-4 pages, in English) of a toy programming language of your choice. Design document must include the following information:

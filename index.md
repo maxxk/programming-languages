@@ -14,12 +14,13 @@ Course topics include:
 * specification of domain-specific programming languages
 * static typing and type inference
 
-**Thursday, 15:00-16:35, aud. 13-15, starting March 2nd.**
+**Thursday, 15:00-16:35, aud. 13-16, starting February 15th.**
 
 
-**2.03.2017** Introduction. History of programming languages. 
+**15.02.2018** Introduction. History of programming languages. 
 [presentation - html](presentations/01-Introduction.html)
 
+<!--
 **9.03.2017** Classification of programming languages. 
 [presentation - html](presentations/02-Classification.html) 
 
@@ -55,3 +56,4 @@ Course topics include:
 [presentation - html](presentations/12-IR-DSL.html)
 
 **25.05.2017** Exam
+-->

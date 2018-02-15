@@ -1,48 +1,76 @@
 <!DOCTYPE html><html><head>
   <meta charset="utf-8">
   <meta name="generator" content="pandoc">
-  <title></title>
+  <title>01-Introduction</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <link rel="stylesheet" href="slider.css">
   <style type="text/css">code{white-space: pre;}</style>
   <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
   </style>
 </head>
 <body>
@@ -82,11 +110,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 }
 
 </style>
-<p>Instructor — Maxim A. Krivchikov, senior researcher,<br>
-Lomonosov Moscow State University<br>
-<a href="mailto:maxim.krivchikov@gmail.com" class="email">maxim.krivchikov@gmail.com</a></p>
-<p>Course page: <a href="https://maxxk.github.io/programming-languages/" class="uri">https://maxxk.github.io/programming-languages/</a><br>
-<span style="font-size: 0.5em">Chrome or Firefox are recommended to watch presentations; Konqueror in aud. 13-15 skips some slides. Open with Firefox and enable scripts with button “Settings”, lower right corner</span></p>
+<p>Instructor — Maxim A. Krivchikov, senior researcher, Lomonosov Moscow State University <a href="mailto:maxim.krivchikov@gmail.com" class="email">maxim.krivchikov@gmail.com</a></p>
+<p><a href="https://maxxk.github.io/programming-languages/" class="uri">https://maxxk.github.io/programming-languages/</a></p>
+<p><span style="font-size: 0.5em">Chrome or Firefox are recommended to watch presentations; Konqueror in aud. 13-15 skips some slides. Open with Firefox and enable scripts with button “Settings”, lower right corner</span></p>
 </section><div><a class="slider-prev"></a><a class="slider-next" href="#quick-recap"></a></div>
 <section id="quick-recap" class="slide level1">
 <h1>Quick recap</h1>
@@ -102,29 +128,25 @@ Lomonosov Moscow State University<br>
 <li class="fragment">is the convergence between “mathematical” and “software engineering” approaches possible</li>
 </ul>
 </section><div><a class="slider-prev" href="#software-and-programming-language-theory"></a><a class="slider-next" href="#how-many-programming-languages-you-have-acquaintance-with"></a></div>
-<section id="how-many-programming-languages-you-have-acquaintance-with" class="slide level1 flex">
+<section id="how-many-programming-languages-you-have-acquaintance-with" class="slide level1">
 <h1>How many programming languages you have acquaintance with?</h1>
 <p>(to have acquaintance with programming language ≈ can write something more sophisticated than Hello World in less than an hour)</p>
-</section><div><a class="slider-prev" href="#quick-recap"></a><a class="slider-next" href="#github-can-detect-277-programming-languages"></a></div>
-<section id="github-can-detect-277-programming-languages" class="slide level1 flex">
-<h1>GitHub can detect 277 programming languages</h1>
-<p>Last year it was 238!</p>
+</section><div><a class="slider-prev" href="#quick-recap"></a><a class="slider-next" href="#github-can-detect-299-programming-languages"></a></div>
+<section id="github-can-detect-299-programming-languages" class="slide level1">
+<h1>GitHub can detect 299 programming languages</h1>
+<p>Last year (2017) it was 277!</p>
 <p>This figure is the lower bound of the count of programming languages which are used by more than one person.</p>
-<div style="display: block; position: absolute; bottom: 30vh; font-size: 0.8em;">
-Source: <a href="https://github.com/github/linguist/tree/master/vendor/grammars" class="uri">https://github.com/github/linguist/tree/master/vendor/grammars</a>
-</div>
+<p>Source: <a href="https://github.com/github/linguist/tree/master/vendor/grammars" class="uri">https://github.com/github/linguist/tree/master/vendor/grammars</a></p>
 </section><div><a class="slider-prev" href="#how-many-programming-languages-you-have-acquaintance-with"></a><a class="slider-next" href="#programming-language"></a></div>
 <section id="programming-language" class="slide level1">
 <h1>Programming language</h1>
 <blockquote>
-<p>A system of precisely defined symbols and rules devised for writing computer programs.<br>
-— <cite>Oxford Dictionary</cite></p>
+<p>A system of precisely defined symbols and rules devised for writing computer programs. — <cite>Oxford Dictionary</cite></p>
 </blockquote>
 <blockquote>
-<p>An artificial language used to write instructions that can be translated into machine language and then executed by a computer.<br>
-— <cite>The American Heritage Dictionary of the English language</cite></p>
+<p>An artificial language used to write instructions that can be translated into machine language and then executed by a computer. — <cite>The American Heritage Dictionary of the English language</cite></p>
 </blockquote>
-</section><div><a class="slider-prev" href="#github-can-detect-277-programming-languages"></a><a class="slider-next" href="#history-of-programming-languages-1"></a></div>
+</section><div><a class="slider-prev" href="#github-can-detect-299-programming-languages"></a><a class="slider-next" href="#history-of-programming-languages-1"></a></div>
 <section id="history-of-programming-languages-1" class="slide level1">
 <h1>History of programming languages</h1>
 <p>Sources for the further research:</p>
@@ -141,40 +163,35 @@ Source: <a href="https://github.com/github/linguist/tree/master/vendor/grammars"
 </section><div><a class="slider-prev" href="#history-of-programming-languages-1"></a><a class="slider-next" href="#zuse-z3"></a></div>
 <section id="zuse-z3" class="slide level1">
 <h1>Zuse Z3</h1>
-<p><span style="font-size: 0.5em">Image source: <a href="https://commons.wikimedia.org/wiki/File:Z3_Deutsches_Museum.JPG">Wikimedia Foundation</a></span><br>
-<img src="images/Z3_Deutsches_Museum.jpg"></p>
+<p><span style="font-size: 0.5em">Image source: <a href="https://commons.wikimedia.org/wiki/File:Z3_Deutsches_Museum.JPG">Wikimedia Foundation</a></span> <img data-src="images/Z3_Deutsches_Museum.jpg" src="images/Z3_Deutsches_Museum.jpg"></p>
 </section><div><a class="slider-prev" href="#generation-based-history-and-classification"></a><a class="slider-next" href="#zuse-z3-1941"></a></div>
 <section id="zuse-z3-1941" class="slide level1">
 <h1>Zuse Z3 (1941)</h1>
-<span style="font-size: 0.5em">Image source: <a href="http://www.deutsches-museum.de/en/exhibitions/communication/computers/universal-computers/">Deutsches Museum</a></span><br>
-
+<span style="font-size: 0.5em">Image source: <a href="http://www.deutsches-museum.de/en/exhibitions/communication/computers/universal-computers/">Deutsches Museum</a></span>
 <div class="fullwidth">
-<img src="images/CD_62419_Zuse-Lochstreifen-Z5.jpg">
+<img data-src="images/CD_62419_Zuse-Lochstreifen-Z5.jpg" src="images/CD_62419_Zuse-Lochstreifen-Z5.jpg">
 </div>
 </section><div><a class="slider-prev" href="#zuse-z3"></a><a class="slider-next" href="#zuse-z3-1"></a></div>
 <section id="zuse-z3-1" class="slide level1">
 <h1>Zuse Z3</h1>
 <p><span style="font-size:small">Image source: <a href="https://www.linuxvoice.com/konrad-zuse-nearly-the-german-turing-5/" class="uri">https://www.linuxvoice.com/konrad-zuse-nearly-the-german-turing-5/</a></span></p>
 <div class="fullwidth" style="max-height: 60%; height: 60%; max-width: 55%">
-<img src="images/z3sim-large6.jpg">
+<img data-src="images/z3sim-large6.jpg" src="images/z3sim-large6.jpg">
 </div>
 <p>Some of the early machines (not Zuse Z3) were programmed by rewiring. These machines are not actually automatic programmable computers.</p>
 </section><div><a class="slider-prev" href="#zuse-z3-1941"></a><a class="slider-next" href="#simple-cpu"></a></div>
 <section id="simple-cpu" class="slide level1">
 <h1>Simple CPU</h1>
-<span style="font-size: 0.5em">Source: C.Petzold. Code</span><br>
-
+<span style="font-size: 0.5em">Source: C.Petzold. Code</span>
 <div style="height:80%;">
-<img src="images/petzold-cpu.png">
+<img data-src="images/petzold-cpu.png" src="images/petzold-cpu.png">
 </div>
 </section><div><a class="slider-prev" href="#zuse-z3-1"></a><a class="slider-next" href="#machine-code"></a></div>
 <section id="machine-code" class="slide level1">
 <h1>Machine code</h1>
 <p>Binary representation of elementary instructions which can be executed directly on CPU.</p>
 <h2 id="gl-first-generation-programming-languages">1GL (first-generation programming languages)</h2>
-<p>See also: Bootstrapping a simple compiler from nothing - 1GL to 3GL<br>
-<a href="http://homepage.ntlworld.com/edmund.grimley-evans/bcompiler.html" class="uri">http://homepage.ntlworld.com/edmund.grimley-evans/bcompiler.html</a><br>
-<a href="https://github.com/smtlaissezfaire/bcompiler" class="uri">https://github.com/smtlaissezfaire/bcompiler</a></p>
+<p>See also: Bootstrapping a simple compiler from nothing - 1GL to 3GL <a href="http://homepage.ntlworld.com/edmund.grimley-evans/bcompiler.html" class="uri">http://homepage.ntlworld.com/edmund.grimley-evans/bcompiler.html</a> <a href="https://github.com/smtlaissezfaire/bcompiler" class="uri">https://github.com/smtlaissezfaire/bcompiler</a></p>
 <pre class="x86asm"><code># _start:
   e8 25 00 00 00    # call  gethex
   c1 e0 04          # sall  $4,%eax
@@ -197,32 +214,22 @@ Source: <a href="https://github.com/github/linguist/tree/master/vendor/grammars"
 </section><div><a class="slider-prev" href="#simple-cpu"></a><a class="slider-next" href="#microcode"></a></div>
 <section id="microcode" class="slide level1">
 <h1>Microcode</h1>
-Current CPUs are not hardwired. The connections between logic units at the opcode execution time are maintained by the microcode — sequence of bit packages describing the signals at each clock.<br>
-
+Current CPUs are not hardwired. The connections between logic units at the opcode execution time are maintained by the microcode — sequence of bit packages describing the signals at each clock.
 <div class="twocolumn">
 <div class="fullwidth">
-<img src="images/gemini-microinstruction.gif"><br>
-
+<img data-src="images/gemini-microinstruction.gif" src="images/gemini-microinstruction.gif">
 </div>
 <div style="font-size: 0.5em">
-Source: <a href="http://www.cs.indiana.edu/~jwmills/EDUCATION.NOTEBOOK/b443/b443.gemini.html" class="uri">http://www.cs.indiana.edu/~jwmills/EDUCATION.NOTEBOOK/b443/b443.gemini.html</a><br>
-See also:<br>
-<a href="http://www.bedroomlan.org/projects/mcasm" class="uri">http://www.bedroomlan.org/projects/mcasm</a><br>
-<a href="http://williams.comp.ncat.edu/COMP375/Microcode.pdf" class="uri">http://williams.comp.ncat.edu/COMP375/Microcode.pdf</a><br>
-<a href="http://minnie.tuhs.org/CompArch/Tutes/week04.html" class="uri">http://minnie.tuhs.org/CompArch/Tutes/week04.html</a><br>
-
+Source: <a href="http://www.cs.indiana.edu/~jwmills/EDUCATION.NOTEBOOK/b443/b443.gemini.html" class="uri">http://www.cs.indiana.edu/~jwmills/EDUCATION.NOTEBOOK/b443/b443.gemini.html</a> See also: <a href="http://www.bedroomlan.org/projects/mcasm" class="uri">http://www.bedroomlan.org/projects/mcasm</a> <a href="http://williams.comp.ncat.edu/COMP375/Microcode.pdf" class="uri">http://williams.comp.ncat.edu/COMP375/Microcode.pdf</a> <a href="http://minnie.tuhs.org/CompArch/Tutes/week04.html" class="uri">http://minnie.tuhs.org/CompArch/Tutes/week04.html</a>
 </div>
 <div class="fullwidth" style="max-width: 80%">
-<img src="images/gemini-microarchitecture.gif"><br>
-
+<img data-src="images/gemini-microarchitecture.gif" src="images/gemini-microarchitecture.gif">
 </div>
 </div>
 </section><div><a class="slider-prev" href="#machine-code"></a><a class="slider-next" href="#gl-second-generation-programming-languages"></a></div>
 <section id="gl-second-generation-programming-languages" class="slide level1">
 <h1>2GL (second-generation programming languages)</h1>
-<p>Opcode (mnemonic): <code>add</code>, <code>sub</code>, <code>jmp</code>, <code>je</code>, <code>and</code>, <code>mov</code><br>
-Operand: register, constant value, flag, memory, label<br>
-Label: get offset at the specified point</p>
+<p>Opcode (mnemonic): <code>add</code>, <code>sub</code>, <code>jmp</code>, <code>je</code>, <code>and</code>, <code>mov</code> Operand: register, constant value, flag, memory, label Label: get offset at the specified point</p>
 <div style="-webkit-column-count: 2; -moz-column-count: 2">
 <pre class="x86asm"><code>global  strlen
   ; int strlen(const char *string);
@@ -252,18 +259,17 @@ repne  scasb
 </section><div><a class="slider-prev" href="#microcode"></a><a class="slider-next" href="#assembly-languages"></a></div>
 <section id="assembly-languages" class="slide level1">
 <h1>Assembly languages</h1>
-<p>Assembly instructions are converted into the machine code.<br>
-<span style="font-size: 0.5em:"><a href="http://www.c-jump.com/CIS77/CPU/IsaDesign/lecture.html" class="uri">http://www.c-jump.com/CIS77/CPU/IsaDesign/lecture.html</a></span><br>
-Simplifed x86-like instruction encoding</p>
+<p>Assembly instructions are converted into the machine code.</p>
+<p><span style="font-size: 0.5em:"><a href="http://www.c-jump.com/CIS77/CPU/IsaDesign/lecture.html" class="uri">http://www.c-jump.com/CIS77/CPU/IsaDesign/lecture.html</a></span></p>
+<p>Simplifed x86-like instruction encoding</p>
 <div class="fullwidth">
-<img src="images/simple_encoding.png">
+<img data-src="images/simple_encoding.png" src="images/simple_encoding.png">
 </div>
 </section><div><a class="slider-prev" href="#gl-second-generation-programming-languages"></a><a class="slider-next" href="#macroassembler"></a></div>
 <section id="macroassembler" class="slide level1">
 <h1>Macroassembler</h1>
 <h2 id="generation-language">"2.5 generation" language</h2>
-Macroassemblers allow macros: special directives with parameters which can be substituted at the assembly time.<br>
-
+Macroassemblers allow macros: special directives with parameters which can be substituted at the assembly time.
 <div class="twocolumn">
 <pre class="x86asm"><code>ForLp           macro   LCV, Start, Stop
 ifndef  $$For&amp;LCV&amp;      
@@ -304,55 +310,53 @@ Next    I</code></pre>
 <h1>High-level programming languages</h1>
 <h2 id="gl-third-generation-programming-languages">3GL (third-generation programming languages)</h2>
 <p>Third-generation programming languages feature machine-independence, complex data and code constructions.</p>
-<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c"><span class="kw">typedef</span> <span class="kw">struct</span> timespec {
-    time_t   tv_sec;        <span class="co">/* seconds */</span>
-    <span class="dt">long</span>     tv_nsec;       <span class="co">/* nanoseconds */</span>
-};
-
-<span class="dt">int</span> main(<span class="dt">int</span> argc, <span class="dt">char</span> **argv) {
-    <span class="dt">int</span> clk_id = CLOCK_REALTIME;
-    <span class="dt">const</span> uint TIME_FMT = strlen(<span class="st">"2012-12-31 12:59:59.123456789"</span>) + <span class="dv">1</span>;
-    <span class="dt">char</span> timestr[TIME_FMT];
-
-    <span class="kw">struct</span> timespec ts, res;
-    <span class="cf">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt; <span class="dv">100</span>; i++) {
-      clock_getres(clk_id, &amp;res);
-      clock_gettime(clk_id, &amp;ts);
-    }
-
-    <span class="cf">if</span> (timespec2str(timestr, TIME_FMT, &amp;ts) != <span class="dv">0</span>) {
-        printf(<span class="st">"timespec2str failed!</span><span class="sc">\n</span><span class="st">"</span>);
-        <span class="cf">return</span> EXIT_FAILURE;
-    } <span class="cf">else</span> {
-        <span class="dt">unsigned</span> <span class="dt">long</span> resol = res.tv_sec * NANO + res.tv_nsec;
-        printf(<span class="st">"CLOCK_REALTIME: res=%ld ns, time=%s</span><span class="sc">\n</span><span class="st">"</span>, resol, timestr);
-        <span class="cf">return</span> EXIT_SUCCESS;
-    }
-}</code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw">typedef</span> <span class="kw">struct</span> timespec {</a>
+<a class="sourceLine" id="cb6-2" data-line-number="2">    <span class="dt">time_t</span>   tv_sec;        <span class="co">/* seconds */</span></a>
+<a class="sourceLine" id="cb6-3" data-line-number="3">    <span class="dt">long</span>     tv_nsec;       <span class="co">/* nanoseconds */</span></a>
+<a class="sourceLine" id="cb6-4" data-line-number="4">};</a>
+<a class="sourceLine" id="cb6-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb6-6" data-line-number="6"><span class="dt">int</span> main(<span class="dt">int</span> argc, <span class="dt">char</span> **argv) {</a>
+<a class="sourceLine" id="cb6-7" data-line-number="7">    <span class="dt">int</span> clk_id = CLOCK_REALTIME;</a>
+<a class="sourceLine" id="cb6-8" data-line-number="8">    <span class="dt">const</span> uint TIME_FMT = strlen(<span class="st">"2012-12-31 12:59:59.123456789"</span>) + <span class="dv">1</span>;</a>
+<a class="sourceLine" id="cb6-9" data-line-number="9">    <span class="dt">char</span> timestr[TIME_FMT];</a>
+<a class="sourceLine" id="cb6-10" data-line-number="10"></a>
+<a class="sourceLine" id="cb6-11" data-line-number="11">    <span class="kw">struct</span> timespec ts, res;</a>
+<a class="sourceLine" id="cb6-12" data-line-number="12">    <span class="cf">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt; <span class="dv">100</span>; i++) {</a>
+<a class="sourceLine" id="cb6-13" data-line-number="13">      clock_getres(clk_id, &amp;res);</a>
+<a class="sourceLine" id="cb6-14" data-line-number="14">      clock_gettime(clk_id, &amp;ts);</a>
+<a class="sourceLine" id="cb6-15" data-line-number="15">    }</a>
+<a class="sourceLine" id="cb6-16" data-line-number="16"></a>
+<a class="sourceLine" id="cb6-17" data-line-number="17">    <span class="cf">if</span> (timespec2str(timestr, TIME_FMT, &amp;ts) != <span class="dv">0</span>) {</a>
+<a class="sourceLine" id="cb6-18" data-line-number="18">        printf(<span class="st">"timespec2str failed!</span><span class="sc">\n</span><span class="st">"</span>);</a>
+<a class="sourceLine" id="cb6-19" data-line-number="19">        <span class="cf">return</span> EXIT_FAILURE;</a>
+<a class="sourceLine" id="cb6-20" data-line-number="20">    } <span class="cf">else</span> {</a>
+<a class="sourceLine" id="cb6-21" data-line-number="21">        <span class="dt">unsigned</span> <span class="dt">long</span> resol = res.tv_sec * NANO + res.tv_nsec;</a>
+<a class="sourceLine" id="cb6-22" data-line-number="22">        printf(<span class="st">"CLOCK_REALTIME: res=%ld ns, time=%s</span><span class="sc">\n</span><span class="st">"</span>, resol, timestr);</a>
+<a class="sourceLine" id="cb6-23" data-line-number="23">        <span class="cf">return</span> EXIT_SUCCESS;</a>
+<a class="sourceLine" id="cb6-24" data-line-number="24">    }</a>
+<a class="sourceLine" id="cb6-25" data-line-number="25">}</a></code></pre></div>
 </section><div><a class="slider-prev" href="#macroassembler"></a><a class="slider-next" href="#gl-data-querying-and-manipulation-languages"></a></div>
 <section id="gl-data-querying-and-manipulation-languages" class="slide level1">
 <h1>4GL: Data querying and manipulation languages</h1>
-Fourth-generation languages are declarative, mostly concerned with data manipulation.<br>
-
+Fourth-generation languages are declarative, mostly concerned with data manipulation.
 <div class="twocolumn">
-<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">select</span>  quartile,  
-  <span class="fu">min</span>(spend) <span class="kw">as</span> <span class="fu">min</span>,  
-  <span class="fu">max</span>(spend) <span class="kw">as</span> <span class="fu">max</span>
-<span class="kw">from</span> (
-  <span class="kw">select</span>  spend,  <span class="fu">ntile</span>(<span class="dv">4</span>)
-    <span class="kw">over</span> (<span class="kw">order</span> <span class="kw">by</span> spend <span class="kw">asc</span>)
-    quartile
-  <span class="kw">from</span> (
-    <span class="kw">select</span> user_id,
-      <span class="fu">sum</span>(price) <span class="kw">as</span> spend
-    <span class="kw">from</span> purchases
-    <span class="kw">group</span> <span class="kw">by</span> <span class="dv">1</span>
-  ) user_spend
-) user_spend_quartiles
-<span class="kw">group</span> <span class="kw">by</span> <span class="dv">1</span>
-<span class="kw">order</span> <span class="kw">by</span> <span class="fu">ntile</span> <span class="kw">asc</span></code></pre></div>
-<img src="images/ntiles.png"><br>
-
+<div class="sourceCode" id="cb7"><pre class="sourceCode sql"><code class="sourceCode sql"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw">select</span>  quartile,  </a>
+<a class="sourceLine" id="cb7-2" data-line-number="2">  <span class="fu">min</span>(spend) <span class="kw">as</span> <span class="fu">min</span>,  </a>
+<a class="sourceLine" id="cb7-3" data-line-number="3">  <span class="fu">max</span>(spend) <span class="kw">as</span> <span class="fu">max</span></a>
+<a class="sourceLine" id="cb7-4" data-line-number="4"><span class="kw">from</span> (</a>
+<a class="sourceLine" id="cb7-5" data-line-number="5">  <span class="kw">select</span>  spend,  <span class="fu">ntile</span>(<span class="dv">4</span>)</a>
+<a class="sourceLine" id="cb7-6" data-line-number="6">    <span class="kw">over</span> (<span class="kw">order</span> <span class="kw">by</span> spend <span class="kw">asc</span>)</a>
+<a class="sourceLine" id="cb7-7" data-line-number="7">    quartile</a>
+<a class="sourceLine" id="cb7-8" data-line-number="8">  <span class="kw">from</span> (</a>
+<a class="sourceLine" id="cb7-9" data-line-number="9">    <span class="kw">select</span> user_id,</a>
+<a class="sourceLine" id="cb7-10" data-line-number="10">      <span class="fu">sum</span>(price) <span class="kw">as</span> spend</a>
+<a class="sourceLine" id="cb7-11" data-line-number="11">    <span class="kw">from</span> purchases</a>
+<a class="sourceLine" id="cb7-12" data-line-number="12">    <span class="kw">group</span> <span class="kw">by</span> <span class="dv">1</span></a>
+<a class="sourceLine" id="cb7-13" data-line-number="13">  ) user_spend</a>
+<a class="sourceLine" id="cb7-14" data-line-number="14">) user_spend_quartiles</a>
+<a class="sourceLine" id="cb7-15" data-line-number="15"><span class="kw">group</span> <span class="kw">by</span> <span class="dv">1</span></a>
+<a class="sourceLine" id="cb7-16" data-line-number="16"><span class="kw">order</span> <span class="kw">by</span> <span class="fu">ntile</span> <span class="kw">asc</span></a></code></pre></div>
+<img data-src="images/ntiles.png" src="images/ntiles.png">
 <div class="small">
 Source: <a href="https://www.periscopedata.com/blog/window-functions-by-example.html" class="uri">https://www.periscopedata.com/blog/window-functions-by-example.html</a>
 </div>
@@ -367,33 +371,31 @@ Source: <a href="https://www.periscopedata.com/blog/window-functions-by-example.
 <ul>
 <li class="fragment">syntax is very verbose, unneccessary mimics natural languge</li>
 <li class="fragment">complicated debugging</li>
-<li class="fragment">unpredictable performance (and, usually, in orders of magnutude slower than for implementation in general-purpose programming language)</li>
+<li class="fragment">unpredictable performance (and, usually, in orders of magnutude slower than an implementation in general-purpose programming language)</li>
 <li class="fragment">complicated development process, compatibility problems</li>
 </ul>
 </section><div><a class="slider-prev" href="#gl-data-querying-and-manipulation-languages"></a><a class="slider-next" href="#gl-logical-inference-and-constraint-based"></a></div>
 <section id="gl-logical-inference-and-constraint-based" class="slide level1">
 <h1>5GL: Logical inference and constraint-based</h1>
-<p>Fifth-generation languages were the ultimate dream of software engineers in 1980s :)<br>
-Example: Prolog, Datalog<br>
-Programmer specifies the model and formulates the task. The runtime solves the specified constraints using some knowledge-inference engines (first-order inferene, frame inference).</p>
+<p>Fifth-generation languages were the ultimate dream of software engineers in 1980s :) Example: Prolog, Datalog Programmer specifies the model and formulates the task. The runtime solves the specified constraints using some knowledge-inference engines (first-order inferene, frame inference).</p>
 <p>You can try Prolog here: <a href="http://swish.swi-prolog.org/example/houses_puzzle.pl" class="uri">http://swish.swi-prolog.org/example/houses_puzzle.pl</a></p>
 </section><div><a class="slider-prev" href="#gl-data-querying-and-manipulation-languages-1"></a><a class="slider-next" href="#einstein-riddle-who-keeps-zebra-in-prolog"></a></div>
 <section id="einstein-riddle-who-keeps-zebra-in-prolog" class="slide level1">
 <h1>Einstein riddle (who keeps zebra?) in Prolog</h1>
-<div class="sourceCode"><pre class="sourceCode prolog"><code class="sourceCode prolog">neigh(<span class="dt">Left</span><span class="kw">,</span> <span class="dt">Right</span><span class="kw">,</span> <span class="dt">List</span>) <span class="kw">:-</span>
-        <span class="dt">List</span> <span class="kw">=</span> [<span class="dt">Left</span> <span class="fu">|</span> [<span class="dt">Right</span> <span class="fu">|</span> <span class="dt">_</span>]]<span class="kw">;</span>
-        <span class="dt">List</span> <span class="kw">=</span> [<span class="dt">_</span> <span class="fu">|</span> [<span class="dt">Left</span> <span class="fu">|</span> <span class="dt">Right</span>]]<span class="kw">.</span>
-
-zebraowner(<span class="dt">Houses</span><span class="kw">,</span> <span class="dt">ZebraOwner</span>)<span class="kw">:-</span>
-        member([englishman, <span class="dt">_</span>, red]<span class="kw">,</span> <span class="dt">Houses</span>)<span class="kw">,</span>
-        member([spanish, jaguar, <span class="dt">_</span>]<span class="kw">,</span> <span class="dt">Houses</span>)<span class="kw">,</span>
-        neigh([<span class="dt">_</span>, snail, <span class="dt">_</span>]<span class="kw">,</span> [japanese, <span class="dt">_</span>, <span class="dt">_</span>]<span class="kw">,</span> <span class="dt">Houses</span>)<span class="kw">,</span>
-        neigh([<span class="dt">_</span>, snail, <span class="dt">_</span>]<span class="kw">,</span> [<span class="dt">_</span>, <span class="dt">_</span>, blue]<span class="kw">,</span> <span class="dt">Houses</span>)<span class="kw">,</span>
-        member([<span class="dt">ZebraOwner</span>, zebra, <span class="dt">_</span>]<span class="kw">,</span> <span class="dt">Houses</span>)<span class="kw">,</span>
-        member([<span class="dt">_</span>, <span class="dt">_</span>, green]<span class="kw">,</span> <span class="dt">Houses</span>)<span class="kw">.</span>
-
-
-zebra(<span class="dt">X</span>) <span class="kw">:-</span> zebraowner([<span class="dt">_</span>, <span class="dt">_</span>, <span class="dt">_</span>]<span class="kw">,</span> <span class="dt">X</span>)<span class="kw">.</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode prolog"><code class="sourceCode prolog"><a class="sourceLine" id="cb8-1" data-line-number="1">neigh(<span class="dt">Left</span><span class="kw">,</span> <span class="dt">Right</span><span class="kw">,</span> <span class="dt">List</span>) <span class="kw">:-</span></a>
+<a class="sourceLine" id="cb8-2" data-line-number="2">        <span class="dt">List</span> <span class="kw">=</span> [<span class="dt">Left</span> <span class="fu">|</span> [<span class="dt">Right</span> <span class="fu">|</span> <span class="dt">_</span>]]<span class="kw">;</span></a>
+<a class="sourceLine" id="cb8-3" data-line-number="3">        <span class="dt">List</span> <span class="kw">=</span> [<span class="dt">_</span> <span class="fu">|</span> [<span class="dt">Left</span> <span class="fu">|</span> <span class="dt">Right</span>]]<span class="kw">.</span></a>
+<a class="sourceLine" id="cb8-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb8-5" data-line-number="5">zebraowner(<span class="dt">Houses</span><span class="kw">,</span> <span class="dt">ZebraOwner</span>)<span class="kw">:-</span></a>
+<a class="sourceLine" id="cb8-6" data-line-number="6">        member([englishman, <span class="dt">_</span>, red]<span class="kw">,</span> <span class="dt">Houses</span>)<span class="kw">,</span></a>
+<a class="sourceLine" id="cb8-7" data-line-number="7">        member([spanish, jaguar, <span class="dt">_</span>]<span class="kw">,</span> <span class="dt">Houses</span>)<span class="kw">,</span></a>
+<a class="sourceLine" id="cb8-8" data-line-number="8">        neigh([<span class="dt">_</span>, snail, <span class="dt">_</span>]<span class="kw">,</span> [japanese, <span class="dt">_</span>, <span class="dt">_</span>]<span class="kw">,</span> <span class="dt">Houses</span>)<span class="kw">,</span></a>
+<a class="sourceLine" id="cb8-9" data-line-number="9">        neigh([<span class="dt">_</span>, snail, <span class="dt">_</span>]<span class="kw">,</span> [<span class="dt">_</span>, <span class="dt">_</span>, blue]<span class="kw">,</span> <span class="dt">Houses</span>)<span class="kw">,</span></a>
+<a class="sourceLine" id="cb8-10" data-line-number="10">        member([<span class="dt">ZebraOwner</span>, zebra, <span class="dt">_</span>]<span class="kw">,</span> <span class="dt">Houses</span>)<span class="kw">,</span></a>
+<a class="sourceLine" id="cb8-11" data-line-number="11">        member([<span class="dt">_</span>, <span class="dt">_</span>, green]<span class="kw">,</span> <span class="dt">Houses</span>)<span class="kw">.</span></a>
+<a class="sourceLine" id="cb8-12" data-line-number="12"></a>
+<a class="sourceLine" id="cb8-13" data-line-number="13"></a>
+<a class="sourceLine" id="cb8-14" data-line-number="14">zebra(<span class="dt">X</span>) <span class="kw">:-</span> zebraowner([<span class="dt">_</span>, <span class="dt">_</span>, <span class="dt">_</span>]<span class="kw">,</span> <span class="dt">X</span>)<span class="kw">.</span></a></code></pre></div>
 <pre><code>zebra(Owner).
 &gt; Owner = japanese</code></pre>
 </section><div><a class="slider-prev" href="#gl-logical-inference-and-constraint-based"></a><a class="slider-next" href="#ii.-influential-programming-languages"></a></div>
@@ -401,53 +403,54 @@ zebra(<span class="dt">X</span>) <span class="kw">:-</span> zebraowner([<span cl
 <h1>II. Influential programming languages</h1>
 <h2 id="first-widespread-programming-languages">First widespread programming languages</h2>
 <p>Fortran, Cobol, Algol, Lisp</p>
-<h2 id="languages-which-gave-start-to-important-concepts">Languages which gave start to important concepts</h2>
+<h2 id="languages-which-introduced-some-important-concepts">Languages which introduced some important concepts</h2>
 <p>ML, Prolog, Smalltalk, Forth, APL, Refal, Haskell</p>
 </section><div><a class="slider-prev" href="#einstein-riddle-who-keeps-zebra-in-prolog"></a><a class="slider-next" href="#fortran-the-first-widely-used-high-level-language"></a></div>
 <section id="fortran-the-first-widely-used-high-level-language" class="slide level1">
 <h1>FORTRAN: the first widely-used high-level language</h1>
-<p>FORmula TRANslator. John Backus, 1950s</p>
-<div class="sourceCode"><pre class="sourceCode fortran"><code class="sourceCode fortran"><span class="co">C AREA OF A TRIANGLE - HERON'S FORMULA</span>
-<span class="co">C INPUT - CARD READER UNIT 5, INTEGER INPUT</span>
-<span class="co">C OUTPUT - LINE PRINTER UNIT 6, REAL OUTPUT</span>
-<span class="co">C INPUT ERROR DISPLAY ERROR OUTPUT CODE 1 IN JOB CONTROL LISTING</span>
-      <span class="dt">INTEGER</span> A,B,C
-      <span class="fu">READ(</span><span class="dv">5</span>,<span class="dv">501</span><span class="fu">)</span> A,B,C
-  <span class="dv">501</span> <span class="fu">FORMAT(</span>3I5<span class="fu">)</span>
-      <span class="kw">IF</span>(A<span class="op">.EQ.</span><span class="dv">0</span> <span class="op">.OR.</span> B<span class="op">.EQ.</span><span class="dv">0</span> <span class="op">.OR.</span> C<span class="op">.EQ.</span><span class="dv">0</span>) <span class="kw">STOP</span> <span class="dv">1</span>
-      S <span class="kw">=</span> (A <span class="kw">+</span> B <span class="kw">+</span> C) <span class="kw">/</span> <span class="fl">2.0</span>
-      AREA <span class="kw">=</span> <span class="bu">SQRT</span>( S <span class="kw">*</span> (S <span class="kw">-</span> A) <span class="kw">*</span> (S <span class="kw">-</span> B) <span class="kw">*</span> (S <span class="kw">-</span> C) )
-      <span class="fu">WRITE(</span><span class="dv">6</span>,<span class="dv">601</span><span class="fu">)</span> A,B,C,AREA
-  <span class="dv">601</span> <span class="fu">FORMAT(</span>4H A<span class="kw">=</span> ,I5,5H  B<span class="kw">=</span> ,I5,5H  C<span class="kw">=</span> ,I5,8H  AREA<span class="kw">=</span> ,F10.2,12HSQUARE UNITS<span class="fu">)</span>
-      <span class="kw">STOP</span>
-      <span class="kw">END</span></code></pre></div>
+<p>FORmula TRANslator. John Backus, IBM, 1954-57</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode fortran"><code class="sourceCode fortran"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="co">C AREA OF A TRIANGLE - HERON'S FORMULA</span></a>
+<a class="sourceLine" id="cb10-2" data-line-number="2"><span class="co">C INPUT - CARD READER UNIT 5, INTEGER INPUT</span></a>
+<a class="sourceLine" id="cb10-3" data-line-number="3"><span class="co">C OUTPUT - LINE PRINTER UNIT 6, REAL OUTPUT</span></a>
+<a class="sourceLine" id="cb10-4" data-line-number="4"><span class="co">C INPUT ERROR DISPLAY ERROR OUTPUT CODE 1 IN JOB CONTROL LISTING</span></a>
+<a class="sourceLine" id="cb10-5" data-line-number="5">      <span class="dt">INTEGER</span> A,B,C</a>
+<a class="sourceLine" id="cb10-6" data-line-number="6">      <span class="fu">READ(</span><span class="dv">5</span>,<span class="dv">501</span><span class="fu">)</span> A,B,C</a>
+<a class="sourceLine" id="cb10-7" data-line-number="7">  <span class="dv">501</span> <span class="fu">FORMAT(</span>3I5<span class="fu">)</span></a>
+<a class="sourceLine" id="cb10-8" data-line-number="8">      <span class="kw">IF</span>(A<span class="op">.EQ.</span><span class="dv">0</span> <span class="op">.OR.</span> B<span class="op">.EQ.</span><span class="dv">0</span> <span class="op">.OR.</span> C<span class="op">.EQ.</span><span class="dv">0</span>) <span class="kw">STOP</span> <span class="dv">1</span></a>
+<a class="sourceLine" id="cb10-9" data-line-number="9">      S <span class="kw">=</span> (A <span class="kw">+</span> B <span class="kw">+</span> C) <span class="kw">/</span> <span class="fl">2.0</span></a>
+<a class="sourceLine" id="cb10-10" data-line-number="10">      AREA <span class="kw">=</span> <span class="bu">SQRT</span>( S <span class="kw">*</span> (S <span class="kw">-</span> A) <span class="kw">*</span> (S <span class="kw">-</span> B) <span class="kw">*</span> (S <span class="kw">-</span> C) )</a>
+<a class="sourceLine" id="cb10-11" data-line-number="11">      <span class="fu">WRITE(</span><span class="dv">6</span>,<span class="dv">601</span><span class="fu">)</span> A,B,C,AREA</a>
+<a class="sourceLine" id="cb10-12" data-line-number="12">  <span class="dv">601</span> <span class="fu">FORMAT(</span>4H A<span class="kw">=</span> ,I5,5H  B<span class="kw">=</span> ,I5,5H  C<span class="kw">=</span> ,I5,8H  AREA<span class="kw">=</span> ,F10.2,12HSQUARE UNITS<span class="fu">)</span></a>
+<a class="sourceLine" id="cb10-13" data-line-number="13">      <span class="kw">STOP</span></a>
+<a class="sourceLine" id="cb10-14" data-line-number="14">      <span class="kw">END</span></a></code></pre></div>
 </section><div><a class="slider-prev" href="#ii.-influential-programming-languages"></a><a class="slider-next" href="#fortran-is-alive"></a></div>
 <section id="fortran-is-alive" class="slide level1">
 <h1>Fortran is alive</h1>
-<p>Fortran 2008 is out, next revision (Fortran 2015) is to be standartized in 2018.<br>
-<a href="http://www.fortran.bcs.org/2012/nm_talk.pdf" class="uri">http://www.fortran.bcs.org/2012/nm_talk.pdf</a></p>
-<div class="sourceCode"><pre class="sourceCode fortran"><code class="sourceCode fortran"><span class="kw">do</span> i <span class="kw">=</span> this_image(), limit, num_images()
-    pi <span class="kw">=</span> pi <span class="kw">+</span> (<span class="kw">-</span><span class="dv">1</span>)<span class="kw">**</span>(i<span class="kw">+</span><span class="dv">1</span>) <span class="kw">/</span> <span class="bu">real</span>( <span class="dv">2</span><span class="kw">*</span>i<span class="kw">-</span><span class="dv">1</span>, <span class="fu">kind</span><span class="kw">=</span>rk )
-<span class="kw">end do</span>
-    sync <span class="fu">all</span> <span class="co">! global barrier</span>
-<span class="kw">if</span> (img <span class="op">.eq.</span> <span class="dv">1</span>) <span class="kw">then</span>
-    <span class="kw">do</span> i <span class="kw">=</span> <span class="dv">2</span>, nimgs
-        pi <span class="kw">=</span> pi <span class="kw">+</span> pi<span class="kw">[</span>i<span class="kw">]</span>
-    <span class="kw">end do</span>
-    pi <span class="kw">=</span> pi <span class="kw">*</span> <span class="fl">4.0_rk</span>
-<span class="kw">end if</span></code></pre></div>
+<p>Fortran 2008 is out, next revision (Fortran 2018) is to be standartized later in 2018.</p>
+<p><a href="http://www.fortran.bcs.org/2012/nm_talk.pdf" class="uri">http://www.fortran.bcs.org/2012/nm_talk.pdf</a></p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode fortran"><code class="sourceCode fortran"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="kw">do</span> i <span class="kw">=</span> this_image(), limit, num_images()</a>
+<a class="sourceLine" id="cb11-2" data-line-number="2">    pi <span class="kw">=</span> pi <span class="kw">+</span> (<span class="kw">-</span><span class="dv">1</span>)<span class="kw">**</span>(i<span class="kw">+</span><span class="dv">1</span>) <span class="kw">/</span> <span class="bu">real</span>( <span class="dv">2</span><span class="kw">*</span>i<span class="kw">-</span><span class="dv">1</span>, <span class="fu">kind</span><span class="kw">=</span>rk )</a>
+<a class="sourceLine" id="cb11-3" data-line-number="3"><span class="kw">end do</span></a>
+<a class="sourceLine" id="cb11-4" data-line-number="4">    sync <span class="fu">all</span> <span class="co">! global barrier</span></a>
+<a class="sourceLine" id="cb11-5" data-line-number="5"><span class="kw">if</span> (img <span class="op">.eq.</span> <span class="dv">1</span>) <span class="kw">then</span></a>
+<a class="sourceLine" id="cb11-6" data-line-number="6">    <span class="kw">do</span> i <span class="kw">=</span> <span class="dv">2</span>, nimgs</a>
+<a class="sourceLine" id="cb11-7" data-line-number="7">        pi <span class="kw">=</span> pi <span class="kw">+</span> pi<span class="kw">[</span>i<span class="kw">]</span></a>
+<a class="sourceLine" id="cb11-8" data-line-number="8">    <span class="kw">end do</span></a>
+<a class="sourceLine" id="cb11-9" data-line-number="9">    pi <span class="kw">=</span> pi <span class="kw">*</span> <span class="fl">4.0_rk</span></a>
+<a class="sourceLine" id="cb11-10" data-line-number="10"><span class="kw">end if</span></a></code></pre></div>
 <p>Equivalent to MPI code:</p>
-<div class="sourceCode"><pre class="sourceCode fortran"><code class="sourceCode fortran"><span class="kw">do</span> i <span class="kw">=</span> rank<span class="kw">+</span><span class="dv">1</span>, limit, nprocs
-    pi <span class="kw">=</span> pi <span class="kw">+</span> (<span class="kw">-</span><span class="dv">1</span>)<span class="kw">**</span>(i<span class="kw">+</span><span class="dv">1</span>) <span class="kw">/</span> <span class="bu">real</span>( <span class="dv">2</span><span class="kw">*</span>i<span class="kw">-</span><span class="dv">1</span>, <span class="fu">kind</span><span class="kw">=</span>rk )
-<span class="kw">end do</span>
-<span class="kw">call</span> MPI_REDUCE( pi, picalc, <span class="dv">1</span>, MPI_DOUBLE_PRECISION, <span class="kw">&amp;</span>
-    MPI_SUM, <span class="dv">0</span>, MPI_COMM_WORLD, ierr )
-picalc <span class="kw">=</span> picalc <span class="kw">*</span> <span class="fl">4.0_rk</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode fortran"><code class="sourceCode fortran"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="kw">do</span> i <span class="kw">=</span> rank<span class="kw">+</span><span class="dv">1</span>, limit, nprocs</a>
+<a class="sourceLine" id="cb12-2" data-line-number="2">    pi <span class="kw">=</span> pi <span class="kw">+</span> (<span class="kw">-</span><span class="dv">1</span>)<span class="kw">**</span>(i<span class="kw">+</span><span class="dv">1</span>) <span class="kw">/</span> <span class="bu">real</span>( <span class="dv">2</span><span class="kw">*</span>i<span class="kw">-</span><span class="dv">1</span>, <span class="fu">kind</span><span class="kw">=</span>rk )</a>
+<a class="sourceLine" id="cb12-3" data-line-number="3"><span class="kw">end do</span></a>
+<a class="sourceLine" id="cb12-4" data-line-number="4"><span class="kw">call</span> MPI_REDUCE( pi, picalc, <span class="dv">1</span>, MPI_DOUBLE_PRECISION, <span class="kw">&amp;</span></a>
+<a class="sourceLine" id="cb12-5" data-line-number="5">    MPI_SUM, <span class="dv">0</span>, MPI_COMM_WORLD, ierr )</a>
+<a class="sourceLine" id="cb12-6" data-line-number="6">picalc <span class="kw">=</span> picalc <span class="kw">*</span> <span class="fl">4.0_rk</span></a></code></pre></div>
 </section><div><a class="slider-prev" href="#fortran-the-first-widely-used-high-level-language"></a><a class="slider-next" href="#cobol-common-business-oriented-language"></a></div>
 <section id="cobol-common-business-oriented-language" class="slide level1">
 <h1>COBOL: COmmon Business-Oriented Language</h1>
+<p>Grace M. Hopper, CODASYL consortium, 1959.</p>
 <p>One of the first languages initially designed without any academic (computer science) influence.</p>
-<p>Nowadays, as I have probably already mentioned in an introduction of the previous course, COBOL is the canonical example of legacy code: more than a half of an entrprises (in US) use several billions lines of COBOL code in their everyday activity. The migration cost is very high, so in short future COBOL share won't drop significantly.</p>
+<p>Nowadays, as I have probably already mentioned in an introduction of the previous course, COBOL programs represent the canonical example of legacy code: more than a half of an enterprises (in US) use several billions lines of COBOL code in their everyday activity. The migration cost is very high, so in short future COBOL share won't drop significantly.</p>
 </section><div><a class="slider-prev" href="#fortran-is-alive"></a><a class="slider-next" href="#cobol-4gl-beginnings"></a></div>
 <section id="cobol-4gl-beginnings" class="slide level1">
 <h1>COBOL: 4GL beginnings</h1>
@@ -496,9 +499,10 @@ picalc <span class="kw">=</span> picalc <span class="kw">*</span> <span class="f
           CLOSE sales, report-out
           .</code></pre>
 </div>
-</section><div><a class="slider-prev" href="#cobol-common-business-oriented-language"></a><a class="slider-next" href="#abap-cobol-successor"></a></div>
-<section id="abap-cobol-successor" class="slide level1">
-<h1>ABAP: COBOL successor</h1>
+</section><div><a class="slider-prev" href="#cobol-common-business-oriented-language"></a><a class="slider-next" href="#abap-contemporary-cobol-successor-sap-erp"></a></div>
+<section id="abap-contemporary-cobol-successor-sap-erp" class="slide level1">
+<h1>ABAP (contemporary COBOL successor, SAP ERP)</h1>
+<p>SAP SE, ~1981-83.</p>
 <pre class="abap"><code>REPORT ZSOURCE2307.
 * List of the current program
 WRITE / 'I am program ZSOURCE2307'.
@@ -518,8 +522,8 @@ ENDFORM.</code></pre>
 <h1>ALGOL</h1>
 <p>ALGOrithmic Language, first implementation in 1958 (known as International Algebraic Language, IAL).</p>
 <p>Developed by joint committee of American and Soviet computer scientists, after standartization was immediately adopted as GOST standart in USSR. John Backus (one of FORTRAN creators), John McCarthy (creator of LISP), Peter Naur (creator of BNF grammar specification formalism), Edsger Dijkstra (no need to introduce :) took part in the original development. Algol 60 and Algol 68 followed.</p>
-<p>At the next 2 slides there are code examples in Algol 68, which is different from the most widespread Algol 60.</p>
-</section><div><a class="slider-prev" href="#abap-cobol-successor"></a><a class="slider-next" href="#algol-1"></a></div>
+<p>Code examples in the following slides are in Algol 68, which is different from the most widespread Algol 60.</p>
+</section><div><a class="slider-prev" href="#abap-contemporary-cobol-successor-sap-erp"></a><a class="slider-next" href="#algol-1"></a></div>
 <section id="algol-1" class="slide level1">
 <h1>ALGOL</h1>
 <pre class="algol"><code>proc abs max = ([,]real a, ref real y, ref int i, k)real:
@@ -574,7 +578,7 @@ op max = ([]real a) real:
 <p>Introduced by John McCarthy in 1958, based on lambda-calculus. One of the most popular languages for AI development in time span from 1960s to the end of 1980s.</p>
 <p>Today there are 3 widespread dialects:</p>
 <ul>
-<li class="fragment">Scheme (minimal and extensible)</li>
+<li class="fragment">Scheme (minimal and extensible, see also <a href="http://library.readscheme.org/page1.html">"Lambda: the ultimate ..." papers</a>)</li>
 <li class="fragment">Common LISP (large system with rich standard library)</li>
 <li class="fragment">Clojure (LISP dialect for Java ecosystem)</li>
 </ul>
@@ -601,6 +605,7 @@ op max = ([]real a) real:
 </section><div><a class="slider-prev" href="#lisp"></a><a class="slider-next" href="#smalltalk-object-oriented-programming"></a></div>
 <section id="smalltalk-object-oriented-programming" class="slide level1">
 <h1>Smalltalk: object-oriented programming</h1>
+<p>Alan Kay et al., Xerox PARC, 1972</p>
 <p>Message-based, prototype-based object-oriented programming</p>
 <pre class="smalltalk"><code>| rectangles aPoint collisions |
 rectangles := OrderedCollection
@@ -611,11 +616,11 @@ collisions := rectangles select: [:aRect | aRect containsPoint: aPoint].</code><
 </section><div><a class="slider-prev" href="#lisp-1"></a><a class="slider-next" href="#prolog-logical-constraint-based-programming"></a></div>
 <section id="prolog-logical-constraint-based-programming" class="slide level1">
 <h1>Prolog: logical (constraint-based) programming</h1>
-<p>(already mentioned at 5GL section)</p>
+<p>Alain Colmerauer, 1972. (already mentioned at 5GL section)</p>
 </section><div><a class="slider-prev" href="#smalltalk-object-oriented-programming"></a><a class="slider-next" href="#forth-stack-based-programming"></a></div>
 <section id="forth-stack-based-programming" class="slide level1">
 <h1>Forth: stack-based programming</h1>
-<p><a href="https://skilldrick.github.io/easyforth/#snake" class="uri">https://skilldrick.github.io/easyforth/#snake</a></p>
+<p>Charles H. Moore, 1970. <a href="https://skilldrick.github.io/easyforth/#snake" class="uri">https://skilldrick.github.io/easyforth/#snake</a></p>
 <pre class="forth"><code>: move-up  -1 snake-y-head +! ;
 : move-left  -1 snake-x-head +! ;
 : move-down  1 snake-y-head +! ;
@@ -636,8 +641,7 @@ collisions := rectangles select: [:aRect | aRect containsPoint: aPoint].</code><
 </section><div><a class="slider-prev" href="#prolog-logical-constraint-based-programming"></a><a class="slider-next" href="#apl-array-programming"></a></div>
 <section id="apl-array-programming" class="slide level1">
 <h1>APL: array programming</h1>
-<p>Array Programming Languages syntax uses special graphical symbols to define array operations.<br>
-Example program (Game of Life simulator):</p>
+<p>Kenneth Iverson, IBM, 1964. Array Programming Languages syntax uses special graphical symbols to define array operations. Example program (Game of Life simulator):</p>
 <blockquote>
 <p>life←{↑1 ⍵∨.∧3 4=+/,¯1 0 1∘.⊖¯1 0 1∘.⌽⊂⍵}</p>
 </blockquote>
@@ -649,6 +653,7 @@ Example program (Game of Life simulator):</p>
 <p>Unicode standard has some APL-specific symbols.</p>
 <p>Advantage: extremely concise (short) programs. Its ASCII-successor J is very popular in "coding golf" competitions.</p>
 <p>Disadvantage: unreadable programs.</p>
+<p><a href="http://tryapl.org/" class="uri">http://tryapl.org/</a></p>
 </section><div><a class="slider-prev" href="#forth-stack-based-programming"></a><a class="slider-next" href="#apl-example"></a></div>
 <section id="apl-example" class="slide level1">
 <h1>APL example</h1>
@@ -673,9 +678,7 @@ Example program (Game of Life simulator):</p>
 <section id="refal-recursive-functions-algorithmic-language" class="slide level1">
 <h1>Refal (REcursive Functions ALGOrithmic Language)</h1>
 <p>Created in Soviet Union in 1968 by Valentin F. Turchin.</p>
-<p>Recursive term rewriting language, based on Markov Algorithms.<br>
-Original concept of Refal was the metalanguage for programming language syntax and semantics.<br>
-Features advanced pattern-matching.</p>
+<p>Recursive term rewriting language, based on Markov Algorithms. Original concept of Refal was the metalanguage for programming language syntax and semantics. Features advanced pattern-matching.</p>
 <p>Example: Palindrome</p>
 <pre><code> Pal { = True;
     s.1 = True;
@@ -771,8 +774,7 @@ $ENTRY Go {
 </section><div><a class="slider-prev" href="#refal-example-untyped-lambda-calculus-interpreter"></a><a class="slider-next" href="#project"></a></div>
 <section id="project" class="slide level1">
 <h1>Project</h1>
-<p>Let's write a specification of a toy programming language. In total you will get at least 10 stars.<br>
-Choose a single application area and try to imagine a simple programming language which is more convenient to use in that area than, for example, C.</p>
+<p>Alternatively you can write a specification of a toy programming language. In total you will get at least 10 stars. Choose a single application area and try to imagine a simple programming language which is more convenient to use in that area than, for example, C.</p>
 <p><strong>Project Step 1.*</strong> Write a "design document" (short informal description, 1-4 pages, in English) of a toy programming language of your choice. Design document must include the following information:</p>
 <ul>
 <li class="fragment">what is the main focus of the language</li>
@@ -822,12 +824,14 @@ Choose a single application area and try to imagine a simple programming languag
             window.location = a.href;
           }
           break;
+       case 33: // Page Up
        case 37: // left arrow
          var a = document.querySelector("section:target ~ div a.slider-prev");
          if (a && a.href) {
            window.location = a.href;
          }
          break;
+       case 34: // Page Down
        case 39: // right arrow
          var a = document.querySelector("section:target ~ div a.slider-next");
          if (a && a.href) {
