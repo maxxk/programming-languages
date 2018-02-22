@@ -1,48 +1,76 @@
 <!DOCTYPE html><html><head>
   <meta charset="utf-8">
   <meta name="generator" content="pandoc">
-  <title></title>
+  <title>02-Classification</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <link rel="stylesheet" href="slider.css">
   <style type="text/css">code{white-space: pre;}</style>
   <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
   </style>
 </head>
 <body>
@@ -58,8 +86,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h2 id="classification-of-programming-languages">Classification of programming languages</h2>
 <h3 id="characteristics-of-programming-languages">Characteristics of programming languages</h3>
 <h3 id="how-do-programming-languages-differ-from-each-other">(How do programming languages differ from each other)</h3>
-<p>Course page: <a href="https://maxxk.github.io/programming-languages/" class="uri">https://maxxk.github.io/programming-languages/</a><br>
-<span style="font-size: small">Chrome or Firefox are recommended to watch presentations; Konqueror in aud. 13-16 skips some slides. Open with Firefox and enable scripts with button “Settings”, lower right corner</span></p>
+<div style="text-align: center">
+<p><a href="https://maxxk.github.io/programming-languages/" class="uri">https://maxxk.github.io/programming-languages/</a></p>
+<span style="font-size: small">Chrome or Firefox are recommended to watch presentations; Konqueror in aud. 13-16 skips some slides. Open with Firefox and enable scripts with button “Settings”, lower right corner</span>
+</div>
 </section><div><a class="slider-prev"></a><a class="slider-next" href="#literature"></a></div>
 <section id="literature" class="slide level1">
 <h1>Literature</h1>
@@ -82,77 +112,78 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </section><div><a class="slider-prev" href="#history-of-programming-languages-additions"></a><a class="slider-next" href="#ada-programming-language"></a></div>
 <section id="ada-programming-language" class="slide level1">
 <h1>Ada programming language</h1>
-<p><span class="small">Missing parts from previous lecture. Based on «R. Sebesta. Concepts of Programming Lanugages. 2012»</span><br>
-US Department of Defense initiated the design process of programming language in 1975. Original motivation: make a single high-level programming language for a broad range of applications, including critical embedded systems. At the time of proposal, about 450 different languages was in use by DoD contractors.</p>
+<p><span class="small">Missing parts from previous lecture. Based on «R. Sebesta. Concepts of Programming Lanugages. 2012»</span> US Department of Defense initiated the design process of programming language in 1975. Original motivation: make a single high-level programming language for a broad range of applications, including critical embedded systems. At the time of proposal, about 450 different languages was in use by DoD contractors.</p>
 <p>In 1979 design and rationale of Ada were published in ACM SIGPLAN Notices. In October 1979 a public test and evaluation conference was held. In the conference representatives from over 100 US and Europe organizations took part.</p>
 <p>Final specification was mostly completed in 1980, revised and published in 1983. First usable compilers appeared around 1980.</p>
-<p>Revised in 1995, 2005 (both revisions featuring OOP and concurrency enhancements). Widely used in aviation.</p>
+<p>Revised in 1995, 2005 (both revisions featuring OOP and concurrency enhancements). Widely used in avionics.</p>
 </section><div><a class="slider-prev" href="#forth-stack-based-and-concatenative"></a><a class="slider-next" href="#ada"></a></div>
 <section id="ada" class="slide level1">
 <h1>Ada</h1>
-<div class="sourceCode"><pre class="sourceCode ada"><code class="sourceCode ada"><span class="kw">procedure</span> Ada_Ex <span class="kw">is</span>
-  <span class="kw">type</span> Int_List_Type <span class="kw">is</span> <span class="kw">array</span> (<span class="dv">1</span>..<span class="dv">99</span>) <span class="kw">of</span> <span class="dt">Integer</span>; Int_List : Int_List_Type;
-  List_Len, Sum, Average, Result : <span class="dt">Integer</span>;
-<span class="kw">begin</span>
-  Result:= <span class="dv">0</span>;
-  Sum := <span class="dv">0</span>;
-  Get (List_Len);
-  <span class="kw">if</span> (List_Len &gt; <span class="dv">0</span>) <span class="kw">and</span> (List_Len &lt; <span class="dv">100</span>) <span class="kw">then</span>
-  <span class="co">-- Read input data into an array and compute the sum</span>
-  <span class="kw">for</span> Counter := <span class="dv">1</span> .. List_Len <span class="kw">loop</span>
-      Get (Int_List(Counter));
-      Sum := Sum + Int_List(Counter);
-  <span class="kw">end loop</span>;
-  <span class="co">-- Compute the average</span>
-  Average := Sum / List_Len;
-  <span class="co">-- Count the number of values that are &gt; average</span>
-  <span class="kw">for</span> Counter := <span class="dv">1</span> .. List_Len <span class="kw">loop</span>
-      <span class="kw">if</span> Int_List(Counter) &gt; Average <span class="kw">then</span>
-        Result:= Result+ <span class="dv">1</span>;
-      <span class="kw">end if</span>;
-  <span class="kw">end loop</span>;
-  <span class="co">-- Print result</span>
-  Put (<span class="st">"The number of values &gt; average is:"</span>);
-  Put (Result);
-  New_Line;
-<span class="kw">else</span>
-    Put_Line (<span class="st">"Error—input list length is not legal"</span>);
-<span class="kw">end if</span>;
-<span class="kw">end</span> Ada_Ex;</code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode ada"><code class="sourceCode ada"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">procedure</span> Ada_Ex <span class="kw">is</span></a>
+<a class="sourceLine" id="cb2-2" data-line-number="2">  <span class="kw">type</span> Int_List_Type <span class="kw">is</span> <span class="kw">array</span> (<span class="dv">1</span>..<span class="dv">99</span>) <span class="kw">of</span> <span class="dt">Integer</span>; Int_List : Int_List_Type;</a>
+<a class="sourceLine" id="cb2-3" data-line-number="3">  List_Len, Sum, Average, Result : <span class="dt">Integer</span>;</a>
+<a class="sourceLine" id="cb2-4" data-line-number="4"><span class="kw">begin</span></a>
+<a class="sourceLine" id="cb2-5" data-line-number="5">  Result:= <span class="dv">0</span>;</a>
+<a class="sourceLine" id="cb2-6" data-line-number="6">  Sum := <span class="dv">0</span>;</a>
+<a class="sourceLine" id="cb2-7" data-line-number="7">  Get (List_Len);</a>
+<a class="sourceLine" id="cb2-8" data-line-number="8">  <span class="kw">if</span> (List_Len &gt; <span class="dv">0</span>) <span class="kw">and</span> (List_Len &lt; <span class="dv">100</span>) <span class="kw">then</span></a>
+<a class="sourceLine" id="cb2-9" data-line-number="9">  <span class="co">-- Read input data into an array and compute the sum</span></a>
+<a class="sourceLine" id="cb2-10" data-line-number="10">  <span class="kw">for</span> Counter := <span class="dv">1</span> .. List_Len <span class="kw">loop</span></a>
+<a class="sourceLine" id="cb2-11" data-line-number="11">      Get (Int_List(Counter));</a>
+<a class="sourceLine" id="cb2-12" data-line-number="12">      Sum := Sum + Int_List(Counter);</a>
+<a class="sourceLine" id="cb2-13" data-line-number="13">  <span class="kw">end loop</span>;</a>
+<a class="sourceLine" id="cb2-14" data-line-number="14">  <span class="co">-- Compute the average</span></a>
+<a class="sourceLine" id="cb2-15" data-line-number="15">  Average := Sum / List_Len;</a>
+<a class="sourceLine" id="cb2-16" data-line-number="16">  <span class="co">-- Count the number of values that are &gt; average</span></a>
+<a class="sourceLine" id="cb2-17" data-line-number="17">  <span class="kw">for</span> Counter := <span class="dv">1</span> .. List_Len <span class="kw">loop</span></a>
+<a class="sourceLine" id="cb2-18" data-line-number="18">      <span class="kw">if</span> Int_List(Counter) &gt; Average <span class="kw">then</span></a>
+<a class="sourceLine" id="cb2-19" data-line-number="19">        Result:= Result+ <span class="dv">1</span>;</a>
+<a class="sourceLine" id="cb2-20" data-line-number="20">      <span class="kw">end if</span>;</a>
+<a class="sourceLine" id="cb2-21" data-line-number="21">  <span class="kw">end loop</span>;</a>
+<a class="sourceLine" id="cb2-22" data-line-number="22">  <span class="co">-- Print result</span></a>
+<a class="sourceLine" id="cb2-23" data-line-number="23">  Put (<span class="st">"The number of values &gt; average is:"</span>);</a>
+<a class="sourceLine" id="cb2-24" data-line-number="24">  Put (Result);</a>
+<a class="sourceLine" id="cb2-25" data-line-number="25">  New_Line;</a>
+<a class="sourceLine" id="cb2-26" data-line-number="26"><span class="kw">else</span></a>
+<a class="sourceLine" id="cb2-27" data-line-number="27">    Put_Line (<span class="st">"Error—input list length is not legal"</span>);</a>
+<a class="sourceLine" id="cb2-28" data-line-number="28"><span class="kw">end if</span>;</a>
+<a class="sourceLine" id="cb2-29" data-line-number="29"><span class="kw">end</span> Ada_Ex;</a></code></pre></div>
 </section><div><a class="slider-prev" href="#ada-programming-language"></a><a class="slider-next" href="#ada-1"></a></div>
 <section id="ada-1" class="slide level1">
 <h1>Ada</h1>
-<div class="sourceCode"><pre class="sourceCode ada"><code class="sourceCode ada"><span class="kw">generic</span>
-  capacity: Positive;
-<span class="kw">package</span> Queues <span class="kw">is</span>
-  <span class="kw">type</span> Queue <span class="kw">is</span> <span class="kw">limited</span> <span class="kw">private</span>;
-  <span class="co">-- A Queue value represents a queue whose elements are characters and</span>
-  <span class="co">-- whose maximum length is capacity.</span>
-  <span class="kw">procedure</span> clear (q: <span class="kw">out</span> Queue);
-  <span class="co">-- Make queue q empty.</span>
-  <span class="kw">procedure</span> add (q: <span class="kw">in</span> <span class="kw">out</span> Queue; e: <span class="kw">in</span> <span class="dt">Character</span>);
-  <span class="co">-- Add element e to the rear of queue q.</span>
-  <span class="kw">procedure</span> remove (q: <span class="kw">in</span> <span class="kw">out</span> Queue; e: <span class="kw">out</span> <span class="dt">Character</span>);
-  <span class="co">-- Remove element e from the front of queue q. private</span>
-  <span class="kw">type</span> Queue <span class="kw">is</span> <span class="kw">record</span>
-    length: <span class="dt">Integer</span> <span class="kw">range</span> <span class="dv">0</span> .. capacity;
-    front, rear: <span class="dt">Integer</span> <span class="kw">range</span> <span class="dv">0</span> .. capacity-<span class="dv">1</span>; elems: <span class="kw">array</span> (<span class="dv">0</span> .. capacity-<span class="dv">1</span>) <span class="kw">of</span> <span class="dt">Character</span>;
-  <span class="kw">end record</span>;
-  <span class="co">-- A queue is represented by a cyclic array, with the queued elements</span>
-  <span class="co">-- stored either in elems(front..rear-1) or in</span>
-  <span class="co">-- elems(front..capacity-1) and elems(0..rear-1).</span>
-<span class="kw">end</span> Queues;</code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode ada"><code class="sourceCode ada"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw">generic</span></a>
+<a class="sourceLine" id="cb3-2" data-line-number="2">  capacity: Positive;</a>
+<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="kw">package</span> Queues <span class="kw">is</span></a>
+<a class="sourceLine" id="cb3-4" data-line-number="4">  <span class="kw">type</span> Queue <span class="kw">is</span> <span class="kw">limited</span> <span class="kw">private</span>;</a>
+<a class="sourceLine" id="cb3-5" data-line-number="5">  <span class="co">-- A Queue value represents a queue whose elements are characters and</span></a>
+<a class="sourceLine" id="cb3-6" data-line-number="6">  <span class="co">-- whose maximum length is capacity.</span></a>
+<a class="sourceLine" id="cb3-7" data-line-number="7">  <span class="kw">procedure</span> clear (q: <span class="kw">out</span> Queue);</a>
+<a class="sourceLine" id="cb3-8" data-line-number="8">  <span class="co">-- Make queue q empty.</span></a>
+<a class="sourceLine" id="cb3-9" data-line-number="9">  <span class="kw">procedure</span> add (q: <span class="kw">in</span> <span class="kw">out</span> Queue; e: <span class="kw">in</span> <span class="dt">Character</span>);</a>
+<a class="sourceLine" id="cb3-10" data-line-number="10">  <span class="co">-- Add element e to the rear of queue q.</span></a>
+<a class="sourceLine" id="cb3-11" data-line-number="11">  <span class="kw">procedure</span> remove (q: <span class="kw">in</span> <span class="kw">out</span> Queue; e: <span class="kw">out</span> <span class="dt">Character</span>);</a>
+<a class="sourceLine" id="cb3-12" data-line-number="12">  <span class="co">-- Remove element e from the front of queue q. private</span></a>
+<a class="sourceLine" id="cb3-13" data-line-number="13">  <span class="kw">type</span> Queue <span class="kw">is</span> <span class="kw">record</span></a>
+<a class="sourceLine" id="cb3-14" data-line-number="14">    length: <span class="dt">Integer</span> <span class="kw">range</span> <span class="dv">0</span> .. capacity;</a>
+<a class="sourceLine" id="cb3-15" data-line-number="15">    front, rear: <span class="dt">Integer</span> <span class="kw">range</span> <span class="dv">0</span> .. capacity<span class="dv">-1</span>; elems: <span class="kw">array</span> (<span class="dv">0</span> .. capacity<span class="dv">-1</span>) <span class="kw">of</span> <span class="dt">Character</span>;</a>
+<a class="sourceLine" id="cb3-16" data-line-number="16">  <span class="kw">end record</span>;</a>
+<a class="sourceLine" id="cb3-17" data-line-number="17">  <span class="co">-- A queue is represented by a cyclic array, with the queued elements</span></a>
+<a class="sourceLine" id="cb3-18" data-line-number="18">  <span class="co">-- stored either in elems(front..rear-1) or in</span></a>
+<a class="sourceLine" id="cb3-19" data-line-number="19">  <span class="co">-- elems(front..capacity-1) and elems(0..rear-1).</span></a>
+<a class="sourceLine" id="cb3-20" data-line-number="20"><span class="kw">end</span> Queues;</a></code></pre></div>
 </section><div><a class="slider-prev" href="#ada"></a><a class="slider-next" href="#characteristics-of-programming-languages-1"></a></div>
 <section id="characteristics-of-programming-languages-1" class="slide level1">
 <h1>Characteristics of programming languages</h1>
 <p>How the modern programming languages differ from each other?</p>
 <p>Two major categories:</p>
 <ul>
-<li class="fragment">«internal» characteristic — what is representable in the language, features of any language implementation<br>
-E.g. static vs dynamic typing</li>
-<li class="fragment">«external» characteristic — features of specific language implementation<br>
-E.g. interpreted vs compiled</li>
+<li class="fragment">«internal» characteristic — what is representable in the language, features of any language implementation</li>
 </ul>
+<p>E.g. static vs dynamic typing</p>
+<ul>
+<li class="fragment">«external» characteristic — features of specific language implementation</li>
+</ul>
+<p>E.g. interpreted vs compiled</p>
 </section><div><a class="slider-prev" href="#ada-1"></a><a class="slider-next" href="#interpreted-vs-compiled-python"></a></div>
 <section id="interpreted-vs-compiled-python" class="slide level1">
 <h1>Interpreted vs compiled: Python</h1>
@@ -197,40 +228,37 @@ E.g. interpreted vs compiled</li>
 </section><div><a class="slider-prev" href="#imperative-programming"></a><a class="slider-next" href="#prototype-based-object-oriented-programming"></a></div>
 <section id="prototype-based-object-oriented-programming" class="slide level1">
 <h1>Prototype-based object-oriented programming</h1>
-<p>The concept of class is implemented by the means of a prototype object, which defines the common methods for objects.<br>
-Well-known implementation: JavaScript (ECMAScript)</p>
-<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">var</span> a <span class="op">=</span> [<span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span>]<span class="op">;</span>
-
-<span class="va">a</span>.<span class="at">sum</span>()<span class="op">;</span>
-<span class="co">// ⟶ Exception: sum is not defined</span>
-
-<span class="va">Array</span>.<span class="va">prototype</span>.<span class="at">sum</span> <span class="op">=</span> <span class="kw">function</span>() <span class="op">{</span>
-  <span class="kw">let</span> sum <span class="op">=</span> <span class="dv">0</span><span class="op">;</span>
-  <span class="cf">for</span> (<span class="kw">let</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> <span class="kw">this</span>.<span class="at">length</span><span class="op">;</span> i<span class="op">++</span>) <span class="op">{</span>
-    sum <span class="op">+=</span> <span class="kw">this</span>[i]<span class="op">;</span>
-  <span class="op">}</span>
-  <span class="cf">return</span> sum<span class="op">;</span>
-<span class="op">}</span>
-
-<span class="va">a</span>.<span class="at">sum</span>()<span class="op">;</span>
-<span class="co">// ⟶ 6</span></code></pre></div>
+<p>The concept of class is implemented by the means of a prototype object, which defines the common methods for objects. Well-known implementation: JavaScript (ECMAScript)</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw">var</span> a <span class="op">=</span> [<span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span>]<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb4-3" data-line-number="3"><span class="va">a</span>.<span class="at">sum</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-4" data-line-number="4"><span class="co">// ⟶ Exception: sum is not defined</span></a>
+<a class="sourceLine" id="cb4-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb4-6" data-line-number="6"><span class="va">Array</span>.<span class="va">prototype</span>.<span class="at">sum</span> <span class="op">=</span> <span class="kw">function</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb4-7" data-line-number="7">  <span class="kw">let</span> sum <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb4-8" data-line-number="8">  <span class="cf">for</span> (<span class="kw">let</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> <span class="kw">this</span>.<span class="at">length</span><span class="op">;</span> i<span class="op">++</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb4-9" data-line-number="9">    sum <span class="op">+=</span> <span class="kw">this</span>[i]<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-10" data-line-number="10">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb4-11" data-line-number="11">  <span class="cf">return</span> sum<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-12" data-line-number="12"><span class="op">}</span></a>
+<a class="sourceLine" id="cb4-13" data-line-number="13"></a>
+<a class="sourceLine" id="cb4-14" data-line-number="14"><span class="va">a</span>.<span class="at">sum</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-15" data-line-number="15"><span class="co">// ⟶ 6</span></a></code></pre></div>
 </section><div><a class="slider-prev" href="#object-oriented-programming"></a><a class="slider-next" href="#live-programming"></a></div>
 <section id="live-programming" class="slide level1">
 <h1>Live programming</h1>
 <h2 id="interactive-programming">(interactive programming)</h2>
-<p>Program components are written in the same environment as the program runs.<br>
-Original idea comes from Alan Kay's Ph.D. thesis «The Reactive Engine» (1969), which describes the live programming computer system. Smalltalk was the successor of this idea.</p>
+<p>Program components are written in the same environment as the program runs. Original idea comes from Alan Kay's Ph.D. thesis «The Reactive Engine» (1969), which describes the live programming computer system. Smalltalk was the successor of this idea.</p>
 <p>Main example today: web browser.</p>
-<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="va">document</span>.<span class="at">querySelector</span>(<span class="st">'#live-programming h1'</span>)
-  .<span class="at">addEventListener</span>(<span class="st">'click'</span><span class="op">,</span> <span class="kw">function</span>(e) <span class="op">{</span>
-    <span class="va">e</span>.<span class="va">target</span>.<span class="va">style</span>.<span class="at">fontSize</span><span class="op">=</span><span class="va">Math</span>.<span class="at">random</span>()<span class="op">*</span><span class="dv">70</span> <span class="op">+</span> <span class="st">'pt'</span><span class="op">;</span>
-  <span class="op">}</span>)</code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="va">document</span>.<span class="at">querySelector</span>(<span class="st">'#live-programming h1'</span>)</a>
+<a class="sourceLine" id="cb5-2" data-line-number="2">  .<span class="at">addEventListener</span>(<span class="st">'click'</span><span class="op">,</span> <span class="kw">function</span>(e) <span class="op">{</span></a>
+<a class="sourceLine" id="cb5-3" data-line-number="3">    <span class="va">e</span>.<span class="va">target</span>.<span class="va">style</span>.<span class="at">fontSize</span><span class="op">=</span><span class="va">Math</span>.<span class="at">random</span>()<span class="op">*</span><span class="dv">70</span> <span class="op">+</span> <span class="st">'pt'</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb5-4" data-line-number="4">  <span class="op">}</span>)</a></code></pre></div>
 </section><div><a class="slider-prev" href="#prototype-based-object-oriented-programming"></a><a class="slider-next" href="#type-system"></a></div>
 <section id="type-system" class="slide level1">
 <h1>Type system</h1>
 <blockquote>
-<p>A type system is a tractable syntactic method for proving the absence of certain program behaviors by classifying phrases according to the kinds of values they compute.<br>
-<span class="small">B. Pierce. Types and Programming Languages. 2002.</span></p>
+<p>A type system is a tractable syntactic method for proving the absence of certain program behaviors by classifying phrases according to the kinds of values they compute. <span class="small">B. Pierce. Types and Programming Languages. 2002.</span></p>
 </blockquote>
 <ul>
 <li class="fragment">safe and unsafe</li>
@@ -239,77 +267,76 @@ Original idea comes from Alan Kay's Ph.D. thesis «The Reactive Engine» (1969),
 </section><div><a class="slider-prev" href="#live-programming"></a><a class="slider-next" href="#dynamic-typechecking-and-weak-typing"></a></div>
 <section id="dynamic-typechecking-and-weak-typing" class="slide level1">
 <h1>Dynamic typechecking and weak typing</h1>
-<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">function</span> <span class="at">dynamic</span>(x) <span class="op">{</span>
-  <span class="cf">return</span> x <span class="op">+</span> <span class="dv">1</span><span class="op">;</span>
-<span class="op">}</span>
-
-<span class="at">dynamic</span>(<span class="dv">1</span>) <span class="co">// ⟶ 2</span>
-
-<span class="at">dynamic</span>(<span class="st">'1'</span>) <span class="co">// ⟶ '11'</span>
-<span class="co">// (in some languages it returns 2)</span>
-
-<span class="at">dynamic</span>([<span class="st">'a'</span><span class="op">,</span> <span class="st">'b'</span>]) <span class="co">// ⟶ 'a,b1'</span>
-<span class="co">// (in some languages it may return ['a', 'b', 1])</span>
-
-<span class="at">dynamic</span>(<span class="op">{}</span>)</code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw">function</span> <span class="at">dynamic</span>(x) <span class="op">{</span></a>
+<a class="sourceLine" id="cb6-2" data-line-number="2">  <span class="cf">return</span> x <span class="op">+</span> <span class="dv">1</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb6-3" data-line-number="3"><span class="op">}</span></a>
+<a class="sourceLine" id="cb6-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb6-5" data-line-number="5"><span class="at">dynamic</span>(<span class="dv">1</span>) <span class="co">// ⟶ 2</span></a>
+<a class="sourceLine" id="cb6-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb6-7" data-line-number="7"><span class="at">dynamic</span>(<span class="st">'1'</span>) <span class="co">// ⟶ '11'</span></a>
+<a class="sourceLine" id="cb6-8" data-line-number="8"><span class="co">// (in some languages it returns 2)</span></a>
+<a class="sourceLine" id="cb6-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb6-10" data-line-number="10"><span class="at">dynamic</span>([<span class="st">'a'</span><span class="op">,</span> <span class="st">'b'</span>]) <span class="co">// ⟶ 'a,b1'</span></a>
+<a class="sourceLine" id="cb6-11" data-line-number="11"><span class="co">// (in some languages it may return ['a', 'b', 1])</span></a>
+<a class="sourceLine" id="cb6-12" data-line-number="12"></a>
+<a class="sourceLine" id="cb6-13" data-line-number="13"><span class="at">dynamic</span>(<span class="op">{}</span>)</a></code></pre></div>
 </section><div><a class="slider-prev" href="#type-system"></a><a class="slider-next" href="#optional-type-systems"></a></div>
 <section id="optional-type-systems" class="slide level1">
 <h1>Optional type systems</h1>
-<p>It is possible to provide external static type checking engine for dynamic language. It works as a statical analysis tool. Proper type systems for dynamic language are rather complex (it usually employs row-types).<br>
-Examples:</p>
+<p>It is possible to provide external static type checking engine for dynamic language. It works as a statical analysis tool. Proper type systems for dynamic language are rather complex (it usually employs row-types). Examples:</p>
 <ul>
 <li class="fragment"><a href="http://typedclojure.org">Typed Clojure</a></li>
 <li class="fragment"><a href="https://github.com/python/mypy">mypy (Python)</a></li>
-<li class="fragment"><a href="http://flowtype.org"><strong>Flow (Javascript, by Facebook)</strong></a></li>
+<li class="fragment"><a href="http://flowtype.org"><strong>Flow (JavaScript, by Facebook)</strong></a></li>
+<li class="fragment"><a href="http://typescriptlang.org">Typescript (JavaScript, by Microsoft)</a></li>
 </ul>
-<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript">type BinaryTree <span class="op">=</span>
-  <span class="op">{</span> <span class="dt">kind</span><span class="op">:</span> <span class="st">"leaf"</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> number <span class="op">}</span> <span class="op">|</span>
-  <span class="op">{</span> <span class="dt">kind</span><span class="op">:</span> <span class="st">"branch"</span><span class="op">,</span> <span class="dt">left</span><span class="op">:</span> BinaryTree<span class="op">,</span> <span class="dt">right</span><span class="op">:</span> BinaryTree <span class="op">}</span>
-
-<span class="kw">function</span> <span class="at">sumLeaves</span>(tree<span class="op">:</span> BinaryTree)<span class="op">:</span> number <span class="op">{</span>
-  <span class="cf">if</span> (<span class="va">tree</span>.<span class="at">kind</span> <span class="op">===</span> <span class="st">"leaf"</span>) <span class="op">{</span>
-    <span class="cf">return</span> <span class="va">tree</span>.<span class="at">value</span><span class="op">;</span>
-  <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span>
-    <span class="cf">return</span> <span class="at">sumLeaves</span>(<span class="va">tree</span>.<span class="at">left</span>) <span class="op">+</span> <span class="at">sumLeaves</span>(<span class="va">tree</span>.<span class="at">right</span>)<span class="op">;</span>
-  <span class="op">}</span>
-<span class="op">}</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb7-1" data-line-number="1">type BinaryTree <span class="op">=</span></a>
+<a class="sourceLine" id="cb7-2" data-line-number="2">  <span class="op">{</span> <span class="dt">kind</span><span class="op">:</span> <span class="st">"leaf"</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> number <span class="op">}</span> <span class="op">|</span></a>
+<a class="sourceLine" id="cb7-3" data-line-number="3">  <span class="op">{</span> <span class="dt">kind</span><span class="op">:</span> <span class="st">"branch"</span><span class="op">,</span> <span class="dt">left</span><span class="op">:</span> BinaryTree<span class="op">,</span> <span class="dt">right</span><span class="op">:</span> BinaryTree <span class="op">}</span></a>
+<a class="sourceLine" id="cb7-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb7-5" data-line-number="5"><span class="kw">function</span> <span class="at">sumLeaves</span>(tree<span class="op">:</span> BinaryTree)<span class="op">:</span> number <span class="op">{</span></a>
+<a class="sourceLine" id="cb7-6" data-line-number="6">  <span class="cf">if</span> (<span class="va">tree</span>.<span class="at">kind</span> <span class="op">===</span> <span class="st">"leaf"</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb7-7" data-line-number="7">    <span class="cf">return</span> <span class="va">tree</span>.<span class="at">value</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb7-8" data-line-number="8">  <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb7-9" data-line-number="9">    <span class="cf">return</span> <span class="at">sumLeaves</span>(<span class="va">tree</span>.<span class="at">left</span>) <span class="op">+</span> <span class="at">sumLeaves</span>(<span class="va">tree</span>.<span class="at">right</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb7-10" data-line-number="10">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb7-11" data-line-number="11"><span class="op">}</span></a></code></pre></div>
 </section><div><a class="slider-prev" href="#dynamic-typechecking-and-weak-typing"></a><a class="slider-next" href="#optional-typing"></a></div>
 <section id="optional-typing" class="slide level1">
 <h1>Optional typing</h1>
 <p>Usually external type checkers allow to use annotations as special comments (remember the model checking from the previous semester).</p>
-<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="co">/*::</span>
-<span class="co">type BinaryTree =</span>
-<span class="co">  { kind: "leaf", value: number } |</span>
-<span class="co">  { kind: "branch", left: BinaryTree, right: BinaryTree }</span>
-<span class="co">*/</span>
-
-<span class="kw">function</span> <span class="at">sumLeaves</span>(tree <span class="co">/*: BinaryTree*/</span>) <span class="co">/*: number*/</span> <span class="op">{</span>
-  <span class="cf">if</span> (<span class="va">tree</span>.<span class="at">kind</span> <span class="op">===</span> <span class="st">"leaf"</span>) <span class="op">{</span>
-    <span class="cf">return</span> <span class="va">tree</span>.<span class="at">value</span><span class="op">;</span>
-  <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span>
-    <span class="cf">return</span> <span class="at">sumLeaves</span>(<span class="va">tree</span>.<span class="at">left</span>) <span class="op">+</span> <span class="at">sumLeaves</span>(<span class="va">tree</span>.<span class="at">right</span>)<span class="op">;</span>
-  <span class="op">}</span>
-<span class="op">}</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="co">/*::</span></a>
+<a class="sourceLine" id="cb8-2" data-line-number="2"><span class="co">type BinaryTree =</span></a>
+<a class="sourceLine" id="cb8-3" data-line-number="3"><span class="co">  { kind: "leaf", value: number } |</span></a>
+<a class="sourceLine" id="cb8-4" data-line-number="4"><span class="co">  { kind: "branch", left: BinaryTree, right: BinaryTree }</span></a>
+<a class="sourceLine" id="cb8-5" data-line-number="5"><span class="co">*/</span></a>
+<a class="sourceLine" id="cb8-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb8-7" data-line-number="7"><span class="kw">function</span> <span class="at">sumLeaves</span>(tree <span class="co">/*: BinaryTree*/</span>) <span class="co">/*: number*/</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb8-8" data-line-number="8">  <span class="cf">if</span> (<span class="va">tree</span>.<span class="at">kind</span> <span class="op">===</span> <span class="st">"leaf"</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb8-9" data-line-number="9">    <span class="cf">return</span> <span class="va">tree</span>.<span class="at">value</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb8-10" data-line-number="10">  <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb8-11" data-line-number="11">    <span class="cf">return</span> <span class="at">sumLeaves</span>(<span class="va">tree</span>.<span class="at">left</span>) <span class="op">+</span> <span class="at">sumLeaves</span>(<span class="va">tree</span>.<span class="at">right</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb8-12" data-line-number="12">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb8-13" data-line-number="13"><span class="op">}</span></a></code></pre></div>
 </section><div><a class="slider-prev" href="#optional-type-systems"></a><a class="slider-next" href="#row-types"></a></div>
 <section id="row-types" class="slide level1">
 <h1>Row types</h1>
 <p>The data type which describes required fields (or methods) in data structure, but allows a programmer to extend fields.</p>
-<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript">type BinaryTree <span class="op">=</span>
-  <span class="op">{</span> <span class="dt">kind</span><span class="op">:</span> <span class="st">"leaf"</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> number <span class="op">}</span> <span class="op">|</span>
-  <span class="op">{</span> <span class="dt">kind</span><span class="op">:</span> <span class="st">"branch"</span><span class="op">,</span> <span class="dt">left</span><span class="op">:</span> BinaryTree<span class="op">,</span> <span class="dt">right</span><span class="op">:</span> BinaryTree <span class="op">}</span>
-
-<span class="op">{</span> <span class="dt">kind</span><span class="op">:</span> <span class="st">"leaf"</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span> <span class="dt">additional</span><span class="op">:</span> <span class="st">"Hey!"</span> <span class="op">}</span> <span class="co">/*: BinaryTree */</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb9-1" data-line-number="1">type BinaryTree <span class="op">=</span></a>
+<a class="sourceLine" id="cb9-2" data-line-number="2">  <span class="op">{</span> <span class="dt">kind</span><span class="op">:</span> <span class="st">"leaf"</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> number <span class="op">}</span> <span class="op">|</span></a>
+<a class="sourceLine" id="cb9-3" data-line-number="3">  <span class="op">{</span> <span class="dt">kind</span><span class="op">:</span> <span class="st">"branch"</span><span class="op">,</span> <span class="dt">left</span><span class="op">:</span> BinaryTree<span class="op">,</span> <span class="dt">right</span><span class="op">:</span> BinaryTree <span class="op">}</span></a>
+<a class="sourceLine" id="cb9-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb9-5" data-line-number="5"><span class="op">{</span> <span class="dt">kind</span><span class="op">:</span> <span class="st">"leaf"</span><span class="op">,</span> <span class="dt">value</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span> <span class="dt">additional</span><span class="op">:</span> <span class="st">"Hey!"</span> <span class="op">}</span> <span class="co">/*: BinaryTree */</span></a></code></pre></div>
 </section><div><a class="slider-prev" href="#optional-typing"></a><a class="slider-next" href="#structural-typing"></a></div>
 <section id="structural-typing" class="slide level1">
 <h1>Structural typing</h1>
 <h2 id="duck-typing">Duck typing</h2>
 <blockquote>
-<p>When I see a bird that walks like a duck and swims like a duck and quacks like a duck, I can call that bird a duck.<br>
-<span class="small">J. Riley</span></p>
+<p>When I see a bird that walks like a duck and swims like a duck and quacks like a duck, I can call that bird a duck. <span class="small">J. Riley</span></p>
 </blockquote>
-<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">function</span> <span class="at">addAB</span>(x <span class="co">/*: { a: number, b: number } */</span>) <span class="co">/*: number */</span> <span class="op">{</span>
-  <span class="cf">return</span> <span class="va">x</span>.<span class="at">a</span> <span class="op">+</span> <span class="va">x</span>.<span class="at">b</span><span class="op">;</span>
-<span class="op">}</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="kw">function</span> <span class="at">addAB</span>(x <span class="co">/*: { a: number, b: number } */</span>) <span class="co">/*: number */</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb10-2" data-line-number="2">  <span class="cf">return</span> <span class="va">x</span>.<span class="at">a</span> <span class="op">+</span> <span class="va">x</span>.<span class="at">b</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb10-3" data-line-number="3"><span class="op">}</span></a></code></pre></div>
 </section><div><a class="slider-prev" href="#row-types"></a><a class="slider-next" href="#functional-programming"></a></div>
 <section id="functional-programming" class="slide level1">
 <h1>Functional programming</h1>
@@ -323,61 +350,57 @@ Examples:</p>
 </section><div><a class="slider-prev" href="#structural-typing"></a><a class="slider-next" href="#currying-and-partial-application"></a></div>
 <section id="currying-and-partial-application" class="slide level1">
 <h1>Currying and partial application</h1>
-<p>People say: language support functional programming if the functions are the first-class citizens.<br>
-The core point of this definition can be reduced to implementability of two operations: currying and partial application.</p>
-<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c"><span class="dt">double</span> fmax(<span class="dt">double</span> a, <span class="dt">double</span> b);</code></pre></div>
-<p>Curry: make from two-argument function a function which returns an another function.<br>
-fmax : (a : double) × (b : double) → double<br>
-curry(fmax) : (a : double) → ((b : double) → double)</p>
-<p>Partial application:<br>
-curry(fmax) · 0 : (b : double) → double</p>
-<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">function</span> <span class="at">fmax</span>(a<span class="op">,</span> b) <span class="op">{</span> <span class="cf">return</span> a <span class="op">&lt;</span> b <span class="op">?</span> b : a <span class="op">}</span>
-<span class="kw">function</span> <span class="at">curry2</span>(func) <span class="op">{</span> <span class="cf">return</span> <span class="kw">function</span>(x) <span class="op">{</span> <span class="cf">return</span> <span class="kw">function</span>(y) <span class="op">{</span> <span class="cf">return</span> <span class="at">func</span>(x<span class="op">,</span> y) <span class="op">}</span> <span class="op">}</span> <span class="op">}</span>
-<span class="kw">const</span> curried_fmax <span class="op">=</span> <span class="at">curry2</span>(fmax)<span class="op">;</span>
-<span class="kw">const</span> nonnegative <span class="op">=</span> <span class="at">curried_fmax</span>(<span class="dv">0</span>)<span class="op">;</span>
-<span class="va">Math</span>.<span class="at">sqrt</span>(<span class="at">nonnegative</span>(z))<span class="op">;</span></code></pre></div>
+<p>People say: language support functional programming if the functions are the first-class citizens. The core point of this definition can be reduced to implementability of two operations: currying and partial application.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="dt">double</span> fmax(<span class="dt">double</span> a, <span class="dt">double</span> b);</a></code></pre></div>
+<p>Curry: make from two-argument function a function which returns an another function.</p>
+<p>fmax : (a : double) × (b : double) → double</p>
+<p>curry(fmax) : (a : double) → ((b : double) → double)</p>
+<p>Partial application:</p>
+<p>curry(fmax) · 0 : (b : double) → double</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="kw">function</span> <span class="at">fmax</span>(a<span class="op">,</span> b) <span class="op">{</span> <span class="cf">return</span> a <span class="op">&lt;</span> b <span class="op">?</span> b : a <span class="op">}</span></a>
+<a class="sourceLine" id="cb12-2" data-line-number="2"><span class="kw">function</span> <span class="at">curry2</span>(func) <span class="op">{</span> <span class="cf">return</span> <span class="kw">function</span>(x) <span class="op">{</span> <span class="cf">return</span> <span class="kw">function</span>(y) <span class="op">{</span> <span class="cf">return</span> <span class="at">func</span>(x<span class="op">,</span> y) <span class="op">}</span> <span class="op">}</span> <span class="op">}</span></a>
+<a class="sourceLine" id="cb12-3" data-line-number="3"><span class="kw">const</span> curried_fmax <span class="op">=</span> <span class="at">curry2</span>(fmax)<span class="op">;</span></a>
+<a class="sourceLine" id="cb12-4" data-line-number="4"><span class="kw">const</span> nonnegative <span class="op">=</span> <span class="at">curried_fmax</span>(<span class="dv">0</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb12-5" data-line-number="5"><span class="va">Math</span>.<span class="at">sqrt</span>(<span class="at">nonnegative</span>(z))<span class="op">;</span> <span class="co">// = Math.sqrt(z &lt; 0 ? 0 : z)</span></a></code></pre></div>
 </section><div><a class="slider-prev" href="#functional-programming"></a><a class="slider-next" href="#pure-functional-programming"></a></div>
 <section id="pure-functional-programming" class="slide level1">
 <h1>Pure functional programming</h1>
 <ul>
 <li class="fragment"><strong>Pure function</strong> — a function for which the output depends only on the values of its arguments (no global mutable state).</li>
 </ul>
-<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">function</span> <span class="at">pure</span>(x) <span class="op">{</span>
-  <span class="cf">return</span> x<span class="op">+</span><span class="dv">1</span><span class="op">;</span>
-<span class="op">}</span>
-
-<span class="at">pure</span>(<span class="dv">1</span>) <span class="co">/* ⟶ 2 */</span>
-<span class="at">pure</span>(<span class="dv">1</span>) <span class="co">/* ⟶ 2 */</span>
-
-<span class="va">Array</span>.<span class="va">prototype</span>.<span class="at">impure</span> <span class="op">=</span> <span class="kw">function</span>(x) <span class="op">{</span>
-  <span class="kw">this</span>.<span class="at">push</span>(x)<span class="op">;</span> <span class="co">/* mutation */</span>
-  <span class="cf">return</span> <span class="kw">this</span>.<span class="at">length</span><span class="op">;</span>
-<span class="op">}</span>
-
-<span class="kw">var</span> x <span class="op">=</span> []<span class="op">;</span>
-<span class="va">x</span>.<span class="at">impure</span>(<span class="dv">1</span>) <span class="co">/* ⟶ 1 */</span>
-<span class="va">x</span>.<span class="at">impure</span>(<span class="dv">1</span>) <span class="co">/* ⟶ 2 */</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="kw">function</span> <span class="at">pure</span>(x) <span class="op">{</span></a>
+<a class="sourceLine" id="cb13-2" data-line-number="2">  <span class="cf">return</span> x<span class="op">+</span><span class="dv">1</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb13-3" data-line-number="3"><span class="op">}</span></a>
+<a class="sourceLine" id="cb13-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb13-5" data-line-number="5"><span class="at">pure</span>(<span class="dv">1</span>) <span class="co">/* ⟶ 2 */</span></a>
+<a class="sourceLine" id="cb13-6" data-line-number="6"><span class="at">pure</span>(<span class="dv">1</span>) <span class="co">/* ⟶ 2 */</span></a>
+<a class="sourceLine" id="cb13-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb13-8" data-line-number="8"><span class="va">Array</span>.<span class="va">prototype</span>.<span class="at">impure</span> <span class="op">=</span> <span class="kw">function</span>(x) <span class="op">{</span></a>
+<a class="sourceLine" id="cb13-9" data-line-number="9">  <span class="kw">this</span>.<span class="at">push</span>(x)<span class="op">;</span> <span class="co">/* mutation */</span></a>
+<a class="sourceLine" id="cb13-10" data-line-number="10">  <span class="cf">return</span> <span class="kw">this</span>.<span class="at">length</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb13-11" data-line-number="11"><span class="op">}</span></a>
+<a class="sourceLine" id="cb13-12" data-line-number="12"></a>
+<a class="sourceLine" id="cb13-13" data-line-number="13"><span class="kw">var</span> x <span class="op">=</span> []<span class="op">;</span></a>
+<a class="sourceLine" id="cb13-14" data-line-number="14"><span class="va">x</span>.<span class="at">impure</span>(<span class="dv">1</span>) <span class="co">/* ⟶ 1 */</span></a>
+<a class="sourceLine" id="cb13-15" data-line-number="15"><span class="va">x</span>.<span class="at">impure</span>(<span class="dv">1</span>) <span class="co">/* ⟶ 2 */</span></a></code></pre></div>
 </section><div><a class="slider-prev" href="#currying-and-partial-application"></a><a class="slider-next" href="#pure-functional-programming-1"></a></div>
 <section id="pure-functional-programming-1" class="slide level1">
 <h1>Pure functional programming</h1>
-<p>Example: Haskell<br>
-Advantage: an order of computation is insignificant. An optimizing compiler may translate functional program by taking advantage of mutable state.</p>
+<p>Example: Haskell Advantage: an order of computation is insignificant. An optimizing compiler may translate functional program by taking advantage of mutable state.</p>
 <p><strong>Tail recursion</strong></p>
-<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">function</span> <span class="at">factorial_</span>(n<span class="op">,</span> accumulator) <span class="op">{</span>
-  <span class="cf">return</span> n <span class="op">==</span> <span class="dv">0</span> <span class="op">?</span> accumulator : <span class="at">factorial_</span>(n<span class="op">-</span><span class="dv">1</span><span class="op">,</span> accumulator)<span class="op">;</span>
-<span class="op">}</span>
-<span class="kw">function</span> <span class="at">factorial</span>(x) <span class="op">{</span> <span class="cf">return</span> <span class="at">factorial_</span>(x<span class="op">,</span> <span class="dv">1</span>) <span class="op">}</span></code></pre></div>
-<div class="fragment">
-<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="co">/* Is translated to: */</span>
-<span class="kw">function</span> <span class="at">factorial_</span>(n<span class="op">,</span> accumulator) <span class="op">{</span>
-<span class="dt">START</span><span class="op">:</span> <span class="cf">do</span> <span class="op">{</span>
-    <span class="cf">if</span> (n <span class="op">==</span> <span class="dv">0</span>) <span class="cf">return</span> accumulator<span class="op">;</span>
-    accumulator <span class="op">*=</span> n<span class="op">;</span>
-    n <span class="op">-=</span> <span class="dv">1</span><span class="op">;</span>
-    <span class="cf">continue</span> START<span class="op">;</span>
-  <span class="op">}</span> <span class="cf">while</span>(<span class="dv">0</span>)
-<span class="op">}</span></code></pre></div>
-</div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb14-1" data-line-number="1"><span class="kw">function</span> <span class="at">factorial_</span>(n<span class="op">,</span> accumulator) <span class="op">{</span></a>
+<a class="sourceLine" id="cb14-2" data-line-number="2">  <span class="cf">return</span> n <span class="op">==</span> <span class="dv">0</span> <span class="op">?</span> accumulator : <span class="at">factorial_</span>(n<span class="dv">-1</span><span class="op">,</span> n<span class="op">*</span>accumulator)<span class="op">;</span></a>
+<a class="sourceLine" id="cb14-3" data-line-number="3"><span class="op">}</span></a>
+<a class="sourceLine" id="cb14-4" data-line-number="4"><span class="kw">function</span> <span class="at">factorial</span>(x) <span class="op">{</span> <span class="cf">return</span> <span class="at">factorial_</span>(x<span class="op">,</span> <span class="dv">1</span>) <span class="op">}</span></a></code></pre></div>
+<p>is translated to:</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="kw">function</span> <span class="at">factorial_</span>(n<span class="op">,</span> accumulator) <span class="op">{</span></a>
+<a class="sourceLine" id="cb15-2" data-line-number="2"><span class="dt">START</span><span class="op">:</span> <span class="cf">do</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb15-3" data-line-number="3">    <span class="cf">if</span> (n <span class="op">==</span> <span class="dv">0</span>) <span class="cf">return</span> accumulator<span class="op">;</span></a>
+<a class="sourceLine" id="cb15-4" data-line-number="4">    accumulator <span class="op">*=</span> n<span class="op">;</span></a>
+<a class="sourceLine" id="cb15-5" data-line-number="5">    n <span class="op">-=</span> <span class="dv">1</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb15-6" data-line-number="6">    <span class="cf">continue</span> START<span class="op">;</span></a>
+<a class="sourceLine" id="cb15-7" data-line-number="7">  <span class="op">}</span> <span class="cf">while</span>(<span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb15-8" data-line-number="8"><span class="op">}</span></a></code></pre></div>
 </section><div><a class="slider-prev" href="#pure-functional-programming"></a><a class="slider-next" href="#polymorphism"></a></div>
 <section id="polymorphism" class="slide level1">
 <h1>Polymorphism</h1>
@@ -392,40 +415,40 @@ Advantage: an order of computation is insignificant. An optimizing compiler may 
 <section id="ad-hoc-polymorphism-1" class="slide level1">
 <h1>Ad-hoc polymorphism</h1>
 <p>Function (operator) overloading — the same name for different types corresponds to the different implementations. Example: C++</p>
-<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="dt">int</span> volume(<span class="dt">int</span> s)
-{
-    <span class="cf">return</span> s*s*s;
-}
-
-<span class="co">// volume of a cylinder</span>
-<span class="dt">double</span> volume(<span class="dt">double</span> r, <span class="dt">int</span> h)
-{
-    <span class="cf">return</span> <span class="fl">3.14</span>*r*r*<span class="kw">static_cast</span>&lt;<span class="dt">double</span>&gt;(h);
-}
-<span class="co">// volume of a cuboid</span>
-<span class="dt">long</span> volume(<span class="dt">long</span> l, <span class="dt">int</span> b, <span class="dt">int</span> h)
-{
-    <span class="cf">return</span> l*b*h;
-}</code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="dt">int</span> volume(<span class="dt">int</span> s)</a>
+<a class="sourceLine" id="cb16-2" data-line-number="2">{</a>
+<a class="sourceLine" id="cb16-3" data-line-number="3">    <span class="cf">return</span> s*s*s;</a>
+<a class="sourceLine" id="cb16-4" data-line-number="4">}</a>
+<a class="sourceLine" id="cb16-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb16-6" data-line-number="6"><span class="co">// volume of a cylinder</span></a>
+<a class="sourceLine" id="cb16-7" data-line-number="7"><span class="dt">double</span> volume(<span class="dt">double</span> r, <span class="dt">int</span> h)</a>
+<a class="sourceLine" id="cb16-8" data-line-number="8">{</a>
+<a class="sourceLine" id="cb16-9" data-line-number="9">    <span class="cf">return</span> <span class="fl">3.14</span>*r*r*<span class="kw">static_cast</span>&lt;<span class="dt">double</span>&gt;(h);</a>
+<a class="sourceLine" id="cb16-10" data-line-number="10">}</a>
+<a class="sourceLine" id="cb16-11" data-line-number="11"><span class="co">// volume of a cuboid</span></a>
+<a class="sourceLine" id="cb16-12" data-line-number="12"><span class="dt">long</span> volume(<span class="dt">long</span> l, <span class="dt">int</span> b, <span class="dt">int</span> h)</a>
+<a class="sourceLine" id="cb16-13" data-line-number="13">{</a>
+<a class="sourceLine" id="cb16-14" data-line-number="14">    <span class="cf">return</span> l*b*h;</a>
+<a class="sourceLine" id="cb16-15" data-line-number="15">}</a></code></pre></div>
 </section><div><a class="slider-prev" href="#polymorphism"></a><a class="slider-next" href="#subtype-polymorphism-1"></a></div>
 <section id="subtype-polymorphism-1" class="slide level1">
 <h1>Subtype polymorphism</h1>
 <p>The same function for subtype may call different implementations</p>
-<div class="sourceCode"><pre class="sourceCode java"><code class="sourceCode java"><span class="kw">abstract</span> <span class="kw">class</span> Animal {
-    <span class="kw">abstract</span> <span class="bu">String</span> <span class="fu">talk</span>();
-}
-
-<span class="kw">class</span> Cat <span class="kw">extends</span> Animal {
-    <span class="bu">String</span> <span class="fu">talk</span>() {
-        <span class="kw">return</span> <span class="st">"Meow!"</span>;
-    }
-}
-
-<span class="kw">class</span> Dog <span class="kw">extends</span> Animal {
-    <span class="bu">String</span> <span class="fu">talk</span>() {
-        <span class="kw">return</span> <span class="st">"Woof!"</span>;
-    }
-}</code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="kw">abstract</span> <span class="kw">class</span> Animal {</a>
+<a class="sourceLine" id="cb17-2" data-line-number="2">    <span class="kw">abstract</span> <span class="bu">String</span> <span class="fu">talk</span>();</a>
+<a class="sourceLine" id="cb17-3" data-line-number="3">}</a>
+<a class="sourceLine" id="cb17-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb17-5" data-line-number="5"><span class="kw">class</span> Cat <span class="kw">extends</span> Animal {</a>
+<a class="sourceLine" id="cb17-6" data-line-number="6">    <span class="bu">String</span> <span class="fu">talk</span>() {</a>
+<a class="sourceLine" id="cb17-7" data-line-number="7">        <span class="kw">return</span> <span class="st">"Meow!"</span>;</a>
+<a class="sourceLine" id="cb17-8" data-line-number="8">    }</a>
+<a class="sourceLine" id="cb17-9" data-line-number="9">}</a>
+<a class="sourceLine" id="cb17-10" data-line-number="10"></a>
+<a class="sourceLine" id="cb17-11" data-line-number="11"><span class="kw">class</span> Dog <span class="kw">extends</span> Animal {</a>
+<a class="sourceLine" id="cb17-12" data-line-number="12">    <span class="bu">String</span> <span class="fu">talk</span>() {</a>
+<a class="sourceLine" id="cb17-13" data-line-number="13">        <span class="kw">return</span> <span class="st">"Woof!"</span>;</a>
+<a class="sourceLine" id="cb17-14" data-line-number="14">    }</a>
+<a class="sourceLine" id="cb17-15" data-line-number="15">}</a></code></pre></div>
 </section><div><a class="slider-prev" href="#ad-hoc-polymorphism-1"></a><a class="slider-next" href="#dynamic-dispatch-1"></a></div>
 <section id="dynamic-dispatch-1" class="slide level1">
 <h1>Dynamic dispatch</h1>
@@ -440,196 +463,195 @@ Advantage: an order of computation is insignificant. An optimizing compiler may 
 </dl>
 <p>Example of multiple dispatch: an implementation of the addition operator in <a href="http://docs.julialang.org/en/release-0.4/manual/methods/">Julia programming language</a>:</p>
 <div style="overflow-y: scroll; height: 10em;">
-<div class="sourceCode"><pre class="sourceCode julia"><code class="sourceCode julia">julia&gt; methods(+)
-<span class="co"># 139 methods for generic function "+":</span>
-+(x::<span class="dt">Bool</span>) at bool.jl:<span class="fl">33</span>
-+(x::<span class="dt">Bool</span>,y::<span class="dt">Bool</span>) at bool.jl:<span class="fl">36</span>
-+(y::AbstractFloat,x::<span class="dt">Bool</span>) at bool.jl:<span class="fl">46</span>
-+(x::<span class="dt">Int64</span>,y::<span class="dt">Int64</span>) at int.jl:<span class="fl">14</span>
-+(x::<span class="dt">Int8</span>,y::<span class="dt">Int8</span>) at int.jl:<span class="fl">14</span>
-+(x::UInt8,y::UInt8) at int.jl:<span class="fl">14</span>
-+(x::<span class="dt">Int16</span>,y::<span class="dt">Int16</span>) at int.jl:<span class="fl">14</span>
-+(x::UInt16,y::UInt16) at int.jl:<span class="fl">14</span>
-+(x::<span class="dt">Int32</span>,y::<span class="dt">Int32</span>) at int.jl:<span class="fl">14</span>
-+(x::UInt32,y::UInt32) at int.jl:<span class="fl">14</span>
-+(x::UInt64,y::UInt64) at int.jl:<span class="fl">14</span>
-+(x::Int128,y::Int128) at int.jl:<span class="fl">14</span>
-+(x::UInt128,y::UInt128) at int.jl:<span class="fl">14</span>
-+(x::<span class="dt">Float32</span>,y::<span class="dt">Float32</span>) at float.jl:<span class="fl">192</span>
-+(x::<span class="dt">Float64</span>,y::<span class="dt">Float64</span>) at float.jl:<span class="fl">193</span>
-+(z::<span class="dt">Complex</span>{T&lt;:<span class="dt">Real</span>},w::<span class="dt">Complex</span>{T&lt;:<span class="dt">Real</span>}) at complex.jl:<span class="fl">96</span>
-+(x::<span class="dt">Real</span>,z::<span class="dt">Complex</span>{T&lt;:<span class="dt">Real</span>}) at complex.jl:<span class="fl">106</span>
-+(z::<span class="dt">Complex</span>{T&lt;:<span class="dt">Real</span>},x::<span class="dt">Real</span>) at complex.jl:<span class="fl">107</span>
-+(x::<span class="dt">Rational</span>{T&lt;:<span class="dt">Integer</span>},y::<span class="dt">Rational</span>{T&lt;:<span class="dt">Integer</span>}) at rational.jl:<span class="fl">167</span>
-+(a::Float16,b::Float16) at float16.jl:<span class="fl">136</span>
-+(x::Base.GMP.BigInt,y::Base.GMP.BigInt) at gmp.jl:<span class="fl">243</span>
-+(a::Base.GMP.BigInt,b::Base.GMP.BigInt,c::Base.GMP.BigInt) at gmp.jl:<span class="fl">266</span>
-+(a::Base.GMP.BigInt,b::Base.GMP.BigInt,c::Base.GMP.BigInt,d::Base.GMP.BigInt) at gmp.jl:<span class="fl">272</span>
-+(a::Base.GMP.BigInt,b::Base.GMP.BigInt,c::Base.GMP.BigInt,d::Base.GMP.BigInt,e::Base.GMP.BigInt) at gmp.jl:<span class="fl">279</span>
-+(x::Base.GMP.BigInt,c::<span class="dt">Union</span>{UInt32,UInt16,UInt8,UInt64}) at gmp.jl:<span class="fl">291</span>
-+(c::<span class="dt">Union</span>{UInt32,UInt16,UInt8,UInt64},x::Base.GMP.BigInt) at gmp.jl:<span class="fl">295</span>
-+(x::Base.GMP.BigInt,c::<span class="dt">Union</span>{<span class="dt">Int16</span>,<span class="dt">Int32</span>,<span class="dt">Int8</span>,<span class="dt">Int64</span>}) at gmp.jl:<span class="fl">307</span>
-+(c::<span class="dt">Union</span>{<span class="dt">Int16</span>,<span class="dt">Int32</span>,<span class="dt">Int8</span>,<span class="dt">Int64</span>},x::Base.GMP.BigInt) at gmp.jl:<span class="fl">308</span>
-+(x::Base.MPFR.BigFloat,y::Base.MPFR.BigFloat) at mpfr.jl:<span class="fl">206</span>
-+(x::Base.MPFR.BigFloat,c::<span class="dt">Union</span>{UInt32,UInt16,UInt8,UInt64}) at mpfr.jl:<span class="fl">213</span>
-+(c::<span class="dt">Union</span>{UInt32,UInt16,UInt8,UInt64},x::Base.MPFR.BigFloat) at mpfr.jl:<span class="fl">217</span>
-+(x::Base.MPFR.BigFloat,c::<span class="dt">Union</span>{<span class="dt">Int16</span>,<span class="dt">Int32</span>,<span class="dt">Int8</span>,<span class="dt">Int64</span>}) at mpfr.jl:<span class="fl">221</span>
-+(c::<span class="dt">Union</span>{<span class="dt">Int16</span>,<span class="dt">Int32</span>,<span class="dt">Int8</span>,<span class="dt">Int64</span>},x::Base.MPFR.BigFloat) at mpfr.jl:<span class="fl">225</span>
-+(x::Base.MPFR.BigFloat,c::<span class="dt">Union</span>{Float16,<span class="dt">Float64</span>,<span class="dt">Float32</span>}) at mpfr.jl:<span class="fl">229</span>
-+(c::<span class="dt">Union</span>{Float16,<span class="dt">Float64</span>,<span class="dt">Float32</span>},x::Base.MPFR.BigFloat) at mpfr.jl:<span class="fl">233</span>
-+(x::Base.MPFR.BigFloat,c::Base.GMP.BigInt) at mpfr.jl:<span class="fl">237</span>
-+(c::Base.GMP.BigInt,x::Base.MPFR.BigFloat) at mpfr.jl:<span class="fl">241</span>
-+(a::Base.MPFR.BigFloat,b::Base.MPFR.BigFloat,c::Base.MPFR.BigFloat) at mpfr.jl:<span class="fl">318</span>
-+(a::Base.MPFR.BigFloat,b::Base.MPFR.BigFloat,c::Base.MPFR.BigFloat,d::Base.MPFR.BigFloat) at mpfr.jl:<span class="fl">324</span>
-+(a::Base.MPFR.BigFloat,b::Base.MPFR.BigFloat,c::Base.MPFR.BigFloat,d::Base.MPFR.BigFloat,e::Base.MPFR.BigFloat) at mpfr.jl:<span class="fl">331</span>
-+(x::Irrational{sym},y::Irrational{sym}) at constants.jl:<span class="fl">71</span>
-+{T&lt;:<span class="dt">Number</span>}(x::T&lt;:<span class="dt">Number</span>,y::T&lt;:<span class="dt">Number</span>) at promotion.jl:<span class="fl">205</span>
-+{T&lt;:AbstractFloat}(x::<span class="dt">Bool</span>,y::T&lt;:AbstractFloat) at bool.jl:<span class="fl">43</span>
-+(x::<span class="dt">Number</span>,y::<span class="dt">Number</span>) at promotion.jl:<span class="fl">167</span>
-+(x::<span class="dt">Integer</span>,y::<span class="dt">Ptr</span>{T}) at pointer.jl:<span class="fl">70</span>
-+(x::<span class="dt">Bool</span>,A::<span class="dt">AbstractArray</span>{<span class="dt">Bool</span>,N}) at array.jl:<span class="fl">829</span>
-+(x::<span class="dt">Integer</span>,y::<span class="dt">Char</span>) at char.jl:<span class="fl">41</span>
-+(x::<span class="dt">Number</span>) at operators.jl:<span class="fl">72</span>
-+(r1::OrdinalRange{T,S},r2::OrdinalRange{T,S}) at operators.jl:<span class="fl">325</span>
-+{T&lt;:AbstractFloat}(r1::FloatRange{T&lt;:AbstractFloat},r2::FloatRange{T&lt;:AbstractFloat}) at operators.jl:<span class="fl">331</span>
-+(r1::FloatRange{T&lt;:AbstractFloat},r2::FloatRange{T&lt;:AbstractFloat}) at operators.jl:<span class="fl">348</span>
-+(r1::FloatRange{T&lt;:AbstractFloat},r2::OrdinalRange{T,S}) at operators.jl:<span class="fl">349</span>
-+(r1::OrdinalRange{T,S},r2::FloatRange{T&lt;:AbstractFloat}) at operators.jl:<span class="fl">350</span>
-+(x::<span class="dt">Ptr</span>{T},y::<span class="dt">Integer</span>) at pointer.jl:<span class="fl">68</span>
-+{S,T}(A::<span class="dt">Range</span>{S},B::<span class="dt">Range</span>{T}) at array.jl:<span class="fl">773</span>
-+{S,T}(A::<span class="dt">Range</span>{S},B::<span class="dt">AbstractArray</span>{T,N}) at array.jl:<span class="fl">791</span>
-+(A::<span class="dt">AbstractArray</span>{<span class="dt">Bool</span>,N},x::<span class="dt">Bool</span>) at array.jl:<span class="fl">828</span>
-+(A::BitArray{N},B::BitArray{N}) at bitarray.jl:<span class="fl">926</span>
-+(A::<span class="dt">Union</span>{DenseArray{<span class="dt">Bool</span>,N},<span class="dt">SubArray</span>{<span class="dt">Bool</span>,N,A&lt;:DenseArray{T,N},I&lt;:<span class="dt">Tuple</span>{Vararg{<span class="dt">Union</span>{Colon,<span class="dt">Range</span>{<span class="dt">Int64</span>},<span class="dt">Int64</span>}}},LD}},B::<span class="dt">Union</span>{DenseArray{<span class="dt">Bool</span>,N},<span class="dt">SubArray</span>{<span class="dt">Bool</span>,N,A&lt;:DenseArray{T,N},I&lt;:<span class="dt">Tuple</span>{Vararg{<span class="dt">Union</span>{Colon,<span class="dt">Range</span>{<span class="dt">Int64</span>},<span class="dt">Int64</span>}}},LD}}) at array.jl:<span class="fl">859</span>
-+(A::Base.LinAlg.SymTridiagonal{T},B::Base.LinAlg.SymTridiagonal{T}) at linalg/tridiag.jl:<span class="fl">59</span>
-+(A::Base.LinAlg.Tridiagonal{T},B::Base.LinAlg.Tridiagonal{T}) at linalg/tridiag.jl:<span class="fl">254</span>
-+(A::Base.LinAlg.Tridiagonal{T},B::Base.LinAlg.SymTridiagonal{T}) at linalg/special.jl:<span class="fl">113</span>
-+(A::Base.LinAlg.SymTridiagonal{T},B::Base.LinAlg.Tridiagonal{T}) at linalg/special.jl:<span class="fl">112</span>
-+(A::Base.LinAlg.UpperTriangular{T,S&lt;:<span class="dt">AbstractArray</span>{T,<span class="fl">2</span>}},B::Base.LinAlg.UpperTriangular{T,S&lt;:<span class="dt">AbstractArray</span>{T,<span class="fl">2</span>}}) at linalg/triangular.jl:<span class="fl">164</span>
-+(A::Base.LinAlg.LowerTriangular{T,S&lt;:<span class="dt">AbstractArray</span>{T,<span class="fl">2</span>}},B::Base.LinAlg.LowerTriangular{T,S&lt;:<span class="dt">AbstractArray</span>{T,<span class="fl">2</span>}}) at linalg/triangular.jl:<span class="fl">165</span>
-+(A::Base.LinAlg.UpperTriangular{T,S&lt;:<span class="dt">AbstractArray</span>{T,<span class="fl">2</span>}},B::Base.LinAlg.UnitUpperTriangular{T,S&lt;:<span class="dt">AbstractArray</span>{T,<span class="fl">2</span>}}) at linalg/triangular.jl:<span class="fl">166</span>
-+(A::Base.LinAlg.LowerTriangular{T,S&lt;:<span class="dt">AbstractArray</span>{T,<span class="fl">2</span>}},B::Base.LinAlg.UnitLowerTriangular{T,S&lt;:<span class="dt">AbstractArray</span>{T,<span class="fl">2</span>}}) at linalg/triangular.jl:<span class="fl">167</span>
-+(A::Base.LinAlg.UnitUpperTriangular{T,S&lt;:<span class="dt">AbstractArray</span>{T,<span class="fl">2</span>}},B::Base.LinAlg.UpperTriangular{T,S&lt;:<span class="dt">AbstractArray</span>{T,<span class="fl">2</span>}}) at linalg/triangular.jl:<span class="fl">168</span>
-+(A::Base.LinAlg.UnitLowerTriangular{T,S&lt;:<span class="dt">AbstractArray</span>{T,<span class="fl">2</span>}},B::Base.LinAlg.LowerTriangular{T,S&lt;:<span class="dt">AbstractArray</span>{T,<span class="fl">2</span>}}) at linalg/triangular.jl:<span class="fl">169</span>
-+(A::Base.LinAlg.UnitUpperTriangular{T,S&lt;:<span class="dt">AbstractArray</span>{T,<span class="fl">2</span>}},B::Base.LinAlg.UnitUpperTriangular{T,S&lt;:<span class="dt">AbstractArray</span>{T,<span class="fl">2</span>}}) at linalg/triangular.jl:<span class="fl">170</span>
-+(A::Base.LinAlg.UnitLowerTriangular{T,S&lt;:<span class="dt">AbstractArray</span>{T,<span class="fl">2</span>}},B::Base.LinAlg.UnitLowerTriangular{T,S&lt;:<span class="dt">AbstractArray</span>{T,<span class="fl">2</span>}}) at linalg/triangular.jl:<span class="fl">171</span>
-+(A::Base.LinAlg.AbstractTriangular{T,S&lt;:<span class="dt">AbstractArray</span>{T,<span class="fl">2</span>}},B::Base.LinAlg.AbstractTriangular{T,S&lt;:<span class="dt">AbstractArray</span>{T,<span class="fl">2</span>}}) at linalg/triangular.jl:<span class="fl">172</span>
-+(Da::Base.LinAlg.Diagonal{T},Db::Base.LinAlg.Diagonal{T}) at linalg/diagonal.jl:<span class="fl">50</span>
-+(A::Base.LinAlg.Bidiagonal{T},B::Base.LinAlg.Bidiagonal{T}) at linalg/bidiag.jl:<span class="fl">111</span>
-+{T}(B::BitArray{<span class="fl">2</span>},J::Base.LinAlg.UniformScaling{T}) at linalg/uniformscaling.jl:<span class="fl">28</span>
-+(A::Base.LinAlg.Diagonal{T},B::Base.LinAlg.Bidiagonal{T}) at linalg/special.jl:<span class="fl">103</span>
-+(A::Base.LinAlg.Bidiagonal{T},B::Base.LinAlg.Diagonal{T}) at linalg/special.jl:<span class="fl">104</span>
-+(A::Base.LinAlg.Diagonal{T},B::Base.LinAlg.Tridiagonal{T}) at linalg/special.jl:<span class="fl">103</span>
-+(A::Base.LinAlg.Tridiagonal{T},B::Base.LinAlg.Diagonal{T}) at linalg/special.jl:<span class="fl">104</span>
-+(A::Base.LinAlg.Diagonal{T},B::<span class="dt">Array</span>{T,<span class="fl">2</span>}) at linalg/special.jl:<span class="fl">103</span>
-+(A::<span class="dt">Array</span>{T,<span class="fl">2</span>},B::Base.LinAlg.Diagonal{T}) at linalg/special.jl:<span class="fl">104</span>
-+(A::Base.LinAlg.Bidiagonal{T},B::Base.LinAlg.Tridiagonal{T}) at linalg/special.jl:<span class="fl">103</span>
-+(A::Base.LinAlg.Tridiagonal{T},B::Base.LinAlg.Bidiagonal{T}) at linalg/special.jl:<span class="fl">104</span>
-+(A::Base.LinAlg.Bidiagonal{T},B::<span class="dt">Array</span>{T,<span class="fl">2</span>}) at linalg/special.jl:<span class="fl">103</span>
-+(A::<span class="dt">Array</span>{T,<span class="fl">2</span>},B::Base.LinAlg.Bidiagonal{T}) at linalg/special.jl:<span class="fl">104</span>
-+(A::Base.LinAlg.Tridiagonal{T},B::<span class="dt">Array</span>{T,<span class="fl">2</span>}) at linalg/special.jl:<span class="fl">103</span>
-+(A::<span class="dt">Array</span>{T,<span class="fl">2</span>},B::Base.LinAlg.Tridiagonal{T}) at linalg/special.jl:<span class="fl">104</span>
-+(A::Base.LinAlg.SymTridiagonal{T},B::<span class="dt">Array</span>{T,<span class="fl">2</span>}) at linalg/special.jl:<span class="fl">112</span>
-+(A::<span class="dt">Array</span>{T,<span class="fl">2</span>},B::Base.LinAlg.SymTridiagonal{T}) at linalg/special.jl:<span class="fl">113</span>
-+(A::Base.LinAlg.Diagonal{T},B::Base.LinAlg.SymTridiagonal{T}) at linalg/special.jl:<span class="fl">121</span>
-+(A::Base.LinAlg.SymTridiagonal{T},B::Base.LinAlg.Diagonal{T}) at linalg/special.jl:<span class="fl">122</span>
-+(A::Base.LinAlg.Bidiagonal{T},B::Base.LinAlg.SymTridiagonal{T}) at linalg/special.jl:<span class="fl">121</span>
-+(A::Base.LinAlg.SymTridiagonal{T},B::Base.LinAlg.Bidiagonal{T}) at linalg/special.jl:<span class="fl">122</span>
-+{Tv1,Ti1,Tv2,Ti2}(A_1::Base.SparseMatrix.SparseMatrixCSC{Tv1,Ti1},A_2::Base.SparseMatrix.SparseMatrixCSC{Tv2,Ti2}) at sparse/sparsematrix.jl:<span class="fl">873</span>
-+(A::Base.SparseMatrix.SparseMatrixCSC{Tv,Ti&lt;:<span class="dt">Integer</span>},B::<span class="dt">Array</span>{T,N}) at sparse/sparsematrix.jl:<span class="fl">885</span>
-+(A::<span class="dt">Array</span>{T,N},B::Base.SparseMatrix.SparseMatrixCSC{Tv,Ti&lt;:<span class="dt">Integer</span>}) at sparse/sparsematrix.jl:<span class="fl">887</span>
-+{P&lt;:Base.Dates.Period}(Y::<span class="dt">Union</span>{<span class="dt">SubArray</span>{P&lt;:Base.Dates.Period,N,A&lt;:DenseArray{T,N},I&lt;:<span class="dt">Tuple</span>{Vararg{<span class="dt">Union</span>{Colon,<span class="dt">Range</span>{<span class="dt">Int64</span>},<span class="dt">Int64</span>}}},LD},DenseArray{P&lt;:Base.Dates.Period,N}},x::P&lt;:Base.Dates.Period) at dates/periods.jl:<span class="fl">50</span>
-+{T&lt;:Base.Dates.TimeType}(r::<span class="dt">Range</span>{T&lt;:Base.Dates.TimeType},x::Base.Dates.Period) at dates/ranges.jl:<span class="fl">39</span>
-+{T&lt;:<span class="dt">Number</span>}(x::<span class="dt">AbstractArray</span>{T&lt;:<span class="dt">Number</span>,N}) at abstractarray.jl:<span class="fl">442</span>
-+{S,T}(A::<span class="dt">AbstractArray</span>{S,N},B::<span class="dt">Range</span>{T}) at array.jl:<span class="fl">782</span>
-+{S,T}(A::<span class="dt">AbstractArray</span>{S,N},B::<span class="dt">AbstractArray</span>{T,N}) at array.jl:<span class="fl">800</span>
-+(A::<span class="dt">AbstractArray</span>{T,N},x::<span class="dt">Number</span>) at array.jl:<span class="fl">832</span>
-+(x::<span class="dt">Number</span>,A::<span class="dt">AbstractArray</span>{T,N}) at array.jl:<span class="fl">833</span>
-+(x::<span class="dt">Char</span>,y::<span class="dt">Integer</span>) at char.jl:<span class="fl">40</span>
-+{N}(index1::Base.IteratorsMD.CartesianIndex{N},index2::Base.IteratorsMD.CartesianIndex{N}) at multidimensional.jl:<span class="fl">121</span>
-+(J1::Base.LinAlg.UniformScaling{T&lt;:<span class="dt">Number</span>},J2::Base.LinAlg.UniformScaling{T&lt;:<span class="dt">Number</span>}) at linalg/uniformscaling.jl:<span class="fl">27</span>
-+(J::Base.LinAlg.UniformScaling{T&lt;:<span class="dt">Number</span>},B::BitArray{<span class="fl">2</span>}) at linalg/uniformscaling.jl:<span class="fl">29</span>
-+(J::Base.LinAlg.UniformScaling{T&lt;:<span class="dt">Number</span>},A::<span class="dt">AbstractArray</span>{T,<span class="fl">2</span>}) at linalg/uniformscaling.jl:<span class="fl">30</span>
-+(J::Base.LinAlg.UniformScaling{T&lt;:<span class="dt">Number</span>},x::<span class="dt">Number</span>) at linalg/uniformscaling.jl:<span class="fl">31</span>
-+(x::<span class="dt">Number</span>,J::Base.LinAlg.UniformScaling{T&lt;:<span class="dt">Number</span>}) at linalg/uniformscaling.jl:<span class="fl">32</span>
-+{TA,TJ}(A::<span class="dt">AbstractArray</span>{TA,<span class="fl">2</span>},J::Base.LinAlg.UniformScaling{TJ}) at linalg/uniformscaling.jl:<span class="fl">35</span>
-+{T}(a::Base.Pkg.Resolve.VersionWeights.HierarchicalValue{T},b::Base.Pkg.Resolve.VersionWeights.HierarchicalValue{T}) at pkg/resolve/versionweight.jl:<span class="fl">21</span>
-+(a::Base.Pkg.Resolve.VersionWeights.VWPreBuildItem,b::Base.Pkg.Resolve.VersionWeights.VWPreBuildItem) at pkg/resolve/versionweight.jl:<span class="fl">83</span>
-+(a::Base.Pkg.Resolve.VersionWeights.VWPreBuild,b::Base.Pkg.Resolve.VersionWeights.VWPreBuild) at pkg/resolve/versionweight.jl:<span class="fl">129</span>
-+(a::Base.Pkg.Resolve.VersionWeights.VersionWeight,b::Base.Pkg.Resolve.VersionWeights.VersionWeight) at pkg/resolve/versionweight.jl:<span class="fl">183</span>
-+(a::Base.Pkg.Resolve.MaxSum.FieldValues.FieldValue,b::Base.Pkg.Resolve.MaxSum.FieldValues.FieldValue) at pkg/resolve/fieldvalue.jl:<span class="fl">43</span>
-+{P&lt;:Base.Dates.Period}(x::P&lt;:Base.Dates.Period,y::P&lt;:Base.Dates.Period) at dates/periods.jl:<span class="fl">43</span>
-+{P&lt;:Base.Dates.Period}(x::P&lt;:Base.Dates.Period,Y::<span class="dt">Union</span>{<span class="dt">SubArray</span>{P&lt;:Base.Dates.Period,N,A&lt;:DenseArray{T,N},I&lt;:<span class="dt">Tuple</span>{Vararg{<span class="dt">Union</span>{Colon,<span class="dt">Range</span>{<span class="dt">Int64</span>},<span class="dt">Int64</span>}}},LD},DenseArray{P&lt;:Base.Dates.Period,N}}) at dates/periods.jl:<span class="fl">49</span>
-+(x::Base.Dates.Period,y::Base.Dates.Period) at dates/periods.jl:<span class="fl">196</span>
-+(x::Base.Dates.CompoundPeriod,y::Base.Dates.Period) at dates/periods.jl:<span class="fl">197</span>
-+(y::Base.Dates.Period,x::Base.Dates.CompoundPeriod) at dates/periods.jl:<span class="fl">198</span>
-+(x::Base.Dates.CompoundPeriod,y::Base.Dates.CompoundPeriod) at dates/periods.jl:<span class="fl">199</span>
-+(dt::Base.Dates.DateTime,y::Base.Dates.Year) at dates/arithmetic.jl:<span class="fl">13</span>
-+(dt::Base.Dates.Date,y::Base.Dates.Year) at dates/arithmetic.jl:<span class="fl">17</span>
-+(dt::Base.Dates.DateTime,z::Base.Dates.Month) at dates/arithmetic.jl:<span class="fl">37</span>
-+(dt::Base.Dates.Date,z::Base.Dates.Month) at dates/arithmetic.jl:<span class="fl">43</span>
-+(x::Base.Dates.Date,y::Base.Dates.Week) at dates/arithmetic.jl:<span class="fl">60</span>
-+(x::Base.Dates.Date,y::Base.Dates.Day) at dates/arithmetic.jl:<span class="fl">62</span>
-+(x::Base.Dates.DateTime,y::Base.Dates.Period) at dates/arithmetic.jl:<span class="fl">64</span>
-+(a::Base.Dates.TimeType,b::Base.Dates.Period,c::Base.Dates.Period) at dates/periods.jl:<span class="fl">210</span>
-+(a::Base.Dates.TimeType,b::Base.Dates.Period,c::Base.Dates.Period,d::Base.Dates.Period...) at dates/periods.jl:<span class="fl">212</span>
-+(x::Base.Dates.TimeType,y::Base.Dates.CompoundPeriod) at dates/periods.jl:<span class="fl">216</span>
-+(x::Base.Dates.CompoundPeriod,y::Base.Dates.TimeType) at dates/periods.jl:<span class="fl">221</span>
-+(x::Base.Dates.Instant) at dates/arithmetic.jl:<span class="fl">4</span>
-+(x::Base.Dates.TimeType) at dates/arithmetic.jl:<span class="fl">8</span>
-+(y::Base.Dates.Period,x::Base.Dates.TimeType) at dates/arithmetic.jl:<span class="fl">66</span>
-+{T&lt;:Base.Dates.TimeType}(x::Base.Dates.Period,r::<span class="dt">Range</span>{T&lt;:Base.Dates.TimeType}) at dates/ranges.jl:<span class="fl">40</span>
-+(a,b,c) at operators.jl:<span class="fl">83</span>
-+(a,b,c,xs...) at operators.jl:<span class="fl">84</span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb18-1" data-line-number="1">julia&gt; methods(+)</a>
+<a class="sourceLine" id="cb18-2" data-line-number="2"><span class="co"># 139 methods for generic function "+":</span></a>
+<a class="sourceLine" id="cb18-3" data-line-number="3">+(x::<span class="dt">Bool</span>) at bool.jl:<span class="fl">33</span></a>
+<a class="sourceLine" id="cb18-4" data-line-number="4">+(x::<span class="dt">Bool</span>,y::<span class="dt">Bool</span>) at bool.jl:<span class="fl">36</span></a>
+<a class="sourceLine" id="cb18-5" data-line-number="5">+(y::AbstractFloat,x::<span class="dt">Bool</span>) at bool.jl:<span class="fl">46</span></a>
+<a class="sourceLine" id="cb18-6" data-line-number="6">+(x::<span class="dt">Int64</span>,y::<span class="dt">Int64</span>) at int.jl:<span class="fl">14</span></a>
+<a class="sourceLine" id="cb18-7" data-line-number="7">+(x::<span class="dt">Int8</span>,y::<span class="dt">Int8</span>) at int.jl:<span class="fl">14</span></a>
+<a class="sourceLine" id="cb18-8" data-line-number="8">+(x::UInt8,y::UInt8) at int.jl:<span class="fl">14</span></a>
+<a class="sourceLine" id="cb18-9" data-line-number="9">+(x::<span class="dt">Int16</span>,y::<span class="dt">Int16</span>) at int.jl:<span class="fl">14</span></a>
+<a class="sourceLine" id="cb18-10" data-line-number="10">+(x::UInt16,y::UInt16) at int.jl:<span class="fl">14</span></a>
+<a class="sourceLine" id="cb18-11" data-line-number="11">+(x::<span class="dt">Int32</span>,y::<span class="dt">Int32</span>) at int.jl:<span class="fl">14</span></a>
+<a class="sourceLine" id="cb18-12" data-line-number="12">+(x::UInt32,y::UInt32) at int.jl:<span class="fl">14</span></a>
+<a class="sourceLine" id="cb18-13" data-line-number="13">+(x::UInt64,y::UInt64) at int.jl:<span class="fl">14</span></a>
+<a class="sourceLine" id="cb18-14" data-line-number="14">+(x::Int128,y::Int128) at int.jl:<span class="fl">14</span></a>
+<a class="sourceLine" id="cb18-15" data-line-number="15">+(x::UInt128,y::UInt128) at int.jl:<span class="fl">14</span></a>
+<a class="sourceLine" id="cb18-16" data-line-number="16">+(x::<span class="dt">Float32</span>,y::<span class="dt">Float32</span>) at float.jl:<span class="fl">192</span></a>
+<a class="sourceLine" id="cb18-17" data-line-number="17">+(x::<span class="dt">Float64</span>,y::<span class="dt">Float64</span>) at float.jl:<span class="fl">193</span></a>
+<a class="sourceLine" id="cb18-18" data-line-number="18">+(z::<span class="dt">Complex</span>{T&lt;:<span class="dt">Real</span>},w::<span class="dt">Complex</span>{T&lt;:<span class="dt">Real</span>}) at complex.jl:<span class="fl">96</span></a>
+<a class="sourceLine" id="cb18-19" data-line-number="19">+(x::<span class="dt">Real</span>,z::<span class="dt">Complex</span>{T&lt;:<span class="dt">Real</span>}) at complex.jl:<span class="fl">106</span></a>
+<a class="sourceLine" id="cb18-20" data-line-number="20">+(z::<span class="dt">Complex</span>{T&lt;:<span class="dt">Real</span>},x::<span class="dt">Real</span>) at complex.jl:<span class="fl">107</span></a>
+<a class="sourceLine" id="cb18-21" data-line-number="21">+(x::<span class="dt">Rational</span>{T&lt;:<span class="dt">Integer</span>},y::<span class="dt">Rational</span>{T&lt;:<span class="dt">Integer</span>}) at rational.jl:<span class="fl">167</span></a>
+<a class="sourceLine" id="cb18-22" data-line-number="22">+(a::Float16,b::Float16) at float16.jl:<span class="fl">136</span></a>
+<a class="sourceLine" id="cb18-23" data-line-number="23">+(x::Base.GMP.BigInt,y::Base.GMP.BigInt) at gmp.jl:<span class="fl">243</span></a>
+<a class="sourceLine" id="cb18-24" data-line-number="24">+(a::Base.GMP.BigInt,b::Base.GMP.BigInt,c::Base.GMP.BigInt) at gmp.jl:<span class="fl">266</span></a>
+<a class="sourceLine" id="cb18-25" data-line-number="25">+(a::Base.GMP.BigInt,b::Base.GMP.BigInt,c::Base.GMP.BigInt,d::Base.GMP.BigInt) at gmp.jl:<span class="fl">272</span></a>
+<a class="sourceLine" id="cb18-26" data-line-number="26">+(a::Base.GMP.BigInt,b::Base.GMP.BigInt,c::Base.GMP.BigInt,d::Base.GMP.BigInt,e::Base.GMP.BigInt) at gmp.jl:<span class="fl">279</span></a>
+<a class="sourceLine" id="cb18-27" data-line-number="27">+(x::Base.GMP.BigInt,c::<span class="dt">Union</span>{UInt32,UInt16,UInt8,UInt64}) at gmp.jl:<span class="fl">291</span></a>
+<a class="sourceLine" id="cb18-28" data-line-number="28">+(c::<span class="dt">Union</span>{UInt32,UInt16,UInt8,UInt64},x::Base.GMP.BigInt) at gmp.jl:<span class="fl">295</span></a>
+<a class="sourceLine" id="cb18-29" data-line-number="29">+(x::Base.GMP.BigInt,c::<span class="dt">Union</span>{<span class="dt">Int16</span>,<span class="dt">Int32</span>,<span class="dt">Int8</span>,<span class="dt">Int64</span>}) at gmp.jl:<span class="fl">307</span></a>
+<a class="sourceLine" id="cb18-30" data-line-number="30">+(c::<span class="dt">Union</span>{<span class="dt">Int16</span>,<span class="dt">Int32</span>,<span class="dt">Int8</span>,<span class="dt">Int64</span>},x::Base.GMP.BigInt) at gmp.jl:<span class="fl">308</span></a>
+<a class="sourceLine" id="cb18-31" data-line-number="31">+(x::Base.MPFR.BigFloat,y::Base.MPFR.BigFloat) at mpfr.jl:<span class="fl">206</span></a>
+<a class="sourceLine" id="cb18-32" data-line-number="32">+(x::Base.MPFR.BigFloat,c::<span class="dt">Union</span>{UInt32,UInt16,UInt8,UInt64}) at mpfr.jl:<span class="fl">213</span></a>
+<a class="sourceLine" id="cb18-33" data-line-number="33">+(c::<span class="dt">Union</span>{UInt32,UInt16,UInt8,UInt64},x::Base.MPFR.BigFloat) at mpfr.jl:<span class="fl">217</span></a>
+<a class="sourceLine" id="cb18-34" data-line-number="34">+(x::Base.MPFR.BigFloat,c::<span class="dt">Union</span>{<span class="dt">Int16</span>,<span class="dt">Int32</span>,<span class="dt">Int8</span>,<span class="dt">Int64</span>}) at mpfr.jl:<span class="fl">221</span></a>
+<a class="sourceLine" id="cb18-35" data-line-number="35">+(c::<span class="dt">Union</span>{<span class="dt">Int16</span>,<span class="dt">Int32</span>,<span class="dt">Int8</span>,<span class="dt">Int64</span>},x::Base.MPFR.BigFloat) at mpfr.jl:<span class="fl">225</span></a>
+<a class="sourceLine" id="cb18-36" data-line-number="36">+(x::Base.MPFR.BigFloat,c::<span class="dt">Union</span>{Float16,<span class="dt">Float64</span>,<span class="dt">Float32</span>}) at mpfr.jl:<span class="fl">229</span></a>
+<a class="sourceLine" id="cb18-37" data-line-number="37">+(c::<span class="dt">Union</span>{Float16,<span class="dt">Float64</span>,<span class="dt">Float32</span>},x::Base.MPFR.BigFloat) at mpfr.jl:<span class="fl">233</span></a>
+<a class="sourceLine" id="cb18-38" data-line-number="38">+(x::Base.MPFR.BigFloat,c::Base.GMP.BigInt) at mpfr.jl:<span class="fl">237</span></a>
+<a class="sourceLine" id="cb18-39" data-line-number="39">+(c::Base.GMP.BigInt,x::Base.MPFR.BigFloat) at mpfr.jl:<span class="fl">241</span></a>
+<a class="sourceLine" id="cb18-40" data-line-number="40">+(a::Base.MPFR.BigFloat,b::Base.MPFR.BigFloat,c::Base.MPFR.BigFloat) at mpfr.jl:<span class="fl">318</span></a>
+<a class="sourceLine" id="cb18-41" data-line-number="41">+(a::Base.MPFR.BigFloat,b::Base.MPFR.BigFloat,c::Base.MPFR.BigFloat,d::Base.MPFR.BigFloat) at mpfr.jl:<span class="fl">324</span></a>
+<a class="sourceLine" id="cb18-42" data-line-number="42">+(a::Base.MPFR.BigFloat,b::Base.MPFR.BigFloat,c::Base.MPFR.BigFloat,d::Base.MPFR.BigFloat,e::Base.MPFR.BigFloat) at mpfr.jl:<span class="fl">331</span></a>
+<a class="sourceLine" id="cb18-43" data-line-number="43">+(x::Irrational{sym},y::Irrational{sym}) at constants.jl:<span class="fl">71</span></a>
+<a class="sourceLine" id="cb18-44" data-line-number="44">+{T&lt;:<span class="dt">Number</span>}(x::T&lt;:<span class="dt">Number</span>,y::T&lt;:<span class="dt">Number</span>) at promotion.jl:<span class="fl">205</span></a>
+<a class="sourceLine" id="cb18-45" data-line-number="45">+{T&lt;:AbstractFloat}(x::<span class="dt">Bool</span>,y::T&lt;:AbstractFloat) at bool.jl:<span class="fl">43</span></a>
+<a class="sourceLine" id="cb18-46" data-line-number="46">+(x::<span class="dt">Number</span>,y::<span class="dt">Number</span>) at promotion.jl:<span class="fl">167</span></a>
+<a class="sourceLine" id="cb18-47" data-line-number="47">+(x::<span class="dt">Integer</span>,y::<span class="dt">Ptr</span>{T}) at pointer.jl:<span class="fl">70</span></a>
+<a class="sourceLine" id="cb18-48" data-line-number="48">+(x::<span class="dt">Bool</span>,A::<span class="dt">AbstractArray</span>{<span class="dt">Bool</span>,N}) at array.jl:<span class="fl">829</span></a>
+<a class="sourceLine" id="cb18-49" data-line-number="49">+(x::<span class="dt">Integer</span>,y::<span class="dt">Char</span>) at char.jl:<span class="fl">41</span></a>
+<a class="sourceLine" id="cb18-50" data-line-number="50">+(x::<span class="dt">Number</span>) at operators.jl:<span class="fl">72</span></a>
+<a class="sourceLine" id="cb18-51" data-line-number="51">+(r1::OrdinalRange{T,S},r2::OrdinalRange{T,S}) at operators.jl:<span class="fl">325</span></a>
+<a class="sourceLine" id="cb18-52" data-line-number="52">+{T&lt;:AbstractFloat}(r1::FloatRange{T&lt;:AbstractFloat},r2::FloatRange{T&lt;:AbstractFloat}) at operators.jl:<span class="fl">331</span></a>
+<a class="sourceLine" id="cb18-53" data-line-number="53">+(r1::FloatRange{T&lt;:AbstractFloat},r2::FloatRange{T&lt;:AbstractFloat}) at operators.jl:<span class="fl">348</span></a>
+<a class="sourceLine" id="cb18-54" data-line-number="54">+(r1::FloatRange{T&lt;:AbstractFloat},r2::OrdinalRange{T,S}) at operators.jl:<span class="fl">349</span></a>
+<a class="sourceLine" id="cb18-55" data-line-number="55">+(r1::OrdinalRange{T,S},r2::FloatRange{T&lt;:AbstractFloat}) at operators.jl:<span class="fl">350</span></a>
+<a class="sourceLine" id="cb18-56" data-line-number="56">+(x::<span class="dt">Ptr</span>{T},y::<span class="dt">Integer</span>) at pointer.jl:<span class="fl">68</span></a>
+<a class="sourceLine" id="cb18-57" data-line-number="57">+{S,T}(A::<span class="dt">Range</span>{S},B::<span class="dt">Range</span>{T}) at array.jl:<span class="fl">773</span></a>
+<a class="sourceLine" id="cb18-58" data-line-number="58">+{S,T}(A::<span class="dt">Range</span>{S},B::<span class="dt">AbstractArray</span>{T,N}) at array.jl:<span class="fl">791</span></a>
+<a class="sourceLine" id="cb18-59" data-line-number="59">+(A::<span class="dt">AbstractArray</span>{<span class="dt">Bool</span>,N},x::<span class="dt">Bool</span>) at array.jl:<span class="fl">828</span></a>
+<a class="sourceLine" id="cb18-60" data-line-number="60">+(A::BitArray{N},B::BitArray{N}) at bitarray.jl:<span class="fl">926</span></a>
+<a class="sourceLine" id="cb18-61" data-line-number="61">+(A::<span class="dt">Union</span>{DenseArray{<span class="dt">Bool</span>,N},<span class="dt">SubArray</span>{<span class="dt">Bool</span>,N,A&lt;:DenseArray{T,N},I&lt;:<span class="dt">Tuple</span>{Vararg{<span class="dt">Union</span>{Colon,<span class="dt">Range</span>{<span class="dt">Int64</span>},<span class="dt">Int64</span>}}},LD}},B::<span class="dt">Union</span>{DenseArray{<span class="dt">Bool</span>,N},<span class="dt">SubArray</span>{<span class="dt">Bool</span>,N,A&lt;:DenseArray{T,N},I&lt;:<span class="dt">Tuple</span>{Vararg{<span class="dt">Union</span>{Colon,<span class="dt">Range</span>{<span class="dt">Int64</span>},<span class="dt">Int64</span>}}},LD}}) at array.jl:<span class="fl">859</span></a>
+<a class="sourceLine" id="cb18-62" data-line-number="62">+(A::Base.LinAlg.SymTridiagonal{T},B::Base.LinAlg.SymTridiagonal{T}) at linalg/tridiag.jl:<span class="fl">59</span></a>
+<a class="sourceLine" id="cb18-63" data-line-number="63">+(A::Base.LinAlg.Tridiagonal{T},B::Base.LinAlg.Tridiagonal{T}) at linalg/tridiag.jl:<span class="fl">254</span></a>
+<a class="sourceLine" id="cb18-64" data-line-number="64">+(A::Base.LinAlg.Tridiagonal{T},B::Base.LinAlg.SymTridiagonal{T}) at linalg/special.jl:<span class="fl">113</span></a>
+<a class="sourceLine" id="cb18-65" data-line-number="65">+(A::Base.LinAlg.SymTridiagonal{T},B::Base.LinAlg.Tridiagonal{T}) at linalg/special.jl:<span class="fl">112</span></a>
+<a class="sourceLine" id="cb18-66" data-line-number="66">+(A::Base.LinAlg.UpperTriangular{T,S&lt;:<span class="dt">AbstractArray</span>{T,<span class="fl">2</span>}},B::Base.LinAlg.UpperTriangular{T,S&lt;:<span class="dt">AbstractArray</span>{T,<span class="fl">2</span>}}) at linalg/triangular.jl:<span class="fl">164</span></a>
+<a class="sourceLine" id="cb18-67" data-line-number="67">+(A::Base.LinAlg.LowerTriangular{T,S&lt;:<span class="dt">AbstractArray</span>{T,<span class="fl">2</span>}},B::Base.LinAlg.LowerTriangular{T,S&lt;:<span class="dt">AbstractArray</span>{T,<span class="fl">2</span>}}) at linalg/triangular.jl:<span class="fl">165</span></a>
+<a class="sourceLine" id="cb18-68" data-line-number="68">+(A::Base.LinAlg.UpperTriangular{T,S&lt;:<span class="dt">AbstractArray</span>{T,<span class="fl">2</span>}},B::Base.LinAlg.UnitUpperTriangular{T,S&lt;:<span class="dt">AbstractArray</span>{T,<span class="fl">2</span>}}) at linalg/triangular.jl:<span class="fl">166</span></a>
+<a class="sourceLine" id="cb18-69" data-line-number="69">+(A::Base.LinAlg.LowerTriangular{T,S&lt;:<span class="dt">AbstractArray</span>{T,<span class="fl">2</span>}},B::Base.LinAlg.UnitLowerTriangular{T,S&lt;:<span class="dt">AbstractArray</span>{T,<span class="fl">2</span>}}) at linalg/triangular.jl:<span class="fl">167</span></a>
+<a class="sourceLine" id="cb18-70" data-line-number="70">+(A::Base.LinAlg.UnitUpperTriangular{T,S&lt;:<span class="dt">AbstractArray</span>{T,<span class="fl">2</span>}},B::Base.LinAlg.UpperTriangular{T,S&lt;:<span class="dt">AbstractArray</span>{T,<span class="fl">2</span>}}) at linalg/triangular.jl:<span class="fl">168</span></a>
+<a class="sourceLine" id="cb18-71" data-line-number="71">+(A::Base.LinAlg.UnitLowerTriangular{T,S&lt;:<span class="dt">AbstractArray</span>{T,<span class="fl">2</span>}},B::Base.LinAlg.LowerTriangular{T,S&lt;:<span class="dt">AbstractArray</span>{T,<span class="fl">2</span>}}) at linalg/triangular.jl:<span class="fl">169</span></a>
+<a class="sourceLine" id="cb18-72" data-line-number="72">+(A::Base.LinAlg.UnitUpperTriangular{T,S&lt;:<span class="dt">AbstractArray</span>{T,<span class="fl">2</span>}},B::Base.LinAlg.UnitUpperTriangular{T,S&lt;:<span class="dt">AbstractArray</span>{T,<span class="fl">2</span>}}) at linalg/triangular.jl:<span class="fl">170</span></a>
+<a class="sourceLine" id="cb18-73" data-line-number="73">+(A::Base.LinAlg.UnitLowerTriangular{T,S&lt;:<span class="dt">AbstractArray</span>{T,<span class="fl">2</span>}},B::Base.LinAlg.UnitLowerTriangular{T,S&lt;:<span class="dt">AbstractArray</span>{T,<span class="fl">2</span>}}) at linalg/triangular.jl:<span class="fl">171</span></a>
+<a class="sourceLine" id="cb18-74" data-line-number="74">+(A::Base.LinAlg.AbstractTriangular{T,S&lt;:<span class="dt">AbstractArray</span>{T,<span class="fl">2</span>}},B::Base.LinAlg.AbstractTriangular{T,S&lt;:<span class="dt">AbstractArray</span>{T,<span class="fl">2</span>}}) at linalg/triangular.jl:<span class="fl">172</span></a>
+<a class="sourceLine" id="cb18-75" data-line-number="75">+(Da::Base.LinAlg.Diagonal{T},Db::Base.LinAlg.Diagonal{T}) at linalg/diagonal.jl:<span class="fl">50</span></a>
+<a class="sourceLine" id="cb18-76" data-line-number="76">+(A::Base.LinAlg.Bidiagonal{T},B::Base.LinAlg.Bidiagonal{T}) at linalg/bidiag.jl:<span class="fl">111</span></a>
+<a class="sourceLine" id="cb18-77" data-line-number="77">+{T}(B::BitArray{<span class="fl">2</span>},J::Base.LinAlg.UniformScaling{T}) at linalg/uniformscaling.jl:<span class="fl">28</span></a>
+<a class="sourceLine" id="cb18-78" data-line-number="78">+(A::Base.LinAlg.Diagonal{T},B::Base.LinAlg.Bidiagonal{T}) at linalg/special.jl:<span class="fl">103</span></a>
+<a class="sourceLine" id="cb18-79" data-line-number="79">+(A::Base.LinAlg.Bidiagonal{T},B::Base.LinAlg.Diagonal{T}) at linalg/special.jl:<span class="fl">104</span></a>
+<a class="sourceLine" id="cb18-80" data-line-number="80">+(A::Base.LinAlg.Diagonal{T},B::Base.LinAlg.Tridiagonal{T}) at linalg/special.jl:<span class="fl">103</span></a>
+<a class="sourceLine" id="cb18-81" data-line-number="81">+(A::Base.LinAlg.Tridiagonal{T},B::Base.LinAlg.Diagonal{T}) at linalg/special.jl:<span class="fl">104</span></a>
+<a class="sourceLine" id="cb18-82" data-line-number="82">+(A::Base.LinAlg.Diagonal{T},B::<span class="dt">Array</span>{T,<span class="fl">2</span>}) at linalg/special.jl:<span class="fl">103</span></a>
+<a class="sourceLine" id="cb18-83" data-line-number="83">+(A::<span class="dt">Array</span>{T,<span class="fl">2</span>},B::Base.LinAlg.Diagonal{T}) at linalg/special.jl:<span class="fl">104</span></a>
+<a class="sourceLine" id="cb18-84" data-line-number="84">+(A::Base.LinAlg.Bidiagonal{T},B::Base.LinAlg.Tridiagonal{T}) at linalg/special.jl:<span class="fl">103</span></a>
+<a class="sourceLine" id="cb18-85" data-line-number="85">+(A::Base.LinAlg.Tridiagonal{T},B::Base.LinAlg.Bidiagonal{T}) at linalg/special.jl:<span class="fl">104</span></a>
+<a class="sourceLine" id="cb18-86" data-line-number="86">+(A::Base.LinAlg.Bidiagonal{T},B::<span class="dt">Array</span>{T,<span class="fl">2</span>}) at linalg/special.jl:<span class="fl">103</span></a>
+<a class="sourceLine" id="cb18-87" data-line-number="87">+(A::<span class="dt">Array</span>{T,<span class="fl">2</span>},B::Base.LinAlg.Bidiagonal{T}) at linalg/special.jl:<span class="fl">104</span></a>
+<a class="sourceLine" id="cb18-88" data-line-number="88">+(A::Base.LinAlg.Tridiagonal{T},B::<span class="dt">Array</span>{T,<span class="fl">2</span>}) at linalg/special.jl:<span class="fl">103</span></a>
+<a class="sourceLine" id="cb18-89" data-line-number="89">+(A::<span class="dt">Array</span>{T,<span class="fl">2</span>},B::Base.LinAlg.Tridiagonal{T}) at linalg/special.jl:<span class="fl">104</span></a>
+<a class="sourceLine" id="cb18-90" data-line-number="90">+(A::Base.LinAlg.SymTridiagonal{T},B::<span class="dt">Array</span>{T,<span class="fl">2</span>}) at linalg/special.jl:<span class="fl">112</span></a>
+<a class="sourceLine" id="cb18-91" data-line-number="91">+(A::<span class="dt">Array</span>{T,<span class="fl">2</span>},B::Base.LinAlg.SymTridiagonal{T}) at linalg/special.jl:<span class="fl">113</span></a>
+<a class="sourceLine" id="cb18-92" data-line-number="92">+(A::Base.LinAlg.Diagonal{T},B::Base.LinAlg.SymTridiagonal{T}) at linalg/special.jl:<span class="fl">121</span></a>
+<a class="sourceLine" id="cb18-93" data-line-number="93">+(A::Base.LinAlg.SymTridiagonal{T},B::Base.LinAlg.Diagonal{T}) at linalg/special.jl:<span class="fl">122</span></a>
+<a class="sourceLine" id="cb18-94" data-line-number="94">+(A::Base.LinAlg.Bidiagonal{T},B::Base.LinAlg.SymTridiagonal{T}) at linalg/special.jl:<span class="fl">121</span></a>
+<a class="sourceLine" id="cb18-95" data-line-number="95">+(A::Base.LinAlg.SymTridiagonal{T},B::Base.LinAlg.Bidiagonal{T}) at linalg/special.jl:<span class="fl">122</span></a>
+<a class="sourceLine" id="cb18-96" data-line-number="96">+{Tv1,Ti1,Tv2,Ti2}(A_1::Base.SparseMatrix.SparseMatrixCSC{Tv1,Ti1},A_2::Base.SparseMatrix.SparseMatrixCSC{Tv2,Ti2}) at sparse/sparsematrix.jl:<span class="fl">873</span></a>
+<a class="sourceLine" id="cb18-97" data-line-number="97">+(A::Base.SparseMatrix.SparseMatrixCSC{Tv,Ti&lt;:<span class="dt">Integer</span>},B::<span class="dt">Array</span>{T,N}) at sparse/sparsematrix.jl:<span class="fl">885</span></a>
+<a class="sourceLine" id="cb18-98" data-line-number="98">+(A::<span class="dt">Array</span>{T,N},B::Base.SparseMatrix.SparseMatrixCSC{Tv,Ti&lt;:<span class="dt">Integer</span>}) at sparse/sparsematrix.jl:<span class="fl">887</span></a>
+<a class="sourceLine" id="cb18-99" data-line-number="99">+{P&lt;:Base.Dates.Period}(Y::<span class="dt">Union</span>{<span class="dt">SubArray</span>{P&lt;:Base.Dates.Period,N,A&lt;:DenseArray{T,N},I&lt;:<span class="dt">Tuple</span>{Vararg{<span class="dt">Union</span>{Colon,<span class="dt">Range</span>{<span class="dt">Int64</span>},<span class="dt">Int64</span>}}},LD},DenseArray{P&lt;:Base.Dates.Period,N}},x::P&lt;:Base.Dates.Period) at dates/periods.jl:<span class="fl">50</span></a>
+<a class="sourceLine" id="cb18-100" data-line-number="100">+{T&lt;:Base.Dates.TimeType}(r::<span class="dt">Range</span>{T&lt;:Base.Dates.TimeType},x::Base.Dates.Period) at dates/ranges.jl:<span class="fl">39</span></a>
+<a class="sourceLine" id="cb18-101" data-line-number="101">+{T&lt;:<span class="dt">Number</span>}(x::<span class="dt">AbstractArray</span>{T&lt;:<span class="dt">Number</span>,N}) at abstractarray.jl:<span class="fl">442</span></a>
+<a class="sourceLine" id="cb18-102" data-line-number="102">+{S,T}(A::<span class="dt">AbstractArray</span>{S,N},B::<span class="dt">Range</span>{T}) at array.jl:<span class="fl">782</span></a>
+<a class="sourceLine" id="cb18-103" data-line-number="103">+{S,T}(A::<span class="dt">AbstractArray</span>{S,N},B::<span class="dt">AbstractArray</span>{T,N}) at array.jl:<span class="fl">800</span></a>
+<a class="sourceLine" id="cb18-104" data-line-number="104">+(A::<span class="dt">AbstractArray</span>{T,N},x::<span class="dt">Number</span>) at array.jl:<span class="fl">832</span></a>
+<a class="sourceLine" id="cb18-105" data-line-number="105">+(x::<span class="dt">Number</span>,A::<span class="dt">AbstractArray</span>{T,N}) at array.jl:<span class="fl">833</span></a>
+<a class="sourceLine" id="cb18-106" data-line-number="106">+(x::<span class="dt">Char</span>,y::<span class="dt">Integer</span>) at char.jl:<span class="fl">40</span></a>
+<a class="sourceLine" id="cb18-107" data-line-number="107">+{N}(index1::Base.IteratorsMD.CartesianIndex{N},index2::Base.IteratorsMD.CartesianIndex{N}) at multidimensional.jl:<span class="fl">121</span></a>
+<a class="sourceLine" id="cb18-108" data-line-number="108">+(J1::Base.LinAlg.UniformScaling{T&lt;:<span class="dt">Number</span>},J2::Base.LinAlg.UniformScaling{T&lt;:<span class="dt">Number</span>}) at linalg/uniformscaling.jl:<span class="fl">27</span></a>
+<a class="sourceLine" id="cb18-109" data-line-number="109">+(J::Base.LinAlg.UniformScaling{T&lt;:<span class="dt">Number</span>},B::BitArray{<span class="fl">2</span>}) at linalg/uniformscaling.jl:<span class="fl">29</span></a>
+<a class="sourceLine" id="cb18-110" data-line-number="110">+(J::Base.LinAlg.UniformScaling{T&lt;:<span class="dt">Number</span>},A::<span class="dt">AbstractArray</span>{T,<span class="fl">2</span>}) at linalg/uniformscaling.jl:<span class="fl">30</span></a>
+<a class="sourceLine" id="cb18-111" data-line-number="111">+(J::Base.LinAlg.UniformScaling{T&lt;:<span class="dt">Number</span>},x::<span class="dt">Number</span>) at linalg/uniformscaling.jl:<span class="fl">31</span></a>
+<a class="sourceLine" id="cb18-112" data-line-number="112">+(x::<span class="dt">Number</span>,J::Base.LinAlg.UniformScaling{T&lt;:<span class="dt">Number</span>}) at linalg/uniformscaling.jl:<span class="fl">32</span></a>
+<a class="sourceLine" id="cb18-113" data-line-number="113">+{TA,TJ}(A::<span class="dt">AbstractArray</span>{TA,<span class="fl">2</span>},J::Base.LinAlg.UniformScaling{TJ}) at linalg/uniformscaling.jl:<span class="fl">35</span></a>
+<a class="sourceLine" id="cb18-114" data-line-number="114">+{T}(a::Base.Pkg.Resolve.VersionWeights.HierarchicalValue{T},b::Base.Pkg.Resolve.VersionWeights.HierarchicalValue{T}) at pkg/resolve/versionweight.jl:<span class="fl">21</span></a>
+<a class="sourceLine" id="cb18-115" data-line-number="115">+(a::Base.Pkg.Resolve.VersionWeights.VWPreBuildItem,b::Base.Pkg.Resolve.VersionWeights.VWPreBuildItem) at pkg/resolve/versionweight.jl:<span class="fl">83</span></a>
+<a class="sourceLine" id="cb18-116" data-line-number="116">+(a::Base.Pkg.Resolve.VersionWeights.VWPreBuild,b::Base.Pkg.Resolve.VersionWeights.VWPreBuild) at pkg/resolve/versionweight.jl:<span class="fl">129</span></a>
+<a class="sourceLine" id="cb18-117" data-line-number="117">+(a::Base.Pkg.Resolve.VersionWeights.VersionWeight,b::Base.Pkg.Resolve.VersionWeights.VersionWeight) at pkg/resolve/versionweight.jl:<span class="fl">183</span></a>
+<a class="sourceLine" id="cb18-118" data-line-number="118">+(a::Base.Pkg.Resolve.MaxSum.FieldValues.FieldValue,b::Base.Pkg.Resolve.MaxSum.FieldValues.FieldValue) at pkg/resolve/fieldvalue.jl:<span class="fl">43</span></a>
+<a class="sourceLine" id="cb18-119" data-line-number="119">+{P&lt;:Base.Dates.Period}(x::P&lt;:Base.Dates.Period,y::P&lt;:Base.Dates.Period) at dates/periods.jl:<span class="fl">43</span></a>
+<a class="sourceLine" id="cb18-120" data-line-number="120">+{P&lt;:Base.Dates.Period}(x::P&lt;:Base.Dates.Period,Y::<span class="dt">Union</span>{<span class="dt">SubArray</span>{P&lt;:Base.Dates.Period,N,A&lt;:DenseArray{T,N},I&lt;:<span class="dt">Tuple</span>{Vararg{<span class="dt">Union</span>{Colon,<span class="dt">Range</span>{<span class="dt">Int64</span>},<span class="dt">Int64</span>}}},LD},DenseArray{P&lt;:Base.Dates.Period,N}}) at dates/periods.jl:<span class="fl">49</span></a>
+<a class="sourceLine" id="cb18-121" data-line-number="121">+(x::Base.Dates.Period,y::Base.Dates.Period) at dates/periods.jl:<span class="fl">196</span></a>
+<a class="sourceLine" id="cb18-122" data-line-number="122">+(x::Base.Dates.CompoundPeriod,y::Base.Dates.Period) at dates/periods.jl:<span class="fl">197</span></a>
+<a class="sourceLine" id="cb18-123" data-line-number="123">+(y::Base.Dates.Period,x::Base.Dates.CompoundPeriod) at dates/periods.jl:<span class="fl">198</span></a>
+<a class="sourceLine" id="cb18-124" data-line-number="124">+(x::Base.Dates.CompoundPeriod,y::Base.Dates.CompoundPeriod) at dates/periods.jl:<span class="fl">199</span></a>
+<a class="sourceLine" id="cb18-125" data-line-number="125">+(dt::Base.Dates.DateTime,y::Base.Dates.Year) at dates/arithmetic.jl:<span class="fl">13</span></a>
+<a class="sourceLine" id="cb18-126" data-line-number="126">+(dt::Base.Dates.Date,y::Base.Dates.Year) at dates/arithmetic.jl:<span class="fl">17</span></a>
+<a class="sourceLine" id="cb18-127" data-line-number="127">+(dt::Base.Dates.DateTime,z::Base.Dates.Month) at dates/arithmetic.jl:<span class="fl">37</span></a>
+<a class="sourceLine" id="cb18-128" data-line-number="128">+(dt::Base.Dates.Date,z::Base.Dates.Month) at dates/arithmetic.jl:<span class="fl">43</span></a>
+<a class="sourceLine" id="cb18-129" data-line-number="129">+(x::Base.Dates.Date,y::Base.Dates.Week) at dates/arithmetic.jl:<span class="fl">60</span></a>
+<a class="sourceLine" id="cb18-130" data-line-number="130">+(x::Base.Dates.Date,y::Base.Dates.Day) at dates/arithmetic.jl:<span class="fl">62</span></a>
+<a class="sourceLine" id="cb18-131" data-line-number="131">+(x::Base.Dates.DateTime,y::Base.Dates.Period) at dates/arithmetic.jl:<span class="fl">64</span></a>
+<a class="sourceLine" id="cb18-132" data-line-number="132">+(a::Base.Dates.TimeType,b::Base.Dates.Period,c::Base.Dates.Period) at dates/periods.jl:<span class="fl">210</span></a>
+<a class="sourceLine" id="cb18-133" data-line-number="133">+(a::Base.Dates.TimeType,b::Base.Dates.Period,c::Base.Dates.Period,d::Base.Dates.Period...) at dates/periods.jl:<span class="fl">212</span></a>
+<a class="sourceLine" id="cb18-134" data-line-number="134">+(x::Base.Dates.TimeType,y::Base.Dates.CompoundPeriod) at dates/periods.jl:<span class="fl">216</span></a>
+<a class="sourceLine" id="cb18-135" data-line-number="135">+(x::Base.Dates.CompoundPeriod,y::Base.Dates.TimeType) at dates/periods.jl:<span class="fl">221</span></a>
+<a class="sourceLine" id="cb18-136" data-line-number="136">+(x::Base.Dates.Instant) at dates/arithmetic.jl:<span class="fl">4</span></a>
+<a class="sourceLine" id="cb18-137" data-line-number="137">+(x::Base.Dates.TimeType) at dates/arithmetic.jl:<span class="fl">8</span></a>
+<a class="sourceLine" id="cb18-138" data-line-number="138">+(y::Base.Dates.Period,x::Base.Dates.TimeType) at dates/arithmetic.jl:<span class="fl">66</span></a>
+<a class="sourceLine" id="cb18-139" data-line-number="139">+{T&lt;:Base.Dates.TimeType}(x::Base.Dates.Period,r::<span class="dt">Range</span>{T&lt;:Base.Dates.TimeType}) at dates/ranges.jl:<span class="fl">40</span></a>
+<a class="sourceLine" id="cb18-140" data-line-number="140">+(a,b,c) at operators.jl:<span class="fl">83</span></a>
+<a class="sourceLine" id="cb18-141" data-line-number="141">+(a,b,c,xs...) at operators.jl:<span class="fl">84</span></a></code></pre></div>
 </div>
 </section><div><a class="slider-prev" href="#subtype-polymorphism-1"></a><a class="slider-next" href="#parametric-polymorphism-1"></a></div>
 <section id="parametric-polymorphism-1" class="slide level1">
 <h1>Parametric polymorphism</h1>
 <p>Some <em>generic</em> parameters may be substituted to the function which describe the types of the subprogram parameters.</p>
-<div class="sourceCode"><pre class="sourceCode java"><code class="sourceCode java"><span class="kw">public</span> <span class="kw">class</span> MyClass&lt;T, U, V, W&gt;
-    where T : <span class="kw">class</span>,        <span class="co">// T should be a reference type (array, class, delegate, interface)</span>
-        <span class="kw">new</span>()               <span class="co">// T should have a public constructor with no parameters</span>
-    where U : struct        <span class="co">// U should be a value type (byte, double, float, int, long, struct, uint, etc.)</span>
-    where V : MyOtherClass, <span class="co">// V should be derived from MyOtherClass</span>
-        IEnumerable&lt;U&gt;      <span class="co">// V should implement IEnumerable&lt;U&gt;</span>
-    where W : T,            <span class="co">// W should be derived from T</span>
-        IDisposable         <span class="co">// W should implement IDisposable</span>
-{
-    <span class="kw">public</span> <span class="fu">MyClass</span>(U u, V v, W w) {
-      var t = <span class="kw">new</span> <span class="fu">T</span>();
-      var u2 = u; <span class="co">// make a copy (value-type)</span>
-      <span class="fu">foreach</span> (var e in v) {
-        <span class="co">/* ... */</span>
-      }
-      w.<span class="fu">Dispose</span>();
-    }
-}</code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb19-1" data-line-number="1"><span class="kw">public</span> <span class="kw">class</span> MyClass&lt;T, U, V, W&gt;</a>
+<a class="sourceLine" id="cb19-2" data-line-number="2">    where T : <span class="kw">class</span>,        <span class="co">// T should be a reference type (array, class, delegate, interface)</span></a>
+<a class="sourceLine" id="cb19-3" data-line-number="3">        <span class="kw">new</span>()               <span class="co">// T should have a public constructor with no parameters</span></a>
+<a class="sourceLine" id="cb19-4" data-line-number="4">    where U : struct        <span class="co">// U should be a value type (byte, double, float, int, long, struct, uint, etc.)</span></a>
+<a class="sourceLine" id="cb19-5" data-line-number="5">    where V : MyOtherClass, <span class="co">// V should be derived from MyOtherClass</span></a>
+<a class="sourceLine" id="cb19-6" data-line-number="6">        IEnumerable&lt;U&gt;      <span class="co">// V should implement IEnumerable&lt;U&gt;</span></a>
+<a class="sourceLine" id="cb19-7" data-line-number="7">    where W : T,            <span class="co">// W should be derived from T</span></a>
+<a class="sourceLine" id="cb19-8" data-line-number="8">        IDisposable         <span class="co">// W should implement IDisposable</span></a>
+<a class="sourceLine" id="cb19-9" data-line-number="9">{</a>
+<a class="sourceLine" id="cb19-10" data-line-number="10">    <span class="kw">public</span> <span class="fu">MyClass</span>(U u, V v, W w) {</a>
+<a class="sourceLine" id="cb19-11" data-line-number="11">      var t = <span class="kw">new</span> <span class="fu">T</span>();</a>
+<a class="sourceLine" id="cb19-12" data-line-number="12">      var u2 = u; <span class="co">// make a copy (value-type)</span></a>
+<a class="sourceLine" id="cb19-13" data-line-number="13">      <span class="fu">foreach</span> (var e in v) {</a>
+<a class="sourceLine" id="cb19-14" data-line-number="14">        <span class="co">/* ... */</span></a>
+<a class="sourceLine" id="cb19-15" data-line-number="15">      }</a>
+<a class="sourceLine" id="cb19-16" data-line-number="16">      w.<span class="fu">Dispose</span>();</a>
+<a class="sourceLine" id="cb19-17" data-line-number="17">    }</a>
+<a class="sourceLine" id="cb19-18" data-line-number="18">}</a></code></pre></div>
 </section><div><a class="slider-prev" href="#dynamic-dispatch-1"></a><a class="slider-next" href="#higher-order-polymorphism-1"></a></div>
 <section id="higher-order-polymorphism-1" class="slide level1">
 <h1>Higher order polymorphism</h1>
-<p>The generic parameters can be parametrized as well by some means of type-level computation. Example: functor.<br>
-Reminder: a functor <span class="math inline"><em>F</em></span> is a pair of an object-map <br><span class="math display"><em>F</em> : <em>A</em> → <em>B</em></span><br> and an arrow-map <br><span class="math display"><em>f</em><em>m</em><em>a</em><em>p</em> : (<em>a</em><sub>1</sub> → <em>a</em><sub>2</sub>)→(<em>F</em>(<em>a</em><sub>1</sub>)→<em>F</em>(<em>a</em><sub>2</sub>))</span><br></p>
-<div class="sourceCode"><pre class="sourceCode java"><code class="sourceCode java"><span class="co">/* not actually possible in Java or C# */</span>
-<span class="kw">interface</span> Functor&lt;F&lt;*&gt;&gt; {
-  F&lt;B&gt; fmap&lt;A, B&gt;(F&lt;A&gt; a, Function&lt;A, B&gt; f);
-}</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="kw">class</span>  <span class="dt">Functor</span> f  <span class="kw">where</span>
-<span class="ot">    fmap ::</span> (a <span class="ot">-&gt;</span> b) <span class="ot">-&gt;</span> f a <span class="ot">-&gt;</span> f b
-
-<span class="co">-- elementwise map is a functor on lists</span>
-<span class="kw">instance</span>  <span class="dt">Functor</span> []  <span class="kw">where</span>
-    fmap <span class="fu">=</span> map</code></pre></div>
+<p>The generic parameters can be parametrized as well by some means of type-level computation. Example: functor. Reminder: a functor <span class="math inline"><em>F</em></span> is a pair of an object-map <br><span class="math display"><em>F</em> : <em>A</em> → <em>B</em></span><br> and an arrow-map <br><span class="math display"><em>f</em><em>m</em><em>a</em><em>p</em> : (<em>a</em><sub>1</sub> → <em>a</em><sub>2</sub>) → (<em>F</em>(<em>a</em><sub>1</sub>) → <em>F</em>(<em>a</em><sub>2</sub>))</span><br></p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb20-1" data-line-number="1"><span class="co">/* not actually possible in Java or C# */</span></a>
+<a class="sourceLine" id="cb20-2" data-line-number="2"><span class="kw">interface</span> Functor&lt;F&lt;*&gt;&gt; {</a>
+<a class="sourceLine" id="cb20-3" data-line-number="3">  F&lt;B&gt; fmap&lt;A, B&gt;(F&lt;A&gt; a, Function&lt;A, B&gt; f);</a>
+<a class="sourceLine" id="cb20-4" data-line-number="4">}</a></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb21-1" data-line-number="1"><span class="kw">class</span>  <span class="dt">Functor</span> f  <span class="kw">where</span></a>
+<a class="sourceLine" id="cb21-2" data-line-number="2"><span class="ot">    fmap ::</span> (a <span class="ot">-&gt;</span> b) <span class="ot">-&gt;</span> f a <span class="ot">-&gt;</span> f b</a>
+<a class="sourceLine" id="cb21-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb21-4" data-line-number="4"><span class="co">-- elementwise map is a functor on lists</span></a>
+<a class="sourceLine" id="cb21-5" data-line-number="5"><span class="kw">instance</span>  <span class="dt">Functor</span> []  <span class="kw">where</span></a>
+<a class="sourceLine" id="cb21-6" data-line-number="6">    fmap <span class="fu">=</span> map</a></code></pre></div>
 </section><div><a class="slider-prev" href="#parametric-polymorphism-1"></a><a class="slider-next" href="#evaluation-strategy"></a></div>
 <section id="evaluation-strategy" class="slide level1">
 <h1>Evaluation strategy</h1>
 <h2 id="strict-vs-non-strict-evaluation">Strict vs Non-strict evaluation</h2>
 <p>Strict (eager) evaluation: all function arguments are evaluated before call.</p>
 <p>Non-strict (lazy) evaluation: function arguments are evaluated only when used.</p>
-<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">function</span> <span class="at">f</span>(a<span class="op">,</span> b<span class="op">,</span> c) <span class="op">{</span> <span class="cf">return</span> a<span class="op">+</span>b<span class="op">;</span> <span class="op">}</span>
-<span class="kw">function</span> ⟂() <span class="op">{</span> <span class="cf">while</span>(<span class="kw">true</span>) <span class="op">{}</span> <span class="op">}</span>
-<span class="at">f</span>(<span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> ⟂())
-<span class="co">// Strict evaluation ⟶ ⟂</span>
-<span class="co">// Non-strict evaluation ⟶ 3</span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb22-1" data-line-number="1"><span class="kw">function</span> <span class="at">f</span>(a<span class="op">,</span> b<span class="op">,</span> c) <span class="op">{</span> <span class="cf">return</span> a<span class="op">+</span>b<span class="op">;</span> <span class="op">}</span></a>
+<a class="sourceLine" id="cb22-2" data-line-number="2"><span class="kw">function</span> ⟂() <span class="op">{</span> <span class="cf">while</span>(<span class="kw">true</span>) <span class="op">{}</span> <span class="op">}</span></a>
+<a class="sourceLine" id="cb22-3" data-line-number="3"><span class="at">f</span>(<span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> ⟂())</a>
+<a class="sourceLine" id="cb22-4" data-line-number="4"><span class="co">// Strict evaluation ⟶ ⟂</span></a>
+<a class="sourceLine" id="cb22-5" data-line-number="5"><span class="co">// Non-strict evaluation ⟶ 3</span></a></code></pre></div>
 </section><div><a class="slider-prev" href="#higher-order-polymorphism-1"></a><a class="slider-next" href="#strict-evaluation"></a></div>
 <section id="strict-evaluation" class="slide level1">
 <h1>Strict evaluation</h1>
@@ -664,15 +686,15 @@ Reminder: a functor <span class="math inline"><em>F</em></span> is a pair of an 
 <dd class="fragment">(TeX, C preprocessor) substitute the macros with its body it the source code, possibly capturing identifiers.
 </dd>
 </dl>
-<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c"><span class="pp">#define MACRO(a) (a &lt; b)</span>
-
-<span class="dt">int</span> f(<span class="dt">int</span> b) {
-  <span class="cf">return</span> MACRO(<span class="dv">0</span>);
-}
-
-<span class="dt">int</span> g(<span class="dt">int</span> a) {
-  <span class="cf">return</span> MACRO(<span class="dv">0</span>) <span class="co">// error: b not defined</span>
-}</code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb23-1" data-line-number="1"><span class="pp">#define MACRO(a) (a &lt; b)</span></a>
+<a class="sourceLine" id="cb23-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb23-3" data-line-number="3"><span class="dt">int</span> f(<span class="dt">int</span> b) {</a>
+<a class="sourceLine" id="cb23-4" data-line-number="4">  <span class="cf">return</span> MACRO(<span class="dv">0</span>);</a>
+<a class="sourceLine" id="cb23-5" data-line-number="5">}</a>
+<a class="sourceLine" id="cb23-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb23-7" data-line-number="7"><span class="dt">int</span> g(<span class="dt">int</span> a) {</a>
+<a class="sourceLine" id="cb23-8" data-line-number="8">  <span class="cf">return</span> MACRO(<span class="dv">0</span>) <span class="co">// error: b not defined</span></a>
+<a class="sourceLine" id="cb23-9" data-line-number="9">}</a></code></pre></div>
 </section><div><a class="slider-prev" href="#lazy-evaluation"></a><a class="slider-next" href="#hygienic-macros"></a></div>
 <section id="hygienic-macros" class="slide level1">
 <h1>Hygienic macros</h1>
@@ -719,12 +741,14 @@ syntax ("for_", "(", begin, ")", body)
             window.location = a.href;
           }
           break;
+       case 33: // Page Up
        case 37: // left arrow
          var a = document.querySelector("section:target ~ div a.slider-prev");
          if (a && a.href) {
            window.location = a.href;
          }
          break;
+       case 34: // Page Down
        case 39: // right arrow
          var a = document.querySelector("section:target ~ div a.slider-next");
          if (a && a.href) {

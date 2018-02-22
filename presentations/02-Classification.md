@@ -3,8 +3,11 @@
 ### Characteristics of programming languages
 ### (How do programming languages differ from each other)
 
-Course page: https://maxxk.github.io/programming-languages/
+<div style="text-align: center">
+https://maxxk.github.io/programming-languages/
+
 <span style="font-size: small">Chrome or Firefox are recommended to watch presentations; Konqueror in aud. 13-16 skips some slides. Open with Firefox and enable scripts with button “Settings”, lower right corner</span>
+</div>
 
 # Literature
 1. B. Pierce. Types and Programming Languages. MIT Press. 2002.
@@ -31,7 +34,7 @@ In 1979 design and rationale of Ada were published in ACM SIGPLAN Notices. In Oc
 
 Final specification was mostly completed in 1980, revised and published in 1983. First usable compilers appeared around 1980.
 
-Revised in 1995, 2005 (both revisions featuring OOP and concurrency enhancements). Widely used in aviation.
+Revised in 1995, 2005 (both revisions featuring OOP and concurrency enhancements). Widely used in avionics.
 
 # Ada
 ```ada
@@ -96,8 +99,11 @@ How the modern programming languages differ from each other?
 
 Two major categories:
 - «internal» characteristic — what is representable in the language, features of any language implementation
+
 E.g. static vs dynamic typing
+
 - «external» characteristic — features of specific language implementation
+
 E.g. interpreted vs compiled
 
 # Interpreted vs compiled: Python
@@ -197,7 +203,8 @@ It is possible to provide external static type checking engine for dynamic langu
 Examples:
 - [Typed Clojure](http://typedclojure.org)
 - [mypy (Python)](https://github.com/python/mypy)
-- [**Flow (Javascript, by Facebook)**](http://flowtype.org)
+- [**Flow (JavaScript, by Facebook)**](http://flowtype.org)
+- [Typescript (JavaScript, by Microsoft)](http://typescriptlang.org)
 
 ```javascript
 type BinaryTree =
@@ -269,10 +276,13 @@ double fmax(double a, double b);
 ```
 
 Curry: make from two-argument function a function which returns an another function.
+
 fmax : (a : double) × (b : double) → double
+
 curry(fmax) : (a : double) → ((b : double) → double)
 
 Partial application:
+
 curry(fmax) · 0 : (b : double) → double
 
 ```javascript
@@ -280,7 +290,7 @@ function fmax(a, b) { return a < b ? b : a }
 function curry2(func) { return function(x) { return function(y) { return func(x, y) } } }
 const curried_fmax = curry2(fmax);
 const nonnegative = curried_fmax(0);
-Math.sqrt(nonnegative(z));
+Math.sqrt(nonnegative(z)); // = Math.sqrt(z < 0 ? 0 : z)
 ```
 
 # Pure functional programming
@@ -312,15 +322,14 @@ Advantage: an order of computation is insignificant. An optimizing compiler may 
 
 ```javascript
 function factorial_(n, accumulator) {
-  return n == 0 ? accumulator : factorial_(n-1, accumulator);
+  return n == 0 ? accumulator : factorial_(n-1, n*accumulator);
 }
 function factorial(x) { return factorial_(x, 1) }
 ```
 
-. . .
+is translated to:
 
 ```javascript
-/* Is translated to: */
 function factorial_(n, accumulator) {
 START: do {
     if (n == 0) return accumulator;

@@ -20,10 +20,11 @@ Course topics include:
 **15.02.2018** Introduction. History of programming languages. 
 [presentation - html](presentations/01-Introduction.html)
 
-<!--
-**9.03.2017** Classification of programming languages. 
+
+**22.02.2018** Classification of programming languages. 
 [presentation - html](presentations/02-Classification.html) 
 
+<!--
 **16.03.2017** Specification of programming language. Syntax. 
 [presentation - html](presentations/03-Specification-Syntax.html) 
 
