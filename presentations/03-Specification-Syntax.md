@@ -86,21 +86,13 @@ http://stackoverflow.com/questions/5508110/why-is-this-program-erroneously-rejec
 # Syntax: example 
 Suppose we want to compute the sum of the product of *v* and *w* and the quotient of *y* and *z*.
 Syntax representations:
- - mathematical expression: 
- 
- v·w + <div style="display: inline-flex; flex-direction: column; justify-content: center;"><div style="border-bottom: 2pt solid black;">y</div><div>z</div></div>
+ - mathematical expression: v·w + <div style="display: inline-flex; flex-direction: column; justify-content: center;"><div style="border-bottom: 2pt solid black;">y</div><div>z</div></div>
 
- - traditional infix notation: 
- 
- `v*w + y/z`
+ - traditional infix notation: `v*w + y/z`
 
- - LISP prefix S-expression: 
- 
- `(+ (* v w) (/ y z))`
+ - LISP prefix S-expression: `(+ (* v w) (/ y z))`
 
- - reverse polish notation / stack calculator: 
-
- `v w * y z / +`
+ - reverse polish notation / stack calculator:  `v w * y z / +`
 
  - some [visual "syntax"](https://blockly-demo.appspot.com/static/demos/blockfactory/index.html)
 
