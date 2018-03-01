@@ -1,48 +1,76 @@
 <!DOCTYPE html><html><head>
   <meta charset="utf-8">
   <meta name="generator" content="pandoc">
-  <title></title>
+  <title>03-Specification-Syntax</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <link rel="stylesheet" href="slider.css">
   <style type="text/css">code{white-space: pre;}</style>
   <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
   </style>
 </head>
 <body>
@@ -64,26 +92,26 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 }
 .small { font-size: smaller ; }
 </style>
-<p>Course page: <a href="https://maxxk.github.io/programming-languages/" class="uri">https://maxxk.github.io/programming-languages/</a><br>
-Contact author: <a href="mailto:maxim.krivchikov@gmail.com" class="email">maxim.krivchikov@gmail.com</a></p>
+<p><a href="https://maxxk.github.io/programming-languages/" class="uri">https://maxxk.github.io/programming-languages/</a></p>
+<p><a href="mailto:maxim.krivchikov@gmail.com" class="email">maxim.krivchikov@gmail.com</a></p>
 </section><div><a class="slider-prev"></a><a class="slider-next" href="#additions"></a></div>
 <section id="additions" class="slide level1">
 <h1>Additions</h1>
 <h2 id="optional-typing-systems">Optional typing systems</h2>
 <p>In similar way to the annotations of model checking tools, the optional type checkers do not neccessarily accept all correct programs.</p>
-<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="co">/*::</span>
-<span class="co">type BinaryTree =</span>
-<span class="co">  { kind: "leaf", value: number } |</span>
-<span class="co">  { kind: "branch", left: BinaryTree, right: BinaryTree }</span>
-<span class="co">*/</span>
-
-<span class="kw">function</span> <span class="at">sumLeaves</span>(tree <span class="co">/*: BinaryTree*/</span>)<span class="op">:</span> number <span class="op">{</span>
-  <span class="cf">if</span> (<span class="op">!</span><span class="va">tree</span>.<span class="at">left</span>) <span class="op">{</span> <span class="co">// condition was: kind == "leaf"</span>
-    <span class="cf">return</span> <span class="va">tree</span>.<span class="at">value</span><span class="op">;</span>
-  <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span>
-    <span class="cf">return</span> <span class="at">sumLeaves</span>(<span class="va">tree</span>.<span class="at">left</span>) <span class="op">+</span> <span class="at">sumLeaves</span>(<span class="va">tree</span>.<span class="at">right</span>)<span class="op">;</span>
-  <span class="op">}</span>
-<span class="op">}</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="co">/*::</span></a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="co">type BinaryTree =</span></a>
+<a class="sourceLine" id="cb1-3" data-line-number="3"><span class="co">  { kind: "leaf", value: number } |</span></a>
+<a class="sourceLine" id="cb1-4" data-line-number="4"><span class="co">  { kind: "branch", left: BinaryTree, right: BinaryTree }</span></a>
+<a class="sourceLine" id="cb1-5" data-line-number="5"><span class="co">*/</span></a>
+<a class="sourceLine" id="cb1-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb1-7" data-line-number="7"><span class="kw">function</span> <span class="at">sumLeaves</span>(tree <span class="co">/*: BinaryTree*/</span>)<span class="op">:</span> number <span class="op">{</span></a>
+<a class="sourceLine" id="cb1-8" data-line-number="8">  <span class="cf">if</span> (<span class="op">!</span><span class="va">tree</span>.<span class="at">left</span>) <span class="op">{</span> <span class="co">// condition was: kind == "leaf"</span></a>
+<a class="sourceLine" id="cb1-9" data-line-number="9">    <span class="cf">return</span> <span class="va">tree</span>.<span class="at">value</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb1-10" data-line-number="10">  <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb1-11" data-line-number="11">    <span class="cf">return</span> <span class="at">sumLeaves</span>(<span class="va">tree</span>.<span class="at">left</span>) <span class="op">+</span> <span class="at">sumLeaves</span>(<span class="va">tree</span>.<span class="at">right</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb1-12" data-line-number="12">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb1-13" data-line-number="13"><span class="op">}</span></a></code></pre></div>
 </section><div><a class="slider-prev" href="#software-and-programming-language-theory"></a><a class="slider-next" href="#addition"></a></div>
 <section id="addition" class="slide level1">
 <h1>Addition</h1>
@@ -92,9 +120,9 @@ Contact author: <a href="mailto:maxim.krivchikov@gmail.com" class="email">maxim.
 <li class="fragment">First programming languages and compilers apperared in 1950s.</li>
 <li class="fragment">Classical textbooks, e.g. the first edition of "Dragon book" (Aho, Ullman. Principles of Compiler Design) appeared in 1977.</li>
 <li class="fragment">Commonly-known technology and mathematics may be outdated</li>
-<li class="fragment"><p>Example: standard character set: machine-specific character set → ANSI (C) → UCS-2 (C#, JavaScript) → UTF-8</p>
-<pre><code>"👍".length = 2</code></pre></li>
+<li class="fragment">Example: standard character set: machine-specific character set → ANSI (C) → UCS-2 (C#, JavaScript) → UTF-8</li>
 </ul>
+<pre><code>"👍".length = 2</code></pre>
 </section><div><a class="slider-prev" href="#additions"></a><a class="slider-next" href="#programming-language-specification-1"></a></div>
 <section id="programming-language-specification-1" class="slide level1">
 <h1>Programming language specification</h1>
@@ -107,30 +135,33 @@ Contact author: <a href="mailto:maxim.krivchikov@gmail.com" class="email">maxim.
 <p>(non-computer languages also have:</p>
 <ul>
 <li class="fragment"><em>morphology</em> — the study of language morphemes, words; the study and description of word formation (as inflection, derivation, and compounding) in language</li>
-<li class="fragment"><em>phonology</em> — the study of the speech sounds used in a language</li>
+<li class="fragment"><p><em>phonology</em> — the study of the speech sounds used in a language</p>
+<p>)</p></li>
 </ul>
-<p>)<br>
-<span class="smaller">Definitions from <a href="http://www.merriam-webster.com/dictionary/">Merriam-Webster</a><br>
-See also: <a href="http://www.sbql.pl/Topics/Syntax%20semantics%20and%20pragmatics.html">http://www.sbql.pl/Topics/Syntax%20semantics%20and%20pragmatics.html</a><br>
-</span></p>
-</section><div><a class="slider-prev" href="#addition"></a><a class="slider-next" href="#syntax"></a></div>
+<p>Definitions from <a href="http://www.merriam-webster.com/dictionary/">Merriam-Webster</a></p>
+<p>See also: <a href="http://www.sbql.pl/Topics/Syntax%20semantics%20and%20pragmatics.html">http://www.sbql.pl/Topics/Syntax%20semantics%20and%20pragmatics.html</a></p>
+</section><div><a class="slider-prev" href="#addition"></a><a class="slider-next" href="#programming-language-specification-2"></a></div>
+<section id="programming-language-specification-2" class="slide level1">
+<h1>Programming language specification</h1>
+<p><img data-src="graphviz-images/d28958ffcf5115f8b7cae26100163f4165a819ff.svg" src="graphviz-images/d28958ffcf5115f8b7cae26100163f4165a819ff.svg"></p>
+</section><div><a class="slider-prev" href="#programming-language-specification-1"></a><a class="slider-next" href="#syntax"></a></div>
 <section id="syntax" class="slide level1">
 <h1>Syntax</h1>
 <p>Syntax of a programming language is concerned with the form of programs: how expressions, commands, declarations and other constructs must be arranged to make a well-formed program.</p>
 <p><span class="small">Definition from D. Watt — Programming Language Design Concepts</span></p>
 <p>How can we write the program and how the compiler/interpreter expects it to be formed.</p>
-</section><div><a class="slider-prev" href="#programming-language-specification-1"></a><a class="slider-next" href="#syntax-example"></a></div>
+</section><div><a class="slider-prev" href="#programming-language-specification-2"></a><a class="slider-next" href="#syntax-example"></a></div>
 <section id="syntax-example" class="slide level1">
 <h1>Syntax: example</h1>
 <p><a href="http://stackoverflow.com/questions/5508110/why-is-this-program-erroneously-rejected-by-three-c-compilers/5514384#5514384" class="uri">http://stackoverflow.com/questions/5508110/why-is-this-program-erroneously-rejected-by-three-c-compilers/5514384#5514384</a></p>
 </section><div><a class="slider-prev" href="#syntax"></a><a class="slider-next" href="#syntax-example-1"></a></div>
 <section id="syntax-example-1" class="slide level1">
 <h1>Syntax: example</h1>
-<p><span class="small">Example based on F. Turbak, D. Gifford. Design Concepts in Programming Languages</span><br>
-Suppose we want to compute the sum of the product of <em>v</em> and <em>w</em> and the quotient of <em>y</em> and <em>z</em>.<br>
-Syntax representations:</p>
+<p>Suppose we want to compute the sum of the product of <em>v</em> and <em>w</em> and the quotient of <em>y</em> and <em>z</em>. Syntax representations:</p>
 <ul>
-<li>mathematical expression: v·w +
+<li class="fragment">mathematical expression:</li>
+</ul>
+v·w +
 <div style="display: inline-flex; flex-direction: column; justify-content: center;">
 <div style="border-bottom: 2pt solid black;">
 y
@@ -138,14 +169,27 @@ y
 <div>
 z
 </div>
-</div></li>
-<li>traditional infix notation: <code>v*w + y/z</code></li>
-<li>LISP prefix S-expression: <code>(+ (* v w) (/ y z))</code></li>
-<li>reverse polish notation / stack calculator: <code>v w * y z / +</code></li>
-<li>some <a href="https://blockly-demo.appspot.com/static/demos/blockfactory/index.html">visual "syntax"</a><br>
-<img src="images/scratch-syntax.png"></li>
-<li>graph-based syntax <a href="http://app.flowhub.io/#example/6699161" class="uri">http://app.flowhub.io/#example/6699161</a> <a href="https://noflojs.org/example/" class="uri">https://noflojs.org/example/</a></li>
+</div>
+<ul>
+<li class="fragment">traditional infix notation:</li>
 </ul>
+<p><code>v*w + y/z</code></p>
+<ul>
+<li class="fragment">LISP prefix S-expression:</li>
+</ul>
+<p><code>(+ (* v w) (/ y z))</code></p>
+<ul>
+<li class="fragment">reverse polish notation / stack calculator:</li>
+</ul>
+<p><code>v w * y z / +</code></p>
+<ul>
+<li class="fragment">some <a href="https://blockly-demo.appspot.com/static/demos/blockfactory/index.html">visual "syntax"</a></li>
+</ul>
+<p><img data-src="images/scratch-syntax.png" src="images/scratch-syntax.png"></p>
+<ul>
+<li class="fragment">graph-based syntax (not related to previous examples) <a href="https://noflojs.org/dataflow-noflo/demo/draggabilly.html" class="uri">https://noflojs.org/dataflow-noflo/demo/draggabilly.html</a> <a href="https://noflojs.org/example/" class="uri">https://noflojs.org/example/</a></li>
+</ul>
+<p>Example based on F. Turbak, D. Gifford. Design Concepts in Programming Languages</p>
 </section><div><a class="slider-prev" href="#syntax-example"></a><a class="slider-next" href="#semantics"></a></div>
 <section id="semantics" class="slide level1">
 <h1>Semantics</h1>
@@ -170,16 +214,14 @@ z
 </section><div><a class="slider-prev" href="#semantics"></a><a class="slider-next" href="#pragmatics"></a></div>
 <section id="pragmatics" class="slide level1">
 <h1>Pragmatics</h1>
-<p>A programming language's pragmatics is concerned with the way in which the language is intended to be used in practice.<br>
-<span class="small">Definition from D. Watt — Programming Language Design Concepts</span></p>
-<p>No general consensus on the definition.<br>
-Two sides:</p>
+<p>A programming language's pragmatics is concerned with the way in which the language is intended to be used in practice. <span class="small">Definition from D. Watt — Programming Language Design Concepts</span></p>
+<p>No general consensus on the definition. Two sides:</p>
 <ul>
 <li>human interface (how the programmers are expected to design and implement programs in practice: design patterns, concurrency support and specific model, foreign function interfaces, packaging system; exception-based control flow :)</li>
 <li>implementation details (specific garbage collection algorithm, semantics-preserving optimizations)</li>
 </ul>
 <div class="fragment">
-<p>Evaluation strategy (strict / lazy) is a part of semantics (because the change of strategy changes the meaning of the same syntactic formula).</p>
+<p>Note: Evaluation strategy (strict / lazy) is a part of semantics (because the change of strategy changes the meaning of the same syntactic formula).</p>
 </div>
 </section><div><a class="slider-prev" href="#semantics-example"></a><a class="slider-next" href="#formal-specification"></a></div>
 <section id="formal-specification" class="slide level1">
@@ -189,28 +231,32 @@ Two sides:</p>
 </section><div><a class="slider-prev" href="#pragmatics"></a><a class="slider-next" href="#syntax-1"></a></div>
 <section id="syntax-1" class="slide level1">
 <h1>Syntax</h1>
-<p><span class="large">List<char> ⟶ AbstractSyntaxTree</char></span></p>
+<h2 id="listchar-abstractsyntaxtree">List&lt;Char&gt; ⟶ AbstractSyntaxTree</h2>
 </section><div><a class="slider-prev" href="#formal-specification"></a><a class="slider-next" href="#syntax-relation-to-formal-languages"></a></div>
 <section id="syntax-relation-to-formal-languages" class="slide level1">
 <h1>Syntax: relation to formal languages</h1>
 <p>(regular ⊂ context-free ⊂ context-sensitive ⊂ unbounded)</p>
 <p>We could make a relation between programs and formal languages in many ways:</p>
 <ul>
-<li class="fragment">language <span class="math inline"><em>L</em><sub>1</sub></span>, containing all well-formed (syntactically correct) programs</li>
-<li class="fragment">language <span class="math inline"><em>L</em><sub>2</sub> ⊆ <em>L</em><sub>1</sub></span>, containing all well-typed (runnable) programs</li>
-<li class="fragment">language <span class="math inline"><em>L</em><sub>3</sub> ⊆ <em>L</em><sub>2</sub></span>, containing all semantically-correct programs (running without errors)</li>
+<li class="fragment"><p>language <span class="math inline"><em>L</em><sub>1</sub></span>, containing all well-formed (syntactically correct) programs</p></li>
+<li class="fragment"><p>language <span class="math inline"><em>L</em><sub>2</sub> ⊆ <em>L</em><sub>1</sub></span>, containing all well-typed (runnable) programs <span class="math inline"><em>L</em><sub>1</sub> ∖ <em>L</em><sub>2</sub></span> — "syntax gap", well-formed programs which are not well-typed</p></li>
+<li class="fragment"><p>language <span class="math inline"><em>L</em><sub>3</sub> ⊆ <em>L</em><sub>2</sub></span>, containing all semantically-correct programs (running without errors) $L3 <span class="math inline"><em>L</em><sub>2</sub> ∖ <em>L</em><sub>3</sub></span> — "typing gap", well-typed programs which throw errors in run-time</p></li>
 </ul>
-<p>It is obvious that for almost every practical programming language <span class="math inline"><em>L</em><sub>3</sub></span> is unbounded. For the modern languages, <span class="math inline"><em>L</em><sub>1</sub></span> is usually context-free or some subset of context-free languages (Deterministic Context-Free Languages, unambiguous languages which can be accepted by deterministic pushdown automaton and therefore can be parsed in <span class="math inline"><em>O</em>(<em>n</em>)</span>).</p>
+<p>It is obvious that for almost every practical ("Turing complete") programming language <span class="math inline"><em>L</em><sub>3</sub></span> is unbounded. For the modern languages, <span class="math inline"><em>L</em><sub>1</sub></span> is usually context-free or some subset of context-free languages (Deterministic Context-Free Languages, unambiguous languages which can be accepted by deterministic pushdown automaton and therefore can be parsed in <span class="math inline"><em>O</em>(<em>n</em>)</span>).</p>
 <p><span class="math inline"><em>L</em><sub>2</sub></span> may be decidable, but not usually decidability is not proven. Compiler freezes may be caused by undecidability of type checking.</p>
 </section><div><a class="slider-prev" href="#syntax-1"></a><a class="slider-next" href="#lexical-analysis"></a></div>
 <section id="lexical-analysis" class="slide level1">
 <h1>Lexical analysis</h1>
-<p><span class="large">List<char> ⟶ List<token></token></char></span></p>
+<h2 id="listchar-listtoken">List&lt;Char&gt; ⟶ List&lt;Token&gt;</h2>
 <p>Traditionally decision problem of <span class="math inline"><em>L</em><sub>1</sub></span> membership (well-formedness of a program) is split by two parts:</p>
 <ul>
-<li class="fragment">lexical analysis transforms a sequence of characters to a sequence of tokens (marked groups of characters, like identifiers, integers, etc.):<br>
-<span class="huge"><code>int main(int argc, char argv)</code></span><br>
-<span class="smaller"><code>KEYWORD IDENTIFIER LPAR KEYWORD IDENTIFIER COMMA KEYWORD IDENTIFIER RPAR</code></span></li>
+<li class="fragment">lexical analysis transforms a sequence of characters to a sequence of tokens (marked groups of characters, like identifiers, integers, etc.):</li>
+</ul>
+<div class="sourceCode" id="cb3"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="dt">int</span> main (<span class="dt">int</span> argc, <span class="dt">char</span> argv)</a>
+<a class="sourceLine" id="cb3-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb3-3" data-line-number="3">  <span class="dt">int</span>      main      (    <span class="dt">int</span>       argc    ,     <span class="dt">char</span>     argv      )</a>
+<a class="sourceLine" id="cb3-4" data-line-number="4">KEYWORD IDENTIFIER LPAR KEYWORD IDENTIFIER COMMA KEYWORD IDENTIFIER RPAR</a></code></pre></div>
+<ul>
 <li class="fragment">usually lexical specification of the language is regular</li>
 <li class="fragment">Unicode standard defines base categories for a lexical analysis (identifier start, identifier, digit, punctuation etc.)</li>
 </ul>
@@ -222,24 +268,22 @@ Two sides:</p>
 <li class="fragment"><strong>concrete syntax</strong>: the syntax of a language including all the features visible in the source code such as parentheses and delimiters;</li>
 <li class="fragment"><strong>abstract syntax</strong>: the high-level description of a language structure independent of machine-oriented structures and encodings.</li>
 </ul>
-<p><img src="images/ast-example-js.png"><br>
-<span class="small">Source: <a href="http://azu.github.io/slide/JSojisan/resources/ast-is-true.png" class="uri">http://azu.github.io/slide/JSojisan/resources/ast-is-true.png</a></span></p>
+<p><img data-src="images/ast-example-js.png" src="images/ast-example-js.png"> <span class="small">Source: <a href="http://azu.github.io/slide/JSojisan/resources/ast-is-true.png" class="uri">http://azu.github.io/slide/JSojisan/resources/ast-is-true.png</a></span></p>
 </section><div><a class="slider-prev" href="#lexical-analysis"></a><a class="slider-next" href="#abstract-syntax-tree"></a></div>
 <section id="abstract-syntax-tree" class="slide level1">
 <h1>Abstract Syntax Tree</h1>
-<p>— a representation of an abstract syntax of a program<br>
-<img src="images/ast-example.png"></p>
+<p>— a representation of an abstract syntax of a program <img data-src="images/ast-example.png" src="images/ast-example.png"></p>
 <p>Multiple representations of <a href="#/syntax-example">concrete syntax</a> may correspond to a single abstract syntax.</p>
 <div class="fragment">
 <p>Lisp S-expression is a direct representation of abstract syntax tree:</p>
-<div class="sourceCode"><pre class="sourceCode clojure"><code class="sourceCode clojure">(<span class="kw">+</span>
-  (<span class="kw">*</span> v w)
-  (<span class="kw">/</span> y z) )</code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode clojure"><code class="sourceCode clojure"><a class="sourceLine" id="cb4-1" data-line-number="1">(<span class="kw">+</span></a>
+<a class="sourceLine" id="cb4-2" data-line-number="2">  (<span class="kw">*</span> v w)</a>
+<a class="sourceLine" id="cb4-3" data-line-number="3">  (<span class="kw">/</span> y z) )</a></code></pre></div>
 </div>
 </section><div><a class="slider-prev" href="#syntax-analysis"></a><a class="slider-next" href="#language-specification"></a></div>
 <section id="language-specification" class="slide level1">
 <h1>Language specification</h1>
-<p>Languages (which are (possibly infinite) subsets of strings of some alphabet: Σ*) may have a finite description, which is called "grammar".</p>
+<p>Languages (which are (possibly infinite) subsets of strings of some alphabet: Σ*) usually have a finite description, which is called "grammar".</p>
 <ul>
 <li class="fragment"><strong>generative grammar:</strong> how to generate all strings of the language starting from a single "start" symbol</li>
 <li class="fragment"><strong>analytic grammar:</strong> how to get an abstract syntax tree (a tree of rule applications) from a given string</li>
@@ -247,18 +291,17 @@ Two sides:</p>
 </section><div><a class="slider-prev" href="#abstract-syntax-tree"></a><a class="slider-next" href="#bnf-backus-normal-form"></a></div>
 <section id="bnf-backus-normal-form" class="slide level1">
 <h1>BNF: Backus Normal Form</h1>
-<p>(Backus-Naur Form, by Dijkstra, because "it is not a normal form")<br>
-During the development of ALGOL 60, John Backus proposed a notation for context-free grammars:</p>
+<p>(Backus-Naur Form, by Dijkstra, because "it is not a normal form") During the development of ALGOL 60, John Backus proposed a notation for context-free grammars:</p>
 <ul>
 <li>group of characters named <em>expr</em> is denoted as <code>&lt;expr&gt;</code>;</li>
 <li>character constants are quoted <code>"("</code></li>
 <li>sequence of constants and groups defines a sequence <code>"(" &lt;expr&gt; ")"</code></li>
-<li>group of characters is defined by an operator <code>::=</code>:<br>
-<code>&lt;expr&gt; ::= "(" &lt;atom&gt; ")"</code></li>
-<li>definitions may use recursion:<br>
-<code>&lt;parens&gt; ::= "" | "(" &lt;parens&gt; ")"</code></li>
-<li>at the right side of the definition operator the alternative operator <strong>|</strong> is allowed:<br>
-<code>&lt;expr&gt; ::= &lt;expr&gt; | &lt;expr&gt; &lt;add-operation&gt; &lt;atom&gt;</code></li>
+<li><p>group of characters is defined by an operator <code>::=</code>:</p>
+<pre><code>&lt;expr&gt; ::= "(" &lt;atom&gt; ")"</code></pre></li>
+<li><p>definitions may use recursion:</p>
+<pre><code>&lt;parens&gt; ::= "" | "(" &lt;parens&gt; ")"</code></pre></li>
+<li><p>at the right side of the definition operator the alternative operator <strong>|</strong> is allowed:</p>
+<pre><code>&lt;expr&gt; ::= &lt;expr&gt; | &lt;expr&gt; &lt;add-operation&gt; &lt;atom&gt;</code></pre></li>
 </ul>
 </section><div><a class="slider-prev" href="#language-specification"></a><a class="slider-next" href="#bnf-example"></a></div>
 <section id="bnf-example" class="slide level1">
@@ -289,7 +332,7 @@ During the development of ALGOL 60, John Backus proposed a notation for context-
 <li class="fragment">Kleene star (zero or more): <span class="math inline"><em>e</em>*</span></li>
 <li class="fragment">"plus" (one or more): <span class="math inline"><em>e</em>+</span></li>
 <li class="fragment">optional: <span class="math inline"><em>e</em>?</span></li>
-<li class="fragment">positive lookahead: <span class="math inline">$&amp;e$</span></li>
+<li class="fragment">positive lookahead: <span class="math inline">&amp;<em>e</em></span></li>
 <li class="fragment">negative lookahead: <span class="math inline">!<em>e</em></span></li>
 </ul>
 </section><div><a class="slider-prev" href="#bnf-standars"></a><a class="slider-next" href="#left-recursion"></a></div>
@@ -300,23 +343,23 @@ During the development of ALGOL 60, John Backus proposed a notation for context-
 Product ← Expr (('*' / '/') Expr)*
 Sum     ← Expr (('+' / '-') Expr)*
 Expr    ← Product / Sum / Value</code></pre>
-<p>It is possible to rewrite grammars without left recursion.</p>
+<p>Rewriting grammars to remove left recursion is possible (see "Dragon book").</p>
 </section><div><a class="slider-prev" href="#peg-parsing-expression-grammar"></a><a class="slider-next" href="#infix-operators"></a></div>
 <section id="infix-operators" class="slide level1">
 <h1>Infix operators</h1>
 <p>Infix mathematical notation is probably the only desirable part of syntax which don't have nice representations as an S-expression</p>
-<div class="sourceCode"><pre class="sourceCode scheme"><code class="sourceCode scheme">(defun triangle (number-of-rows)    <span class="co">; Version with</span>
-                                    <span class="co">;   incrementing counter.</span>
-  <span class="st">"Add up the number of pebbles in a triangle.</span>
-<span class="st">The first row has one pebble, the second row two pebbles,</span>
-<span class="st">the third row three pebbles, and so on.</span>
-<span class="st">The argument is NUMBER-OF-ROWS."</span>
-  (<span class="kw">let</span> ((total <span class="dv">0</span>)
-        (row-number <span class="dv">1</span>))
-    (<span class="kw">while</span> (<span class="kw">&lt;=</span> row-number number-of-rows)
-      (← total (<span class="kw">+</span> total row-number))
-      (← row-number (<span class="dv">1</span>+ row-number)))
-    total))</code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode scheme"><code class="sourceCode scheme"><a class="sourceLine" id="cb10-1" data-line-number="1">(defun triangle (number-of-rows)    <span class="co">; Version with</span></a>
+<a class="sourceLine" id="cb10-2" data-line-number="2">                                    <span class="co">;   incrementing counter.</span></a>
+<a class="sourceLine" id="cb10-3" data-line-number="3">  <span class="st">"Add up the number of pebbles in a triangle.</span></a>
+<a class="sourceLine" id="cb10-4" data-line-number="4"><span class="st">The first row has one pebble, the second row two pebbles,</span></a>
+<a class="sourceLine" id="cb10-5" data-line-number="5"><span class="st">the third row three pebbles, and so on.</span></a>
+<a class="sourceLine" id="cb10-6" data-line-number="6"><span class="st">The argument is NUMBER-OF-ROWS."</span></a>
+<a class="sourceLine" id="cb10-7" data-line-number="7">  (<span class="kw">let</span> ((total <span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb10-8" data-line-number="8">        (row-number <span class="dv">1</span>))</a>
+<a class="sourceLine" id="cb10-9" data-line-number="9">    (<span class="kw">while</span> (<span class="kw">&lt;=</span> row-number number-of-rows)</a>
+<a class="sourceLine" id="cb10-10" data-line-number="10">      (← total (<span class="kw">+</span> total row-number))</a>
+<a class="sourceLine" id="cb10-11" data-line-number="11">      (← row-number (<span class="dv">1</span>+ row-number)))</a>
+<a class="sourceLine" id="cb10-12" data-line-number="12">    total))</a></code></pre></div>
 </section><div><a class="slider-prev" href="#left-recursion"></a><a class="slider-next" href="#precedence-and-associativity"></a></div>
 <section id="precedence-and-associativity" class="slide level1">
 <h1>Precedence and associativity</h1>
@@ -332,8 +375,8 @@ Expr    ← Product / Sum / Value</code></pre>
 </section><div><a class="slider-prev" href="#infix-operators"></a><a class="slider-next" href="#tdop-algorithm"></a></div>
 <section id="tdop-algorithm" class="slide level1">
 <h1>TDOP algorithm</h1>
-<p>Operator binding power:<br>
-<code>1 + 2 * 4</code></p>
+<p>Top-down operator precedence parser</p>
+<p>Operator binding power: <code>1 + 2 * 4</code></p>
 <ul>
 <li class="fragment">right binding power of "+" is 10</li>
 <li class="fragment">left binding power of "*" is 20</li>
@@ -343,7 +386,7 @@ Expr    ← Product / Sum / Value</code></pre>
 <ul>
 <li class="fragment">Interactive example <a href="http://l-lang.org/blog/TDOP---Pratt-parser-in-pictures/" class="uri">http://l-lang.org/blog/TDOP---Pratt-parser-in-pictures/</a></li>
 <li class="fragment">simple implementation <a href="http://javascript.crockford.com/tdop/tdop.html" class="uri">http://javascript.crockford.com/tdop/tdop.html</a></li>
-<li class="fragment">JetBrains Nitra (russian project): <a href="https://github.com/JetBrains/Nitra" class="uri">https://github.com/JetBrains/Nitra</a></li>
+<li class="fragment">Nitra language workbench (russian project): <a href="https://github.com/rsdn/nitra" class="uri">https://github.com/rsdn/nitra</a></li>
 <li class="fragment">original Pratt paper: <a href="https://tdop.github.io" class="uri">https://tdop.github.io</a></li>
 </ul>
 </div>
@@ -373,9 +416,7 @@ str : string → Parser&lt;string, string&gt;</code></pre>
 </section><div><a class="slider-prev" href="#attribute-grammar"></a><a class="slider-next" href="#parser-combinators-1"></a></div>
 <section id="parser-combinators-1" class="slide level1">
 <h1>Parser combinators</h1>
-Advantage: simple, embedded grammar specification<br>
-Disadvantage: hard to reason about<br>
-
+Advantage: simple, embedded grammar specification Disadvantage: hard to reason about
 <div class="smaller">
 <p>Example implementations:</p>
 <ul>
@@ -389,11 +430,9 @@ Disadvantage: hard to reason about<br>
 <h1>Modern algorithms and implementations</h1>
 <p>Contex-free grammar parsers:</p>
 <ul>
-<li class="fragment">theoretical complexity bound: reduced by Valiant to boolean matrix multiplication, <span class="math inline"><em>O</em>(<em>n</em><sup>2.3728639</sup>)</span> with Coppersmith-Wingorad multiplication;<br>
-<span class="small">Leslie G. Valiant (1975). "General context-free recognition in less than cubic time". Journal of Computer and System Sciences 10 (2): 308–315. <a href="doi:10.1016/s0022-0000(75)80046-8" class="uri">doi:10.1016/s0022-0000(75)80046-8</a>.</span></li>
+<li class="fragment">theoretical complexity bound: reduced by Valiant to boolean matrix multiplication, <span class="math inline"><em>O</em>(<em>n</em><sup>2.3728639</sup>)</span> with Coppersmith-Wingorad multiplication; <span class="small">Leslie G. Valiant (1975). "General context-free recognition in less than cubic time". Journal of Computer and System Sciences 10 (2): 308–315. <a href="doi:10.1016/s0022-0000(75)80046-8" class="uri">doi:10.1016/s0022-0000(75)80046-8</a>.</span></li>
 <li class="fragment">LL(k), LR(k), LALR(k) (c.f. Aho, Ullman "Principles of Complier Design" and <a href="http://www.antlr.org">ANTLR</a> )</li>
-<li class="fragment">Earley parser (used in NLP): <span class="math inline"><em>O</em>(<em>n</em><sup>3</sup>)</span> for general context-free grammar, <span class="math inline"><em>O</em>(<em>n</em><sup>2</sup>)</span> for unambiguous grammar, linear time for some deterministic context-free language<br>
-<span class="small">Aycock, John; Horspool, R. Nigel (2002). Practical Earley Parsing. The Computer Journal 45. pp. 620–630. <a href="doi:10.1093/comjnl/45.6.620" class="uri">doi:10.1093/comjnl/45.6.620</a></span></li>
+<li class="fragment">Earley parser (used in NLP): <span class="math inline"><em>O</em>(<em>n</em><sup>3</sup>)</span> for general context-free grammar, <span class="math inline"><em>O</em>(<em>n</em><sup>2</sup>)</span> for unambiguous grammar, linear time for some deterministic context-free language <span class="small">Aycock, John; Horspool, R. Nigel (2002). Practical Earley Parsing. The Computer Journal 45. pp. 620–630. <a href="doi:10.1093/comjnl/45.6.620" class="uri">doi:10.1093/comjnl/45.6.620</a></span></li>
 <li class="fragment">GLR: <span class="math inline"><em>O</em>(<em>n</em><sup>3</sup>)</span> upper bound, complexity is lower for "more deterministic" grammars, <span class="math inline"><em>O</em>(<em>n</em>)</span> for deterministic grammars</li>
 <li class="fragment"><a href="http://www.cs.rhul.ac.uk/research/languages/csle/GLLsketch.html">GLL</a>: recent memoization-based algorithm allowing the parser combinator implementation.</li>
 </ul>
@@ -407,35 +446,34 @@ Disadvantage: hard to reason about<br>
 <ul>
 <li class="fragment">C++ (templates a Turing-complete and type-aware)</li>
 </ul>
-<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="kw">template</span>&lt;<span class="dt">bool</span> V&gt; <span class="kw">struct</span> answer { answer(<span class="dt">int</span>) {} <span class="dt">bool</span> <span class="kw">operator</span>()(){<span class="cf">return</span> V;}};
-
-<span class="kw">template</span>&lt;<span class="dt">bool</span> no, <span class="dt">bool</span> yes, <span class="dt">int</span> f, <span class="dt">int</span> p&gt; <span class="kw">struct</span> IsPrimeHelper
-  : IsPrimeHelper&lt;p % f == <span class="dv">0</span>, f * f &gt;= p, f + <span class="dv">2</span>, p&gt; {};
-<span class="kw">template</span>&lt;<span class="dt">bool</span> yes, <span class="dt">int</span> f, <span class="dt">int</span> p&gt; <span class="kw">struct</span> IsPrimeHelper&lt;<span class="kw">true</span>, yes, f, p&gt; { <span class="kw">using</span> type = answer&lt;<span class="kw">false</span>&gt;; };
-<span class="kw">template</span>&lt;<span class="dt">int</span> f, <span class="dt">int</span> p&gt; <span class="kw">struct</span> IsPrimeHelper&lt;<span class="kw">false</span>, <span class="kw">true</span>, f, p&gt; { <span class="kw">using</span> type = answer&lt;<span class="kw">true</span>&gt;; };
-
-<span class="kw">template</span>&lt;<span class="dt">int</span> I&gt; <span class="kw">using</span> IsPrime = <span class="kw">typename</span> IsPrimeHelper&lt;!(I&amp;<span class="dv">1</span>), <span class="kw">false</span>, <span class="dv">3</span>, I&gt;::type;
-<span class="kw">template</span>&lt;<span class="dt">int</span> I&gt;
-<span class="kw">struct</span> X { <span class="at">static</span> <span class="at">const</span> <span class="dt">int</span> i = I; <span class="dt">int</span> a[i]; };
-
-<span class="kw">template</span>&lt;<span class="kw">typename</span> A&gt; <span class="kw">struct</span> foo;
-<span class="kw">template</span>&lt;&gt;<span class="kw">struct</span> foo&lt;answer&lt;<span class="kw">true</span>&gt;&gt;{
-  <span class="kw">template</span>&lt;<span class="dt">int</span> I&gt; <span class="kw">using</span> typen = X&lt;I&gt;;
-};
-<span class="kw">template</span>&lt;&gt; <span class="kw">struct</span> foo&lt;answer&lt;<span class="kw">false</span>&gt;&gt;{
-  <span class="at">static</span> <span class="at">const</span> <span class="dt">int</span> typen = <span class="dv">0</span>;
-};
-
-<span class="dt">int</span> main() {
-  <span class="kw">auto</span> b = foo&lt;IsPrime&lt;<span class="dv">234799</span>&gt;&gt;::typen&lt;<span class="dv">1</span>&gt;(); <span class="co">// Syntax error if not prime</span>
-  <span class="cf">return</span> <span class="dv">0</span>;
-}</code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="kw">template</span>&lt;<span class="dt">bool</span> V&gt; <span class="kw">struct</span> answer { answer(<span class="dt">int</span>) {} <span class="dt">bool</span> <span class="kw">operator</span>()(){<span class="cf">return</span> V;}};</a>
+<a class="sourceLine" id="cb13-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb13-3" data-line-number="3"><span class="kw">template</span>&lt;<span class="dt">bool</span> no, <span class="dt">bool</span> yes, <span class="dt">int</span> f, <span class="dt">int</span> p&gt; <span class="kw">struct</span> IsPrimeHelper</a>
+<a class="sourceLine" id="cb13-4" data-line-number="4">  : IsPrimeHelper&lt;p % f == <span class="dv">0</span>, f * f &gt;= p, f + <span class="dv">2</span>, p&gt; {};</a>
+<a class="sourceLine" id="cb13-5" data-line-number="5"><span class="kw">template</span>&lt;<span class="dt">bool</span> yes, <span class="dt">int</span> f, <span class="dt">int</span> p&gt; <span class="kw">struct</span> IsPrimeHelper&lt;<span class="kw">true</span>, yes, f, p&gt; { <span class="kw">using</span> type = answer&lt;<span class="kw">false</span>&gt;; };</a>
+<a class="sourceLine" id="cb13-6" data-line-number="6"><span class="kw">template</span>&lt;<span class="dt">int</span> f, <span class="dt">int</span> p&gt; <span class="kw">struct</span> IsPrimeHelper&lt;<span class="kw">false</span>, <span class="kw">true</span>, f, p&gt; { <span class="kw">using</span> type = answer&lt;<span class="kw">true</span>&gt;; };</a>
+<a class="sourceLine" id="cb13-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb13-8" data-line-number="8"><span class="kw">template</span>&lt;<span class="dt">int</span> I&gt; <span class="kw">using</span> IsPrime = <span class="kw">typename</span> IsPrimeHelper&lt;!(I&amp;<span class="dv">1</span>), <span class="kw">false</span>, <span class="dv">3</span>, I&gt;::type;</a>
+<a class="sourceLine" id="cb13-9" data-line-number="9"><span class="kw">template</span>&lt;<span class="dt">int</span> I&gt;</a>
+<a class="sourceLine" id="cb13-10" data-line-number="10"><span class="kw">struct</span> X { <span class="at">static</span> <span class="at">const</span> <span class="dt">int</span> i = I; <span class="dt">int</span> a[i]; };</a>
+<a class="sourceLine" id="cb13-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb13-12" data-line-number="12"><span class="kw">template</span>&lt;<span class="kw">typename</span> A&gt; <span class="kw">struct</span> foo;</a>
+<a class="sourceLine" id="cb13-13" data-line-number="13"><span class="kw">template</span>&lt;&gt;<span class="kw">struct</span> foo&lt;answer&lt;<span class="kw">true</span>&gt;&gt;{</a>
+<a class="sourceLine" id="cb13-14" data-line-number="14">  <span class="kw">template</span>&lt;<span class="dt">int</span> I&gt; <span class="kw">using</span> typen = X&lt;I&gt;;</a>
+<a class="sourceLine" id="cb13-15" data-line-number="15">};</a>
+<a class="sourceLine" id="cb13-16" data-line-number="16"><span class="kw">template</span>&lt;&gt; <span class="kw">struct</span> foo&lt;answer&lt;<span class="kw">false</span>&gt;&gt;{</a>
+<a class="sourceLine" id="cb13-17" data-line-number="17">  <span class="at">static</span> <span class="at">const</span> <span class="dt">int</span> typen = <span class="dv">0</span>;</a>
+<a class="sourceLine" id="cb13-18" data-line-number="18">};</a>
+<a class="sourceLine" id="cb13-19" data-line-number="19"></a>
+<a class="sourceLine" id="cb13-20" data-line-number="20"><span class="dt">int</span> main() {</a>
+<a class="sourceLine" id="cb13-21" data-line-number="21">  <span class="kw">auto</span> b = foo&lt;IsPrime&lt;<span class="dv">234799</span>&gt;&gt;::typen&lt;<span class="dv">1</span>&gt;(); <span class="co">// Syntax error if not prime</span></a>
+<a class="sourceLine" id="cb13-22" data-line-number="22">  <span class="cf">return</span> <span class="dv">0</span>;</a>
+<a class="sourceLine" id="cb13-23" data-line-number="23">}</a></code></pre></div>
 <p><span class="small"><a href="http://stackoverflow.com/questions/14589346/is-c-context-free-or-context-sensitive" class="uri">http://stackoverflow.com/questions/14589346/is-c-context-free-or-context-sensitive</a></span></p>
 </section><div><a class="slider-prev" href="#modern-algorithms-and-implementations"></a><a class="slider-next" href="#home-reading"></a></div>
 <section id="home-reading" class="slide level1">
 <h1>Home reading</h1>
-<p>Kenneth E. Iverson (the creator of APL). Notation as a Tool of Thought.<br>
-1979 ACM Turing Award Lecture</p>
+<p>Kenneth E. Iverson (the creator of APL). Notation as a Tool of Thought. 1979 ACM Turing Award Lecture</p>
 <p><a href="http://www.jsoftware.com/papers/tot.htm" class="uri">http://www.jsoftware.com/papers/tot.htm</a></p>
 </section><div><a class="slider-prev" href="#non-context-free-syntax"></a><a class="slider-next" href="#homework-assignments"></a></div>
 <section id="homework-assignments" class="slide level1">
@@ -448,15 +486,20 @@ Disadvantage: hard to reason about<br>
 <li class="fragment">composition (a ∘ b: parse a, pass result to b; if b fails, whole composition fails)</li>
 <li class="fragment">lookahead (a | b : parse a, try parse b, if b succeeds, continue parsing from the last part of a)</li>
 </ul>
-<p><strong>Task 3.2a</strong>* Define a grammar for a non-trivial subset of an existing programming language in BNF, PEG or parser combinators.<br>
-<strong>Task 3.2b</strong>** Implement a parser for a non-trivial subset of an existing programming language (preferrably in PEG.js, but you can use tool of your choice).</p>
+<p><strong>Task 3.2a</strong>* Define a grammar for a non-trivial subset of an existing programming language in BNF, PEG or parser combinators.</p>
+<p><strong>Task 3.2b</strong>** Implement a parser for a non-trivial subset of an existing programming language (preferrably in PEG.js, but you can use tool of your choice).</p>
 <p><strong>Task 3.3</strong>* Define a regular expression for C/C++ floating point numbers. You can use the following tool: <a href="https://regex101.com/" class="uri">https://regex101.com/</a></p>
 </section><div><a class="slider-prev" href="#home-reading"></a><a class="slider-next" href="#project"></a></div>
 <section id="project" class="slide level1">
 <h1>Project</h1>
-<p><strong>Project Step 1 (design document) due date is March 23rd</strong></p>
-<p><strong>Project Step 2 (due April 6th).</strong> Define an abstract syntax tree for the language in S-expression terms.</p>
-<p><strong>Project Step 2' (optional, task 3.2b).</strong>** Design a simple concrete syntax specification (in BNF or any other formalism) and implement a parser for the language (from sequence of characters to abstract syntax tree conforming to Step 2 specification)</p>
+<dl>
+<dt class="fragment"><strong>Project Step 2.</strong></dt>
+<dd class="fragment">Define an abstract syntax tree for the language in S-expression terms.
+</dd>
+<dt class="fragment"><strong>Project Step 2'.</strong></dt>
+<dd class="fragment">Design a simple concrete syntax specification (in BNF or any other formalism) and implement a parser for the language (from sequence of characters to abstract syntax tree conforming to Step 2 specification)
+</dd>
+</dl>
 </section><div><a class="slider-prev" href="#homework-assignments"></a><a class="slider-next"></a></div>
 
 <!-- start page -->
@@ -487,12 +530,14 @@ Disadvantage: hard to reason about<br>
             window.location = a.href;
           }
           break;
+       case 33: // Page Up
        case 37: // left arrow
          var a = document.querySelector("section:target ~ div a.slider-prev");
          if (a && a.href) {
            window.location = a.href;
          }
          break;
+       case 34: // Page Down
        case 39: // right arrow
          var a = document.querySelector("section:target ~ div a.slider-next");
          if (a && a.href) {

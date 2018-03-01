@@ -24,10 +24,10 @@ Course topics include:
 **22.02.2018** Classification of programming languages. 
 [presentation - html](presentations/02-Classification.html) 
 
-<!--
-**16.03.2017** Specification of programming language. Syntax. 
+**01.03.2018** Specification of programming language. Syntax. 
 [presentation - html](presentations/03-Specification-Syntax.html) 
 
+<!--
 **23.03.2017** Formal syntax analysis. Syntax extensions. 
 [presentation - html](presentations/04-Macros-Parsing.html) 
 

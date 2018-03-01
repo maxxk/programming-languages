@@ -10,8 +10,9 @@
 .small { font-size: smaller ; }
 </style>
 
-Course page: https://maxxk.github.io/programming-languages/
-Contact author: maxim.krivchikov@gmail.com
+https://maxxk.github.io/programming-languages/
+
+maxim.krivchikov@gmail.com
 
 # Additions
 ## Optional typing systems
@@ -54,9 +55,22 @@ Linguistics in general is concerned with three main aspects of a written languag
 - *phonology* — the study of the speech sounds used in a language
 
   )
-<span class="smaller">Definitions from [Merriam-Webster](http://www.merriam-webster.com/dictionary/)
+
+Definitions from [Merriam-Webster](http://www.merriam-webster.com/dictionary/)
+
 See also: http://www.sbql.pl/Topics/Syntax%20semantics%20and%20pragmatics.html
-</span>
+
+# Programming language specification
+```{.graphviz .dot}
+digraph Spec {
+  edge [minlen=3.0];
+
+  { rank=same; Syntax, Semantics, Pragmatics };
+  Specification -> Syntax;
+  Specification -> Semantics;
+  Specification -> Pragmatics;
+}
+```
 
 
 # Syntax
@@ -70,16 +84,31 @@ How can we write the program and how the compiler/interpreter expects it to be f
 http://stackoverflow.com/questions/5508110/why-is-this-program-erroneously-rejected-by-three-c-compilers/5514384#5514384
 
 # Syntax: example 
-<span class="small">Example based on F. Turbak, D. Gifford. Design Concepts in Programming Languages</span>
 Suppose we want to compute the sum of the product of *v* and *w* and the quotient of *y* and *z*.
 Syntax representations:
-> - mathematical expression: v·w + <div style="display: inline-flex; flex-direction: column; justify-content: center;"><div style="border-bottom: 2pt solid black;">y</div><div>z</div></div>
-> - traditional infix notation: `v*w + y/z`
-> - LISP prefix S-expression: `(+ (* v w) (/ y z))`
-> - reverse polish notation / stack calculator: `v w * y z / +`
-> - some [visual "syntax"](https://blockly-demo.appspot.com/static/demos/blockfactory/index.html)
-> ![](images/scratch-syntax.png)
-> - graph-based syntax http://app.flowhub.io/#example/6699161 https://noflojs.org/example/
+ - mathematical expression: 
+ 
+ v·w + <div style="display: inline-flex; flex-direction: column; justify-content: center;"><div style="border-bottom: 2pt solid black;">y</div><div>z</div></div>
+
+ - traditional infix notation: 
+ 
+ `v*w + y/z`
+
+ - LISP prefix S-expression: 
+ 
+ `(+ (* v w) (/ y z))`
+
+ - reverse polish notation / stack calculator: 
+
+ `v w * y z / +`
+
+ - some [visual "syntax"](https://blockly-demo.appspot.com/static/demos/blockfactory/index.html)
+
+ ![](images/scratch-syntax.png)
+
+ - graph-based syntax (not related to previous examples) https://noflojs.org/dataflow-noflo/demo/draggabilly.html https://noflojs.org/example/
+
+Example based on F. Turbak, D. Gifford. Design Concepts in Programming Languages
 
 # Semantics
 Semantics of a programming language is concerned with the meaning of programs: how a well-formed program may be expected to behave when executed on a computer.
@@ -110,7 +139,7 @@ Two sides:
 
 . . .
 
-Evaluation strategy (strict / lazy) is a part of semantics (because the change of strategy changes the meaning of the same syntactic formula).
+Note: Evaluation strategy (strict / lazy) is a part of semantics (because the change of strategy changes the meaning of the same syntactic formula).
 
 # Formal specification
 Our objective is to get a precise mathematical description of a program.
@@ -118,27 +147,39 @@ Our objective is to get a precise mathematical description of a program.
 Each part of language specification must be implemented in mathematical terms.
 
 # Syntax
-<span class="large">List<Char> ⟶ AbstractSyntaxTree</span>
+## List\<Char\> ⟶ AbstractSyntaxTree
 
 # Syntax: relation to formal languages
 (regular ⊂ context-free ⊂ context-sensitive ⊂ unbounded)
 
 We could make a relation between programs and formal languages in many ways:
 - language $L_1$, containing all well-formed (syntactically correct) programs
+  
 - language $L_2 ⊆ L_1$, containing all well-typed (runnable) programs
-- language $L_3 ⊆ L_2$, containing all semantically-correct programs (running without errors)
+  $L_1 ∖ L_2$ — "syntax gap", well-formed programs which are not well-typed
 
-It is obvious that for almost every practical programming language $L_3$ is unbounded. For the modern languages, $L_1$ is usually context-free or some subset of context-free languages (Deterministic Context-Free Languages, unambiguous languages which can be accepted by deterministic pushdown automaton and therefore can be parsed in $O(n)$).
+- language $L_3 ⊆ L_2$, containing all semantically-correct programs (running without errors)
+  $L3
+  $L_2 ∖ L_3$ — "typing gap", well-typed programs which throw errors in run-time
+
+
+It is obvious that for almost every practical ("Turing complete") programming language $L_3$ is unbounded. For the modern languages, $L_1$ is usually context-free or some subset of context-free languages (Deterministic Context-Free Languages, unambiguous languages which can be accepted by deterministic pushdown automaton and therefore can be parsed in $O(n)$).
 
 $L_2$ may be decidable, but not usually decidability is not proven. Compiler freezes may be caused by undecidability of type checking.
 
 # Lexical analysis
-<span class="large">List<Char> ⟶ List<Token></span>
+## List\<Char\> ⟶ List\<Token\>
 
 Traditionally decision problem of $L_1$ membership (well-formedness of a program) is split by two parts:
 - lexical analysis transforms a sequence of characters to a sequence of tokens (marked groups of characters, like identifiers, integers, etc.):
-    <span class="huge">`int main(int argc, char argv)`</span>
-    <span class="smaller">`KEYWORD IDENTIFIER LPAR KEYWORD IDENTIFIER COMMA KEYWORD IDENTIFIER RPAR`</span>
+
+```c
+int main (int argc, char argv)
+
+  int      main      (    int       argc    ,     char     argv      )
+KEYWORD IDENTIFIER LPAR KEYWORD IDENTIFIER COMMA KEYWORD IDENTIFIER RPAR
+```
+
 - usually lexical specification of the language is regular
 - Unicode standard defines base categories for a lexical analysis (identifier start, identifier, digit, punctuation etc.)
 
@@ -167,7 +208,7 @@ Lisp S-expression is a direct representation of abstract syntax tree:
 ```
 
 # Language specification
-Languages (which are (possibly infinite) subsets of strings of some alphabet: Σ*) may have a finite description, which is called "grammar".
+Languages (which are (possibly infinite) subsets of strings of some alphabet: Σ*) usually have a finite description, which is called "grammar".
 
 - **generative grammar:** how to generate all strings of the language starting from a single "start" symbol
 - **analytic grammar:** how to get an abstract syntax tree (a tree of rule applications) from a given string
@@ -216,7 +257,7 @@ Analytical grammar formalism, a superset of regular expressions:
 - Kleene star (zero or more): $e*$
 - "plus" (one or more): $e+$
 - optional: $e?$
-- positive lookahead: $&e$
+- positive lookahead: $\&e$
 - negative lookahead: $!e$
 
 
@@ -229,7 +270,7 @@ Product ← Expr (('*' / '/') Expr)*
 Sum     ← Expr (('+' / '-') Expr)*
 Expr    ← Product / Sum / Value
 ```
-It is possible to rewrite grammars without left recursion.
+Rewriting grammars to remove left recursion is possible (see "Dragon book").
 
 # Infix operators
 Infix mathematical notation is probably the only desirable part of syntax which don't have nice representations as an S-expression
@@ -259,6 +300,7 @@ Infix operators are complicated for parsing:
 The non-associatitvity is hard to represent in syntax, so it is usually a property of semantics.
 
 # TDOP algorithm
+Top-down operator precedence parser
 
 Operator binding power:
 `1 + 2 * 4`
@@ -269,7 +311,7 @@ Operator binding power:
 See also:
 - Interactive example http://l-lang.org/blog/TDOP---Pratt-parser-in-pictures/
 - simple implementation http://javascript.crockford.com/tdop/tdop.html
-- JetBrains Nitra (russian project): https://github.com/JetBrains/Nitra
+- Nitra language workbench (russian project): https://github.com/rsdn/nitra
 - original Pratt paper: https://tdop.github.io
 </div>
 
@@ -370,14 +412,17 @@ http://www.jsoftware.com/papers/tot.htm
 - lookahead (a | b : parse a, try parse b, if b succeeds, continue parsing from the last part of a)
 
 **Task 3.2a*** Define a grammar for a non-trivial subset of an existing programming language in BNF, PEG or parser combinators.
+
 **Task 3.2b**** Implement a parser for a non-trivial subset of an existing programming language (preferrably in PEG.js, but you can use tool of your choice). 
 
 **Task 3.3*** Define a regular expression for C/C++ floating point numbers. You can use the following tool: https://regex101.com/
 
-# Project 
 
-**Project Step 1 (design document) due date is March 23rd**
 
-**Project Step 2 (due April 6th).** Define an abstract syntax tree for the language in S-expression terms.
+# Project
 
-**Project Step 2' (optional, task 3.2b).**** Design a simple concrete syntax specification (in BNF or any other formalism) and implement a parser for the language (from sequence of characters to abstract syntax tree conforming to Step 2 specification)
+**Project Step 2.**
+~ Define an abstract syntax tree for the language in S-expression terms.
+
+**Project Step 2'.**
+~ Design a simple concrete syntax specification (in BNF or any other formalism) and implement a parser for the language (from sequence of characters to abstract syntax tree conforming to Step 2 specification)
