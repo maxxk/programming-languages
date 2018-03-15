@@ -15,8 +15,9 @@
 .huge { font-size: 2em !important; }
 </style>
 
-Course page: https://maxxk.github.io/programming-languages/
-Contact author: maxim.krivchikov@gmail.com
+https://maxxk.github.io/programming-languages/
+
+maxim.krivchikov@gmail.com
 
 # Programming language specification
 ```{.graphviz .dot}
@@ -70,7 +71,7 @@ atom ::= number | '(' term ')'
 
 # Mechanization
 <div class="smaller">
-Programs are complex. In theory, you can make a mathematical description of a programming language with some assumptions. You can't usually prove properties on paper. Therefore we have to use some (mathematically correct) mechanization tools to make a precise reasoning about  the program. In the present course we employ Agda and Coq as the mechanization tools.
+Programs are complex. In theory, you can make a mathematical description of a programming language with some assumptions. You can't usually prove properties on paper. Therefore we have to use some (mathematically correct) mechanization tools to make a precise reasoning about  the program. Scientific publications which we will discuss today use Coq or Agda proof-assistants for mechanization.
 </div>
 
 <div class="twocolumn" style="font-size: 0.5em;">
@@ -159,8 +160,9 @@ A → B
 ~ function from type A to type B
 
 (a : A) → B(a) 
-~ dependent function (dependent product) mapping an element *a* of type A to representative B(a) of 
-family B : A → Type
+~ dependent function (dependent product) mapping an element *a* of type A to representative B(a) of family 
+
+B : A → Type
 
 A + B 
 ~ sum type (either an element of A or element of B)
@@ -194,6 +196,8 @@ Atom   = ANumber (n : Number) | AGroup (t : Term)
 # Pattern matching
 
 An interpreter for an abstract syntax tree from previous slide is defined with pattern matching (case analysis) on inductive type constructors:
+
+```
 interpretTerm : Term → Number
 interpretTerm (TFactor f) = interpretFactor f
 interpretTerm (TSum t f) = (interpretTerm t) + (interpretFactor f)
@@ -203,21 +207,29 @@ interpretFactor (FProduct f a) = (interpretFactor f) * (interpretAtom a)
 interpretAtom : Atom → Number
 interpretAtom (ANumber n) = n
 interpretAtom (AGroup t) = interpretTerm t
+```
 
 # Proof assistants: Coq and Agda
 Coq and Agda are the proof assistants based on dependently-typed lambda calculus ([remember the previous semester](https://maxxk.github.io/formal-models/)).
 
 ## Coq
 ML-like syntax.
+
 Homepage: https://coq.inria.fr
+
 Textbook: http://adam.chlipala.net/cpdt/
+
 Quickstart (in Russian): https://habrahabr.ru/post/182442/
+
 Another short texbook (in Russian): http://lpcs.math.msu.su/~krupski/download/coq_pract.pdf
 
 ## Agda
 Haskell-like syntax.
+
 Homepage: http://wiki.portal.chalmers.se/agda/pmwiki.php?n=Main.HomePage
+
 Introduction paper: http://www.cse.chalmers.se/~ulfn/papers/afp08/tutorial.pdf
+
 Example (in Russian): https://habrahabr.ru/post/148769/
 
 # Coq and Agda
@@ -305,6 +317,7 @@ Definition head A n (vec : Vector A (S n)) : A := head' vec.
 
 # Formal syntax analysis
 Parser is a function which implements syntax analysis.
+
 Suppose we have defined a syntax as a grammar G and an abstract syntax tree and implemented a parser P.
 
 P : String → AST + SyntaxError
@@ -315,7 +328,7 @@ How can we make sure that our parser will:
 3. will terminate for every finite input.
 
 # Couldn't we just write a parser in a proof assistant?
-From the previous class: left recursion.
+From the previous lecture: left recursion.
 ```
 term ::= factor | term '+' factor
 factor ::= atom | factor '*' atom
@@ -437,7 +450,7 @@ end.
 ```
 <span class="smaller">
 Koprowski A., Binsztok H. TRX: A Formally Verified Parser Interpreter // Logical Methods in Computer Science / ed. Gordon A. 2011. Vol. 7, № 2.
-Note: some approaches exist to enable left-recursive PEG parsing, I must have references somewhere :)
+
 Medeiros S., Ierusalimschy R. A parsing machine for PEGs // Proceedings of the 2008 symposium on Dynamic languages - DLS ’08. 2008. P. 1–12.
 </span>
 
@@ -557,13 +570,21 @@ public class Decorator: <#= interface.FullName #>
 #>
 }
 ```
+
+Notes on the M4 Macro Language: http://mbreen.com/m4.html
+
+T4 Text Templates: https://docs.microsoft.com/en-us/visualstudio/modeling/design-time-code-generation-by-using-t4-text-templates
+
+
 # LISP Reader Macros
 In LISP there are different kinds of macros: ordinary macros which transfrom abstract syntax tree and reader macros which transform a string to an abstract syntax tree.
 
 ReaderMacro : String × (genericReader : String → AST) → AST
 
 In LISP reader macros are implemented by means of modifying *read table:* a mapping from characters to further actions.
+
 ReadTable : Char → (String → AST)
+
 Reader : (readtable : ReadTable) → (nexttable : Char → ReadTable) → String → AST
 
 See an example at: https://gist.github.com/chaitanyagupta/9324402
@@ -680,7 +701,7 @@ macro_rules! vec {
 let x: Vec<u32> = vec![1, 2, 3]; 
 // expanded:
 let x : Vec<u32> = {
-  let mut temp_vec_1234 = Vec::new();
+  let mut temp_vec = Vec::new();
   temp_vec.push(1);
   temp_vec.push(2);
   temp_vec.push(3);
@@ -690,9 +711,9 @@ let x : Vec<u32> = {
 
 # Homework assignments
 
-**Task 4.1** (6*) Implement Danielsson's Total Parser Combinators in Coq.
+**Task 4.1** (10*) Implement Danielsson's Total Parser Combinators in Coq.
 
-**Task 4.2a*** Write (manually) an extensible parser for LISP-like symbolic expressions (subset of ["R7RS small"](http://www.scheme-reports.org) Scheme specification). Whitespace, identifier and number specifications are omitted as a trivial exercise. 
+**Task 4.2*** Write (manually) an extensible parser for LISP-like symbolic expressions (subset of ["R7RS small"](http://www.scheme-reports.org) Scheme specification). Whitespace, identifier and number specifications are omitted as a trivial exercise. 
 ```
 <datum> ::= <atom> <optional whitespace> | <list> <optional whitespace>
 <atom> ::= <identifier> | <number> | <string>
@@ -703,7 +724,7 @@ let x : Vec<u32> = {
 
 # Homework assignments
 
-**Task 4.2b**** Implement reader macros for a subset of a context-free grammar as an interpreter from s-expressions to parser extension. It'll be easier to implement in some lanugage featuring `eval` command (like JavaScript, Python or LISP family)
+**Task 4.3**** Implement reader macros for a subset of a context-free grammar as an interpreter from s-expressions to parser extension. It'll be easier to implement in some lanugage featuring `eval` command (like JavaScript, Python or LISP family)
 ```scheme
 (reader-macro <start-string> <stop-string> <grammar>)
 ; Example:
@@ -714,4 +735,4 @@ let x : Vec<u32> = {
 #1.5e11# ⟶ (float "1" ("." ("5")) ("e" ("") "11"))
 ```
 
-**Task 4.2c*** Write a reader macro for infix arithmetical expressions (addition, multiplication, brackets).
+**Task 4.4*** Write a reader macro for infix arithmetical expressions (addition, multiplication, brackets).

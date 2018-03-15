@@ -27,9 +27,10 @@ Course topics include:
 **01.03.2018** Specification of programming language. Syntax. 
 [presentation - html](presentations/03-Specification-Syntax.html) 
 
-<!--
-**23.03.2017** Formal syntax analysis. Syntax extensions. 
+**15.03.2018** Formal syntax analysis. Syntax extensions. 
 [presentation - html](presentations/04-Macros-Parsing.html) 
+
+<!--
 
 **30.03.2017** Static semantics. Naming, Bindings and Scope. 
 [presentation - html](presentations/05-Static-Semantics.html)

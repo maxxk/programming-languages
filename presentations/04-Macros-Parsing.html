@@ -1,48 +1,76 @@
 <!DOCTYPE html><html><head>
   <meta charset="utf-8">
   <meta name="generator" content="pandoc">
-  <title></title>
+  <title>04-Macros-Parsing</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <link rel="stylesheet" href="slider.css">
   <style type="text/css">code{white-space: pre;}</style>
   <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
   </style>
 </head>
 <body>
@@ -68,105 +96,104 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 .large { font-size: 1.5em !important; }
 .huge { font-size: 2em !important; }
 </style>
-<p>Course page: <a href="https://maxxk.github.io/programming-languages/" class="uri">https://maxxk.github.io/programming-languages/</a><br>
-Contact author: <a href="mailto:maxim.krivchikov@gmail.com" class="email">maxim.krivchikov@gmail.com</a></p>
+<p><a href="https://maxxk.github.io/programming-languages/" class="uri">https://maxxk.github.io/programming-languages/</a></p>
+<p><a href="mailto:maxim.krivchikov@gmail.com" class="email">maxim.krivchikov@gmail.com</a></p>
 </section><div><a class="slider-prev"></a><a class="slider-next" href="#programming-language-specification"></a></div>
 <section id="programming-language-specification" class="slide level1">
 <h1>Programming language specification</h1>
-<p><img src="graphviz-images/aa5f4656547c5b2a7ce97a49486be6e2a63b8520.svg"></p>
+<p><img data-src="graphviz-images/aa5f4656547c5b2a7ce97a49486be6e2a63b8520.svg" src="graphviz-images/aa5f4656547c5b2a7ce97a49486be6e2a63b8520.svg"></p>
 </section><div><a class="slider-prev" href="#software-and-programming-language-theory"></a><a class="slider-next" href="#bnf-formally"></a></div>
 <section id="bnf-formally" class="slide level1">
 <h1>BNF formally</h1>
 <p>BNF has a graph structure (actually, a directed hypergraph with per-edge ordered destination nodes). Parse tree is a tree derived from the graph (when you encounter a cycle, vertex is duplicated).</p>
-<p><img src="graphviz-images/bf9e1f309d9b94e9d24da483ef8f703eb63e3c0a.svg"></p>
+<p><img data-src="graphviz-images/bf9e1f309d9b94e9d24da483ef8f703eb63e3c0a.svg" src="graphviz-images/bf9e1f309d9b94e9d24da483ef8f703eb63e3c0a.svg"></p>
 <div class="smallish">
-<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c">term ::= factor | term <span class="ch">'+'</span> factor
-factor ::= atom | factor <span class="ch">'*'</span> atom
-atom ::= number | <span class="ch">'('</span> term <span class="ch">')'</span></code></pre></div>
-<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c">(<span class="dv">3</span>+<span class="dv">2</span>)*<span class="dv">4</span>+<span class="dv">1</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb1-1" data-line-number="1">term ::= factor | term <span class="ch">'+'</span> factor</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2">factor ::= atom | factor <span class="ch">'*'</span> atom</a>
+<a class="sourceLine" id="cb1-3" data-line-number="3">atom ::= number | <span class="ch">'('</span> term <span class="ch">')'</span></a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb2-1" data-line-number="1">(<span class="dv">3</span>+<span class="dv">2</span>)*<span class="dv">4</span>+<span class="dv">1</span></a></code></pre></div>
 </div>
 </section><div><a class="slider-prev" href="#programming-language-specification"></a><a class="slider-next" href="#mechanization"></a></div>
 <section id="mechanization" class="slide level1">
 <h1>Mechanization</h1>
 <div class="smaller">
-Programs are complex. In theory, you can make a mathematical description of a programming language with some assumptions. You can't usually prove properties on paper. Therefore we have to use some (mathematically correct) mechanization tools to make a precise reasoning about the program. In the present course we employ Agda and Coq as the mechanization tools.
+Programs are complex. In theory, you can make a mathematical description of a programming language with some assumptions. You can't usually prove properties on paper. Therefore we have to use some (mathematically correct) mechanization tools to make a precise reasoning about the program. Scientific publications which we will discuss today use Coq or Agda proof-assistants for mechanization.
 </div>
 <div class="twocolumn" style="font-size: 0.5em;">
-<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="kw">class</span> HashEntry
-{
-<span class="kw">private</span>:
-
-      <span class="dt">int</span> key;
-      <span class="dt">int</span> value;
-
-<span class="kw">public</span>:
-
-      HashEntry(<span class="dt">int</span> key, <span class="dt">int</span> value)
-      {
-            <span class="kw">this</span>-&gt;key = key;
-            <span class="kw">this</span>-&gt;value = value;
-      }
-
-      <span class="dt">int</span> getKey() { <span class="cf">return</span> key; }
-
-      <span class="dt">int</span> getValue() { <span class="cf">return</span> value; }
-};
-
-<span class="at">const</span> <span class="dt">int</span> TABLE_SIZE = <span class="dv">128</span>;
-
-<span class="kw">class</span> HashMap
-{
-<span class="kw">private</span>:
-
-      HashEntry **table;
-
-<span class="kw">public</span>:
-
-      HashMap()
-      {
-            table = <span class="kw">new</span> HashEntry*[TABLE_SIZE];
-
-            <span class="cf">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt; TABLE_SIZE; i++)
-                  table[i] = NULL;
-      }
-
-      <span class="dt">int</span> get(<span class="dt">int</span> key)
-      {
-            <span class="dt">int</span> hash = (key % TABLE_SIZE);
-
-            <span class="cf">while</span> (table[hash] != NULL &amp;&amp; table[hash]-&gt;getKey() != key)
-                  hash = (hash + <span class="dv">1</span>) % TABLE_SIZE;
-
-            <span class="cf">if</span> (table[hash] == NULL)
-                  <span class="cf">return</span> <span class="dv">-1</span>;
-            <span class="cf">else</span>
-                  <span class="cf">return</span> table[hash]-&gt;getValue();
-      }
-
-      <span class="dt">void</span> put(<span class="dt">int</span> key, <span class="dt">int</span> value)
-      {
-            <span class="dt">int</span> hash = (key % TABLE_SIZE);
-
-            <span class="cf">while</span> (table[hash] != NULL &amp;&amp; table[hash]-&gt;getKey() != key)
-                  hash = (hash + <span class="dv">1</span>) % TABLE_SIZE;
-
-            <span class="cf">if</span> (table[hash] != NULL)
-                  <span class="kw">delete</span> table[hash];
-
-            table[hash] = <span class="kw">new</span> HashEntry(key, value);
-      }     
-
-      ~HashMap()
-      {
-            <span class="cf">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt; TABLE_SIZE; i++)
-                  <span class="cf">if</span> (table[i] != NULL)
-                        <span class="kw">delete</span> table[i];
-
-            <span class="kw">delete</span>[] table;
-      }
-};</code></pre></div>
-2009 nodes in an abstract syntax tree.<br>
-<img src="images/S6kW9.jpg">
+<div class="sourceCode" id="cb3"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw">class</span> HashEntry</a>
+<a class="sourceLine" id="cb3-2" data-line-number="2">{</a>
+<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="kw">private</span>:</a>
+<a class="sourceLine" id="cb3-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb3-5" data-line-number="5">      <span class="dt">int</span> key;</a>
+<a class="sourceLine" id="cb3-6" data-line-number="6">      <span class="dt">int</span> value;</a>
+<a class="sourceLine" id="cb3-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb3-8" data-line-number="8"><span class="kw">public</span>:</a>
+<a class="sourceLine" id="cb3-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb3-10" data-line-number="10">      HashEntry(<span class="dt">int</span> key, <span class="dt">int</span> value)</a>
+<a class="sourceLine" id="cb3-11" data-line-number="11">      {</a>
+<a class="sourceLine" id="cb3-12" data-line-number="12">            <span class="kw">this</span>-&gt;key = key;</a>
+<a class="sourceLine" id="cb3-13" data-line-number="13">            <span class="kw">this</span>-&gt;value = value;</a>
+<a class="sourceLine" id="cb3-14" data-line-number="14">      }</a>
+<a class="sourceLine" id="cb3-15" data-line-number="15"></a>
+<a class="sourceLine" id="cb3-16" data-line-number="16">      <span class="dt">int</span> getKey() { <span class="cf">return</span> key; }</a>
+<a class="sourceLine" id="cb3-17" data-line-number="17"></a>
+<a class="sourceLine" id="cb3-18" data-line-number="18">      <span class="dt">int</span> getValue() { <span class="cf">return</span> value; }</a>
+<a class="sourceLine" id="cb3-19" data-line-number="19">};</a>
+<a class="sourceLine" id="cb3-20" data-line-number="20"></a>
+<a class="sourceLine" id="cb3-21" data-line-number="21"><span class="at">const</span> <span class="dt">int</span> TABLE_SIZE = <span class="dv">128</span>;</a>
+<a class="sourceLine" id="cb3-22" data-line-number="22"></a>
+<a class="sourceLine" id="cb3-23" data-line-number="23"><span class="kw">class</span> HashMap</a>
+<a class="sourceLine" id="cb3-24" data-line-number="24">{</a>
+<a class="sourceLine" id="cb3-25" data-line-number="25"><span class="kw">private</span>:</a>
+<a class="sourceLine" id="cb3-26" data-line-number="26"></a>
+<a class="sourceLine" id="cb3-27" data-line-number="27">      HashEntry **table;</a>
+<a class="sourceLine" id="cb3-28" data-line-number="28"></a>
+<a class="sourceLine" id="cb3-29" data-line-number="29"><span class="kw">public</span>:</a>
+<a class="sourceLine" id="cb3-30" data-line-number="30"></a>
+<a class="sourceLine" id="cb3-31" data-line-number="31">      HashMap()</a>
+<a class="sourceLine" id="cb3-32" data-line-number="32">      {</a>
+<a class="sourceLine" id="cb3-33" data-line-number="33">            table = <span class="kw">new</span> HashEntry*[TABLE_SIZE];</a>
+<a class="sourceLine" id="cb3-34" data-line-number="34"></a>
+<a class="sourceLine" id="cb3-35" data-line-number="35">            <span class="cf">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt; TABLE_SIZE; i++)</a>
+<a class="sourceLine" id="cb3-36" data-line-number="36">                  table[i] = NULL;</a>
+<a class="sourceLine" id="cb3-37" data-line-number="37">      }</a>
+<a class="sourceLine" id="cb3-38" data-line-number="38"></a>
+<a class="sourceLine" id="cb3-39" data-line-number="39">      <span class="dt">int</span> get(<span class="dt">int</span> key)</a>
+<a class="sourceLine" id="cb3-40" data-line-number="40">      {</a>
+<a class="sourceLine" id="cb3-41" data-line-number="41">            <span class="dt">int</span> hash = (key % TABLE_SIZE);</a>
+<a class="sourceLine" id="cb3-42" data-line-number="42"></a>
+<a class="sourceLine" id="cb3-43" data-line-number="43">            <span class="cf">while</span> (table[hash] != NULL &amp;&amp; table[hash]-&gt;getKey() != key)</a>
+<a class="sourceLine" id="cb3-44" data-line-number="44">                  hash = (hash + <span class="dv">1</span>) % TABLE_SIZE;</a>
+<a class="sourceLine" id="cb3-45" data-line-number="45"></a>
+<a class="sourceLine" id="cb3-46" data-line-number="46">            <span class="cf">if</span> (table[hash] == NULL)</a>
+<a class="sourceLine" id="cb3-47" data-line-number="47">                  <span class="cf">return</span> <span class="dv">-1</span>;</a>
+<a class="sourceLine" id="cb3-48" data-line-number="48">            <span class="cf">else</span></a>
+<a class="sourceLine" id="cb3-49" data-line-number="49">                  <span class="cf">return</span> table[hash]-&gt;getValue();</a>
+<a class="sourceLine" id="cb3-50" data-line-number="50">      }</a>
+<a class="sourceLine" id="cb3-51" data-line-number="51"></a>
+<a class="sourceLine" id="cb3-52" data-line-number="52">      <span class="dt">void</span> put(<span class="dt">int</span> key, <span class="dt">int</span> value)</a>
+<a class="sourceLine" id="cb3-53" data-line-number="53">      {</a>
+<a class="sourceLine" id="cb3-54" data-line-number="54">            <span class="dt">int</span> hash = (key % TABLE_SIZE);</a>
+<a class="sourceLine" id="cb3-55" data-line-number="55"></a>
+<a class="sourceLine" id="cb3-56" data-line-number="56">            <span class="cf">while</span> (table[hash] != NULL &amp;&amp; table[hash]-&gt;getKey() != key)</a>
+<a class="sourceLine" id="cb3-57" data-line-number="57">                  hash = (hash + <span class="dv">1</span>) % TABLE_SIZE;</a>
+<a class="sourceLine" id="cb3-58" data-line-number="58"></a>
+<a class="sourceLine" id="cb3-59" data-line-number="59">            <span class="cf">if</span> (table[hash] != NULL)</a>
+<a class="sourceLine" id="cb3-60" data-line-number="60">                  <span class="kw">delete</span> table[hash];</a>
+<a class="sourceLine" id="cb3-61" data-line-number="61"></a>
+<a class="sourceLine" id="cb3-62" data-line-number="62">            table[hash] = <span class="kw">new</span> HashEntry(key, value);</a>
+<a class="sourceLine" id="cb3-63" data-line-number="63">      }     </a>
+<a class="sourceLine" id="cb3-64" data-line-number="64"></a>
+<a class="sourceLine" id="cb3-65" data-line-number="65">      ~HashMap()</a>
+<a class="sourceLine" id="cb3-66" data-line-number="66">      {</a>
+<a class="sourceLine" id="cb3-67" data-line-number="67">            <span class="cf">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt; TABLE_SIZE; i++)</a>
+<a class="sourceLine" id="cb3-68" data-line-number="68">                  <span class="cf">if</span> (table[i] != NULL)</a>
+<a class="sourceLine" id="cb3-69" data-line-number="69">                        <span class="kw">delete</span> table[i];</a>
+<a class="sourceLine" id="cb3-70" data-line-number="70"></a>
+<a class="sourceLine" id="cb3-71" data-line-number="71">            <span class="kw">delete</span>[] table;</a>
+<a class="sourceLine" id="cb3-72" data-line-number="72">      }</a>
+<a class="sourceLine" id="cb3-73" data-line-number="73">};</a></code></pre></div>
+2009 nodes in an abstract syntax tree. <img data-src="images/S6kW9.jpg" src="images/S6kW9.jpg">
 </div>
 <div class="small">
 Example from: <a href="http://stackoverflow.com/a/11025084" class="uri">http://stackoverflow.com/a/11025084</a>
@@ -179,21 +206,19 @@ Example from: <a href="http://stackoverflow.com/a/11025084" class="uri">http://s
 <dd class="fragment">function from type A to type B
 </dd>
 <dt class="fragment">(a : A) → B(a)</dt>
-<dd class="fragment">dependent function (dependent product) mapping an element <em>a</em> of type A to representative B(a) of<br>
-family B : A → Type
+<dd class="fragment">dependent function (dependent product) mapping an element <em>a</em> of type A to representative B(a) of family
 </dd>
+</dl>
+<p>B : A → Type</p>
+<dl>
 <dt class="fragment">A + B</dt>
-<dd class="fragment">sum type (either an element of A or element of B)<br>
-inl : A → A + B<br>
-inr : B → A + B
+<dd class="fragment">sum type (either an element of A or element of B) inl : A → A + B inr : B → A + B
 </dd>
 <dt class="fragment">A × B</dt>
-<dd class="fragment">product type (ordered pair of elements from A and B)<br>
-(a, b) : A × B
+<dd class="fragment">product type (ordered pair of elements from A and B) (a, b) : A × B
 </dd>
 <dt class="fragment">(a : A) × B(a)</dt>
-<dd class="fragment">dependent sum, an ordered pair of element <em>a</em> from A and element from representative B(a) of<br>
-family B : A → Type
+<dd class="fragment">dependent sum, an ordered pair of element <em>a</em> from A and element from representative B(a) of family B : A → Type
 </dd>
 </dl>
 </section><div><a class="slider-prev" href="#mechanization"></a><a class="slider-next" href="#inductive-types"></a></div>
@@ -209,31 +234,31 @@ Atom   = ANumber (n : Number) | AGroup (t : Term)</code></pre>
 </section><div><a class="slider-prev" href="#notation"></a><a class="slider-next" href="#pattern-matching"></a></div>
 <section id="pattern-matching" class="slide level1">
 <h1>Pattern matching</h1>
-<p>An interpreter for an abstract syntax tree from previous slide is defined with pattern matching (case analysis) on inductive type constructors:<br>
-interpretTerm : Term → Number<br>
-interpretTerm (TFactor f) = interpretFactor f<br>
-interpretTerm (TSum t f) = (interpretTerm t) + (interpretFactor f)<br>
-interpretFactor : Factor → Number<br>
-interpretFactor (FAtom a) = interpretAtom a<br>
-interpretFactor (FProduct f a) = (interpretFactor f) * (interpretAtom a)<br>
-interpretAtom : Atom → Number<br>
-interpretAtom (ANumber n) = n<br>
-interpretAtom (AGroup t) = interpretTerm t</p>
+<p>An interpreter for an abstract syntax tree from previous slide is defined with pattern matching (case analysis) on inductive type constructors:</p>
+<pre><code>interpretTerm : Term → Number
+interpretTerm (TFactor f) = interpretFactor f
+interpretTerm (TSum t f) = (interpretTerm t) + (interpretFactor f)
+interpretFactor : Factor → Number
+interpretFactor (FAtom a) = interpretAtom a
+interpretFactor (FProduct f a) = (interpretFactor f) * (interpretAtom a)
+interpretAtom : Atom → Number
+interpretAtom (ANumber n) = n
+interpretAtom (AGroup t) = interpretTerm t</code></pre>
 </section><div><a class="slider-prev" href="#inductive-types"></a><a class="slider-next" href="#proof-assistants-coq-and-agda"></a></div>
 <section id="proof-assistants-coq-and-agda" class="slide level1">
 <h1>Proof assistants: Coq and Agda</h1>
 <p>Coq and Agda are the proof assistants based on dependently-typed lambda calculus (<a href="https://maxxk.github.io/formal-models/">remember the previous semester</a>).</p>
 <h2 id="coq">Coq</h2>
-<p>ML-like syntax.<br>
-Homepage: <a href="https://coq.inria.fr" class="uri">https://coq.inria.fr</a><br>
-Textbook: <a href="http://adam.chlipala.net/cpdt/" class="uri">http://adam.chlipala.net/cpdt/</a><br>
-Quickstart (in Russian): <a href="https://habrahabr.ru/post/182442/" class="uri">https://habrahabr.ru/post/182442/</a><br>
-Another short texbook (in Russian): <a href="http://lpcs.math.msu.su/~krupski/download/coq_pract.pdf" class="uri">http://lpcs.math.msu.su/~krupski/download/coq_pract.pdf</a></p>
+<p>ML-like syntax.</p>
+<p>Homepage: <a href="https://coq.inria.fr" class="uri">https://coq.inria.fr</a></p>
+<p>Textbook: <a href="http://adam.chlipala.net/cpdt/" class="uri">http://adam.chlipala.net/cpdt/</a></p>
+<p>Quickstart (in Russian): <a href="https://habrahabr.ru/post/182442/" class="uri">https://habrahabr.ru/post/182442/</a></p>
+<p>Another short texbook (in Russian): <a href="http://lpcs.math.msu.su/~krupski/download/coq_pract.pdf" class="uri">http://lpcs.math.msu.su/~krupski/download/coq_pract.pdf</a></p>
 <h2 id="agda">Agda</h2>
-<p>Haskell-like syntax.<br>
-Homepage: <a href="http://wiki.portal.chalmers.se/agda/pmwiki.php?n=Main.HomePage" class="uri">http://wiki.portal.chalmers.se/agda/pmwiki.php?n=Main.HomePage</a><br>
-Introduction paper: <a href="http://www.cse.chalmers.se/~ulfn/papers/afp08/tutorial.pdf" class="uri">http://www.cse.chalmers.se/~ulfn/papers/afp08/tutorial.pdf</a><br>
-Example (in Russian): <a href="https://habrahabr.ru/post/148769/" class="uri">https://habrahabr.ru/post/148769/</a></p>
+<p>Haskell-like syntax.</p>
+<p>Homepage: <a href="http://wiki.portal.chalmers.se/agda/pmwiki.php?n=Main.HomePage" class="uri">http://wiki.portal.chalmers.se/agda/pmwiki.php?n=Main.HomePage</a></p>
+<p>Introduction paper: <a href="http://www.cse.chalmers.se/~ulfn/papers/afp08/tutorial.pdf" class="uri">http://www.cse.chalmers.se/~ulfn/papers/afp08/tutorial.pdf</a></p>
+<p>Example (in Russian): <a href="https://habrahabr.ru/post/148769/" class="uri">https://habrahabr.ru/post/148769/</a></p>
 </section><div><a class="slider-prev" href="#pattern-matching"></a><a class="slider-next" href="#coq-and-agda"></a></div>
 <section id="coq-and-agda" class="slide level1">
 <h1>Coq and Agda</h1>
@@ -241,42 +266,42 @@ Example (in Russian): <a href="https://habrahabr.ru/post/148769/" class="uri">ht
 <ol type="1">
 <li class="fragment">The function will accept any input of the specified type, errors like Haskell's "non-exhaustive patterns" are not possible:</li>
 </ol>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span class="ot">helper ::</span> <span class="dt">Integer</span> <span class="ot">-&gt;</span> [<span class="dt">Integer</span>] <span class="ot">-&gt;</span> [<span class="dt">Integer</span>] <span class="ot">-&gt;</span> [(<span class="dt">Integer</span>,<span class="dt">Integer</span>)] <span class="ot">-&gt;</span> [<span class="dt">Integer</span>]
-helper n [] (v) _ <span class="fu">=</span> []
-helper n (x<span class="fu">:</span>y<span class="fu">:</span>xs) (v) (c<span class="fu">:</span>cs) <span class="fu">=</span>
-    <span class="kw">if</span> (chinese3 (b<span class="fu">:</span>c<span class="fu">:</span>cs) <span class="fu">==</span> n)
-      <span class="kw">then</span> (x<span class="fu">:</span>v)
-    <span class="kw">else</span> helper n (xs) (x<span class="fu">:</span>v) ((n <span class="ot">`mod`</span> y,y)<span class="fu">:</span>c<span class="fu">:</span>cs)
-    <span class="kw">where</span> b <span class="fu">=</span>(n <span class="ot">`mod`</span> x,x)
-
-<span class="co">-- helper 10 primes [] [] ⟶ error: Non-exhaustive patterns in function helper.</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="ot">helper ::</span> <span class="dt">Integer</span> <span class="ot">-&gt;</span> [<span class="dt">Integer</span>] <span class="ot">-&gt;</span> [<span class="dt">Integer</span>] <span class="ot">-&gt;</span> [(<span class="dt">Integer</span>,<span class="dt">Integer</span>)] <span class="ot">-&gt;</span> [<span class="dt">Integer</span>]</a>
+<a class="sourceLine" id="cb7-2" data-line-number="2">helper n [] (v) _ <span class="fu">=</span> []</a>
+<a class="sourceLine" id="cb7-3" data-line-number="3">helper n (x<span class="fu">:</span>y<span class="fu">:</span>xs) (v) (c<span class="fu">:</span>cs) <span class="fu">=</span></a>
+<a class="sourceLine" id="cb7-4" data-line-number="4">    <span class="kw">if</span> (chinese3 (b<span class="fu">:</span>c<span class="fu">:</span>cs) <span class="fu">==</span> n)</a>
+<a class="sourceLine" id="cb7-5" data-line-number="5">      <span class="kw">then</span> (x<span class="fu">:</span>v)</a>
+<a class="sourceLine" id="cb7-6" data-line-number="6">    <span class="kw">else</span> helper n (xs) (x<span class="fu">:</span>v) ((n <span class="ot">`mod`</span> y,y)<span class="fu">:</span>c<span class="fu">:</span>cs)</a>
+<a class="sourceLine" id="cb7-7" data-line-number="7">    <span class="kw">where</span> b <span class="fu">=</span>(n <span class="ot">`mod`</span> x,x)</a>
+<a class="sourceLine" id="cb7-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb7-9" data-line-number="9"><span class="co">-- helper 10 primes [] [] ⟶ error: Non-exhaustive patterns in function helper.</span></a></code></pre></div>
 <ol start="2" type="1">
-<li class="fragment"><p>The function will terminate for any input, infinite recursion is not allowed:</p>
-<div class="sourceCode"><pre class="sourceCode haskell"><code class="sourceCode haskell">helper a b c d <span class="fu">=</span> helper a (a<span class="fu">:</span>b) c d</code></pre></div></li>
+<li class="fragment">The function will terminate for any input, infinite recursion is not allowed:</li>
 </ol>
+<div class="sourceCode" id="cb8"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb8-1" data-line-number="1">helper a b c d <span class="fu">=</span> helper a (a<span class="fu">:</span>b) c d</a></code></pre></div>
 </section><div><a class="slider-prev" href="#proof-assistants-coq-and-agda"></a><a class="slider-next" href="#agda-examples"></a></div>
 <section id="agda-examples" class="slide level1">
 <h1>Agda examples</h1>
 <p>Inductive datatype is defined by a set of constructors. Note that indentation is significant (like in Python and Haskell)</p>
-<div class="sourceCode"><pre class="sourceCode agda"><code class="sourceCode agda"><span class="kw">data</span> Nat <span class="ot">:</span> <span class="dt">Set</span> <span class="kw">where</span>
-    zero <span class="ot">:</span> Nat
-    succ <span class="ot">:</span> Nat <span class="ot">→</span> Nat</code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="kw">data</span> Nat <span class="ot">:</span> <span class="dt">Set</span> <span class="kw">where</span></a>
+<a class="sourceLine" id="cb9-2" data-line-number="2">    zero <span class="ot">:</span> Nat</a>
+<a class="sourceLine" id="cb9-3" data-line-number="3">    succ <span class="ot">:</span> Nat <span class="ot">→</span> Nat</a></code></pre></div>
 <p>Function on inductive types are defined by the means of pattern matching.</p>
-<div class="sourceCode"><pre class="sourceCode agda"><code class="sourceCode agda">plus <span class="ot">:</span> Nat <span class="ot">→</span> Nat <span class="ot">→</span> Nat
-plus zero m <span class="ot">=</span> m
-plus <span class="ot">(</span>succ n<span class="ot">)</span> m <span class="ot">=</span> succ <span class="ot">(</span>plus n m<span class="ot">)</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb10-1" data-line-number="1">plus <span class="ot">:</span> Nat <span class="ot">→</span> Nat <span class="ot">→</span> Nat</a>
+<a class="sourceLine" id="cb10-2" data-line-number="2">plus zero m <span class="ot">=</span> m</a>
+<a class="sourceLine" id="cb10-3" data-line-number="3">plus <span class="ot">(</span>succ n<span class="ot">)</span> m <span class="ot">=</span> succ <span class="ot">(</span>plus n m<span class="ot">)</span></a></code></pre></div>
 </section><div><a class="slider-prev" href="#coq-and-agda"></a><a class="slider-next" href="#agda-examples-1"></a></div>
 <section id="agda-examples-1" class="slide level1">
 <h1>Agda examples</h1>
 <p>Dependent product indexed type familiy. Note that the implicit argument n to <code>cons</code> is enclosed in braces.</p>
-<div class="sourceCode"><pre class="sourceCode agda"><code class="sourceCode agda"><span class="kw">data</span> Vec <span class="ot">(</span>A <span class="ot">:</span> <span class="dt">Set</span><span class="ot">)</span> <span class="ot">:</span> Nat <span class="ot">→</span> <span class="dt">Set</span> <span class="kw">where</span>
-    [] <span class="ot">:</span> Vec A zero
-    cons <span class="ot">:</span> <span class="ot">{</span>n <span class="ot">:</span> Nat<span class="ot">}</span> <span class="ot">→</span> A <span class="ot">→</span> Vec A n <span class="ot">→</span> Vec A <span class="ot">(</span>succ n<span class="ot">)</span>
-
-cons zero [] <span class="co">-- Vector with a single element (0)</span>
-
-head <span class="ot">:</span> <span class="ot">{</span>A <span class="ot">:</span> <span class="dt">Set</span><span class="ot">}{</span>n <span class="ot">:</span> Nat<span class="ot">}</span> <span class="ot">→</span> Vec A <span class="ot">(</span>succ n<span class="ot">)</span> <span class="ot">→</span> A
-head <span class="ot">(</span>cons x xs<span class="ot">)</span> <span class="ot">=</span> x</code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="kw">data</span> Vec <span class="ot">(</span>A <span class="ot">:</span> <span class="dt">Set</span><span class="ot">)</span> <span class="ot">:</span> Nat <span class="ot">→</span> <span class="dt">Set</span> <span class="kw">where</span></a>
+<a class="sourceLine" id="cb11-2" data-line-number="2">    [] <span class="ot">:</span> Vec A zero</a>
+<a class="sourceLine" id="cb11-3" data-line-number="3">    cons <span class="ot">:</span> <span class="ot">{</span>n <span class="ot">:</span> Nat<span class="ot">}</span> <span class="ot">→</span> A <span class="ot">→</span> Vec A n <span class="ot">→</span> Vec A <span class="ot">(</span>succ n<span class="ot">)</span></a>
+<a class="sourceLine" id="cb11-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb11-5" data-line-number="5">cons zero [] <span class="co">-- Vector with a single element (0)</span></a>
+<a class="sourceLine" id="cb11-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb11-7" data-line-number="7">head <span class="ot">:</span> <span class="ot">{</span>A <span class="ot">:</span> <span class="dt">Set</span><span class="ot">}{</span>n <span class="ot">:</span> Nat<span class="ot">}</span> <span class="ot">→</span> Vec A <span class="ot">(</span>succ n<span class="ot">)</span> <span class="ot">→</span> A</a>
+<a class="sourceLine" id="cb11-8" data-line-number="8">head <span class="ot">(</span>cons x xs<span class="ot">)</span> <span class="ot">=</span> x</a></code></pre></div>
 </section><div><a class="slider-prev" href="#agda-examples"></a><a class="slider-next" href="#coq-examples"></a></div>
 <section id="coq-examples" class="slide level1">
 <h1>Coq examples</h1>
@@ -308,8 +333,8 @@ Definition head A n (vec : Vector A (S n)) : A := head' vec.</code></pre>
 </section><div><a class="slider-prev" href="#coq-examples"></a><a class="slider-next" href="#formal-syntax-analysis-1"></a></div>
 <section id="formal-syntax-analysis-1" class="slide level1">
 <h1>Formal syntax analysis</h1>
-<p>Parser is a function which implements syntax analysis.<br>
-Suppose we have defined a syntax as a grammar G and an abstract syntax tree and implemented a parser P.</p>
+<p>Parser is a function which implements syntax analysis.</p>
+<p>Suppose we have defined a syntax as a grammar G and an abstract syntax tree and implemented a parser P.</p>
 <p>P : String → AST + SyntaxError</p>
 <p>How can we make sure that our parser will:</p>
 <ol type="1">
@@ -320,7 +345,7 @@ Suppose we have defined a syntax as a grammar G and an abstract syntax tree and 
 </section><div><a class="slider-prev" href="#coq-examples-1"></a><a class="slider-next" href="#couldnt-we-just-write-a-parser-in-a-proof-assistant"></a></div>
 <section id="couldnt-we-just-write-a-parser-in-a-proof-assistant" class="slide level1">
 <h1>Couldn't we just write a parser in a proof assistant?</h1>
-<p>From the previous class: left recursion.</p>
+<p>From the previous lecture: left recursion.</p>
 <pre><code>term ::= factor | term '+' factor
 factor ::= atom | factor '*' atom
 atom ::= number | '(' term ')'</code></pre>
@@ -330,82 +355,79 @@ atom ::= number | '(' term ')'</code></pre>
 <section id="danielsson.-total-parser-combinators-2010" class="slide level1">
 <h1>Danielsson. Total Parser Combinators (2010)</h1>
 <p>Main idea is: use the lazy computation. Total, dependently-typed programming languages may represent infinite lazy computations as a corecursive type. After the parsing process is represented as tree with some infinite-depth paths, make a breadth-first search of successful parse result.</p>
-<div class="sourceCode"><pre class="sourceCode agda"><code class="sourceCode agda"><span class="kw">data</span> List <span class="ot">(</span>A <span class="ot">:</span> <span class="dt">Set</span><span class="ot">)</span> <span class="ot">:</span> <span class="dt">Set</span> <span class="kw">where</span>
-  [] <span class="ot">:</span> List A
-  <span class="ot">_</span>::<span class="ot">_</span> <span class="ot">:</span> A <span class="ot">→</span> List A <span class="ot">→</span> List A
-
-<span class="kw">data</span> Colist <span class="ot">(</span>A <span class="ot">:</span> <span class="dt">Set</span><span class="ot">)</span> <span class="ot">:</span> <span class="dt">Set</span> <span class="kw">where</span>
-  [] <span class="ot">:</span> Colist A
-  <span class="ot">_</span>::<span class="ot">_</span> <span class="ot">:</span> A <span class="ot">→</span> ∞ <span class="ot">(</span>Colist A<span class="ot">)</span> <span class="ot">→</span> Colist A
-
-♯ <span class="ot">:</span> <span class="ot">{</span>A <span class="ot">:</span> <span class="dt">Set</span><span class="ot">}</span> <span class="ot">→</span>  A <span class="ot">→</span> ∞ A
-♭ <span class="ot">:</span> <span class="ot">{</span>A <span class="ot">:</span> <span class="dt">Set</span><span class="ot">}</span> <span class="ot">→</span> ∞ A→ A</code></pre></div>
-<p><span class="smaller"><br>
-Danielsson N.A. Total parser combinators // Proceedings of the 15th ACM SIGPLAN international conference on Functional programming - ICFP ’10. ACM Press, 2010. P. 285–285.<br>
-Source and paper is available at: <a href="http://www.cse.chalmers.se/~nad/publications/danielsson-parser-combinators.html" class="uri">http://www.cse.chalmers.se/~nad/publications/danielsson-parser-combinators.html</a><br>
-</span></p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb18-1" data-line-number="1"><span class="kw">data</span> List <span class="ot">(</span>A <span class="ot">:</span> <span class="dt">Set</span><span class="ot">)</span> <span class="ot">:</span> <span class="dt">Set</span> <span class="kw">where</span></a>
+<a class="sourceLine" id="cb18-2" data-line-number="2">  [] <span class="ot">:</span> List A</a>
+<a class="sourceLine" id="cb18-3" data-line-number="3">  <span class="ot">_</span>::<span class="ot">_</span> <span class="ot">:</span> A <span class="ot">→</span> List A <span class="ot">→</span> List A</a>
+<a class="sourceLine" id="cb18-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb18-5" data-line-number="5"><span class="kw">data</span> Colist <span class="ot">(</span>A <span class="ot">:</span> <span class="dt">Set</span><span class="ot">)</span> <span class="ot">:</span> <span class="dt">Set</span> <span class="kw">where</span></a>
+<a class="sourceLine" id="cb18-6" data-line-number="6">  [] <span class="ot">:</span> Colist A</a>
+<a class="sourceLine" id="cb18-7" data-line-number="7">  <span class="ot">_</span>::<span class="ot">_</span> <span class="ot">:</span> A <span class="ot">→</span> ∞ <span class="ot">(</span>Colist A<span class="ot">)</span> <span class="ot">→</span> Colist A</a>
+<a class="sourceLine" id="cb18-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb18-9" data-line-number="9">♯ <span class="ot">:</span> <span class="ot">{</span>A <span class="ot">:</span> <span class="dt">Set</span><span class="ot">}</span> <span class="ot">→</span>  A <span class="ot">→</span> ∞ A</a>
+<a class="sourceLine" id="cb18-10" data-line-number="10">♭ <span class="ot">:</span> <span class="ot">{</span>A <span class="ot">:</span> <span class="dt">Set</span><span class="ot">}</span> <span class="ot">→</span> ∞ A→ A</a></code></pre></div>
+<p><span class="smaller"> Danielsson N.A. Total parser combinators // Proceedings of the 15th ACM SIGPLAN international conference on Functional programming - ICFP ’10. ACM Press, 2010. P. 285–285. Source and paper is available at: <a href="http://www.cse.chalmers.se/~nad/publications/danielsson-parser-combinators.html" class="uri">http://www.cse.chalmers.se/~nad/publications/danielsson-parser-combinators.html</a> </span></p>
 </section><div><a class="slider-prev" href="#couldnt-we-just-write-a-parser-in-a-proof-assistant"></a><a class="slider-next" href="#danielsson.-total-parser-combinators-2010-1"></a></div>
 <section id="danielsson.-total-parser-combinators-2010-1" class="slide level1">
 <h1>Danielsson. Total Parser Combinators (2010)</h1>
-<div class="sourceCode"><pre class="sourceCode agda"><code class="sourceCode agda">map <span class="ot">:</span> <span class="ot">∀{</span>A B<span class="ot">}</span> <span class="ot">→</span> <span class="ot">(</span> A <span class="ot">→</span> B<span class="ot">)</span> <span class="ot">→</span> Colist A <span class="ot">→</span> Colist B
-map f [ ] <span class="ot">=</span> [ ]
-map f <span class="ot">(</span>x::xs<span class="ot">)</span> <span class="ot">=</span> f x :: ♯ map f <span class="ot">(</span>♭xs<span class="ot">)</span></code></pre></div>
-<div class="sourceCode"><pre class="sourceCode agda"><code class="sourceCode agda"><span class="kw">mutual</span>
-  <span class="co">-- The index is true if the corresponding language contains the</span>
-  <span class="co">-- empty string (is nullable).</span>
-  <span class="kw">data</span> P <span class="ot">:</span> Bool <span class="ot">→</span> <span class="dt">Set</span> <span class="kw">where</span>
-    fail  <span class="ot">:</span> P false
-    empty <span class="ot">:</span> P true
-    tok   <span class="ot">:</span> Tok <span class="ot">→</span> P false
-    <span class="ot">_</span>∣<span class="ot">_</span>   <span class="ot">:</span> <span class="ot">∀</span> <span class="ot">{</span>n₁ n₂<span class="ot">}</span> <span class="ot">→</span> P n₁ <span class="ot">→</span>            P n₂ <span class="ot">→</span> P <span class="ot">(</span>n₁ ∨ n₂<span class="ot">)</span>
-    <span class="ot">_</span>·<span class="ot">_</span>   <span class="ot">:</span> <span class="ot">∀</span> <span class="ot">{</span>n₁ n₂<span class="ot">}</span> <span class="ot">→</span> P n₁ <span class="ot">→</span> ∞⟨ not n₁ ⟩P n₂ <span class="ot">→</span> P <span class="ot">(</span>n₁ ∧ n₂<span class="ot">)</span>
-
-  <span class="co">-- Coinductive if the index is true.</span>
-  ∞⟨<span class="ot">_</span>⟩P <span class="ot">:</span> Bool <span class="ot">→</span> Bool <span class="ot">→</span> <span class="dt">Set</span>
-  ∞⟨ true  ⟩P n <span class="ot">=</span> ∞ <span class="ot">(</span>P n<span class="ot">)</span>
-  ∞⟨ false ⟩P n <span class="ot">=</span>    P n</code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb19-1" data-line-number="1">map <span class="ot">:</span> <span class="ot">∀{</span>A B<span class="ot">}</span> <span class="ot">→</span> <span class="ot">(</span> A <span class="ot">→</span> B<span class="ot">)</span> <span class="ot">→</span> Colist A <span class="ot">→</span> Colist B</a>
+<a class="sourceLine" id="cb19-2" data-line-number="2">map f [ ] <span class="ot">=</span> [ ]</a>
+<a class="sourceLine" id="cb19-3" data-line-number="3">map f <span class="ot">(</span>x::xs<span class="ot">)</span> <span class="ot">=</span> f x :: ♯ map f <span class="ot">(</span>♭xs<span class="ot">)</span></a></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb20-1" data-line-number="1"><span class="kw">mutual</span></a>
+<a class="sourceLine" id="cb20-2" data-line-number="2">  <span class="co">-- The index is true if the corresponding language contains the</span></a>
+<a class="sourceLine" id="cb20-3" data-line-number="3">  <span class="co">-- empty string (is nullable).</span></a>
+<a class="sourceLine" id="cb20-4" data-line-number="4">  <span class="kw">data</span> P <span class="ot">:</span> Bool <span class="ot">→</span> <span class="dt">Set</span> <span class="kw">where</span></a>
+<a class="sourceLine" id="cb20-5" data-line-number="5">    fail  <span class="ot">:</span> P false</a>
+<a class="sourceLine" id="cb20-6" data-line-number="6">    empty <span class="ot">:</span> P true</a>
+<a class="sourceLine" id="cb20-7" data-line-number="7">    tok   <span class="ot">:</span> Tok <span class="ot">→</span> P false</a>
+<a class="sourceLine" id="cb20-8" data-line-number="8">    <span class="ot">_</span>∣<span class="ot">_</span>   <span class="ot">:</span> <span class="ot">∀</span> <span class="ot">{</span>n₁ n₂<span class="ot">}</span> <span class="ot">→</span> P n₁ <span class="ot">→</span>            P n₂ <span class="ot">→</span> P <span class="ot">(</span>n₁ ∨ n₂<span class="ot">)</span></a>
+<a class="sourceLine" id="cb20-9" data-line-number="9">    <span class="ot">_</span>·<span class="ot">_</span>   <span class="ot">:</span> <span class="ot">∀</span> <span class="ot">{</span>n₁ n₂<span class="ot">}</span> <span class="ot">→</span> P n₁ <span class="ot">→</span> ∞⟨ not n₁ ⟩P n₂ <span class="ot">→</span> P <span class="ot">(</span>n₁ ∧ n₂<span class="ot">)</span></a>
+<a class="sourceLine" id="cb20-10" data-line-number="10"></a>
+<a class="sourceLine" id="cb20-11" data-line-number="11">  <span class="co">-- Coinductive if the index is true.</span></a>
+<a class="sourceLine" id="cb20-12" data-line-number="12">  ∞⟨<span class="ot">_</span>⟩P <span class="ot">:</span> Bool <span class="ot">→</span> Bool <span class="ot">→</span> <span class="dt">Set</span></a>
+<a class="sourceLine" id="cb20-13" data-line-number="13">  ∞⟨ true  ⟩P n <span class="ot">=</span> ∞ <span class="ot">(</span>P n<span class="ot">)</span></a>
+<a class="sourceLine" id="cb20-14" data-line-number="14">  ∞⟨ false ⟩P n <span class="ot">=</span>    P n</a></code></pre></div>
 </section><div><a class="slider-prev" href="#danielsson.-total-parser-combinators-2010"></a><a class="slider-next" href="#danielsson.-total-parser-combinators-2010-2"></a></div>
 <section id="danielsson.-total-parser-combinators-2010-2" class="slide level1">
 <h1>Danielsson. Total Parser Combinators (2010)</h1>
 <p>Example from: <a href="http://www.cse.chalmers.se/~nad/publications/danielsson-parser-combinators/TotalParserCombinators.Examples.Expression.html#233" class="uri">http://www.cse.chalmers.se/~nad/publications/danielsson-parser-combinators/TotalParserCombinators.Examples.Expression.html#233</a></p>
-<div class="sourceCode"><pre class="sourceCode agda"><code class="sourceCode agda"><span class="kw">module</span> Monadic <span class="kw">where</span>
-  <span class="kw">mutual</span>
-    term   <span class="ot">=</span> factor
-           ∣ ♯ term            &gt;&gt;= <span class="ot">λ</span> e₁ <span class="ot">→</span>
-             tok <span class="ch">'+'</span>           &gt;&gt;= <span class="ot">λ</span> <span class="ot">_</span>  <span class="ot">→</span>
-             factor            &gt;&gt;= <span class="ot">λ</span> e₂ <span class="ot">→</span>
-             return <span class="ot">(</span>e₁ + e₂<span class="ot">)</span>
-    factor <span class="ot">=</span> atom
-           ∣ ♯ factor          &gt;&gt;= <span class="ot">λ</span> e₁ <span class="ot">→</span>
-             tok <span class="ch">'*'</span>           &gt;&gt;= <span class="ot">λ</span> <span class="ot">_</span>  <span class="ot">→</span>
-             atom              &gt;&gt;= <span class="ot">λ</span> e₂ <span class="ot">→</span>
-             return <span class="ot">(</span>e₁ * e₂<span class="ot">)</span>
-    atom   <span class="ot">=</span> number
-           ∣ tok <span class="ch">'('</span>           &gt;&gt;= <span class="ot">λ</span> <span class="ot">_</span>  <span class="ot">→</span>
-             ♯ term            &gt;&gt;= <span class="ot">λ</span> e  <span class="ot">→</span>
-             tok <span class="ch">')'</span>           &gt;&gt;= <span class="ot">λ</span> <span class="ot">_</span>  <span class="ot">→</span>
-             return e</code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb21-1" data-line-number="1"><span class="kw">module</span> Monadic <span class="kw">where</span></a>
+<a class="sourceLine" id="cb21-2" data-line-number="2">  <span class="kw">mutual</span></a>
+<a class="sourceLine" id="cb21-3" data-line-number="3">    term   <span class="ot">=</span> factor</a>
+<a class="sourceLine" id="cb21-4" data-line-number="4">           ∣ ♯ term            &gt;&gt;= <span class="ot">λ</span> e₁ <span class="ot">→</span></a>
+<a class="sourceLine" id="cb21-5" data-line-number="5">             tok <span class="ch">'+'</span>           &gt;&gt;= <span class="ot">λ</span> <span class="ot">_</span>  <span class="ot">→</span></a>
+<a class="sourceLine" id="cb21-6" data-line-number="6">             factor            &gt;&gt;= <span class="ot">λ</span> e₂ <span class="ot">→</span></a>
+<a class="sourceLine" id="cb21-7" data-line-number="7">             return <span class="ot">(</span>e₁ + e₂<span class="ot">)</span></a>
+<a class="sourceLine" id="cb21-8" data-line-number="8">    factor <span class="ot">=</span> atom</a>
+<a class="sourceLine" id="cb21-9" data-line-number="9">           ∣ ♯ factor          &gt;&gt;= <span class="ot">λ</span> e₁ <span class="ot">→</span></a>
+<a class="sourceLine" id="cb21-10" data-line-number="10">             tok <span class="ch">'*'</span>           &gt;&gt;= <span class="ot">λ</span> <span class="ot">_</span>  <span class="ot">→</span></a>
+<a class="sourceLine" id="cb21-11" data-line-number="11">             atom              &gt;&gt;= <span class="ot">λ</span> e₂ <span class="ot">→</span></a>
+<a class="sourceLine" id="cb21-12" data-line-number="12">             return <span class="ot">(</span>e₁ * e₂<span class="ot">)</span></a>
+<a class="sourceLine" id="cb21-13" data-line-number="13">    atom   <span class="ot">=</span> number</a>
+<a class="sourceLine" id="cb21-14" data-line-number="14">           ∣ tok <span class="ch">'('</span>           &gt;&gt;= <span class="ot">λ</span> <span class="ot">_</span>  <span class="ot">→</span></a>
+<a class="sourceLine" id="cb21-15" data-line-number="15">             ♯ term            &gt;&gt;= <span class="ot">λ</span> e  <span class="ot">→</span></a>
+<a class="sourceLine" id="cb21-16" data-line-number="16">             tok <span class="ch">')'</span>           &gt;&gt;= <span class="ot">λ</span> <span class="ot">_</span>  <span class="ot">→</span></a>
+<a class="sourceLine" id="cb21-17" data-line-number="17">             return e</a></code></pre></div>
 </section><div><a class="slider-prev" href="#danielsson.-total-parser-combinators-2010-1"></a><a class="slider-next" href="#and-what-about-proofs"></a></div>
 <section id="and-what-about-proofs" class="slide level1">
 <h1>And what about proofs?</h1>
 <p>Simplification</p>
-<div class="sourceCode"><pre class="sourceCode agda"><code class="sourceCode agda"><span class="co">-- f &lt;$&gt; fail                  → fail</span>
-<span class="co">-- f &lt;$&gt; return x              → return (f x)</span>
-<span class="co">-- fail         ∣ p            → p</span>
-<span class="co">-- p            ∣ fail         → p</span>
-<span class="co">-- token &gt;&gt;= p₁ ∣ token &gt;&gt;= p₂ → token &gt;&gt;= (λ t → p₁ t ∣ p₂ t)  (*)</span>
-<span class="co">-- ...</span>
-simplify₁ <span class="ot">:</span> <span class="ot">∀</span> <span class="ot">{</span>Tok R xs<span class="ot">}</span> <span class="ot">(</span>p <span class="ot">:</span> Parser Tok R xs<span class="ot">)</span> <span class="ot">→</span>
-            ∃₂ <span class="ot">λ</span> xs <span class="ot">(</span>p′ <span class="ot">:</span> Parser Tok R xs<span class="ot">)</span> <span class="ot">→</span> p ≅P p′</code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb22-1" data-line-number="1"><span class="co">-- f &lt;$&gt; fail                  → fail</span></a>
+<a class="sourceLine" id="cb22-2" data-line-number="2"><span class="co">-- f &lt;$&gt; return x              → return (f x)</span></a>
+<a class="sourceLine" id="cb22-3" data-line-number="3"><span class="co">-- fail         ∣ p            → p</span></a>
+<a class="sourceLine" id="cb22-4" data-line-number="4"><span class="co">-- p            ∣ fail         → p</span></a>
+<a class="sourceLine" id="cb22-5" data-line-number="5"><span class="co">-- token &gt;&gt;= p₁ ∣ token &gt;&gt;= p₂ → token &gt;&gt;= (λ t → p₁ t ∣ p₂ t)  (*)</span></a>
+<a class="sourceLine" id="cb22-6" data-line-number="6"><span class="co">-- ...</span></a>
+<a class="sourceLine" id="cb22-7" data-line-number="7">simplify₁ <span class="ot">:</span> <span class="ot">∀</span> <span class="ot">{</span>Tok R xs<span class="ot">}</span> <span class="ot">(</span>p <span class="ot">:</span> Parser Tok R xs<span class="ot">)</span> <span class="ot">→</span></a>
+<a class="sourceLine" id="cb22-8" data-line-number="8">            ∃₂ <span class="ot">λ</span> xs <span class="ot">(</span>p′ <span class="ot">:</span> Parser Tok R xs<span class="ot">)</span> <span class="ot">→</span> p ≅P p′</a></code></pre></div>
 <p>Completeness</p>
-<div class="sourceCode"><pre class="sourceCode agda"><code class="sourceCode agda"><span class="co">-- A proof showing that all functions of type List Bool → List R can</span>
-<span class="co">-- be realised using parser combinators (for any R, assuming that bag</span>
-<span class="co">-- equality is used for the lists of results).</span>
-parser⇒fun <span class="ot">:</span> <span class="ot">∀</span> <span class="ot">{</span>R xs<span class="ot">}</span> <span class="ot">(</span>p <span class="ot">:</span> Parser Bool R xs<span class="ot">)</span> <span class="ot">{</span>x s<span class="ot">}</span> <span class="ot">→</span>
-             x ∈ p · s ⇿ x ∈ parse p s
-maximally-expressive <span class="ot">:</span>
- <span class="ot">∀</span> <span class="ot">{</span>R<span class="ot">}</span> <span class="ot">(</span>f <span class="ot">:</span> List Bool <span class="ot">→</span> List R<span class="ot">)</span> <span class="ot">{</span>s<span class="ot">}</span> <span class="ot">→</span>
- parse <span class="ot">(</span>grammar f<span class="ot">)</span> s ≈[ bag ] f s</code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb23-1" data-line-number="1"><span class="co">-- A proof showing that all functions of type List Bool → List R can</span></a>
+<a class="sourceLine" id="cb23-2" data-line-number="2"><span class="co">-- be realised using parser combinators (for any R, assuming that bag</span></a>
+<a class="sourceLine" id="cb23-3" data-line-number="3"><span class="co">-- equality is used for the lists of results).</span></a>
+<a class="sourceLine" id="cb23-4" data-line-number="4">parser⇒fun <span class="ot">:</span> <span class="ot">∀</span> <span class="ot">{</span>R xs<span class="ot">}</span> <span class="ot">(</span>p <span class="ot">:</span> Parser Bool R xs<span class="ot">)</span> <span class="ot">{</span>x s<span class="ot">}</span> <span class="ot">→</span></a>
+<a class="sourceLine" id="cb23-5" data-line-number="5">             x ∈ p · s ⇿ x ∈ parse p s</a>
+<a class="sourceLine" id="cb23-6" data-line-number="6">maximally-expressive <span class="ot">:</span></a>
+<a class="sourceLine" id="cb23-7" data-line-number="7"> <span class="ot">∀</span> <span class="ot">{</span>R<span class="ot">}</span> <span class="ot">(</span>f <span class="ot">:</span> List Bool <span class="ot">→</span> List R<span class="ot">)</span> <span class="ot">{</span>s<span class="ot">}</span> <span class="ot">→</span></a>
+<a class="sourceLine" id="cb23-8" data-line-number="8"> parse <span class="ot">(</span>grammar f<span class="ot">)</span> s ≈[ bag ] f s</a></code></pre></div>
 </section><div><a class="slider-prev" href="#danielsson.-total-parser-combinators-2010-2"></a><a class="slider-next" href="#koprowski-binsztok.-trx-a-formally-verified-parser-interpreter"></a></div>
 <section id="koprowski-binsztok.-trx-a-formally-verified-parser-interpreter" class="slide level1">
 <h1>Koprowski, Binsztok. TRX: A Formally Verified Parser Interpreter</h1>
@@ -422,11 +444,8 @@ maximally-expressive <span class="ot">:</span>
   |note ⇒is_wf e wf
   | id e ⇒ is_wf e wf
 end.</code></pre>
-<p><span class="smaller"><br>
-Koprowski A., Binsztok H. TRX: A Formally Verified Parser Interpreter // Logical Methods in Computer Science / ed. Gordon A. 2011. Vol. 7, № 2.<br>
-Note: some approaches exist to enable left-recursive PEG parsing, I must have references somewhere :)<br>
-Medeiros S., Ierusalimschy R. A parsing machine for PEGs // Proceedings of the 2008 symposium on Dynamic languages - DLS ’08. 2008. P. 1–12.<br>
-</span></p>
+<p><span class="smaller"> Koprowski A., Binsztok H. TRX: A Formally Verified Parser Interpreter // Logical Methods in Computer Science / ed. Gordon A. 2011. Vol. 7, № 2.</span></p>
+<p>Medeiros S., Ierusalimschy R. A parsing machine for PEGs // Proceedings of the 2008 symposium on Dynamic languages - DLS ’08. 2008. P. 1–12. </p>
 </section><div><a class="slider-prev" href="#and-what-about-proofs"></a><a class="slider-next" href="#trx-a-formally-verified-parser-interpreter"></a></div>
 <section id="trx-a-formally-verified-parser-interpreter" class="slide level1">
 <h1>TRX: A Formally Verified Parser Interpreter</h1>
@@ -449,8 +468,7 @@ Medeiros S., Ierusalimschy R. A parsing machine for PEGs // Proceedings of the 2
 </section><div><a class="slider-prev" href="#see-also"></a><a class="slider-next" href="#macroassemblers-revisited"></a></div>
 <section id="macroassemblers-revisited" class="slide level1">
 <h1>Macroassemblers revisited</h1>
-Macros are substituted before the assembly time.<br>
-
+Macros are substituted before the assembly time.
 <div class="twocolumn">
 <pre class="x86asm"><code>ForLp           macro   LCV, Start, Stop
 ifndef  $$For&amp;LCV&amp;      
@@ -494,63 +512,64 @@ Next    I</code></pre>
 </section><div><a class="slider-prev" href="#macroassemblers-revisited"></a><a class="slider-next" href="#c-preprocessor"></a></div>
 <section id="c-preprocessor" class="slide level1">
 <h1>C preprocessor</h1>
-<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c"><span class="pp">#include </span><span class="im">&lt;math.h&gt;</span>
-
-<span class="pp">#ifndef _WINDOW_H</span>
-<span class="pp">#define _WINDOW_H</span>
-<span class="pp">#endif</span>
-
-<span class="pp">#define MAX(a,b) ((a) &gt; (b) ? (a) : (b))</span>
-
-<span class="pp">#if VERBOSE &gt;= 2</span>
-  print(<span class="st">"trace message"</span>);
-<span class="pp">#endif</span>
-
-<span class="pp">#if !(defined __LP64__ || defined __LLP64__) || defined _WIN32 &amp;&amp; !defined _WIN64</span>
-<span class="pp">#error 32-bit systems not supported</span>
-<span class="pp">#else</span>
-    <span class="co">// we are compiling for a 64-bit system</span>
-<span class="pp">#endif</span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb28-1" data-line-number="1"><span class="pp">#include </span><span class="im">&lt;math.h&gt;</span></a>
+<a class="sourceLine" id="cb28-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb28-3" data-line-number="3"><span class="pp">#ifndef _WINDOW_H</span></a>
+<a class="sourceLine" id="cb28-4" data-line-number="4"><span class="pp">#define _WINDOW_H</span></a>
+<a class="sourceLine" id="cb28-5" data-line-number="5"><span class="pp">#endif</span></a>
+<a class="sourceLine" id="cb28-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb28-7" data-line-number="7"><span class="pp">#define MAX(a,b) ((a) &gt; (b) ? (a) : (b))</span></a>
+<a class="sourceLine" id="cb28-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb28-9" data-line-number="9"><span class="pp">#if VERBOSE &gt;= 2</span></a>
+<a class="sourceLine" id="cb28-10" data-line-number="10">  print(<span class="st">"trace message"</span>);</a>
+<a class="sourceLine" id="cb28-11" data-line-number="11"><span class="pp">#endif</span></a>
+<a class="sourceLine" id="cb28-12" data-line-number="12"></a>
+<a class="sourceLine" id="cb28-13" data-line-number="13"><span class="pp">#if !(defined __LP64__ || defined __LLP64__) || defined _WIN32 &amp;&amp; !defined _WIN64</span></a>
+<a class="sourceLine" id="cb28-14" data-line-number="14"><span class="pp">#error 32-bit systems not supported</span></a>
+<a class="sourceLine" id="cb28-15" data-line-number="15"><span class="pp">#else</span></a>
+<a class="sourceLine" id="cb28-16" data-line-number="16">    <span class="co">// we are compiling for a 64-bit system</span></a>
+<a class="sourceLine" id="cb28-17" data-line-number="17"><span class="pp">#endif</span></a></code></pre></div>
 </section><div><a class="slider-prev" href="#preprocessors"></a><a class="slider-next" href="#c-preprocessor-1"></a></div>
 <section id="c-preprocessor-1" class="slide level1">
 <h1>C preprocessor</h1>
-<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c"><span class="pp">#define xstr(s) str(s)</span>
-<span class="pp">#define str(s) #s</span>
-<span class="pp">#define foo 4</span>
-
-str (foo)  <span class="co">// outputs "foo"</span>
-xstr (foo) <span class="co">// outputs "4"</span>
-
-<span class="pp">#define DECLARE_STRUCT_TYPE(name) typedef struct name##_s name##_t</span>
-
-DECLARE_STRUCT_TYPE(g_object);
-<span class="co">// Outputs: typedef struct g_object_s g_object_t;</span></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb29-1" data-line-number="1"><span class="pp">#define xstr(s) str(s)</span></a>
+<a class="sourceLine" id="cb29-2" data-line-number="2"><span class="pp">#define str(s) #s</span></a>
+<a class="sourceLine" id="cb29-3" data-line-number="3"><span class="pp">#define foo 4</span></a>
+<a class="sourceLine" id="cb29-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb29-5" data-line-number="5">str (foo)  <span class="co">// outputs "foo"</span></a>
+<a class="sourceLine" id="cb29-6" data-line-number="6">xstr (foo) <span class="co">// outputs "4"</span></a>
+<a class="sourceLine" id="cb29-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb29-8" data-line-number="8"><span class="pp">#define DECLARE_STRUCT_TYPE(name) typedef struct name##_s name##_t</span></a>
+<a class="sourceLine" id="cb29-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb29-10" data-line-number="10">DECLARE_STRUCT_TYPE(g_object);</a>
+<a class="sourceLine" id="cb29-11" data-line-number="11"><span class="co">// Outputs: typedef struct g_object_s g_object_t;</span></a></code></pre></div>
 <p>(It is even possible to write limited recursive programs in C preprocessor by itself: <a href="https://github.com/pfultz2/Cloak/wiki/Is-the-C-preprocessor-Turing-complete%3F">https://github.com/pfultz2/Cloak/wiki/Is-the-C-preprocessor-Turing-complete%3F</a>)</p>
 </section><div><a class="slider-prev" href="#c-preprocessor"></a><a class="slider-next" href="#m4-t4"></a></div>
 <section id="m4-t4" class="slide level1">
 <h1>M4 / T4</h1>
 <p>Some external preprocessors feature complex programming languages for template transformations:</p>
-<div class="sourceCode"><pre class="sourceCode csharp"><code class="sourceCode cs"><span class="kw">public</span> <span class="kw">class</span> Decorator: &lt;#= <span class="kw">interface</span>.<span class="fu">FullName</span> #&gt;
-{    <span class="co">// …</span>
-&lt;#
-    <span class="kw">foreach</span>(Member member <span class="kw">in</span> interfaceType.<span class="fu">Members</span>)
-        <span class="fu">WriteMember</span>(member);
-#&gt;
-}</code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode csharp"><code class="sourceCode cs"><a class="sourceLine" id="cb30-1" data-line-number="1"><span class="kw">public</span> <span class="kw">class</span> Decorator: &lt;#= <span class="kw">interface</span>.<span class="fu">FullName</span> #&gt;</a>
+<a class="sourceLine" id="cb30-2" data-line-number="2">{    <span class="co">// …</span></a>
+<a class="sourceLine" id="cb30-3" data-line-number="3">&lt;#</a>
+<a class="sourceLine" id="cb30-4" data-line-number="4">    <span class="kw">foreach</span>(Member member <span class="kw">in</span> interfaceType.<span class="fu">Members</span>)</a>
+<a class="sourceLine" id="cb30-5" data-line-number="5">        <span class="fu">WriteMember</span>(member);</a>
+<a class="sourceLine" id="cb30-6" data-line-number="6">#&gt;</a>
+<a class="sourceLine" id="cb30-7" data-line-number="7">}</a></code></pre></div>
+<p>Notes on the M4 Macro Language: <a href="http://mbreen.com/m4.html" class="uri">http://mbreen.com/m4.html</a></p>
+<p>T4 Text Templates: <a href="https://docs.microsoft.com/en-us/visualstudio/modeling/design-time-code-generation-by-using-t4-text-templates" class="uri">https://docs.microsoft.com/en-us/visualstudio/modeling/design-time-code-generation-by-using-t4-text-templates</a></p>
 </section><div><a class="slider-prev" href="#c-preprocessor-1"></a><a class="slider-next" href="#lisp-reader-macros"></a></div>
 <section id="lisp-reader-macros" class="slide level1">
 <h1>LISP Reader Macros</h1>
 <p>In LISP there are different kinds of macros: ordinary macros which transfrom abstract syntax tree and reader macros which transform a string to an abstract syntax tree.</p>
 <p>ReaderMacro : String × (genericReader : String → AST) → AST</p>
-<p>In LISP reader macros are implemented by means of modifying <em>read table:</em> a mapping from characters to further actions.<br>
-ReadTable : Char → (String → AST)<br>
-Reader : (readtable : ReadTable) → (nexttable : Char → ReadTable) → String → AST</p>
+<p>In LISP reader macros are implemented by means of modifying <em>read table:</em> a mapping from characters to further actions.</p>
+<p>ReadTable : Char → (String → AST)</p>
+<p>Reader : (readtable : ReadTable) → (nexttable : Char → ReadTable) → String → AST</p>
 <p>See an example at: <a href="https://gist.github.com/chaitanyagupta/9324402" class="uri">https://gist.github.com/chaitanyagupta/9324402</a></p>
 </section><div><a class="slider-prev" href="#m4-t4"></a><a class="slider-next" href="#tex"></a></div>
 <section id="tex" class="slide level1">
 <h1>TeX</h1>
-<p>TeX is actually built around reader macros:<br>
-<a href="https://en.wikibooks.org/wiki/TeX/catcode" class="uri">https://en.wikibooks.org/wiki/TeX/catcode</a></p>
+<p>TeX is actually built around reader macros: <a href="https://en.wikibooks.org/wiki/TeX/catcode" class="uri">https://en.wikibooks.org/wiki/TeX/catcode</a></p>
 <pre><code>0 = Escape character, normally \
 1 = Begin grouping, normally {
 2 = End grouping, normally }
@@ -567,13 +586,13 @@ Reader : (readtable : ReadTable) → (nexttable : Char → ReadTable) → String
 13 = Active character, for example ~
 14 = Comment character, normally %
 15 = Invalid character, normally &lt;delete&gt;</code></pre>
-<div class="sourceCode"><pre class="sourceCode latex"><code class="sourceCode latex"><span class="co">% \makeatletter substitute:</span>
-<span class="fu">\hello@</span> <span class="co">% is two tokens \hello  @ by default</span>
-
-<span class="co">% make @ an ordinary letter</span>
-<span class="fu">\catcode</span>`<span class="fu">\@</span>=11<span class="fu">\relax</span> 
-
-<span class="fu">\hello@</span> <span class="co">% is a single token \hello@</span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode latex"><code class="sourceCode latex"><a class="sourceLine" id="cb32-1" data-line-number="1"><span class="co">% \makeatletter substitute:</span></a>
+<a class="sourceLine" id="cb32-2" data-line-number="2"><span class="fu">\hello@</span> <span class="co">% is two tokens \hello  @ by default</span></a>
+<a class="sourceLine" id="cb32-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb32-4" data-line-number="4"><span class="co">% make @ an ordinary letter</span></a>
+<a class="sourceLine" id="cb32-5" data-line-number="5"><span class="fu">\catcode</span>`<span class="fu">\@</span>=11<span class="fu">\relax</span> </a>
+<a class="sourceLine" id="cb32-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb32-7" data-line-number="7"><span class="fu">\hello@</span> <span class="co">% is a single token \hello@</span></a></code></pre></div>
 </section><div><a class="slider-prev" href="#lisp-reader-macros"></a><a class="slider-next" href="#lisp-macros"></a></div>
 <section id="lisp-macros" class="slide level1">
 <h1>LISP Macros</h1>
@@ -581,33 +600,31 @@ Reader : (readtable : ReadTable) → (nexttable : Char → ReadTable) → String
 <p>Macros transform program AST at some stage before the evaluation.</p>
 <p>Example: short-circuit evaluation</p>
 <p>C:</p>
-<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c">A() 
-  &amp;&amp; B() <span class="co">// only run if A returned non-zero</span>
-  &amp;&amp; C(); <span class="co">// only run if both A and B returned non-zero</span>
-
-and(A(), B(), C()) <span class="co">// will evaluate A(), B() and C() before going inside and </span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb33-1" data-line-number="1">A() </a>
+<a class="sourceLine" id="cb33-2" data-line-number="2">  &amp;&amp; B() <span class="co">// only run if A returned non-zero</span></a>
+<a class="sourceLine" id="cb33-3" data-line-number="3">  &amp;&amp; C(); <span class="co">// only run if both A and B returned non-zero</span></a>
+<a class="sourceLine" id="cb33-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb33-5" data-line-number="5">and(A(), B(), C()) <span class="co">// will evaluate A(), B() and C() before going inside and </span></a></code></pre></div>
 <p>LISP:</p>
-<div class="sourceCode"><pre class="sourceCode scheme"><code class="sourceCode scheme">(<span class="kw">defmacro</span><span class="fu"> </span>&amp;&amp; (expr1 &amp;rest exprs)
-    `(<span class="kw">if</span> ,expr1
-         (&amp;&amp; ,@exprs)
-         nil))
-
-(&amp;&amp; (A) (B) (C))</code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode scheme"><code class="sourceCode scheme"><a class="sourceLine" id="cb34-1" data-line-number="1">(<span class="kw">defmacro</span><span class="fu"> </span>&amp;&amp; (expr1 &amp;rest exprs)</a>
+<a class="sourceLine" id="cb34-2" data-line-number="2">    `(<span class="kw">if</span> ,expr1</a>
+<a class="sourceLine" id="cb34-3" data-line-number="3">         (&amp;&amp; ,@exprs)</a>
+<a class="sourceLine" id="cb34-4" data-line-number="4">         nil))</a>
+<a class="sourceLine" id="cb34-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb34-6" data-line-number="6">(&amp;&amp; (A) (B) (C))</a></code></pre></div>
 </section><div><a class="slider-prev" href="#tex"></a><a class="slider-next" href="#lisp-macros-1"></a></div>
 <section id="lisp-macros-1" class="slide level1">
 <h1>LISP Macros</h1>
-<p>Complex example: SQL-like queries in LISP:<br>
-<a href="https://marijnhaverbeke.nl/postmodern/s-sql.html" class="uri">https://marijnhaverbeke.nl/postmodern/s-sql.html</a></p>
-<div class="sourceCode"><pre class="sourceCode scheme"><code class="sourceCode scheme">(:select (:+ 'field-<span class="dv">1</span> <span class="dv">100</span>) 'field-<span class="dv">5</span>
-   :from (:as 'my-table 'x)
-   :left-join 'your-table :on (:= 'x.field-<span class="dv">2</span> 'your-table.field-<span class="dv">1</span>)
-   :where (:not-null 'a.field-<span class="dv">3</span>))</code></pre></div>
+<p>Complex example: SQL-like queries in LISP: <a href="https://marijnhaverbeke.nl/postmodern/s-sql.html" class="uri">https://marijnhaverbeke.nl/postmodern/s-sql.html</a></p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode scheme"><code class="sourceCode scheme"><a class="sourceLine" id="cb35-1" data-line-number="1">(:select (:+ 'field<span class="dv">-1</span> <span class="dv">100</span>) 'field<span class="dv">-5</span></a>
+<a class="sourceLine" id="cb35-2" data-line-number="2">   :from (:as 'my-table 'x)</a>
+<a class="sourceLine" id="cb35-3" data-line-number="3">   :left-join 'your-table :on (:= 'x.field<span class="dv">-2</span> 'your-table.field<span class="dv">-1</span>)</a>
+<a class="sourceLine" id="cb35-4" data-line-number="4">   :where (:not-null 'a.field<span class="dv">-3</span>))</a></code></pre></div>
 </section><div><a class="slider-prev" href="#lisp-macros"></a><a class="slider-next" href="#lisp-macros-2"></a></div>
 <section id="lisp-macros-2" class="slide level1">
 <h1>LISP Macros</h1>
 <p>The evaluation of macro invocation is split in two stages: expansion-time (first stage, in compiler) and run-time (second stage, in program).</p>
-<p>Macro code starts running in expansion-time.<br>
-The run-time is separated from expansion-time with <em>quotation</em> operators:</p>
+<p>Macro code starts running in expansion-time. The run-time is separated from expansion-time with <em>quotation</em> operators:</p>
 <ul>
 <li class="fragment"><code>'</code> — quote</li>
 <li class="fragment"><code>`</code> — quasiquote, allowing for unquoting with operator <code>,</code></li>
@@ -619,37 +636,37 @@ The run-time is separated from expansion-time with <em>quotation</em> operators:
 <li class="fragment"><code>`(f a b ,(+ 1 2))</code> – evaluate <code>(+ 1 2)</code> at expansion time and return list <code>(f a b 3)</code></li>
 </ul>
 <p>What the code from the previous example does?</p>
-<div class="sourceCode"><pre class="sourceCode scheme"><code class="sourceCode scheme">`(<span class="kw">if</span> ,expr1
-         (&amp;&amp; ,@exprs)
-         nil))</code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode scheme"><code class="sourceCode scheme"><a class="sourceLine" id="cb36-1" data-line-number="1">`(<span class="kw">if</span> ,expr1</a>
+<a class="sourceLine" id="cb36-2" data-line-number="2">         (&amp;&amp; ,@exprs)</a>
+<a class="sourceLine" id="cb36-3" data-line-number="3">         nil))</a></code></pre></div>
 </section><div><a class="slider-prev" href="#lisp-macros-1"></a><a class="slider-next" href="#macros-in-rust"></a></div>
 <section id="macros-in-rust" class="slide level1">
 <h1>Macros in Rust</h1>
-<div class="sourceCode"><pre class="sourceCode rust"><code class="sourceCode rust"><span class="pp">macro_rules!</span> vec <span class="op">{</span>
-    ( $( $x:expr ),* ) =&gt; <span class="op">{</span>
-        <span class="op">{</span>
-            <span class="kw">let</span> <span class="kw">mut</span> temp_vec = <span class="dt">Vec</span>::new();
-            $(
-                temp_vec.push($x);
-            )*
-            temp_vec
-        <span class="op">}</span>
-    <span class="op">}</span>;
-<span class="op">}</span></code></pre></div>
-<div class="sourceCode"><pre class="sourceCode rust"><code class="sourceCode rust"><span class="kw">let</span> x: <span class="dt">Vec</span>&lt;<span class="dt">u32</span>&gt; = <span class="pp">vec!</span><span class="op">[</span><span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span><span class="op">]</span>; 
-<span class="co">// expanded:</span>
-<span class="kw">let</span> x : <span class="dt">Vec</span>&lt;<span class="dt">u32</span>&gt; = <span class="op">{</span>
-  <span class="kw">let</span> <span class="kw">mut</span> temp_vec_1234 = <span class="dt">Vec</span>::new();
-  temp_vec.push(<span class="dv">1</span>);
-  temp_vec.push(<span class="dv">2</span>);
-  temp_vec.push(<span class="dv">3</span>);
-  temp_vec
-<span class="op">}</span></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode rust"><code class="sourceCode rust"><a class="sourceLine" id="cb37-1" data-line-number="1"><span class="pp">macro_rules!</span> vec <span class="op">{</span></a>
+<a class="sourceLine" id="cb37-2" data-line-number="2">    ( $( $x:expr ),* ) =&gt; <span class="op">{</span></a>
+<a class="sourceLine" id="cb37-3" data-line-number="3">        <span class="op">{</span></a>
+<a class="sourceLine" id="cb37-4" data-line-number="4">            <span class="kw">let</span> <span class="kw">mut</span> temp_vec = <span class="dt">Vec</span>::new();</a>
+<a class="sourceLine" id="cb37-5" data-line-number="5">            $(</a>
+<a class="sourceLine" id="cb37-6" data-line-number="6">                temp_vec.push($x);</a>
+<a class="sourceLine" id="cb37-7" data-line-number="7">            )*</a>
+<a class="sourceLine" id="cb37-8" data-line-number="8">            temp_vec</a>
+<a class="sourceLine" id="cb37-9" data-line-number="9">        <span class="op">}</span></a>
+<a class="sourceLine" id="cb37-10" data-line-number="10">    <span class="op">}</span>;</a>
+<a class="sourceLine" id="cb37-11" data-line-number="11"><span class="op">}</span></a></code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode rust"><code class="sourceCode rust"><a class="sourceLine" id="cb38-1" data-line-number="1"><span class="kw">let</span> x: <span class="dt">Vec</span>&lt;<span class="dt">u32</span>&gt; = <span class="pp">vec!</span><span class="op">[</span><span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span><span class="op">]</span>; </a>
+<a class="sourceLine" id="cb38-2" data-line-number="2"><span class="co">// expanded:</span></a>
+<a class="sourceLine" id="cb38-3" data-line-number="3"><span class="kw">let</span> x : <span class="dt">Vec</span>&lt;<span class="dt">u32</span>&gt; = <span class="op">{</span></a>
+<a class="sourceLine" id="cb38-4" data-line-number="4">  <span class="kw">let</span> <span class="kw">mut</span> temp_vec = <span class="dt">Vec</span>::new();</a>
+<a class="sourceLine" id="cb38-5" data-line-number="5">  temp_vec.push(<span class="dv">1</span>);</a>
+<a class="sourceLine" id="cb38-6" data-line-number="6">  temp_vec.push(<span class="dv">2</span>);</a>
+<a class="sourceLine" id="cb38-7" data-line-number="7">  temp_vec.push(<span class="dv">3</span>);</a>
+<a class="sourceLine" id="cb38-8" data-line-number="8">  temp_vec</a>
+<a class="sourceLine" id="cb38-9" data-line-number="9"><span class="op">}</span></a></code></pre></div>
 </section><div><a class="slider-prev" href="#lisp-macros-2"></a><a class="slider-next" href="#homework-assignments"></a></div>
 <section id="homework-assignments" class="slide level1">
 <h1>Homework assignments</h1>
-<p><strong>Task 4.1</strong> (6*) Implement Danielsson's Total Parser Combinators in Coq.</p>
-<p><strong>Task 4.2a</strong>* Write (manually) an extensible parser for LISP-like symbolic expressions (subset of <a href="http://www.scheme-reports.org">"R7RS small"</a> Scheme specification). Whitespace, identifier and number specifications are omitted as a trivial exercise.</p>
+<p><strong>Task 4.1</strong> (10*) Implement Danielsson's Total Parser Combinators in Coq.</p>
+<p><strong>Task 4.2</strong>* Write (manually) an extensible parser for LISP-like symbolic expressions (subset of <a href="http://www.scheme-reports.org">"R7RS small"</a> Scheme specification). Whitespace, identifier and number specifications are omitted as a trivial exercise.</p>
 <pre><code>&lt;datum&gt; ::= &lt;atom&gt; &lt;optional whitespace&gt; | &lt;list&gt; &lt;optional whitespace&gt;
 &lt;atom&gt; ::= &lt;identifier&gt; | &lt;number&gt; | &lt;string&gt;
 &lt;string&gt; ::= '"' &lt;string element&gt;* '"'
@@ -658,15 +675,15 @@ The run-time is separated from expansion-time with <em>quotation</em> operators:
 </section><div><a class="slider-prev" href="#macros-in-rust"></a><a class="slider-next" href="#homework-assignments-1"></a></div>
 <section id="homework-assignments-1" class="slide level1">
 <h1>Homework assignments</h1>
-<p><strong>Task 4.2b</strong>** Implement reader macros for a subset of a context-free grammar as an interpreter from s-expressions to parser extension. It'll be easier to implement in some lanugage featuring <code>eval</code> command (like JavaScript, Python or LISP family)</p>
-<div class="sourceCode"><pre class="sourceCode scheme"><code class="sourceCode scheme">(reader-macro &lt;start-string&gt; &lt;stop-string&gt; &lt;grammar&gt;)
-<span class="co">; Example:</span>
-(reader-macro <span class="st">"#"</span> <span class="st">"#"</span> (float decimal-digits
-    (optional <span class="st">"."</span> (optional decimal-digits))
-    (optional <span class="st">"e"</span> (either <span class="st">"+"</span> <span class="st">"-"</span> <span class="st">""</span>) decimal-digits)))
-
-#<span class="fl">1.5e11</span># ⟶ (float <span class="st">"1"</span> (<span class="st">"."</span> (<span class="st">"5"</span>)) (<span class="st">"e"</span> (<span class="st">""</span>) <span class="st">"11"</span>))</code></pre></div>
-<p><strong>Task 4.2c</strong>* Write a reader macro for infix arithmetical expressions (addition, multiplication, brackets).</p>
+<p><strong>Task 4.3</strong>** Implement reader macros for a subset of a context-free grammar as an interpreter from s-expressions to parser extension. It'll be easier to implement in some lanugage featuring <code>eval</code> command (like JavaScript, Python or LISP family)</p>
+<div class="sourceCode" id="cb40"><pre class="sourceCode scheme"><code class="sourceCode scheme"><a class="sourceLine" id="cb40-1" data-line-number="1">(reader-macro &lt;start-string&gt; &lt;stop-string&gt; &lt;grammar&gt;)</a>
+<a class="sourceLine" id="cb40-2" data-line-number="2"><span class="co">; Example:</span></a>
+<a class="sourceLine" id="cb40-3" data-line-number="3">(reader-macro <span class="st">"#"</span> <span class="st">"#"</span> (float decimal-digits</a>
+<a class="sourceLine" id="cb40-4" data-line-number="4">    (optional <span class="st">"."</span> (optional decimal-digits))</a>
+<a class="sourceLine" id="cb40-5" data-line-number="5">    (optional <span class="st">"e"</span> (either <span class="st">"+"</span> <span class="st">"-"</span> <span class="st">""</span>) decimal-digits)))</a>
+<a class="sourceLine" id="cb40-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb40-7" data-line-number="7">#<span class="fl">1.5e11</span># ⟶ (float <span class="st">"1"</span> (<span class="st">"."</span> (<span class="st">"5"</span>)) (<span class="st">"e"</span> (<span class="st">""</span>) <span class="st">"11"</span>))</a></code></pre></div>
+<p><strong>Task 4.4</strong>* Write a reader macro for infix arithmetical expressions (addition, multiplication, brackets).</p>
 </section><div><a class="slider-prev" href="#homework-assignments"></a><a class="slider-next"></a></div>
 
 <!-- start page -->
@@ -697,12 +714,14 @@ The run-time is separated from expansion-time with <em>quotation</em> operators:
             window.location = a.href;
           }
           break;
+       case 33: // Page Up
        case 37: // left arrow
          var a = document.querySelector("section:target ~ div a.slider-prev");
          if (a && a.href) {
            window.location = a.href;
          }
          break;
+       case 34: // Page Down
        case 39: // right arrow
          var a = document.querySelector("section:target ~ div a.slider-next");
          if (a && a.href) {
