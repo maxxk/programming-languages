@@ -1,48 +1,76 @@
 <!DOCTYPE html><html><head>
   <meta charset="utf-8">
   <meta name="generator" content="pandoc">
-  <title></title>
+  <title>05-Static-Semantics</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <link rel="stylesheet" href="slider.css">
   <style type="text/css">code{white-space: pre;}</style>
   <style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code > span.dt { color: #902000; } /* DataType */
-code > span.dv { color: #40a070; } /* DecVal */
-code > span.bn { color: #40a070; } /* BaseN */
-code > span.fl { color: #40a070; } /* Float */
-code > span.ch { color: #4070a0; } /* Char */
-code > span.st { color: #4070a0; } /* String */
-code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code > span.ot { color: #007020; } /* Other */
-code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code > span.fu { color: #06287e; } /* Function */
-code > span.er { color: #ff0000; font-weight: bold; } /* Error */
-code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #880000; } /* Constant */
-code > span.sc { color: #4070a0; } /* SpecialChar */
-code > span.vs { color: #4070a0; } /* VerbatimString */
-code > span.ss { color: #bb6688; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #19177c; } /* Variable */
-code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #666666; } /* Operator */
-code > span.bu { } /* BuiltIn */
-code > span.ex { } /* Extension */
-code > span.pp { color: #bc7a00; } /* Preprocessor */
-code > span.at { color: #7d9029; } /* Attribute */
-code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
   </style>
 </head>
 <body>
@@ -76,12 +104,12 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 .large { font-size: 1.5em !important; }
 .huge { font-size: 2em !important; }
 </style>
-<p>Course page: <a href="https://maxxk.github.io/programming-languages-2016/" class="uri">https://maxxk.github.io/programming-languages-2016/</a><br>
-Contact author: <a href="mailto:maxim.krivchikov@gmail.com" class="email">maxim.krivchikov@gmail.com</a></p>
+<p><a href="https://maxxk.github.io/programming-languages/" class="uri">https://maxxk.github.io/programming-languages/</a></p>
+<p><a href="mailto:maxim.krivchikov@gmail.com" class="email">maxim.krivchikov@gmail.com</a></p>
 </section><div><a class="slider-prev"></a><a class="slider-next" href="#programming-language-specification"></a></div>
 <section id="programming-language-specification" class="slide level1">
 <h1>Programming language specification</h1>
-<p><img src="graphviz-images/aa5f4656547c5b2a7ce97a49486be6e2a63b8520.svg"></p>
+<p><img data-src="graphviz-images/118c71dc5f666420f7c7dbd2d9307f9fbbe0afd2.svg" src="graphviz-images/118c71dc5f666420f7c7dbd2d9307f9fbbe0afd2.svg"></p>
 </section><div><a class="slider-prev" href="#software-and-programming-language-theory"></a><a class="slider-next" href="#programming-language-semantics"></a></div>
 <section id="programming-language-semantics" class="slide level1">
 <h1>Programming language semantics</h1>
@@ -93,8 +121,12 @@ Contact author: <a href="mailto:maxim.krivchikov@gmail.com" class="email">maxim.
 </dd>
 <dd class="fragment">static type checking (do the expressions satisfy constraints of typing system)
 </dd>
+<dd class="fragment">"context-sensitive" restriction on valid programs
+</dd>
 <dt class="fragment">Dynamic semantics</dt>
 <dd class="fragment">how do we compute the value of expressions, statements, etc.
+</dd>
+<dd class="fragment">"recursively enumerable" restriction on valid programs
 </dd>
 </dl>
 </section><div><a class="slider-prev" href="#programming-language-specification"></a><a class="slider-next" href="#naming"></a></div>
@@ -110,35 +142,34 @@ Contact author: <a href="mailto:maxim.krivchikov@gmail.com" class="email">maxim.
 </section><div><a class="slider-prev" href="#programming-language-semantics"></a><a class="slider-next" href="#binding"></a></div>
 <section id="binding" class="slide level1">
 <h1>Binding</h1>
-Binding is the process of assigning the meaning to a name.<br>
-
+Binding is the process of assigning the meaning to a name.
 <div class="twocolumn smaller">
-<div class="sourceCode"><pre class="sourceCode java"><code class="sourceCode java"><span class="kw">public</span> <span class="kw">class</span> SimpleDemoClass  
-{            
-     <span class="kw">public</span> <span class="dt">void</span> GetData&lt;T&gt;(T obj)  
-     {  
-        <span class="bu">Console</span>.<span class="fu">WriteLine</span>(<span class="st">"INSIDE GetData&lt;T&gt;,"</span>+ obj.<span class="fu">GetType</span>().<span class="fu">Name</span>);  
-     }        
-     <span class="kw">public</span> <span class="dt">void</span> <span class="fu">GetData</span>(<span class="dt">int</span> x)  
-     {  
-        <span class="bu">Console</span>.<span class="fu">WriteLine</span>(<span class="st">"INSIDE GetData"</span> + x.<span class="fu">GetType</span>().<span class="fu">Name</span>);  
-     }        
-     <span class="kw">public</span> <span class="dt">void</span> GetxNextData&lt;T&gt;(T obj)  
-     {  
-         <span class="fu">GetData</span>(obj);  
-     }      
- }  </code></pre></div>
-<div class="sourceCode"><pre class="sourceCode java"><code class="sourceCode java"><span class="kw">class</span> Program  
-{  
-      Static <span class="dt">void</span> <span class="fu">Main</span>(string[] args)  
-      {    
-           SimpleDemoClass sobj = <span class="kw">new</span> <span class="fu">SimpleDemoClass</span>();  
-           sobj.<span class="fu">GetData</span>(<span class="st">"data is for testing by-Devesh"</span>);  
-           sobj.<span class="fu">GetData</span>(<span class="dv">95</span>);  
-           sobj.<span class="fu">GetxNextData</span>(<span class="dv">1234</span>);  
-           <span class="bu">Console</span>.<span class="fu">ReadKey</span>();  
-       }  
-}  </code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">public</span> <span class="kw">class</span> SimpleDemoClass  </a>
+<a class="sourceLine" id="cb1-2" data-line-number="2">{            </a>
+<a class="sourceLine" id="cb1-3" data-line-number="3">     <span class="kw">public</span> <span class="dt">void</span> GetData&lt;T&gt;(T obj)  </a>
+<a class="sourceLine" id="cb1-4" data-line-number="4">     {  </a>
+<a class="sourceLine" id="cb1-5" data-line-number="5">        <span class="bu">Console</span>.<span class="fu">WriteLine</span>(<span class="st">"INSIDE GetData&lt;T&gt;,"</span>+ obj.<span class="fu">GetType</span>().<span class="fu">Name</span>);  </a>
+<a class="sourceLine" id="cb1-6" data-line-number="6">     }        </a>
+<a class="sourceLine" id="cb1-7" data-line-number="7">     <span class="kw">public</span> <span class="dt">void</span> <span class="fu">GetData</span>(<span class="dt">int</span> x)  </a>
+<a class="sourceLine" id="cb1-8" data-line-number="8">     {  </a>
+<a class="sourceLine" id="cb1-9" data-line-number="9">        <span class="bu">Console</span>.<span class="fu">WriteLine</span>(<span class="st">"INSIDE GetData"</span> + x.<span class="fu">GetType</span>().<span class="fu">Name</span>);  </a>
+<a class="sourceLine" id="cb1-10" data-line-number="10">     }        </a>
+<a class="sourceLine" id="cb1-11" data-line-number="11">     <span class="kw">public</span> <span class="dt">void</span> GetxNextData&lt;T&gt;(T obj)  </a>
+<a class="sourceLine" id="cb1-12" data-line-number="12">     {  </a>
+<a class="sourceLine" id="cb1-13" data-line-number="13">         <span class="fu">GetData</span>(obj);  </a>
+<a class="sourceLine" id="cb1-14" data-line-number="14">     }      </a>
+<a class="sourceLine" id="cb1-15" data-line-number="15"> }  </a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">class</span> Program  </a>
+<a class="sourceLine" id="cb2-2" data-line-number="2">{  </a>
+<a class="sourceLine" id="cb2-3" data-line-number="3">      Static <span class="dt">void</span> <span class="fu">Main</span>(string[] args)  </a>
+<a class="sourceLine" id="cb2-4" data-line-number="4">      {    </a>
+<a class="sourceLine" id="cb2-5" data-line-number="5">           SimpleDemoClass sobj = <span class="kw">new</span> <span class="fu">SimpleDemoClass</span>();  </a>
+<a class="sourceLine" id="cb2-6" data-line-number="6">           sobj.<span class="fu">GetData</span>(<span class="st">"data is for testing by-Devesh"</span>);  </a>
+<a class="sourceLine" id="cb2-7" data-line-number="7">           sobj.<span class="fu">GetData</span>(<span class="dv">95</span>);  </a>
+<a class="sourceLine" id="cb2-8" data-line-number="8">           sobj.<span class="fu">GetxNextData</span>(<span class="dv">1234</span>);  </a>
+<a class="sourceLine" id="cb2-9" data-line-number="9">           <span class="bu">Console</span>.<span class="fu">ReadKey</span>();  </a>
+<a class="sourceLine" id="cb2-10" data-line-number="10">       }  </a>
+<a class="sourceLine" id="cb2-11" data-line-number="11">}  </a></code></pre></div>
 </div>
 <div class="small">
 Example from: <a href="http://www.c-sharpcorner.com/UploadFile/deveshomar/generic-method-overloading-in-C-Sharp/" class="uri">http://www.c-sharpcorner.com/UploadFile/deveshomar/generic-method-overloading-in-C-Sharp/</a>
@@ -147,116 +178,187 @@ Example from: <a href="http://www.c-sharpcorner.com/UploadFile/deveshomar/generi
 <section id="scope-1" class="slide level1">
 <h1>Scope</h1>
 <p><em>Scope</em> of a binding is a textual region in program in which a binding is active. We may also use term <em>scope</em> to call the region of a program of maximal size in which no bindings are destroyed (masked).</p>
-<div class="sourceCode"><pre class="sourceCode c"><code class="sourceCode c"><span class="dt">char</span> *a = <span class="st">"QWE123\0"</span>;
-<span class="dt">char</span>* fun() {
-  dobule a = <span class="dv">0</span>;
-  <span class="cf">return</span> a;
-}</code></pre></div>
-</section><div><a class="slider-prev" href="#binding"></a><a class="slider-next" href="#dynamic-scope"></a></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="dt">char</span> *a = <span class="st">"QWE123\0"</span>;</a>
+<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="dt">char</span>* fun() {</a>
+<a class="sourceLine" id="cb3-3" data-line-number="3">  <span class="dt">double</span> a = <span class="dv">0</span>;</a>
+<a class="sourceLine" id="cb3-4" data-line-number="4">  <span class="cf">return</span> a;</a>
+<a class="sourceLine" id="cb3-5" data-line-number="5">}</a></code></pre></div>
+<p><em>Lexical scope</em> (implemented in most of statically-typed programming languages, e.g. C/C++) binds identifiers inside some specific parts of program source code (lexical context).</p>
+</section><div><a class="slider-prev" href="#binding"></a><a class="slider-next" href="#closure"></a></div>
+<section id="closure" class="slide level1">
+<h1>Closure</h1>
+<p>A closure is a persistent scope which holds on to local variables even after the code execution has moved out of that block [<a href="https://stackoverflow.com/a/7464475">1</a>].</p>
+<div class="twocolumn smaller">
+<div class="sourceCode" id="cb4"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw">function</span> <span class="at">external</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb4-2" data-line-number="2">  <span class="kw">var</span> a <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb4-3" data-line-number="3">  <span class="kw">function</span> <span class="at">f</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb4-4" data-line-number="4">    a <span class="op">+=</span> <span class="dv">1</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb4-5" data-line-number="5">    <span class="cf">return</span> a<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-6" data-line-number="6">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb4-7" data-line-number="7">  <span class="kw">function</span> <span class="at">g</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb4-8" data-line-number="8">    a <span class="op">-=</span> <span class="dv">1</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb4-9" data-line-number="9">    <span class="cf">return</span> a<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-10" data-line-number="10">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb4-11" data-line-number="11">  <span class="cf">return</span> [f<span class="op">,</span> g]<span class="op">;</span></a>
+<a class="sourceLine" id="cb4-12" data-line-number="12"><span class="op">}</span></a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw">typedef</span> <span class="dt">char</span> (*fooType)();</a>
+<a class="sourceLine" id="cb5-2" data-line-number="2">fooType fun() {</a>
+<a class="sourceLine" id="cb5-3" data-line-number="3">  <span class="dt">char</span> a = <span class="dv">0</span>;</a>
+<a class="sourceLine" id="cb5-4" data-line-number="4">  <span class="dt">char</span> f2() {</a>
+<a class="sourceLine" id="cb5-5" data-line-number="5">    a += <span class="dv">1</span>;</a>
+<a class="sourceLine" id="cb5-6" data-line-number="6">    <span class="cf">return</span> a;</a>
+<a class="sourceLine" id="cb5-7" data-line-number="7">  }</a>
+<a class="sourceLine" id="cb5-8" data-line-number="8">  <span class="cf">return</span> f2;</a>
+<a class="sourceLine" id="cb5-9" data-line-number="9">}</a>
+<a class="sourceLine" id="cb5-10" data-line-number="10"></a>
+<a class="sourceLine" id="cb5-11" data-line-number="11"><span class="dt">int</span> main(<span class="dt">void</span>) {</a>
+<a class="sourceLine" id="cb5-12" data-line-number="12">  printf(<span class="st">"Result: %d"</span>, fun()());</a>
+<a class="sourceLine" id="cb5-13" data-line-number="13">  <span class="cf">return</span> <span class="dv">0</span>;</a>
+<a class="sourceLine" id="cb5-14" data-line-number="14">}</a></code></pre></div>
+</div>
+<p>Static semantics: which variables to persist and share between closures?</p>
+</section><div><a class="slider-prev" href="#scope-1"></a><a class="slider-next" href="#dynamic-scope"></a></div>
 <section id="dynamic-scope" class="slide level1">
 <h1>Dynamic scope</h1>
 <div class="twocolumn">
 <p>Some languages (like ECMAScript/JavaScript or some kinds of LISP) have a concept of the <em>dynamic scoping</em>. Binding of identifiers occurs at run-time.</p>
-<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">var</span> a <span class="op">=</span> <span class="dv">0</span><span class="op">;</span>
-<span class="kw">function</span> <span class="at">f</span>() <span class="op">{</span>
-  <span class="kw">var</span> b <span class="op">=</span> a<span class="op">;</span>
-  <span class="cf">with</span> (<span class="op">{</span><span class="dt">a</span><span class="op">:</span> <span class="dv">1</span><span class="op">}</span>) <span class="op">{</span>
-    b <span class="op">+=</span> a<span class="op">;</span>
-  <span class="op">}</span>
-  <span class="cf">return</span> b<span class="op">;</span> <span class="co">// b = 1</span>
-<span class="op">}</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw">var</span> a <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb6-2" data-line-number="2"><span class="kw">function</span> <span class="at">f</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb6-3" data-line-number="3">  <span class="kw">var</span> b <span class="op">=</span> a<span class="op">;</span></a>
+<a class="sourceLine" id="cb6-4" data-line-number="4">  <span class="cf">with</span> (<span class="op">{</span><span class="dt">a</span><span class="op">:</span> <span class="dv">1</span><span class="op">}</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb6-5" data-line-number="5">    b <span class="op">+=</span> a<span class="op">;</span></a>
+<a class="sourceLine" id="cb6-6" data-line-number="6">  <span class="op">}</span></a>
+<a class="sourceLine" id="cb6-7" data-line-number="7">  <span class="cf">return</span> b<span class="op">;</span> <span class="co">// b = 1</span></a>
+<a class="sourceLine" id="cb6-8" data-line-number="8"><span class="op">}</span></a></code></pre></div>
 <p><code>this</code> in object-oriented language may be seen as either an implicit argument to a function or as a way of introducing a dynamic scope.</p>
-<div class="sourceCode"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span class="kw">function</span> <span class="at">g</span>() <span class="op">{</span>
-  <span class="cf">return</span> <span class="kw">this</span>.<span class="at">x</span><span class="op">;</span>
-<span class="op">}</span>
-<span class="kw">var</span> A <span class="op">=</span> <span class="op">{</span> <span class="dt">x</span><span class="op">:</span> <span class="dv">0</span><span class="op">,</span> g <span class="op">}</span>
-<span class="kw">var</span> B <span class="op">=</span> <span class="op">{</span> <span class="dt">x</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span> g <span class="op">}</span>
-<span class="va">A</span>.<span class="at">g</span>() <span class="co">// returns 0</span>
-<span class="va">B</span>.<span class="at">g</span>() <span class="co">// returns 1</span>
-<span class="at">g</span>() <span class="co">// returns 2</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw">function</span> <span class="at">g</span>() <span class="op">{</span></a>
+<a class="sourceLine" id="cb7-2" data-line-number="2">  <span class="cf">return</span> <span class="kw">this</span>.<span class="at">x</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb7-3" data-line-number="3"><span class="op">}</span></a>
+<a class="sourceLine" id="cb7-4" data-line-number="4"><span class="kw">var</span> A <span class="op">=</span> <span class="op">{</span> <span class="dt">x</span><span class="op">:</span> <span class="dv">0</span><span class="op">,</span> g <span class="op">}</span></a>
+<a class="sourceLine" id="cb7-5" data-line-number="5"><span class="kw">var</span> B <span class="op">=</span> <span class="op">{</span> <span class="dt">x</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span> g <span class="op">}</span></a>
+<a class="sourceLine" id="cb7-6" data-line-number="6"><span class="va">A</span>.<span class="at">g</span>() <span class="co">// returns 0</span></a>
+<a class="sourceLine" id="cb7-7" data-line-number="7"><span class="va">B</span>.<span class="at">g</span>() <span class="co">// returns 1</span></a>
+<a class="sourceLine" id="cb7-8" data-line-number="8"><span class="at">g</span>() <span class="co">// returns 2</span></a></code></pre></div>
 </div>
-</section><div><a class="slider-prev" href="#scope-1"></a><a class="slider-next" href="#name-overloading"></a></div>
+</section><div><a class="slider-prev" href="#closure"></a><a class="slider-next" href="#name-overloading"></a></div>
 <section id="name-overloading" class="slide level1">
 <h1>Name overloading</h1>
 <div class="twocolumn smallish">
-<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="kw">template</span>&lt;<span class="kw">typename</span> T&gt;
-T mul(<span class="dt">int</span> i, <span class="dt">int</span> j)
-{
-   <span class="co">// If you get a compile error, it's because you did not use</span>
-   <span class="co">// one of the authorized template specializations</span>
-   <span class="at">const</span> <span class="dt">int</span> k = <span class="dv">25</span> ; k = <span class="dv">36</span> ;
-}
-<span class="kw">template</span>&lt;&gt;
-<span class="dt">int</span> mul&lt;<span class="dt">int</span>&gt;(<span class="dt">int</span> i, <span class="dt">int</span> j)
-{
-   <span class="cf">return</span> i * j ;
-}
-
-<span class="kw">template</span>&lt;&gt;
-<span class="bu">std::</span>string mul&lt;<span class="bu">std::</span>string&gt;(<span class="dt">int</span> i, <span class="dt">int</span> j)
-{
-   <span class="cf">return</span> <span class="bu">std::</span>string(j, <span class="kw">static_cast</span>&lt;<span class="dt">char</span>&gt;(i)) ;
-}</code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw">template</span>&lt;<span class="kw">typename</span> T&gt;</a>
+<a class="sourceLine" id="cb8-2" data-line-number="2">T mul(<span class="dt">int</span> i, <span class="dt">int</span> j)</a>
+<a class="sourceLine" id="cb8-3" data-line-number="3">{</a>
+<a class="sourceLine" id="cb8-4" data-line-number="4">   <span class="co">// If you get a compile error, it's because you did not use</span></a>
+<a class="sourceLine" id="cb8-5" data-line-number="5">   <span class="co">// one of the authorized template specializations</span></a>
+<a class="sourceLine" id="cb8-6" data-line-number="6">   <span class="at">const</span> <span class="dt">int</span> k = <span class="dv">25</span> ; k = <span class="dv">36</span> ;</a>
+<a class="sourceLine" id="cb8-7" data-line-number="7">}</a>
+<a class="sourceLine" id="cb8-8" data-line-number="8"><span class="kw">template</span>&lt;&gt;</a>
+<a class="sourceLine" id="cb8-9" data-line-number="9"><span class="dt">int</span> mul&lt;<span class="dt">int</span>&gt;(<span class="dt">int</span> i, <span class="dt">int</span> j)</a>
+<a class="sourceLine" id="cb8-10" data-line-number="10">{</a>
+<a class="sourceLine" id="cb8-11" data-line-number="11">   <span class="cf">return</span> i * j ;</a>
+<a class="sourceLine" id="cb8-12" data-line-number="12">}</a>
+<a class="sourceLine" id="cb8-13" data-line-number="13"></a>
+<a class="sourceLine" id="cb8-14" data-line-number="14"><span class="kw">template</span>&lt;&gt;</a>
+<a class="sourceLine" id="cb8-15" data-line-number="15"><span class="bu">std::</span>string mul&lt;<span class="bu">std::</span>string&gt;(<span class="dt">int</span> i, <span class="dt">int</span> j)</a>
+<a class="sourceLine" id="cb8-16" data-line-number="16">{</a>
+<a class="sourceLine" id="cb8-17" data-line-number="17">   <span class="cf">return</span> <span class="bu">std::</span>string(j, <span class="kw">static_cast</span>&lt;<span class="dt">char</span>&gt;(i)) ;</a>
+<a class="sourceLine" id="cb8-18" data-line-number="18">}</a></code></pre></div>
 <p>If the language supports name overloading, the same identifier in the same place may have a different meaning depending on some external information (like typing). Usually in imperative languages name overloading is restricted to functions names.</p>
-<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="dt">int</span> mul(<span class="dt">int</span> i, <span class="dt">int</span> j) { <span class="cf">return</span> i*j; }
-<span class="bu">std::</span>string mul(<span class="dt">char</span> c, <span class="dt">int</span> n) { <span class="cf">return</span> <span class="bu">std::</span>string(n, c); }
-
-<span class="dt">int</span> n = mul(<span class="dv">6</span>, <span class="dv">3</span>); <span class="co">// n = 18</span>
-<span class="bu">std::</span>string s = mul(<span class="kw">static_cast</span>&lt;<span class="dt">char</span>&gt;(<span class="dv">6</span>), <span class="dv">2</span>); <span class="co">// s = "110"</span>
-<span class="dt">int</span> n = mul&lt;<span class="dt">int</span>&gt;(<span class="dv">6</span>, <span class="dv">3</span>); <span class="co">// n = 18</span>
-<span class="bu">std::</span>string s = mul&lt;<span class="bu">std::</span>string&gt;(<span class="dv">54</span>, <span class="dv">2</span>); <span class="co">// s = "110110"</span>
-<span class="dt">short</span> n2 = mul&lt;<span class="dt">short</span>&gt;(<span class="dv">6</span>, <span class="dv">3</span>); <span class="co">// error: assignment of read-only variable ‘k’</span></code></pre></div>
-Languages supporting function overloading: C++, C#<br>
-Languages not supporting function overloading: Haskell, ECMAScript, C (but C11 has the <code>_Generic</code> keyword: <a href="http://stackoverflow.com/a/25026358" class="uri">http://stackoverflow.com/a/25026358</a>)
+<div class="sourceCode" id="cb9"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="dt">int</span> mul(<span class="dt">int</span> i, <span class="dt">int</span> j) { <span class="cf">return</span> i*j; }</a>
+<a class="sourceLine" id="cb9-2" data-line-number="2"><span class="bu">std::</span>string mul(<span class="dt">char</span> c, <span class="dt">int</span> n) { <span class="cf">return</span> <span class="bu">std::</span>string(n, c); }</a>
+<a class="sourceLine" id="cb9-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb9-4" data-line-number="4"><span class="dt">int</span> n = mul(<span class="dv">6</span>, <span class="dv">3</span>); <span class="co">// n = 18</span></a>
+<a class="sourceLine" id="cb9-5" data-line-number="5"><span class="bu">std::</span>string s = mul(<span class="kw">static_cast</span>&lt;<span class="dt">char</span>&gt;(<span class="dv">6</span>), <span class="dv">2</span>); <span class="co">// s = "110"</span></a>
+<a class="sourceLine" id="cb9-6" data-line-number="6"><span class="dt">int</span> n = mul&lt;<span class="dt">int</span>&gt;(<span class="dv">6</span>, <span class="dv">3</span>); <span class="co">// n = 18</span></a>
+<a class="sourceLine" id="cb9-7" data-line-number="7"><span class="bu">std::</span>string s = mul&lt;<span class="bu">std::</span>string&gt;(<span class="dv">54</span>, <span class="dv">2</span>); <span class="co">// s = "110110"</span></a>
+<a class="sourceLine" id="cb9-8" data-line-number="8"><span class="dt">short</span> n2 = mul&lt;<span class="dt">short</span>&gt;(<span class="dv">6</span>, <span class="dv">3</span>); <span class="co">// error: assignment of read-only variable ‘k’</span></a></code></pre></div>
+<p>Languages supporting function overloading: C++, C#</p>
+Languages without support for function overloading: Haskell, ECMAScript, C (but C11 has the <code>_Generic</code> keyword: <a href="http://stackoverflow.com/a/25026358" class="uri">http://stackoverflow.com/a/25026358</a>)
 </div>
 <div class="small">
 Example from: <a href="http://stackoverflow.com/questions/226144/overload-a-c-function-according-to-the-return-value" class="uri">http://stackoverflow.com/questions/226144/overload-a-c-function-according-to-the-return-value</a>
 </div>
-</section><div><a class="slider-prev" href="#dynamic-scope"></a><a class="slider-next" href="#static-semantics-representation"></a></div>
+</section><div><a class="slider-prev" href="#dynamic-scope"></a><a class="slider-next" href="#lexical-scope-declarative-region"></a></div>
+<section id="lexical-scope-declarative-region" class="slide level1">
+<h1>Lexical scope declarative region</h1>
+<p>Where does declaration effect start/stop?</p>
+<div class="twocolumn">
+<div class="sourceCode" id="cb10"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="kw">def</span> f(x):</a>
+<a class="sourceLine" id="cb10-2" data-line-number="2">    x <span class="op">=</span> <span class="dv">0</span></a>
+<a class="sourceLine" id="cb10-3" data-line-number="3">    <span class="cf">for</span> x <span class="kw">in</span> [<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>]:</a>
+<a class="sourceLine" id="cb10-4" data-line-number="4">        <span class="bu">print</span> x</a>
+<a class="sourceLine" id="cb10-5" data-line-number="5">    <span class="cf">return</span> x <span class="co"># return 3</span></a></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="kw">function</span> <span class="at">f</span>(x) <span class="op">{</span></a>
+<a class="sourceLine" id="cb11-2" data-line-number="2">    <span class="co">// let x = 0;  // "Syntax error", </span></a>
+<a class="sourceLine" id="cb11-3" data-line-number="3">                   <span class="co">// the same region </span></a>
+<a class="sourceLine" id="cb11-4" data-line-number="4">                   <span class="co">// as function arguments</span></a>
+<a class="sourceLine" id="cb11-5" data-line-number="5">    x <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb11-6" data-line-number="6">    <span class="cf">for</span> (<span class="kw">let</span> x of [<span class="dv">1</span><span class="op">,</span><span class="dv">2</span><span class="op">,</span><span class="dv">3</span>]) <span class="op">{</span></a>
+<a class="sourceLine" id="cb11-7" data-line-number="7">      <span class="va">console</span>.<span class="at">log</span>(x)<span class="op">;</span></a>
+<a class="sourceLine" id="cb11-8" data-line-number="8">    <span class="op">}</span></a>
+<a class="sourceLine" id="cb11-9" data-line-number="9">    <span class="cf">return</span> x<span class="op">;</span> <span class="co">// return 0</span></a>
+<a class="sourceLine" id="cb11-10" data-line-number="10"><span class="op">}</span></a></code></pre></div>
+</div>
+<p>Use before definition</p>
+<div class="twocolumn">
+<div class="sourceCode" id="cb12"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="dt">int</span> f() {</a>
+<a class="sourceLine" id="cb12-2" data-line-number="2">    <span class="co">// warning: implicit declaration ...</span></a>
+<a class="sourceLine" id="cb12-3" data-line-number="3">    <span class="cf">return</span> g();</a>
+<a class="sourceLine" id="cb12-4" data-line-number="4">}</a>
+<a class="sourceLine" id="cb12-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb12-6" data-line-number="6"><span class="dt">int</span> g() {</a>
+<a class="sourceLine" id="cb12-7" data-line-number="7">    <span class="cf">return</span> <span class="dv">0</span>;</a>
+<a class="sourceLine" id="cb12-8" data-line-number="8">}</a></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode rust"><code class="sourceCode rust"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="kw">fn</span> f() -&gt; <span class="dt">u32</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb13-2" data-line-number="2">    <span class="kw">return</span> g()</a>
+<a class="sourceLine" id="cb13-3" data-line-number="3"><span class="op">}</span></a>
+<a class="sourceLine" id="cb13-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb13-5" data-line-number="5"><span class="kw">fn</span> g() -&gt; <span class="dt">u32</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb13-6" data-line-number="6">    <span class="kw">return</span> <span class="dv">0</span>;</a>
+<a class="sourceLine" id="cb13-7" data-line-number="7"><span class="op">}</span></a></code></pre></div>
+</div>
+</section><div><a class="slider-prev" href="#name-overloading"></a><a class="slider-next" href="#static-semantics-representation"></a></div>
 <section id="static-semantics-representation" class="slide level1">
 <h1>Static semantics representation</h1>
 <p>Let us return to the topic of formal mechanized analysis of programs.</p>
-<p><img src="graphviz-images/ed002a3970835e74b75f748296f96716059b7048.svg"></p>
+<p><img data-src="graphviz-images/ed002a3970835e74b75f748296f96716059b7048.svg" src="graphviz-images/ed002a3970835e74b75f748296f96716059b7048.svg"></p>
 <p>Syntax is a transformation from <code>String</code> to <abbr title="Abstract Syntax Tree"><code>AST</code></abbr>. Static semantics, in the same way, is a transformation from AST to AST with variable bindings information. How would we store this information?</p>
 <p>Easier approach: generate unique names and store scope in parallel.</p>
 <p>AST+Bindings = Σ (ast : AST /[Id := ℕ]) . (scope : Map&lt;ℕ, AST&gt; ) . (p : ∀ { id : ℕ } ∈ ast, id ∈ scope).</p>
 <div class="small">
 Example at: Vasenin V. A., Krivchikov M. A. Ecma-335 static formal semantics // Programming and Computer Software. — 2012. — Vol. 38, no. 4. — P. 183–188. <a href="http://dx.doi.org/10.1134/S0361768812040056" class="uri">http://dx.doi.org/10.1134/S0361768812040056</a>
 </div>
-</section><div><a class="slider-prev" href="#name-overloading"></a><a class="slider-next" href="#higher-order-abstract-syntax"></a></div>
+</section><div><a class="slider-prev" href="#lexical-scope-declarative-region"></a><a class="slider-next" href="#higher-order-abstract-syntax"></a></div>
 <section id="higher-order-abstract-syntax" class="slide level1">
 <h1>Higher order abstract syntax</h1>
-— the technique to capture the variable binding in abstract syntax tree (Miller, 1987; Phenning, 1988).<br>
-
+— the technique to capture the variable binding in abstract syntax tree (Miller, 1987; Phenning, 1988).
 <div class="twocolumn">
 <p>Abstract syntax:</p>
-<div class="sourceCode"><pre class="sourceCode ocaml"><code class="sourceCode ocaml"><span class="kw">type</span> var = <span class="dt">string</span>
-<span class="kw">type</span> typ =
-  | Bool
-  | Arrow <span class="kw">of</span> typ * typ
-<span class="kw">type</span> <span class="dt">exp</span> =
-  | Var <span class="kw">of</span> var
-  | True
-  | False
-  | App <span class="kw">of</span> <span class="dt">exp</span> * <span class="dt">exp</span>
-  | Abs <span class="kw">of</span> var * <span class="dt">exp</span></code></pre></div>
-Higher-order syntax captures the name binding:<br>
-
+<div class="sourceCode" id="cb14"><pre class="sourceCode ocaml"><code class="sourceCode ocaml"><a class="sourceLine" id="cb14-1" data-line-number="1"><span class="kw">type</span> var = <span class="dt">string</span></a>
+<a class="sourceLine" id="cb14-2" data-line-number="2"><span class="kw">type</span> typ =</a>
+<a class="sourceLine" id="cb14-3" data-line-number="3">  | Bool</a>
+<a class="sourceLine" id="cb14-4" data-line-number="4">  | Arrow <span class="kw">of</span> typ * typ</a>
+<a class="sourceLine" id="cb14-5" data-line-number="5"><span class="kw">type</span> <span class="dt">exp</span> =</a>
+<a class="sourceLine" id="cb14-6" data-line-number="6">  | Var <span class="kw">of</span> var</a>
+<a class="sourceLine" id="cb14-7" data-line-number="7">  | True</a>
+<a class="sourceLine" id="cb14-8" data-line-number="8">  | False</a>
+<a class="sourceLine" id="cb14-9" data-line-number="9">  | App <span class="kw">of</span> <span class="dt">exp</span> * <span class="dt">exp</span></a>
+<a class="sourceLine" id="cb14-10" data-line-number="10">  | Abs <span class="kw">of</span> var * <span class="dt">exp</span></a></code></pre></div>
+Higher-order syntax captures the name binding:
 <div>
-<div class="sourceCode"><pre class="sourceCode ocaml"><code class="sourceCode ocaml"><span class="kw">type</span> <span class="dt">exp</span> =
-  | True
-  | False
-  | App <span class="kw">of</span> <span class="dt">exp</span> * <span class="dt">exp</span>
-  | Abs <span class="kw">of</span> <span class="dt">exp</span> -&gt; <span class="dt">exp</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode ocaml"><code class="sourceCode ocaml"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="kw">type</span> <span class="dt">exp</span> =</a>
+<a class="sourceLine" id="cb15-2" data-line-number="2">  | True</a>
+<a class="sourceLine" id="cb15-3" data-line-number="3">  | False</a>
+<a class="sourceLine" id="cb15-4" data-line-number="4">  | App <span class="kw">of</span> <span class="dt">exp</span> * <span class="dt">exp</span></a>
+<a class="sourceLine" id="cb15-5" data-line-number="5">  | Abs <span class="kw">of</span> <span class="dt">exp</span> -&gt; <span class="dt">exp</span></a></code></pre></div>
 </div>
 <p>Parametrized Higher-order syntax captures the types of variables:</p>
-<div class="sourceCode"><pre class="sourceCode ocaml"><code class="sourceCode ocaml"><span class="kw">type</span> 't var
-<span class="kw">type</span> 't <span class="dt">exp</span> =
-    | Var : 't var -&gt; 't <span class="dt">exp</span>
-    | True : <span class="dt">bool</span> <span class="dt">exp</span>
-    | False : <span class="dt">bool</span> <span class="dt">exp</span>
-    | App : ('d -&gt; 'r) <span class="dt">exp</span> * 'd <span class="dt">exp</span> -&gt; 'r <span class="dt">exp</span>
-    | Abs : ('d var -&gt; 'r <span class="dt">exp</span>) -&gt; ('d -&gt; 'r) <span class="dt">exp</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode ocaml"><code class="sourceCode ocaml"><a class="sourceLine" id="cb16-1" data-line-number="1"></a>
+<a class="sourceLine" id="cb16-2" data-line-number="2"><span class="kw">type</span> ('t, 'V) <span class="dt">exp</span> =</a>
+<a class="sourceLine" id="cb16-3" data-line-number="3">    | Var : 't 'V -&gt; ('t, 'V) <span class="dt">exp</span></a>
+<a class="sourceLine" id="cb16-4" data-line-number="4">    | True : (<span class="dt">bool</span>, 'V) <span class="dt">exp</span></a>
+<a class="sourceLine" id="cb16-5" data-line-number="5">    | False : (<span class="dt">bool</span>, 'V) <span class="dt">exp</span></a>
+<a class="sourceLine" id="cb16-6" data-line-number="6">    | App : ('d -&gt; 'r, 'V) <span class="dt">exp</span> * ('d, 'V) <span class="dt">exp</span> -&gt; ('r, 'V) <span class="dt">exp</span></a>
+<a class="sourceLine" id="cb16-7" data-line-number="7">    | Abs : ('d 'V -&gt; ('r, 'V) <span class="dt">exp</span>) -&gt; ('d -&gt; 'r, 'V) <span class="dt">exp</span></a></code></pre></div>
 <a href="http://adam.chlipala.net/papers/PhoasICFP08/" class="uri">http://adam.chlipala.net/papers/PhoasICFP08/</a>
 </div>
 </section><div><a class="slider-prev" href="#static-semantics-representation"></a><a class="slider-next" href="#ornaments"></a></div>
@@ -264,34 +366,39 @@ Higher-order syntax captures the name binding:<br>
 <h1>Ornaments</h1>
 <p>Conor McBride. «Ornamental Algebras, Algebraic Ornaments»</p>
 <p>One base data type defines the induction structure, basic constructors:</p>
-<div class="sourceCode"><pre class="sourceCode agda"><code class="sourceCode agda"><span class="kw">data</span> Nat <span class="kw">where</span>
-  <span class="dv">0</span> <span class="ot">:</span> Nat
-  succ <span class="ot">:</span> Nat <span class="ot">→</span> Nat</code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="kw">data</span> Nat <span class="kw">where</span></a>
+<a class="sourceLine" id="cb17-2" data-line-number="2">  <span class="dv">0</span> <span class="ot">:</span> Nat</a>
+<a class="sourceLine" id="cb17-3" data-line-number="3">  succ <span class="ot">:</span> Nat <span class="ot">→</span> Nat</a></code></pre></div>
 <p>Then we place an additional data (ornament) to the leaves of the induction structure:</p>
-<div class="sourceCode"><pre class="sourceCode agda"><code class="sourceCode agda"><span class="kw">data</span> List [A <span class="ot">:</span> Set] from Nat <span class="kw">where</span>
-   List<span class="ot">_</span>A ← nil
-    <span class="ot">|</span> cons [a <span class="ot">:</span> A] <span class="ot">(</span>as <span class="ot">:</span> List<span class="ot">_</span>A<span class="ot">)</span>
-
-<span class="kw">data</span> Vec [A <span class="ot">:</span> Set] from Nat <span class="kw">where</span>
-  Vec<span class="ot">_</span>A n ← nil [q <span class="ot">:</span> n ≡ 0]
-     <span class="ot">|</span> cons [n' <span class="ot">:</span> Nat][ q <span class="ot">:</span> n <span class="ot">=</span> succ n' ] <span class="ot">(</span>a <span class="ot">:</span> A<span class="ot">)</span> <span class="ot">(</span>vs <span class="ot">:</span> Vec<span class="ot">_</span>A n<span class="ot">)</span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb18-1" data-line-number="1"><span class="kw">data</span> List [A <span class="ot">:</span> Set] from Nat <span class="kw">where</span></a>
+<a class="sourceLine" id="cb18-2" data-line-number="2">   List<span class="ot">_</span>A ← nil</a>
+<a class="sourceLine" id="cb18-3" data-line-number="3">    <span class="ot">|</span> cons [a <span class="ot">:</span> A] <span class="ot">(</span>as <span class="ot">:</span> List<span class="ot">_</span>A<span class="ot">)</span></a>
+<a class="sourceLine" id="cb18-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb18-5" data-line-number="5"><span class="kw">data</span> Vec [A <span class="ot">:</span> Set] from Nat <span class="kw">where</span></a>
+<a class="sourceLine" id="cb18-6" data-line-number="6">  Vec<span class="ot">_</span>A n ← nil [q <span class="ot">:</span> n ≡ 0]</a>
+<a class="sourceLine" id="cb18-7" data-line-number="7">     <span class="ot">|</span> cons [n' <span class="ot">:</span> Nat][ q <span class="ot">:</span> n <span class="ot">=</span> succ n' ] <span class="ot">(</span>a <span class="ot">:</span> A<span class="ot">)</span> <span class="ot">(</span>vs <span class="ot">:</span> Vec<span class="ot">_</span>A n<span class="ot">)</span></a></code></pre></div>
 <div class="small">
-<a href="https://personal.cis.strath.ac.uk/conor.mcbride/pub/OAAO/LitOrn.pdf" class="uri">https://personal.cis.strath.ac.uk/conor.mcbride/pub/OAAO/LitOrn.pdf</a><br>
-<a href="http://arxiv.org/pdf/1201.4801.pdf" class="uri">http://arxiv.org/pdf/1201.4801.pdf</a>
+<a href="https://personal.cis.strath.ac.uk/conor.mcbride/pub/OAAO/LitOrn.pdf" class="uri">https://personal.cis.strath.ac.uk/conor.mcbride/pub/OAAO/LitOrn.pdf</a> <a href="http://arxiv.org/pdf/1201.4801.pdf" class="uri">http://arxiv.org/pdf/1201.4801.pdf</a>
 </div>
 </section><div><a class="slider-prev" href="#higher-order-abstract-syntax"></a><a class="slider-next" href="#recursion"></a></div>
 <section id="recursion" class="slide level1">
 <h1>Recursion</h1>
-<div class="sourceCode"><pre class="sourceCode java"><code class="sourceCode java"><span class="kw">class</span> A { B b; }
-<span class="kw">class</span> B { A a; }</code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb19-1" data-line-number="1"><span class="kw">class</span> A { B b; }</a>
+<a class="sourceLine" id="cb19-2" data-line-number="2"><span class="kw">class</span> B { A a; }</a></code></pre></div>
 <p>Suppose we started translating <abbr title="Abstract Syntax Tree">AST</abbr> to static semantics. Before we process second line and see that <code>B</code> is a class, what is the static semantics of <code>B</code> at the first line?</p>
 <p>Approach: fixed point (works for classical Domain Theory, doesn't work well in a constructive setting).</p>
 <p>N.S. Papaspyrou. Formal semantics of the C Programming Language (PhD thesis).</p>
 </section><div><a class="slider-prev" href="#ornaments"></a><a class="slider-next" href="#homework-assignments"></a></div>
 <section id="homework-assignments" class="slide level1">
 <h1>Homework assignments</h1>
-<p><strong>Task 5.1.</strong> ** Implement a translator from simply-typed lambda calculus <abbr title="Abstract Syntax Tree">AST</abbr> to <abbr title="Higher-Order Abstract Syntax">HOAS</abbr> in Haskell or any other language of your choice (except the original OCaml) which is expressive enough to represent HOAS.</p>
+<p><strong>Task 5.1.</strong> ** Implement a translator from simply-typed lambda calculus <abbr title="Abstract Syntax Tree">AST</abbr> to <abbr title="Higher-Order Abstract Syntax">HOAS</abbr> in Haskell or any other language of your choice (except OCaml) which is expressive enough to represent HOAS.</p>
 <p><strong>Task 5.2.</strong> *** Implement a translator from simply-typed lambda calculus <abbr title="Abstract Syntax Tree">AST</abbr> to <abbr title="Parametrized Higher-Order Abstract Syntax">PHOAS</abbr> in Haskell or any other language of your choice (except the original OCaml) which is expressive enough to represent PHOAS.</p>
+<p><strong>Task 5.3.</strong> * Look at the assembly code generated by GCC on example code from "Closure" slide and explain how "closures" are implemented in this case.</p>
+<p><strong>Task 5.4.</strong> Describe static semantics of BNF in terms of Parametrized Higher Order Syntax.</p>
+<ol type="a">
+<li class="fragment">"on paper" (**)</li>
+<li class="fragment">in Coq, following the original paper (***)</li>
+</ol>
 </section><div><a class="slider-prev" href="#recursion"></a><a class="slider-next" href="#project"></a></div>
 <section id="project" class="slide level1">
 <h1>Project</h1>
@@ -299,6 +406,7 @@ Higher-order syntax captures the name binding:<br>
 <ul>
 <li class="fragment"><strong>Project Step 3a.</strong> * Assign the unique identifiers (e.g. natural numbers) to each bindable identifier leaf in the AST and create the mapping between the unique identifiers and static semantics subtrees.</li>
 <li class="fragment"><strong>Project Step 3b.</strong> ** Use Higher-Order Abstract Syntax.</li>
+<li class="fragment"><strong>Project Step 3c.</strong> *** Use Parametrized Higher-Order Abstract Syntax</li>
 </ul>
 </section><div><a class="slider-prev" href="#homework-assignments"></a><a class="slider-next"></a></div>
 
@@ -330,12 +438,14 @@ Higher-order syntax captures the name binding:<br>
             window.location = a.href;
           }
           break;
+       case 33: // Page Up
        case 37: // left arrow
          var a = document.querySelector("section:target ~ div a.slider-prev");
          if (a && a.href) {
            window.location = a.href;
          }
          break;
+       case 34: // Page Down
        case 39: // right arrow
          var a = document.querySelector("section:target ~ div a.slider-next");
          if (a && a.href) {
