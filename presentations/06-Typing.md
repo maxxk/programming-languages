@@ -25,8 +25,9 @@
 }
 </style>
 
-Course page: https://maxxk.github.io/programming-languages/
-Contact author: maxim.krivchikov@gmail.com
+https://maxxk.github.io/programming-languages/
+
+maxim.krivchikov@gmail.com
 
 # Literature
 - R. Harper, Practical Foundations for Programming Languages, 2nd ed, 2016.
@@ -52,6 +53,12 @@ N.S. Papaspyrou. A Formal Semantics for the C Programming Language. PhD Thesis. 
 http://www.softlab.ntua.gr/~nickie/Papers/papaspyrou-1998-fscpl.pdf
 
 Part II. Static Semantics.
+
+# Type system
+> A type system is a tractable syntactic method for proving the absence of certain program behaviors by classifying phrases according to the kinds of values they compute.
+
+> B. Pierce. Types and Programming Languages. 2002.
+
 
 # Type conversions
 **Type conversion** — mapping from the values of one type to the corresponding values of a different type. For example, integers to floating point numbers: 1 → 1.0 or strings to codepoints to integers.
@@ -203,13 +210,47 @@ Typing:
  -------------------------------------
   Γ ⊦ let x be e in f : σ
 
+# Soundness and completeness
+The following properties connect typing with program execution.
+
+**Soundness: ** *No incorrect programs are allowed.*
+
+**Completeness: ** *No correct programs are rejected.*
+
+**Decidability of type checking:** *Type checking is decidable*
+
+We may define a type checking as a decision procedure for property "expression $e$ has type $τ$ but it evaluates to value $v$ of type $φ$ ($φ ≠ τ$)". For this definition:
+- soundness means lack of false negatives (if expression is typed, the result of its evaluation has the same type)
+- completeness means lack of false positives (if expression $e$ always evaluates to a value of type $τ$, $e : τ$ is derivable during type checking)
+
+Usually type systems for practical languages are sound and possibly decidable, hence incomplete (by Rice theorem of non-trivial property undecidability).
+
+# Soundness
+**Soundness: ** *No incorrect programs are allowed.*
+
+Formal statement:  if $Γ ⊢ e : τ$ and during program execution expression $e$ evaluates to a value $v$ then $v$ is of type $τ$.
+
+Soundness is generally proved in two steps: preservation and progress.
+
+$e₁ ⟶ e₂$ — during a single step of evaluation expression $e₁$ evaluates to expression $e₂$ (part of dynamic semantics, more formal definition on next lecture).
+
+**Preservation: ** Evaluation preserves typing.
+
+Formally: $Γ ⊢ e₁ : τ$, $e₁ ⟶ e₂$ ⇒ $Γ ⊢ e₂ : τ$
+
+**Progress: ** If well-typed expression is not a value, it is possible to make an evaluation step.
+
+Formally: $Γ ⊢ e₁ : τ$, $e₁$ is not value ⇒ ∃ $e₂$ : $e₁ ⟶ e₂$.
+
 # Logical properties of typing
 (usually are proved either by induction on rules or by induction on derivation)
+
 **Unicity: ** *For every typing context Γ and expression e there exists at most one τ such that $Γ ⊦ e : τ$.*
 We usually want this property in a sane type system, it may be neccessary to use a different statement in case of subtyping (not a single type, but a single minimal/maximal type).
 
 **Inversion: ** *(example) If Γ ⊦ plus(a, b) : num then Γ ⊦ a : num, Γ ⊦ b : num. *
 If typing rules are complex, such principles are difficult to state and prove. But these principle is essential for e.g. type inference.
+
 
 # Structural properties of typing {.inference}
 
@@ -262,7 +303,7 @@ p1.reset(); //Does nothing.
 <div class="small">See also: http://homepages.inf.ed.ac.uk/wadler/topics/linear-logic.html</div>
 
 # Linear types
-Clean programming language
+`Clean` programming language
 ```haskell
 AppendAB :: File -> (File, File)
 AppendAB file = (fileA, fileB)

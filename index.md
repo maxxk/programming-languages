@@ -33,12 +33,10 @@ Course topics include:
 **22.03.2017** Static semantics. Naming, Bindings and Scope. 
 [presentation - html](presentations/05-Static-Semantics.html)
 
-<!--
-
-**06.04.2017** Static semantics. Domain constraints. Typing.
+**29.03.2017** Static semantics. Domain constraints. Typing.
 [presentation - html](presentations/06-Typing.html) 
 
-
+<!--
 **13.04.2017** Operational semantics 
 [presentation - html](presentations/07-Operational-Semantics.html)
 
