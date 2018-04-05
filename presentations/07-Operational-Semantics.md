@@ -26,8 +26,9 @@
 
 </style>
 
-Course page: https://maxxk.github.io/programming-languages/
-Contact author: maxim.krivchikov@gmail.com
+https://maxxk.github.io/programming-languages/
+
+maxim.krivchikov@gmail.com
 
 # Programming language specification
 ```{.graphviz .dot}
@@ -64,6 +65,7 @@ The meaning of the program is formalized as a mathematical object (denotation).
 # Operational semantics
 
 Program execution may be understood as a step-by-step process that evolves by mechanical application of a fixed set of rules.
+
 Rules describe how language constructs affect the state of some *abstract machine* that provides the mathematical model of computation. Each state of the abstract machine is called *configuration*.
 
 <div class="smaller">F. Turbak, D. Gifford. Design Concepts in Programming Languages. Chapter 3. Operational Semantics.</div>
@@ -103,6 +105,7 @@ Structural operational semantics for L is five-tuple S = 〈 CF, ⇒, FC, IF, OF
 
 * cf ∈ CF — __domain of configurations__ for an abstract machine
 * ⇒ — __transition relation__, "⇒" ⊆ CF × CF. Two configurations are in transition relation iff there is a __(one step) transition__ from cf to cf'
+
 cf ⇒ cf' ⇔ 〈 cf, cf' 〉 ∈ ⇒
 
 $⇒^*$ — reflexive transitive closure of ⇒. Sequence of transitions cf $⇒^*$ cf' is called **transition path**.

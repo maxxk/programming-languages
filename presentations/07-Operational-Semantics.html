@@ -1,7 +1,7 @@
 <!DOCTYPE html><html><head>
   <meta charset="utf-8">
   <meta name="generator" content="pandoc">
-  <title></title>
+  <title>07-Operational-Semantics</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -43,12 +43,12 @@
 }
 
 </style>
-<p>Course page: <a href="https://maxxk.github.io/programming-languages/" class="uri">https://maxxk.github.io/programming-languages/</a><br>
-Contact author: <a href="mailto:maxim.krivchikov@gmail.com" class="email">maxim.krivchikov@gmail.com</a></p>
+<p><a href="https://maxxk.github.io/programming-languages/" class="uri">https://maxxk.github.io/programming-languages/</a></p>
+<p><a href="mailto:maxim.krivchikov@gmail.com" class="email">maxim.krivchikov@gmail.com</a></p>
 </section><div><a class="slider-prev"></a><a class="slider-next" href="#programming-language-specification"></a></div>
 <section id="programming-language-specification" class="slide level1">
 <h1>Programming language specification</h1>
-<p><img src="graphviz-images/bbe727775038043af9c9c955731db5637b7b6712.svg"></p>
+<p><img data-src="graphviz-images/bbe727775038043af9c9c955731db5637b7b6712.svg" src="graphviz-images/bbe727775038043af9c9c955731db5637b7b6712.svg"></p>
 </section><div><a class="slider-prev" href="#software-and-programming-language-theory"></a><a class="slider-next" href="#dynamic-semantics-1"></a></div>
 <section id="dynamic-semantics-1" class="slide level1">
 <h1>Dynamic semantics</h1>
@@ -63,15 +63,15 @@ Contact author: <a href="mailto:maxim.krivchikov@gmail.com" class="email">maxim.
 </section><div><a class="slider-prev" href="#programming-language-specification"></a><a class="slider-next" href="#operational-semantics-1"></a></div>
 <section id="operational-semantics-1" class="slide level1">
 <h1>Operational semantics</h1>
-<p>Program execution may be understood as a step-by-step process that evolves by mechanical application of a fixed set of rules.<br>
-Rules describe how language constructs affect the state of some <em>abstract machine</em> that provides the mathematical model of computation. Each state of the abstract machine is called <em>configuration</em>.</p>
+<p>Program execution may be understood as a step-by-step process that evolves by mechanical application of a fixed set of rules.</p>
+<p>Rules describe how language constructs affect the state of some <em>abstract machine</em> that provides the mathematical model of computation. Each state of the abstract machine is called <em>configuration</em>.</p>
 <div class="smaller">
 F. Turbak, D. Gifford. Design Concepts in Programming Languages. Chapter 3. Operational Semantics.
 </div>
 </section><div><a class="slider-prev" href="#dynamic-semantics-1"></a><a class="slider-next" href="#operational-execution-model"></a></div>
 <section id="operational-execution-model" class="slide level1">
 <h1>Operational execution model</h1>
-<p><img src="graphviz-images/429fa226b1a0a9d035e722469c0d820109989672.svg"></p>
+<p><img data-src="graphviz-images/429fa226b1a0a9d035e722469c0d820109989672.svg" src="graphviz-images/429fa226b1a0a9d035e722469c0d820109989672.svg"></p>
 </section><div><a class="slider-prev" href="#operational-semantics-1"></a><a class="slider-next" href="#big-step-and-small-step-operational-semantics"></a></div>
 <section id="big-step-and-small-step-operational-semantics" class="slide level1">
 <h1>Big-step and small-step operational semantics</h1>
@@ -88,9 +88,9 @@ Gordon D. Plotkin. A Structural Approach to Operational Semantics. (1981) Tech. 
 <p>Structural operational semantics for L is five-tuple S = 〈 CF, ⇒, FC, IF, OF 〉</p>
 <ul>
 <li class="fragment">cf ∈ CF — <strong>domain of configurations</strong> for an abstract machine</li>
-<li class="fragment">⇒ — <strong>transition relation</strong>, "⇒" ⊆ CF × CF. Two configurations are in transition relation iff there is a <strong>(one step) transition</strong> from cf to cf'<br>
-cf ⇒ cf' ⇔ 〈 cf, cf' 〉 ∈ ⇒</li>
+<li class="fragment">⇒ — <strong>transition relation</strong>, "⇒" ⊆ CF × CF. Two configurations are in transition relation iff there is a <strong>(one step) transition</strong> from cf to cf'</li>
 </ul>
+<p>cf ⇒ cf' ⇔ 〈 cf, cf' 〉 ∈ ⇒</p>
 <p><span class="math inline">⇒<sup>*</sup></span> — reflexive transitive closure of ⇒. Sequence of transitions cf <span class="math inline">⇒<sup>*</sup></span> cf' is called <strong>transition path</strong>.</p>
 <p>Configuration cf is <strong>reducible</strong> if there is some cf' such that cf ⇒ cf', otherwise cf is <strong>irreducible</strong>.</p>
 <p>Transition relation <span class="math inline">⇒</span> is <strong>deterministic</strong> if for every cf there is exactly one <span class="math inline"><em>c</em><em>f</em>′</span>, otherwise ⇒ is <strong>nondeterministic</strong>.</p>
@@ -109,19 +109,12 @@ cf ⇒ cf' ⇔ 〈 cf, cf' 〉 ∈ ⇒</li>
 <section id="program-behavior" class="slide level1">
 <h1>Program behavior</h1>
 <p>Outcome = AnsExp + ErrorResult (+ — disjoint union)</p>
-<p>Deterministic behavior, if <span class="math inline">⇒</span> is deterministic:<br>
-<span class="math inline"><em>b</em><em>e</em><em>h</em><sub><em>d</em><em>e</em><em>t</em></sub></span> : (Prog × Inputs) → Outcome<br>
-<span class="math inline"><em>b</em><em>e</em><em>h</em><sub><em>d</em><em>e</em><em>t</em></sub></span> 〈 P, I 〉 | IF 〈 P, I 〉 <span class="math inline">⇒<sup>*</sup></span> cf ∈ FC = AnsExp ↦ Outcome (OF cf)<br>
-<span class="math inline"><em>b</em><em>e</em><em>h</em><sub><em>d</em><em>e</em><em>t</em></sub></span> 〈 P, I 〉 | IF 〈 P, I 〉 <span class="math inline">⇒<sup>*</sup></span> cf ∈ Stuck = ErrorResult<br>
-<span class="math inline"><em>b</em><em>e</em><em>h</em><sub><em>d</em><em>e</em><em>t</em></sub></span> 〈 P, I 〉 | IF 〈 P, I 〉 <span class="math inline">⇒<sup>∞</sup></span> = ∞</p>
+<p>Deterministic behavior, if <span class="math inline">⇒</span> is deterministic: <span class="math inline"><em>b</em><em>e</em><em>h</em><sub><em>d</em><em>e</em><em>t</em></sub></span> : (Prog × Inputs) → Outcome <span class="math inline"><em>b</em><em>e</em><em>h</em><sub><em>d</em><em>e</em><em>t</em></sub></span> 〈 P, I 〉 | IF 〈 P, I 〉 <span class="math inline">⇒<sup>*</sup></span> cf ∈ FC = AnsExp ↦ Outcome (OF cf) <span class="math inline"><em>b</em><em>e</em><em>h</em><sub><em>d</em><em>e</em><em>t</em></sub></span> 〈 P, I 〉 | IF 〈 P, I 〉 <span class="math inline">⇒<sup>*</sup></span> cf ∈ Stuck = ErrorResult <span class="math inline"><em>b</em><em>e</em><em>h</em><sub><em>d</em><em>e</em><em>t</em></sub></span> 〈 P, I 〉 | IF 〈 P, I 〉 <span class="math inline">⇒<sup>∞</sup></span> = ∞</p>
 </section><div><a class="slider-prev" href="#structural-operational-semantics-1"></a><a class="slider-next" href="#non-deterministic-behavior"></a></div>
 <section id="non-deterministic-behavior" class="slide level1">
 <h1>Non-deterministic behavior</h1>
 <p><span class="math inline">𝒫(<em>A</em>)</span> — powerset of <span class="math inline"><em>A</em></span>.</p>
-<p><br><span class="math display"><em>b</em><em>e</em><em>h</em> : (<em>P</em><em>r</em><em>o</em><em>g</em> × <em>I</em><em>n</em><em>p</em><em>u</em><em>t</em><em>s</em>)→𝒫(<em>O</em><em>u</em><em>t</em><em>c</em><em>o</em><em>m</em><em>e</em>)</span><br><br>
-o ∈ beh( 〈P, I〉 ) <strong>if</strong> o = AnsExp ↦ Outcome (OF cf) <strong>and</strong> IF 〈P, I〉 <span class="math inline">⇒<sup>*</sup></span> cf ∈ FC<br>
-o ∈ beh( 〈P, I〉 ) <strong>if</strong> o ∈ ErrorResult <strong>and</strong> IF 〈 P, I 〉 <span class="math inline">⇒<sup>*</sup></span> cf ∈ Stuck<br>
-o ∈ beh( 〈P, I〉 ) <strong>if</strong> o = ∞ <strong>and</strong> IF 〈P, I〉 <span class="math inline">⇒<sup>∞</sup></span></p>
+<p><br><span class="math display"><em>b</em><em>e</em><em>h</em> : (<em>P</em><em>r</em><em>o</em><em>g</em> × <em>I</em><em>n</em><em>p</em><em>u</em><em>t</em><em>s</em>) → 𝒫(<em>O</em><em>u</em><em>t</em><em>c</em><em>o</em><em>m</em><em>e</em>)</span><br> o ∈ beh( 〈P, I〉 ) <strong>if</strong> o = AnsExp ↦ Outcome (OF cf) <strong>and</strong> IF 〈P, I〉 <span class="math inline">⇒<sup>*</sup></span> cf ∈ FC o ∈ beh( 〈P, I〉 ) <strong>if</strong> o ∈ ErrorResult <strong>and</strong> IF 〈 P, I 〉 <span class="math inline">⇒<sup>*</sup></span> cf ∈ Stuck o ∈ beh( 〈P, I〉 ) <strong>if</strong> o = ∞ <strong>and</strong> IF 〈P, I〉 <span class="math inline">⇒<sup>∞</sup></span></p>
 </section><div><a class="slider-prev" href="#program-behavior"></a><a class="slider-next" href="#rewrite-rules"></a></div>
 <section id="rewrite-rules" class="slide level1 inference">
 <h1>Rewrite rules</h1>
@@ -142,8 +135,7 @@ o ∈ beh( 〈P, I〉 ) <strong>if</strong> o = ∞ <strong>and</strong> IF 〈P
 [name]
 </div>
 <p><span class="math inline"><em>a</em><em>n</em><em>t</em><em>e</em><em>c</em><em>e</em><em>d</em><em>e</em><em>n</em><em>t</em><em>s</em> = ⊘</span> ⇒ rule is called <strong>axiom</strong>, otherwise <strong>progress rule</strong>.</p>
-<p>Example axiom for stack-based language (placing constant on stack;<br>
-configuration state = 〈 command sequence, stack 〉):</p>
+<p>Example axiom for stack-based language (placing constant on stack; configuration state = 〈 command sequence, stack 〉):</p>
 <p>〈 N . Q, S〉 ⇒ 〈 Q, N . S 〉 [num]</p>
 <p>〈 (Q) . R, S〉 ⇒ 〈 R, (Q) . S 〉 [seq]</p>
 <table>
@@ -165,15 +157,15 @@ configuration state = 〈 command sequence, stack 〉):</p>
 </section><div><a class="slider-prev" href="#non-deterministic-behavior"></a><a class="slider-next" href="#example-structural-operational-semantics-execution"></a></div>
 <section id="example-structural-operational-semantics-execution" class="slide level1">
 <h1>Example structural operational semantics execution</h1>
-<p><img src="images/postfix-sos.png"></p>
+<p><img data-src="images/postfix-sos.png" src="images/postfix-sos.png"></p>
 </section><div><a class="slider-prev" href="#rewrite-rules"></a><a class="slider-next" href="#subexpression-evaluation"></a></div>
 <section id="subexpression-evaluation" class="slide level1">
 <h1>Subexpression evaluation</h1>
-<p><img src="images/elmm-transition.png"></p>
+<p><img data-src="images/elmm-transition.png" src="images/elmm-transition.png"></p>
 </section><div><a class="slider-prev" href="#example-structural-operational-semantics-execution"></a><a class="slider-next" href="#evaluation-contexts"></a></div>
 <section id="evaluation-contexts" class="slide level1">
 <h1>Evaluation contexts</h1>
-<p><img src="images/evaluation-contexts.png"></p>
+<p><img data-src="images/evaluation-contexts.png" src="images/evaluation-contexts.png"></p>
 </section><div><a class="slider-prev" href="#subexpression-evaluation"></a><a class="slider-next" href="#big-step-operational-semantics"></a></div>
 <section id="big-step-operational-semantics" class="slide level1">
 <h1>Big-step operational semantics</h1>
@@ -182,21 +174,17 @@ configuration state = 〈 command sequence, stack 〉):</p>
 </section><div><a class="slider-prev" href="#evaluation-contexts"></a><a class="slider-next" href="#big-step-operational-semantics-1"></a></div>
 <section id="big-step-operational-semantics-1" class="slide level1">
 <h1>Big-step operational semantics</h1>
-<p><img src="images/big-step-elm.png"></p>
+<p><img data-src="images/big-step-elm.png" src="images/big-step-elm.png"></p>
 </section><div><a class="slider-prev" href="#big-step-operational-semantics"></a><a class="slider-next" href="#language-properties"></a></div>
 <section id="language-properties" class="slide level1">
 <h1>Language properties</h1>
 <p>Usually operational semantics is used to prove some of the following properties:</p>
 <ul>
 <li class="fragment">universality: the language can express all computable programs;</li>
-<li class="fragment">determinism: the set of possible outcomes from executing a program on any<br>
-particular inputs is a singleton;</li>
-<li class="fragment">strong normalization: all programs are guaranteed to terminate on all inputs<br>
-(i.e., it is not possible to express an infinite loop);</li>
-<li class="fragment">static checkability: a class of program errors can be found by static analysis<br>
-without resorting to execution;</li>
-<li class="fragment">referential transparency: different occurrences of an expression within the<br>
-same context always have the same meaning.</li>
+<li class="fragment">determinism: the set of possible outcomes from executing a program on any particular inputs is a singleton;</li>
+<li class="fragment">strong normalization: all programs are guaranteed to terminate on all inputs (i.e., it is not possible to express an infinite loop);</li>
+<li class="fragment">static checkability: a class of program errors can be found by static analysis without resorting to execution;</li>
+<li class="fragment">referential transparency: different occurrences of an expression within the same context always have the same meaning.</li>
 </ul>
 </section><div><a class="slider-prev" href="#big-step-operational-semantics-1"></a><a class="slider-next" href="#example-proof-of-termination"></a></div>
 <section id="example-proof-of-termination" class="slide level1">
@@ -209,8 +197,7 @@ same context always have the same meaning.</li>
 </section><div><a class="slider-prev" href="#example-proof-of-termination"></a><a class="slider-next" href="#homework-assignments"></a></div>
 <section id="homework-assignments" class="slide level1">
 <h1>Homework Assignments</h1>
-<p>Turbak, Gifford.<br>
-Exercises 3.3, 3.4, 3.5, 3.6, 3.10a, 3.10b, 3.18, 3.19, 3.22, 3.24, 3.25 (one star each, at most 3 stars)</p>
+<p>Turbak, Gifford. Exercises 3.3, 3.4, 3.5, 3.6, 3.10a, 3.10b, 3.18, 3.19, 3.22, 3.24, 3.25 (one star each, at most 3 stars)</p>
 </section><div><a class="slider-prev" href="#k-framework"></a><a class="slider-next"></a></div>
 
 <!-- start page -->
@@ -241,12 +228,14 @@ Exercises 3.3, 3.4, 3.5, 3.6, 3.10a, 3.10b, 3.18, 3.19, 3.22, 3.24, 3.25 (one st
             window.location = a.href;
           }
           break;
+       case 33: // Page Up
        case 37: // left arrow
          var a = document.querySelector("section:target ~ div a.slider-prev");
          if (a && a.href) {
            window.location = a.href;
          }
          break;
+       case 34: // Page Down
        case 39: // right arrow
          var a = document.querySelector("section:target ~ div a.slider-next");
          if (a && a.href) {
