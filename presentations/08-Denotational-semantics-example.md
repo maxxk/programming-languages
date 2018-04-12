@@ -23,14 +23,17 @@
 }
 </style>
 
-Course page: https://maxxk.github.io/programming-languages/
-Contact author: maxim.krivchikov@gmail.com
+https://maxxk.github.io/programming-languages/
+
+maxim.krivchikov@gmail.com
 
 # Some non-trivial parts of programming language semantics
 1. Possible non-termination. Some languages allow possibly-infinite loops. Languages without non-termination have rather simple semantics.
+
 **Operational semantics:** sequence of steps form the directed graph (execution trace), non-termination is represented as a loop in graph.
 
 2. Non-determinism. In some languages (for example, C) the order of execution of some expressions (e.g. the evaluation order of arguments) is unspecified. Furthermore, threads parallel programming model is essentially non-deterministic.
+
 **Operational semantics:** evaluation relations are many-valued.
 
 # Denotational semantics: Literature
@@ -49,8 +52,9 @@ Contact author: maxim.krivchikov@gmail.com
 4. N.S. Papaspyrou. A Formal Semantics for the C Programming Language. 1998.
   PhD thesis.
 
-5. **D.S. Scott. Logics and programming languages. 1977 [doi:10.1145/359810.359826](http://dx.doi.org/10.1145/359810.359826)
-    1976 ACM Turing Award Lecture. The creator of domain theory and denotational semantics describes the history and the essence of the theory to wide audience.**
+5. **D.S. Scott. Logics and programming languages. 1977 [doi:10.1145/359810.359826](http://dx.doi.org/10.1145/359810.359826)**
+
+    1976 ACM Turing Award Lecture. The creator of domain theory and denotational semantics describes the history and the essence of the theory to wide audience.
 
 6. Ю.Л. Ершов.
 - Непрерывные решетки и A-пространства // Докл. АН СССР. — 1972. — Т. 207, No 3. — C. 523–526.
@@ -60,6 +64,7 @@ Contact author: maxim.krivchikov@gmail.com
 # Denotational semantics
 The core idea of denotational semantics is compositionality. «The meaning of the whole is composed out of the meaning of the parts».
 Main parts:
+
 1. **Syntactic algebra** — abstract syntax representation, AST in our notation. Describes the syntax of the program.
 
 2. **Semantic algebra** — a collection of **semantic domains** along with functions that manipulate these domains. Models the meaning of program phrases.
@@ -68,7 +73,7 @@ Usually the meaning of a program is an element of a function domain that maps **
 3. **Meaning function** maps the elements of the syntactic algebra to their meanings in the semantic algebra.
 
 # Meaning function
-Meaning function must be homomorphic under the AST composition.
+Meaning function is desired to be homomorphic under the AST composition.
 E.g. if we have some AST node $t$ = $t(t_1, t_2, …, t_k)$ and globally defined meaning function $M$ then:
 $$ M(t) = f_t (M(t_1), M(t_2), …, M(t_k)), $$
 where $f_t$ is a function over the semantic domain determined by the syntactic class of $t$.
@@ -77,6 +82,7 @@ where $f_t$ is a function over the semantic domain determined by the syntactic c
 # Meaning function definition
 The usual notation for meaning function is $⟦ · ⟧_{\text{syntax-domain}}$.
 The body of the meaning function is usually defined in terms of untyped lambda-calculus with some syntactic sugar:
+
 - conditional operator **if** … **then** … **else** with condition as a (decidable) predicate over the semantic domain
 - pattern matching operator **match** ▷ pattern1 ↦ result1 … **end**
 - structural recursion: function can recursively call itself with arguments which are the structural parts of the original arguments
@@ -134,56 +140,83 @@ return divisor
 <div class="smaller">
 ## Semantic domains
 *Int* — integer numbers with addition, subtraction, division, modulus and integral approximation to square root and boolean-valued comparison operators (usually you want integer numbers mod $2^32$ or $2^64$, but our language supports big integers).
+
 *Bool* — boolean values (*true*, *false*) with logical operations.
 
 ## Expression semantics (without variables)
+
 $⟦ · ⟧_{\text{AE}} : \text{ArithmeticalExpression} → \text{Int}$
+
 $⟦ \text{IntegerNumber}(i) ⟧_{\text{AE}} = ⟦i⟧_{\text{IntegerNumber}}$
-$⟦ \text{sqrt}(e) ⟧_{\text{AE}} = \left[ \sqrt{⟦e⟧_{\text{AE}}} \right] $
+
+$⟦ \text{sqrt}(e) ⟧_{\text{AE}} = \left[ √⟦e⟧_{\text{AE}} \right]$
+
 $⟦ -e ⟧_{\text{AE}} = - ⟦e⟧_{\text{AE}}$
-$⟦ e_1 \; aop \; e_2 ⟧_{\text{AE}} =⟦op⟧_{\text{AE-aop}} (⟦ e_1 ⟧_{\text{AE}},  ⟦e_2⟧_{\text{AE}})$ [e.g. $⟦\texttt{}⟧_{\text{AE-aop}} = \text{mod}$]
+
+$⟦ e_1 \; aop \; e_2 ⟧_{\text{AE}} =⟦op⟧_{\text{AE-aop}} (⟦ e_1 ⟧_{\text{AE}},  ⟦e_2⟧_{\text{AE}})$ 
+[e.g. $⟦\texttt{}⟧_{\text{AE-aop}} = \text{mod}$]
 
 ## Boolean expression semantics
 abop — arithmetical-boolean operator, bbop — boolean-boolean operator.
+
 $⟦ · ⟧_{\text{BE}} : \text{BooleanExpression} → \text{Bool}$
+
 $⟦ e_1 \; abop \; e_2 ⟧_{\text{BE}} = ⟦abop⟧ (⟦e_1⟧_{\text{AE}}, ⟦e_2⟧_{\text{AE}})$
+
 $⟦\texttt{!} b ⟧_{\text{BE}} = ¬ ⟦ b ⟧$
+
 $⟦b_1 \; bbop \; b_2 ⟧_{\text{BE}} = ⟦bbop⟧(⟦b_1⟧_{\text{BE}}, ⟦b_2⟧_{\text{BE}})$
 </div>
 
 # Environments
 Expressions have read-only access to variables. It is represented in terms of environment (additional argument to the meaning function).
+
 **Semantic domain:** *VariableState ≡ Identifier → Int${}_⟂$,*  *Int${}_⟂$ = Int ∪ { ⟂ }* with bottom (⟂) value representing undefined variable state. We will discuss this construction later, for now let us just state that $f(x, ⊥) = f(⟂, x) = ⟂$ for all defined functions.
 
 Update meaning functions:
-$⟦ · ⟧_{\text{AE}} : \color{red}{\text{VariableState} →} \text{ArithmeticalExpression} → \text{Int}\color{red}{ {}_⟂}$
+
+$⟦ · ⟧_{\text{AE}} : \text{VariableState} → \text{ArithmeticalExpression} → \text{Int}_⟂$
+
 All previously defined cases are updated to pass an environment to nested functions, for example:
+
 $⟦ -e ⟧ = λ env . - ⟦e⟧(env)$
+
 Now we can define the variable getter expression:
 $⟦ \text{Identifier}(I) ⟧ = λ env. env(I)$
 
 Boolean expressions also depend on variable values. Previously defined cases must me updated.
-$⟦ · ⟧_{\text{BE}} : \color{red}{\text{VariableState} →} \text{BooleanExpression} → \text{Bool}\color{red}{{}_⟂}$
+
+$⟦ · ⟧_{\text{BE}} : {\text{VariableState} →} \text{BooleanExpression} → \text{Bool}{{}_⟂}$
 
 # Exceptions
 <div class="smaller">
 Now let us remember that we have three operators (`/, %, sqrt`) which are not universally defined over the integer numbers.
+
 **Semantic domains:**
+
 - errors: *Error = { div-by-zero, sqrt-from-negative }*
 - domain sum constructor: *X + Error* are the values of either *X* or *Error*, with constructor *inl* converting *X* values to sum, constructor *inr* converting *Error* values to the sum.
 
 **Convenience function:**
+
 withLeft : (f : X → Y) → X + Error → Y + Error
+
 withLeft(f, x) = **match**(x)  
+
 ▷ *inl* a ↦ f(a)
+
 ▷ *inr* e ↦ e
+
 **end**
 
 **Meaning functions:**
+
 $⟦ · ⟧_{\text{AE}} : \text{VariableState} → \text{ArithmeticalExpression} → \text{Int}_⟂ + \text{Error}$
+
 $⟦ · ⟧_{\text{BE}} : \text{VariableState} → \text{BooleanExpression} → \text{Bool}_⟂ + \text{Error}$
 
 **Example meaning function update:**
+
 $⟦ -e ⟧ = λ env . \text{withLeft}(λx.-x, ⟦e⟧(env))$
 
 </div>
@@ -191,23 +224,33 @@ $⟦ -e ⟧ = λ env . \text{withLeft}(λx.-x, ⟦e⟧(env))$
 # Statement and program semantics
 ## Program
 — receive the arguments and run statements. If statements completed without an error, get the return value.
+
 $⟦ · ⟧_{\text{P}} : \text{VariableState} → \text{Int}_⊥ + \text{Error}$
+
 $⟦ s_1 ; \; \texttt{return} \; I ⟧ = λ args. \text{withLeft}(λenv . env(I), ⟦s_1⟧(args))$
 
 ## Statement
 Statements manipulate the variable environment not as a read-only environment, but as a read-write state.
+
 $⟦ · ⟧_{\text{S}} : \text{VariableState} → \text{VariableState} + \text{Error}$
+
 $⟦ \texttt{skip} ⟧ = λenv. \text{inl}(env)$
+
 $⟦ s_1 \; \texttt{;} \; s_2 ⟧ = λ env. \text{withLeft}(⟦s_2⟧, ⟦s_1⟧(env))$
+
 $⟦ I \; \texttt{=} \; e ⟧ = λ env. \text{withLeft}(λi. (λJ. \text{if J=I return i else return env(J)}), ⟦e⟧(env))$
 
 # Statements (2)
 Let us adopt two shorthand notations for withLeft:
+
 - left composition: x >>= y  ≡  withLeft(y, x)
+
 - left variable binding: a ← b; S  ≡  withLeft(λa. S, b)
 
 $⟦ \texttt{if} \; b_1 \; s_t \; s_f ⟧ = λ env. b' ← ⟦b_1⟧(env) ;$
+
 $\qquad$ **if** $(b' =_{\text{Bool}} \text{true})$  $⟦s_t⟧(env)$
+
 $\qquad$ **else** $⟦s_f⟧(env)$
 
 # Independent execution branches in legacy code with automated static analysis tools
@@ -292,11 +335,29 @@ EQUIVALENCE (thdfpp1_1,G15_z1(686920))
 # Fortran subset syntax
 ## Source code files
 ```fortran
-CALL ysfpp5t( 202, 1, fwpflowppv_1, fwfpp1_1, fwfpp2_1,     fwdfpp1_1, fwdfpp2_1, fwdfpp1_fi_1, fwdfpp2_fi_1, y1mtmp(     862 ), y1mtmp( 863 ), - y1mtmp( 1054 ) * fwdtt_1, - y1mtmp(     1055 ) * fwdtt_1, fwdvgpnt_1( 13 ), fwdvgpnt_1( 14 ),     fwdlpnt_1( 13 ), fwdlpnt_1( 14 ), fwfipp1_1( 1 ), fwfipp2_1(     1 ), fwfpntpnt1_1( 1 ), fwfpntpnt2_1( 1 ), fwpflowpp_1,     fwzpp_1( 1 ), fwdtt_1, kf0 )
+CALL ysfpp5t( 202, 1, fwpflowppv_1, fwfpp1_1, fwfpp2_1,
+     fwdfpp1_1, fwdfpp2_1, fwdfpp1_fi_1, fwdfpp2_fi_1, 
+     y1mtmp(862 ), y1mtmp( 863 ), - y1mtmp( 1054 ) * fwdtt_1, 
+     - y1mtmp( 1055 ) * fwdtt_1, fwdvgpnt_1( 13 ), fwdvgpnt_1( 14 ),
+     fwdlpnt_1( 13 ), fwdlpnt_1( 14 ), fwfipp1_1( 1 ), fwfipp2_1(1 ), 
+     fwfpntpnt1_1( 1 ), fwfpntpnt2_1( 1 ), fwpflowpp_1,
+     fwzpp_1( 1 ), fwdtt_1, kf0 )
 
-CALL ysfpp5t( 202, 2, fwpflowppv_1, fwfpp1_1, fwfpp2_1,     fwdfpp1_1, fwdfpp2_1, fwdfpp1_fi_1, fwdfpp2_fi_1, y1mtmp(     863 ), y1mtmp( 864 ), - y1mtmp( 1055 ) * fwdtt_1, - y1mtmp(     1056 ) * fwdtt_1, fwdvgpnt_1( 14 ), fwdvgpnt_1( 15 ),     fwdlpnt_1( 14 ), fwdlpnt_1( 15 ), fwfipp1_1( 2 ), fwfipp2_1(     2 ), fwfpntpnt1_1( 2 ), fwfpntpnt2_1( 2 ), fwpflowpp_1,     fwzpp_1( 2 ), fwdtt_1, kf0 )
+CALL ysfpp5t( 202, 2, fwpflowppv_1, fwfpp1_1, fwfpp2_1,
+     fwdfpp1_1, fwdfpp2_1, fwdfpp1_fi_1, fwdfpp2_fi_1, 
+     y1mtmp(     863 ), y1mtmp( 864 ), - y1mtmp( 1055 ) * fwdtt_1, 
+     - y1mtmp(     1056 ) * fwdtt_1, fwdvgpnt_1( 14 ), fwdvgpnt_1( 15 ),     
+     fwdlpnt_1( 14 ), fwdlpnt_1( 15 ), fwfipp1_1( 2 ), fwfipp2_1(     2 ), 
+     fwfpntpnt1_1( 2 ), fwfpntpnt2_1( 2 ), fwpflowpp_1,     
+     fwzpp_1( 2 ), fwdtt_1, kf0 )
 
-CALL ysfpp5t( 202, 3, fwpflowppv_1, fwfpp1_1, fwfpp2_1,     fwdfpp1_1, fwdfpp2_1, fwdfpp1_fi_1, fwdfpp2_fi_1, y1mtmp(     850 ), y1mtmp( 851 ), - y1mtmp( 1042 ) * fwdtt_1, - y1mtmp(     1043 ) * fwdtt_1, fwdvgpnt_1( 1 ), fwdvgpnt_1( 2 ),     fwdlpnt_1( 1 ), fwdlpnt_1( 2 ), fwfipp1_1( 3 ), fwfipp2_1(     3 ), fwfpntpnt1_1( 3 ), fwfpntpnt2_1( 3 ), fwpflowpp_1,     fwzpp_1( 3 ), fwdtt_1, kf0 )
+CALL ysfpp5t( 202, 3, fwpflowppv_1, fwfpp1_1, fwfpp2_1,
+     fwdfpp1_1, fwdfpp2_1, fwdfpp1_fi_1, fwdfpp2_fi_1, 
+     y1mtmp(     850 ), y1mtmp( 851 ), - y1mtmp( 1042 ) * fwdtt_1, 
+     - y1mtmp(     1043 ) * fwdtt_1, fwdvgpnt_1( 1 ), fwdvgpnt_1( 2 ),     
+     fwdlpnt_1( 1 ), fwdlpnt_1( 2 ), fwfipp1_1( 3 ), fwfipp2_1(     3 ), 
+     fwfpntpnt1_1( 3 ), fwfpntpnt2_1( 3 ), fwpflowpp_1,     
+     fwzpp_1( 3 ), fwdtt_1, kf0 )
 
 CALL ysfpp5t( 202, 4, fwpflowppv_1, fwfpp1_1, fwfpp2_1,     fwdfpp1_1, fwdfpp2_1, fwdfpp1_fi_1, fwdfpp2_fi_1, y1mtmp(     852 ), y1mtmp( 853 ), - y1mtmp( 1044 ) * fwdtt_1, - y1mtmp(     1045 ) * fwdtt_1, fwdvgpnt_1( 3 ), fwdvgpnt_1( 4 ),     fwdlpnt_1( 3 ), fwdlpnt_1( 4 ), fwfipp1_1( 4 ), fwfipp2_1(     4 ), fwfpntpnt1_1( 4 ), fwfpntpnt2_1( 4 ), fwpflowpp_1,     fwzpp_1( 4 ), fwdtt_1, kf0 )
 
@@ -359,12 +420,14 @@ Modifier (extension) of static and dynamic denotational semantics for the existi
 programming languages. 
 
 Statements =
+
 - compute c 
 - s${}_1$ ; s${}_2$ 
 - v = spawn t, c 
 - wait v, m 
 
 Requirement: computations are purely functional (no global modifiable state)
+
 Property (theorem): correctness of the parallel execution.
 
 Vasenin V. A., Krivchikov M. A. A model of dynamical concurrent program execution // Programming and Computer Software. — 2013. — Vol. 39, no. 1. — P. 1–9. 
@@ -375,27 +438,31 @@ Identifiers are uniquely mapped to the block in which it is mapped.
 Location : identifier → MemoryBlock × Offset × Size
 
 Memory blocks are annotated with non-negative number (version). Version is increased at the time of the assignment.
+
 Classical intermediate representation: SSA  (static single assignment form).
+
 SSA defines mutable variables as a sequence of immutable values.
 
 Version : MemoryBlock × Offset × Size → N
 
 Local variables may be represented in terms of the separate memory block.
 
-# Построение статической семантики
+# Static formal semantics transformation
 
-1. Вызовы функций заменяются на код функции с подстановкой значений переменных и выделением новой памяти под локальные переменные, или заменяется операторами множественного присваивания со специальными функциональными символами.
-2. Циклы `DO` с постоянными границами раскрываются.
-3. Циклы `DO WHILE` и условные операторы `IF` на верхнем уровне заменяются операторами присваивания со специальными функциональными символами.
-4. Идентификаторы заменяются на тройки MemoryBlock × Offset × N
+1. Replace function calls with function code, substitute arguments, allocate memory for local variables. Simple functions can be replaced by "multiple-assignment" operators with special functional symbols.
+2. Unroll `DO` loops with constant boundaries.
+3. Replace `DO WHILE` loops and `IF` conditional operators with "multiple-assignment" operators.
+4. Replace identifiers with triples MemoryBlock × Offset × N
 I₁ = f(I₂, ..., Iₙ) 
 
 (Location I₁, Version (Location I₁)+1) := f((Location I₂, Version(Location I₂)), ..., (Location Iₙ, Version(Location Iₙ))) 
 
 Version[Location I₁] ← Version[Location I₁] + 1
 
-# Построение статическоДля локальных переменных выделяется специальный блок памяти.й семантики
-## Операторы множественного присваивания
+Local variables are stored in separate memory block.
+
+# Static formal semantics
+## Operator of multiple assignment and special functional symbol
 ```fortran
 IF ( f_temp1 .GT. thhgconv ) THEN
     htcarg1 = f_temp1 * fipnt + thhgconv * ( kf1 - fipnt )
@@ -409,54 +476,61 @@ END IF
 (htcarg1, mode) = IF1234(f_temp1, thhgconv, fipnt, kf1)
 
 
-# Динамическая семантика
-описывается в терминах подстановок:
+# Dynamic semantics
+specified by means of symbolic substitution:
 
-В результате построения статической семантики программа преобразуется в последовательность операторов множественного присваивания, в правой части которых находятся выражения или функциональные символы.
+In result of static semantics transformation program is converted into sequence of multiple-assignment operators with expressions or functional symbols in the right part.
 
-Окружение динамической семантики сохраняет представление статической семантики *выражений*:
+Dynamic semantics environment stores static semantics representation of *expressions* (symbolic computation):
+
 I₁ = (G₁, O₁, V₁) := f₁(...)
 ...
 Iₙ = (Gₙ, Oₙ, Vₙ) := fₙ(...)
 
-⟦J = (Gⱼ, Oⱼ, Vⱼ) := g(I₁, ..., Iₙ)⟧ = J = (Gⱼ, Oⱼ, Vⱼ) := g(f₁(...), ..., fₙ(...))
+⟦J = (Gⱼ, Oⱼ, Vⱼ) := g(I₁, ..., Iₙ)⟧ ≡ J = (Gⱼ, Oⱼ, Vⱼ) := g(f₁(...), ..., fₙ(...))
 
 
 
-# Выделение ветвей вычислений
-Выделение независимых ветвей вычислений выполняется путём выражения операторов присваивания и получения значения переменной в терминах модели динамического параллельного исполнения программ.
+# Independent computation branches
 
-Каждый оператор присваивания выполняется в собственном потоке.
+Independent computation branches are separated by means of representing assignment operators and variable dereference in terms of dynamic concurrent program execution model.
 
-Окружение динамической семантики сохраняет для версии смещения в блоке памяти идентификатор потока и номер результата в множественном присваивании:
+Each assignment operator is executed in separate logical computation thread.
+
+Dynamic semantics environment for each version of memory block location stores an identifier for the thread and index of the result in multiple-assignment.
+
 I₁ = (G₁, O₁, V₁) := T₁, k₁
+
 ...
+
 Iₙ = (Gₙ, Oₙ, Vₙ) := Tₙ, kₙ
 
-⟦J = (Gⱼ, Oⱼ, Vⱼ) := g(I₁, ..., Iₙ)⟧ = 
+⟦J = (Gⱼ, Oⱼ, Vⱼ) := g(I₁, ..., Iₙ)⟧ ≡
+
 J = (Gⱼ, Oⱼ, Vⱼ) := spawn g [ I₁ := wait T₁, k₁; ...; Iₙ := wait Tₙ, kₙ  ]
 
-Режим исполнения "по порядку" на динамической семантике в терминах подстановок должен порождать аналогичное исходной версии окружение динамической семантики (итоговые выражения получатся точно такими же). 
-Это свойство проверяется в явном виде.
+Equivalence between original dynamic semantics and concurrent dynamic semantics is checked directly with sequential execution mode. Resulting expressions for all memory locations must be the same for non-concurrent dynamic semantics and concurrent dynamic semantics in sequential mode.
 
-# Статическое планирование
-В отличие от ранних подходов, в данном случае размер гранулы получается слишком мелким. С учётом особенностей распространения продукта, в состав которого входит код (аппаратно-программный комплекс), предлагается использовать статическое планирование:
+# Static scheduling
 
-Модель динамического параллельного исполнения программ выполняется перед компиляцией, управляющее ядро предоставляет статический планировщик. 
+In contrast with previous approach, parallel execution in this case is fine-grained. Target system is distributed as a complete technological platform. We propose static thread scheduling:
 
-С точки зрения статической семантики — к каждому оператору присваивания приписывается номер процесса, в котором он выполняется.
+Dynamical concurrent execution model runs before compiling; core of the model provides static scheduler.
 
-В зависимости от используемого стандарта параллельных вычислений, команды spawn и wait раскрываются в последовательность функций одной из реализаций (аналогично пропрограммам В.А. Роганова).
+In terms of static semantics for each statement we assign an index of parallel process.
 
-# Модель стоимости
-Для эффективного планирования потоков необходима дополнительная информация об ожидаемом времени вычисления того или иного выражения. 
+Depending on the used concurrent execution implementation, "spawn" and "wait" statements are translated to the sequence of implementation-specific functions.
 
-Параметры модели:
-1. Стоимость бинарных и унарных операций над числами.
-2. Стоимость функциональных символов — оценка максимальной сложности тела цикла (оператора IF).
-3. Стоимость пересылки (учитывается только при необходимости пересылки).
+# Cost model
+To schedule threads effectively we need the additional information on the expected operation timings.
 
-В окружении планировщика сохраняется информация о номерах процессов, на которых выполняются потоки вычисления.
+Model parameters:
+
+1. Binary and unary numeric operation cost.
+2. Functional symbol cost (upper bound on loop body cost).
+3. Cost of data transfer (only if data transfer is required).
+
+Scheduler environment contains mapping between (physical) processes and (logical) computation threads.
 
 ```
 ComputationCost : Computation → N
@@ -466,49 +540,49 @@ Cost(S, J = (Gⱼ, Oⱼ, Vⱼ) := spawn g [ I₁ := wait T₁, k₁, ..., Iₙ :
     + Σᵢ MessageCost(g, Tᵢ)
 ```
 
-Задача оптимизации стоимости является NP-трудной, поэтому оптимальное решение найти на практике невозможно (но для практических задач хватит "достаточно быстрого" решения)
+Optimal mapping problem is NP-hard, it is impossible to find true optimal solution in practice. But practice doesn't require optimal solution, "fast enough" is enough.
 
-# Последовательное выполнение (базовая отметка)
-1. Стоимость бинарных и унарных операций над числами — 1.
-2. Стоимость функциональных символов — вычисляется на основе стоимости операций.
-3. Стоимость пересылки — 0.
+# Examples
 
-Количество процессов = 1
+## Sequential execution (baseline)
+1. Binary and unary operation const — 1.
+2. Functional symbol cost — computed.
+3. Data transfer cost — 0.
 
-# MPI
-1. Стоимость бинарных и унарных операций над числами — 1.
-2. Стоимость функциональных символов — вычисляется на основе стоимости операций.
-3. Стоимость пересылки — 1000 (mpi_ping)
+Number of processes = 1
 
-# Threads
-1. Стоимость бинарных и унарных операций над числами — 1.
-2. Стоимость функциональных символов — вычисляется на основе стоимости операций.
-3. Стоимость пересылки — 1.
+## MPI
+1. Binary and unary operation cost — 1.
+2. Functional symbol cost — computed.
+3. Data transfer cost — 1000 (mpi_ping on customer hardware)
 
-Количество процессов = 2..60 (Xeon Phi)
+Number of processes = 2..48 (customer hardware)
+
+## Threads
+1. Binary and unary operation cost — 1.
+2. Functional symbol cost — computed.
+3. Data transfer cost — 1.
+
+Number of processes = 2..60 (Xeon Phi)
 
 
 # MALT
-перспективная многоядерная архитектура процессоров, разрабатываемая на физическом факультете МГУ совместно с ФГУП НИИ Квант.
+future many-core CPU architecture, developed at Faculty of Physics, Lomonosov Moscow State University, in cooperation with NII Kvant. 
 
-- аппаратная поддержка лёгких потоков (F/E-биты)
-- нет аппаратной поддержки вычислений с плавающей точкой
-- стоимость операций — мои спекулятивные оценки
+- hardware support of featherweight threads (F/E bits)
+- no hardware floating-point unit
+- costs are my speculative assumptions based on workshop reports of developers
 
-1. Стоимость бинарных и унарных операций над числами — 1..200 (SoftFloat).
-2. Стоимость функциональных символов — вычисляется на основе стоимости операций.
-3. Стоимость пересылки — 1.
+1. Binary and unary operation cost — 1..200 (SoftFloat).
+2. Functional symbol cost — computed.
+3. Data transfer cost — 1.
 
-Количество процессов: ~100-1000.
-Гипотеза: высокая степень параллелизма и очень "дешёвые" пересылки могут перекрыть плохую производительность программной эмуляции вычислений с плавающей точкой.
+Number of processes: ~100-1000.
 
-# Дальнейшая работа
-- программная реализация описанной модели
-- испытания
+Hypotheses: overhead of software-emulated floating point operation is compensated by high level of parallelism and low cost of data transfer
 
-## Перспективы
-- вернуть в модель явное решение разреженной системы линейных уравнений методом LU-разложения
-- пакетные пересылки MPI (MessageCost : Schedule × TId × TId × Size → N = C + k*Size)
-- учёт SIMD-операций
-- локальные микрооптимизации и постоптимизации кода
-- подобрать метод аппроксимации решения задачи планирования 
+# Future work directions
+- pack consequtive data transfers (MessageCost : Schedule × TId × TId × Size → N = C + k*Size)
+- add SIMD operations into cost model
+- local microoptimization and postoptimization for code
+- implement scheduling algorithm and run simulations
