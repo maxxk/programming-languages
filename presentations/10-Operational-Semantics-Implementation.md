@@ -15,6 +15,13 @@
     display: inline-block;
     padding: 1em;
 }
+.slider > section pre {
+  line-height: 1.5 !important;
+}
+
+section ol li, section ul li {
+  line-height: 1.5 !important;
+}
 
 .inference table th {
     font-weight: normal;
@@ -26,8 +33,9 @@
 
 </style>
 
-Course page: https://maxxk.github.io/programming-languages/
-Contact author: maxim.krivchikov@gmail.com
+https://maxxk.github.io/programming-languages/
+
+maxim.krivchikov@gmail.com
 
 
 # Mechanized Semantics for the Clight Subset of the C Language
@@ -35,6 +43,7 @@ Contact author: maxim.krivchikov@gmail.com
 Big-step operational semantics for a subset of the C programming language. Implemented in Coq for CompCert certifying C compiler.
 
 Links:
+
 1. Official site: http://compcert.inria.fr/
 2. Source code repository: https://github.com/AbsInt/CompCert (non-free software, see license: https://github.com/AbsInt/CompCert/blob/master/LICENSE)
 3. Complete commented (literate) Coq source code: http://compcert.inria.fr/doc/index.html
@@ -52,6 +61,7 @@ Links:
 
 # Clight language
 — intermediate representation of C programs (source code in C is desugared into Clight).
+
 - no concrete syntax (but for the sake of readability we sometimes will use C-like syntax)
 - no string literals (replaced with pointers to static data section)
 - all expressions are pure: assignment is a statement, increment/decrement operators are disabled etc. (behavior of some constructions, unspecified by the specification, is specified at the C → Clight translation stage, e.g. order of evaluation of function arguments)
@@ -110,13 +120,17 @@ The temporary environemnt maps local temporaries to values.
 
 # Clight operational semantics overview
 Big-step operational semantcs. 10 evaluation relations are defined:
+
 1. G, E ⊦ a, M ⇐ L — evaluation of expressions in l-value position, i.e. targets of assignment
+  L is a location — pair of block identifier *b* and offset δ inside the block.
 2. G, E ⊦ a, M ⇒ v — evaluation of expressions in r-value position
+  v is a value.
 3. G, E ⊦ [a], M ⇒ [v] — evaluation of lists of expression, e.g. function call arguments
 4. G, E ⊦ s, M ⇒ out, M' — evaluation of statements, terminating case, M and M' are memory states
 5. G, E ⊦ sw, M ⇒ out, M' — execution of the `switch` cases
 6. G ⊦ Fd([v]), M ⇒ v, M' — evaluation of function invocation, terminating case
 7. G, E ⊦ s, M ⇒ ∞ — evaluation of statements, diverging case
+
 8, 9. — diverging evaluation of `switch` cases and function invocation
 
 10. P ⇒ B — execution of the whole program
@@ -126,26 +140,35 @@ Big-step operational semantcs. 10 evaluation relations are defined:
 Simple inductive types — represented by a set of constructors, all values have same type (see expressions and statements above).
 Indexed inductive types — represented by a set of constructors and some index type. Each instance of indexed inductive type is a separate type.
 Example (from [previous semester](http://maxxk.github.io/formal-models-2015/pdf/08-Inductive.pdf)):
+
+```
 Even : ℕ → Type :=
 | even_zero : Even 0
 | even_plus_2 : forall (k : ℕ), Even(k) → Even(k+2)
+```
 
 *Even 0,* *Even 2* and *Even 4* are of different types (but *Even 2* and *Even 4* are constructed by call of the same constructor *even_plus_2*).
 
 # Evaluation relations in dependently-typed specification language
 Evaluation relations are defined as an indexed inductive type. It is common way of definition for possibly-undecidable relations.
 
+```
 Inductive eval_expr (G : global) (L : local) : expr → val → Type (* expr ⇒ val *)
+```
 
 Two indices:
+
 - *expr* — left hand side of relation
 - *val* — right hand side of relation
 
 Individual judgements are represented as the constructors for the indexed inductive type.
 Axiom:
+```
 | eval_Econst_int : forall (i : int, ty : Ctype), eval_expr (Econst_int i ty) (Vint i)
+```
 Same judgement in different notation:
-G, E ⊦ Econst_int i ty ⇒ Vint i   [eval_Econst_int]
+
+G, E ⊦ *Econst_int* i ty ⇒ *Vint* i   [**eval_Econst_int**]
 
 # Evaluation relations {.inference}
 Premises (antecedents) are represented as a constructor arguments:
@@ -162,9 +185,9 @@ Rule:
 Different notation:
 
 
-  a1 ⇒ v1; a2 ⇒ v2; a1 `op` a2 $⇒_{\text{binop}}$ v
+  a₁ ⇒ v₁; a₂ ⇒ v₂; v₁ `op` v₂ $⇒_{\text{binop}}$ v
  ---------------------------------------------------
-  [ty] a1 `op` a2 ⇒ v
+  [ty] a₁ `op` a₂ ⇒ v
 
 `sem_binary_op` (binop) is a decidable relation, hence we may represent it as a function.
 
