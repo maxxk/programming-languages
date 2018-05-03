@@ -48,10 +48,9 @@ Course topics include:
 **26.04.2018** Mechanized semantics (Operational semantics implementation)
 [presentation - html](presentations/10-Operational-Semantics-Implementation.html)
 
-<!--
-**11.05.2017** Axiomatic semantics 
+**03.05.2018** Axiomatic semantics 
 [presentation - html](presentations/11-Axiomatic-Semantics.html)
-
+<!--
 **18.05.2017** Domain-specific languages. Intermediate representations
 [presentation - html](presentations/12-IR-DSL.html)
 
