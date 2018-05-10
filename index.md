@@ -16,7 +16,7 @@ Course topics include:
 
 **Thursday, 15:00-16:35, aud. 13-16, starting February 15th.**
 
-Please take a quick survey about the course: https://goo.gl/forms/PYP4oSGn0VfQQL403
+Please take a quick survey about the course: [Survey form](https://goo.gl/forms/PYP4oSGn0VfQQL403)
 
 
 **15.02.2018** Introduction. History of programming languages. 
