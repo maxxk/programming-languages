@@ -16,6 +16,8 @@ Course topics include:
 
 **Thursday, 15:00-16:35, aud. 13-16, starting February 15th.**
 
+Please take a quick survey about the course: https://goo.gl/forms/PYP4oSGn0VfQQL403
+
 
 **15.02.2018** Introduction. History of programming languages. 
 [presentation - html](presentations/01-Introduction.html)
@@ -50,9 +52,10 @@ Course topics include:
 
 **03.05.2018** Axiomatic semantics 
 [presentation - html](presentations/11-Axiomatic-Semantics.html)
-<!--
-**18.05.2017** Domain-specific languages. Intermediate representations
+
+**10.05.2018** Domain-specific languages. Intermediate representations
 [presentation - html](presentations/12-IR-DSL.html)
 
-**25.05.2017** Exam
--->
+**17.05.2018** Exam ([program](presentations/program.html))
+ 
+**24.05.2018** Possible second date for exam (by appointment)

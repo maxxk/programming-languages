@@ -13,8 +13,9 @@
 .huge { font-size: 2em !important; }
 </style>
 
-Course page: https://maxxk.github.io/programming-languages/
-Contact author: maxim.krivchikov@gmail.com
+https://maxxk.github.io/programming-languages/
+
+maxim.krivchikov@gmail.com
 
 # Domain-specific languages
 https://cacm.acm.org/magazines/2011/7/109910-dsl-for-the-uninitiated/fulltext
@@ -23,6 +24,7 @@ Domain-specific programming language is a language which is targetet to the spec
 
 # Example: HTML and CSS
 Domain: text markup (HTML) and hierarchical styling (CSS).
+
 ```css
 form > label > .redtext {
     color: red;
@@ -40,6 +42,7 @@ form > label > .redtext {
 <label for="birthday">Birthday</label><input type="date" name="birthday">
 </form>
 ```
+
 <style type="text/css">
 form > label > .redtext {
     color: red;
@@ -75,7 +78,9 @@ ping $(hostname)
 
 # Example: GrGen {.twocolumn}
 Domain: graph modeling and rewriting
+
 http://www.info.uni-karlsruhe.de/software/grgen/
+
 https://en.wikipedia.org/wiki/GrGen
 
 ```
@@ -130,6 +135,7 @@ test ReachedEndOfWorld(curAnt:Ant) : (GridNode)
 ```
 
 # Example: blockchain contract languages
+
 https://blog.chain.com/announcing-ivy-playground-395364675d0a
 
 ```
@@ -156,6 +162,7 @@ contract CallOption(
 ```
 
 # Blockchain contract languages {.twocolumn}
+
 http://solidity.readthedocs.io/en/latest/
 
 ```
@@ -277,6 +284,7 @@ svcContext.AccountSet.All()
 https://github.com/bitemyapp/esqueleto
 
 All "keywords" and "operators" are ordinary functions in Haskell (except `do`, `$` and lambda-abstraction)
+
 ```haskell
 let complexQuery =
     from $ \(p1 `InnerJoin` p2) -> do
@@ -291,7 +299,30 @@ let complexQuery =
 ```
 
 # Example: Ruby eDSLs
-http://squib.rocks/
+https://github.com/felipecsl/wombat
+
+```ruby
+require 'wombat'
+
+Wombat.crawl do
+  base_url "https://www.github.com"
+  path "/"
+
+  headline xpath: "//h1"
+  subheading css: "p.alt-lead"
+
+  what_is({ css: ".one-fourth h4" }, :list)
+
+  links do
+    explore xpath: '/html/body/header/div/div/nav[1]/a[4]' do |e|
+      e.gsub(/Explore/, "Love")
+    end
+
+    features css: '.nav-item-opensource'
+    business css: '.nav-item-business'
+  end
+end
+```
 
 # Example: Lisp DSLs
 http://swizard.info/articles/solitaire/article.html
@@ -325,21 +356,25 @@ http://swizard.info/articles/solitaire/article.html
 
 # Language-oriented programming
 Ward, MP. “Language-Oriented Programming.” Software - Concepts and Tools 15, no. 4 (1994): 147–61.
+
 http://www.cse.dmu.ac.uk/~mward/martin/papers/middle-out-t.pdf
 
 This paper describes the concept of language oriented programming which is a novel way of
-organising the development of a large software system, leading to a different structure for the
-finished product. The approach starts by developing a formally specified, domain-oriented, very
-high-level language which is designed to be well-suited to developing “this kind of program”.
-The development process then splits into two independent stages: (1) Implement the system
-using this “middle level” language, and (2) Implement a compiler or translator or interpreter
-for the language, using existing technology. 
+organising the development of a large software system, leading to a different structure for the finished product. The approach starts by developing a formally specified, domain-oriented, very high-level language which is designed to be well-suited to developing “this kind of program”.
+
+The development process then splits into two independent stages: 
+1. Implement the system
+using this “middle level” language
+2. Implement a compiler or translator or interpreter for the language, using existing technology. 
 
 http://www.onboard.jetbrains.com/articles/04/10/lop/
+
 https://www.martinfowler.com/articles/languageWorkbench.html
 
 # Example: JetBrains MPS
+
 https://www.jetbrains.com/mps/
+
 https://confluence.jetbrains.com/display/MPSD20171/Shapes+-+an+introductory+MPS+tutorial
 
 # Language composition
@@ -356,6 +391,7 @@ form > label > .redtext {
     border: solid green 1px;
 }
 ```
+
 selectors language is reused in JavaScript (in jQuery library and document.querySelector function)
 
 - some well-designed programming libraries usually are some kind of embedded DSLs
@@ -385,7 +421,9 @@ Intermediate representation programming language is a special case of programmin
 - common intermediate representation may have formal specification (in this case the semantics of DSL is specified in terms of translation)
 
 # Classification
-(my classification, paper is in print)
+
+Vasenin V. A., Krivchikov M. A. Program Intermediate Representation Techniques, Programmnaya Ingeneria, 2017, vol. 8, no. 8, pp. 345—353 (in Russian)
+
 ## Low-level intermediate representations
 ## Bytecode for imperative languages
 ## Bytecode for functional languages
@@ -393,11 +431,13 @@ Intermediate representation programming language is a special case of programmin
 ## High-level language-specific representations 
 
 # Low-level intermediate representations
+
 - linear code structure
 - data types are specified in terms of memory layout
 - instruction set is close to machine/assembly language
 
 # Low-level intermediate representation
+
 - three-address code, abstract representation, see "Dragon book" (Aho, Seti, Ullman "Compilers: Principles, Techniques, and Tools")
     - each instruction has opcode and at most 3 operands ("addresses")
 - RTL (register transfer language), abstract representation
@@ -414,12 +454,14 @@ Intermediate representation programming language is a special case of programmin
     Morrisett G. et al. From System F to Typed Assembly Language // ACM Trans. Program. Lang. Syst. 1999. Т. 21, № 3. Сс. 527–568.
 
 # Bytecode application virtual machines
+
 - linear code structure
 - high-level instructions
 - high-level (usually memory layout-independent) date type representation
 - typing, first-order polymorphism
 
 # Bytecode for imperative languages
+
 - CLI/JVM
     ISO. ISO/IEC 23271:2003: Information technology — Common Language Infrastructure. 
 
@@ -436,7 +478,8 @@ associate draw__6Square_int with draw__5Shape_int(@Square, @any)
 send draw__5Shape_int(s, color)
 ```
 
-# Bytecode for functional languages
+# Bytecode for functional languages {.twocolumn}
+
 - usually untyped
 - supports closure creation at the level of bytecode
 
@@ -482,10 +525,12 @@ send draw__5Shape_int(s, color)
 Leißa R., Köster M., Hack S. A graph-based higher-order intermediate representation // 2015 IEEE/ACM International Symposium on Code Generation and Optimization (CGO). 2015. Сс. 202–212.
 
 # High-level language-specific representations 
+
 - Clight in CompCert (previously discussed)
 - LISP (and, less frequently, Forth) also can be used as high-level general-purpose representations
 
 # Nanopass compiler
+
 D. Sarkar, O. Waddell, and R. K. Dybvig. A nanopass infrastructure for compiler education. In ICFP ’04: Proceedings of the ninth ACM SIGPLAN International Conference on Functional Programming, pages 201–212, New York, NY, USA, 2004. ACM.
 
 Translation pipeline is specified in terms of ~50 simple transformation steps between languages. Nanopass framework provides the specification DSL for languages. Languages may be specified in terms of modification of output languages from previous pass.
