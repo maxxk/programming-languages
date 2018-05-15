@@ -1,0 +1,852 @@
+<!DOCTYPE html><html><head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <title>Семинар-2018</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <link rel="stylesheet" href="slider.css">
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+  <div style="width: 640px;height: 400px;">
+  <input id="slider-max" type="checkbox" checked="">
+   <article class="slider slider-indicator">
+   <a id="slider-default"></a>
+   <label for="slider-max" title="Maximize"></label>
+
+
+<section id="описание-семантики-предметно-ориентированных-языков-программирования-с-использованием-подтипов" class="slide level1">
+<h1>Описание семантики предметно-ориентированных языков программирования с использованием подтипов</h1>
+<h2 id="м.а.-кривчиков">М.А. Кривчиков</h2>
+</section><div><a class="slider-prev"></a><a class="slider-next" href="#введение"></a></div>
+<section id="введение" class="slide level1">
+<h1>Введение</h1>
+<p>Проблемная область — разработка крупных наукоёмких программных комплексов и верификация их функциональных свойств.</p>
+<p>Свойства:</p>
+<ul>
+<li class="fragment">гетерогенность кода</li>
+<li class="fragment">перманентное внесение изменений в код</li>
+<li class="fragment">распределённость</li>
+</ul>
+</section><div><a class="slider-prev" href="#описание-семантики-предметно-ориентированных-языков-программирования-с-использованием-подтипов"></a><a class="slider-next" href="#верификация-и-валидация"></a></div>
+<section id="верификация-и-валидация" class="slide level1">
+<h1>Верификация и валидация</h1>
+<p><strong>верификация</strong> — процесс, целью которого является показать соответствие продукта, сервиса или системы требованиям, спецификациям и другим условиям, которые накладываются на продукт</p>
+<p><strong>валидация</strong> — процесс, целью которого является определить адекватность продукта, сервиса или системы потребностям заказчика</p>
+<p>Верификация выполняется путём анализа кода системы.</p>
+<p>Существующие подходы к анализу можно разделить на экспертные, статические и динамические.</p>
+</section><div><a class="slider-prev" href="#введение"></a><a class="slider-next" href="#экспертный-анализ"></a></div>
+<section id="экспертный-анализ" class="slide level1">
+<h1>Экспертный анализ</h1>
+<ol type="1">
+<li class="fragment"><p>Формализованный процесс (например, [Fagan inspection (1976)](<a href="https://en.wikipedia.org/wiki/Fagan_inspection" class="uri">https://en.wikipedia.org/wiki/Fagan_inspection</a>))</p>
+<ul>
+<li>отдельная стадия разработки</li>
+<li>большое количество участников и ролей</li>
+<li>несколько этапов</li>
+<li>широкий набор критериев</li>
+</ul></li>
+</ol>
+<p>Использовался в NASA, IBM, Motorola.</p>
+<ol start="2" type="1">
+<li class="fragment"><p>Неформализованный процесс рецензирования кода</p>
+<ul>
+<li>рецензирование изменений по email (ядро ОС Linux)</li>
+<li>парное программирование</li>
+<li>средства рецензирования, интегрированные в процессы разработки (например, [Reviewable](<a href="https://reviewable.io" class="uri">https://reviewable.io</a>))</li>
+</ul></li>
+<li class="fragment">Ручное тестирование по программе испытаний</li>
+</ol>
+</section><div><a class="slider-prev" href="#верификация-и-валидация"></a><a class="slider-next" href="#экспертный-анализ-1"></a></div>
+<section id="экспертный-анализ-1" class="slide level1">
+<h1>Экспертный анализ</h1>
+<h2 id="достоинства">Достоинства</h2>
+<ul>
+<li class="fragment">можно реализовать без использования технических средств</li>
+<li class="fragment">полезен для командной разработки</li>
+</ul>
+<h2 id="недостатки">Недостатки</h2>
+<ul>
+<li class="fragment">зависит от экспертного мнения;</li>
+<li class="fragment">не автоматизирован;</li>
+<li class="fragment">на больших объёмах кода сложен в применении.</li>
+</ul>
+</section><div><a class="slider-prev" href="#экспертный-анализ"></a><a class="slider-next" href="#динамический-анализ"></a></div>
+<section id="динамический-анализ" class="slide level1">
+<h1>Динамический анализ</h1>
+<p>— анализ кода системы путём его запуска на исполнение.</p>
+<h2 id="автоматизированное-тестирование">(Автоматизированное) тестирование</h2>
+<ul>
+<li class="fragment">методы чёрного/белого/серого ящика</li>
+<li class="fragment">юнит-тестирование, интеграционное, интерфейсное, системное, приёмочное, регрессионное тестирование, smoke-тестирование, sanity-тестирование</li>
+<li class="fragment">функциональное или нефункциональное тестирование (производительность, безопасность, живучесть, удобство использования)</li>
+</ul>
+<p>Может быть интегрировано в процессы разработки с использованием подходов "Test-Driven Development" или "Behavior-Driven Development"</p>
+</section><div><a class="slider-prev" href="#экспертный-анализ-1"></a><a class="slider-next" href="#автоматизированное-тестирование-1"></a></div>
+<section id="автоматизированное-тестирование-1" class="slide level1">
+<h1>(Автоматизированное) тестирование</h1>
+<h2 id="достоинства-1">Достоинства</h2>
+<ul>
+<li class="fragment">наглядность</li>
+<li class="fragment">требуется стандартами разработки</li>
+</ul>
+<h2 id="недостатки-1">Недостатки</h2>
+<ul>
+<li class="fragment">большой объём кода тестов по сравнению с кодом продукта (SQLite: 80 тыс. строк кода / 90 млн. строк тестов);</li>
+<li class="fragment">тесты необходимо поддерживать в актуальном состоянии;</li>
+<li class="fragment">тесты в общем случае не гарантируют отсутствия дефектов/ошибок.</li>
+</ul>
+</section><div><a class="slider-prev" href="#динамический-анализ"></a><a class="slider-next" href="#динамический-анализ-1"></a></div>
+<section id="динамический-анализ-1" class="slide level1">
+<h1>Динамический анализ</h1>
+<h2 id="инструментирование-кода">Инструментирование кода</h2>
+<ul>
+<li class="fragment">использование автоматизированных средств, контролирующих ход выполнения программы, с целью выявления дефектов.</li>
+</ul>
+<p>Примеры существующих реализаций:</p>
+<ul>
+<li class="fragment">fuzzing-тестирование (подход) ­— итерационный автоматизированный рандомизированный подбор входных данных для тестирования с целью покрытия всех ветвей на основе анализа процесса исполнения машинного кода для известных входных данных (пример реализации: AFL)</li>
+<li class="fragment">Valgrind (инструментальное средство) проверяет корректность работы с памятью, примитивов синхронизации</li>
+</ul>
+</section><div><a class="slider-prev" href="#автоматизированное-тестирование-1"></a><a class="slider-next" href="#статический-анализ"></a></div>
+<section id="статический-анализ" class="slide level1">
+<h1>Статический анализ</h1>
+<p>— анализ кода системы без его запуска на исполнение.</p>
+<h2 id="недостоверные-средства-статического-анализа">Недостоверные средства статического анализа</h2>
+<p>Способны обнаружить некоторые типичные дефекты исходного кода.</p>
+<ul>
+<li class="fragment">предупреждения компилятора</li>
+<li class="fragment">анализаторы для динамических языков программирования (pylint, pyflakes для Python, jslint для JavaScript)</li>
+<li class="fragment">анализаторы для языков программирования со статической типизацией (PVS-Studio для C/C++)</li>
+</ul>
+</section><div><a class="slider-prev" href="#динамический-анализ-1"></a><a class="slider-next" href="#пример-pvs-studio"></a></div>
+<section id="пример-pvs-studio" class="slide level1">
+<h1>Пример: PVS-Studio</h1>
+<p><img data-src="images/pvs-studio.png" alt="image" src="images/pvs-studio.png"></p>
+</section><div><a class="slider-prev" href="#статический-анализ"></a><a class="slider-next" href="#формальные-методы-в-инженерии-программ"></a></div>
+<section id="формальные-методы-в-инженерии-программ" class="slide level1">
+<h1>Формальные методы в инженерии программ</h1>
+<p>Общий недостаток перечисленных подходов: не определены гарантии, которые предоставляются этими подходами.</p>
+<p>Более строго — в настоящее время нет формальной модели, по отношению к которой показана достоверность этих подходов.</p>
+<p>Формальные методы в инженерии программ — область приложения строгих математических методов к процессам спецификации, разработки и верификации программного обеспечения.</p>
+<p>Теорема Райса (фундаментальное ограничение): нетривиальные семантические свойства программ неразрешимы.</p>
+</section><div><a class="slider-prev" href="#пример-pvs-studio"></a><a class="slider-next" href="#формальные-методы"></a></div>
+<section id="формальные-методы" class="slide level1">
+<h1>Формальные методы</h1>
+<h2 id="тестирование">Тестирование</h2>
+<p>Автоматизированная генерация тестовых данных по формальной спецификации</p>
+<p>UniTESK (ИСП РАН)</p>
+<p>QuickCheck</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="ot">prop_PrefixSuffix ::</span> [<span class="dt">Int</span>] <span class="ot">-&gt;</span> <span class="dt">Int</span> <span class="ot">-&gt;</span> <span class="dt">Bool</span></a>
+<a class="sourceLine" id="cb1-2" data-line-number="2">prop_PrefixSuffix xs n <span class="fu">=</span> isPrefixOf prefix xs <span class="fu">&amp;&amp;</span></a>
+<a class="sourceLine" id="cb1-3" data-line-number="3">                        isSuffixOf (reverse prefix) (reverse xs)</a>
+<a class="sourceLine" id="cb1-4" data-line-number="4"><span class="kw">where</span> prefix <span class="fu">=</span> take n xs</a>
+<a class="sourceLine" id="cb1-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb1-6" data-line-number="6"><span class="ot">prop_Sqrt ::</span> <span class="dt">Double</span> <span class="ot">-&gt;</span> <span class="dt">Bool</span></a>
+<a class="sourceLine" id="cb1-7" data-line-number="7">prop_Sqrt x</a>
+<a class="sourceLine" id="cb1-8" data-line-number="8"><span class="fu">|</span> x <span class="fu">&lt;</span> <span class="dv">0</span>            <span class="fu">=</span> isNaN sqrtX</a>
+<a class="sourceLine" id="cb1-9" data-line-number="9"><span class="fu">|</span> x <span class="fu">==</span> <span class="dv">0</span> <span class="fu">||</span> x <span class="fu">==</span> <span class="dv">1</span> <span class="fu">=</span> sqrtX <span class="fu">==</span> x</a>
+<a class="sourceLine" id="cb1-10" data-line-number="10"><span class="fu">|</span> x <span class="fu">&lt;</span> <span class="dv">1</span>            <span class="fu">=</span> sqrtX <span class="fu">&gt;</span> x</a>
+<a class="sourceLine" id="cb1-11" data-line-number="11"><span class="fu">|</span> x <span class="fu">&gt;</span> <span class="dv">1</span>            <span class="fu">=</span> sqrtX <span class="fu">&gt;</span> <span class="dv">0</span> <span class="fu">&amp;&amp;</span> sqrtX <span class="fu">&lt;</span> x</a>
+<a class="sourceLine" id="cb1-12" data-line-number="12"><span class="kw">where</span></a>
+<a class="sourceLine" id="cb1-13" data-line-number="13">    sqrtX <span class="fu">=</span> sqrt x</a></code></pre></div>
+</section><div><a class="slider-prev" href="#формальные-методы-в-инженерии-программ"></a><a class="slider-next" href="#достоверные-средства-статического-анализа"></a></div>
+<section id="достоверные-средства-статического-анализа" class="slide level1">
+<h1>Достоверные средства статического анализа</h1>
+<p>Достоверные (sound) методы статического анализа основаны на формальной спецификации языка программирования и формальной спецификации исследуемой программы. Такие методы не дают ложных отрицательных результатов, но дают ложные положительные.</p>
+<ul>
+<li class="fragment">Frama-C, OpenSource:</li>
+</ul>
+<div class="sourceCode" id="cb2"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="dt">int</span> max_array(<span class="dt">int</span>* a, <span class="dt">int</span> length) {</a>
+<a class="sourceLine" id="cb2-2" data-line-number="2">    <span class="dt">int</span> m = a[<span class="dv">0</span>];</a>
+<a class="sourceLine" id="cb2-3" data-line-number="3">    <span class="co">/*@</span></a>
+<a class="sourceLine" id="cb2-4" data-line-number="4"><span class="co">    loop invariant 0&lt;=i&lt;=length; loop invariant</span></a>
+<a class="sourceLine" id="cb2-5" data-line-number="5"><span class="co">    \forall integer j; 0&lt;=j&lt;i ==&gt; m &gt;= a[j]; loop invariant</span></a>
+<a class="sourceLine" id="cb2-6" data-line-number="6"><span class="co">    \exists integer j; 0&lt;=j&lt;i &amp;&amp; m == a[j]; loop assigns i,m;</span></a>
+<a class="sourceLine" id="cb2-7" data-line-number="7"><span class="co">    */</span></a>
+<a class="sourceLine" id="cb2-8" data-line-number="8">    <span class="cf">for</span> (<span class="dt">int</span> i = <span class="dv">1</span>; i&lt;length; i++) {</a>
+<a class="sourceLine" id="cb2-9" data-line-number="9">        <span class="cf">if</span> (a[i] &gt; m) m = a[i]; }</a>
+<a class="sourceLine" id="cb2-10" data-line-number="10">    <span class="cf">return</span> m;</a>
+<a class="sourceLine" id="cb2-11" data-line-number="11">}</a></code></pre></div>
+<ul>
+<li class="fragment">Polyspace, коммерческое средство от разработчиков MATLAB</li>
+</ul>
+</section><div><a class="slider-prev" href="#формальные-методы"></a><a class="slider-next" href="#верификация-моделей-программ"></a></div>
+<section id="верификация-моделей-программ" class="slide level1">
+<h1>Верификация моделей программ</h1>
+<p>— подход, обеспечивающий выполнение требуемых свойств путём исчерпывающей проверки всего возможного множества состояний.</p>
+<p>На настоящее время наиболее успешно используемый на практике подход к формальной верификации программного обеспечения.</p>
+<p>Автоматизированный подход, который:</p>
+<ul>
+<li class="fragment">верифицирует модели состояний и переходов,</li>
+<li class="fragment">обеспечивает выполнение <em>темпоральных</em> свойств (свойств, которые формулируются в понятиях «до» и «после» некоторого состояния).</li>
+</ul>
+<p>Современная разновидность Software Model Checking via Counterexample Guided Abstraction Refinement.</p>
+<p>Э.М. Кларк и др. Верификация моделей программ. Model checking. М.:МЦНМО, 2002.</p>
+</section><div><a class="slider-prev" href="#достоверные-средства-статического-анализа"></a><a class="slider-next" href="#системы-типов"></a></div>
+<section id="системы-типов" class="slide level1">
+<h1>Системы типов</h1>
+<p>Система типов [языка программирования] — это гибко управляемый синтаксический метод доказательства отсутствия в программе определенных видов поведения при помощи классификаций выражений языка по разновидностям вычисляемых ими значений.</p>
+<p>Б. Пирс. Типы в языках программирования. М.: Лямбда-пресс: Добросвет, 2011.</p>
+<p>Системы типов позволяют проводить достоверный статический анализ программ для ограниченного набора свойств.</p>
+<p>Как правило, на практике доказательство достоверности системы типов не проводится (однако это возможно в теории).</p>
+</section><div><a class="slider-prev" href="#верификация-моделей-программ"></a><a class="slider-next" href="#системы-типов-примеры"></a></div>
+<section id="системы-типов-примеры" class="slide level1">
+<h1>Системы типов: примеры</h1>
+<ul>
+<li class="fragment">в языках Java и C# гарантируется отсутствие ошибок при работе с памятью (выход за границы области памяти, ошибки при освобождении памяти). Доказательства достоверности не производятся</li>
+<li class="fragment">в языке Rust гарантируется отсутствие ошибок при работе с памятью (детерминированное освобождение памяти), в том числе для многопоточных программ. Ведётся исследование на предмет доказательства достоверности</li>
+<li class="fragment">система типов языка Haskell (без расширений) достоверна</li>
+<li class="fragment">системы типов языков Agda, Idris и средства Coq достоверны и достаточно выразительны для описания формулировок теорем в рамках интуиционистской логики</li>
+</ul>
+</section><div><a class="slider-prev" href="#системы-типов"></a><a class="slider-next" href="#применимость-формальных-методов"></a></div>
+<section id="применимость-формальных-методов" class="slide level1">
+<h1>Применимость формальных методов</h1>
+<p>Существующие методы верификации не подходят для крупных наукоёмких программных комплексов, поскольку формальная спецификация поведения системы со всеми деталями быстро становится сложнее, чем реализация системы.</p>
+<p>Пример: UniTESK-модель для спецификации POSIX: <a href="https://github.com/bitia-ru/olver/tree/master/src/model" class="uri">https://github.com/bitia-ru/olver/tree/master/src/model</a></p>
+</section><div><a class="slider-prev" href="#системы-типов-примеры"></a><a class="slider-next" href="#пример-sel4"></a></div>
+<section id="пример-sel4" class="slide level1">
+<h1>Пример: SeL4</h1>
+<p>Микроядро операционной системы (семейство микроядер L4), реализация которого верифицирована по отношению к его формальной спецификации с использованием средства Isabelle/HOL.</p>
+<ul>
+<li class="fragment">3 тыс. строк формальных спецификаций</li>
+<li class="fragment">10 тыс. строк кода на C (реализация)</li>
+<li class="fragment">100 тыс. строк формальных доказательств</li>
+</ul>
+</section><div><a class="slider-prev" href="#применимость-формальных-методов"></a><a class="slider-next" href="#контрпример-compcert"></a></div>
+<section id="контрпример-compcert" class="slide level1">
+<h1>(Контр)пример: CompCert</h1>
+<p>Верифицированный компилятор языка C, поддерживающий значительную часть ISO C99 (полностью поддерживает части спецификации, рекомендуемые к использованию спецификацией MISRA-C 2004). Реализован почти полностью в среде Coq.</p>
+<p><img data-src="images/compcert-diagram.png" alt="image" src="images/compcert-diagram.png"></p>
+</section><div><a class="slider-prev" href="#пример-sel4"></a><a class="slider-next" href="#compcert"></a></div>
+<section id="compcert" class="slide level1">
+<h1>CompCert</h1>
+<pre><code>-------------------------------------------------------------------------------
+Language            Files        Lines         Code     Comments       Blanks
+-------------------------------------------------------------------------------
+Assembly               61         4584         4238            0          346
+C                     220        95473        64487        17955        13031
+C Header               86        14771         7814         4422         2535
+Coq                   225       176601       145869        13375        17357
+CSS                     3          193          149           15           29
+HTML                    1          352          308            0           44
+JavaScript              1           24           23            0            1
+Makefile                9          733          515           52          166
+Markdown                2           72           72            0            0
+OCaml                 150        35080        26589         4440         4051
+Perl                    1           18           15            1            2
+Shell                   4          883          654          131           98
+Plain Text              2         1672         1672            0            0
+-------------------------------------------------------------------------------
+Total                 765       330456       252405        40391        37660
+-------------------------------------------------------------------------------</code></pre>
+</section><div><a class="slider-prev" href="#контрпример-compcert"></a><a class="slider-next" href="#tiny-c-compiler"></a></div>
+<section id="tiny-c-compiler" class="slide level1">
+<h1>Tiny C Compiler</h1>
+<pre><code>-------------------------------------------------------------------------------
+Language            Files        Lines         Code     Comments       Blanks
+-------------------------------------------------------------------------------
+Assembly                4          665          547            0          118
+Autoconf                1            9            1            4            4
+Batch                   1           28           28            0            0
+C                      34        30915        25275         2815         2825
+C Header               77        24919        20670         2430         1819
+CMake                   2          476          342           93           41
+HTML                    1         2241         2078           23          140
+Makefile                2          417          303           41           73
+Module-Definition       5         2770         2718            0           52
+Perl                    1          427          306           63           58
+Shell                   2          415          355           27           33
+Plain Text              1          158          158            0            0
+-------------------------------------------------------------------------------
+Total                 131        63440        52781         5496         5163
+-------------------------------------------------------------------------------</code></pre>
+</section><div><a class="slider-prev" href="#compcert"></a><a class="slider-next" href="#спецификация-языков-программирования"></a></div>
+<section id="спецификация-языков-программирования" class="slide level1">
+<h1>Спецификация языков программирования</h1>
+<h2 id="синтаксис">Синтаксис</h2>
+<h2 id="статическая-семантика">Статическая семантика</h2>
+<h2 id="динамическая-семантика">Динамическая семантика</h2>
+<ul>
+<li class="fragment">текстовая спецификация</li>
+<li class="fragment">компилятор или интерпретатор</li>
+<li class="fragment">операционная семантика</li>
+<li class="fragment">денотационная семантика</li>
+<li class="fragment">аксиоматическая семантика</li>
+</ul>
+</section><div><a class="slider-prev" href="#tiny-c-compiler"></a><a class="slider-next" href="#предметно-ориентированные-языки"></a></div>
+<section id="предметно-ориентированные-языки" class="slide level1">
+<h1>Предметно-ориентированные языки</h1>
+<p>Семантику языков программирования общего назначения сложно описать из-за их универсальности (эквивалентности машине Тьюринга).</p>
+<p>Для описания формальной семантики и последующей формальной верификации удобнее использовать ограниченные предметно-ориентированные языки.</p>
+<p>Предметно-ориентированный язык программирования — язык, адекватно отражающий специфику некоторой предметной области.</p>
+<p>Код на таких языках, как правило, декларативен и описывает в большей степени спецификацию программы ("денотационный подход"), а не её реализацию ("операционный подход").</p>
+</section><div><a class="slider-prev" href="#спецификация-языков-программирования"></a><a class="slider-next" href="#языково-ориентированное-программирование"></a></div>
+<section id="языково-ориентированное-программирование" class="slide level1">
+<h1>Языково-ориентированное программирование</h1>
+<p>(M. Ward, 1994)</p>
+<ol type="1">
+<li class="fragment">В форме спецификации разрабатываются языки, адекватно отражающие специфику предметной области, задачи которой должен решать программный продукт.</li>
+<li class="fragment">Разработка разделяется на два (в идеале — независимых) процесса:</li>
+</ol>
+<ul>
+<li class="fragment">описание целевого программного продукта в терминах предметно-ориентированных языков;</li>
+<li class="fragment">создание средств трансляции или компиляции таких языков для выполнения программы.</li>
+</ul>
+</section><div><a class="slider-prev" href="#предметно-ориентированные-языки"></a><a class="slider-next" href="#предметно-ориентированные-языки-1"></a></div>
+<section id="предметно-ориентированные-языки-1" class="slide level1">
+<h1>Предметно-ориентированные языки</h1>
+<p>Предметно-ориентированный язык в нашем понимании — это, прежде всего, семантика.</p>
+<p>Модель предметной области фиксируется в виде предметно-ориентированного языка.</p>
+<p>Далее на основе семантики:</p>
+<ul>
+<li class="fragment">доказываются свойства программы (вверх по уровню абстракции от оборудования)</li>
+<li class="fragment">доказывается корректность реализации (вниз по уровню абстракции от оборудования)</li>
+</ul>
+</section><div><a class="slider-prev" href="#языково-ориентированное-программирование"></a><a class="slider-next" href="#предметно-ориентированные-языки-2"></a></div>
+<section id="предметно-ориентированные-языки-2" class="slide level1">
+<h1>Предметно-ориентированные языки</h1>
+<h2 id="замечания">Замечания</h2>
+<p>Предметно-ориентированные языки можно реализовать как внешним образом (HTML+CSS, SQL, Bison, YACC, Antlr, ...), так и внутренним (макросы LISP, eDSL в Haskell, Scala, JSX, LINQ).</p>
+<p>Если определить предметно-ориентированный язык с позиций семантики, то к такому определению целесообразно отнести и интерфейсы библиотек программных модулей (например, BSD Sockets или части стандартной библиотеки языка C, POSIX), и протоколы (HTTP).</p>
+<p>Для языково-ориентированного программирования представляется необходимым наличие связующего языка (glue language), который организует отдельные аспекты предметной области в программный комплекс. Современная практика разработки показывает, что в качестве такого языка используются динамические языки (Python, JavaScript, Lua).</p>
+</section><div><a class="slider-prev" href="#предметно-ориентированные-языки-1"></a><a class="slider-next" href="#предлагаемый-подход"></a></div>
+<section id="предлагаемый-подход" class="slide level1">
+<h1>Предлагаемый подход</h1>
+<p>Цель: собрать подход к итеративной разработке верифицируемых сложных программных систем на основе предметно-ориентированных языков.</p>
+<p>Задача: средство описания семантики предметно-ориентированных языков, внешних библиотек и связующего языка, обеспечивающее возможность формального описания системы, совместимое при этом с частью существующих средств формальной верификации.</p>
+</section><div><a class="slider-prev" href="#предметно-ориентированные-языки-2"></a><a class="slider-next" href="#промежуточные-представления"></a></div>
+<section id="промежуточные-представления" class="slide level1">
+<h1>Промежуточные представления</h1>
+<p>Как правило, для анализа программ используется не их исходный код, а некоторое промежуточное представление с меньшим, чем у исходного кода, уровнем детализации (уникальность идентификаторов, раскрытие синтаксического сахара), однако с большим уровнем абстракции от оборудования, по сравнению с машинным кодом.</p>
+</section><div><a class="slider-prev" href="#предлагаемый-подход"></a><a class="slider-next" href="#классификация-промежуточных-представлений"></a></div>
+<section id="классификация-промежуточных-представлений" class="slide level1">
+<h1>Классификация промежуточных представлений</h1>
+<ol type="1">
+<li class="fragment">Низкоуровневые промежуточные представления, используемые в компиляторах в машинный код (LLVM, Typed Assembly Language).</li>
+<li class="fragment">Виртуальные машины уровня приложений на основе байт-кода, ориентированные на императивные языки программирования (JVM/Java, CLI/C#).</li>
+<li class="fragment">Виртуальные машины уровня приложений на основе байт-кода, ориентированные на функциональные языки программирования (ZINC/OCaml, WAM/Prolog, BEAM/Erlang, Python).</li>
+<li class="fragment">__Внутренние промежуточные представления на основе графа потока исполнения, сохраняющие информацию о типах значений (CPS).__</li>
+<li class="fragment">Высокоуровневые, специфичные для языка программирования промежуточные представления на основе канонических форм синтаксического дерева (STG/Haskell, Cminor/CompCert/C).</li>
+</ol>
+<p>Васенин В. А., Кривчиков М. А. Методы промежуточного представления программ // Программная инженерия. — 2017. — Т. 8, № 8. — С. 345–353.</p>
+<p>Предлагается использовать промежуточное представление уровня 4 по этой классификации с достаточно выразительной для решения задачи системой типов.</p>
+</section><div><a class="slider-prev" href="#промежуточные-представления"></a><a class="slider-next" href="#системы-типов-1"></a></div>
+<section id="системы-типов-1" class="slide level1">
+<h1>Системы типов</h1>
+<p>В виде формальной системы с основным отношением — суждением типизации (t : T), где t — терм ("код программы"), а T — тип ("спецификация").</p>
+<p>Свойство системы типов: сильные (C#, Python) или слабые (C) типы</p>
+<p>Свойство её реализации: статическая (Haskell) или динамическая (Python) проверка</p>
+</section><div><a class="slider-prev" href="#классификация-промежуточных-представлений"></a><a class="slider-next" href="#λ-исчисление-с-зависимыми-типами"></a></div>
+<section id="λ-исчисление-с-зависимыми-типами" class="slide level1">
+<h1>λ-исчисление с зависимыми типами</h1>
+<p>Зависимые типы — свойство системы типов, которое позволяет использовать значения для описания типов.</p>
+<p>Например:</p>
+<pre><code>mult : forall (n m p : nat), matrix n m -&gt; matrix m p -&gt; matrix n p</code></pre>
+<p>Реализовано в виде среды Coq, языков Agda и Idris.</p>
+<p>Исследования проводились также автором доклада в диссертации "Формальные модели и верификация свойств программ с использованием промежуточного представления".</p>
+</section><div><a class="slider-prev" href="#системы-типов-1"></a><a class="slider-next" href="#недостатки-статической-типизации"></a></div>
+<section id="недостатки-статической-типизации" class="slide level1">
+<h1>Недостатки статической типизации</h1>
+<p>Использовать сильную статическую типизацию на ранних стадиях разработки программного комплекса сложно: система типов сразу фиксирует спецификацию кода.</p>
+<p>С этим фактом связана высокая популярность в настоящее время динамических языков (Python, JavaScript), особенно в области анализа данных.</p>
+<p>В компиляторе GHC языка Haskell есть флаг <code>-fdefer-type-errors</code>, который заменяет ошибки типизации исключениями во время исполнения нетипизированных веток функции.</p>
+<p>Однако для прототипирования система типов Haskell даже с учётом этого флага может быть ограничивающим фактором. Например, следующее определение функции некорректно и не может быть использовано даже с отложенными ошибками типизации.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="ot">foo ::</span> a <span class="ot">-&gt;</span> b</a>
+<a class="sourceLine" id="cb6-2" data-line-number="2">foo <span class="dt">True</span>  <span class="fu">=</span> <span class="dt">False</span></a>
+<a class="sourceLine" id="cb6-3" data-line-number="3">foo <span class="dt">False</span> <span class="fu">=</span> <span class="st">"Hello world!"</span></a>
+<a class="sourceLine" id="cb6-4" data-line-number="4">foo <span class="ch">'x'</span>   <span class="fu">=</span> <span class="dv">42</span></a></code></pre></div>
+</section><div><a class="slider-prev" href="#λ-исчисление-с-зависимыми-типами"></a><a class="slider-next" href="#постепенная-типизация"></a></div>
+<section id="постепенная-типизация" class="slide level1">
+<h1>Постепенная типизация</h1>
+<p>Gradual typing — система типов, в которой для части кода проверки системы типов осуществляются статически на этапе компиляции, а часть кода помечается как нетипизированная и проверяется динамически на этапе исполнения.</p>
+<p><img data-src="images/react-flow.gif" alt="image" src="images/react-flow.gif"></p>
+</section><div><a class="slider-prev" href="#недостатки-статической-типизации"></a><a class="slider-next" href="#примеры-постепенной-типизации"></a></div>
+<section id="примеры-постепенной-типизации" class="slide level1">
+<h1>Примеры постепенной типизации</h1>
+<h2 id="flow-и-typescript-javascript">Flow и TypeScript (JavaScript)</h2>
+<div class="sourceCode" id="cb7"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="co">/*::</span></a>
+<a class="sourceLine" id="cb7-2" data-line-number="2"><span class="co">type BinaryTree =</span></a>
+<a class="sourceLine" id="cb7-3" data-line-number="3"><span class="co">{ kind: "leaf", value: number } |</span></a>
+<a class="sourceLine" id="cb7-4" data-line-number="4"><span class="co">{ kind: "branch", left: BinaryTree, right: BinaryTree }</span></a>
+<a class="sourceLine" id="cb7-5" data-line-number="5"><span class="co">*/</span></a>
+<a class="sourceLine" id="cb7-6" data-line-number="6"><span class="kw">function</span> <span class="at">sumLeaves</span>(tree <span class="co">/*: BinaryTree*/</span>) <span class="co">/*: number*/</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb7-7" data-line-number="7">    <span class="cf">if</span> (<span class="va">tree</span>.<span class="at">kind</span> <span class="op">===</span> <span class="st">"leaf"</span>) <span class="op">{</span></a>
+<a class="sourceLine" id="cb7-8" data-line-number="8">        <span class="cf">return</span> <span class="va">tree</span>.<span class="at">value</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb7-9" data-line-number="9">    <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb7-10" data-line-number="10">        <span class="cf">return</span> <span class="at">sumLeaves</span>(<span class="va">tree</span>.<span class="at">left</span>) <span class="op">+</span> <span class="at">sumLeaves</span>(<span class="va">tree</span>.<span class="at">right</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb7-11" data-line-number="11">    <span class="op">}</span></a>
+<a class="sourceLine" id="cb7-12" data-line-number="12"><span class="op">}</span></a></code></pre></div>
+</section><div><a class="slider-prev" href="#постепенная-типизация"></a><a class="slider-next" href="#примеры-постепенной-типизации-1"></a></div>
+<section id="примеры-постепенной-типизации-1" class="slide level1">
+<h1>Примеры постепенной типизации</h1>
+<h2 id="mypy-python3">MyPy (Python3)</h2>
+<div class="sourceCode" id="cb8"><pre class="sourceCode python"><code class="sourceCode python"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw">def</span> send_email(address: Union[<span class="bu">str</span>, List[<span class="bu">str</span>]],</a>
+<a class="sourceLine" id="cb8-2" data-line-number="2">           sender: <span class="bu">str</span>,</a>
+<a class="sourceLine" id="cb8-3" data-line-number="3">           cc: Optional[List[<span class="bu">str</span>]],</a>
+<a class="sourceLine" id="cb8-4" data-line-number="4">           bcc: Optional[List[<span class="bu">str</span>]],</a>
+<a class="sourceLine" id="cb8-5" data-line-number="5">           subject<span class="op">=</span><span class="st">''</span>,</a>
+<a class="sourceLine" id="cb8-6" data-line-number="6">           body: List[<span class="bu">str</span>] <span class="op">=</span> <span class="va">None</span></a>
+<a class="sourceLine" id="cb8-7" data-line-number="7">           ) <span class="op">-&gt;</span> <span class="bu">bool</span>:</a></code></pre></div>
+</section><div><a class="slider-prev" href="#примеры-постепенной-типизации"></a><a class="slider-next" href="#системы-подтипов"></a></div>
+<section id="системы-подтипов" class="slide level1">
+<h1>Системы подтипов</h1>
+<p>Средства постепенной типизации используют основаны не на системе типов, а на системе подтипов.</p>
+<p>Система типов: типы неупорядочены, каждый терм имеет только один тип (t : T), где T — нормальная форма типа по отношению редукции на типах.</p>
+<p>Система подтипов: типы образуют частичный порядок (S ⊑ T), который можно интерпретировать как "значение типа S можно подставить в качестве значения типа T".</p>
+<p>Постепенная типизация вводит понятие "типа-джокера" <code>any</code>, такой, что (S ⊑ any) для любого типа S.</p>
+<p>Обратное отношение (any ⊑ S) возможно только с нарушением достоверности, но на практике его допускается использовать в некоторых случаях.</p>
+</section><div><a class="slider-prev" href="#примеры-постепенной-типизации-1"></a><a class="slider-next" href="#подтипы-для-языково-ориентированного-программирования"></a></div>
+<section id="подтипы-для-языково-ориентированного-программирования" class="slide level1">
+<h1>Подтипы для языково-ориентированного программирования</h1>
+<ol type="1">
+<li class="fragment">В форме спецификации разрабатываются языки, адекватно отражающие специфику предметной области, задачи которой должен решать программный продукт.</li>
+</ol>
+<p>Спецификация представляется в виде пары типов:</p>
+<ul>
+<li class="fragment">StaticSemantics (статическая семантика предметно-ориентированного языка)</li>
+<li class="fragment">Specification (абстрактная спецификация языка, Specification : StaticSemantics → D).</li>
+</ul>
+<p>Для этапа прототипирования допускается использование "типа-джокера", чтобы отложить уточнение несущественных аспектов на более поздний этап разработки.</p>
+</section><div><a class="slider-prev" href="#системы-подтипов"></a><a class="slider-next" href="#подтипы-для-языково-ориентированного-программирования-1"></a></div>
+<section id="подтипы-для-языково-ориентированного-программирования-1" class="slide level1">
+<h1>Подтипы для языково-ориентированного программирования</h1>
+<ol start="2" type="1">
+<li class="fragment">Разработка разделяется на два (в идеале — независимых) процесса:</li>
+</ol>
+<ul>
+<li class="fragment">описание целевого программного продукта в терминах предметно-ориентированных языков;</li>
+</ul>
+<p>Код на предметно-ориентированном языке — program : StaticSemantics.</p>
+<p>Формальная верификация функциональных свойств производится с использованием гарантий, которые предоставляются абстрактной спецификацией:</p>
+<p>Specification(program) : D, Property(Specification(program))</p>
+<ul>
+<li class="fragment">создание средств трансляции или компиляции таких языков для выполнения программы.</li>
+</ul>
+<p>Динамическая семантика языка, DynamicSemantics ⊑ Specification</p>
+</section><div><a class="slider-prev" href="#подтипы-для-языково-ориентированного-программирования"></a><a class="slider-next" href="#образцы"></a></div>
+<section id="образцы" class="slide level1">
+<h1>Образцы</h1>
+<p>Промежуточное представление используется для описания типов и термов одновременно. Разработанное автором на основе существующего байт-кода представление описывает процесс сопоставления значения с образцом:</p>
+<pre class="sourceCode "><code>// Образцы
+Recognizer ::=
+
+    /// Точное заданное значение
+    Exact(Value),
+
+    /// Произвольное значение заданного примитивного типа
+    ValueLiteral(ValueType),
+
+    /// Список
+    Structural,
+
+    /// Произвольное значение любого примитивного типа
+    Literal,
+
+    /// Любое одиночное значение, включая список
+    Term,
+
+    /// Повторение уже распознанного значения с заданным номером
+    OldExpression(Variable),</code></pre>
+</section><div><a class="slider-prev" href="#подтипы-для-языково-ориентированного-программирования-1"></a><a class="slider-next" href="#сопоставление-с-образцом"></a></div>
+<section id="сопоставление-с-образцом" class="slide level1">
+<h1>Сопоставление с образцом</h1>
+<pre class="sourceCode "><code>/// Код функции
+Expr ::=
+
+    /// Завершить распознавание с ошибкой
+    Fail
+
+    /// Распознать значение 
+    Recognize(Recognizer) 
+
+    /// Распознать остаток
+    Close
+
+    /// Убедиться, что значение распознано без остатка
+    Check
+
+    /// Перейти к анализу ранее распознанного фрагмента
+    Range(Variable),
+
+    /// Ветвление
+    Branch(Branch),
+
+    /// Записать в результат вызов функции
+    Eval(ExprVector),
+
+    /// Записать в результат значение-константу
+    Value(Value),
+
+    /// Записать в результат значение ранее распознанного фрагмента
+    EmitValue { index: Variable, unquote_level: u8 },
+
+    /// Записать в результат список, перейти к формированию его составных частей
+    Structural(ExprVector),
+
+    /// Записать в результат функцию
+    Function{ name: Option&lt;Symbol&gt;, body: ExprVector },
+
+    /// Выполнить все вызовы функций в результате и записать
+    /// полученное выражение в качестве распознанного фрагмента
+    Push,
+    ...</code></pre>
+</section><div><a class="slider-prev" href="#образцы"></a><a class="slider-next" href="#отношение-распознавания"></a></div>
+<section id="отношение-распознавания" class="slide level1">
+<h1>Отношение распознавания</h1>
+<p>На этапе проверки типов значения отождествляются с константными образцами. Вместо отношения типизации в качестве базового используется отношение распознавания:</p>
+<p>Pattern₁ ≤ Pattern₂, если все значения, которые распознаются образцом Pattern₁ распознаются образцом Pattern₂.</p>
+<p>Примеры:</p>
+<pre class="sourceCode "><code>t : int    --&gt;  Recognize OldExpression(t) ≤ Recognize ValueLiteral(int)
+
+t : 1 | 2  --&gt;  Recognize OldExpression(t) ≤ Branch( (Recognize Exact 1), (Recognize Exact 2) )
+
+1 : 1 | 2  --&gt;  Recognize Exact 1 ≤ Branch( (Recognize Exact 1), (Recognize Exact 2) )</code></pre>
+</section><div><a class="slider-prev" href="#сопоставление-с-образцом"></a><a class="slider-next" href="#типы-функций"></a></div>
+<section id="типы-функций" class="slide level1">
+<h1>Типы функций</h1>
+<p>Типы — это завершимые функции промежуточного представления.</p>
+<p>Завершимость может быть относительной, в зависимости от входных данных:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="kw">function</span> <span class="at">f</span>(x) <span class="op">{</span></a>
+<a class="sourceLine" id="cb12-2" data-line-number="2">    <span class="cf">if</span> (x <span class="kw">instanceof</span> Number) <span class="cf">return</span> x <span class="op">+</span> <span class="dv">1</span><span class="op">;</span></a>
+<a class="sourceLine" id="cb12-3" data-line-number="3">    <span class="cf">while</span>(<span class="kw">true</span>) <span class="op">{}</span></a>
+<a class="sourceLine" id="cb12-4" data-line-number="4"><span class="op">}</span></a></code></pre></div>
+<p>Основное отношение — (трёхместное) отношение совместимости (подтипов).</p>
+<p>f ⊑ₜ g, если:</p>
+<ol type="1">
+<li class="fragment">ограничение g на входные образцы t завершимо (Terminates(g, t))</li>
+<li class="fragment">любой входной образец f принимается g</li>
+<li class="fragment">любое выходное значение f принимается g для данного входного образца</li>
+</ol>
+<p>Выражения дополняются выражениями Terminates, Prove.</p>
+</section><div><a class="slider-prev" href="#отношение-распознавания"></a><a class="slider-next" href="#теоретические-результаты"></a></div>
+<section id="теоретические-результаты" class="slide level1">
+<h1>Теоретические результаты</h1>
+<p>Завершимые функции с отношением ⊑ₜ при фиксированном t образуют предпорядок (отношение рефлексивно и транзитивно, но не антисимметрично). Если отождествить функции по антисимметричности (f ⊑ₜ g, g ⊑ₜ f ⇒ f =ₜ g), то на множестве таких классов эквивалентности отношение образует частичный порядок.</p>
+<p>Классы эквивалентности завершимых функций с отношением ⊑ₜ образуют полную решётку:</p>
+<ul>
+<li class="fragment">наименьший элемент — Function{ Fail }</li>
+<li class="fragment">наибольший элемент — t → Close (глобальный наибольший элемент — Function { Close })</li>
+<li class="fragment">представитель верхней грани определяется ветвлением (f ∨ g — выражение Branch(f, g))</li>
+<li class="fragment">представитель нижней грани определяется последовательным сопоставлением</li>
+</ul>
+<p>Предположительно, система подтипов непротиворечива, планируется построить модель в терминах теории доменов.</p>
+<p>Автоматическое доказательство не может использовать транзитивность отношения совместимости т.к. это делает проверку типов неразрешимой.</p>
+<p>Предполагается использовать автоматизированное доказательство с ручным указанием дополнительных разбиений образцов, для этого набор выражений потребуется расширить.</p>
+</section><div><a class="slider-prev" href="#типы-функций"></a><a class="slider-next" href="#совместимость-с-известными-моделями"></a></div>
+<section id="совместимость-с-известными-моделями" class="slide level1">
+<h1>Совместимость с известными моделями</h1>
+<p>Предлагаемая система типов заведомо не менее мощна, чем λ-исчисление с простыми типами:</p>
+<blockquote>
+<p>Type ::= B | τ₁ → τ₂</p>
+<p>⟦B⟧ = Recognize ValueLiteral(B)</p>
+<p>⟦τ₁ → τ₂⟧ = Function{ Recognize Term, Prove(⟦τ₁⟧, EmitValue 1), Push, Prove(⟦τ₂⟧) }</p>
+</blockquote>
+<p>Открытые вопросы:</p>
+<ul>
+<li class="fragment">полиморфное λ-исчисление?</li>
+<li class="fragment">исчисление конструкций?</li>
+</ul>
+<p>Типы представимы, однако соответствие и системы типов и разрешимость проверки типов требует доказательства.</p>
+</section><div><a class="slider-prev" href="#теоретические-результаты"></a><a class="slider-next" href="#реализация"></a></div>
+<section id="реализация" class="slide level1">
+<h1>Реализация</h1>
+<p>Основой для промежуточного представления стал язык Рефал [1] и его промежуточное представление "Язык сборки" [2].</p>
+<p>Основные отличия:</p>
+<ul>
+<li class="fragment">язык сборки относится к третьему классу промежуточных представлений (виртуальные машины уровня приложений на основе байт-кода, ориентированные на функциональные языки программирования), а предлагаемое промежуточное представление — к четвёртому (внутренние промежуточные представления на основе графа потока исполнения, сохраняющие информацию о типах значений).</li>
+<li class="fragment">язык сборки описан для языка "Рефал-2", в предлагаемом промежуточном представлении поддерживаются функции высшего порядка</li>
+<li class="fragment">промежуточное представление существенно расширено для системы типов</li>
+<li class="fragment">планируется детальное сравнение с представлением "язык рефал-графов", которое используется в суперкомпиляторе SCP-4 [3].</li>
+</ul>
+<p>[1] Турчин В. Ф. «Метаалгоритмический язык». Кибернетика, вып. 4 (1968 г.): 45–54</p>
+<p>[2] Романенко С.А. Машинно-независимый компилятор с языка рекурсивных функций: Диссертация на соискание учёной степени кандидата физико-математических. Москва: ИПМ АН СССР, 1978</p>
+<p>[3] А.П. Немытых. Суперкомпилятор SCP4. Общая структура. М.: Издательство ЛКИ, 2007.</p>
+</section><div><a class="slider-prev" href="#совместимость-с-известными-моделями"></a><a class="slider-next" href="#метавычисления-и-суперкомпиляция"></a></div>
+<section id="метавычисления-и-суперкомпиляция" class="slide level1">
+<h1>Метавычисления и суперкомпиляция</h1>
+<p>Метавычисления — это раздел теории и практики программирования, связанный с разработкой и использованием метапрограмм — конструктивных метасистем над программами.</p>
+<p>Суперкомпиляция — техника преобразования программ [в первую очередь — оптимизации], основанная на построении полной и самодостаточной модели программы. [2]</p>
+<p>Две основные стадии суперкомпиляции:</p>
+<ol type="1">
+<li class="fragment"><em>Прогонка</em> программы на параметризованных входных данных (частичная специализация). Выполняется построение множетсва конфигураций машины.</li>
+<li class="fragment"><em>Свёртка</em> результата прогонки для получения остаточной программы (выделение рекурсии).</li>
+</ol>
+<p>[1] С.М. Абрамов. Основы метавычислений. Курс НОУ ИНТУИТ. <a href="http://www.intuit.ru/studies/courses/1067/221/info" class="uri">http://www.intuit.ru/studies/courses/1067/221/info</a></p>
+<p>[2] И.Г. Ключников. Суперкомпиляция: идеи и методы. Практика функционального программирования, № 7, 2011.</p>
+</section><div><a class="slider-prev" href="#реализация"></a><a class="slider-next" href="#суперкомпиляция-для-решения-задач-верификации"></a></div>
+<section id="суперкомпиляция-для-решения-задач-верификации" class="slide level1">
+<h1>Суперкомпиляция для решения задач верификации</h1>
+<p>Известны публикации, в которых суперкомпиляция используется для верификации, однако используется она как средство верификации моделей программ, на относительно невысоком уровне абстракции от оборудования.</p>
+<p>[1] Klimov A.V. (2010) A Java Supercompiler and Its Application to Verification of Cache-Coherence Protocols. In: Pnueli A., Virbitskaite I., Voronkov A. (eds) Perspectives of Systems Informatics. PSI 2009. Lecture Notes in Computer Science, vol 5947. Springer, Berlin, Heidelberg</p>
+<p>[2] A. Lisitsa and A. Nemytykh, "Towards verification via supercompilation," 29th Annual International Computer Software and Applications Conference (COMPSAC'05), Edinburgh, 2005, pp. 9-10 Vol. 1.</p>
+<p>[3] Lisitsa, A., &amp; Nemytykh, A. P. (2008). Reachability analysis in verification via supercompilation. International Journal of Foundations of Computer Science, 19(04), 953-969.</p>
+<p>[4] Lisitsa, A. P., &amp; Nemytykh, A. P. (2007). Verification as a parameterized testing (experiments with the SCP4 supercompiler). Programming and Computer Software, 33(1), 14-23.</p>
+<p>В монографии [5] отмечается связь между суперкомпиляцией и типизацией, однако в дальнейшем речь в ней идёт исключительно о суперкомпиляции для оптимизации.</p>
+<p>[5] А.П. Немытых. Суперкомпилятор SCP4. Общая структура. М.: Издательство ЛКИ, 2007.</p>
+</section><div><a class="slider-prev" href="#метавычисления-и-суперкомпиляция"></a><a class="slider-next" href="#изменения-синтаксиса"></a></div>
+<section id="изменения-синтаксиса" class="slide level1">
+<h1>Изменения синтаксиса</h1>
+<p>Несмотря на тот факт, что для проверки типов используется промежуточное представление, для разработки средств проверки типов необходимо использовать язык с конкретным синтаксисом. Автором доклада был модифицирован синтаксис языка с целью его приведения к более привычному для современного состояния виду.</p>
+<p>Традиционный синтаксис:</p>
+<pre class="sourceCode "><code>DqString (e.prefix) e.str = e.str =&gt; {
+    '\\' s.escape e.rest =
+        s.result : &lt;StringEscape s.escape&gt;
+        = &lt;DqString (e.prefix s.result) e.rest&gt;;
+    '\"' e.rest = (String e.prefix) &lt;Lexer e.rest&gt;;
+    s.next e.rest = &lt;DqString (e.prefix s.next) e.rest&gt;  
+};</code></pre>
+<p>Новый синтаксис:</p>
+<pre class="sourceCode "><code>// Строка в двойных кавычках. 
+// На вход подаётся строка, начиная с символа, следующего за открывающей кавычкой.
+fn DqString (e.prefix) e.str =&gt; match e.str with {
+    '\\' s.escape e.rest, 
+        let s.result = &lt;StringEscape s.escape&gt;
+        =&gt; &lt;DqString (e.prefix s.result) e.rest&gt;;
+    '\"' e.rest =&gt; (String e.prefix) &lt;Lexer e.rest&gt;;
+    s.next e.rest =&gt; &lt;DqString (e.prefix s.next) e.rest&gt;  
+};</code></pre>
+</section><div><a class="slider-prev" href="#суперкомпиляция-для-решения-задач-верификации"></a><a class="slider-next" href="#интерпретатор-промежуточного-представления"></a></div>
+<section id="интерпретатор-промежуточного-представления" class="slide level1">
+<h1>Интерпретатор промежуточного представления</h1>
+<p>Автором доклада реализован интерпретатор промежуточного представления и разработан транслятор с языка в промежуточное представление.</p>
+<p>Интерпретатор реализован на языке Rust (объём порядка 5 тыс. строк кода).</p>
+<p>Транслятор был разработан на языке Рефал (в реализации, которую удалось найти в работоспособном состоянии) и с помощью метода раскрутки (bootstrapping) переведён в режим самоподдержки (self-hosting), по следующей схеме:</p>
+<ol type="1">
+<li class="fragment">Транслятор T скомпилирован компилятором Рефал в исполнимый код E.</li>
+</ol>
+<p>...</p>
+</section><div><a class="slider-prev" href="#изменения-синтаксиса"></a><a class="slider-next" href="#интерпретатор-промежуточного-представления-1"></a></div>
+<section id="интерпретатор-промежуточного-представления-1" class="slide level1">
+<h1>Интерпретатор промежуточного представления</h1>
+<ol start="2" type="1">
+<li class="fragment"><p>Итеративная доработка интерпретатора:</p>
+<blockquote>
+<ol type="a">
+<li class="fragment">Получено промежуточное представление фрагмента транслятора (E(T') = I').</li>
+<li class="fragment">Промежуточное представление подаётся на вход интерпретатору (Interpreter I').</li>
+<li class="fragment">По полученным ошибкам производится доработка интерпретатора или транслятора.</li>
+<li class="fragment"><p>Итерация завершается после того как достигается самоподдержка:</p>
+<blockquote>
+<p>E(T) = I Interpreter(I, T) = I₁, Interpreter(I₁, T) = I₂, Interpreter(I₂, T) = I₃</p>
+<p>I₂ ≡ I₃</p>
+</blockquote></li>
+</ol>
+<p>По завершению итеративной доработки использовавшийся изначально компилятор Рефал становится не нужен.</p>
+</blockquote></li>
+</ol>
+<p>...</p>
+</section><div><a class="slider-prev" href="#интерпретатор-промежуточного-представления"></a><a class="slider-next" href="#интерпретатор-промежуточного-представления-2"></a></div>
+<section id="интерпретатор-промежуточного-представления-2" class="slide level1">
+<h1>Интерпретатор промежуточного представления</h1>
+<ol start="3" type="1">
+<li class="fragment"><p>Итеративная модификация синтаксиса:</p>
+<blockquote>
+<ol type="a">
+<li class="fragment">Добавляется поддержка переходного синтаксиса.</li>
+<li class="fragment">Код транслятора T переводится на переходный синтаксис.</li>
+<li class="fragment">Удаляется поддержка старого синтаксиса, добавляется поддержка нового синтаксиса.</li>
+<li class="fragment">Код транслятора T переводится на новый синтаксис.</li>
+</ol>
+<p>На каждом этапе проверяется, что состояние самоподдержки сохранено.</p>
+</blockquote></li>
+</ol>
+</section><div><a class="slider-prev" href="#интерпретатор-промежуточного-представления-1"></a><a class="slider-next" href="#дальнейшая-работа"></a></div>
+<section id="дальнейшая-работа" class="slide level1">
+<h1>Дальнейшая работа</h1>
+<h2 id="совместимость-с-существующими-средствами">Совместимость с существующими средствами</h2>
+<p>Если предлагаемая автором система типов не менее мощна, чем λ-исчисление с зависимыми типами, относительно просто можно разработать транслятор с языков Coq, Agda, Idris в используемую модель.</p>
+<p>Для внешних библиотек программных модулей, которые реализованы на языках программирования общего назначения целесообразно использовать существующие подходы по тестированию на основе формальных моделей (UniTESK).</p>
+<p>Вариант 1. Такая спецификация уже есть и её можно транслировать в тип в терминах промежуточного представления.</p>
+<p>Вариант 2. Спецификация разрабатывается в терминах промежуточного представления и затем транслируется в язык средства тестирования.</p>
+</section><div><a class="slider-prev" href="#интерпретатор-промежуточного-представления-2"></a><a class="slider-next" href="#спасибо-за-внимание"></a></div>
+<section id="спасибо-за-внимание" class="slide level1">
+<h1>Спасибо за внимание!</h1>
+</section><div><a class="slider-prev" href="#дальнейшая-работа"></a><a class="slider-next" href="#пример-язык-обхода-rdf-графов"></a></div>
+<section id="пример-язык-обхода-rdf-графов" class="slide level1">
+<h1>Пример: язык обхода RDF-графов</h1>
+<p>Граф представлен множеством RDF-триплетов (субъект, предикат, объект).</p>
+<p>Предметно-ориентированный язык предназначен для обхода графа с сопоставлением с образцом и последующей генерацией подграфа.</p>
+<pre class="sourceCode "><code>Statement ::=
+
+    /// распознать триплет
+    RecognizeTriple(Variable, TripleRecognizer),
+
+    /// распознать значение
+    RecognizeValue(Variable, ValueRecognizer),
+
+    /// обход графа
+    Traverse{
+        variable: Variable,
+        destination: Option&lt;Variable&gt;,
+        triplet_name: Variable,
+        kind: TripleRecognizer,
+        traversal: Traversal,
+        statements: Vec&lt;Statement&gt;
+    },
+
+    /// вывод триплета
+    EmitTriple(TripleEmitter),
+
+    /// обращение результата
+    Not(Statement),</code></pre>
+</section><div><a class="slider-prev" href="#спасибо-за-внимание"></a><a class="slider-next" href="#образцы-1"></a></div>
+<section id="образцы-1" class="slide level1">
+<h1>Образцы</h1>
+<pre class="sourceCode "><code>TripleRecognizer ::= {
+    subject: ValueRecognizer,
+    predicate: ValueRecognizer,
+    object: ValueRecognizer
+}
+
+ValueRecognizer ::=
+    Value(Value),
+    Term(Option&lt;Variable&gt;),
+    OldValue(Variable),
+    CompareDateTime(Ordering, DateTime),
+    StringContains(String),
+    ...</code></pre>
+</section><div><a class="slider-prev" href="#пример-язык-обхода-rdf-графов"></a><a class="slider-next" href="#параметры-модели"></a></div>
+<section id="параметры-модели" class="slide level1">
+<h1>Параметры модели</h1>
+<p>Graph (граф), Value (значение).</p>
+<pre class="sourceCode "><code>fn Triplet [Value] [Value] [Value]; </code></pre>
+</section><div><a class="slider-prev" href="#образцы-1"></a><a class="slider-next" href="#семантика-образцов-на-значениях"></a></div>
+<section id="семантика-образцов-на-значениях" class="slide level1">
+<h1>Семантика образцов на значениях</h1>
+<pre class="sourceCode "><code>fn ValueRecognizerSemantics 
+    [ValueRecognizer] 
+    =&gt; [lambda { 
+            [Value] = [{ empty; fail }]
+        }];</code></pre>
+</section><div><a class="slider-prev" href="#параметры-модели"></a><a class="slider-next" href="#семантика-образцов-на-триплетах"></a></div>
+<section id="семантика-образцов-на-триплетах" class="slide level1">
+<h1>Семантика образцов на триплетах</h1>
+<pre class="sourceCode "><code>fn TripletRecognizerSemantics {
+    t.vr1 t.vr2 t.vr3 =&gt; [ lambda { [Triplet ] } ]
+}</code></pre>
+<p>Семантика обходов</p>
+<p>Производная</p>
+<p>Пример</p>
+</section><div><a class="slider-prev" href="#семантика-образцов-на-значениях"></a><a class="slider-next" href="#дополнения"></a></div>
+<section id="дополнения" class="slide level1">
+<h1>Дополнения</h1>
+<blockquote>
+<p>Роганов метаинтеллект Чечкин радикалы — это всё подходы к автоматизированному созданию программ, их динамическому анализу и т.п. Как эти средства "понимают" что делает фрагмент кода? В сегодняшнем докладе ******************<strong>* Существующие результаты</strong>********************* - plt-redex, LISP-подобные макросы - Роганов - O-Meta</p>
+</blockquote>
+</section><div><a class="slider-prev" href="#семантика-образцов-на-триплетах"></a><a class="slider-next"></a></div>
+
+<!-- start page -->
+   <div id="slider">
+       <a href="#описание-семантики-предметно-ориентированных-языков-программирования-с-использованием-подтипов" class="slider-start">PLAY</a>
+   </div>
+
+   <!-- progressbar container -->
+   <div class="slider-progress"></div>
+   </article>
+  </div>
+
+  
+  <script type="text/javascript">
+  document.addEventListener("keydown", function(e) {
+     if (e.altKey || e.ctrlKey || e.metaKey || e.shiftKey) { return; }
+     switch (e.keyCode) {
+       case 35: // End
+          var arr = document.querySelectorAll("a.slider-next:link");
+          var a = arr[arr.length - 1];
+          if (a && a.href) {
+            window.location = a.href;
+          }
+          break;
+       case 36: // Home
+          var a = document.querySelector("a.slider-start");
+          if (a && a.href) {
+            window.location = a.href;
+          }
+          break;
+       case 33: // Page Up
+       case 37: // left arrow
+         var a = document.querySelector("section:target ~ div a.slider-prev");
+         if (a && a.href) {
+           window.location = a.href;
+         }
+         break;
+       case 34: // Page Down
+       case 39: // right arrow
+         var a = document.querySelector("section:target ~ div a.slider-next");
+         if (a && a.href) {
+           window.location = a.href;
+         }
+         break;
+     }
+  });
+  </script>
+  
+
+</body></html>
