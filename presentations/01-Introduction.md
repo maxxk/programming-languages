@@ -49,9 +49,9 @@ https://maxxk.github.io/programming-languages/
 (to have acquaintance with programming language ≈ can write something more sophisticated than Hello World in less than an hour)
 
 
-# GitHub can detect 299 programming languages
+# GitHub can detect 316 programming languages
 
-Last year (2017) it was 277!
+Last year (2018) it was 299, in 2017 — 277!
 
 This figure is the lower bound of the count of programming languages which are used by more than one person.
 
@@ -80,36 +80,35 @@ Sources for the further research:
 # Generation-based history and classification {.flex}
 
 # Zuse Z3
-<span style="font-size: 0.5em">Image source: [Wikimedia Foundation](https://commons.wikimedia.org/wiki/File:Z3_Deutsches_Museum.JPG)</span>
 ![](images/Z3_Deutsches_Museum.jpg)
+<span style="font-size: 0.5em">Image source: [Wikimedia Foundation](https://commons.wikimedia.org/wiki/File:Z3_Deutsches_Museum.JPG)</span>
+
 
 # Zuse Z3 (1941)
-<span style="font-size: 0.5em">Image source: [Deutsches Museum](http://www.deutsches-museum.de/en/exhibitions/communication/computers/universal-computers/)</span>
 <div class="fullwidth">
 ![](images/CD_62419_Zuse-Lochstreifen-Z5.jpg)
 </div>
+<span style="font-size: 0.5em">Image source: [Deutsches Museum](http://www.deutsches-museum.de/en/exhibitions/communication/computers/universal-computers/)</span>
+
 
 # Zuse Z3
-<span style="font-size:small">Image source: https://www.linuxvoice.com/konrad-zuse-nearly-the-german-turing-5/</span>
-
 <div class="fullwidth" style="max-height: 60%; height: 60%; max-width: 55%">
 ![](images/z3sim-large6.jpg)
 </div>
+<span style="font-size:small">Image source: https://www.linuxvoice.com/konrad-zuse-nearly-the-german-turing-5/</span>
+
 
 Some of the early machines (not Zuse Z3) were programmed by rewiring. These machines are not actually automatic programmable computers.
-
-# Simple CPU
-<span style="font-size: 0.5em">Source: C.Petzold. Code</span>
-<div style="height:80%;">
-![](images/petzold-cpu.png)
-</div>
 
 # Machine code
 Binary representation of elementary instructions which can be executed directly on CPU.
 ## 1GL (first-generation programming languages)
 See also: Bootstrapping a simple compiler from nothing - 1GL to 3GL
+
 http://homepage.ntlworld.com/edmund.grimley-evans/bcompiler.html
+
 https://github.com/smtlaissezfaire/bcompiler
+
 ```x86asm
 # _start:
   e8 25 00 00 00    # call  gethex
@@ -123,14 +122,20 @@ https://github.com/smtlaissezfaire/bcompiler
 
 # +25
 # putchar:
-  31 db      # xor  %ebx,%ebx
-  43      # inc  %ebx
-  8d 4c 24 04    # lea  4(%esp),%ecx
-  89 da      # mov  %ebx,%edx
-  b8 04 00 00 00    # mov  $4,%eax
-  cd 80      # int  $0x80
-  c3      # ret
+  31 db           # xor  %ebx,%ebx
+  43              # inc  %ebx
+  8d 4c 24 04     # lea  4(%esp),%ecx
+  89 da           # mov  %ebx,%edx
+  b8 04 00 00 00  # mov  $4,%eax
+  cd 80           # int  $0x80
+  c3              # ret
 ```
+
+# Simple CPU
+<div style="height:80%;">
+![](images/petzold-cpu.png)
+</div>
+<span style="font-size: 0.5em">Source: C.Petzold. Code</span>
 
 # Microcode
 Current CPUs are not hardwired. The connections between logic units at the opcode execution time are maintained by the microcode — sequence of bit packages describing the signals at each clock.
@@ -153,7 +158,9 @@ Current CPUs are not hardwired. The connections between logic units at the opcod
 
 # 2GL (second-generation programming languages)
 Opcode (mnemonic): `add`, `sub`, `jmp`, `je`, `and`, `mov`
+
 Operand: register, constant value, flag, memory, label
+
 Label: get offset at the specified point
 
 <div style="-webkit-column-count: 2; -moz-column-count: 2">
@@ -307,14 +314,17 @@ Also include: report and form-generation languages (ABAP, dBase, FoxPro), wide r
 Some features of modern high-level programming languages take roots in 4GL (e.g. list comprehensions).
 
 Some disadvantages of 4GL:
-- syntax is very verbose, unneccessary mimics natural languge
+
+- syntax is very verbose, unneccessarily mimics natural languge
 - complicated debugging
-- unpredictable performance (and, usually, in orders of magnutude slower than an implementation in general-purpose programming language)
+- unpredictable performance (programs in 4GL are, usually, orders of magnutude slower than high-performance optimized implementation in general-purpose programming language)
 - complicated development process, compatibility problems
 
 # 5GL: Logical inference and constraint-based
 Fifth-generation languages were the ultimate dream of software engineers in 1980s :)
+
 Example: Prolog, Datalog
+
 Programmer specifies the model and formulates the task. The runtime solves the specified constraints using some knowledge-inference engines (first-order inferene, frame inference).
 
 You can try Prolog here: http://swish.swi-prolog.org/example/houses_puzzle.pl
@@ -370,7 +380,7 @@ C INPUT ERROR DISPLAY ERROR OUTPUT CODE 1 IN JOB CONTROL LISTING
 ```
 
 # Fortran is alive
-Fortran 2008 is out, next revision (Fortran 2018) is to be standartized later in 2018.
+Fortran 2018 was released on November 28, 2018. It specifies interoperability with C programming language and parallel computing intrinsics.
 
 http://www.fortran.bcs.org/2012/nm_talk.pdf
 
@@ -404,7 +414,7 @@ One of the first languages initially designed without any academic (computer sci
 
 Nowadays, as I have probably already mentioned in an introduction of the previous course, COBOL programs represent the canonical example of legacy code: more than a half of an enterprises (in US) use several billions lines of COBOL code in their everyday activity. The migration cost is very high, so in short future COBOL share won't drop significantly.
 
-# COBOL: 4GL beginnings
+# COBOL: 4GL prototype
 <div class="smaller">
 ```cobol
 RD  sales-report
@@ -539,6 +549,7 @@ op max = ([]real a) real:
 Introduced by John McCarthy in 1958, based on lambda-calculus. One of the most popular languages for AI development in time span from 1960s to the end of 1980s.
 
 Today there are 3 widespread dialects:
+
 - Scheme (minimal and extensible, see also ["Lambda: the ultimate ..." papers](http://library.readscheme.org/page1.html))
 - Common LISP (large system with rich standard library)
 - Clojure (LISP dialect for Java ecosystem)
@@ -560,6 +571,8 @@ See also: http://www.flownet.com/gat/papers/lisp-java.pdf
  (defun get-min(list)
    (get-from-list list #'<))
 ```
+
+Macros make possible to define "lazy" and "short-circuiting" operators.
 
 ```
 (defmacro multi-run (times &body algo-call)
@@ -754,6 +767,7 @@ Implement something non-trivial (more than 200 lines in equivalent C code) in la
 
 </div>
 
+<!--
 # Project
 Alternatively you can write a specification of a toy programming language. In total you will get at least 10 stars.
 Choose a single application area and try to imagine a simple programming language which is more convenient to use in that area than, for example, C.
@@ -773,3 +787,4 @@ Language must support variables or named function arguments.
 - asynchronous control
 - shared-memory concurrency
 - distributed-memory concurrency
+-->
