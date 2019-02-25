@@ -14,48 +14,49 @@ Course topics include:
 * specification of domain-specific programming languages
 * static typing and type inference
 
-**Thursday, 15:00-16:35, aud. 13-16, starting February 15th.**
+**Monday, 16:45-18:20, aud. 13-16, starting February 25th.**
 
-Please take a quick survey about the course: [Survey form](https://goo.gl/forms/PYP4oSGn0VfQQL403)
+<!--Please take a quick survey about the course: [Survey form](https://goo.gl/forms/PYP4oSGn0VfQQL403)-->
 
 
-**15.02.2018** Introduction. History of programming languages. 
+**15.02.2019** Introduction. History of programming languages. 
 [presentation - html](presentations/01-Introduction.html)
 
-
-**22.02.2018** Classification of programming languages. 
+<!--
+**22.02.2019** Classification of programming languages. 
 [presentation - html](presentations/02-Classification.html) 
 
-**01.03.2018** Specification of programming language. Syntax. 
+**01.03.2019** Specification of programming language. Syntax. 
 [presentation - html](presentations/03-Specification-Syntax.html) 
 
-**15.03.2018** Formal syntax analysis. Syntax extensions. 
+**15.03.2019** Formal syntax analysis. Syntax extensions. 
 [presentation - html](presentations/04-Macros-Parsing.html) 
 
-**22.03.2018** Static semantics. Naming, Bindings and Scope. 
+**22.03.2019** Static semantics. Naming, Bindings and Scope. 
 [presentation - html](presentations/05-Static-Semantics.html)
 
-**29.03.2018** Static semantics. Domain constraints. Typing.
+**29.03.2019** Static semantics. Domain constraints. Typing.
 [presentation - html](presentations/06-Typing.html) 
 
-**05.04.2018** Operational semantics 
+**05.04.2019** Operational semantics 
 [presentation - html](presentations/07-Operational-Semantics.html)
 
-**12.04.2018** Denotational semantics example
+**12.04.2019** Denotational semantics example
 [presentation - html](presentations/08-Denotational-semantics-example.html) 
 
-**19.04.2018** Denotational semantics implementation: Monads, Fixed points
+**19.04.2019** Denotational semantics implementation: Monads, Fixed points
 [presentation - html](presentations/09-Monads.html) 
 
-**26.04.2018** Mechanized semantics (Operational semantics implementation)
+**26.04.2019** Mechanized semantics (Operational semantics implementation)
 [presentation - html](presentations/10-Operational-Semantics-Implementation.html)
 
-**03.05.2018** Axiomatic semantics 
+**03.05.2019** Axiomatic semantics 
 [presentation - html](presentations/11-Axiomatic-Semantics.html)
 
-**10.05.2018** Domain-specific languages. Intermediate representations
+**10.05.2019** Domain-specific languages. Intermediate representations
 [presentation - html](presentations/12-IR-DSL.html)
 
-**17.05.2018** Exam ([program](presentations/program.html))
+**17.05.2019** Exam ([program](presentations/program.html))
  
-**24.05.2018** Possible second date for exam (by appointment)
+**24.05.2019** Possible second date for exam (by appointment)
+-->
