@@ -15,26 +15,20 @@ https://maxxk.github.io/programming-languages/
 3. F. Turbak, D. Gifford. Design Concepts in Programming Languages. 2008.
 4. R. Sebesta. Concepts of Programming Languages. 2012.
 
-# History of programming languages (additions)
-
-# Forth: stack-based and concatenative
-Uses point-free notation (e.g. f ∘ g instead of λx. f(g(x))).
-```forth
-: FILL   FAUCETS OPEN  TILL-FULL  FAUCETS CLOSE ;
-: RINSE   FILL AGITATE DRAIN ; 
-: WASHER   WASH SPIN RINSE SPIN ;
-```
+# History of programming languages (addendum)
 
 
 # Ada programming language
+
 <span class="small">Missing parts from previous lecture. Based on «R. Sebesta. Concepts of Programming Lanugages. 2012»</span>
+
 US Department of Defense initiated the design process of programming language in 1975. Original motivation: make a single high-level programming language for a broad range of applications, including critical embedded systems. At the time of proposal, about 450 different languages was in use by DoD contractors.
 
 In 1979 design and rationale of Ada were published in ACM SIGPLAN Notices. In October 1979 a public test and evaluation conference was held. In the conference representatives from over 100 US and Europe organizations took part.
 
 Final specification was mostly completed in 1980, revised and published in 1983. First usable compilers appeared around 1980.
 
-Revised in 1995, 2005 (both revisions featuring OOP and concurrency enhancements). Widely used in avionics.
+Revised in 1995, 2005 (both revisions featuring OOP and concurrency enhancements), 2012 (contract-based programming). Widely used in avionics.
 
 # Ada
 ```ada
@@ -98,11 +92,14 @@ end Queues;
 How the modern programming languages differ from each other?
 
 Two major categories:
-- «internal» characteristic — what is representable in the language, features of any language implementation
+
+### «internal» characteristics
+— what is representable in the language, features of any language implementation
 
 E.g. static vs dynamic typing
 
-- «external» characteristic — features of specific language implementation
+### «external» characteristics 
+— features of specific language implementation
 
 E.g. interpreted vs compiled
 
@@ -112,13 +109,15 @@ E.g. interpreted vs compiled
 - [Cython](http://cython.org/), [Nuitka](http://nuitka.net/) — ahead-of-time compiler (to machine code)
 
 # Imperative programming
-Main entities:
+
+Primary entities:
+
 - variable (abstracts memory block and register loading)
 - command (operation on variables)
 - procedure (sequence of commands with inputs and outputs)
 
 # Object-oriented programming
-## Main entities
+## Primary entities
 
 object
 ~ a main concept of OOP, may contain data (fields) and code (methods)
@@ -163,25 +162,33 @@ a.sum();
 # Live programming
 ## (interactive programming)
 Program components are written in the same environment as the program runs.
+
 Original idea comes from Alan Kay's Ph.D. thesis «The Reactive Engine» (1969), which describes the live programming computer system. Smalltalk was the successor of this idea.
 
 Main example today: web browser.
+
 ```javascript
 document.querySelector('#live-programming h1')
   .addEventListener('click', function(e) {
-    e.target.style.fontSize=Math.random()*70 + 'pt';
+    e.target.style.fontSize=(6+Math.random()*70) + 'pt';
   })
 ```
 
 # Type system
 
 > A type system is a tractable syntactic method for proving the absence of certain program behaviors by classifying phrases according to the kinds of values they compute.
+
 > <span class="small">B. Pierce. Types and Programming Languages. 2002.</span>
+
+Some properties of type systems:
 
 - safe and unsafe
 - statically-checked and dynamically-checked
 
 # Dynamic typechecking and weak typing
+
+JavaScript is weakly typed (compiler or runtime doesn't enforce correct typing:)
+
 ```javascript
 function dynamic(x) {
   return x + 1;
@@ -198,9 +205,15 @@ dynamic(['a', 'b']) // ⟶ 'a,b1'
 dynamic({})
 ```
 
+Python is strongly typed (only numbers will be allowed in function "dynamic"), but typing is dynamic (in runtime).
+
+Java or C# may be considered "strongly statically typed". C and C++ may be considered weakly typed because of implicit integer-character conversions (and even -pointer in case of C).
+
 # Optional type systems
 It is possible to provide external static type checking engine for dynamic language. It works as a statical analysis tool. Proper type systems for dynamic language are rather complex (it usually employs row-types).
+
 Examples:
+
 - [Typed Clojure](http://typedclojure.org)
 - [mypy (Python)](https://github.com/python/mypy)
 - [**Flow (JavaScript, by Facebook)**](http://flowtype.org)
@@ -221,7 +234,9 @@ function sumLeaves(tree: BinaryTree): number {
 ```
 
 # Optional typing
+
 Usually external type checkers allow to use annotations as special comments (remember the model checking from the previous semester).
+
 ```javascript
 /*::
 type BinaryTree =
@@ -238,16 +253,6 @@ function sumLeaves(tree /*: BinaryTree*/) /*: number*/ {
 }
 ```
 
-# Row types
-The data type which describes required fields (or methods) in data structure, but allows a programmer to extend fields.
-```javascript
-type BinaryTree =
-  { kind: "leaf", value: number } |
-  { kind: "branch", left: BinaryTree, right: BinaryTree }
-
-{ kind: "leaf", value: 1, additional: "Hey!" } /*: BinaryTree */
-```
-
 # Structural typing
 ## Duck typing
 > When I see a bird that walks like a duck and swims like a duck and quacks like a duck, I can call that bird a duck.
@@ -259,8 +264,31 @@ function addAB(x /*: { a: number, b: number } */) /*: number */ {
 }
 ```
 
+
+# Row types
+The data type which describes required fields (or methods) in data structure, but allows a programmer to extend fields.
+```javascript
+type BinaryTree =
+  { kind: "leaf", value: number } |
+  { kind: "branch", left: BinaryTree, right: BinaryTree }
+
+{ kind: "leaf", value: 1, additional: "Hey!" } /*: BinaryTree */
+```
+
+Row types are defined by the following three operations:
+
+- select(label) : { \[label\]: T, ρ } → T
+- add(label) : { absent(label), ρ } → T
+- remove(label) : { \[label\] : T, ρ } → { absent(label), ρ }
+
+<span class="small">Wand, Mitchell (1991). "Type inference for record concatenation and multiple inheritance". Information and Computation. 93 (Selections from 1989 IEEE Symposium on Logic in Computer Science): 1–15. doi:10.1016/0890-5401(91)90050-C</span>
+
+Row types are implemented in the following languages: Purescript, Idris and (not exactly) in TypeScript.
+
+
 # Functional programming
 Primary entities:
+
 - expression (way of compute new values from old)
 - function (a composition of expressions)
 - parametric polymorphism (means of making the same operations on different variables)
@@ -275,7 +303,7 @@ The core point of this definition can be reduced to implementability of two oper
 double fmax(double a, double b);
 ```
 
-Curry: make from two-argument function a function which returns an another function.
+Curry: transform two-argument function into a function which returns an another function.
 
 fmax : (a : double) × (b : double) → double
 
@@ -294,7 +322,7 @@ Math.sqrt(nonnegative(z)); // = Math.sqrt(z < 0 ? 0 : z)
 ```
 
 # Pure functional programming
-- **Pure function** — a function for which the output depends only on the values of its arguments (no global mutable state).
+- **Pure function** — a function which depends only on the values of its arguments (no global mutable state).
 
 ```javascript
 function pure(x) {
@@ -315,7 +343,9 @@ x.impure(1) /* ⟶ 2 */
 ```
 
 # Pure functional programming
+
 Example: Haskell
+
 Advantage: an order of computation is insignificant. An optimizing compiler may translate functional program by taking advantage of mutable state.
 
 **Tail recursion**
@@ -345,7 +375,8 @@ START: do {
 
 ## Ad-hoc polymorphism
 ## Subtype polymorphism
-(polymorphism in OOP sense)
+— polymorphism in OOP sense
+
 ## Dynamic dispatch
 ## Parametric polymorphism
 ## Higher-order polymorphism
@@ -392,7 +423,7 @@ class Dog extends Animal {
 ```
 
 # Dynamic dispatch
-— an process of selecting which implementation of a polymorphic operation to call at run time. 
+— an process of selecting which implementation of a polymorphic operation to call *at run time*. 
 
 single dispatch
 ~ the decision is based on a single argument (this is how the subtype polymorphism works)
@@ -552,7 +583,7 @@ julia> methods(+)
 
 
 # Parametric polymorphism
-Some *generic* parameters may be substituted to the function which describe the types of the subprogram parameters.
+Some *generic* parameters may be substituted to the function which describe the types of the subprogram parameters. Example (C#):
 
 ```java
 public class MyClass<T, U, V, W>
@@ -577,6 +608,7 @@ public class MyClass<T, U, V, W>
 
 # Higher order polymorphism
 The generic parameters can be parametrized as well by some means of type-level computation. Example: functor.
+
 Reminder: a functor $F$ is a pair of an object-map $$ F : A → B $$ and an arrow-map $$ fmap : (a_1 → a_2) → (F(a_1) → F(a_2))$$
 
 ```java
@@ -585,6 +617,8 @@ interface Functor<F<*>> {
   F<B> fmap<A, B>(F<A> a, Function<A, B> f);
 }
 ```
+
+Haskell:
 
 ```haskell
 class  Functor f  where
@@ -631,7 +665,7 @@ call-by-need
 
 # Macro expansion
 call-by-macro-expansion
-~ (TeX, C preprocessor) substitute the macros with its body it the source code, possibly capturing identifiers.
+~ (TeX, C preprocessor) substitute the macros with its body it the source code, *possibly capturing identifiers.*
 
 ```c
 #define MACRO(a) (a < b)

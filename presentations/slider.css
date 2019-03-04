@@ -392,9 +392,14 @@
   margin: 0;
   padding: 0 0.5em;
   text-indent: 2em;
-  line-height: 1.5;
+  line-height: 1.2;
   font-size: 1em;
 }
+
+.slider > section p + p {
+  padding-top: 0.5em;
+}
+
 .slider > section dt {
   margin: 0;
   padding: 0 1em;
@@ -425,7 +430,7 @@
 .slider > section ul,
 .slider > section ol {
   margin: 0;
-  padding: 0 0 0 2.5em;
+  padding: 0 0 0.5em 2.5em;
 }
 .slider > section ul li,
 .slider > section ol li {
@@ -644,4 +649,8 @@
   background-size: contain;
   background-repeat: no-repeat;
   z-index: -1;
+}
+
+.slider span.small {
+  font-size: 0.7em;
 }

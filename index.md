@@ -19,13 +19,13 @@ Course topics include:
 <!--Please take a quick survey about the course: [Survey form](https://goo.gl/forms/PYP4oSGn0VfQQL403)-->
 
 
-**15.02.2019** Introduction. History of programming languages. 
+**25.02.2019** Introduction. History of programming languages. 
 [presentation - html](presentations/01-Introduction.html)
 
-<!--
-**22.02.2019** Classification of programming languages. 
+**04.03.2019** Classification of programming languages. 
 [presentation - html](presentations/02-Classification.html) 
 
+<!--
 **01.03.2019** Specification of programming language. Syntax. 
 [presentation - html](presentations/03-Specification-Syntax.html) 
 
