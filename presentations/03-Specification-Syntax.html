@@ -10,7 +10,7 @@
   <style type="text/css">
 a.sourceLine { display: inline-block; line-height: 1.25; }
 a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; position: absolute; }
+a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 div.sourceCode { margin: 1em 0; }
@@ -23,13 +23,11 @@ code.sourceCode { white-space: pre-wrap; }
 a.sourceLine { text-indent: -1em; padding-left: 1em; }
 }
 pre.numberSource a.sourceLine
-  { position: relative; }
-pre.numberSource a.sourceLine:empty
-  { position: absolute; }
+  { position: relative; left: -4em; }
 pre.numberSource a.sourceLine::before
   { content: attr(data-line-number);
-    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all;
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -118,9 +116,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2 id="remember-computer-science-is-old">Remember: Computer Science is old</h2>
 <ul>
 <li class="fragment">First programming languages and compilers apperared in 1950s.</li>
-<li class="fragment">Classical textbooks, e.g. the first edition of "Dragon book" (Aho, Ullman. Principles of Compiler Design) appeared in 1977.</li>
-<li class="fragment">Commonly-known technology and mathematics may be outdated</li>
-<li class="fragment">Example: standard character set: machine-specific character set → ANSI (C) → UCS-2 (C#, JavaScript) → UTF-8</li>
+<li class="fragment">Classical textbooks, e.g.&nbsp;the first edition of “Dragon book” (Aho, Ullman. Principles of Compiler Design) appeared in 1977.</li>
+<li class="fragment">Commonly-known technology and mathematics may be outdated.</li>
+<li class="fragment">Example: “standard” character set: machine-specific character set → ANSI/Locale-specific encoding (C) → UCS-2 (C#, JavaScript) → UTF-8</li>
 </ul>
 <pre><code>"👍".length = 2</code></pre>
 </section><div><a class="slider-prev" href="#additions"></a><a class="slider-next" href="#programming-language-specification-1"></a></div>
@@ -128,9 +126,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h1>Programming language specification</h1>
 <p>Linguistics in general is concerned with three main aspects of a written language:</p>
 <ol type="1">
-<li class="fragment"><strong>Syntax</strong> — the way in which linguistic elements (words) are put together to form constituents (phrases).</li>
-<li class="fragment"><strong>Semantics</strong> — the meanings of words and phrases in language.</li>
-<li class="fragment"><strong>Pragmatics</strong> — the relationship between sentences to the environment in which they occur.</li>
+<li class="fragment"><p><strong>Syntax</strong> — the way in which linguistic elements (words) are put together to form constituents (phrases).</p></li>
+<li class="fragment"><p><strong>Semantics</strong> — the meanings of words and phrases in language.</p></li>
+<li class="fragment"><p><strong>Pragmatics</strong> — the relationship between sentences to the environment in which they occur.</p></li>
 </ol>
 <p>(non-computer languages also have:</p>
 <ul>
@@ -139,7 +137,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>)</p></li>
 </ul>
 <p>Definitions from <a href="http://www.merriam-webster.com/dictionary/">Merriam-Webster</a></p>
-<p>See also: <a href="http://www.sbql.pl/Topics/Syntax%20semantics%20and%20pragmatics.html">http://www.sbql.pl/Topics/Syntax%20semantics%20and%20pragmatics.html</a></p>
+<p>See also: <a href="http://web.archive.org/web/20170922094027/http://www.sbql.pl/Topics/Syntax%20semantics%20and%20pragmatics.html">Archive: http://www.sbql.pl/Topics/Syntax%20semantics%20and%20pragmatics.html</a></p>
 </section><div><a class="slider-prev" href="#addition"></a><a class="slider-next" href="#programming-language-specification-2"></a></div>
 <section id="programming-language-specification-2" class="slide level1">
 <h1>Programming language specification</h1>
@@ -149,11 +147,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h1>Syntax</h1>
 <p>Syntax of a programming language is concerned with the form of programs: how expressions, commands, declarations and other constructs must be arranged to make a well-formed program.</p>
 <p><span class="small">Definition from D. Watt — Programming Language Design Concepts</span></p>
-<p>How can we write the program and how the compiler/interpreter expects it to be formed.</p>
+<p>In other words: How can we write the program and how the compiler/interpreter expects it to be formed.</p>
 </section><div><a class="slider-prev" href="#programming-language-specification-2"></a><a class="slider-next" href="#syntax-example"></a></div>
 <section id="syntax-example" class="slide level1">
 <h1>Syntax: example</h1>
-<p><a href="http://stackoverflow.com/questions/5508110/why-is-this-program-erroneously-rejected-by-three-c-compilers/5514384#5514384" class="uri">http://stackoverflow.com/questions/5508110/why-is-this-program-erroneously-rejected-by-three-c-compilers/5514384#5514384</a></p>
+<p><a href="https://stackoverflow.com/questions/5508110/why-is-this-program-erroneously-rejected-by-three-c-compilers/" class="uri">https://stackoverflow.com/questions/5508110/why-is-this-program-erroneously-rejected-by-three-c-compilers/</a></p>
 </section><div><a class="slider-prev" href="#syntax"></a><a class="slider-next" href="#syntax-example-1"></a></div>
 <section id="syntax-example-1" class="slide level1">
 <h1>Syntax: example</h1>
@@ -168,22 +166,20 @@ y
 z
 </div>
 </div></li>
-<li class="fragment"><p>traditional infix notation: <code>v*w + y/z</code></p></li>
-<li class="fragment"><p>LISP prefix S-expression: <code>(+ (* v w) (/ y z))</code></p></li>
-<li class="fragment"><p>reverse polish notation / stack calculator: <code>v w * y z / +</code></p></li>
-<li class="fragment"><p>some <a href="https://blockly-demo.appspot.com/static/demos/blockfactory/index.html">visual "syntax"</a></p></li>
+<li class="fragment">traditional infix notation: <code>v*w + y/z</code></li>
+<li class="fragment">LISP prefix S-expression: <code>(+ (* v w) (/ y z))</code></li>
+<li class="fragment">reverse polish notation / stack calculator: <code>v w * y z / +</code></li>
+<li class="fragment">graph-based syntax (not related to previous examples) <a href="https://noflojs.org/dataflow-noflo/demo/draggabilly.html" class="uri">https://noflojs.org/dataflow-noflo/demo/draggabilly.html</a> <a href="https://noflojs.org/example/" class="uri">https://noflojs.org/example/</a></li>
+<li class="fragment">some <a href="https://blockly-demo.appspot.com/static/demos/blockfactory/index.html">visual “syntax”</a></li>
 </ul>
 <p><img data-src="images/scratch-syntax.png" src="images/scratch-syntax.png"></p>
-<ul>
-<li class="fragment">graph-based syntax (not related to previous examples) <a href="https://noflojs.org/dataflow-noflo/demo/draggabilly.html" class="uri">https://noflojs.org/dataflow-noflo/demo/draggabilly.html</a> <a href="https://noflojs.org/example/" class="uri">https://noflojs.org/example/</a></li>
-</ul>
 <p>Example based on F. Turbak, D. Gifford. Design Concepts in Programming Languages</p>
 </section><div><a class="slider-prev" href="#syntax-example"></a><a class="slider-next" href="#semantics"></a></div>
 <section id="semantics" class="slide level1">
 <h1>Semantics</h1>
 <p>Semantics of a programming language is concerned with the meaning of programs: how a well-formed program may be expected to behave when executed on a computer.</p>
 <p><span class="small">Definition from D. Watt — Programming Language Design Concepts</span></p>
-<p>We will spend a half of the course on this topic, but today we speak about syntax.</p>
+<p>We will spend about a half of the course on this topic, but today we discuss just the syntax.</p>
 </section><div><a class="slider-prev" href="#syntax-example-1"></a><a class="slider-next" href="#semantics-example"></a></div>
 <section id="semantics-example" class="slide level1">
 <h1>Semantics: example</h1>
@@ -202,7 +198,8 @@ z
 </section><div><a class="slider-prev" href="#semantics"></a><a class="slider-next" href="#pragmatics"></a></div>
 <section id="pragmatics" class="slide level1">
 <h1>Pragmatics</h1>
-<p>A programming language's pragmatics is concerned with the way in which the language is intended to be used in practice. <span class="small">Definition from D. Watt — Programming Language Design Concepts</span></p>
+<p>A programming language’s pragmatics is concerned with the way in which the language is intended to be used in practice.</p>
+<p><span class="small">Definition from D. Watt — Programming Language Design Concepts</span></p>
 <p>No general consensus on the definition. Two sides:</p>
 <ul>
 <li>human interface (how the programmers are expected to design and implement programs in practice: design patterns, concurrency support and specific model, foreign function interfaces, packaging system; exception-based control flow :)</li>
@@ -226,20 +223,22 @@ z
 <p>(regular ⊂ context-free ⊂ context-sensitive ⊂ unbounded)</p>
 <p>We could make a relation between programs and formal languages in many ways:</p>
 <ul>
-<li class="fragment"><p>language <span class="math inline"><em>L</em><sub>1</sub></span>, containing all well-formed (syntactically correct) programs</p></li>
-<li class="fragment"><p>language <span class="math inline"><em>L</em><sub>2</sub> ⊆ <em>L</em><sub>1</sub></span>, containing all well-typed (runnable) programs <span class="math inline"><em>L</em><sub>1</sub> ∖ <em>L</em><sub>2</sub></span> — "syntax gap", well-formed programs which are not well-typed</p></li>
-<li class="fragment"><p>language <span class="math inline"><em>L</em><sub>3</sub> ⊆ <em>L</em><sub>2</sub></span>, containing all semantically-correct programs (running without errors) $L3 <span class="math inline"><em>L</em><sub>2</sub> ∖ <em>L</em><sub>3</sub></span> — "typing gap", well-typed programs which throw errors in run-time</p></li>
+<li class="fragment"><p>language <span class="math inline"><em>L</em><sub><em>w</em><em>f</em></sub></span>, containing all well-formed (syntactically correct) programs</p></li>
+<li class="fragment"><p>language <span class="math inline"><em>L</em><sub><em>w</em><em>t</em></sub> ⊆ <em>L</em><sub><em>w</em><em>f</em></sub></span>, containing all well-typed (runnable) programs</p>
+<p><span class="math inline"><em>L</em><sub><em>w</em><em>f</em></sub> ∖ <em>L</em><sub><em>w</em><em>t</em></sub></span> — “syntax gap”, well-formed programs which are not well-typed</p></li>
+<li class="fragment"><p>language <span class="math inline"><em>L</em><sub><em>c</em></sub> ⊆ <em>L</em><sub><em>w</em><em>t</em></sub></span>, containing all semantically-correct programs (running without errors)</p>
+<p><span class="math inline"><em>L</em><sub><em>w</em><em>t</em></sub> ∖ <em>L</em><sub><em>c</em></sub></span> — “typing gap”, well-typed programs which throw errors in run-time</p></li>
 </ul>
-<p>It is obvious that for almost every practical ("Turing complete") programming language <span class="math inline"><em>L</em><sub>3</sub></span> is unbounded. For the modern languages, <span class="math inline"><em>L</em><sub>1</sub></span> is usually context-free or some subset of context-free languages (Deterministic Context-Free Languages, unambiguous languages which can be accepted by deterministic pushdown automaton and therefore can be parsed in <span class="math inline"><em>O</em>(<em>n</em>)</span>).</p>
-<p><span class="math inline"><em>L</em><sub>2</sub></span> may be decidable, but not usually decidability is not proven. Compiler freezes may be caused by undecidability of type checking.</p>
+<p>It is obvious that for almost every practical (“Turing complete”) programming language <span class="math inline"><em>L</em><sub><em>c</em></sub></span> is unbounded. For the modern languages, <span class="math inline"><em>L</em><sub><em>w</em><em>f</em></sub></span> is usually context-free or some subset of context-free languages (Deterministic Context-Free Languages, unambiguous languages which can be accepted by deterministic pushdown automaton and therefore can be parsed in <span class="math inline"><em>O</em>(<em>n</em>)</span>).</p>
+<p><span class="math inline"><em>L</em><sub><em>w</em><em>t</em></sub></span> may be decidable, but usually decidability is not proven. Compiler freezes may be caused by undecidability of type checking.</p>
 </section><div><a class="slider-prev" href="#syntax-1"></a><a class="slider-next" href="#lexical-analysis"></a></div>
 <section id="lexical-analysis" class="slide level1">
 <h1>Lexical analysis</h1>
 <h2 id="listchar-listtoken">List&lt;Char&gt; ⟶ List&lt;Token&gt;</h2>
-<p>Traditionally decision problem of <span class="math inline"><em>L</em><sub>1</sub></span> membership (well-formedness of a program) is split by two parts:</p>
-<ul>
+<p>Traditionally decision problem of <span class="math inline"><em>L</em><sub><em>w</em><em>f</em></sub></span> -membership (well-formedness of a program) is split by two parts:</p>
+<ol type="1">
 <li class="fragment">lexical analysis transforms a sequence of characters to a sequence of tokens (marked groups of characters, like identifiers, integers, etc.):</li>
-</ul>
+</ol>
 <div class="sourceCode" id="cb3"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="dt">int</span> main (<span class="dt">int</span> argc, <span class="dt">char</span> argv)</a>
 <a class="sourceLine" id="cb3-2" data-line-number="2"></a>
 <a class="sourceLine" id="cb3-3" data-line-number="3">  <span class="dt">int</span>      main      (    <span class="dt">int</span>       argc    ,     <span class="dt">char</span>     argv      )</a>
@@ -251,7 +250,10 @@ z
 </section><div><a class="slider-prev" href="#syntax-relation-to-formal-languages"></a><a class="slider-next" href="#syntax-analysis"></a></div>
 <section id="syntax-analysis" class="slide level1">
 <h1>Syntax analysis</h1>
-<p><span class="large">List<token> ⟶ AbstractSyntaxTree</token></span></p>
+<h2 id="listtoken-abstractsyntaxtree">List&lt;Token&gt; ⟶ AbstractSyntaxTree</h2>
+<ol start="2" type="1">
+<li class="fragment">Syntax analysis transforms a sequence of tokens to a syntax tree.</li>
+</ol>
 <ul>
 <li class="fragment"><strong>concrete syntax</strong>: the syntax of a language including all the features visible in the source code such as parentheses and delimiters;</li>
 <li class="fragment"><strong>abstract syntax</strong>: the high-level description of a language structure independent of machine-oriented structures and encodings.</li>
@@ -260,8 +262,9 @@ z
 </section><div><a class="slider-prev" href="#lexical-analysis"></a><a class="slider-next" href="#abstract-syntax-tree"></a></div>
 <section id="abstract-syntax-tree" class="slide level1">
 <h1>Abstract Syntax Tree</h1>
-<p>— a representation of an abstract syntax of a program <img data-src="images/ast-example.png" src="images/ast-example.png"></p>
-<p>Multiple representations of <a href="#/syntax-example">concrete syntax</a> may correspond to a single abstract syntax.</p>
+<p>— a representation of an abstract syntax of a program</p>
+<p><img data-src="images/ast-example.png" src="images/ast-example.png"></p>
+<p>Multiple representations of <a href="#syntax-example-1">concrete syntax</a> may correspond to a single abstract syntax tree.</p>
 <div class="fragment">
 <p>Lisp S-expression is a direct representation of abstract syntax tree:</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode clojure"><code class="sourceCode clojure"><a class="sourceLine" id="cb4-1" data-line-number="1">(<span class="kw">+</span></a>
@@ -271,19 +274,20 @@ z
 </section><div><a class="slider-prev" href="#syntax-analysis"></a><a class="slider-next" href="#language-specification"></a></div>
 <section id="language-specification" class="slide level1">
 <h1>Language specification</h1>
-<p>Languages (which are (possibly infinite) subsets of strings of some alphabet: Σ*) usually have a finite description, which is called "grammar".</p>
+<p>Foraml languages (which are (possibly infinite) subsets of strings of some alphabet: Σ*) usually have a finite description, which is called “grammar”.</p>
 <ul>
-<li class="fragment"><strong>generative grammar:</strong> how to generate all strings of the language starting from a single "start" symbol</li>
+<li class="fragment"><strong>generative grammar:</strong> how to generate all strings of the language starting from a single “start” symbol</li>
 <li class="fragment"><strong>analytic grammar:</strong> how to get an abstract syntax tree (a tree of rule applications) from a given string</li>
 </ul>
 </section><div><a class="slider-prev" href="#abstract-syntax-tree"></a><a class="slider-next" href="#bnf-backus-normal-form"></a></div>
 <section id="bnf-backus-normal-form" class="slide level1">
 <h1>BNF: Backus Normal Form</h1>
-<p>(Backus-Naur Form, by Dijkstra, because "it is not a normal form") During the development of ALGOL 60, John Backus proposed a notation for context-free grammars:</p>
+<p>(Backus-Naur Form, by Dijkstra, because “it is not a normal form”)</p>
+<p>During the development of ALGOL 60, John Backus proposed a notation for context-free grammars:</p>
 <ul>
 <li>group of characters named <em>expr</em> is denoted as <code>&lt;expr&gt;</code>;</li>
-<li>character constants are quoted <code>"("</code></li>
-<li>sequence of constants and groups defines a sequence <code>"(" &lt;expr&gt; ")"</code></li>
+<li>character constants are quoted: <code>"("</code></li>
+<li>sequence of constants and groups defines a sequence: <code>"(" &lt;expr&gt; ")"</code></li>
 <li><p>group of characters is defined by an operator <code>::=</code>:</p>
 <pre><code>&lt;expr&gt; ::= "(" &lt;atom&gt; ")"</code></pre></li>
 <li><p>definitions may use recursion:</p>
@@ -291,6 +295,7 @@ z
 <li><p>at the right side of the definition operator the alternative operator <strong>|</strong> is allowed:</p>
 <pre><code>&lt;expr&gt; ::= &lt;expr&gt; | &lt;expr&gt; &lt;add-operation&gt; &lt;atom&gt;</code></pre></li>
 </ul>
+<p>BNF is the generative grammar specification language.</p>
 </section><div><a class="slider-prev" href="#language-specification"></a><a class="slider-next" href="#bnf-example"></a></div>
 <section id="bnf-example" class="slide level1">
 <h1>BNF example</h1>
@@ -302,9 +307,9 @@ z
 &lt;list&gt;           ::= &lt;term&gt; | &lt;term&gt; &lt;opt-whitespace&gt; &lt;list&gt;
 &lt;term&gt;           ::= &lt;literal&gt; | "&lt;" &lt;rule-name&gt; "&gt;"
 &lt;literal&gt;        ::= '"' &lt;text&gt; '"' | "'" &lt;text&gt; "'"</code></pre>
-</section><div><a class="slider-prev" href="#bnf-backus-normal-form"></a><a class="slider-next" href="#bnf-standars"></a></div>
-<section id="bnf-standars" class="slide level1">
-<h1>BNF standars</h1>
+</section><div><a class="slider-prev" href="#bnf-backus-normal-form"></a><a class="slider-next" href="#bnf-specifications"></a></div>
+<section id="bnf-specifications" class="slide level1">
+<h1>BNF specifications</h1>
 <ul>
 <li class="fragment">Extended BNF (EBNF, specification ISO/IEC 14977)</li>
 <li class="fragment">Augmented BNF (ABNF, specification IETF <a href="https://tools.ietf.org/html/rfc5234">RFC 5324</a>, <a href="https://tools.ietf.org/html/rfc7405">RFC 7405</a>)</li>
@@ -318,12 +323,12 @@ z
 <li class="fragment">sequence: <span class="math inline"><em>e</em><sub>1</sub> <em>e</em><sub>2</sub></span></li>
 <li class="fragment"><em>ordered</em> choice: <span class="math inline"><em>e</em><sub>1</sub> / <em>e</em><sub>2</sub></span></li>
 <li class="fragment">Kleene star (zero or more): <span class="math inline"><em>e</em>*</span></li>
-<li class="fragment">"plus" (one or more): <span class="math inline"><em>e</em>+</span></li>
+<li class="fragment">“plus” (one or more): <span class="math inline"><em>e</em>+</span></li>
 <li class="fragment">optional: <span class="math inline"><em>e</em>?</span></li>
 <li class="fragment">positive lookahead: <span class="math inline">&amp;<em>e</em></span></li>
 <li class="fragment">negative lookahead: <span class="math inline">!<em>e</em></span></li>
 </ul>
-</section><div><a class="slider-prev" href="#bnf-standars"></a><a class="slider-next" href="#left-recursion"></a></div>
+</section><div><a class="slider-prev" href="#bnf-specifications"></a><a class="slider-next" href="#left-recursion"></a></div>
 <section id="left-recursion" class="slide level1">
 <h1>Left recursion</h1>
 <p>Most direct PEG implementations do not support left recursion in grammar. Parsing of the following grammar will not terminate:</p>
@@ -331,11 +336,11 @@ z
 Product ← Expr (('*' / '/') Expr)*
 Sum     ← Expr (('+' / '-') Expr)*
 Expr    ← Product / Sum / Value</code></pre>
-<p>Rewriting grammars to remove left recursion is possible (see "Dragon book").</p>
+<p>Rewriting grammars to remove left recursion is possible (see “Dragon book”).</p>
 </section><div><a class="slider-prev" href="#peg-parsing-expression-grammar"></a><a class="slider-next" href="#infix-operators"></a></div>
 <section id="infix-operators" class="slide level1">
 <h1>Infix operators</h1>
-<p>Infix mathematical notation is probably the only desirable part of syntax which don't have nice representations as an S-expression</p>
+<p>Infix mathematical notation is probably the only desirable part of syntax which don’t have nice representations as an S-expression</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode scheme"><code class="sourceCode scheme"><a class="sourceLine" id="cb10-1" data-line-number="1">(defun triangle (number-of-rows)    <span class="co">; Version with</span></a>
 <a class="sourceLine" id="cb10-2" data-line-number="2">                                    <span class="co">;   incrementing counter.</span></a>
 <a class="sourceLine" id="cb10-3" data-line-number="3">  <span class="st">"Add up the number of pebbles in a triangle.</span></a>
@@ -344,8 +349,8 @@ Expr    ← Product / Sum / Value</code></pre>
 <a class="sourceLine" id="cb10-6" data-line-number="6"><span class="st">The argument is NUMBER-OF-ROWS."</span></a>
 <a class="sourceLine" id="cb10-7" data-line-number="7">  (<span class="kw">let</span> ((total <span class="dv">0</span>)</a>
 <a class="sourceLine" id="cb10-8" data-line-number="8">        (row-number <span class="dv">1</span>))</a>
-<a class="sourceLine" id="cb10-9" data-line-number="9">    (<span class="kw">while</span> (<span class="kw">&lt;=</span> row-number number-of-rows)</a>
-<a class="sourceLine" id="cb10-10" data-line-number="10">      (← total (<span class="kw">+</span> total row-number))</a>
+<a class="sourceLine" id="cb10-9" data-line-number="9">    (<span class="kw">while</span> (<span class="op">&lt;=</span> row-number number-of-rows)</a>
+<a class="sourceLine" id="cb10-10" data-line-number="10">      (← total (<span class="op">+</span> total row-number))</a>
 <a class="sourceLine" id="cb10-11" data-line-number="11">      (← row-number (<span class="dv">1</span>+ row-number)))</a>
 <a class="sourceLine" id="cb10-12" data-line-number="12">    total))</a></code></pre></div>
 </section><div><a class="slider-prev" href="#left-recursion"></a><a class="slider-next" href="#precedence-and-associativity"></a></div>
@@ -366,7 +371,7 @@ Expr    ← Product / Sum / Value</code></pre>
 <p>Top-down operator precedence parser</p>
 <p>Operator binding power: <code>1 + 2 * 4</code></p>
 <ul>
-<li class="fragment">right binding power of "+" is 10</li>
+<li class="fragment">right binding power of “+” is 10</li>
 <li class="fragment">left binding power of "*" is 20</li>
 </ul>
 <div class="smaller">
@@ -389,7 +394,7 @@ Term → Factor [ Term.value = Factor.value ]
 Factor → "(" Expr ")" [ Factor.value =  Expr.value ]
 Factor → integer [ Factor.value = strToInt(integer.str) ]</code></pre>
 <div class="smaller">
-Live example of calculator: <a href="http://pegjs.org/online" class="uri">http://pegjs.org/online</a>
+<p>Live example of calculator implemented as attribute PEG grammar: <a href="http://pegjs.org/online" class="uri">http://pegjs.org/online</a></p>
 </div>
 </section><div><a class="slider-prev" href="#tdop-algorithm"></a><a class="slider-next" href="#parser-combinators"></a></div>
 <section id="parser-combinators" class="slide level1">
@@ -404,7 +409,8 @@ str : string → Parser&lt;string, string&gt;</code></pre>
 </section><div><a class="slider-prev" href="#attribute-grammar"></a><a class="slider-next" href="#parser-combinators-1"></a></div>
 <section id="parser-combinators-1" class="slide level1">
 <h1>Parser combinators</h1>
-Advantage: simple, embedded grammar specification Disadvantage: hard to reason about
+<p>Advantage: simple, embedded grammar specification</p>
+<p>Disadvantage: hard to reason about</p>
 <div class="smaller">
 <p>Example implementations:</p>
 <ul>
@@ -418,10 +424,10 @@ Advantage: simple, embedded grammar specification Disadvantage: hard to reason a
 <h1>Modern algorithms and implementations</h1>
 <p>Contex-free grammar parsers:</p>
 <ul>
-<li class="fragment">theoretical complexity bound: reduced by Valiant to boolean matrix multiplication, <span class="math inline"><em>O</em>(<em>n</em><sup>2.3728639</sup>)</span> with Coppersmith-Wingorad multiplication; <span class="small">Leslie G. Valiant (1975). "General context-free recognition in less than cubic time". Journal of Computer and System Sciences 10 (2): 308–315. <a href="doi:10.1016/s0022-0000(75)80046-8" class="uri">doi:10.1016/s0022-0000(75)80046-8</a>.</span></li>
-<li class="fragment">LL(k), LR(k), LALR(k) (c.f. Aho, Ullman "Principles of Complier Design" and <a href="http://www.antlr.org">ANTLR</a> )</li>
-<li class="fragment">Earley parser (used in NLP): <span class="math inline"><em>O</em>(<em>n</em><sup>3</sup>)</span> for general context-free grammar, <span class="math inline"><em>O</em>(<em>n</em><sup>2</sup>)</span> for unambiguous grammar, linear time for some deterministic context-free language <span class="small">Aycock, John; Horspool, R. Nigel (2002). Practical Earley Parsing. The Computer Journal 45. pp. 620–630. <a href="doi:10.1093/comjnl/45.6.620" class="uri">doi:10.1093/comjnl/45.6.620</a></span></li>
-<li class="fragment">GLR: <span class="math inline"><em>O</em>(<em>n</em><sup>3</sup>)</span> upper bound, complexity is lower for "more deterministic" grammars, <span class="math inline"><em>O</em>(<em>n</em>)</span> for deterministic grammars</li>
+<li class="fragment">theoretical complexity bound: reduced by Valiant to boolean matrix multiplication, <span class="math inline"><em>O</em>(<em>n</em><sup>2.3728639</sup>)</span> with Coppersmith-Wingorad multiplication; <span class="small">Leslie G. Valiant (1975). “General context-free recognition in less than cubic time”. Journal of Computer and System Sciences 10 (2): 308–315. <a href="doi:10.1016/s0022-0000(75)80046-8" class="uri">doi:10.1016/s0022-0000(75)80046-8</a>.</span></li>
+<li class="fragment">LL(k), LR(k), LALR(k) (c.f. Aho, Ullman “Principles of Complier Design” and <a href="http://www.antlr.org">ANTLR</a> )</li>
+<li class="fragment">Earley parser (used in NLP): <span class="math inline"><em>O</em>(<em>n</em><sup>3</sup>)</span> for general context-free grammar, <span class="math inline"><em>O</em>(<em>n</em><sup>2</sup>)</span> for unambiguous grammar, linear time for some deterministic context-free languages <span class="small">Aycock, John; Horspool, R. Nigel (2002). Practical Earley Parsing. The Computer Journal 45. pp.&nbsp;620–630. <a href="doi:10.1093/comjnl/45.6.620" class="uri">doi:10.1093/comjnl/45.6.620</a></span></li>
+<li class="fragment">GLR: <span class="math inline"><em>O</em>(<em>n</em><sup>3</sup>)</span> upper bound, complexity is lower for “more deterministic” grammars, <span class="math inline"><em>O</em>(<em>n</em>)</span> for deterministic grammars</li>
 <li class="fragment"><a href="http://www.cs.rhul.ac.uk/research/languages/csle/GLLsketch.html">GLL</a>: recent memoization-based algorithm allowing the parser combinator implementation.</li>
 </ul>
 <p>Non-context-free:</p>
@@ -432,7 +438,7 @@ Advantage: simple, embedded grammar specification Disadvantage: hard to reason a
 <section id="non-context-free-syntax" class="slide level1">
 <h1>Non-context-free syntax</h1>
 <ul>
-<li class="fragment">C++ (templates a Turing-complete and type-aware)</li>
+<li class="fragment">C++ (templates are Turing-complete and type-aware)</li>
 </ul>
 <div class="sourceCode" id="cb13"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="kw">template</span>&lt;<span class="dt">bool</span> V&gt; <span class="kw">struct</span> answer { answer(<span class="dt">int</span>) {} <span class="dt">bool</span> <span class="kw">operator</span>()(){<span class="cf">return</span> V;}};</a>
 <a class="sourceLine" id="cb13-2" data-line-number="2"></a>
@@ -466,7 +472,7 @@ Advantage: simple, embedded grammar specification Disadvantage: hard to reason a
 </section><div><a class="slider-prev" href="#non-context-free-syntax"></a><a class="slider-next" href="#homework-assignments"></a></div>
 <section id="homework-assignments" class="slide level1">
 <h1>Homework assignments</h1>
-<p><strong>Task 3.1</strong>** Implement parser combinators a programming language of your choice. Must be implemented at least the following combinators:</p>
+<p><strong>Task 3.1</strong>** Implement parser combinators in a programming language of your choice which supports higher-order functions. At least the following combinators must be implemented:</p>
 <ul>
 <li class="fragment">string or regex parser</li>
 <li class="fragment">sequence (a, b )</li>
@@ -474,21 +480,20 @@ Advantage: simple, embedded grammar specification Disadvantage: hard to reason a
 <li class="fragment">composition (a ∘ b: parse a, pass result to b; if b fails, whole composition fails)</li>
 <li class="fragment">lookahead (a | b : parse a, try parse b, if b succeeds, continue parsing from the last part of a)</li>
 </ul>
-<p><strong>Task 3.2a</strong>* Define a grammar for a non-trivial subset of an existing programming language in BNF, PEG or parser combinators.</p>
-<p><strong>Task 3.2b</strong>** Implement a parser for a non-trivial subset of an existing programming language (preferrably in PEG.js, but you can use tool of your choice).</p>
-<p><strong>Task 3.3</strong>* Define a regular expression for C/C++ floating point numbers. You can use the following tool: <a href="https://regex101.com/" class="uri">https://regex101.com/</a></p>
-</section><div><a class="slider-prev" href="#home-reading"></a><a class="slider-next" href="#project"></a></div>
-<section id="project" class="slide level1">
-<h1>Project</h1>
-<dl>
-<dt class="fragment"><strong>Project Step 2.</strong></dt>
-<dd class="fragment">Define an abstract syntax tree for the language in S-expression terms.
-</dd>
-<dt class="fragment"><strong>Project Step 2'.</strong></dt>
-<dd class="fragment">Design a simple concrete syntax specification (in BNF or any other formalism) and implement a parser for the language (from sequence of characters to abstract syntax tree conforming to Step 2 specification)
-</dd>
-</dl>
-</section><div><a class="slider-prev" href="#homework-assignments"></a><a class="slider-next"></a></div>
+<p><strong>Task 3.2</strong>* Define a regular expression for C/C++ floating point numbers. You can use the <a href="https://regex101.com/" class="uri">https://regex101.com/</a></p>
+<p><strong>Task 3.3a</strong>* Define a grammar for a non-trivial subset of an existing programming language in BNF, PEG or parser combinators.</p>
+<p><strong>Task 3.3b</strong>** Implement a parser for a non-trivial subset of an existing programming language (preferrably in PEG.js, but you can use tool of your choice).</p>
+<p><strong>Task 3.3c</strong>***(+**) Implement a parser for S-expressions and prove the correctness property (for any input string the parser either throws an exception or returns an abstract syntax tree which can be serialized to a string equivalent to input in some sense). An implementation in dependently-typed language (Coq, Agda, Idris) is preferred, you will get additional two stars for task 1.1. Parser must support lists, symbols, numbers, strings with escape characters (\n, \t, \").</p>
+<!--
+# Project
+
+**Project Step 2.**
+~ Define an abstract syntax tree for the language in S-expression terms.
+
+**Project Step 2'.**
+~ Design a simple concrete syntax specification (in BNF or any other formalism) and implement a parser for the language (from sequence of characters to abstract syntax tree conforming to Step 2 specification)
+-->
+</section><div><a class="slider-prev" href="#home-reading"></a><a class="slider-next"></a></div>
 
 <!-- start page -->
    <div id="slider">
