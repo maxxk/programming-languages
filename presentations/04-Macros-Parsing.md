@@ -34,7 +34,7 @@ digraph Spec {
 }
 ```
 # BNF formally
-BNF has a graph structure (actually, a directed hypergraph with per-edge ordered destination nodes). Parse tree is a tree derived from the graph (when you encounter a cycle, vertex is duplicated).
+BNF has a graph structure (actually, a directed hypergraph with per-edge ordered destination nodes). Parse tree is a tree derived from the graph (if syntax analysis walks through a cycle, first repeating vertex is duplicated).
 ```{.graphviz .dot}
 digraph Syntax {
   { rank=same; term, factor, atom };
@@ -71,7 +71,7 @@ atom ::= number | '(' term ')'
 
 # Mechanization
 <div class="smaller">
-Programs are complex. In theory, you can make a mathematical description of a programming language with some assumptions. You can't usually prove properties on paper. Therefore we have to use some (mathematically correct) mechanization tools to make a precise reasoning about  the program. Scientific publications which we will discuss today use Coq or Agda proof-assistants for mechanization.
+Programs are complex. Theoretically, you can make a mathematical description of a programming language on paper with some assumptions. But usually proving properties on paper is infeasible. Therefore we have to use some (mathematically sound) mechanization tools to make a precise reasoning about  the program. Scientific publications which we will discuss today use Coq or Agda proof-assistants for mechanization.
 </div>
 
 <div class="twocolumn" style="font-size: 0.5em;">
@@ -160,8 +160,7 @@ A → B
 ~ function from type A to type B
 
 (a : A) → B(a) 
-~ dependent function (dependent product) mapping an element *a* of type A to representative B(a) of family 
-
+~ dependent function (dependent product) mapping an element *a* of type A to representative B(a) of family: \
 B : A → Type
 
 A + B 
@@ -195,7 +194,7 @@ Atom   = ANumber (n : Number) | AGroup (t : Term)
 
 # Pattern matching
 
-An interpreter for an abstract syntax tree from previous slide is defined with pattern matching (case analysis) on inductive type constructors:
+An interpreter for an abstract syntax tree from previous slide is defined with pattern matching (case analysis) over the inductive type constructors:
 
 ```
 interpretTerm : Term → Number
@@ -234,6 +233,7 @@ Example (in Russian): https://habrahabr.ru/post/148769/
 
 # Coq and Agda
 In Coq and Agda all definable functions are (under the normal circumstances) total, which means:
+
 1. The function will accept any input of the specified type, errors like Haskell's "non-exhaustive patterns" are not possible:
 
 ```haskell
@@ -315,19 +315,87 @@ Definition head' A n (vec : Vector A n) :=
 Definition head A n (vec : Vector A (S n)) : A := head' vec.
 ```
 
+# Coq and Agda example side by side
+
+<div class="twocolumn">
+
+```ocaml
+Inductive Nat :=
+  | zero : Nat
+  | succ : Nat -> Nat.
+
+Inductive Even: Nat -> Prop :=
+  | even_base : Even zero
+  | even_step : forall n, Even n -> Even (succ (succ n)).
+
+Fixpoint add (n:Nat) (m:Nat) :=
+  match n with
+    | zero => m
+    | succ n' => succ (add n' m)
+  end.
+
+Lemma add_succ:
+  forall n m, add (succ n) m  = succ (add n m).
+Proof.
+  auto.
+Qed.
+
+Lemma even_sum :
+  forall n m, Even n -> Even m -> Even (add n m).
+Proof.
+  intros n m even_n even_m.
+  induction even_n.
+   (* case even_base *)
+   - simpl.
+     assumption.
+   (* case even_step *)
+   - repeat (rewrite add_succ).
+     apply even_step.
+     assumption.
+Qed.
+```
+
+```agda
+data Nat : Set where
+  zero : Nat
+  succ : Nat -> Nat
+
+data Even : Nat -> Set where
+  even_base : Even zero
+  even_step : forall {n} -> Even n -> Even (succ (succ n))
+
+_+_ : Nat -> Nat -> Nat
+zero + n = n
+(succ n) + m = succ (n + m)
+
+even_sum : forall {n m} -> Even n -> Even m -> Even (n + m)
+even_sum even_base x      = x
+even_sum (even_step x) y  = even_step (even_sum x y)
+```
+
+<span class="small">
+Source: https://dorchard.blog/2015/03/02/an-afternoon-of-dtttheorem-provers-agda-and-coq/
+</span>
+
+</div>
+
+
 # Formal syntax analysis
 Parser is a function which implements syntax analysis.
 
 Suppose we have defined a syntax as a grammar G and an abstract syntax tree and implemented a parser P.
+More realistic example: you write a code generator, so you have to make sure (to prove)
+that it will always generate code without compiling.
 
 P : String → AST + SyntaxError
 
 How can we make sure that our parser will:
-1. accept all strings from G-defined language.
-2. not accept any string outside of G-defined language.
-3. will terminate for every finite input.
 
-# Couldn't we just write a parser in a proof assistant?
+1. accept all strings from G-defined language,
+2. not accept any string outside of G-defined language,
+3. will terminate for every finite input?
+
+## Couldn't we just write a parser in a proof assistant?
 From the previous lecture: left recursion.
 ```
 term ::= factor | term '+' factor
@@ -448,17 +516,17 @@ Definition wf_analyse (exp : pexp) (wf : PES.t) : bool :=
   | id e ⇒ is_wf e wf
 end.
 ```
+
+```coq
+Program Fixpoint parse (T : Type) (e : PExp T | is grammar exp e) (s : string)
+{measure (e , s ) ≻ } : {r : ParsingResult T | ∃ n , [ e , s ] ⇒ [ n , r ] }
+```
+
 <span class="smaller">
 Koprowski A., Binsztok H. TRX: A Formally Verified Parser Interpreter // Logical Methods in Computer Science / ed. Gordon A. 2011. Vol. 7, № 2.
 
 Medeiros S., Ierusalimschy R. A parsing machine for PEGs // Proceedings of the 2008 symposium on Dynamic languages - DLS ’08. 2008. P. 1–12.
 </span>
-
-# TRX: A Formally Verified Parser Interpreter
-```coq
-Program Fixpoint parse (T : Type) (e : PExp T | is grammar exp e) (s : string)
-{measure (e , s ) ≻ } : {r : ParsingResult T | ∃ n , [ e , s ] ⇒ [ n , r ] }
-```
 
 # See also
 1. Uustalu, Tarmo, Firsov, Denis. Certified Parsing of Regular Languages // Certified Programs and Proofs. Springer International Publishing, 2013. P. 98–113.
@@ -712,19 +780,29 @@ let x : Vec<u32> = {
 # Homework assignments
 
 **Task 4.1** (10*) Implement Danielsson's Total Parser Combinators in Coq.
+ 
 
-**Task 4.2*** Write (manually) an extensible parser for LISP-like symbolic expressions (subset of ["R7RS small"](http://www.scheme-reports.org) Scheme specification). Whitespace, identifier and number specifications are omitted as a trivial exercise. 
+**Task 4.3a*** Write (manually) an extensible parser for LISP-like symbolic expressions (subset of ["R7RS small"](http://www.scheme-reports.org) Scheme specification). Definitions for whitespace, identifier and number are omitted as a trivial exercise.
 ```
 <datum> ::= <atom> <optional whitespace> | <list> <optional whitespace>
 <atom> ::= <identifier> | <number> | <string>
 <string> ::= '"' <string element>* '"'
-<string element> ::= <any character except " and \> | '\"' | '\\'
+<string element> ::= <any character except " and \> | '\"' | '\\' | '\n' | '\t'
 <list> ::= "(" <datum>  ")"
 ```
 
+**Task 4.3b**(\*\*+\*\*) Implement parser for s-expressions in Agda using Danielsson's total parser combinators
+or in Coq using PEG implementation.
+
+What's the difference? 
+
+- task 3.3: implement simple parser and prove correctness/termination
+- task 4.3a: implement extensible parser without proofs
+- task 4.3b: implement simple parser using Coq/Agda
+
 # Homework assignments
 
-**Task 4.3**** Implement reader macros for a subset of a context-free grammar as an interpreter from s-expressions to parser extension. It'll be easier to implement in some lanugage featuring `eval` command (like JavaScript, Python or LISP family)
+**Task 4.4**\*\*\* Extend parser from Task 4.3a with reader macros for a subset of a context-free grammar as an interpreter from s-expressions to parser extension. It'll be easier to implement in some lanugage featuring `eval` command (like JavaScript, Python or LISP family)
 ```scheme
 (reader-macro <start-string> <stop-string> <grammar>)
 ; Example:
@@ -735,4 +813,4 @@ let x : Vec<u32> = {
 #1.5e11# ⟶ (float "1" ("." ("5")) ("e" ("") "11"))
 ```
 
-**Task 4.4*** Write a reader macro for infix arithmetical expressions (addition, multiplication, brackets).
+**Task 4.5*** Write a reader macro for infix arithmetical expressions (addition, multiplication, brackets).
