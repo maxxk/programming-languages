@@ -486,7 +486,7 @@ Writer w = a; //implicitly casting from Author to Writer.
 </div>
 
 
-# Homework assignments
+# Homework assignments (1/2)
 **Task 5.1.** ** Implement a translator from simply-typed lambda calculus <abbr title="Abstract Syntax Tree">AST</abbr> to <abbr title="Higher-Order Abstract Syntax">HOAS</abbr> in Haskell or any other language of your choice (except OCaml) which is expressive enough to represent HOAS.
 
 **Task 5.2.** *** Implement a translator from simply-typed lambda calculus <abbr title="Abstract Syntax Tree">AST</abbr> to <abbr title="Parametrized Higher-Order Abstract Syntax">PHOAS</abbr> in Haskell or any other language of your choice (except the original OCaml) which is expressive enough to represent PHOAS.
@@ -497,6 +497,43 @@ Writer w = a; //implicitly casting from Author to Writer.
 
 a. "on paper" (\*\*)
 b. in Coq, following the original paper (\*\*\*)
+
+# Homework assignments (2/2)
+
+**Task 5.5.** \*\*\* Write a formal specification 
+(in Haskell, Standard ML, Coq or Agda) 
+for ISO C99 Arithmetic operands conversion
+(section 6.3.1 Arithmetic operands).
+
+Formal specification must be presented
+as a function
+with input as an AST with operands annotated with the typing information 
+and with output as an AST with operands replaced by the typing information and
+transformations specified in draft or with special value "Undefined behavior". 
+Example:
+
+Inputs in C syntax:
+
+```c
+int pi = 3.14;
+int i = 1e30f;
+```
+
+Inputs as a possible AST:
+
+```
+Assign (Variable "pi" Integer32) (Literal (Float32 3.14))
+
+Assign (Variable "i" Integer32)  (Literal (Float32 1e30))
+```
+
+Outputs as a possible AST:
+```
+Assign (Variable "pi" Integer32) (IntegerPart (Literal (Float32 3.14)))
+
+UndefinedBehavior
+```
+
 <!--
 # Project
 **Project Step 3.** Implement a static formal semantics for your programming language (in Agda or Coq). Choose one of the following approaches.
