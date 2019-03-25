@@ -29,7 +29,7 @@ maxim.krivchikov@gmail.com
 # Programming language specification
 ```{.graphviz .dot}
 digraph Spec {
-  edge [minlen=3.0];
+  edge [minlen=1.5];
 
   { rank=same; Syntax, Semantics, Pragmatics };
   Specification -> Syntax;
@@ -39,6 +39,7 @@ digraph Spec {
   "Static Semantics" -> "Name binding";
   "Static Semantics" -> Typing;
   "Name binding" -> Typing [constraint=false];
+  Typing -> "Name binding" [constraint=false];
   Semantics -> "Dynamic Semantics";
   Syntax -> Grammar [label="Specification"];
   Syntax -> "Parse Tree" [label="Proof"];
@@ -104,7 +105,7 @@ class Program
 <div class="small">Example from: http://www.c-sharpcorner.com/UploadFile/deveshomar/generic-method-overloading-in-C-Sharp/</div>
 
 # Scope
-*Scope* of a binding is a textual region in program in which a binding is active. We may also use term *scope* to call the region of a program of maximal size in which no bindings are destroyed (masked).
+*Scope* of a binding is a textual region in program in which a binding is active. We may also use term *scope* to designate the region of a program of maximal size in which no bindings are destroyed (masked).
 ```c
 char *a = "QWE123\0";
 char* fun() {
@@ -290,9 +291,11 @@ digraph  G {
   AST -> "AST+Bindings" [label="Static semantics"]
 }
 ```
-Syntax is a transformation from `String` to <abbr title="Abstract Syntax Tree">`AST`</abbr>. Static semantics, in the same way, is a transformation from AST to AST with variable bindings information. How would we store this information?
+Syntax is a transformation from `String` to <abbr title="Abstract Syntax Tree">`AST`</abbr>.
 
-Easier approach: generate unique names and store scope in parallel.
+Static semantics, in the same way, is a transformation from AST to AST with variable bindings information. How would we store this information?
+
+Easier approach: generate unique names and store scope as a separate value.
 
 AST+Bindings = Σ (ast : AST /[Id := ℕ]) . (scope :  Map<ℕ, AST> ) . (p : ∀ { id : ℕ } ∈ ast, id ∈ scope).
 
@@ -378,6 +381,111 @@ Approach: fixed point (works for classical Domain Theory, doesn't work well in a
 
 N.S. Papaspyrou. Formal semantics of the C Programming Language (PhD thesis).
 
+# Static semantics
+The static semantics is the description of the structural constraints (context-sensitive aspects) that cannot be adequately described by context-free grammars.
+
+Source: http://www.emu.edu.tr/aelci/Courses/D-318/D-318-Files/plbook/def.htm
+
+In addition to variable binding, static semantics includes the specification of possible values and valid literals, and also the type system (for strongly-typed programming languages).
+
+# Static semantcs for ECMAScript
+Examples of static semantics for dynamically-typed language in specification of ECMAScript (JavaScript):
+
+ECMA-262. ECMAScript Language Specifcation.
+
+http://www.ecma-international.org/ecma-262/6.0/#sec-static-semantics-mv
+
+# Static formal semantics for ANSI C
+Example of mathematically specified formal semantics for C programming language:
+
+N.S. Papaspyrou. A Formal Semantics for the C Programming Language. PhD Thesis. 1998
+http://www.softlab.ntua.gr/~nickie/Papers/papaspyrou-1998-fscpl.pdf
+
+Part II. Static Semantics.
+
+# Type conversions
+**Type conversion** — mapping from the values of one type to the corresponding values of a different type. For example, integers to floating point numbers: 1 → 1.0 or strings to codepoints to integers.
+
+- **cast** — explicit type conversion
+```c++
+x = static_cast<int>('1');
+```
+```ada
+x := Float(1);
+```
+- **coercion** — implicit type conversion, performed automatically.
+```c++
+double hilbert = 1 / (i + j + 1);
+int pi = 3.141592653589793238462643383279502884197169399375105820974944592307816406;
+```
+
+# Type conversions
+- some languages (Ada, Go) do not support any form of the coercion, some (Pascal) support only "lossless" coercions, others (C++, C#) even allow user-defined coercions.
+```pascal
+-- Pascal:
+var n: Integer;   x: Real;
+x := n;
+n := x; -- error
+n := round(x);
+```
+
+```ada
+-- Ada:
+n: Integer; x: Float;
+x := n; -- error
+n := x; -- error
+x := Float(n);
+n := Integer(x); -- rounding
+```
+
+`double` allow exact representation for 53-bit integers.
+
+# Implicit coercions
+<div class="smaller twocolumn">
+```c#
+public class Author
+{
+    public string First;
+    public string Last;
+    public string[] BooksArray;
+}
+
+
+
+
+public class Writer
+{
+    public string FirstName { get; set; }
+    public string LastName { get; set; }
+    public List<string> Books { get; set; }
+}
+
+```
+
+<div class="small">Example from: http://www.codeproject.com/Articles/177153/Type-conversions-with-implicit-and-explicit-operat</div>
+
+```c#
+public static implicit operator Writer(Author a)
+{
+    return new Writer
+    {
+        FirstName = a.First,
+        LastName = a.Last,
+        Books = a.BooksArray != null ? a.BooksArray.ToList() : null
+    };
+}
+
+Author a = new Author
+{
+    First = "Vijaya",
+    Last = "Anand",
+    BooksArray = new string[] { "book1" }
+};
+Writer w = a; //implicitly casting from Author to Writer.
+```
+</div>
+
+
 # Homework assignments
 **Task 5.1.** ** Implement a translator from simply-typed lambda calculus <abbr title="Abstract Syntax Tree">AST</abbr> to <abbr title="Higher-Order Abstract Syntax">HOAS</abbr> in Haskell or any other language of your choice (except OCaml) which is expressive enough to represent HOAS.
 
@@ -389,9 +497,10 @@ N.S. Papaspyrou. Formal semantics of the C Programming Language (PhD thesis).
 
 a. "on paper" (\*\*)
 b. in Coq, following the original paper (\*\*\*)
-
+<!--
 # Project
 **Project Step 3.** Implement a static formal semantics for your programming language (in Agda or Coq). Choose one of the following approaches.
 - **Project Step 3a.** *  Assign the unique identifiers (e.g. natural numbers) to each bindable identifier leaf in the AST and create the mapping between the unique identifiers and static semantics subtrees.
 - **Project Step 3b.** ** Use Higher-Order Abstract Syntax.
 - **Project Step 3c.** *** Use Parametrized Higher-Order Abstract Syntax
+-->

@@ -31,11 +31,11 @@ Course topics include:
 **18.03.2019** Formal syntax analysis. Syntax extensions. 
 [presentation - html](presentations/04-Macros-Parsing.html) 
 
-<!--
-**22.03.2019** Static semantics. Naming, Bindings and Scope. 
+**25.03.2019** Static semantics. Naming, Bindings and Scope. 
 [presentation - html](presentations/05-Static-Semantics.html)
 
-**29.03.2019** Static semantics. Domain constraints. Typing.
+<!--
+**29.03.2019** Static semantics. Typing.
 [presentation - html](presentations/06-Typing.html) 
 
 **05.04.2019** Operational semantics 

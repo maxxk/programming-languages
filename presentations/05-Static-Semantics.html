@@ -10,7 +10,7 @@
   <style type="text/css">
 a.sourceLine { display: inline-block; line-height: 1.25; }
 a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; position: absolute; }
+a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 div.sourceCode { margin: 1em 0; }
@@ -23,13 +23,11 @@ code.sourceCode { white-space: pre-wrap; }
 a.sourceLine { text-indent: -1em; padding-left: 1em; }
 }
 pre.numberSource a.sourceLine
-  { position: relative; }
-pre.numberSource a.sourceLine:empty
-  { position: absolute; }
+  { position: relative; left: -4em; }
 pre.numberSource a.sourceLine::before
   { content: attr(data-line-number);
-    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all;
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -74,11 +72,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </style>
 </head>
 <body>
-  <div style="width: 640px;height: 400px;">
+  <div style="width: 640px;height: 400px;" id="container">
   <input id="slider-max" type="checkbox" checked="">
-   <article class="slider slider-indicator">
+   <article class="slider slider-indicator" id="main">
    <a id="slider-default"></a>
-   <label for="slider-max" title="Maximize"></label>
+   <label title="Flat view" id="flat-view"></label>
 
 
 <section id="software-and-programming-language-theory" class="slide level1">
@@ -109,7 +107,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </section><div><a class="slider-prev"></a><a class="slider-next" href="#programming-language-specification"></a></div>
 <section id="programming-language-specification" class="slide level1">
 <h1>Programming language specification</h1>
-<p><img data-src="graphviz-images/118c71dc5f666420f7c7dbd2d9307f9fbbe0afd2.svg" src="graphviz-images/118c71dc5f666420f7c7dbd2d9307f9fbbe0afd2.svg"></p>
+<p><img data-src="graphviz-images/b144171c915c47e4cb566b7d8dd61a51c81d2e45.svg" src="graphviz-images/b144171c915c47e4cb566b7d8dd61a51c81d2e45.svg"></p>
 </section><div><a class="slider-prev" href="#software-and-programming-language-theory"></a><a class="slider-next" href="#programming-language-semantics"></a></div>
 <section id="programming-language-semantics" class="slide level1">
 <h1>Programming language semantics</h1>
@@ -121,12 +119,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </dd>
 <dd class="fragment">static type checking (do the expressions satisfy constraints of typing system)
 </dd>
-<dd class="fragment">"context-sensitive" restriction on valid programs
+<dd class="fragment">“context-sensitive” restriction on valid programs
 </dd>
 <dt class="fragment">Dynamic semantics</dt>
 <dd class="fragment">how do we compute the value of expressions, statements, etc.
 </dd>
-<dd class="fragment">"recursively enumerable" restriction on valid programs
+<dd class="fragment">“recursively enumerable” restriction on valid programs
 </dd>
 </dl>
 </section><div><a class="slider-prev" href="#programming-language-specification"></a><a class="slider-next" href="#naming"></a></div>
@@ -177,13 +175,13 @@ Example from: <a href="http://www.c-sharpcorner.com/UploadFile/deveshomar/generi
 </section><div><a class="slider-prev" href="#naming"></a><a class="slider-next" href="#scope-1"></a></div>
 <section id="scope-1" class="slide level1">
 <h1>Scope</h1>
-<p><em>Scope</em> of a binding is a textual region in program in which a binding is active. We may also use term <em>scope</em> to call the region of a program of maximal size in which no bindings are destroyed (masked).</p>
+<p><em>Scope</em> of a binding is a textual region in program in which a binding is active. We may also use term <em>scope</em> to designate the region of a program of maximal size in which no bindings are destroyed (masked).</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="dt">char</span> *a = <span class="st">"QWE123\0"</span>;</a>
 <a class="sourceLine" id="cb3-2" data-line-number="2"><span class="dt">char</span>* fun() {</a>
 <a class="sourceLine" id="cb3-3" data-line-number="3">  <span class="dt">double</span> a = <span class="dv">0</span>;</a>
 <a class="sourceLine" id="cb3-4" data-line-number="4">  <span class="cf">return</span> a;</a>
 <a class="sourceLine" id="cb3-5" data-line-number="5">}</a></code></pre></div>
-<p><em>Lexical scope</em> (implemented in most of statically-typed programming languages, e.g. C/C++) binds identifiers inside some specific parts of program source code (lexical context).</p>
+<p><em>Lexical scope</em> (implemented in most of statically-typed programming languages, e.g.&nbsp;C/C++) binds identifiers inside some specific parts of program source code (lexical context).</p>
 </section><div><a class="slider-prev" href="#binding"></a><a class="slider-next" href="#closure"></a></div>
 <section id="closure" class="slide level1">
 <h1>Closure</h1>
@@ -272,7 +270,7 @@ Example from: <a href="http://www.c-sharpcorner.com/UploadFile/deveshomar/generi
 <a class="sourceLine" id="cb9-7" data-line-number="7"><span class="bu">std::</span>string s = mul&lt;<span class="bu">std::</span>string&gt;(<span class="dv">54</span>, <span class="dv">2</span>); <span class="co">// s = "110110"</span></a>
 <a class="sourceLine" id="cb9-8" data-line-number="8"><span class="dt">short</span> n2 = mul&lt;<span class="dt">short</span>&gt;(<span class="dv">6</span>, <span class="dv">3</span>); <span class="co">// error: assignment of read-only variable ‘k’</span></a></code></pre></div>
 <p>Languages supporting function overloading: C++, C#</p>
-Languages without support for function overloading: Haskell, ECMAScript, C (but C11 has the <code>_Generic</code> keyword: <a href="http://stackoverflow.com/a/25026358" class="uri">http://stackoverflow.com/a/25026358</a>)
+<p>Languages without support for function overloading: Haskell, ECMAScript, C (but C11 has the <code>_Generic</code> keyword: <a href="http://stackoverflow.com/a/25026358" class="uri">http://stackoverflow.com/a/25026358</a>)</p>
 </div>
 <div class="small">
 Example from: <a href="http://stackoverflow.com/questions/226144/overload-a-c-function-according-to-the-return-value" class="uri">http://stackoverflow.com/questions/226144/overload-a-c-function-according-to-the-return-value</a>
@@ -321,8 +319,9 @@ Example from: <a href="http://stackoverflow.com/questions/226144/overload-a-c-fu
 <h1>Static semantics representation</h1>
 <p>Let us return to the topic of formal mechanized analysis of programs.</p>
 <p><img data-src="graphviz-images/ed002a3970835e74b75f748296f96716059b7048.svg" src="graphviz-images/ed002a3970835e74b75f748296f96716059b7048.svg"></p>
-<p>Syntax is a transformation from <code>String</code> to <abbr title="Abstract Syntax Tree"><code>AST</code></abbr>. Static semantics, in the same way, is a transformation from AST to AST with variable bindings information. How would we store this information?</p>
-<p>Easier approach: generate unique names and store scope in parallel.</p>
+<p>Syntax is a transformation from <code>String</code> to <abbr title="Abstract Syntax Tree"><code>AST</code></abbr>.</p>
+<p>Static semantics, in the same way, is a transformation from AST to AST with variable bindings information. How would we store this information?</p>
+<p>Easier approach: generate unique names and store scope as a separate value.</p>
 <p>AST+Bindings = Σ (ast : AST /[Id := ℕ]) . (scope : Map&lt;ℕ, AST&gt; ) . (p : ∀ { id : ℕ } ∈ ast, id ∈ scope).</p>
 <div class="small">
 Example at: Vasenin V. A., Krivchikov M. A. Ecma-335 static formal semantics // Programming and Computer Software. — 2012. — Vol. 38, no. 4. — P. 183–188. <a href="http://dx.doi.org/10.1134/S0361768812040056" class="uri">http://dx.doi.org/10.1134/S0361768812040056</a>
@@ -359,7 +358,7 @@ Higher-order syntax captures the name binding:
 <a class="sourceLine" id="cb16-5" data-line-number="5">    | False : (<span class="dt">bool</span>, 'V) <span class="dt">exp</span></a>
 <a class="sourceLine" id="cb16-6" data-line-number="6">    | App : ('d -&gt; 'r, 'V) <span class="dt">exp</span> * ('d, 'V) <span class="dt">exp</span> -&gt; ('r, 'V) <span class="dt">exp</span></a>
 <a class="sourceLine" id="cb16-7" data-line-number="7">    | Abs : ('d 'V -&gt; ('r, 'V) <span class="dt">exp</span>) -&gt; ('d -&gt; 'r, 'V) <span class="dt">exp</span></a></code></pre></div>
-<a href="http://adam.chlipala.net/papers/PhoasICFP08/" class="uri">http://adam.chlipala.net/papers/PhoasICFP08/</a>
+<p><a href="http://adam.chlipala.net/papers/PhoasICFP08/" class="uri">http://adam.chlipala.net/papers/PhoasICFP08/</a></p>
 </div>
 </section><div><a class="slider-prev" href="#static-semantics-representation"></a><a class="slider-next" href="#ornaments"></a></div>
 <section id="ornaments" class="slide level1">
@@ -378,7 +377,7 @@ Higher-order syntax captures the name binding:
 <a class="sourceLine" id="cb18-6" data-line-number="6">  Vec<span class="ot">_</span>A n ← nil [q <span class="ot">:</span> n ≡ 0]</a>
 <a class="sourceLine" id="cb18-7" data-line-number="7">     <span class="ot">|</span> cons [n' <span class="ot">:</span> Nat][ q <span class="ot">:</span> n <span class="ot">=</span> succ n' ] <span class="ot">(</span>a <span class="ot">:</span> A<span class="ot">)</span> <span class="ot">(</span>vs <span class="ot">:</span> Vec<span class="ot">_</span>A n<span class="ot">)</span></a></code></pre></div>
 <div class="small">
-<a href="https://personal.cis.strath.ac.uk/conor.mcbride/pub/OAAO/LitOrn.pdf" class="uri">https://personal.cis.strath.ac.uk/conor.mcbride/pub/OAAO/LitOrn.pdf</a> <a href="http://arxiv.org/pdf/1201.4801.pdf" class="uri">http://arxiv.org/pdf/1201.4801.pdf</a>
+<p><a href="https://personal.cis.strath.ac.uk/conor.mcbride/pub/OAAO/LitOrn.pdf" class="uri">https://personal.cis.strath.ac.uk/conor.mcbride/pub/OAAO/LitOrn.pdf</a> <a href="http://arxiv.org/pdf/1201.4801.pdf" class="uri">http://arxiv.org/pdf/1201.4801.pdf</a></p>
 </div>
 </section><div><a class="slider-prev" href="#higher-order-abstract-syntax"></a><a class="slider-next" href="#recursion"></a></div>
 <section id="recursion" class="slide level1">
@@ -386,29 +385,117 @@ Higher-order syntax captures the name binding:
 <div class="sourceCode" id="cb19"><pre class="sourceCode java"><code class="sourceCode java"><a class="sourceLine" id="cb19-1" data-line-number="1"><span class="kw">class</span> A { B b; }</a>
 <a class="sourceLine" id="cb19-2" data-line-number="2"><span class="kw">class</span> B { A a; }</a></code></pre></div>
 <p>Suppose we started translating <abbr title="Abstract Syntax Tree">AST</abbr> to static semantics. Before we process second line and see that <code>B</code> is a class, what is the static semantics of <code>B</code> at the first line?</p>
-<p>Approach: fixed point (works for classical Domain Theory, doesn't work well in a constructive setting).</p>
+<p>Approach: fixed point (works for classical Domain Theory, doesn’t work well in a constructive setting).</p>
 <p>N.S. Papaspyrou. Formal semantics of the C Programming Language (PhD thesis).</p>
-</section><div><a class="slider-prev" href="#ornaments"></a><a class="slider-next" href="#homework-assignments"></a></div>
+</section><div><a class="slider-prev" href="#ornaments"></a><a class="slider-next" href="#static-semantics"></a></div>
+<section id="static-semantics" class="slide level1">
+<h1>Static semantics</h1>
+<p>The static semantics is the description of the structural constraints (context-sensitive aspects) that cannot be adequately described by context-free grammars.</p>
+<p>Source: <a href="http://www.emu.edu.tr/aelci/Courses/D-318/D-318-Files/plbook/def.htm" class="uri">http://www.emu.edu.tr/aelci/Courses/D-318/D-318-Files/plbook/def.htm</a></p>
+<p>In addition to variable binding, static semantics includes the specification of possible values and valid literals, and also the type system (for strongly-typed programming languages).</p>
+</section><div><a class="slider-prev" href="#recursion"></a><a class="slider-next" href="#static-semantcs-for-ecmascript"></a></div>
+<section id="static-semantcs-for-ecmascript" class="slide level1">
+<h1>Static semantcs for ECMAScript</h1>
+<p>Examples of static semantics for dynamically-typed language in specification of ECMAScript (JavaScript):</p>
+<p>ECMA-262. ECMAScript Language Specifcation.</p>
+<p><a href="http://www.ecma-international.org/ecma-262/6.0/#sec-static-semantics-mv" class="uri">http://www.ecma-international.org/ecma-262/6.0/#sec-static-semantics-mv</a></p>
+</section><div><a class="slider-prev" href="#static-semantics"></a><a class="slider-next" href="#static-formal-semantics-for-ansi-c"></a></div>
+<section id="static-formal-semantics-for-ansi-c" class="slide level1">
+<h1>Static formal semantics for ANSI C</h1>
+<p>Example of mathematically specified formal semantics for C programming language:</p>
+<p>N.S. Papaspyrou. A Formal Semantics for the C Programming Language. PhD Thesis. 1998 <a href="http://www.softlab.ntua.gr/~nickie/Papers/papaspyrou-1998-fscpl.pdf" class="uri">http://www.softlab.ntua.gr/~nickie/Papers/papaspyrou-1998-fscpl.pdf</a></p>
+<p>Part II. Static Semantics.</p>
+</section><div><a class="slider-prev" href="#static-semantcs-for-ecmascript"></a><a class="slider-next" href="#type-conversions"></a></div>
+<section id="type-conversions" class="slide level1">
+<h1>Type conversions</h1>
+<p><strong>Type conversion</strong> — mapping from the values of one type to the corresponding values of a different type. For example, integers to floating point numbers: 1 → 1.0 or strings to codepoints to integers.</p>
+<ul>
+<li class="fragment"><strong>cast</strong> — explicit type conversion</li>
+</ul>
+<div class="sourceCode" id="cb20"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb20-1" data-line-number="1">x = <span class="kw">static_cast</span>&lt;<span class="dt">int</span>&gt;(<span class="ch">'1'</span>);</a></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode ada"><code class="sourceCode ada"><a class="sourceLine" id="cb21-1" data-line-number="1">x := <span class="dt">Float</span>(<span class="dv">1</span>);</a></code></pre></div>
+<ul>
+<li class="fragment"><strong>coercion</strong> — implicit type conversion, performed automatically.</li>
+</ul>
+<div class="sourceCode" id="cb22"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb22-1" data-line-number="1"><span class="dt">double</span> hilbert = <span class="dv">1</span> / (i + j + <span class="dv">1</span>);</a>
+<a class="sourceLine" id="cb22-2" data-line-number="2"><span class="dt">int</span> pi = <span class="fl">3.141592653589793238462643383279502884197169399375105820974944592307816406</span>;</a></code></pre></div>
+</section><div><a class="slider-prev" href="#static-formal-semantics-for-ansi-c"></a><a class="slider-next" href="#type-conversions-1"></a></div>
+<section id="type-conversions-1" class="slide level1">
+<h1>Type conversions</h1>
+<ul>
+<li class="fragment">some languages (Ada, Go) do not support any form of the coercion, some (Pascal) support only “lossless” coercions, others (C++, C#) even allow user-defined coercions.</li>
+</ul>
+<div class="sourceCode" id="cb23"><pre class="sourceCode pascal"><code class="sourceCode pascal"><a class="sourceLine" id="cb23-1" data-line-number="1">-- Pascal:</a>
+<a class="sourceLine" id="cb23-2" data-line-number="2"><span class="kw">var</span> n: <span class="dt">Integer</span>;   x: <span class="dt">Real</span>;</a>
+<a class="sourceLine" id="cb23-3" data-line-number="3">x := n;</a>
+<a class="sourceLine" id="cb23-4" data-line-number="4">n := x; -- error</a>
+<a class="sourceLine" id="cb23-5" data-line-number="5">n := round(x);</a></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode ada"><code class="sourceCode ada"><a class="sourceLine" id="cb24-1" data-line-number="1"><span class="co">-- Ada:</span></a>
+<a class="sourceLine" id="cb24-2" data-line-number="2">n: <span class="dt">Integer</span>; x: <span class="dt">Float</span>;</a>
+<a class="sourceLine" id="cb24-3" data-line-number="3">x := n; <span class="co">-- error</span></a>
+<a class="sourceLine" id="cb24-4" data-line-number="4">n := x; <span class="co">-- error</span></a>
+<a class="sourceLine" id="cb24-5" data-line-number="5">x := <span class="dt">Float</span>(n);</a>
+<a class="sourceLine" id="cb24-6" data-line-number="6">n := <span class="dt">Integer</span>(x); <span class="co">-- rounding</span></a></code></pre></div>
+<p><code>double</code> allow exact representation for 53-bit integers.</p>
+</section><div><a class="slider-prev" href="#type-conversions"></a><a class="slider-next" href="#implicit-coercions"></a></div>
+<section id="implicit-coercions" class="slide level1">
+<h1>Implicit coercions</h1>
+<div class="smaller twocolumn">
+<div class="sourceCode" id="cb25"><pre class="sourceCode c#"><code class="sourceCode cs"><a class="sourceLine" id="cb25-1" data-line-number="1"><span class="kw">public</span> <span class="kw">class</span> Author</a>
+<a class="sourceLine" id="cb25-2" data-line-number="2">{</a>
+<a class="sourceLine" id="cb25-3" data-line-number="3">    <span class="kw">public</span> <span class="dt">string</span> First;</a>
+<a class="sourceLine" id="cb25-4" data-line-number="4">    <span class="kw">public</span> <span class="dt">string</span> Last;</a>
+<a class="sourceLine" id="cb25-5" data-line-number="5">    <span class="kw">public</span> <span class="dt">string</span>[] BooksArray;</a>
+<a class="sourceLine" id="cb25-6" data-line-number="6">}</a>
+<a class="sourceLine" id="cb25-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb25-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb25-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb25-10" data-line-number="10"></a>
+<a class="sourceLine" id="cb25-11" data-line-number="11"><span class="kw">public</span> <span class="kw">class</span> Writer</a>
+<a class="sourceLine" id="cb25-12" data-line-number="12">{</a>
+<a class="sourceLine" id="cb25-13" data-line-number="13">    <span class="kw">public</span> <span class="dt">string</span> FirstName { <span class="kw">get</span>; <span class="kw">set</span>; }</a>
+<a class="sourceLine" id="cb25-14" data-line-number="14">    <span class="kw">public</span> <span class="dt">string</span> LastName { <span class="kw">get</span>; <span class="kw">set</span>; }</a>
+<a class="sourceLine" id="cb25-15" data-line-number="15">    <span class="kw">public</span> List&lt;<span class="dt">string</span>&gt; Books { <span class="kw">get</span>; <span class="kw">set</span>; }</a>
+<a class="sourceLine" id="cb25-16" data-line-number="16">}</a></code></pre></div>
+<div class="small">
+Example from: <a href="http://www.codeproject.com/Articles/177153/Type-conversions-with-implicit-and-explicit-operat" class="uri">http://www.codeproject.com/Articles/177153/Type-conversions-with-implicit-and-explicit-operat</a>
+</div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode c#"><code class="sourceCode cs"><a class="sourceLine" id="cb26-1" data-line-number="1"><span class="kw">public</span> <span class="kw">static</span> <span class="kw">implicit</span> <span class="kw">operator</span> <span class="fu">Writer</span>(Author a)</a>
+<a class="sourceLine" id="cb26-2" data-line-number="2">{</a>
+<a class="sourceLine" id="cb26-3" data-line-number="3">    <span class="kw">return</span> <span class="kw">new</span> Writer</a>
+<a class="sourceLine" id="cb26-4" data-line-number="4">    {</a>
+<a class="sourceLine" id="cb26-5" data-line-number="5">        FirstName = a.<span class="fu">First</span>,</a>
+<a class="sourceLine" id="cb26-6" data-line-number="6">        LastName = a.<span class="fu">Last</span>,</a>
+<a class="sourceLine" id="cb26-7" data-line-number="7">        Books = a.<span class="fu">BooksArray</span> != <span class="kw">null</span> ? a.<span class="fu">BooksArray</span>.<span class="fu">ToList</span>() : <span class="kw">null</span></a>
+<a class="sourceLine" id="cb26-8" data-line-number="8">    };</a>
+<a class="sourceLine" id="cb26-9" data-line-number="9">}</a>
+<a class="sourceLine" id="cb26-10" data-line-number="10"></a>
+<a class="sourceLine" id="cb26-11" data-line-number="11">Author a = <span class="kw">new</span> Author</a>
+<a class="sourceLine" id="cb26-12" data-line-number="12">{</a>
+<a class="sourceLine" id="cb26-13" data-line-number="13">    First = <span class="st">"Vijaya"</span>,</a>
+<a class="sourceLine" id="cb26-14" data-line-number="14">    Last = <span class="st">"Anand"</span>,</a>
+<a class="sourceLine" id="cb26-15" data-line-number="15">    BooksArray = <span class="kw">new</span> <span class="dt">string</span>[] { <span class="st">"book1"</span> }</a>
+<a class="sourceLine" id="cb26-16" data-line-number="16">};</a>
+<a class="sourceLine" id="cb26-17" data-line-number="17">Writer w = a; <span class="co">//implicitly casting from Author to Writer.</span></a></code></pre></div>
+</div>
+</section><div><a class="slider-prev" href="#type-conversions-1"></a><a class="slider-next" href="#homework-assignments"></a></div>
 <section id="homework-assignments" class="slide level1">
 <h1>Homework assignments</h1>
 <p><strong>Task 5.1.</strong> ** Implement a translator from simply-typed lambda calculus <abbr title="Abstract Syntax Tree">AST</abbr> to <abbr title="Higher-Order Abstract Syntax">HOAS</abbr> in Haskell or any other language of your choice (except OCaml) which is expressive enough to represent HOAS.</p>
 <p><strong>Task 5.2.</strong> *** Implement a translator from simply-typed lambda calculus <abbr title="Abstract Syntax Tree">AST</abbr> to <abbr title="Parametrized Higher-Order Abstract Syntax">PHOAS</abbr> in Haskell or any other language of your choice (except the original OCaml) which is expressive enough to represent PHOAS.</p>
-<p><strong>Task 5.3.</strong> * Look at the assembly code generated by GCC on example code from "Closure" slide and explain how "closures" are implemented in this case.</p>
+<p><strong>Task 5.3.</strong> * Look at the assembly code generated by GCC on example code from “Closure” slide and explain how “closures” are implemented in this case.</p>
 <p><strong>Task 5.4.</strong> Describe static semantics of BNF in terms of Parametrized Higher Order Syntax.</p>
 <ol type="a">
-<li class="fragment">"on paper" (**)</li>
-<li class="fragment">in Coq, following the original paper (***)</li>
+<li class="fragment">“on paper” (**)</li>
+<li class="fragment">in Coq, following the original paper (***) <!--
+# Project
+**Project Step 3.** Implement a static formal semantics for your programming language (in Agda or Coq). Choose one of the following approaches.
+- **Project Step 3a.** *  Assign the unique identifiers (e.g. natural numbers) to each bindable identifier leaf in the AST and create the mapping between the unique identifiers and static semantics subtrees.
+- **Project Step 3b.** ** Use Higher-Order Abstract Syntax.
+- **Project Step 3c.** *** Use Parametrized Higher-Order Abstract Syntax
+--></li>
 </ol>
-</section><div><a class="slider-prev" href="#recursion"></a><a class="slider-next" href="#project"></a></div>
-<section id="project" class="slide level1">
-<h1>Project</h1>
-<p><strong>Project Step 3.</strong> Implement a static formal semantics for your programming language (in Agda or Coq). Choose one of the following approaches.</p>
-<ul>
-<li class="fragment"><strong>Project Step 3a.</strong> * Assign the unique identifiers (e.g. natural numbers) to each bindable identifier leaf in the AST and create the mapping between the unique identifiers and static semantics subtrees.</li>
-<li class="fragment"><strong>Project Step 3b.</strong> ** Use Higher-Order Abstract Syntax.</li>
-<li class="fragment"><strong>Project Step 3c.</strong> *** Use Parametrized Higher-Order Abstract Syntax</li>
-</ul>
-</section><div><a class="slider-prev" href="#homework-assignments"></a><a class="slider-next"></a></div>
+</section><div><a class="slider-prev" href="#implicit-coercions"></a><a class="slider-next"></a></div>
 
 <!-- start page -->
    <div id="slider">
@@ -422,7 +509,7 @@ Higher-order syntax captures the name binding:
 
   
   <script type="text/javascript">
-  document.addEventListener("keydown", function(e) {
+  function handleKeydown(e) {
      if (e.altKey || e.ctrlKey || e.metaKey || e.shiftKey) { return; }
      switch (e.keyCode) {
        case 35: // End
@@ -453,7 +540,18 @@ Higher-order syntax captures the name binding:
          }
          break;
      }
-  });
+  }
+  document.addEventListener("keydown", handleKeydown);
+  document.getElementById("flat-view").addEventListener("click", function(e) {
+    document.getElementById("main").classList.toggle('slider');
+    if (document.getElementById("main").classList.contains('slider')) {
+      document.getElementById("container").style="width: 640px;height: 400px;";
+      document.addEventListener("keydown", handleKeydown);
+    } else {
+      document.getElementById("container").style="";
+      document.removeEventListener("keydown", handleKeydown);
+    }
+  })
   </script>
   
 
