@@ -35,7 +35,7 @@
 .slider > section:target {
   opacity: 1;
 }
-#slider {
+.slider #slider {
   position: absolute;
   top: 0;
   left: 0;
@@ -46,7 +46,7 @@
   height: 100%;
   background-color: #FFF;
 }
-#slider .slider-start {
+.slider #slider .slider-start {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -381,10 +381,10 @@
 .slider > section h6 {
   font-size: 1em;
 }
-.slider > section h2 {
+section h2 {
   font-size: 1.2em;
 }
-.slider > section h1 {
+section h1 {
   margin-top: 0.25em;
   font-size: 1.5em;
 }
@@ -448,7 +448,7 @@
 #slider-max {
   display: none;
 }
-.slider > label {
+label#flat-view {
   position: absolute;
   top: 0;
   right: 0;
@@ -457,8 +457,8 @@
   height: 24px;
   cursor: pointer;
 }
-.slider > label::before,
-.slider > label::after {
+label#flat-view::before,
+label#flat-view::after {
   content: '';
   position: absolute;
   width: 5px;
@@ -467,51 +467,51 @@
   -webkit-transition: border-color, 0.5s;
   transition: border-color, 0.5s;
 }
-.slider > label::before {
+label#flat-view::before {
   border-left-width: 0;
   border-bottom-width: 0;
 }
-.slider > label::after {
+label#flat-view::after {
   border-right-width: 0;
   border-top-width: 0;
 }
-.slider > label:hover::before,
-.slider > label:hover::after {
+label#flat-view:hover::before,
+label#flat-view:hover::after {
   border-color: #666;
 }
-.slider > label::before {
+label#flat-view::before {
   top: 5px;
   right: 5px;
 }
-.slider > label::after {
+label#flat-view::after {
   bottom: 5px;
   left: 5px;
 }
-.slider > label:hover::before {
+label#flat-view:hover::before {
   top: 4px;
   right: 4px;
 }
-.slider > label:hover::after {
+label#flat-view:hover::after {
   bottom: 4px;
   left: 4px;
 }
-#slider-max:checked + .slider > label::before,
-.slider > label::before {
+#slider-max:checked + label#flat-view::before,
+label#flat-view::before {
   top: 4px;
   right: 4px;
 }
-#slider-max:checked + .slider > label::after,
-.slider > label::after {
+#slider-max:checked + label#flat-view::after,
+label#flat-view::after {
   bottom: 4px;
   left: 4px;
 }
-#slider-max:checked + .slider > label:hover::before,
-.slider > label:hover::before {
+#slider-max:checked + label#flat-view:hover::before,
+label#flat-view:hover::before {
   top: 5px;
   right: 5px;
 }
-#slider-max:checked + .slider > label:hover::after,
-.slider > label:hover::after {
+#slider-max:checked + label#flat-view:hover::after,
+label#flat-view:hover::after {
   bottom: 5px;
   left: 5px;
 }
@@ -654,3 +654,4 @@
 .slider span.small {
   font-size: 0.7em;
 }
+
