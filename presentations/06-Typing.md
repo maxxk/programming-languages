@@ -1,5 +1,4 @@
 # Software and Programming Language Theory
-## Static semantics
 ## Typing
 
 <style>
@@ -31,127 +30,27 @@ maxim.krivchikov@gmail.com
 
 # Literature
 - R. Harper, Practical Foundations for Programming Languages, 2nd ed, 2016.
+- B. Pierce. Types and Programming Languages. 2002.
 
-# Static semantics
-The static semantics is the description of the structural constraints (context-sensitive aspects) that cannot be adequately described by context-free grammars.
-
-Source: http://www.emu.edu.tr/aelci/Courses/D-318/D-318-Files/plbook/def.htm
-
-In addition to variable binding, static semantics includes the specification of possible values and valid literals, and also the type system (for strongly-typed programming languages).
-
-# Static semantcs for ECMAScript
-Examples of static semantics for dynamically-typed language in specification of ECMAScript (JavaScript):
-
-ECMA-262. ECMAScript Language Specifcation.
-
-http://www.ecma-international.org/ecma-262/6.0/#sec-static-semantics-mv
-
-# Static formal semantics for ANSI C
-Example of mathematically specified formal semantics for C programming language:
-
-N.S. Papaspyrou. A Formal Semantics for the C Programming Language. PhD Thesis. 1998
-http://www.softlab.ntua.gr/~nickie/Papers/papaspyrou-1998-fscpl.pdf
-
-Part II. Static Semantics.
 
 # Type system
 > A type system is a tractable syntactic method for proving the absence of certain program behaviors by classifying phrases according to the kinds of values they compute.
 
 > B. Pierce. Types and Programming Languages. 2002.
 
-
-# Type conversions
-**Type conversion** — mapping from the values of one type to the corresponding values of a different type. For example, integers to floating point numbers: 1 → 1.0 or strings to codepoints to integers.
-
-- **cast** — explicit type conversion
-```c++
-x = static_cast<int>('1');
-```
-```ada
-x := Float(1);
-```
-- **coercion** — implicit type conversion, performed automatically.
-```c++
-double hilbert = 1 / (i + j + 1);
-int pi = 3.141592653589793238462643383279502884197169399375105820974944592307816406;
-```
-
-# Type conversions
-- some languages (Ada, Go) do not support any form of the coercion, some (Pascal) support only "lossless" coercions, others (C++, C#) even allow user-defined coercions.
-```pascal
--- Pascal:
-var n: Integer;   x: Real;
-x := n;
-n := x; -- error
-n := round(x);
-```
-
-```ada
--- Ada:
-n: Integer; x: Float;
-x := n; -- error
-n := x; -- error
-x := Float(n);
-n := Integer(x); -- rounding
-```
-
-`double` allow exact representation for 53-bit integers.
-
-# Implicit coercions
-<div class="smaller twocolumn">
-```c#
-public class Author
-{
-    public string First;
-    public string Last;
-    public string[] BooksArray;
-}
-
-
-
-
-public class Writer
-{
-    public string FirstName { get; set; }
-    public string LastName { get; set; }
-    public List<string> Books { get; set; }
-}
-
-```
-
-<div class="small">Example from: http://www.codeproject.com/Articles/177153/Type-conversions-with-implicit-and-explicit-operat</div>
-
-```c#
-public static implicit operator Writer(Author a)
-{
-    return new Writer
-    {
-        FirstName = a.First,
-        LastName = a.Last,
-        Books = a.BooksArray != null ? a.BooksArray.ToList() : null
-    };
-}
-
-Author a = new Author
-{
-    First = "Vijaya",
-    Last = "Anand",
-    BooksArray = new string[] { "book1" }
-};
-Writer w = a; //implicitly casting from Author to Writer.
-```
-</div>
-
 # Typing
 > The role of type system is to impose constraints on the formation of phrases that are sensitive to the context in which they occur.
 
 In practice, typing is usually specified by means of the formal inference system:
+
 - typing judgement "in context Γ the expression $x$ has type $τ$" — Γ ⊦ x : τ
 - context Γ — set of typing judgement for already defined variables or expressions
 - Γ, x : a ⊦ y : b
 
 # Simply Typed Lambda Calculus {.inference}
-Type: τ ≡ *b* | τ_1 → τ_2, *b* is an element of the set of basic types.
+Type: τ ≡ *b* | τ_1 → τ_2, 
+
+*b* is an element of the set of basic types.
 
 Typing rules:
 
@@ -219,7 +118,8 @@ The following properties connect typing with program execution.
 
 **Decidability of type checking:** *Type checking is decidable*
 
-We may define a type checking as a decision procedure for property "expression $e$ has type $τ$ but it evaluates to value $v$ of type $φ$ ($φ ≠ τ$)". For this definition:
+We can define a type checking as a decision procedure for property "expression $e$ has type $τ$ but it evaluates to value $v$ of type $φ$ ($φ ≠ τ$)". For this definition:
+
 - soundness means lack of false negatives (if expression is typed, the result of its evaluation has the same type)
 - completeness means lack of false positives (if expression $e$ always evaluates to a value of type $τ$, $e : τ$ is derivable during type checking)
 
@@ -246,9 +146,11 @@ Formally: $Γ ⊢ e₁ : τ$, $e₁$ is not value ⇒ ∃ $e₂$ : $e₁ ⟶ e�
 (usually are proved either by induction on rules or by induction on derivation)
 
 **Unicity: ** *For every typing context Γ and expression e there exists at most one τ such that $Γ ⊦ e : τ$.*
+
 We usually want this property in a sane type system, it may be neccessary to use a different statement in case of subtyping (not a single type, but a single minimal/maximal type).
 
 **Inversion: ** *(example) If Γ ⊦ plus(a, b) : num then Γ ⊦ a : num, Γ ⊦ b : num. *
+
 If typing rules are complex, such principles are difficult to state and prove. But these principle is essential for e.g. type inference.
 
 
@@ -273,10 +175,12 @@ If typing rules are complex, such principles are difficult to state and prove. B
 
 
 **Substitution: ** (expressions with the same type may be substituted) 
+
 If Γ, x : τ ⊦ e' : τ' and Γ ⊦ e : τ , then Γ ⊦ [e/x]e' : τ'
 
 
 **Decomposition: ** (we can factor out some typed value)
+
 If Γ ⊦ [e/x]e' : τ' then for every τ such that Γ ⊦ e : τ, we have Γ, x : τ ⊦ e' : τ'
 
 # Substructural type systems
@@ -480,6 +384,108 @@ Typing judgements are represented as indexed inductive type constructor. To each
 
 Example: http://mazzo.li/posts/Lambda.html
 
+# Recursive types {.inference}
+
+Example: simply-typed lambda calculus with iso-recursive types (B. Pierce. Types and Programming Languages, Chapter 20).
+
+Additional terms:  fold \[T\] t, unfold \[T\] t (T — type)
+
+Additional value: fold \[T\] v (T — type)
+
+Additional types: X (type-variable), μX.T (recursive type)
+
+Additional evaluation rules:
+
+        $\qquad$
+  ------------------------------
+    unfold [S] (fold [T] v) ⟶ v 
+
+       t ⟶ t'
+  -----------------------------
+     fold [T] t ⟶ fold [T] t'
+
+
+     t ⟶ t'
+  --------------------------------
+    unfold [T] t ⟶ unfold [T] t'
+
+Additional typing rules:
+
+    U = μX.T $\qquad$  Γ ⊦ t : [X := U] T 
+  ----------------------------------------
+          Γ ⊦ fold [U] t : U
+  
+   U = μX.T $\qquad$  Γ ⊦ t : U 
+  ----------------------------------------
+          Γ ⊦ unfold [U] t : U [X := U] T 
+
+# Recursive types: example
+
+Type of lists with argument — natural number.
+
+Primitive types: ℕ, 𝟙 (type with single element, 1).
+
+Additional type constructors: A + B (alternative), A * B (pairs)
+
+ℕ-List : Type := μX.(1 + ℕ * X)
+
+nil : ℕ-List := fold [ℕ-List] (inl 1)
+
+cons : ℕ → ℕ-List → ℕ-List := λ (n : ℕ). λ (l : ℕ-List). fold [ℕ-List] (inr (n, l))
+
+head : ℕ-List → 1 + ℕ := λ (l : ℕ-List). case (unfold [ℕ-List] l) of
+
+$\qquad$ inl _ ⇒ inl 1
+
+$\qquad$ inr (h, t) ⇒ inr h
+
+
+# System F: polymorphic lambda-calculus {.inference}
+
+Additional types: α (type variable), ∀α.T (polymorphic type)
+
+Additional terms: Λα.t (type abstraction), t ∘ A (type application)
+
+Additional typing rules:
+
+
+    Γ ⊦ t : B 
+  -------------------
+    Γ ⊦ Λα.t : ∀α.B
+  
+   Γ ⊦ t : ∀α.B
+  -------------------------
+    Γ ⊦ t ∘ A : B[α := A]
+
+Example: polymorphic identity function
+
+Λα. λ(x : α). x : ∀α. α → α
+
+# Data-type encoding in polymorphic lambda-calculus
+
+In polymorphic lambda-calculus it is possible to define some data types 
+in terms of elimination functions.
+
+
+## Boolean numbers
+
+Bool = ∀ γ. (γ → γ → γ)
+
+true = Λ γ. λ t. λ f. t
+
+false = Λ γ. λ t. λ f. f
+
+if (u : Bool) then (T : A) else (F : A) = (u ∘ A) T F
+
+## Sum-types (disjoint unions)
+
+A + B = ∀ γ. ( (A → γ) → (B → γ) → γ)
+
+inl a = Λ γ. λ f. λ g. (f a)
+
+inr b = Λ γ. λ f. λ g. (g b)
+
+
 # Homework assignments
 
 **Task 6.1.\*\*** Implement Algorithm W for Hindley-Milner type inference in polymorphic lambda-calculus with data types.
@@ -490,6 +496,7 @@ Example: http://mazzo.li/posts/Lambda.html
 
 **Task 6.4.\*\*\*** Implement a type checking algorithm for a language with gradual typing.
 
+<!--
 # Project
 
 **Project Step 4.** Design a type system for your programming language.
@@ -501,3 +508,4 @@ Example: http://mazzo.li/posts/Lambda.html
 *hard* — as an inductive type in Agda or Coq.
 
 *nightmare :)* — PHOAS in Agda or Coq, like in in example from previous slide: http://mazzo.li/posts/Lambda.html
+-->
