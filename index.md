@@ -37,10 +37,10 @@ Course topics include:
 **01.04.2019** Typing.
 [presentation - html](presentations/06-Typing.html) 
 
-<!--
-**05.04.2019** Operational semantics 
+**08.04.2019** Operational semantics 
 [presentation - html](presentations/07-Operational-Semantics.html)
 
+<!--
 **12.04.2019** Denotational semantics example
 [presentation - html](presentations/08-Denotational-semantics-example.html) 
 

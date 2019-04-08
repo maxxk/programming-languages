@@ -116,6 +116,7 @@ Transition relation $⇒$ is __deterministic__ if for every cf there is exactly 
 
 # Structural operational semantics
 Structural operational semantics for language L is five-tuple S = 〈 CF, ⇒, FC, IF, OF 〉
+
 - Irreducible — all irreducible configurations
 - FC — set of **final configurations** which yield the correct answer, FC ⊂ Irreducible
 - Stuck = Irreducible / FC — set of stuck states, nonfinal irreducible configurations (e.g. error states)
@@ -128,9 +129,13 @@ Structural operational semantics for language L is five-tuple S = 〈 CF, ⇒, F
 Outcome = AnsExp + ErrorResult (+ — disjoint union)
 
 Deterministic behavior, if $⇒$ is deterministic:
+
 $beh_{det}$ : (Prog × Inputs) → Outcome
+
 $beh_{det}$ 〈 P, I 〉 | IF 〈 P, I 〉 $⇒^*$ cf ∈ FC = AnsExp ↦ Outcome (OF cf)
+
 $beh_{det}$ 〈 P, I 〉 | IF 〈 P, I 〉 $⇒^*$ cf ∈ Stuck = ErrorResult
+
 $beh_{det}$ 〈 P, I 〉 | IF 〈 P, I 〉 $⇒^∞$ = ∞
 
 
@@ -140,8 +145,11 @@ $\mathcal{P}(A)$ — powerset of $A$.
 $$
 beh : (\mathrm{Prog} × \mathrm{Inputs}) → \mathcal{P}(\mathrm{Outcome})
 $$
+
 o ∈ beh( 〈P, I〉 ) **if** o = AnsExp ↦ Outcome (OF cf) **and** IF 〈P, I〉 $⇒^*$ cf ∈ FC 
+
 o ∈ beh( 〈P, I〉 ) **if** o ∈ ErrorResult **and** IF 〈 P, I 〉 $⇒^*$ cf ∈ Stuck
+
 o ∈ beh( 〈P, I〉 ) **if** o = ∞ **and** IF 〈P, I〉 $⇒^∞$
 
 # Rewrite rules {.inference}
@@ -151,7 +159,6 @@ Usually relations on complex domains are specified in terms of **formal inferenc
  --------------
   consequents
   
-<div class="ib">[name]</div>
 
 $antecedents = ⊘$ ⇒ rule is called **axiom**, otherwise **progress rule**.
 
@@ -165,8 +172,7 @@ configuration state = 〈 command sequence, stack 〉):
    S = S1 . S2 . Sn
  ------------------------------------
   〈 swap . Q, S〉 ⇒ 〈 Q, S2 . S1 . Sn 〉 
-  
-<div class="ib">[seq]</div>
+
 
 If cf is a configuration in which first command in sequence is constant, then there is a transition from cf to cf' in which constant is moved from command sequence to the top of the stack.
 
@@ -189,6 +195,7 @@ E.g. $→_{NE}$ for numerical expressions and $→_{Prog}$ for programs.
 
 # Language properties
 Usually operational semantics is used to prove some of the following properties:
+
 * universality: the language can express all computable programs;
 * determinism: the set of possible outcomes from executing a program on any
 particular inputs is a singleton;

@@ -9,11 +9,11 @@
   <style type="text/css">code{white-space: pre;}</style>
 </head>
 <body>
-  <div style="width: 640px;height: 400px;">
+  <div style="width: 640px;height: 400px;" id="container">
   <input id="slider-max" type="checkbox" checked="">
-   <article class="slider slider-indicator">
+   <article class="slider slider-indicator" id="main">
    <a id="slider-default"></a>
-   <label for="slider-max" title="Maximize"></label>
+   <label title="Flat view" id="flat-view"></label>
 
 
 <section id="software-and-programming-language-theory" class="slide level1">
@@ -77,7 +77,7 @@ F. Turbak, D. Gifford. Design Concepts in Programming Languages. Chapter 3. Oper
 <h1>Big-step and small-step operational semantics</h1>
 <p>Small-step operational semantics (Structural Operational Semantics, SOS): step-by-step transformation of configurations in abstract machine is defined by set of rewrite rules.</p>
 <div class="smaller">
-Gordon D. Plotkin. A Structural Approach to Operational Semantics. (1981) Tech. Rep. DAIMI FN-19, Computer Science Department, Aarhus University, Aarhus, Denmark. (Reprinted with corrections in J. Log. Algebr. Program. 60-61: 17-139 (2004)
+Gordon D. Plotkin. A Structural Approach to Operational Semantics. (1981) Tech. Rep.&nbsp;DAIMI FN-19, Computer Science Department, Aarhus University, Aarhus, Denmark. (Reprinted with corrections in J. Log. Algebr. Program. 60-61: 17-139 (2004)
 </div>
 <p>Big-step operational semantics (natural semantics): program execution is described in terms of recursive evaluation of subphrases of a program. Each nontrivial syntactic domain (subset of abstract syntax tree constructors) has some specific evaluation relation.</p>
 </section><div><a class="slider-prev" href="#operational-execution-model"></a><a class="slider-next" href="#structural-operational-semantics"></a></div>
@@ -88,20 +88,20 @@ Gordon D. Plotkin. A Structural Approach to Operational Semantics. (1981) Tech. 
 <p>Structural operational semantics for L is five-tuple S = 〈 CF, ⇒, FC, IF, OF 〉</p>
 <ul>
 <li class="fragment">cf ∈ CF — <strong>domain of configurations</strong> for an abstract machine</li>
-<li class="fragment">⇒ — <strong>transition relation</strong>, "⇒" ⊆ CF × CF. Two configurations are in transition relation iff there is a <strong>(one step) transition</strong> from cf to cf'</li>
+<li class="fragment">⇒ — <strong>transition relation</strong>, “⇒” ⊆ CF × CF. Two configurations are in transition relation iff there is a <strong>(one step) transition</strong> from cf to cf’</li>
 </ul>
-<p>cf ⇒ cf' ⇔ 〈 cf, cf' 〉 ∈ ⇒</p>
-<p><span class="math inline">⇒<sup>*</sup></span> — reflexive transitive closure of ⇒. Sequence of transitions cf <span class="math inline">⇒<sup>*</sup></span> cf' is called <strong>transition path</strong>.</p>
-<p>Configuration cf is <strong>reducible</strong> if there is some cf' such that cf ⇒ cf', otherwise cf is <strong>irreducible</strong>.</p>
+<p>cf ⇒ cf’ ⇔ 〈 cf, cf’ 〉 ∈ ⇒</p>
+<p><span class="math inline">⇒<sup>*</sup></span> — reflexive transitive closure of ⇒. Sequence of transitions cf <span class="math inline">⇒<sup>*</sup></span> cf’ is called <strong>transition path</strong>.</p>
+<p>Configuration cf is <strong>reducible</strong> if there is some cf’ such that cf ⇒ cf’, otherwise cf is <strong>irreducible</strong>.</p>
 <p>Transition relation <span class="math inline">⇒</span> is <strong>deterministic</strong> if for every cf there is exactly one <span class="math inline"><em>c</em><em>f</em>′</span>, otherwise ⇒ is <strong>nondeterministic</strong>.</p>
 </section><div><a class="slider-prev" href="#big-step-and-small-step-operational-semantics"></a><a class="slider-next" href="#structural-operational-semantics-1"></a></div>
 <section id="structural-operational-semantics-1" class="slide level1">
 <h1>Structural operational semantics</h1>
 <p>Structural operational semantics for language L is five-tuple S = 〈 CF, ⇒, FC, IF, OF 〉</p>
 <ul>
-<li class="fragment">Irreducible — all irreducible configurations</li>
-<li class="fragment">FC — set of <strong>final configurations</strong> which yield the correct answer, FC ⊂ Irreducible</li>
-<li class="fragment"><p>Stuck = Irreducible / FC — set of stuck states, nonfinal irreducible configurations (e.g. error states)</p></li>
+<li class="fragment"><p>Irreducible — all irreducible configurations</p></li>
+<li class="fragment"><p>FC — set of <strong>final configurations</strong> which yield the correct answer, FC ⊂ Irreducible</p></li>
+<li class="fragment"><p>Stuck = Irreducible / FC — set of stuck states, nonfinal irreducible configurations (e.g.&nbsp;error states)</p></li>
 <li class="fragment"><p>IF : (Prog × Inputs) → CF — <strong>input function</strong>, transforms a program and its inputs to an initial configuration</p></li>
 <li class="fragment"><p>OF : FC → AnsExp — <strong>output function</strong>, maps a program and its inputs to an initial configuration</p></li>
 </ul>
@@ -109,12 +109,19 @@ Gordon D. Plotkin. A Structural Approach to Operational Semantics. (1981) Tech. 
 <section id="program-behavior" class="slide level1">
 <h1>Program behavior</h1>
 <p>Outcome = AnsExp + ErrorResult (+ — disjoint union)</p>
-<p>Deterministic behavior, if <span class="math inline">⇒</span> is deterministic: <span class="math inline"><em>b</em><em>e</em><em>h</em><sub><em>d</em><em>e</em><em>t</em></sub></span> : (Prog × Inputs) → Outcome <span class="math inline"><em>b</em><em>e</em><em>h</em><sub><em>d</em><em>e</em><em>t</em></sub></span> 〈 P, I 〉 | IF 〈 P, I 〉 <span class="math inline">⇒<sup>*</sup></span> cf ∈ FC = AnsExp ↦ Outcome (OF cf) <span class="math inline"><em>b</em><em>e</em><em>h</em><sub><em>d</em><em>e</em><em>t</em></sub></span> 〈 P, I 〉 | IF 〈 P, I 〉 <span class="math inline">⇒<sup>*</sup></span> cf ∈ Stuck = ErrorResult <span class="math inline"><em>b</em><em>e</em><em>h</em><sub><em>d</em><em>e</em><em>t</em></sub></span> 〈 P, I 〉 | IF 〈 P, I 〉 <span class="math inline">⇒<sup>∞</sup></span> = ∞</p>
+<p>Deterministic behavior, if <span class="math inline">⇒</span> is deterministic:</p>
+<p><span class="math inline"><em>b</em><em>e</em><em>h</em><sub><em>d</em><em>e</em><em>t</em></sub></span> : (Prog × Inputs) → Outcome</p>
+<p><span class="math inline"><em>b</em><em>e</em><em>h</em><sub><em>d</em><em>e</em><em>t</em></sub></span> 〈 P, I 〉 | IF 〈 P, I 〉 <span class="math inline">⇒<sup>*</sup></span> cf ∈ FC = AnsExp ↦ Outcome (OF cf)</p>
+<p><span class="math inline"><em>b</em><em>e</em><em>h</em><sub><em>d</em><em>e</em><em>t</em></sub></span> 〈 P, I 〉 | IF 〈 P, I 〉 <span class="math inline">⇒<sup>*</sup></span> cf ∈ Stuck = ErrorResult</p>
+<p><span class="math inline"><em>b</em><em>e</em><em>h</em><sub><em>d</em><em>e</em><em>t</em></sub></span> 〈 P, I 〉 | IF 〈 P, I 〉 <span class="math inline">⇒<sup>∞</sup></span> = ∞</p>
 </section><div><a class="slider-prev" href="#structural-operational-semantics-1"></a><a class="slider-next" href="#non-deterministic-behavior"></a></div>
 <section id="non-deterministic-behavior" class="slide level1">
 <h1>Non-deterministic behavior</h1>
 <p><span class="math inline">𝒫(<em>A</em>)</span> — powerset of <span class="math inline"><em>A</em></span>.</p>
-<p><br><span class="math display"><em>b</em><em>e</em><em>h</em> : (<em>P</em><em>r</em><em>o</em><em>g</em> × <em>I</em><em>n</em><em>p</em><em>u</em><em>t</em><em>s</em>) → 𝒫(<em>O</em><em>u</em><em>t</em><em>c</em><em>o</em><em>m</em><em>e</em>)</span><br> o ∈ beh( 〈P, I〉 ) <strong>if</strong> o = AnsExp ↦ Outcome (OF cf) <strong>and</strong> IF 〈P, I〉 <span class="math inline">⇒<sup>*</sup></span> cf ∈ FC o ∈ beh( 〈P, I〉 ) <strong>if</strong> o ∈ ErrorResult <strong>and</strong> IF 〈 P, I 〉 <span class="math inline">⇒<sup>*</sup></span> cf ∈ Stuck o ∈ beh( 〈P, I〉 ) <strong>if</strong> o = ∞ <strong>and</strong> IF 〈P, I〉 <span class="math inline">⇒<sup>∞</sup></span></p>
+<p><br><span class="math display"><em>b</em><em>e</em><em>h</em> : (<em>P</em><em>r</em><em>o</em><em>g</em> × <em>I</em><em>n</em><em>p</em><em>u</em><em>t</em><em>s</em>) → 𝒫(<em>O</em><em>u</em><em>t</em><em>c</em><em>o</em><em>m</em><em>e</em>)</span><br></p>
+<p>o ∈ beh( 〈P, I〉 ) <strong>if</strong> o = AnsExp ↦ Outcome (OF cf) <strong>and</strong> IF 〈P, I〉 <span class="math inline">⇒<sup>*</sup></span> cf ∈ FC</p>
+<p>o ∈ beh( 〈P, I〉 ) <strong>if</strong> o ∈ ErrorResult <strong>and</strong> IF 〈 P, I 〉 <span class="math inline">⇒<sup>*</sup></span> cf ∈ Stuck</p>
+<p>o ∈ beh( 〈P, I〉 ) <strong>if</strong> o = ∞ <strong>and</strong> IF 〈P, I〉 <span class="math inline">⇒<sup>∞</sup></span></p>
 </section><div><a class="slider-prev" href="#program-behavior"></a><a class="slider-next" href="#rewrite-rules"></a></div>
 <section id="rewrite-rules" class="slide level1 inference">
 <h1>Rewrite rules</h1>
@@ -131,9 +138,6 @@ Gordon D. Plotkin. A Structural Approach to Operational Semantics. (1981) Tech. 
 </tr>
 </tbody>
 </table>
-<div class="ib">
-[name]
-</div>
 <p><span class="math inline"><em>a</em><em>n</em><em>t</em><em>e</em><em>c</em><em>e</em><em>d</em><em>e</em><em>n</em><em>t</em><em>s</em> = ⊘</span> ⇒ rule is called <strong>axiom</strong>, otherwise <strong>progress rule</strong>.</p>
 <p>Example axiom for stack-based language (placing constant on stack; configuration state = 〈 command sequence, stack 〉):</p>
 <p>〈 N . Q, S〉 ⇒ 〈 Q, N . S 〉 [num]</p>
@@ -150,10 +154,7 @@ Gordon D. Plotkin. A Structural Approach to Operational Semantics. (1981) Tech. 
 </tr>
 </tbody>
 </table>
-<div class="ib">
-[seq]
-</div>
-<p>If cf is a configuration in which first command in sequence is constant, then there is a transition from cf to cf' in which constant is moved from command sequence to the top of the stack.</p>
+<p>If cf is a configuration in which first command in sequence is constant, then there is a transition from cf to cf’ in which constant is moved from command sequence to the top of the stack.</p>
 </section><div><a class="slider-prev" href="#non-deterministic-behavior"></a><a class="slider-next" href="#example-structural-operational-semantics-execution"></a></div>
 <section id="example-structural-operational-semantics-execution" class="slide level1">
 <h1>Example structural operational semantics execution</h1>
@@ -189,7 +190,7 @@ Gordon D. Plotkin. A Structural Approach to Operational Semantics. (1981) Tech. 
 </section><div><a class="slider-prev" href="#big-step-operational-semantics-1"></a><a class="slider-next" href="#example-proof-of-termination"></a></div>
 <section id="example-proof-of-termination" class="slide level1">
 <h1>Example proof of termination</h1>
-<p>Turbak, Gifford. p. 85</p>
+<p>Turbak, Gifford. p.&nbsp;85</p>
 </section><div><a class="slider-prev" href="#language-properties"></a><a class="slider-next" href="#k-framework"></a></div>
 <section id="k-framework" class="slide level1">
 <h1>K Framework</h1>
@@ -212,7 +213,7 @@ Gordon D. Plotkin. A Structural Approach to Operational Semantics. (1981) Tech. 
 
   
   <script type="text/javascript">
-  document.addEventListener("keydown", function(e) {
+  function handleKeydown(e) {
      if (e.altKey || e.ctrlKey || e.metaKey || e.shiftKey) { return; }
      switch (e.keyCode) {
        case 35: // End
@@ -243,7 +244,18 @@ Gordon D. Plotkin. A Structural Approach to Operational Semantics. (1981) Tech. 
          }
          break;
      }
-  });
+  }
+  document.addEventListener("keydown", handleKeydown);
+  document.getElementById("flat-view").addEventListener("click", function(e) {
+    document.getElementById("main").classList.toggle('slider');
+    if (document.getElementById("main").classList.contains('slider')) {
+      document.getElementById("container").style="width: 640px;height: 400px;";
+      document.addEventListener("keydown", handleKeydown);
+    } else {
+      document.getElementById("container").style="";
+      document.removeEventListener("keydown", handleKeydown);
+    }
+  })
   </script>
   
 
