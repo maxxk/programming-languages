@@ -155,6 +155,9 @@ $⟦ -e ⟧_{\text{AE}} = - ⟦e⟧_{\text{AE}}$
 
 $⟦ e_1 \; aop \; e_2 ⟧_{\text{AE}} =⟦op⟧_{\text{AE-aop}} (⟦ e_1 ⟧_{\text{AE}},  ⟦e_2⟧_{\text{AE}})$ 
 [e.g. $⟦\texttt{}⟧_{\text{AE-aop}} = \text{mod}$]
+</div>
+
+# Naive denotational semantics
 
 ## Boolean expression semantics
 abop — arithmetical-boolean operator, bbop — boolean-boolean operator.
@@ -166,7 +169,6 @@ $⟦ e_1 \; abop \; e_2 ⟧_{\text{BE}} = ⟦abop⟧ (⟦e_1⟧_{\text{AE}}, ⟦
 $⟦\texttt{!} b ⟧_{\text{BE}} = ¬ ⟦ b ⟧$
 
 $⟦b_1 \; bbop \; b_2 ⟧_{\text{BE}} = ⟦bbop⟧(⟦b_1⟧_{\text{BE}}, ⟦b_2⟧_{\text{BE}})$
-</div>
 
 # Environments
 Expressions have read-only access to variables. It is represented in terms of environment (additional argument to the meaning function).
@@ -179,23 +181,18 @@ $⟦ · ⟧_{\text{AE}} : \text{VariableState} → \text{ArithmeticalExpression}
 
 All previously defined cases are updated to pass an environment to nested functions, for example:
 
-$⟦ -e ⟧ = λ env . - ⟦e⟧(env)$
+⟦ –e ⟧ = λ env . – ⟦e⟧(env)
 
 Now we can define the variable getter expression:
-$⟦ \text{Identifier}(I) ⟧ = λ env. env(I)$
+⟦ Identifier(I) ⟧ = λ env. env(I)
 
 Boolean expressions also depend on variable values. Previously defined cases must me updated.
 
 $⟦ · ⟧_{\text{BE}} : {\text{VariableState} →} \text{BooleanExpression} → \text{Bool}{{}_⟂}$
 
 # Exceptions
-<div class="smaller">
-Now let us remember that we have three operators (`/, %, sqrt`) which are not universally defined over the integer numbers.
-
-**Semantic domains:**
-
-- errors: *Error = { div-by-zero, sqrt-from-negative }*
-- domain sum constructor: *X + Error* are the values of either *X* or *Error*, with constructor *inl* converting *X* values to sum, constructor *inr* converting *Error* values to the sum.
+<div class="twocolumn">
+Remember that we have three operators (`/, %, sqrt`) which are not universally defined over the integer numbers.
 
 **Convenience function:**
 
@@ -209,6 +206,12 @@ withLeft(f, x) = **match**(x)
 
 **end**
 
+**Semantic domains:**
+
+- errors: *Error = { div-by-zero, sqrt-from-negative }*
+- domain sum constructor: *X + Error* are the values of either *X* or *Error*, with constructor *inl* converting *X* values to sum, constructor *inr* converting *Error* values to the sum.
+
+
 **Meaning functions:**
 
 $⟦ · ⟧_{\text{AE}} : \text{VariableState} → \text{ArithmeticalExpression} → \text{Int}_⟂ + \text{Error}$
@@ -217,13 +220,13 @@ $⟦ · ⟧_{\text{BE}} : \text{VariableState} → \text{BooleanExpression} → 
 
 **Example meaning function update:**
 
-$⟦ -e ⟧ = λ env . \text{withLeft}(λx.-x, ⟦e⟧(env))$
+⟦ –e ⟧ = λ env . withLeft(λ x. –x, ⟦e⟧(env))
 
 </div>
 
 # Statement and program semantics
 ## Program
-— receive the arguments and run statements. If statements completed without an error, get the return value.
+— receive the arguments and run statements. If statements computed without an error, get the return value.
 
 $⟦ · ⟧_{\text{P}} : \text{VariableState} → \text{Int}_⊥ + \text{Error}$
 
@@ -234,11 +237,11 @@ Statements manipulate the variable environment not as a read-only environment, b
 
 $⟦ · ⟧_{\text{S}} : \text{VariableState} → \text{VariableState} + \text{Error}$
 
-$⟦ \texttt{skip} ⟧ = λenv. \text{inl}(env)$
+⟦ `skip` ⟧ = λ env. inl(env)
 
-$⟦ s_1 \; \texttt{;} \; s_2 ⟧ = λ env. \text{withLeft}(⟦s_2⟧, ⟦s_1⟧(env))$
+⟦ s₁ `;` s₂ ⟧ = λ env. withLeft(⟦s₂⟧, ⟦s₁⟧(env))
 
-$⟦ I \; \texttt{=} \; e ⟧ = λ env. \text{withLeft}(λi. (λJ. \text{if J=I return i else return env(J)}), ⟦e⟧(env))$
+⟦ I  `=` e ⟧ = λ env. withLeft(λ i. (λ J. if J=I return i else return env(J)), ⟦e⟧(env))
 
 # Statements (2)
 Let us adopt two shorthand notations for withLeft:
@@ -277,7 +280,7 @@ Objects have different properties (pressure, temperature).
 All properties of the same type are stored in separate array.
 Arrays are mapped to common blocks to synchronize with external modules of the whole system.
 
-Code is generated automatically based on thermal-hydraulical system model. Main function consists of the sequence of stages, each stage is repeated for each of 7 stages which compute the updated values for some related parameter groups, in separate lines of code for each object.
+Code is generated automatically based on thermal-hydraulical system model. Main function consists of the sequence of stages, each stage is repeated for each of 7 subsystems which compute the updated values for some related parameter groups, in separate lines of code for each object.
 
 Mapping of variables to common blocks is specified in header files.
 
@@ -288,7 +291,7 @@ In total for a real model (about 2000 objects) there are 424 000 lines of code i
 - for each stage and for each subsystem we select memory blocks which are read and written at that stage
 - before each stage processes synchronize required block values
 
-Result: stages+subsystems are coarsely grained, almost no improvement in parallel distributed execution mode.
+Result: subsystems are coarse-grained, stages are fine-grained with data dependencies at subsystem boundaries, almost no improvement in parallel distributed execution mode.
 
 # Fortran subset syntax
 ## Header files
@@ -325,7 +328,7 @@ EQUIVALENCE (thdfpp1_1,G15_z1(686920))
 <head_equiv> ::= "EQUIVALENCE" "(" <identifier> "," <identifier>" "(" <positiveLiteral> ")" ")"
 
 <type> ::= 
-    "CHARACTER" "*" <positiveLiteral> 
+      "CHARACTER" "*" <positiveLiteral> 
     | "REAL" "*" <positiveLiteral>
     | "INTEGER" "*" <positiveLiteral>
     | "LOGICAL" "*" <positiveLiteral>
@@ -421,10 +424,10 @@ programming languages.
 
 Statements =
 
-- compute c 
-- s${}_1$ ; s${}_2$ 
-- v = spawn t, c 
-- wait v, m 
+- `compute` c 
+- s${}_1$ `;` s${}_2$ 
+- v = `spawn` t, c 
+- `wait` v, m 
 
 Requirement: computations are purely functional (no global modifiable state)
 
@@ -453,9 +456,12 @@ Local variables may be represented in terms of the separate memory block.
 2. Unroll `DO` loops with constant boundaries.
 3. Replace `DO WHILE` loops and `IF` conditional operators with "multiple-assignment" operators.
 4. Replace identifiers with triples MemoryBlock × Offset × N
+
 I₁ = f(I₂, ..., Iₙ) 
 
-(Location I₁, Version (Location I₁)+1) := f((Location I₂, Version(Location I₂)), ..., (Location Iₙ, Version(Location Iₙ))) 
+(Location I₁, Version (Location I₁)+1) := f((Location I₂, Version(Location I₂)), ..., 
+
+(Location Iₙ, Version(Location Iₙ))) 
 
 Version[Location I₁] ← Version[Location I₁] + 1
 
@@ -513,7 +519,7 @@ Equivalence between original dynamic semantics and concurrent dynamic semantics 
 
 # Static scheduling
 
-In contrast with previous approach, parallel execution in this case is fine-grained. Target system is distributed as a complete technological platform. We propose static thread scheduling:
+In contrast with previous approach, parallel execution in this case is fine-grained. Because target system is distributed as a complete technological platform, we can use static thread scheduling:
 
 Dynamical concurrent execution model runs before compiling; core of the model provides static scheduler.
 

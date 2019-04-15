@@ -40,10 +40,10 @@ Course topics include:
 **08.04.2019** Operational semantics 
 [presentation - html](presentations/07-Operational-Semantics.html)
 
-<!--
-**12.04.2019** Denotational semantics example
+**15.04.2019** Denotational semantics example
 [presentation - html](presentations/08-Denotational-semantics-example.html) 
 
+<!--
 **19.04.2019** Denotational semantics implementation: Monads, Fixed points
 [presentation - html](presentations/09-Monads.html) 
 
