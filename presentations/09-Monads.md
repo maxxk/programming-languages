@@ -32,6 +32,7 @@ Contact author: maxim.krivchikov@gmail.com
 Simple imperative language with arithmetical and boolean expressions, assignment, conditional operator and loop.
 
 Abstract syntax (omitting the operator precedence and lexical structure):
+
 ```
 Program = Statement "return" VariableName
 
@@ -79,22 +80,34 @@ return divisor
 
 # Denotational semantics implementation
 Evolution of statement meaning function for Imp' (from previous class):
+
 1. Trivial case
+
 $⟦ · ⟧_{\text{S}} : \text{VariableState} → \text{VariableState}$
+
 $⟦ \texttt{skip} ⟧ = λenv. env$
+
 2. Exceptions possible during expression evaluation.
+
 New notation: domain of answers $\mathbf{A} =  \text{VariableState} + \text{Error}$
+
 $⟦ · ⟧_{\text{S}} : \text{VariableState} → \mathbf{A}$
+
 $⟦ \texttt{skip} ⟧ = λenv. \text{inl}(env)$
+
 3. Continuations for complex control flow, conceptually. 
+
  $⟦ · ⟧_{\text{S}} : \text{VariableState} → (c_{break} : \text{VariableState} → \mathbf{A}) →$
+
  $\qquad → (c_{continue} : \text{VariableState} → \mathbf{A}) → \mathbf{A}$
+
 $⟦ \texttt{skip} ⟧ = λenv.c_{break}.c_{continue}.\text{inl}(env)$
-...and so on (goto, input/output, dynamic memory allocation, non-determinism) ...
 
 # Denotational semantics implementation
 Finally, for a real language we end up with four meaning functions for statements.
+
 (Source: N. Papaspyrou. A Formal Semantics for the C Programming Language).
+
 Note that almost a half of the domains employed are not simply-constructed, they are defined as the application of an argument to a domain-generating function.
 ![](images/papaspyrou-statement-prototype.png)
 
@@ -103,38 +116,51 @@ We need an approach to split the semantics to some modular functions.
 # Imp' expression semantics
 Under normal circumstances we do not care about exceptions if they are passed through the normal computation flow, we even defined `withLeft` function for it:
 
+```
 withLeft : (f : X → Y) → X + Error → Y + Error
-withLeft(f, x) = **match**(x)  
-▷ *inl* a ↦ f(a)
-▷ *inr* e ↦ e
-**end**
+withLeft(f, x) = match(x)  
+▷ inl a ↦ f(a)
+▷ inr e ↦ e
+end
+```
 
 - left composition: x >>= y  ≡  withLeft(y, x)
 - left variable binding: a ← b; S  ≡  withLeft(λa. S, b)
 
 $⟦ -e ⟧ = λ env . x ← ⟦e⟧(env) ; -x$
+
 $⟦ \text{Identifier}(I) ⟧ = λ env. \text{inl}(env(I))$
 
 # ...
 Now let us mark the following three parts of our notation:
+
 1. The **type constructor** wraps a value in some way:
+
 $· \, + \text{Error} : \text{Type} → \text{Type}$
+
 2. **inl injection operator** lets us wrap an actual computation result to fit an application result of the type constructor:
+
 $\text{inl} : A → A + \text{Error}$
+
 3. **withLeft' binding function** allows us to transform the wrapped value by function defined only on the unwrapped values:
+
 withLeft' : (f : X → Y + Error) → X + Error → Y + Error
 
 . . .
 
 These two functions (inl and withLeft') have some nice compositional properties:
+
 1. inl is a neutral element of withLeft':
     - (inl a) >>= f **=** f(a)
     - w >>= inl **=** v
+
 2. Binding has some kind of composition rule:
+
 (w >>= f) >>= g **=** w >>= (λ x. f(x) >>= g)
 
 # Monad {.center}
 We are ready to define the notion of monad as a generalization of the presented construction.
+
 **Type constructor**
 <div class="twocolumn">
 <div>M : Type → Type</div>
@@ -153,7 +179,11 @@ We are ready to define the notion of monad as a generalization of the presented 
 <div>withLeft' : (f : X → Y + Error) → X + Error → Y + Error</div>
 </div>
 
+# Monad {.center}
+
+
 **monad laws** 
+
 neutrality
 <div class="twocolumn">
 <div>
@@ -183,21 +213,33 @@ The binding function `bind` allows us to define the monadic functions by the mea
 We can also define some helper functions operating on the low level (working with internal structure of the wrapper). 
 Examples for our exception definition:
 
-<div class="my-code">
+<div class="twocolumn">
 throw : Error → A + Error
+
 throw ≡ inr
 
+
 catch : A + Error → (Error → A + Error) → A + Error
+
 catch ≡ λ *res*. *handler*. **match**(res)  
+
 ▷ *inl* a ↦ res
+
 ▷ *inr* e ↦ handler(e)
+
 **end**
 
+
 ⟦ a / b ⟧ ≡ λ env.a.b. A ← ⟦a⟧(env) ;
+
 B ← ⟦b⟧(env) ;
+
  **match**(B)
+
 ▷ 0 ↦ throw division-by-zero
+
 ▷ n ↦ return $A \; /_ℤ \; n$
+
 **end**
 </div>
 
@@ -206,82 +248,85 @@ We can equip simpe type constructors with two functions which satisfy the monad 
 
 
 ## Exception monad
-<div class="my-code">
-Exception E A = A + E
-return x = inl x
-bind f x= **match**(x)  
-▷ *inl* a ↦ f(a)
-▷ *inr* e ↦ e
-**end**
-</div>
 
-<div class="my-code">
+```
+Exception E A = A + E 
+return x = inl x 
+bind f x= match(x)  
+▷ *inl* a ↦ f(a) 
+▷ *inr* e ↦ e 
+end 
+
 throw : Error → A + Error
 catch : A + Error → (Error → A + Error) → A + Error
-</div>
+```
 
 
 # Standard monads
 ## Reader monad
 The read-only environment
-<div class="my-code">
+
+```
 Reader R A = R → A
 return x = λ env. x
 bind f x = λ env. f(x(env))
-</div>
+```
 
-<div class="my-code">
+```
 ask : Reader R A (get local state)
 local : (R → R) → Reader R A → Reader R A (locally modify environment)
 reader : (R → A) → Reader R A (get an environmet)
-</div>
+```
 
 # Standard monads
 ## Writer monad
 Models write-only output (logging, tracing).
+
+```
 0 : W
 ⊕ : W → W → W
 ⊕ is associative
+```
 
-<div class="my-code">
+```
 Writer W A = A × W
 return x = (x, 0)
 bind f x = let (y, w) = f(fst x) in (y, snd x + w)
-</div>
+```
 
-<div class="my-code">
+```
 tell : W → Writer W True
 listen : Writer W A → Writer W (A × W)
 pass : Writer W (A × (W → W)) → Writer W A
-</div>
+```
 
 # Standard monads
 ## State monad
 Models the mutable state.
 
-<div class="my-code">
+```
 State S A = S → A × S
 return x = λ s. (x, s)
 bind f x = λ s. let (x', s') = x in (f(x'), s')
-</div>
+```
 
-<div class="my-code">
+```
 get : State S S 
 put : S → State S ()
 modify : (S → S) → State S ()
 gets : (S → A) → State S A
-</div>
+```
 
 
 # Standard monads
 ## List monad
 Models the nondeterminism.
 
-<div class="my-code">
+```
 List A 
 return x = [x]
 bind f x = map f x
-</div>
+```
 
 (helpers — all the standard functions of the list type) 
 
@@ -289,17 +334,17 @@ bind f x = map f x
 ## Continuation monad
 Models a complex control flow.
 
-<div class="my-code">
+```
 Cont R A = (A → R) → R
 return x = λ k . k(x)
 bind f x = λ k . x(λ m. f(m)(k))
-</div>
+```
  
-<div class="my-code">
+```
 x : (A → R) → R
 f : A → (B → R) → R
 bind f x : Cont R B = (B → R) → R
-</div>
+```
 
 <div class="my-code">
 callCC : ((A → Cont R B) → Cont R A) → Cont R A
@@ -321,15 +366,20 @@ See also: http://stackoverflow.com/questions/7220436/good-examples-of-not-a-func
 Monad transformer is the following construction:
 
 A transformer for type constructor:
+
 t : (Type → Type) → Type → Type
 
 A way to obtain monad implementations for transformed monads:
+
 ∀ m, Monad m → Monad (t m)
 
 Lifting operator:
+
+```
 lift : ∀ (a : Type), m a → (t m) a
 lift . return = return
 lift (m >>= k) = (lift m) >>= (lift ∘ k)
+```
 
 The purpose of the monad transformer is to obtain a single object representing a stack of monads.
 
@@ -342,30 +392,43 @@ http://docs.idris-lang.org/en/latest/effects/
 
 # Loop semantics
 
-<div class="my-code">
-⟦ `while` b s ⟧ = λ env. b' ← ⟦b⟧(env) ; 
-<span style="padding-left: 2em;"></span>   **if** $(b' =_{\text{Bool}} \text{false})$ env
-<span style="padding-left: 2em;"></span>   **else** ⟦ s ⟧(env) >>= ???
-</div>
+```
+⟦ while b s ⟧ = λ env. b' ← ⟦b⟧(env) ; 
+  if b' = false
+    env
+  else ⟦ s ⟧(env) >>= ???
+```
 
-How can we define the meaning of the `while` loop? We can't just remove the structural recursion requirement: we may define terms with bad behavior in lambda-calculus.
+How can we define the meaning of the `while` loop? We can't just remove the structural recursion requirement: we may define terms with bad behavior in untyped lambda-calculus.
 
 
 # Fixed point semantics
 Usually complex recursive functions may be defined by the means of the **fixed point combinator** and the **generating function.**
 
 Example: factorial:
+
+```
 n! = 1 if n=0
 n! = n · (n-1)! otherwise
+```
 
 Generating function accepts the recursive call as another argument:
-genFact = λ *fact* . λ n .
-$\qquad$ **if** n = 0 **return** 1
-$\qquad$ **else** **return** n · *fact*(n)
+
+```
+genFact = λ fact . λ n .
+  if n = 0
+    return 1
+  else 
+    return n · fact(n)
+
+```
 
 Suppose we call genFact first with identity function and then — by applying the genFact to result:
+
 $f_1 = \text{genFact}(λn.n)$, $f_2 = \text{genFact}(f_1)$, …, $f_k = \text{genFact}(f_{k-1})$, …
+
 For some good-behaving generating functions (or for some good starting arguments) such a sequence will have **fixed points:**
+
 $f_∞$ is a fixed point of genFact iff genFact($f_∞$) = $f_∞$.
 
 # Fixed points
@@ -375,23 +438,29 @@ For the function [0, 1] → [0, 1]:
 To define a proper recursive function we need to find a solution to the recursive equation: gen($f_∞$) = $f_∞$. Under what conditions does this equation have a solution and how can we construct it?
 
 # Least fixed point
-We need something like this, but for our lambda-definable function space:
-**Banach Fixed Point Theorem.** Let (X, d) be a non-empty complete metric space with a contraction mapping T : X → X. Then T admits a unique fixed-point x\* in X (i.e. T(x\*) = x\*). Furthermore, x\* can be found as follows: start with an arbitrary element $x_0$ in X and define a sequence {$x_n$} by $x_n$ = T($x_{n−1}$), then $x_n$ → x\*.
+
+We need something like the following theorem, but for our lambda-definable function space:
+
+**Banach Fixed Point Theorem.** Let (X, d) be a non-empty complete metric space with a contraction mapping T : X → X. Then T admits a unique fixed-point x\* in X (i.e. T(x\*) = x\*).
+
+Furthermore, x\* can be found as follows: start with an arbitrary element $x_0$ in X and define a sequence {$x_n$} by $x_n$ = T($x_{n−1}$), then $x_n$ → x\*.
 
 The main contribution of D. Scott and Yu. L. Ershov which allows us to call them the creators of the denotational semantics is the construction which allows fixed points for some (*continuous*) functions.
 
 # Partial order
 **Partial order** is a pair (D, ⩽) of a domain D and binary ordering relation ⩽ that is:
+
 - reflexive (a ⩽ a)
 - transitive (a ⩽ b, b ⩽ c ⇒ a ⩽ c)
 - antisymmetric (a ⩽ b, b ⩽ a ⇒ a = b)
 
 
 Pair of elements in D which are not in the ordering relation are called **incomparable**.
-Trivial example: discrete order in which all elements are incomparable. For Bool domain we usually define a discrete partial order.
+Trivial example: discrete order in which all elements are incomparable. For `Bool` domain we usually define a discrete partial order.
 Partial order is **total order** if there is no incomparable elements.
 
 **Upper bound** of subset X ⊆ D is an element u ∈ D that is "greater" (stronger) than any element in X:
+
 ∀ x ∈ X, x ⩽ u.
 
 Some subsets may have even the **least upper bound** (upper bound which is "less" (weaker) than any other upper bound).
@@ -409,18 +478,26 @@ Any partial order D may be **lifted** to another partial order D${}_⊥$ that ha
 We can define the partial order over simple (non-dependent) type constructors:
 
 **Product:** (d, e) ∈ D × E; (d, e) ⩽ (d', e') iff d ⩽ d' and e ⩽ e'
+
 **Sum:** A+B; $\qquad$ *inl* a ⩽ *inl* a' iff a ⩽ a'; $\qquad$ *inr* b ⩽ *inr* b' iff b ⩽ b'.
+
 **Function:** f, g ∈ D → E; $\qquad$ f ⩽ g iff ∀ d ∈ D, f(d) ⩽ g(d).
+
 **Sequence:** $D^*$
+
 - **prefix ordering**
 - **sum-of-products ordering**
+
 **Powerdomain:** $2^D$, sets of all subsets under the subset ordering.
 
 # Complete partial orders (CPOs)
+
 **Chain** is totally ordered nonempty subset of partial orer.
-Partial order D is **complete** iff every chain in D has least upper bound (limit).
+
+Partial order D is **complete (CPO)** iff every chain in D has least upper bound (limit).
 
 Example: partial order *Bool*${}^*$ is not CPO under the prefix ordering, because the chain {[], [true], [true, true], …} has the infinite sequence of *true* as a limit, which is not a finite sequence.
+
 We can extend it with *Bool*${}^∞$ (set of all infinite boolean sequences), so that Bool${}^*$ ∪ Bool${}^∞$ = ${\mathbf{Bool}^*}$ is a CPO
 
 **Theorem. ** For any CPOs D, E we can define the following CPOs under the defined orderings:
@@ -430,16 +507,20 @@ $D_⟂$, $D × E$, $D + E$, $D → E$, $D^*$ (under the sum-of-products ordering
 A partial order is **pointed** if it has a bottom element.
 
 **Theorem. ** For any *partial orders* D, E:
-$D_⟂$ is pointed,
-$D × E$ is pointed iff both D and E are pointed
-$D + E$ is never pointed
-$D → E$ is pointed iff E is pointed
-$D^*$ under the sum-of-products ordering is never pointed
-$D^*$ and $\overline{D^*}$ under the prefix ordering are always pointed.
+
+- $D_⟂$ is pointed,
+- $D × E$ is pointed iff both D and E are pointed
+- $D + E$ is never pointed
+- $D → E$ is pointed iff E is pointed
+- $D^*$ under the sum-of-products ordering is never pointed
+- $D^*$ and $D^* ∪ D^∞$ under the prefix ordering are always pointed.
 
 # Monotonicity and continuity
 $f : D → E$ is **monotonic** (D, E are CPOs) iff x ⩽ y ⇒ f(x) ⩽ f(y).
+
 $f : D → E$ is **continuous** iff for any chain C ⊆ D, f(lub(C)) = lub({f(c) | c ∈ C})
+
+In some sense least upper bounds and chains over CPOs are related in the same way as limits and filter bases in calculus.
 
 **Theorem. ** On finite CPOs (+ infinite CPOs with only finite chains) monotonicity implies continuity.
 On any CPO continuity implies monotonicity.
@@ -450,6 +531,24 @@ f : D → D
 has a least fixed point **fix**(f) defined by lub{$f^n$(⟂), n ⩾ 0}.
 
 So, if we can prove our function is continuous, we can use fixed point combinators.
+
+Example:
+
+genFact : (fact : ℕ → ℕ) → ℕ → ℕ
+```
+genFact = λ fact . λ n .
+  if n = 0
+    return 1
+  else 
+    return n · fact(n)
+```
+
+Use discrete order on ℕ and lift function to $ℕ_⊥$. Function space $ℕ_⊥ → ℕ_⊥$ is a CPO with order:
+
+f ⩽ g ⇔ ∀ x : f(x) ⩽ g(x).
+
+genFact is monotonic and continuous in $ℕ_⊥ → ℕ_⊥$, so we may use least fixed point operator.
+
 
 # Monads bibliography
 1. Moggi E. Notions of computation and monads // Information and Computation. 1991. Vol. 93, № 1. P. 55–92.
@@ -468,12 +567,12 @@ Extensible effects:
 8. [Idris tutorial on the programming with effects](http://docs.idris-lang.org/en/latest/effects/index.html)
 
 # Homework assignments
-**Task 9.1** \*\* Extend the Imp' denotational semantics with `break` and `continue` loop control statements.
+**Task 9.1** \*\* Extend the Imp' denotational semantics with `break` and `continue` loop control statements (use continuation monad).
 
-**Task 9.2** \* Define the big-step operational semantics for Imp' and make a short qualitative (textual) comparison between two definitions.
+**Task 9.2** \*\* Define the big-step operational semantics for Imp' and make a short qualitative (textual) comparison between two definitions.
 
-**Task 9.3** \* Define a continuous meaning function for `while` loops in Imp'.
+**Task 9.3** \*\* Define a continuous meaning function for `while` loops in Imp'.
 
 **Task 9.4** \*\*\* For all "Standard monads" in this presentation prove that operators and helper functions are continuous.
 
-Exercises in chapter 5 of Turbak, Gifford will pass as a one star each.
+**Task 9.5** \* Exercise 5.10 in Turbak, Gifford.
