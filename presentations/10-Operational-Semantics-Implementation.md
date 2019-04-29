@@ -47,7 +47,7 @@ Links:
 1. Official site: http://compcert.inria.fr/
 2. Source code repository: https://github.com/AbsInt/CompCert (non-free software, see license: https://github.com/AbsInt/CompCert/blob/master/LICENSE)
 3. Complete commented (literate) Coq source code: http://compcert.inria.fr/doc/index.html
-4. Full source code for the article: http://compcert.inria.fr/doc/html/Clight.html
+4. Full source code for the article: http://compcert.inria.fr/doc/html/compcert.cfrontend.Clight.html
 
 # Bibliography
 1. Jourdan J.-H., Leroy X., Pottier F. Validating LR(1) Parsers // Proceedings of the 21st European Symposium on Programming. 2012. Vol. 7211. P. 397–416.
@@ -122,9 +122,13 @@ The temporary environemnt maps local temporaries to values.
 Big-step operational semantcs. 10 evaluation relations are defined:
 
 1. G, E ⊦ a, M ⇐ L — evaluation of expressions in l-value position, i.e. targets of assignment
+  
   L is a location — pair of block identifier *b* and offset δ inside the block.
+
 2. G, E ⊦ a, M ⇒ v — evaluation of expressions in r-value position
+  
   v is a value.
+
 3. G, E ⊦ [a], M ⇒ [v] — evaluation of lists of expression, e.g. function call arguments
 4. G, E ⊦ s, M ⇒ out, M' — evaluation of statements, terminating case, M and M' are memory states
 5. G, E ⊦ sw, M ⇒ out, M' — execution of the `switch` cases
@@ -242,7 +246,7 @@ function copyFile(onSuccess, onFailure) {
 ```
 
 
-# Continuations for Clight semantics
+# Continuations in Clight semantics
 ```
 Inductive cont: Type :=
   | Kstop: cont
@@ -317,3 +321,22 @@ Inductive step: state -> trace -> state -> Prop :=
       E0 (State f Sskip k e le m)
 ```
 
+# Homework Assignments
+
+**Task 10.1.** \*\* Manually translate non-trivial function body (10-20 lines of code)
+to Clight statement.
+
+You can check syntax of your definition in Coq:
+
+1. Clone CompCert repository: https://github.com/AbsInt/CompCert
+2. Install CompCert prerequisites (Coq 8.7+, OCaml 4.02+, Menhir 20181113)
+3. Configure and compile CompCert: `./configure x86_64-linux && make`
+4. Open CoqIDE with Clight module: `./coq cfrontend/Clight.v`
+5. Append your code to the end of the file in separate definition:
+
+```coq
+Definition endless_loop : statement :=
+  Sloop Sskip Sskip.
+```
+
+6. Press Ctrl+End to check your code (or from menu: Navigation → End).

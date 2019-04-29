@@ -10,7 +10,7 @@
   <style type="text/css">
 a.sourceLine { display: inline-block; line-height: 1.25; }
 a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; position: absolute; }
+a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 div.sourceCode { margin: 1em 0; }
@@ -23,13 +23,11 @@ code.sourceCode { white-space: pre-wrap; }
 a.sourceLine { text-indent: -1em; padding-left: 1em; }
 }
 pre.numberSource a.sourceLine
-  { position: relative; }
-pre.numberSource a.sourceLine:empty
-  { position: absolute; }
+  { position: relative; left: -4em; }
 pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
-    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all;
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -74,11 +72,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </style>
 </head>
 <body>
-  <div style="width: 640px;height: 400px;">
+  <div style="width: 640px;height: 400px;" id="container">
   <input id="slider-max" type="checkbox" checked="">
-   <article class="slider slider-indicator">
+   <article class="slider slider-indicator" id="main">
    <a id="slider-default"></a>
-   <label for="slider-max" title="Maximize"></label>
+   <label title="Flat view" id="flat-view"></label>
 
 
 <section id="software-and-programming-language-theory" class="slide level1">
@@ -115,18 +113,18 @@ section ol li, section ul li {
 }
 
 </style>
-<p>https://maxxk.github.io/programming-languages/</p>
-<p>maxim.krivchikov@gmail.com</p>
+<p><a href="https://maxxk.github.io/programming-languages/" class="uri">https://maxxk.github.io/programming-languages/</a></p>
+<p><a href="mailto:maxim.krivchikov@gmail.com" class="email">maxim.krivchikov@gmail.com</a></p>
 </section><div><a class="slider-prev"></a><a class="slider-next" href="#mechanized-semantics-for-the-clight-subset-of-the-c-language"></a></div>
 <section id="mechanized-semantics-for-the-clight-subset-of-the-c-language" class="slide level1">
 <h1>Mechanized Semantics for the Clight Subset of the C Language</h1>
 <p>Big-step operational semantics for a subset of the C programming language. Implemented in Coq for CompCert certifying C compiler.</p>
 <p>Links:</p>
 <ol type="1">
-<li class="fragment">Official site: http://compcert.inria.fr/</li>
-<li class="fragment">Source code repository: https://github.com/AbsInt/CompCert (non-free software, see license: https://github.com/AbsInt/CompCert/blob/master/LICENSE)</li>
-<li class="fragment">Complete commented (literate) Coq source code: http://compcert.inria.fr/doc/index.html</li>
-<li class="fragment">Full source code for the article: http://compcert.inria.fr/doc/html/Clight.html</li>
+<li class="fragment">Official site: <a href="http://compcert.inria.fr/" class="uri">http://compcert.inria.fr/</a></li>
+<li class="fragment">Source code repository: <a href="https://github.com/AbsInt/CompCert" class="uri">https://github.com/AbsInt/CompCert</a> (non-free software, see license: <a href="https://github.com/AbsInt/CompCert/blob/master/LICENSE" class="uri">https://github.com/AbsInt/CompCert/blob/master/LICENSE</a>)</li>
+<li class="fragment">Complete commented (literate) Coq source code: <a href="http://compcert.inria.fr/doc/index.html" class="uri">http://compcert.inria.fr/doc/index.html</a></li>
+<li class="fragment">Full source code for the article: <a href="http://compcert.inria.fr/doc/html/compcert.cfrontend.Clight.html" class="uri">http://compcert.inria.fr/doc/html/compcert.cfrontend.Clight.html</a></li>
 </ol>
 </section><div><a class="slider-prev" href="#software-and-programming-language-theory"></a><a class="slider-next" href="#bibliography"></a></div>
 <section id="bibliography" class="slide level1">
@@ -202,8 +200,14 @@ Definition Sfor (s1: statement) (e2: expr) (s3: statement) (s4: statement) :=
 <h1>Clight operational semantics overview</h1>
 <p>Big-step operational semantcs. 10 evaluation relations are defined:</p>
 <ol type="1">
-<li class="fragment">G, E ⊦ a, M ⇐ L — evaluation of expressions in l-value position, i.e.&nbsp;targets of assignment L is a location — pair of block identifier <em>b</em> and offset δ inside the block.</li>
-<li class="fragment">G, E ⊦ a, M ⇒ v — evaluation of expressions in r-value position v is a value.</li>
+<li class="fragment">G, E ⊦ a, M ⇐ L — evaluation of expressions in l-value position, i.e.&nbsp;targets of assignment</li>
+</ol>
+<p>L is a location — pair of block identifier <em>b</em> and offset δ inside the block.</p>
+<ol start="2" type="1">
+<li class="fragment">G, E ⊦ a, M ⇒ v — evaluation of expressions in r-value position</li>
+</ol>
+<p>v is a value.</p>
+<ol start="3" type="1">
 <li class="fragment">G, E ⊦ [a], M ⇒ [v] — evaluation of lists of expression, e.g.&nbsp;function call arguments</li>
 <li class="fragment">G, E ⊦ s, M ⇒ out, M’ — evaluation of statements, terminating case, M and M’ are memory states</li>
 <li class="fragment">G, E ⊦ sw, M ⇒ out, M’ — execution of the <code>switch</code> cases</li>
@@ -287,31 +291,31 @@ Definition Sfor (s1: statement) (e2: expr) (s3: statement) (s4: statement) :=
 <h1>Continuations in practice</h1>
 C# <code>async</code>/<code>await</code> asynchronous execution keywords. <img data-src="images/IC612215.png" src="images/IC612215.png">
 <div class="small">
-Image source: https://msdn.microsoft.com/en-us/library/hh191443.aspx
+Image source: <a href="https://msdn.microsoft.com/en-us/library/hh191443.aspx" class="uri">https://msdn.microsoft.com/en-us/library/hh191443.aspx</a>
 </div>
 </section><div><a class="slider-prev" href="#continuations"></a><a class="slider-next" href="#callback-hell"></a></div>
 <section id="callback-hell" class="slide level1">
 <h1>Callback hell</h1>
 <p>Missing counter-example of asynchronous computations in language without continuations</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="kw">function</span> <span class="at">copyFile</span>(onSuccess<span class="op">,</span> onFailure) <span class="op">{</span></a>
-<a class="sourceLine" id="cb9-2" data-line-number="2">  <span class="kw">var</span> fs <span class="op">=</span> <span class="at">require</span>(<span class="st">'fs'</span>)<span class="op">;</span></a>
-<a class="sourceLine" id="cb9-3" data-line-number="3">  <span class="va">fs</span>.<span class="at">readFile</span>(<span class="st">'file1.txt'</span><span class="op">,</span> <span class="op">{</span> <span class="dt">encoding</span><span class="op">:</span> <span class="st">'utf-8'</span> <span class="op">},</span> <span class="kw">function</span> (error<span class="op">,</span> data1) <span class="op">{</span></a>
-<a class="sourceLine" id="cb9-4" data-line-number="4">    <span class="cf">if</span> (error) <span class="op">{</span></a>
-<a class="sourceLine" id="cb9-5" data-line-number="5">      <span class="at">onFailure</span>(<span class="va">error</span>.<span class="at">code</span>)<span class="op">;</span></a>
-<a class="sourceLine" id="cb9-6" data-line-number="6">    <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></a>
-<a class="sourceLine" id="cb9-7" data-line-number="7">      <span class="va">fs</span>.<span class="at">writeFile</span>(<span class="st">'file2.txt'</span><span class="op">,</span> data<span class="op">,</span> <span class="op">{</span> <span class="dt">encoding</span><span class="op">:</span> <span class="st">'utf-8'</span> <span class="op">},</span> <span class="kw">function</span> (error) <span class="op">{</span></a>
-<a class="sourceLine" id="cb9-8" data-line-number="8">        <span class="cf">if</span> (error) <span class="op">{</span></a>
-<a class="sourceLine" id="cb9-9" data-line-number="9">          <span class="at">onFailure</span>(<span class="va">error</span>.<span class="at">code</span>)<span class="op">;</span></a>
-<a class="sourceLine" id="cb9-10" data-line-number="10">        <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></a>
-<a class="sourceLine" id="cb9-11" data-line-number="11">          <span class="at">onSuccess</span>()<span class="op">;</span></a>
-<a class="sourceLine" id="cb9-12" data-line-number="12">        <span class="op">}</span></a>
-<a class="sourceLine" id="cb9-13" data-line-number="13">      <span class="op">}</span>)<span class="op">;</span></a>
-<a class="sourceLine" id="cb9-14" data-line-number="14">    <span class="op">}</span>   </a>
-<a class="sourceLine" id="cb9-15" data-line-number="15">  <span class="op">}</span>)<span class="op">;</span></a>
-<a class="sourceLine" id="cb9-16" data-line-number="16"><span class="op">}</span> </a></code></pre></div>
-</section><div><a class="slider-prev" href="#continuations-in-practice"></a><a class="slider-next" href="#continuations-for-clight-semantics"></a></div>
-<section id="continuations-for-clight-semantics" class="slide level1">
-<h1>Continuations for Clight semantics</h1>
+<div class="sourceCode" id="cb9"><pre class="sourceCode javascript"><code class="sourceCode javascript"><a class="sourceLine" id="cb9-1" title="1"><span class="kw">function</span> <span class="at">copyFile</span>(onSuccess<span class="op">,</span> onFailure) <span class="op">{</span></a>
+<a class="sourceLine" id="cb9-2" title="2">  <span class="kw">var</span> fs <span class="op">=</span> <span class="at">require</span>(<span class="st">'fs'</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb9-3" title="3">  <span class="va">fs</span>.<span class="at">readFile</span>(<span class="st">'file1.txt'</span><span class="op">,</span> <span class="op">{</span> <span class="dt">encoding</span><span class="op">:</span> <span class="st">'utf-8'</span> <span class="op">},</span> <span class="kw">function</span> (error<span class="op">,</span> data1) <span class="op">{</span></a>
+<a class="sourceLine" id="cb9-4" title="4">    <span class="cf">if</span> (error) <span class="op">{</span></a>
+<a class="sourceLine" id="cb9-5" title="5">      <span class="at">onFailure</span>(<span class="va">error</span>.<span class="at">code</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb9-6" title="6">    <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb9-7" title="7">      <span class="va">fs</span>.<span class="at">writeFile</span>(<span class="st">'file2.txt'</span><span class="op">,</span> data<span class="op">,</span> <span class="op">{</span> <span class="dt">encoding</span><span class="op">:</span> <span class="st">'utf-8'</span> <span class="op">},</span> <span class="kw">function</span> (error) <span class="op">{</span></a>
+<a class="sourceLine" id="cb9-8" title="8">        <span class="cf">if</span> (error) <span class="op">{</span></a>
+<a class="sourceLine" id="cb9-9" title="9">          <span class="at">onFailure</span>(<span class="va">error</span>.<span class="at">code</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb9-10" title="10">        <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></a>
+<a class="sourceLine" id="cb9-11" title="11">          <span class="at">onSuccess</span>()<span class="op">;</span></a>
+<a class="sourceLine" id="cb9-12" title="12">        <span class="op">}</span></a>
+<a class="sourceLine" id="cb9-13" title="13">      <span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb9-14" title="14">    <span class="op">}</span>   </a>
+<a class="sourceLine" id="cb9-15" title="15">  <span class="op">}</span>)<span class="op">;</span></a>
+<a class="sourceLine" id="cb9-16" title="16"><span class="op">}</span> </a></code></pre></div>
+</section><div><a class="slider-prev" href="#continuations-in-practice"></a><a class="slider-next" href="#continuations-in-clight-semantics"></a></div>
+<section id="continuations-in-clight-semantics" class="slide level1">
+<h1>Continuations in Clight semantics</h1>
 <pre><code>Inductive cont: Type :=
   | Kstop: cont
   (* Kseq s2 k = after s1 in s1;s2 *)
@@ -349,7 +353,7 @@ Image source: https://msdn.microsoft.com/en-us/library/hh191443.aspx
       (res: val)
       (k: cont)
       (m: mem) : state.</code></pre>
-</section><div><a class="slider-prev" href="#continuations-for-clight-semantics"></a><a class="slider-next" href="#sequence-statement-evaluation-judgement"></a></div>
+</section><div><a class="slider-prev" href="#continuations-in-clight-semantics"></a><a class="slider-next" href="#sequence-statement-evaluation-judgement"></a></div>
 <section id="sequence-statement-evaluation-judgement" class="slide level1">
 <h1>Sequence statement evaluation judgement</h1>
 <pre><code>Inductive step: state -&gt; trace -&gt; state -&gt; Prop :=
@@ -380,7 +384,24 @@ Image source: https://msdn.microsoft.com/en-us/library/hh191443.aspx
 | step_break_loop2: forall f s1 s2 k e le m,
     step (State f Sbreak (Kloop2 s1 s2 k) e le m)
       E0 (State f Sskip k e le m)</code></pre>
-</section><div><a class="slider-prev" href="#sequence-statement-evaluation-judgement"></a><a class="slider-next"></a></div>
+</section><div><a class="slider-prev" href="#sequence-statement-evaluation-judgement"></a><a class="slider-next" href="#homework-assignments"></a></div>
+<section id="homework-assignments" class="slide level1">
+<h1>Homework Assignments</h1>
+<p><strong>Task 10.1.</strong> ** Manually translate non-trivial function body (10-20 lines of code) to Clight statement.</p>
+<p>You can check syntax of your definition in Coq:</p>
+<ol type="1">
+<li class="fragment">Clone CompCert repository: <a href="https://github.com/AbsInt/CompCert" class="uri">https://github.com/AbsInt/CompCert</a></li>
+<li class="fragment">Install CompCert prerequisites (Coq 8.7+, OCaml 4.02+, Menhir 20181113)</li>
+<li class="fragment">Configure and compile CompCert: <code>./configure x86_64-linux &amp;&amp; make</code></li>
+<li class="fragment">Open CoqIDE with Clight module: <code>./coq cfrontend/Clight.v</code></li>
+<li class="fragment">Append your code to the end of the file in separate definition:</li>
+</ol>
+<pre class="coq"><code>Definition endless_loop : statement :=
+  Sloop Sskip Sskip.</code></pre>
+<ol start="6" type="1">
+<li class="fragment">Press Ctrl+End to check your code (or from menu: Navigation → End).</li>
+</ol>
+</section><div><a class="slider-prev" href="#loop-statement-evaluation-judgements"></a><a class="slider-next"></a></div>
 
 <!-- start page -->
    <div id="slider">
@@ -394,7 +415,7 @@ Image source: https://msdn.microsoft.com/en-us/library/hh191443.aspx
 
   
   <script type="text/javascript">
-  document.addEventListener("keydown", function(e) {
+  function handleKeydown(e) {
      if (e.altKey || e.ctrlKey || e.metaKey || e.shiftKey) { return; }
      switch (e.keyCode) {
        case 35: // End
@@ -425,7 +446,18 @@ Image source: https://msdn.microsoft.com/en-us/library/hh191443.aspx
          }
          break;
      }
-  });
+  }
+  document.addEventListener("keydown", handleKeydown);
+  document.getElementById("flat-view").addEventListener("click", function(e) {
+    document.getElementById("main").classList.toggle('slider');
+    if (document.getElementById("main").classList.contains('slider')) {
+      document.getElementById("container").style="width: 640px;height: 400px;";
+      document.addEventListener("keydown", handleKeydown);
+    } else {
+      document.getElementById("container").style="";
+      document.removeEventListener("keydown", handleKeydown);
+    }
+  })
   </script>
   
 
