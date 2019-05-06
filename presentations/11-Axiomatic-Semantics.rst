@@ -29,9 +29,8 @@ Further reading
 
 6. Ynot (http://ynot.cs.harvard.edu) — Imperative programming with Hoare logic in Coq.
 7. Chen H. et al. Using Crash Hoare logic for certifying the FSCQ file system. ACM Press, 2015. P. 18–37.
-8. Lectures: 
-    http://web.eecs.umich.edu/~weimerw/2017-590/lectures/weimer-gradpl-08.pdf
-    http://web.eecs.umich.edu/~weimerw/2017-590/lectures/weimer-gradpl-09.pdf
+8. `Lecture 1 <http://web.eecs.umich.edu/~weimerw/2017-590/lectures/weimer-gradpl-08.pdf>`_,
+   `Lecture 2 <http://web.eecs.umich.edu/~weimerw/2017-590/lectures/weimer-gradpl-09.pdf>`_.
 
 
 Axiomatic semantics
@@ -66,7 +65,7 @@ Axiomatic semantics correctness
 
 Correctness of axiomatic semantics is usually defined in terms of programming language operational semantics. 
 
-More formally, the connection between axiomatic and operational semantics is defined in following way:
+The connection between axiomatic and operational semantics is defined in following way:
 
 - Assertion validity judgement ⊨ — relation between operational semantics configurations and assertions ( σ ⊨ A means "assertion A holds in configuration σ" ) 
 
@@ -142,24 +141,30 @@ Axiomatic semantics is defined as derivation judgement of Hoare triples.
 
 We assume the following rule of consequence ("transitivity" of derivations):
 
-If ⊢ A' ⇒ A, ⊢ B ⇒ B', ⊢ {A} c {B} then ⊢ {A'} c {B'}
+**If** ⊢ A' ⇒ A, ⊢ B ⇒ B', ⊢ {A} c {B} **then** ⊢ {A'} c {B'}
 
 Imp' axiomatic semantics
 ************************
 
 1. Skip statement: ⊢ {A} ``skip`` {A}
 2. Assignment: ⊢ {A[x:=e]} ``x = e`` {A}
-3. Sequence: ⊢ {A} ``c₁`` {B}, ⊢ {B} ``c₂`` {C} ⇒ ⊢ {A} ``c₁ ; c₂`` {C} 
-4. Conditional operator: ⊢ { A ∧ ``b`` } ``c₁`` {B}, ⊢ { A ∧ ¬``b`` } ``c₂`` {B} ⇒ ⊢ {A} ``if (b) { c₁ } else { c₂ }`` {B}
-5. Loop: ⊢ { A ∧ ``b`` } ``c`` {A} ⇒ ⊢ {A} ``while (b) { c }`` {A ∧ ¬``b``}
+3. Sequence: **If** ⊢ {A} ``c₁`` {B}, ⊢ {B} ``c₂`` {C} **then** ⊢ {A} ``c₁ ; c₂`` {C} 
+4. Conditional operator: **If** ⊢ { A ∧ ``b`` } ``c₁`` {B}, ⊢ { A ∧ ¬``b`` } ``c₂`` {B} **then** ⊢ {A} ``if (b) { c₁ } else { c₂ }`` {B}
+5. Loop: **If** ⊢ { A ∧ ``b`` } ``c`` {A} **then** ⊢ {A} ``while (b) { c }`` {A ∧ ¬``b``}
 
 Derivable rules:
-- "forward" axiom for assignment
-- loop invariant for loops
+
+- "forward" axiom for assignment: ⊢ {A} ``x = e`` { ∃ x₀. A[ ``x`` := x₀]  ∧ ``x`` = ``e``[``x`` := x₀] } 
+- loop invariant for loops: **If** ⊢ A ∧ b ⊢ C, ⊢ {C} ``c`` {A}, ⊢ A ∧ ¬ ``b`` ⇒ B **then** ⊢ {A} ``while (b) { c }`` { B }
 
 Assignment
 **********
-- aliasing
+- aliasing: situation in which single data location in memory can be accessed through different names (aliases) in program.
+
+Example (C): ``int i, *j = &i, *k = &i;``
+
+In axiomatic semantics the following holds: { true } ``*j = 5`` {``*i + *j`` = 10}
+
 
 Soundness
 *********
@@ -169,8 +174,30 @@ Soundness for axiomatic semantics (derivable properties are observable):
 ⊢ {A} c {B} ⇒ ⊨ {A} c {B}
 =========================
 
+This statement contains three inductively-defined objects:
+
+1. c — program statement
+2. ⊨ {A} c {B} — operational semantics derivation (sequence of rule applications)
+3. ⊢ {A} c {B} — axiomatic derivation
+
+Obvious proofs by induction on the structure of each of these objects won't work.
+
+Corner cases are ``while`` loops and rule of consequence.
+
 Simultaneous induction
 **********************
+
+⊢ {A} c {B} ⇒ ⊨ {A} c {B}
+
+Let "<" denote the substructure relation on inductive types (x < y ⇒ x is substructure of y). Elements of an inductive type with substructure relation form partial order.
+
+Let "⊂" denote the lexicographic ordering on tuples of (different) inductive type elements:
+
+(o, a) ⊂ (o', a') ≡ o < o' or (o = o' and a < a')
+
+"⊂" is a well-founded order and we may use it to prove statements by induction with hypothesis "valid for all tuples t ⊂ X" (X is induction step variable).
+
+We can prove soundness for axiomatic semantics by simultaneous induction on the tuple (operational semantics derivation, axiomatic derivation).
 
 Completeness
 ************
@@ -187,8 +214,8 @@ Weakest preconditions
 
 To verify that {A} c {B}:
 
-1. Find all A':  ⊨ {A'} c {B}  (Pre(c, B))
-2. For one A' ∈ Pre(c, B) and prove that ⊢ A ⇒ A'
+1. Find all pre-conditions A':  ⊨ {A'} c {B}  (Pre(c, B))
+2. For one A' ∈ Pre(c, B) prove that ⊢ A ⇒ A'
 
 We can define partial order over assertions by means of implication:
 
@@ -200,7 +227,24 @@ WP(c, B) = lub Pre(c, B)
 
 ⊢ A ⇒ WP(c, B)
 
-Special case: ``while`` loop
+Special case: ``while`` loop, we need to use fixed point theorem (denotational semantics)
+
+
+Relative Completeness: Expressiveness
+*************************************
+
+We can define weakest precondition in terms of configurations: wp(c, B) = { σ | σ (c)⇒σ' | σ' ⊨ B }.
+
+Then we can say that assertion language is **expressive** if for any command and any postcondition there is a precondition which is valid exactly on weakest precondition in terms of configurations. 
+
+
+Verification Conditions
+***********************
+
+Weakest common preconditions are hard to compute (e.g. ``while`` loop). 
+
+To make tools for automatic property checking, we can use user input (e.g. loop invariants) to compute "weak enough" preconditions: verification conditions.
+
 
 Application of axiomatic semantics
 **********************************
@@ -244,4 +288,4 @@ Homework assignments
 
 **Task 11.1** (2*) Write axiomatic semantics for a hypothetical functional programming language based on simply-typed lambda calculus with data types, conditional operator and predefined functions over data types.
 
-**Task 11.2** (2*) Write axiomatic semantics for assignment operator in Imp' extended with pointers and aliasing.
+**Task 11.2** (2*) Write axiomatic semantics for assignment operator in Imp' extended with aliasing operation.

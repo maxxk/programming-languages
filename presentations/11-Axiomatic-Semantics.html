@@ -10,7 +10,7 @@
   <style type="text/css">
 a.sourceLine { display: inline-block; line-height: 1.25; }
 a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; position: absolute; }
+a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 div.sourceCode { margin: 1em 0; }
@@ -23,13 +23,11 @@ code.sourceCode { white-space: pre-wrap; }
 a.sourceLine { text-indent: -1em; padding-left: 1em; }
 }
 pre.numberSource a.sourceLine
-  { position: relative; }
-pre.numberSource a.sourceLine:empty
-  { position: absolute; }
+  { position: relative; left: -4em; }
 pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
-    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all;
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -74,17 +72,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   </style>
 </head>
 <body>
-  <div style="width: 640px;height: 400px;">
+  <div style="width: 640px;height: 400px;" id="container">
   <input id="slider-max" type="checkbox" checked="">
-   <article class="slider slider-indicator">
+   <article class="slider slider-indicator" id="main">
    <a id="slider-default"></a>
-   <label for="slider-max" title="Maximize"></label>
+   <label title="Flat view" id="flat-view"></label>
 
 
 <section id="software-and-programming-language-theory" class="slide level1">
 <h1>Software and Programming Language Theory</h1>
 <h2 id="axiomatic-semantics">Axiomatic Semantics</h2>
-<p><a href="https://maxxk.github.io/programming-languages/" class="uri">https://maxxk.github.io/programming-languages/</a></p>
+<p><a href="https://maxxk.github.io/programming-languages/">https://maxxk.github.io/programming-languages/</a></p>
 <p><a href="mailto:maxim.krivchikov@gmail.com" class="email">maxim.krivchikov@gmail.com</a></p>
 </section><div><a class="slider-prev"></a><a class="slider-next" href="#axiomatic-semantics-literature"></a></div>
 <section id="axiomatic-semantics-literature" class="slide level1">
@@ -101,13 +99,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ol>
 <h2 id="further-reading">Further reading</h2>
 <ol start="6" type="1">
-<li class="fragment">Ynot (<a href="http://ynot.cs.harvard.edu" class="uri">http://ynot.cs.harvard.edu</a>) — Imperative programming with Hoare logic in Coq.</li>
+<li class="fragment">Ynot (<a href="http://ynot.cs.harvard.edu">http://ynot.cs.harvard.edu</a>) — Imperative programming with Hoare logic in Coq.</li>
 <li class="fragment">Chen H. et al. Using Crash Hoare logic for certifying the FSCQ file system. ACM Press, 2015. P. 18–37.</li>
-<li class="fragment"><dl>
-<dt class="fragment">Lectures:</dt>
-<dd class="fragment"><p><a href="http://web.eecs.umich.edu/~weimerw/2017-590/lectures/weimer-gradpl-08.pdf" class="uri">http://web.eecs.umich.edu/~weimerw/2017-590/lectures/weimer-gradpl-08.pdf</a> <a href="http://web.eecs.umich.edu/~weimerw/2017-590/lectures/weimer-gradpl-09.pdf" class="uri">http://web.eecs.umich.edu/~weimerw/2017-590/lectures/weimer-gradpl-09.pdf</a></p>
-</dd>
-</dl></li>
+<li class="fragment"><a href="http://web.eecs.umich.edu/~weimerw/2017-590/lectures/weimer-gradpl-08.pdf">Lecture 1</a>, <a href="http://web.eecs.umich.edu/~weimerw/2017-590/lectures/weimer-gradpl-09.pdf">Lecture 2</a>.</li>
 </ol>
 </section><div><a class="slider-prev" href="#software-and-programming-language-theory"></a><a class="slider-next" href="#axiomatic-semantics-1"></a></div>
 <section id="axiomatic-semantics-1" class="slide level1">
@@ -134,7 +128,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <section id="axiomatic-semantics-correctness" class="slide level1">
 <h1>Axiomatic semantics correctness</h1>
 <p>Correctness of axiomatic semantics is usually defined in terms of programming language operational semantics.</p>
-<p>More formally, the connection between axiomatic and operational semantics is defined in following way:</p>
+<p>The connection between axiomatic and operational semantics is defined in following way:</p>
 <ul>
 <li class="fragment">Assertion validity judgement ⊨ — relation between operational semantics configurations and assertions ( σ ⊨ A means "assertion A holds in configuration σ" )</li>
 <li class="fragment">Hoare triple semantics (partial): ⊨ { A } c { B } is defined as: For all σ ∈ Σ, for all σ' ∈ Σ, if σ ⊨ A and σ (c)⇒ σ', then σ' ⊨ B</li>
@@ -149,7 +143,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h1>Example: Imp'</h1>
 <p>Simple imperative language with arithmetical and boolean expressions, assignment, conditional operator and loop.</p>
 <p>Abstract syntax (omitting the operator precedence and lexical structure):</p>
-<pre class="sourceCode "><code>Program = Statement "return" VariableName
+<pre class=""><code>Program = Statement "return" VariableName
 
 Statement = VariableName "=" ArithmeticalExpression
 | "skip"
@@ -193,32 +187,52 @@ BooleanExpression = ArithmeticalExpression ("&lt;" | "&gt;" | "==") Arithmetical
 <p>Derivation judgement ⊢ A on assertions is defined as usual for first-order logic.</p>
 <p>Axiomatic semantics is defined as derivation judgement of Hoare triples.</p>
 <p>We assume the following rule of consequence ("transitivity" of derivations):</p>
-<p>If ⊢ A' ⇒ A, ⊢ B ⇒ B', ⊢ {A} c {B} then ⊢ {A'} c {B'}</p>
+<p><strong>If</strong> ⊢ A' ⇒ A, ⊢ B ⇒ B', ⊢ {A} c {B} <strong>then</strong> ⊢ {A'} c {B'}</p>
 </section><div><a class="slider-prev" href="#assertion-validity"></a><a class="slider-next" href="#imp-axiomatic-semantics"></a></div>
 <section id="imp-axiomatic-semantics" class="slide level1">
 <h1>Imp' axiomatic semantics</h1>
 <ol type="1">
 <li class="fragment">Skip statement: ⊢ {A} <code>skip</code> {A}</li>
 <li class="fragment">Assignment: ⊢ {A[x:=e]} <code>x = e</code> {A}</li>
-<li class="fragment">Sequence: ⊢ {A} <code>c₁</code> {B}, ⊢ {B} <code>c₂</code> {C} ⇒ ⊢ {A} <code>c₁ ; c₂</code> {C}</li>
-<li class="fragment">Conditional operator: ⊢ { A ∧ <code>b</code> } <code>c₁</code> {B}, ⊢ { A ∧ ¬<code>b</code> } <code>c₂</code> {B} ⇒ ⊢ {A} <code>if (b) { c₁ } else { c₂ }</code> {B}</li>
-<li class="fragment">Loop: ⊢ { A ∧ <code>b</code> } <code>c</code> {A} ⇒ ⊢ {A} <code>while (b) { c }</code> {A ∧ ¬<code>b</code>}</li>
+<li class="fragment">Sequence: <strong>If</strong> ⊢ {A} <code>c₁</code> {B}, ⊢ {B} <code>c₂</code> {C} <strong>then</strong> ⊢ {A} <code>c₁ ; c₂</code> {C}</li>
+<li class="fragment">Conditional operator: <strong>If</strong> ⊢ { A ∧ <code>b</code> } <code>c₁</code> {B}, ⊢ { A ∧ ¬<code>b</code> } <code>c₂</code> {B} <strong>then</strong> ⊢ {A} <code>if (b) { c₁ } else { c₂ }</code> {B}</li>
+<li class="fragment">Loop: <strong>If</strong> ⊢ { A ∧ <code>b</code> } <code>c</code> {A} <strong>then</strong> ⊢ {A} <code>while (b) { c }</code> {A ∧ ¬<code>b</code>}</li>
 </ol>
-<p>Derivable rules: - "forward" axiom for assignment - loop invariant for loops</p>
+<p>Derivable rules:</p>
+<ul>
+<li class="fragment">"forward" axiom for assignment: ⊢ {A} <code>x = e</code> { ∃ x₀. A[ <code>x</code> := x₀] ∧ <code>x</code> = <code>e</code>[<code>x</code> := x₀] }</li>
+<li class="fragment">loop invariant for loops: <strong>If</strong> ⊢ A ∧ b ⊢ C, ⊢ {C} <code>c</code> {A}, ⊢ A ∧ ¬ <code>b</code> ⇒ B <strong>then</strong> ⊢ {A} <code>while (b) { c }</code> { B }</li>
+</ul>
 </section><div><a class="slider-prev" href="#assertion-derivation"></a><a class="slider-next" href="#assignment"></a></div>
 <section id="assignment" class="slide level1">
 <h1>Assignment</h1>
 <ul>
-<li class="fragment">aliasing</li>
+<li class="fragment">aliasing: situation in which single data location in memory can be accessed through different names (aliases) in program.</li>
 </ul>
+<p>Example (C): <code>int i, *j = &amp;i, *k = &amp;i;</code></p>
+<p>In axiomatic semantics the following holds: { true } <code>*j = 5</code> {<code>*i + *j</code> = 10}</p>
 </section><div><a class="slider-prev" href="#imp-axiomatic-semantics"></a><a class="slider-next" href="#soundness"></a></div>
 <section id="soundness" class="slide level1">
 <h1>Soundness</h1>
 <p>Soundness for axiomatic semantics (derivable properties are observable):</p>
 <h2 id="a-c-b-a-c-b">⊢ {A} c {B} ⇒ ⊨ {A} c {B}</h2>
+<p>This statement contains three inductively-defined objects:</p>
+<ol type="1">
+<li class="fragment">c — program statement</li>
+<li class="fragment">⊨ {A} c {B} — operational semantics derivation (sequence of rule applications)</li>
+<li class="fragment">⊢ {A} c {B} — axiomatic derivation</li>
+</ol>
+<p>Obvious proofs by induction on the structure of each of these objects won't work.</p>
+<p>Corner cases are <code>while</code> loops and rule of consequence.</p>
 </section><div><a class="slider-prev" href="#assignment"></a><a class="slider-next" href="#simultaneous-induction"></a></div>
 <section id="simultaneous-induction" class="slide level1">
 <h1>Simultaneous induction</h1>
+<p>⊢ {A} c {B} ⇒ ⊨ {A} c {B}</p>
+<p>Let "&lt;" denote the substructure relation on inductive types (x &lt; y ⇒ x is substructure of y). Elements of an inductive type with substructure relation form partial order.</p>
+<p>Let "⊂" denote the lexicographic ordering on tuples of (different) inductive type elements:</p>
+<p>(o, a) ⊂ (o', a') ≡ o &lt; o' or (o = o' and a &lt; a')</p>
+<p>"⊂" is a well-founded order and we may use it to prove statements by induction with hypothesis "valid for all tuples t ⊂ X" (X is induction step variable).</p>
+<p>We can prove soundness for axiomatic semantics by simultaneous induction on the tuple (operational semantics derivation, axiomatic derivation).</p>
 </section><div><a class="slider-prev" href="#soundness"></a><a class="slider-next" href="#completeness"></a></div>
 <section id="completeness" class="slide level1">
 <h1>Completeness</h1>
@@ -230,16 +244,26 @@ BooleanExpression = ArithmeticalExpression ("&lt;" | "&gt;" | "==") Arithmetical
 <p>(Dijkstra)</p>
 <p>To verify that {A} c {B}:</p>
 <ol type="1">
-<li class="fragment">Find all A': ⊨ {A'} c {B} (Pre(c, B))</li>
-<li class="fragment">For one A' ∈ Pre(c, B) and prove that ⊢ A ⇒ A'</li>
+<li class="fragment">Find all pre-conditions A': ⊨ {A'} c {B} (Pre(c, B))</li>
+<li class="fragment">For one A' ∈ Pre(c, B) prove that ⊢ A ⇒ A'</li>
 </ol>
 <p>We can define partial order over assertions by means of implication:</p>
 <p>A ⊑ A' ⇔ A' ⇒ A</p>
 <p>If Pre(c, B) has least upper bound under this order, we call it weakest precondition:</p>
 <p>WP(c, B) = lub Pre(c, B)</p>
 <p>⊢ A ⇒ WP(c, B)</p>
-<p>Special case: <code>while</code> loop</p>
-</section><div><a class="slider-prev" href="#completeness"></a><a class="slider-next" href="#application-of-axiomatic-semantics"></a></div>
+<p>Special case: <code>while</code> loop, we need to use fixed point theorem (denotational semantics)</p>
+</section><div><a class="slider-prev" href="#completeness"></a><a class="slider-next" href="#relative-completeness-expressiveness"></a></div>
+<section id="relative-completeness-expressiveness" class="slide level1">
+<h1>Relative Completeness: Expressiveness</h1>
+<p>We can define weakest precondition in terms of configurations: wp(c, B) = { σ | σ (c)⇒σ' | σ' ⊨ B }.</p>
+<p>Then we can say that assertion language is <strong>expressive</strong> if for any command and any postcondition there is a precondition which is valid exactly on weakest precondition in terms of configurations.</p>
+</section><div><a class="slider-prev" href="#weakest-preconditions"></a><a class="slider-next" href="#verification-conditions"></a></div>
+<section id="verification-conditions" class="slide level1">
+<h1>Verification Conditions</h1>
+<p>Weakest common preconditions are hard to compute (e.g. <code>while</code> loop).</p>
+<p>To make tools for automatic property checking, we can use user input (e.g. loop invariants) to compute "weak enough" preconditions: verification conditions.</p>
+</section><div><a class="slider-prev" href="#relative-completeness-expressiveness"></a><a class="slider-next" href="#application-of-axiomatic-semantics"></a></div>
 <section id="application-of-axiomatic-semantics" class="slide level1">
 <h1>Application of axiomatic semantics</h1>
 <ol type="1">
@@ -249,34 +273,34 @@ BooleanExpression = ArithmeticalExpression ("&lt;" | "&gt;" | "==") Arithmetical
 <dt class="fragment">2. Code contracts</dt>
 <dd class="fragment"><ul>
 <li class="fragment">based on the idea of axiomatic semantics, but I'm not aware about any formal proofs of soundness</li>
-<li class="fragment">original implementation in Eiffel programming language (e.g. [Section 8](<a href="https://archive.eiffel.com/doc/online/eiffel50/intro/language/tutorial-09.html#pgfId-514761" class="uri">https://archive.eiffel.com/doc/online/eiffel50/intro/language/tutorial-09.html#pgfId-514761</a>) in Eiffel tutorial) require statement (precondition), ensure statement (postcondition), invariant (class state invariant)</li>
-<li class="fragment">probably most well-known implementation is [.NET CodeContracts](<a href="https://github.com/Microsoft/CodeContracts" class="uri">https://github.com/Microsoft/CodeContracts</a>) (see also [publications](<a href="http://research.microsoft.com/en-us/projects/contracts/" class="uri">http://research.microsoft.com/en-us/projects/contracts/</a>))</li>
+<li class="fragment">original implementation in Eiffel programming language (e.g. [Section 8](<a href="https://archive.eiffel.com/doc/online/eiffel50/intro/language/tutorial-09.html#pgfId-514761">https://archive.eiffel.com/doc/online/eiffel50/intro/language/tutorial-09.html#pgfId-514761</a>) in Eiffel tutorial) <span class="title-ref">require</span> statement (precondition), <span class="title-ref">ensure</span> statement (postcondition), <span class="title-ref">invariant</span> (class state invariant)</li>
+<li class="fragment">probably most well-known implementation is [.NET CodeContracts](<a href="https://github.com/Microsoft/CodeContracts">https://github.com/Microsoft/CodeContracts</a>) (see also [publications](<a href="http://research.microsoft.com/en-us/projects/contracts/">http://research.microsoft.com/en-us/projects/contracts/</a>))</li>
 </ul>
 </dd>
 </dl>
-</section><div><a class="slider-prev" href="#weakest-preconditions"></a><a class="slider-next" href="#codecontracts-examples"></a></div>
+</section><div><a class="slider-prev" href="#verification-conditions"></a><a class="slider-next" href="#codecontracts-examples"></a></div>
 <section id="codecontracts-examples" class="slide level1">
 <h1>CodeContracts examples</h1>
-<div class="sourceCode" id="cb2"><pre class="sourceCode csharp"><code class="sourceCode cs"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">private</span> <span class="kw">static</span> <span class="dt">void</span> <span class="fu">Main</span>(<span class="dt">string</span>[] args)</a>
-<a class="sourceLine" id="cb2-2" data-line-number="2">{</a>
-<a class="sourceLine" id="cb2-3" data-line-number="3">    <span class="fu">DoRequiresForAll</span>(<span class="kw">new</span> List&lt;<span class="dt">string</span>&gt;() {<span class="st">"test"</span>,<span class="kw">null</span>,<span class="st">"foo"</span>});</a>
-<a class="sourceLine" id="cb2-4" data-line-number="4">}</a>
-<a class="sourceLine" id="cb2-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb2-6" data-line-number="6"><span class="kw">public</span> <span class="kw">static</span> <span class="dt">void</span> <span class="fu">DoRequiresForAll</span>(List&lt;<span class="dt">string</span>&gt; input)</a>
-<a class="sourceLine" id="cb2-7" data-line-number="7">{</a>
-<a class="sourceLine" id="cb2-8" data-line-number="8">    Contract.<span class="fu">Requires</span>(Contract.<span class="fu">ForAll</span>(input, w =&gt; w != <span class="kw">null</span>));</a>
-<a class="sourceLine" id="cb2-9" data-line-number="9">    input.<span class="fu">ForEach</span>(Console.<span class="fu">WriteLine</span>);</a>
-<a class="sourceLine" id="cb2-10" data-line-number="10">}</a></code></pre></div>
-<div class="sourceCode" id="cb3"><pre class="sourceCode csharp"><code class="sourceCode cs"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw">public</span> <span class="kw">static</span> <span class="dt">string</span> <span class="fu">TrimAfter</span>(<span class="dt">string</span> value, <span class="dt">string</span> suffix)</a>
-<a class="sourceLine" id="cb3-2" data-line-number="2">{</a>
-<a class="sourceLine" id="cb3-3" data-line-number="3">    Contract.<span class="fu">Requires</span>(!String.<span class="fu">IsNullOrEmpty</span>(suffix));</a>
-<a class="sourceLine" id="cb3-4" data-line-number="4">    Contract.<span class="fu">Requires</span>(value != <span class="kw">null</span>);</a>
-<a class="sourceLine" id="cb3-5" data-line-number="5">    Contract.<span class="fu">Ensures</span>( !Contract.<span class="fu">Result</span>&lt;<span class="dt">string</span>&gt;().<span class="fu">EndsWith</span>(suffix));</a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode csharp"><code class="sourceCode cs"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">private</span> <span class="kw">static</span> <span class="dt">void</span> <span class="fu">Main</span>(<span class="dt">string</span>[] args)</a>
+<a class="sourceLine" id="cb2-2" title="2">{</a>
+<a class="sourceLine" id="cb2-3" title="3">    <span class="fu">DoRequiresForAll</span>(<span class="kw">new</span> List&lt;<span class="dt">string</span>&gt;() {<span class="st">"test"</span>,<span class="kw">null</span>,<span class="st">"foo"</span>});</a>
+<a class="sourceLine" id="cb2-4" title="4">}</a>
+<a class="sourceLine" id="cb2-5" title="5"></a>
+<a class="sourceLine" id="cb2-6" title="6"><span class="kw">public</span> <span class="kw">static</span> <span class="dt">void</span> <span class="fu">DoRequiresForAll</span>(List&lt;<span class="dt">string</span>&gt; input)</a>
+<a class="sourceLine" id="cb2-7" title="7">{</a>
+<a class="sourceLine" id="cb2-8" title="8">    Contract.<span class="fu">Requires</span>(Contract.<span class="fu">ForAll</span>(input, w =&gt; w != <span class="kw">null</span>));</a>
+<a class="sourceLine" id="cb2-9" title="9">    input.<span class="fu">ForEach</span>(Console.<span class="fu">WriteLine</span>);</a>
+<a class="sourceLine" id="cb2-10" title="10">}</a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode csharp"><code class="sourceCode cs"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">public</span> <span class="kw">static</span> <span class="dt">string</span> <span class="fu">TrimAfter</span>(<span class="dt">string</span> value, <span class="dt">string</span> suffix)</a>
+<a class="sourceLine" id="cb3-2" title="2">{</a>
+<a class="sourceLine" id="cb3-3" title="3">    Contract.<span class="fu">Requires</span>(!String.<span class="fu">IsNullOrEmpty</span>(suffix));</a>
+<a class="sourceLine" id="cb3-4" title="4">    Contract.<span class="fu">Requires</span>(value != <span class="kw">null</span>);</a>
+<a class="sourceLine" id="cb3-5" title="5">    Contract.<span class="fu">Ensures</span>( !Contract.<span class="fu">Result</span>&lt;<span class="dt">string</span>&gt;().<span class="fu">EndsWith</span>(suffix));</a></code></pre></div>
 </section><div><a class="slider-prev" href="#application-of-axiomatic-semantics"></a><a class="slider-next" href="#homework-assignments"></a></div>
 <section id="homework-assignments" class="slide level1">
 <h1>Homework assignments</h1>
 <p><strong>Task 11.1</strong> (2*) Write axiomatic semantics for a hypothetical functional programming language based on simply-typed lambda calculus with data types, conditional operator and predefined functions over data types.</p>
-<p><strong>Task 11.2</strong> (2*) Write axiomatic semantics for assignment operator in Imp' extended with pointers and aliasing.</p>
+<p><strong>Task 11.2</strong> (2*) Write axiomatic semantics for assignment operator in Imp' extended with aliasing operation.</p>
 </section><div><a class="slider-prev" href="#codecontracts-examples"></a><a class="slider-next"></a></div>
 
 <!-- start page -->
@@ -291,7 +315,7 @@ BooleanExpression = ArithmeticalExpression ("&lt;" | "&gt;" | "==") Arithmetical
 
   
   <script type="text/javascript">
-  document.addEventListener("keydown", function(e) {
+  function handleKeydown(e) {
      if (e.altKey || e.ctrlKey || e.metaKey || e.shiftKey) { return; }
      switch (e.keyCode) {
        case 35: // End
@@ -322,7 +346,18 @@ BooleanExpression = ArithmeticalExpression ("&lt;" | "&gt;" | "==") Arithmetical
          }
          break;
      }
-  });
+  }
+  document.addEventListener("keydown", handleKeydown);
+  document.getElementById("flat-view").addEventListener("click", function(e) {
+    document.getElementById("main").classList.toggle('slider');
+    if (document.getElementById("main").classList.contains('slider')) {
+      document.getElementById("container").style="width: 640px;height: 400px;";
+      document.addEventListener("keydown", handleKeydown);
+    } else {
+      document.getElementById("container").style="";
+      document.removeEventListener("keydown", handleKeydown);
+    }
+  })
   </script>
   
 
