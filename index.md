@@ -52,11 +52,10 @@ Course topics include:
 **06.05.2019** Axiomatic semantics 
 [presentation - html](presentations/11-Axiomatic-Semantics.html)
 
-<!--
-**10.05.2019** Domain-specific languages. Intermediate representations
+**13.05.2019** Domain-specific languages. Intermediate representations
 [presentation - html](presentations/12-IR-DSL.html)
 
-**17.05.2019** Exam ([program](presentations/program.html))
- 
+**20.05.2019** Exam ([program](presentations/program.html))
+<!-- 
 **24.05.2019** Possible second date for exam (by appointment)
 -->

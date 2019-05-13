@@ -22,8 +22,10 @@ https://cacm.acm.org/magazines/2011/7/109910-dsl-for-the-uninitiated/fulltext
 
 Domain-specific programming language is a language which is targetet to the specific application domain.
 
+For the further reference, syllabus for CMU seminar on DSLs: https://github.com/jeanqasaur/dsl-syllabus-fall-2016
+
 # Example: HTML and CSS
-Domain: text markup (HTML) and hierarchical styling (CSS).
+Domain: text markup (HTML — HyperText Markup Language) and hierarchical styling (CSS — Cascading Style Sheets). Recent application — user interface design.
 
 ```css
 form > label > .redtext {
@@ -31,7 +33,7 @@ form > label > .redtext {
 }
 
 .redtext:hover {
-    border: solid green 1px;
+    outline: solid green 1px;
 }
 ```
 
@@ -49,7 +51,7 @@ form > label > .redtext {
 }
 
 .redtext:hover {
-    border: solid green 1px;
+    outline: solid green 1px;
 }
 
 </style>
@@ -69,7 +71,7 @@ diff <(ls $first_directory) <(ls $second_directory)
 
 sort -k 9 <(ls -l /bin) <(ls -l /usr/bin) <(ls -l /usr/X11R6/bin)
 # Lists all the files in the 3 main 'bin' directories, and sorts by filename.
-# Note that three (count 'em) distinct commands are fed to 'sort'.
+# Note that three distinct commands are fed to 'sort'.
 
 ping $(hostname)
 ```
@@ -266,7 +268,7 @@ using (ServiceContext svcContext = new ServiceContext(_serviceProxy))
 }
 ```
 
-Query is translated into something like this:
+Query is translated into regular C# chained method calls like this:
 
 ```csharp
 svcContext.AccountSet.All()
@@ -392,9 +394,10 @@ form > label > .redtext {
 }
 ```
 
-selectors language is reused in JavaScript (in jQuery library and document.querySelector function)
+Selectors language is reused in JavaScript (initially reimplemented in jQuery library, in HTML5 actually reused by document.querySelector function).
 
-- some well-designed programming libraries usually are some kind of embedded DSLs
+# Language composition 
+- some well-designed programming libraries usually provide some kind of embedded DSLs
 
 ```python
 from django.db.models import F, Sum, Value as V
@@ -404,6 +407,8 @@ InvoiceItem.objects.values('id', 'amount').annotate(
     to_pay=F('amount') - Coalesce(Sum('paymentdistribution__amount'), V(0))
 ).order_by('-to_pay')
 ```
+
+(example is from Django framework, SQLAlchemy provides even better examples)
 
 - problems: syntax composition (how to write parser which can detect language boundaries), language interoperability
 
@@ -436,6 +441,37 @@ Vasenin V. A., Krivchikov M. A. Program Intermediate Representation Techniques, 
 - data types are specified in terms of memory layout
 - instruction set is close to machine/assembly language
 
+<div class="twocolumn">
+
+C: 
+
+```c
+int array[] = { 1, 2, 3 };
+int foo(int X) {
+    return array[X];
+}
+
+
+
+
+```
+
+LLVM:
+
+```llvm
+@array = global [3 x i32] [ i32 1, i32 2, i32 3]
+
+define i32 @foo(i32 %X) nounwind readonly {
+entry:
+    %0 = sext i32 %X to i64
+    %1 = getelementptr inbounds [3 x i32]* @array, i64 0, i64 %0
+    %2 = load i32* %1, align 4
+    ret i32 %2
+}
+```
+
+</div>
+
 # Low-level intermediate representation
 
 - three-address code, abstract representation, see "Dragon book" (Aho, Seti, Ullman "Compilers: Principles, Techniques, and Tools")
@@ -455,10 +491,39 @@ Vasenin V. A., Krivchikov M. A. Program Intermediate Representation Techniques, 
 
 # Bytecode application virtual machines
 
-- linear code structure
-- high-level instructions
+- linear code structure; high-level instructions
 - high-level (usually memory layout-independent) date type representation
 - typing, first-order polymorphism
+
+```csharp
+private static void DictionaryInitialize() {
+    var b = new Dictionary<string, string> {
+        ["1"] = "2", ["3"] = "4"
+    }
+}
+```
+
+```il
+.method private hidebysig static void DictionaryInitialize () cil managed
+{
+    .maxstack 3
+    .locals init (
+        [0] class [mscorlib]System.Collections.Generic.Dictionary`2<string,string>
+    )
+
+    newobj instance void class [mscorlib]System.Collections.Generic.Dictionary`2<string,string>::.ctor()
+    stloc.0
+    ldloc.0
+    ldstr "1"
+    ldstr "2"
+    callvirt instance void class [mscorlib]System.Collections.Generic.Dictionary`2<string,string>::set_Item(!0, !1)
+    ldloc.0
+    ldstr "3"
+    ldstr "4"
+    callvirt instance void class [mscorlib]System.Collections.Generic.Dictionary`2<string,string>::set_Item(!0, !1) 
+}
+```
+
 
 # Bytecode for imperative languages
 
@@ -519,7 +584,7 @@ send draw__5Shape_int(s, color)
         execute((\+)/1)])
     ```
 
-# Typed control flow graphss
+# Typed control flow graphs
 
 - graph-based code structure (special constructions at join points are used instead of labels and jump instructions)
 Leißa R., Köster M., Hack S. A graph-based higher-order intermediate representation // 2015 IEEE/ACM International Symposium on Code Generation and Optimization (CGO). 2015. Сс. 202–212.
