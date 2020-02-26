@@ -18,11 +18,11 @@ Course topics include:
 
 <!--Please take a quick survey about the course: [Survey form](https://goo.gl/forms/PYP4oSGn0VfQQL403)-->
 
-Past year lectures:
 
-**25.02.2019** Introduction. History of programming languages. 
+**26.02.2020** Introduction. History of programming languages. 
 [presentation - html](presentations/01-Introduction.html)
 
+<!--
 **04.03.2019** Classification of programming languages. 
 [presentation - html](presentations/02-Classification.html) 
 

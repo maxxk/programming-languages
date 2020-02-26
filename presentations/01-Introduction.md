@@ -49,9 +49,9 @@ https://maxxk.github.io/programming-languages/
 (to have acquaintance with programming language ≈ can write something more sophisticated than Hello World in less than an hour)
 
 
-# GitHub can detect 316 programming languages
+# GitHub can detect 343 programming languages
 
-Last year (2018) it was 299, in 2017 — 277!
+In 2019 it was 316, in 2018 — 299, in 2017 — 277!
 
 This figure is the lower bound of the count of programming languages which are used by more than one person.
 
@@ -102,6 +102,7 @@ Some of the early machines (not Zuse Z3) were programmed by rewiring. These mach
 
 # Machine code
 Binary representation of elementary instructions which can be executed directly on CPU.
+
 ## 1GL (first-generation programming languages)
 See also: Bootstrapping a simple compiler from nothing - 1GL to 3GL
 
@@ -138,7 +139,7 @@ https://github.com/smtlaissezfaire/bcompiler
 <span style="font-size: 0.5em">Source: C.Petzold. Code</span>
 
 # Microcode
-Current CPUs are not hardwired. The connections between logic units at the opcode execution time are maintained by the microcode — sequence of bit packages describing the signals at each clock.
+Modern CPUs are not hardwired. The connections between logic units at the opcode execution time are maintained by the microcode — sequence of bit packages describing the signals at each clock.
 <div class="twocolumn">
 
   <div class="fullwidth">
@@ -208,6 +209,7 @@ Simplifed x86-like instruction encoding
 
 
 # Macroassembler 
+
 ## "2.5 generation" language
 Macroassemblers allow macros: special directives with parameters which can be substituted at the assembly time.
 <div class="twocolumn">
@@ -353,6 +355,7 @@ zebra(Owner).
 ```
 
 # II. Influential programming languages
+
 ## First widespread programming languages
 Fortran, Cobol, Algol, Lisp
 

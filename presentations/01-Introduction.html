@@ -8,26 +8,27 @@
   <link rel="stylesheet" href="slider.css">
   <style type="text/css">code{white-space: pre;}</style>
   <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -36,9 +37,9 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {  }
+  {   }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -129,10 +130,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <section id="how-many-programming-languages-you-have-acquaintance-with" class="slide level1">
 <h1>How many programming languages you have acquaintance with?</h1>
 <p>(to have acquaintance with programming language ≈ can write something more sophisticated than Hello World in less than an hour)</p>
-</section><div><a class="slider-prev" href="#quick-recap"></a><a class="slider-next" href="#github-can-detect-316-programming-languages"></a></div>
-<section id="github-can-detect-316-programming-languages" class="slide level1">
-<h1>GitHub can detect 316 programming languages</h1>
-<p>Last year (2018) it was 299, in 2017 — 277!</p>
+</section><div><a class="slider-prev" href="#quick-recap"></a><a class="slider-next" href="#github-can-detect-343-programming-languages"></a></div>
+<section id="github-can-detect-343-programming-languages" class="slide level1">
+<h1>GitHub can detect 343 programming languages</h1>
+<p>In 2019 it was 316, in 2018 — 299, in 2017 — 277!</p>
 <p>This figure is the lower bound of the count of programming languages which are used by more than one person.</p>
 <p>Source: <a href="https://github.com/github/linguist/tree/master/vendor/grammars" class="uri">https://github.com/github/linguist/tree/master/vendor/grammars</a></p>
 </section><div><a class="slider-prev" href="#how-many-programming-languages-you-have-acquaintance-with"></a><a class="slider-next" href="#programming-language"></a></div>
@@ -144,7 +145,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <blockquote>
 <p>An artificial language used to write instructions that can be translated into machine language and then executed by a computer. — <cite>The American Heritage Dictionary of the English language</cite></p>
 </blockquote>
-</section><div><a class="slider-prev" href="#github-can-detect-316-programming-languages"></a><a class="slider-next" href="#history-of-programming-languages-1"></a></div>
+</section><div><a class="slider-prev" href="#github-can-detect-343-programming-languages"></a><a class="slider-next" href="#history-of-programming-languages-1"></a></div>
 <section id="history-of-programming-languages-1" class="slide level1">
 <h1>History of programming languages</h1>
 <p>Sources for the further research:</p>
@@ -180,7 +181,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </section><div><a class="slider-prev" href="#zuse-z3-1941"></a><a class="slider-next" href="#machine-code"></a></div>
 <section id="machine-code" class="slide level1">
 <h1>Machine code</h1>
-<p>Binary representation of elementary instructions which can be executed directly on CPU. ## 1GL (first-generation programming languages) See also: Bootstrapping a simple compiler from nothing - 1GL to 3GL</p>
+<p>Binary representation of elementary instructions which can be executed directly on CPU.</p>
+<h2 id="gl-first-generation-programming-languages">1GL (first-generation programming languages)</h2>
+<p>See also: Bootstrapping a simple compiler from nothing - 1GL to 3GL</p>
 <p><a href="http://homepage.ntlworld.com/edmund.grimley-evans/bcompiler.html" class="uri">http://homepage.ntlworld.com/edmund.grimley-evans/bcompiler.html</a></p>
 <p><a href="https://github.com/smtlaissezfaire/bcompiler" class="uri">https://github.com/smtlaissezfaire/bcompiler</a></p>
 <pre class="x86asm"><code># _start:
@@ -212,7 +215,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </section><div><a class="slider-prev" href="#machine-code"></a><a class="slider-next" href="#microcode"></a></div>
 <section id="microcode" class="slide level1">
 <h1>Microcode</h1>
-Current CPUs are not hardwired. The connections between logic units at the opcode execution time are maintained by the microcode — sequence of bit packages describing the signals at each clock.
+Modern CPUs are not hardwired. The connections between logic units at the opcode execution time are maintained by the microcode — sequence of bit packages describing the signals at each clock.
 <div class="twocolumn">
 <div class="fullwidth">
 <img data-src="images/gemini-microinstruction.gif" src="images/gemini-microinstruction.gif">
@@ -310,52 +313,52 @@ Next    I</code></pre>
 <h1>High-level programming languages</h1>
 <h2 id="gl-third-generation-programming-languages">3GL (third-generation programming languages)</h2>
 <p>Third-generation programming languages feature machine-independence, complex data and code constructions.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw">typedef</span> <span class="kw">struct</span> timespec {</a>
-<a class="sourceLine" id="cb6-2" data-line-number="2">    <span class="dt">time_t</span>   tv_sec;        <span class="co">/* seconds */</span></a>
-<a class="sourceLine" id="cb6-3" data-line-number="3">    <span class="dt">long</span>     tv_nsec;       <span class="co">/* nanoseconds */</span></a>
-<a class="sourceLine" id="cb6-4" data-line-number="4">};</a>
-<a class="sourceLine" id="cb6-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb6-6" data-line-number="6"><span class="dt">int</span> main(<span class="dt">int</span> argc, <span class="dt">char</span> **argv) {</a>
-<a class="sourceLine" id="cb6-7" data-line-number="7">    <span class="dt">int</span> clk_id = CLOCK_REALTIME;</a>
-<a class="sourceLine" id="cb6-8" data-line-number="8">    <span class="dt">const</span> uint TIME_FMT = strlen(<span class="st">"2012-12-31 12:59:59.123456789"</span>) + <span class="dv">1</span>;</a>
-<a class="sourceLine" id="cb6-9" data-line-number="9">    <span class="dt">char</span> timestr[TIME_FMT];</a>
-<a class="sourceLine" id="cb6-10" data-line-number="10"></a>
-<a class="sourceLine" id="cb6-11" data-line-number="11">    <span class="kw">struct</span> timespec ts, res;</a>
-<a class="sourceLine" id="cb6-12" data-line-number="12">    <span class="cf">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt; <span class="dv">100</span>; i++) {</a>
-<a class="sourceLine" id="cb6-13" data-line-number="13">      clock_getres(clk_id, &amp;res);</a>
-<a class="sourceLine" id="cb6-14" data-line-number="14">      clock_gettime(clk_id, &amp;ts);</a>
-<a class="sourceLine" id="cb6-15" data-line-number="15">    }</a>
-<a class="sourceLine" id="cb6-16" data-line-number="16"></a>
-<a class="sourceLine" id="cb6-17" data-line-number="17">    <span class="cf">if</span> (timespec2str(timestr, TIME_FMT, &amp;ts) != <span class="dv">0</span>) {</a>
-<a class="sourceLine" id="cb6-18" data-line-number="18">        printf(<span class="st">"timespec2str failed!</span><span class="sc">\n</span><span class="st">"</span>);</a>
-<a class="sourceLine" id="cb6-19" data-line-number="19">        <span class="cf">return</span> EXIT_FAILURE;</a>
-<a class="sourceLine" id="cb6-20" data-line-number="20">    } <span class="cf">else</span> {</a>
-<a class="sourceLine" id="cb6-21" data-line-number="21">        <span class="dt">unsigned</span> <span class="dt">long</span> resol = res.tv_sec * NANO + res.tv_nsec;</a>
-<a class="sourceLine" id="cb6-22" data-line-number="22">        printf(<span class="st">"CLOCK_REALTIME: res=%ld ns, time=%s</span><span class="sc">\n</span><span class="st">"</span>, resol, timestr);</a>
-<a class="sourceLine" id="cb6-23" data-line-number="23">        <span class="cf">return</span> EXIT_SUCCESS;</a>
-<a class="sourceLine" id="cb6-24" data-line-number="24">    }</a>
-<a class="sourceLine" id="cb6-25" data-line-number="25">}</a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw">typedef</span> <span class="kw">struct</span> timespec {</span>
+<span id="cb6-2"><a href="#cb6-2"></a>    <span class="dt">time_t</span>   tv_sec;        <span class="co">/* seconds */</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a>    <span class="dt">long</span>     tv_nsec;       <span class="co">/* nanoseconds */</span></span>
+<span id="cb6-4"><a href="#cb6-4"></a>};</span>
+<span id="cb6-5"><a href="#cb6-5"></a></span>
+<span id="cb6-6"><a href="#cb6-6"></a><span class="dt">int</span> main(<span class="dt">int</span> argc, <span class="dt">char</span> **argv) {</span>
+<span id="cb6-7"><a href="#cb6-7"></a>    <span class="dt">int</span> clk_id = CLOCK_REALTIME;</span>
+<span id="cb6-8"><a href="#cb6-8"></a>    <span class="dt">const</span> uint TIME_FMT = strlen(<span class="st">"2012-12-31 12:59:59.123456789"</span>) + <span class="dv">1</span>;</span>
+<span id="cb6-9"><a href="#cb6-9"></a>    <span class="dt">char</span> timestr[TIME_FMT];</span>
+<span id="cb6-10"><a href="#cb6-10"></a></span>
+<span id="cb6-11"><a href="#cb6-11"></a>    <span class="kw">struct</span> timespec ts, res;</span>
+<span id="cb6-12"><a href="#cb6-12"></a>    <span class="cf">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt; <span class="dv">100</span>; i++) {</span>
+<span id="cb6-13"><a href="#cb6-13"></a>      clock_getres(clk_id, &amp;res);</span>
+<span id="cb6-14"><a href="#cb6-14"></a>      clock_gettime(clk_id, &amp;ts);</span>
+<span id="cb6-15"><a href="#cb6-15"></a>    }</span>
+<span id="cb6-16"><a href="#cb6-16"></a></span>
+<span id="cb6-17"><a href="#cb6-17"></a>    <span class="cf">if</span> (timespec2str(timestr, TIME_FMT, &amp;ts) != <span class="dv">0</span>) {</span>
+<span id="cb6-18"><a href="#cb6-18"></a>        printf(<span class="st">"timespec2str failed!</span><span class="sc">\n</span><span class="st">"</span>);</span>
+<span id="cb6-19"><a href="#cb6-19"></a>        <span class="cf">return</span> EXIT_FAILURE;</span>
+<span id="cb6-20"><a href="#cb6-20"></a>    } <span class="cf">else</span> {</span>
+<span id="cb6-21"><a href="#cb6-21"></a>        <span class="dt">unsigned</span> <span class="dt">long</span> resol = res.tv_sec * NANO + res.tv_nsec;</span>
+<span id="cb6-22"><a href="#cb6-22"></a>        printf(<span class="st">"CLOCK_REALTIME: res=%ld ns, time=%s</span><span class="sc">\n</span><span class="st">"</span>, resol, timestr);</span>
+<span id="cb6-23"><a href="#cb6-23"></a>        <span class="cf">return</span> EXIT_SUCCESS;</span>
+<span id="cb6-24"><a href="#cb6-24"></a>    }</span>
+<span id="cb6-25"><a href="#cb6-25"></a>}</span></code></pre></div>
 </section><div><a class="slider-prev" href="#macroassembler"></a><a class="slider-next" href="#gl-data-querying-and-manipulation-languages"></a></div>
 <section id="gl-data-querying-and-manipulation-languages" class="slide level1">
 <h1>4GL: Data querying and manipulation languages</h1>
 Fourth-generation languages are declarative, mostly concerned with data manipulation.
 <div class="twocolumn">
-<div class="sourceCode" id="cb7"><pre class="sourceCode sql"><code class="sourceCode sql"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw">select</span>  quartile,  </a>
-<a class="sourceLine" id="cb7-2" data-line-number="2">  <span class="fu">min</span>(spend) <span class="kw">as</span> <span class="fu">min</span>,  </a>
-<a class="sourceLine" id="cb7-3" data-line-number="3">  <span class="fu">max</span>(spend) <span class="kw">as</span> <span class="fu">max</span></a>
-<a class="sourceLine" id="cb7-4" data-line-number="4"><span class="kw">from</span> (</a>
-<a class="sourceLine" id="cb7-5" data-line-number="5">  <span class="kw">select</span>  spend,  <span class="fu">ntile</span>(<span class="dv">4</span>)</a>
-<a class="sourceLine" id="cb7-6" data-line-number="6">    <span class="kw">over</span> (<span class="kw">order</span> <span class="kw">by</span> spend <span class="kw">asc</span>)</a>
-<a class="sourceLine" id="cb7-7" data-line-number="7">    quartile</a>
-<a class="sourceLine" id="cb7-8" data-line-number="8">  <span class="kw">from</span> (</a>
-<a class="sourceLine" id="cb7-9" data-line-number="9">    <span class="kw">select</span> user_id,</a>
-<a class="sourceLine" id="cb7-10" data-line-number="10">      <span class="fu">sum</span>(price) <span class="kw">as</span> spend</a>
-<a class="sourceLine" id="cb7-11" data-line-number="11">    <span class="kw">from</span> purchases</a>
-<a class="sourceLine" id="cb7-12" data-line-number="12">    <span class="kw">group</span> <span class="kw">by</span> <span class="dv">1</span></a>
-<a class="sourceLine" id="cb7-13" data-line-number="13">  ) user_spend</a>
-<a class="sourceLine" id="cb7-14" data-line-number="14">) user_spend_quartiles</a>
-<a class="sourceLine" id="cb7-15" data-line-number="15"><span class="kw">group</span> <span class="kw">by</span> <span class="dv">1</span></a>
-<a class="sourceLine" id="cb7-16" data-line-number="16"><span class="kw">order</span> <span class="kw">by</span> <span class="fu">ntile</span> <span class="kw">asc</span></a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw">select</span>  quartile,  </span>
+<span id="cb7-2"><a href="#cb7-2"></a>  <span class="fu">min</span>(spend) <span class="kw">as</span> <span class="fu">min</span>,  </span>
+<span id="cb7-3"><a href="#cb7-3"></a>  <span class="fu">max</span>(spend) <span class="kw">as</span> <span class="fu">max</span></span>
+<span id="cb7-4"><a href="#cb7-4"></a><span class="kw">from</span> (</span>
+<span id="cb7-5"><a href="#cb7-5"></a>  <span class="kw">select</span>  spend,  <span class="fu">ntile</span>(<span class="dv">4</span>)</span>
+<span id="cb7-6"><a href="#cb7-6"></a>    <span class="kw">over</span> (<span class="kw">order</span> <span class="kw">by</span> spend <span class="kw">asc</span>)</span>
+<span id="cb7-7"><a href="#cb7-7"></a>    quartile</span>
+<span id="cb7-8"><a href="#cb7-8"></a>  <span class="kw">from</span> (</span>
+<span id="cb7-9"><a href="#cb7-9"></a>    <span class="kw">select</span> user_id,</span>
+<span id="cb7-10"><a href="#cb7-10"></a>      <span class="fu">sum</span>(price) <span class="kw">as</span> spend</span>
+<span id="cb7-11"><a href="#cb7-11"></a>    <span class="kw">from</span> purchases</span>
+<span id="cb7-12"><a href="#cb7-12"></a>    <span class="kw">group</span> <span class="kw">by</span> <span class="dv">1</span></span>
+<span id="cb7-13"><a href="#cb7-13"></a>  ) user_spend</span>
+<span id="cb7-14"><a href="#cb7-14"></a>) user_spend_quartiles</span>
+<span id="cb7-15"><a href="#cb7-15"></a><span class="kw">group</span> <span class="kw">by</span> <span class="dv">1</span></span>
+<span id="cb7-16"><a href="#cb7-16"></a><span class="kw">order</span> <span class="kw">by</span> <span class="fu">ntile</span> <span class="kw">asc</span></span></code></pre></div>
 <img data-src="images/ntiles.png" src="images/ntiles.png">
 <div class="small">
 Source: <a href="https://www.periscopedata.com/blog/window-functions-by-example.html" class="uri">https://www.periscopedata.com/blog/window-functions-by-example.html</a>
@@ -384,20 +387,20 @@ Source: <a href="https://www.periscopedata.com/blog/window-functions-by-example.
 </section><div><a class="slider-prev" href="#gl-data-querying-and-manipulation-languages-1"></a><a class="slider-next" href="#einstein-riddle-who-keeps-zebra-in-prolog"></a></div>
 <section id="einstein-riddle-who-keeps-zebra-in-prolog" class="slide level1">
 <h1>Einstein riddle (who keeps zebra?) in Prolog</h1>
-<div class="sourceCode" id="cb8"><pre class="sourceCode prolog"><code class="sourceCode prolog"><a class="sourceLine" id="cb8-1" data-line-number="1">neigh(<span class="dt">Left</span><span class="kw">,</span> <span class="dt">Right</span><span class="kw">,</span> <span class="dt">List</span>) <span class="kw">:-</span></a>
-<a class="sourceLine" id="cb8-2" data-line-number="2">        <span class="dt">List</span> <span class="kw">=</span> [<span class="dt">Left</span> <span class="fu">|</span> [<span class="dt">Right</span> <span class="fu">|</span> <span class="dt">_</span>]]<span class="kw">;</span></a>
-<a class="sourceLine" id="cb8-3" data-line-number="3">        <span class="dt">List</span> <span class="kw">=</span> [<span class="dt">_</span> <span class="fu">|</span> [<span class="dt">Left</span> <span class="fu">|</span> <span class="dt">Right</span>]]<span class="kw">.</span></a>
-<a class="sourceLine" id="cb8-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb8-5" data-line-number="5">zebraowner(<span class="dt">Houses</span><span class="kw">,</span> <span class="dt">ZebraOwner</span>)<span class="kw">:-</span></a>
-<a class="sourceLine" id="cb8-6" data-line-number="6">        member([englishman, <span class="dt">_</span>, red]<span class="kw">,</span> <span class="dt">Houses</span>)<span class="kw">,</span></a>
-<a class="sourceLine" id="cb8-7" data-line-number="7">        member([spanish, jaguar, <span class="dt">_</span>]<span class="kw">,</span> <span class="dt">Houses</span>)<span class="kw">,</span></a>
-<a class="sourceLine" id="cb8-8" data-line-number="8">        neigh([<span class="dt">_</span>, snail, <span class="dt">_</span>]<span class="kw">,</span> [japanese, <span class="dt">_</span>, <span class="dt">_</span>]<span class="kw">,</span> <span class="dt">Houses</span>)<span class="kw">,</span></a>
-<a class="sourceLine" id="cb8-9" data-line-number="9">        neigh([<span class="dt">_</span>, snail, <span class="dt">_</span>]<span class="kw">,</span> [<span class="dt">_</span>, <span class="dt">_</span>, blue]<span class="kw">,</span> <span class="dt">Houses</span>)<span class="kw">,</span></a>
-<a class="sourceLine" id="cb8-10" data-line-number="10">        member([<span class="dt">ZebraOwner</span>, zebra, <span class="dt">_</span>]<span class="kw">,</span> <span class="dt">Houses</span>)<span class="kw">,</span></a>
-<a class="sourceLine" id="cb8-11" data-line-number="11">        member([<span class="dt">_</span>, <span class="dt">_</span>, green]<span class="kw">,</span> <span class="dt">Houses</span>)<span class="kw">.</span></a>
-<a class="sourceLine" id="cb8-12" data-line-number="12"></a>
-<a class="sourceLine" id="cb8-13" data-line-number="13"></a>
-<a class="sourceLine" id="cb8-14" data-line-number="14">zebra(<span class="dt">X</span>) <span class="kw">:-</span> zebraowner([<span class="dt">_</span>, <span class="dt">_</span>, <span class="dt">_</span>]<span class="kw">,</span> <span class="dt">X</span>)<span class="kw">.</span></a></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode prolog"><code class="sourceCode prolog"><span id="cb8-1"><a href="#cb8-1"></a>neigh(<span class="dt">Left</span><span class="kw">,</span> <span class="dt">Right</span><span class="kw">,</span> <span class="dt">List</span>) <span class="kw">:-</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a>        <span class="dt">List</span> <span class="kw">=</span> [<span class="dt">Left</span> <span class="fu">|</span> [<span class="dt">Right</span> <span class="fu">|</span> <span class="dt">_</span>]]<span class="kw">;</span></span>
+<span id="cb8-3"><a href="#cb8-3"></a>        <span class="dt">List</span> <span class="kw">=</span> [<span class="dt">_</span> <span class="fu">|</span> [<span class="dt">Left</span> <span class="fu">|</span> <span class="dt">Right</span>]]<span class="kw">.</span></span>
+<span id="cb8-4"><a href="#cb8-4"></a></span>
+<span id="cb8-5"><a href="#cb8-5"></a>zebraowner(<span class="dt">Houses</span><span class="kw">,</span> <span class="dt">ZebraOwner</span>)<span class="kw">:-</span></span>
+<span id="cb8-6"><a href="#cb8-6"></a>        member([englishman, <span class="dt">_</span>, red]<span class="kw">,</span> <span class="dt">Houses</span>)<span class="kw">,</span></span>
+<span id="cb8-7"><a href="#cb8-7"></a>        member([spanish, jaguar, <span class="dt">_</span>]<span class="kw">,</span> <span class="dt">Houses</span>)<span class="kw">,</span></span>
+<span id="cb8-8"><a href="#cb8-8"></a>        neigh([<span class="dt">_</span>, snail, <span class="dt">_</span>]<span class="kw">,</span> [japanese, <span class="dt">_</span>, <span class="dt">_</span>]<span class="kw">,</span> <span class="dt">Houses</span>)<span class="kw">,</span></span>
+<span id="cb8-9"><a href="#cb8-9"></a>        neigh([<span class="dt">_</span>, snail, <span class="dt">_</span>]<span class="kw">,</span> [<span class="dt">_</span>, <span class="dt">_</span>, blue]<span class="kw">,</span> <span class="dt">Houses</span>)<span class="kw">,</span></span>
+<span id="cb8-10"><a href="#cb8-10"></a>        member([<span class="dt">ZebraOwner</span>, zebra, <span class="dt">_</span>]<span class="kw">,</span> <span class="dt">Houses</span>)<span class="kw">,</span></span>
+<span id="cb8-11"><a href="#cb8-11"></a>        member([<span class="dt">_</span>, <span class="dt">_</span>, green]<span class="kw">,</span> <span class="dt">Houses</span>)<span class="kw">.</span></span>
+<span id="cb8-12"><a href="#cb8-12"></a></span>
+<span id="cb8-13"><a href="#cb8-13"></a></span>
+<span id="cb8-14"><a href="#cb8-14"></a>zebra(<span class="dt">X</span>) <span class="kw">:-</span> zebraowner([<span class="dt">_</span>, <span class="dt">_</span>, <span class="dt">_</span>]<span class="kw">,</span> <span class="dt">X</span>)<span class="kw">.</span></span></code></pre></div>
 <pre><code>zebra(Owner).
 &gt; Owner = japanese</code></pre>
 </section><div><a class="slider-prev" href="#gl-logical-inference-and-constraint-based"></a><a class="slider-next" href="#ii.-influential-programming-languages"></a></div>
@@ -411,42 +414,42 @@ Source: <a href="https://www.periscopedata.com/blog/window-functions-by-example.
 <section id="fortran-the-first-widely-used-high-level-language" class="slide level1">
 <h1>FORTRAN: the first widely-used high-level language</h1>
 <p>FORmula TRANslator. John Backus, IBM, 1954-57</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode fortran"><code class="sourceCode fortran"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="co">C AREA OF A TRIANGLE - HERON'S FORMULA</span></a>
-<a class="sourceLine" id="cb10-2" data-line-number="2"><span class="co">C INPUT - CARD READER UNIT 5, INTEGER INPUT</span></a>
-<a class="sourceLine" id="cb10-3" data-line-number="3"><span class="co">C OUTPUT - LINE PRINTER UNIT 6, REAL OUTPUT</span></a>
-<a class="sourceLine" id="cb10-4" data-line-number="4"><span class="co">C INPUT ERROR DISPLAY ERROR OUTPUT CODE 1 IN JOB CONTROL LISTING</span></a>
-<a class="sourceLine" id="cb10-5" data-line-number="5">      <span class="dt">INTEGER</span> A,B,C</a>
-<a class="sourceLine" id="cb10-6" data-line-number="6">      <span class="fu">READ(</span><span class="dv">5</span>,<span class="dv">501</span><span class="fu">)</span> A,B,C</a>
-<a class="sourceLine" id="cb10-7" data-line-number="7">  <span class="dv">501</span> <span class="fu">FORMAT(</span>3I5<span class="fu">)</span></a>
-<a class="sourceLine" id="cb10-8" data-line-number="8">      <span class="kw">IF</span>(A<span class="op">.EQ.</span><span class="dv">0</span> <span class="op">.OR.</span> B<span class="op">.EQ.</span><span class="dv">0</span> <span class="op">.OR.</span> C<span class="op">.EQ.</span><span class="dv">0</span>) <span class="kw">STOP</span> <span class="dv">1</span></a>
-<a class="sourceLine" id="cb10-9" data-line-number="9">      S <span class="kw">=</span> (A <span class="kw">+</span> B <span class="kw">+</span> C) <span class="kw">/</span> <span class="fl">2.0</span></a>
-<a class="sourceLine" id="cb10-10" data-line-number="10">      AREA <span class="kw">=</span> <span class="bu">SQRT</span>( S <span class="kw">*</span> (S <span class="kw">-</span> A) <span class="kw">*</span> (S <span class="kw">-</span> B) <span class="kw">*</span> (S <span class="kw">-</span> C) )</a>
-<a class="sourceLine" id="cb10-11" data-line-number="11">      <span class="fu">WRITE(</span><span class="dv">6</span>,<span class="dv">601</span><span class="fu">)</span> A,B,C,AREA</a>
-<a class="sourceLine" id="cb10-12" data-line-number="12">  <span class="dv">601</span> <span class="fu">FORMAT(</span>4H A<span class="kw">=</span> ,I5,5H  B<span class="kw">=</span> ,I5,5H  C<span class="kw">=</span> ,I5,8H  AREA<span class="kw">=</span> ,F10.2,12HSQUARE UNITS<span class="fu">)</span></a>
-<a class="sourceLine" id="cb10-13" data-line-number="13">      <span class="kw">STOP</span></a>
-<a class="sourceLine" id="cb10-14" data-line-number="14">      <span class="kw">END</span></a></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode fortran"><code class="sourceCode fortran"><span id="cb10-1"><a href="#cb10-1"></a><span class="co">C AREA OF A TRIANGLE - HERON'S FORMULA</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a><span class="co">C INPUT - CARD READER UNIT 5, INTEGER INPUT</span></span>
+<span id="cb10-3"><a href="#cb10-3"></a><span class="co">C OUTPUT - LINE PRINTER UNIT 6, REAL OUTPUT</span></span>
+<span id="cb10-4"><a href="#cb10-4"></a><span class="co">C INPUT ERROR DISPLAY ERROR OUTPUT CODE 1 IN JOB CONTROL LISTING</span></span>
+<span id="cb10-5"><a href="#cb10-5"></a>      <span class="dt">INTEGER</span> A,B,C</span>
+<span id="cb10-6"><a href="#cb10-6"></a>      <span class="fu">READ(</span><span class="dv">5</span>,<span class="dv">501</span><span class="fu">)</span> A,B,C</span>
+<span id="cb10-7"><a href="#cb10-7"></a>  <span class="dv">501</span> <span class="fu">FORMAT(</span>3I5<span class="fu">)</span></span>
+<span id="cb10-8"><a href="#cb10-8"></a>      <span class="kw">IF</span>(A<span class="op">.EQ.</span><span class="dv">0</span> <span class="op">.OR.</span> B<span class="op">.EQ.</span><span class="dv">0</span> <span class="op">.OR.</span> C<span class="op">.EQ.</span><span class="dv">0</span>) <span class="kw">STOP</span> <span class="dv">1</span></span>
+<span id="cb10-9"><a href="#cb10-9"></a>      S <span class="kw">=</span> (A <span class="kw">+</span> B <span class="kw">+</span> C) <span class="kw">/</span> <span class="fl">2.0</span></span>
+<span id="cb10-10"><a href="#cb10-10"></a>      AREA <span class="kw">=</span> <span class="bu">SQRT</span>( S <span class="kw">*</span> (S <span class="kw">-</span> A) <span class="kw">*</span> (S <span class="kw">-</span> B) <span class="kw">*</span> (S <span class="kw">-</span> C) )</span>
+<span id="cb10-11"><a href="#cb10-11"></a>      <span class="fu">WRITE(</span><span class="dv">6</span>,<span class="dv">601</span><span class="fu">)</span> A,B,C,AREA</span>
+<span id="cb10-12"><a href="#cb10-12"></a>  <span class="dv">601</span> <span class="fu">FORMAT(</span>4H A<span class="kw">=</span> ,I5,5H  B<span class="kw">=</span> ,I5,5H  C<span class="kw">=</span> ,I5,8H  AREA<span class="kw">=</span> ,F10.2,12HSQUARE UNITS<span class="fu">)</span></span>
+<span id="cb10-13"><a href="#cb10-13"></a>      <span class="kw">STOP</span></span>
+<span id="cb10-14"><a href="#cb10-14"></a>      <span class="kw">END</span></span></code></pre></div>
 </section><div><a class="slider-prev" href="#ii.-influential-programming-languages"></a><a class="slider-next" href="#fortran-is-alive"></a></div>
 <section id="fortran-is-alive" class="slide level1">
 <h1>Fortran is alive</h1>
 <p>Fortran 2018 was released on November 28, 2018. It specifies interoperability with C programming language and parallel computing intrinsics.</p>
 <p><a href="http://www.fortran.bcs.org/2012/nm_talk.pdf" class="uri">http://www.fortran.bcs.org/2012/nm_talk.pdf</a></p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode fortran"><code class="sourceCode fortran"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="kw">do</span> i <span class="kw">=</span> this_image(), limit, num_images()</a>
-<a class="sourceLine" id="cb11-2" data-line-number="2">    pi <span class="kw">=</span> pi <span class="kw">+</span> (<span class="kw">-</span><span class="dv">1</span>)<span class="kw">**</span>(i<span class="kw">+</span><span class="dv">1</span>) <span class="kw">/</span> <span class="bu">real</span>( <span class="dv">2</span><span class="kw">*</span>i<span class="kw">-</span><span class="dv">1</span>, <span class="fu">kind</span><span class="kw">=</span>rk )</a>
-<a class="sourceLine" id="cb11-3" data-line-number="3"><span class="kw">end do</span></a>
-<a class="sourceLine" id="cb11-4" data-line-number="4">    sync <span class="fu">all</span> <span class="co">! global barrier</span></a>
-<a class="sourceLine" id="cb11-5" data-line-number="5"><span class="kw">if</span> (img <span class="op">.eq.</span> <span class="dv">1</span>) <span class="kw">then</span></a>
-<a class="sourceLine" id="cb11-6" data-line-number="6">    <span class="kw">do</span> i <span class="kw">=</span> <span class="dv">2</span>, nimgs</a>
-<a class="sourceLine" id="cb11-7" data-line-number="7">        pi <span class="kw">=</span> pi <span class="kw">+</span> pi<span class="kw">[</span>i<span class="kw">]</span></a>
-<a class="sourceLine" id="cb11-8" data-line-number="8">    <span class="kw">end do</span></a>
-<a class="sourceLine" id="cb11-9" data-line-number="9">    pi <span class="kw">=</span> pi <span class="kw">*</span> <span class="fl">4.0_rk</span></a>
-<a class="sourceLine" id="cb11-10" data-line-number="10"><span class="kw">end if</span></a></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode fortran"><code class="sourceCode fortran"><span id="cb11-1"><a href="#cb11-1"></a><span class="kw">do</span> i <span class="kw">=</span> this_image(), limit, num_images()</span>
+<span id="cb11-2"><a href="#cb11-2"></a>    pi <span class="kw">=</span> pi <span class="kw">+</span> (<span class="kw">-</span><span class="dv">1</span>)<span class="kw">**</span>(i<span class="kw">+</span><span class="dv">1</span>) <span class="kw">/</span> <span class="bu">real</span>( <span class="dv">2</span><span class="kw">*</span>i<span class="kw">-</span><span class="dv">1</span>, <span class="fu">kind</span><span class="kw">=</span>rk )</span>
+<span id="cb11-3"><a href="#cb11-3"></a><span class="kw">end do</span></span>
+<span id="cb11-4"><a href="#cb11-4"></a>    sync <span class="fu">all</span> <span class="co">! global barrier</span></span>
+<span id="cb11-5"><a href="#cb11-5"></a><span class="kw">if</span> (img <span class="op">.eq.</span> <span class="dv">1</span>) <span class="kw">then</span></span>
+<span id="cb11-6"><a href="#cb11-6"></a>    <span class="kw">do</span> i <span class="kw">=</span> <span class="dv">2</span>, nimgs</span>
+<span id="cb11-7"><a href="#cb11-7"></a>        pi <span class="kw">=</span> pi <span class="kw">+</span> pi<span class="kw">[</span>i<span class="kw">]</span></span>
+<span id="cb11-8"><a href="#cb11-8"></a>    <span class="kw">end do</span></span>
+<span id="cb11-9"><a href="#cb11-9"></a>    pi <span class="kw">=</span> pi <span class="kw">*</span> <span class="fl">4.0_rk</span></span>
+<span id="cb11-10"><a href="#cb11-10"></a><span class="kw">end if</span></span></code></pre></div>
 <p>Equivalent to MPI code:</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode fortran"><code class="sourceCode fortran"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="kw">do</span> i <span class="kw">=</span> rank<span class="kw">+</span><span class="dv">1</span>, limit, nprocs</a>
-<a class="sourceLine" id="cb12-2" data-line-number="2">    pi <span class="kw">=</span> pi <span class="kw">+</span> (<span class="kw">-</span><span class="dv">1</span>)<span class="kw">**</span>(i<span class="kw">+</span><span class="dv">1</span>) <span class="kw">/</span> <span class="bu">real</span>( <span class="dv">2</span><span class="kw">*</span>i<span class="kw">-</span><span class="dv">1</span>, <span class="fu">kind</span><span class="kw">=</span>rk )</a>
-<a class="sourceLine" id="cb12-3" data-line-number="3"><span class="kw">end do</span></a>
-<a class="sourceLine" id="cb12-4" data-line-number="4"><span class="kw">call</span> MPI_REDUCE( pi, picalc, <span class="dv">1</span>, MPI_DOUBLE_PRECISION, <span class="kw">&amp;</span></a>
-<a class="sourceLine" id="cb12-5" data-line-number="5">    MPI_SUM, <span class="dv">0</span>, MPI_COMM_WORLD, ierr )</a>
-<a class="sourceLine" id="cb12-6" data-line-number="6">picalc <span class="kw">=</span> picalc <span class="kw">*</span> <span class="fl">4.0_rk</span></a></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode fortran"><code class="sourceCode fortran"><span id="cb12-1"><a href="#cb12-1"></a><span class="kw">do</span> i <span class="kw">=</span> rank<span class="kw">+</span><span class="dv">1</span>, limit, nprocs</span>
+<span id="cb12-2"><a href="#cb12-2"></a>    pi <span class="kw">=</span> pi <span class="kw">+</span> (<span class="kw">-</span><span class="dv">1</span>)<span class="kw">**</span>(i<span class="kw">+</span><span class="dv">1</span>) <span class="kw">/</span> <span class="bu">real</span>( <span class="dv">2</span><span class="kw">*</span>i<span class="kw">-</span><span class="dv">1</span>, <span class="fu">kind</span><span class="kw">=</span>rk )</span>
+<span id="cb12-3"><a href="#cb12-3"></a><span class="kw">end do</span></span>
+<span id="cb12-4"><a href="#cb12-4"></a><span class="kw">call</span> MPI_REDUCE( pi, picalc, <span class="dv">1</span>, MPI_DOUBLE_PRECISION, <span class="kw">&amp;</span></span>
+<span id="cb12-5"><a href="#cb12-5"></a>    MPI_SUM, <span class="dv">0</span>, MPI_COMM_WORLD, ierr )</span>
+<span id="cb12-6"><a href="#cb12-6"></a>picalc <span class="kw">=</span> picalc <span class="kw">*</span> <span class="fl">4.0_rk</span></span></code></pre></div>
 </section><div><a class="slider-prev" href="#fortran-the-first-widely-used-high-level-language"></a><a class="slider-next" href="#cobol-common-business-oriented-language"></a></div>
 <section id="cobol-common-business-oriented-language" class="slide level1">
 <h1>COBOL: COmmon Business-Oriented Language</h1>
