@@ -22,9 +22,9 @@ Course topics include:
 **26.02.2020** Introduction. History of programming languages. 
 [presentation - html](presentations/01-Introduction.html)
 
-<!--
-**04.03.2019** Classification of programming languages. 
+**04.03.2020** Classification of programming languages. 
 [presentation - html](presentations/02-Classification.html) 
+<!--
 
 **11.03.2019** Specification of programming language. Syntax. 
 [presentation - html](presentations/03-Specification-Syntax.html) 
