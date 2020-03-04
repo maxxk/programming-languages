@@ -24,8 +24,8 @@ Course topics include:
 
 **04.03.2020** Classification of programming languages. 
 [presentation - html](presentations/02-Classification.html) 
-<!--
 
+<!--
 **11.03.2019** Specification of programming language. Syntax. 
 [presentation - html](presentations/03-Specification-Syntax.html) 
 
@@ -56,7 +56,7 @@ Course topics include:
 **13.05.2019** Domain-specific languages. Intermediate representations
 [presentation - html](presentations/12-IR-DSL.html)
 
-**20.05.2019** Exam ([program](presentations/program.html))
+**20.05.2019** Exam ([program](presentations/program.html))-->
 <!-- 
 **24.05.2019** Possible second date for exam (by appointment)
 -->
