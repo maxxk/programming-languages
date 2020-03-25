@@ -283,7 +283,7 @@ fn g() -> u32 {
 
 
 # Static semantics representation
-Let us return to the topic of formal mechanized analysis of programs.
+Returning to the topic of formal mechanized analysis of programs.
 ```{.graphviz .dot}
 digraph  G {
   graph [rankdir="LR"];
@@ -384,7 +384,7 @@ N.S. Papaspyrou. Formal semantics of the C Programming Language (PhD thesis).
 # Static semantics
 The static semantics is the description of the structural constraints (context-sensitive aspects) that cannot be adequately described by context-free grammars.
 
-Source: http://www.emu.edu.tr/aelci/Courses/D-318/D-318-Files/plbook/def.htm
+Source: Anthony Aaby. Introduction to Programming Languages. 1996. Online publication.
 
 In addition to variable binding, static semantics includes the specification of possible values and valid literals, and also the type system (for strongly-typed programming languages).
 

@@ -25,17 +25,16 @@ Course topics include:
 **04.03.2020** Classification of programming languages. 
 [presentation - html](presentations/02-Classification.html) 
 
-
 **11.03.2020** Specification of programming language. Syntax. 
 [presentation - html](presentations/03-Specification-Syntax.html) 
 
-**18.03.2019** Formal syntax analysis. Syntax extensions. 
+**18.03.2020** Formal syntax analysis. Syntax extensions. 
 [presentation - html](presentations/04-Macros-Parsing.html) 
 
-<!--
-**25.03.2019** Static semantics. Naming, Bindings and Scope. 
+**25.03.2020** Static semantics. Naming, Bindings and Scope. 
 [presentation - html](presentations/05-Static-Semantics.html)
 
+<!--
 **01.04.2019** Typing.
 [presentation - html](presentations/06-Typing.html) 
 
