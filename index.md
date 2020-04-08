@@ -34,9 +34,10 @@ Course topics include:
 **25.03.2020** Static semantics. Naming, Bindings and Scope. 
 [presentation - html](presentations/05-Static-Semantics.html)
 
-<!--
-**01.04.2019** Typing.
+**08.04.2020** Typing.
 [presentation - html](presentations/06-Typing.html) 
+
+<hr>
 
 **08.04.2019** Operational semantics 
 [presentation - html](presentations/07-Operational-Semantics.html)
