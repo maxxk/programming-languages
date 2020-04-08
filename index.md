@@ -57,7 +57,7 @@ Course topics include:
 **13.05.2019** Domain-specific languages. Intermediate representations
 [presentation - html](presentations/12-IR-DSL.html)
 
-**20.05.2019** Exam ([program](presentations/program.html))-->
+**20.05.2019** Exam ([program](presentations/program.html))
 <!-- 
 **24.05.2019** Possible second date for exam (by appointment)
 -->
