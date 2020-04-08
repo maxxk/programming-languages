@@ -38,6 +38,8 @@ maxim.krivchikov@gmail.com
 
 > B. Pierce. Types and Programming Languages. 2002.
 
+We can say that type system is a (usually) decidable approximation of programming language dynamic semantics.
+
 # Typing
 > The role of type system is to impose constraints on the formation of phrases that are sensitive to the context in which they occur.
 
@@ -48,7 +50,7 @@ In practice, typing is usually specified by means of the formal inference system
 - Γ, x : a ⊦ y : b
 
 # Simply Typed Lambda Calculus {.inference}
-Type: τ ≡ *b* | τ_1 → τ_2, 
+Type: τ ≡ *b* | τ₁ → τ₂, 
 
 *b* is an element of the set of basic types.
 
@@ -74,7 +76,7 @@ Typing rules:
 
 Derivation — tree of rule applications which starts from empty context and ends in typing derivation for required expression.
 
-# Example from Harper's Practical Foundations... {.inference}
+# Example from Harper's «Practical Foundations...» {.inference}
 Type: τ ≡ num | str
 
 Expression: e ≡ x *(variable)* | n | <div class="ib">s *(number and string literals)*</div> | <div class="ib">e + f  *(addition)*</div> | <div class="ib">e ^ f *(concatenation)*</div> | <div class="ib">|e| *(length)*</div> | <div class="ib">let x be e in f *(definition)*</div>
@@ -169,9 +171,9 @@ If typing rules are complex, such principles are difficult to state and prove. B
 
 **Exchange: ** (independent typing judgements may change order in context)
 
-  Γ_1, **x : A,** Γ_2, *y : B,* Γ_3 ⊦ Σ
+  Γ₁, **x : A,** Γ₂, *y : B,* Γ₃ ⊦ Σ
  ---------------------------------------
-  Γ_1, *y : B,* Γ_2, **x : A,** Γ_3 ⊦ Σ
+  Γ₁, *y : B,* Γ₂, **x : A,** Γ₃ ⊦ Σ
 
 
 **Substitution: ** (expressions with the same type may be substituted) 
@@ -242,6 +244,10 @@ More powerful lifetime tracking techniques are required in practice.
 Patina: A Formalization of the Rust Programming Language
 ftp://ftp.cs.washington.edu/tr/2015/03/UW-CSE-15-03-02.pdf
 
+RustBelt: Securing the Foundations of the Rust Programming Language
+https://dl.acm.org/doi/pdf/10.1145/3158154
+https://plv.mpi-sws.org/rustbelt/popl18/appendix.pdf
+
 # Type inference
 In some languages it is possible to leave "holes" in place of type specifiers. Type checker tries to fill these holes in process of **type inference (type reconstruction).**
 
@@ -279,6 +285,10 @@ Monotype: ordinary type, polytype has some type variables: ∀α.(Set α) → in
 ![](images/83c9167b8fdcefe88fce22e0b1761460.png)
 
 Sample implementations: https://github.com/tomprimozic/type-systems
+
+http://dev.stephendiehl.com/fun/006_hindley_milner.html
+
+http://reasonableapproximation.net/2019/05/05/hindley-milner.html
 
 # Algorithm M
 "Algorithm M" is a top-down algorithm for type inference. It stops earlier than W if the input term is ill-typed and in some cases yields better type errors.
@@ -321,7 +331,7 @@ g : [ b : String | τ ] → String
 ```
 
 # Dynamic type checking  
-Dynamic type checking is an implementation detail (for strongly-typed programming languages).
+Dynamic type checking can be an implementation detail (for strongly-typed programming languages).
 
 For example, GHC compiler for Haskell programming language has a flag 
 `-fdefer-type-errors`:
