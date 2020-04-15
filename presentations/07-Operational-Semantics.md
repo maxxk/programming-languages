@@ -95,7 +95,7 @@ Small-step operational semantics (Structural Operational Semantics, SOS): step-b
 
 <div class="smaller">Gordon D. Plotkin. A Structural Approach to Operational Semantics. (1981) Tech. Rep. DAIMI FN-19, Computer Science Department, Aarhus University, Aarhus, Denmark. (Reprinted with corrections in J. Log. Algebr. Program. 60-61: 17-139 (2004)</div>
 
-Big-step operational semantics (natural semantics): program execution is described in terms of recursive evaluation of subphrases of a program. Each nontrivial syntactic domain (subset of abstract syntax tree constructors) has some specific evaluation relation.
+Big-step operational semantics (natural semantics): program execution is described in terms of recursive evaluation of subphrases of a program. Each nontrivial syntactic domain (subset of abstract syntax tree constructors) has its specific evaluation relation.
 
 # Structural operational semantics
 ## Set-theoretic abstract machine model
@@ -112,7 +112,7 @@ $⇒^*$ — reflexive transitive closure of ⇒. Sequence of transitions cf $⇒
 
 Configuration cf is __reducible__ if there is some cf' such that cf ⇒ cf', otherwise cf is __irreducible__.
 
-Transition relation $⇒$ is __deterministic__ if for every cf there is exactly one $cf'$, otherwise ⇒ is __nondeterministic__.
+Transition relation $⇒$ is __deterministic__ if for every cf there is exactly one cf', otherwise ⇒ is __nondeterministic__.
 
 # Structural operational semantics
 Structural operational semantics for language L is five-tuple S = 〈 CF, ⇒, FC, IF, OF 〉
@@ -140,11 +140,9 @@ $beh_{det}$ 〈 P, I 〉 | IF 〈 P, I 〉 $⇒^∞$ = ∞
 
 
 # Non-deterministic behavior
-$\mathcal{P}(A)$ — powerset of $A$.
+𝒫 (A) — powerset of $A$ (set of all subsets of A).
 
-$$
-beh : (\mathrm{Prog} × \mathrm{Inputs}) → \mathcal{P}(\mathrm{Outcome})
-$$
+beh : (Prog × Inputs) → 𝒫 (Outcome)
 
 o ∈ beh( 〈P, I〉 ) **if** o = AnsExp ↦ Outcome (OF cf) **and** IF 〈P, I〉 $⇒^*$ cf ∈ FC 
 
@@ -162,7 +160,7 @@ Usually relations on complex domains are specified in terms of **formal inferenc
 
 $antecedents = ⊘$ ⇒ rule is called **axiom**, otherwise **progress rule**.
 
-Example axiom for stack-based language (placing constant on stack; 
+Example axioms for stack-based language (placing constant on stack; 
 configuration state = 〈 command sequence, stack 〉):
 
 〈 N . Q, S〉 ⇒ 〈 Q, N . S 〉 [num]
@@ -186,7 +184,7 @@ If cf is a configuration in which first command in sequence is constant, then th
 ![](images/evaluation-contexts.png)
 
 # Big-step operational semantics
-Big-step operational semantics (natural semantics): program execution is described in terms of recursive evaluation of subphrases of a program. Each nontrivial syntactic domain (subset of abstract syntax tree constructors) has some specific evaluation relation.
+Big-step operational semantics (natural semantics): program execution is described in terms of recursive evaluation of subphrases of a program. Each nontrivial syntactic domain (subset of abstract syntax tree constructors) has its specific evaluation relation.
 
 E.g. $→_{NE}$ for numerical expressions and $→_{Prog}$ for programs.
 
