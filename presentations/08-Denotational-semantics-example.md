@@ -27,7 +27,7 @@ https://maxxk.github.io/programming-languages/
 
 maxim.krivchikov@gmail.com
 
-# Some non-trivial parts of programming language semantics
+# Non-trivial parts of programming language semantics
 1. Possible non-termination. Some languages allow possibly-infinite loops. Languages without non-termination have rather simple semantics.
 
 **Operational semantics:** sequence of steps form the directed graph (execution trace), non-termination is represented as a loop in graph.
@@ -160,7 +160,7 @@ $⟦ e_1 \; aop \; e_2 ⟧_{\text{AE}} =⟦op⟧_{\text{AE-aop}} (⟦ e_1 ⟧_{\
 # Naive denotational semantics
 
 ## Boolean expression semantics
-abop — arithmetical-boolean operator, bbop — boolean-boolean operator.
+abop — arithmetical→boolean operator, bbop — boolean→boolean operator.
 
 $⟦ · ⟧_{\text{BE}} : \text{BooleanExpression} → \text{Bool}$
 

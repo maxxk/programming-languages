@@ -8,26 +8,27 @@
   <link rel="stylesheet" href="slider.css">
   <style type="text/css">code{white-space: pre;}</style>
   <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(title);
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -36,9 +37,9 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {  }
+  {   }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -105,9 +106,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </style>
 <p><a href="https://maxxk.github.io/programming-languages/" class="uri">https://maxxk.github.io/programming-languages/</a></p>
 <p><a href="mailto:maxim.krivchikov@gmail.com" class="email">maxim.krivchikov@gmail.com</a></p>
-</section><div><a class="slider-prev"></a><a class="slider-next" href="#some-non-trivial-parts-of-programming-language-semantics"></a></div>
-<section id="some-non-trivial-parts-of-programming-language-semantics" class="slide level1">
-<h1>Some non-trivial parts of programming language semantics</h1>
+</section><div><a class="slider-prev"></a><a class="slider-next" href="#non-trivial-parts-of-programming-language-semantics"></a></div>
+<section id="non-trivial-parts-of-programming-language-semantics" class="slide level1">
+<h1>Non-trivial parts of programming language semantics</h1>
 <ol type="1">
 <li class="fragment">Possible non-termination. Some languages allow possibly-infinite loops. Languages without non-termination have rather simple semantics.</li>
 </ol>
@@ -134,7 +135,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="fragment">Теория A-пространств // Алгебра и логика. — 1973. — T. 12, No 4. — C. 369–416.</li>
 </ul>
 </div>
-</section><div><a class="slider-prev" href="#some-non-trivial-parts-of-programming-language-semantics"></a><a class="slider-next" href="#denotational-semantics-1"></a></div>
+</section><div><a class="slider-prev" href="#non-trivial-parts-of-programming-language-semantics"></a><a class="slider-next" href="#denotational-semantics-1"></a></div>
 <section id="denotational-semantics-1" class="slide level1">
 <h1>Denotational semantics</h1>
 <p>The core idea of denotational semantics is compositionality. «The meaning of the whole is composed out of the meaning of the parts». Main parts:</p>
@@ -221,7 +222,7 @@ return divisor</code></pre>
 <section id="naive-denotational-semantics-1" class="slide level1">
 <h1>Naive denotational semantics</h1>
 <h2 id="boolean-expression-semantics">Boolean expression semantics</h2>
-<p>abop — arithmetical-boolean operator, bbop — boolean-boolean operator.</p>
+<p>abop — arithmetical→boolean operator, bbop — boolean→boolean operator.</p>
 <p><span class="math inline">⟦ · ⟧<sub>BE</sub> : BooleanExpression → Bool</span></p>
 <p><span class="math inline">⟦<em>e</em><sub>1</sub> <em>a</em><em>b</em><em>o</em><em>p</em> <em>e</em><sub>2</sub>⟧<sub>BE</sub> = ⟦<em>a</em><em>b</em><em>o</em><em>p</em>⟧(⟦<em>e</em><sub>1</sub>⟧<sub>AE</sub>, ⟦<em>e</em><sub>2</sub>⟧<sub>AE</sub>)</span></p>
 <p><span class="math inline">⟦<code>!</code><em>b</em>⟧<sub>BE</sub> = ¬⟦<em>b</em>⟧</span></p>
@@ -325,20 +326,20 @@ return divisor</code></pre>
 <section id="fortran-subset-syntax" class="slide level1">
 <h1>Fortran subset syntax</h1>
 <h2 id="header-files">Header files</h2>
-<div class="sourceCode" id="cb4"><pre class="sourceCode fortran"><code class="sourceCode fortran"><a class="sourceLine" id="cb4-1" title="1"><span class="dt">CHARACTER*1</span> G03th_z1</a>
-<a class="sourceLine" id="cb4-2" title="2"><span class="kw">COMMON/</span>global03th_z1<span class="kw">/</span>G03th_z1(<span class="dv">0</span>:<span class="dv">819199</span>)</a>
-<a class="sourceLine" id="cb4-3" title="3"><span class="dt">CHARACTER*1</span> G14</a>
-<a class="sourceLine" id="cb4-4" title="4"><span class="kw">COMMON/</span>global14<span class="kw">/</span>G14(<span class="dv">0</span>:<span class="dv">3276799</span>)</a>
-<a class="sourceLine" id="cb4-5" title="5"><span class="dt">CHARACTER*1</span> G04th_z1</a>
-<a class="sourceLine" id="cb4-6" title="6"><span class="kw">COMMON/</span>global04th_z1<span class="kw">/</span>G04th_z1(<span class="dv">0</span>:<span class="dv">819199</span>)</a>
-<a class="sourceLine" id="cb4-7" title="7"><span class="dt">CHARACTER*1</span> G15_z1</a>
-<a class="sourceLine" id="cb4-8" title="8"><span class="kw">COMMON/</span>global15_z1<span class="kw">/</span>G15_z1(<span class="dv">0</span>:<span class="dv">1638399</span>)</a>
-<a class="sourceLine" id="cb4-9" title="9"><span class="dt">REAL*8</span>    chkfim</a>
-<a class="sourceLine" id="cb4-10" title="10"><span class="kw">EQUIVALENCE</span> (chkfim,G14(<span class="dv">46632</span>))</a>
-<a class="sourceLine" id="cb4-11" title="11"><span class="dt">LOGICAL</span><span class="kw">*</span><span class="dv">1</span> th_pumpcav_<span class="dv">1</span>(<span class="dv">4</span>) </a>
-<a class="sourceLine" id="cb4-12" title="12"><span class="kw">EQUIVALENCE</span> (th_pumpcav_<span class="dv">1</span>,G03th_z1(<span class="dv">78992</span>))</a>
-<a class="sourceLine" id="cb4-13" title="13"><span class="dt">REAL*8</span>    thdfpp1_<span class="dv">1</span>(<span class="dv">563</span>,<span class="dv">2</span>) </a>
-<a class="sourceLine" id="cb4-14" title="14"><span class="kw">EQUIVALENCE</span> (thdfpp1_<span class="dv">1</span>,G15_z1(<span class="dv">686920</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode fortran"><code class="sourceCode fortran"><span id="cb4-1"><a href="#cb4-1"></a><span class="dt">CHARACTER*1</span> G03th_z1</span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="kw">COMMON/</span>global03th_z1<span class="kw">/</span>G03th_z1(<span class="dv">0</span>:<span class="dv">819199</span>)</span>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="dt">CHARACTER*1</span> G14</span>
+<span id="cb4-4"><a href="#cb4-4"></a><span class="kw">COMMON/</span>global14<span class="kw">/</span>G14(<span class="dv">0</span>:<span class="dv">3276799</span>)</span>
+<span id="cb4-5"><a href="#cb4-5"></a><span class="dt">CHARACTER*1</span> G04th_z1</span>
+<span id="cb4-6"><a href="#cb4-6"></a><span class="kw">COMMON/</span>global04th_z1<span class="kw">/</span>G04th_z1(<span class="dv">0</span>:<span class="dv">819199</span>)</span>
+<span id="cb4-7"><a href="#cb4-7"></a><span class="dt">CHARACTER*1</span> G15_z1</span>
+<span id="cb4-8"><a href="#cb4-8"></a><span class="kw">COMMON/</span>global15_z1<span class="kw">/</span>G15_z1(<span class="dv">0</span>:<span class="dv">1638399</span>)</span>
+<span id="cb4-9"><a href="#cb4-9"></a><span class="dt">REAL*8</span>    chkfim</span>
+<span id="cb4-10"><a href="#cb4-10"></a><span class="kw">EQUIVALENCE</span> (chkfim,G14(<span class="dv">46632</span>))</span>
+<span id="cb4-11"><a href="#cb4-11"></a><span class="dt">LOGICAL</span><span class="kw">*</span><span class="dv">1</span> th_pumpcav_<span class="dv">1</span>(<span class="dv">4</span>) </span>
+<span id="cb4-12"><a href="#cb4-12"></a><span class="kw">EQUIVALENCE</span> (th_pumpcav_<span class="dv">1</span>,G03th_z1(<span class="dv">78992</span>))</span>
+<span id="cb4-13"><a href="#cb4-13"></a><span class="dt">REAL*8</span>    thdfpp1_<span class="dv">1</span>(<span class="dv">563</span>,<span class="dv">2</span>) </span>
+<span id="cb4-14"><a href="#cb4-14"></a><span class="kw">EQUIVALENCE</span> (thdfpp1_<span class="dv">1</span>,G15_z1(<span class="dv">686920</span>))</span></code></pre></div>
 </section><div><a class="slider-prev" href="#previous-work"></a><a class="slider-next" href="#fortran-subset-syntax-1"></a></div>
 <section id="fortran-subset-syntax-1" class="slide level1">
 <h1>Fortran subset syntax</h1>
@@ -364,35 +365,35 @@ return divisor</code></pre>
 <section id="fortran-subset-syntax-2" class="slide level1">
 <h1>Fortran subset syntax</h1>
 <h2 id="source-code-files">Source code files</h2>
-<div class="sourceCode" id="cb6"><pre class="sourceCode fortran"><code class="sourceCode fortran"><a class="sourceLine" id="cb6-1" title="1"><span class="kw">CALL</span> ysfpp5t( <span class="dv">202</span>, <span class="dv">1</span>, fwpflowppv_<span class="dv">1</span>, fwfpp1_<span class="dv">1</span>, fwfpp2_<span class="dv">1</span>,</a>
-<a class="sourceLine" id="cb6-2" title="2">     fwdfpp1_<span class="dv">1</span>, fwdfpp2_<span class="dv">1</span>, fwdfpp1_fi_<span class="dv">1</span>, fwdfpp2_fi_<span class="dv">1</span>, </a>
-<a class="sourceLine" id="cb6-3" title="3">     y1mtmp(<span class="dv">862</span> ), y1mtmp( <span class="dv">863</span> ), <span class="kw">-</span> y1mtmp( <span class="dv">1054</span> ) <span class="kw">*</span> fwdtt_<span class="dv">1</span>, </a>
-<a class="sourceLine" id="cb6-4" title="4">     <span class="kw">-</span> y1mtmp( <span class="dv">1055</span> ) <span class="kw">*</span> fwdtt_<span class="dv">1</span>, fwdvgpnt_<span class="dv">1</span>( <span class="dv">13</span> ), fwdvgpnt_<span class="dv">1</span>( <span class="dv">14</span> ),</a>
-<a class="sourceLine" id="cb6-5" title="5">     fwdlpnt_<span class="dv">1</span>( <span class="dv">13</span> ), fwdlpnt_<span class="dv">1</span>( <span class="dv">14</span> ), fwfipp1_<span class="dv">1</span>( <span class="dv">1</span> ), fwfipp2_<span class="dv">1</span>(<span class="dv">1</span> ), </a>
-<a class="sourceLine" id="cb6-6" title="6">     fwfpntpnt1_<span class="dv">1</span>( <span class="dv">1</span> ), fwfpntpnt2_<span class="dv">1</span>( <span class="dv">1</span> ), fwpflowpp_<span class="dv">1</span>,</a>
-<a class="sourceLine" id="cb6-7" title="7">     fwzpp_<span class="dv">1</span>( <span class="dv">1</span> ), fwdtt_<span class="dv">1</span>, kf0 )</a>
-<a class="sourceLine" id="cb6-8" title="8"></a>
-<a class="sourceLine" id="cb6-9" title="9"><span class="kw">CALL</span> ysfpp5t( <span class="dv">202</span>, <span class="dv">2</span>, fwpflowppv_<span class="dv">1</span>, fwfpp1_<span class="dv">1</span>, fwfpp2_<span class="dv">1</span>,</a>
-<a class="sourceLine" id="cb6-10" title="10">     fwdfpp1_<span class="dv">1</span>, fwdfpp2_<span class="dv">1</span>, fwdfpp1_fi_<span class="dv">1</span>, fwdfpp2_fi_<span class="dv">1</span>, </a>
-<a class="sourceLine" id="cb6-11" title="11">     y1mtmp(     <span class="dv">863</span> ), y1mtmp( <span class="dv">864</span> ), <span class="kw">-</span> y1mtmp( <span class="dv">1055</span> ) <span class="kw">*</span> fwdtt_<span class="dv">1</span>, </a>
-<a class="sourceLine" id="cb6-12" title="12">     <span class="kw">-</span> y1mtmp(     <span class="dv">1056</span> ) <span class="kw">*</span> fwdtt_<span class="dv">1</span>, fwdvgpnt_<span class="dv">1</span>( <span class="dv">14</span> ), fwdvgpnt_<span class="dv">1</span>( <span class="dv">15</span> ),     </a>
-<a class="sourceLine" id="cb6-13" title="13">     fwdlpnt_<span class="dv">1</span>( <span class="dv">14</span> ), fwdlpnt_<span class="dv">1</span>( <span class="dv">15</span> ), fwfipp1_<span class="dv">1</span>( <span class="dv">2</span> ), fwfipp2_<span class="dv">1</span>(     <span class="dv">2</span> ), </a>
-<a class="sourceLine" id="cb6-14" title="14">     fwfpntpnt1_<span class="dv">1</span>( <span class="dv">2</span> ), fwfpntpnt2_<span class="dv">1</span>( <span class="dv">2</span> ), fwpflowpp_<span class="dv">1</span>,     </a>
-<a class="sourceLine" id="cb6-15" title="15">     fwzpp_<span class="dv">1</span>( <span class="dv">2</span> ), fwdtt_<span class="dv">1</span>, kf0 )</a>
-<a class="sourceLine" id="cb6-16" title="16"></a>
-<a class="sourceLine" id="cb6-17" title="17"><span class="kw">CALL</span> ysfpp5t( <span class="dv">202</span>, <span class="dv">3</span>, fwpflowppv_<span class="dv">1</span>, fwfpp1_<span class="dv">1</span>, fwfpp2_<span class="dv">1</span>,</a>
-<a class="sourceLine" id="cb6-18" title="18">     fwdfpp1_<span class="dv">1</span>, fwdfpp2_<span class="dv">1</span>, fwdfpp1_fi_<span class="dv">1</span>, fwdfpp2_fi_<span class="dv">1</span>, </a>
-<a class="sourceLine" id="cb6-19" title="19">     y1mtmp(     <span class="dv">850</span> ), y1mtmp( <span class="dv">851</span> ), <span class="kw">-</span> y1mtmp( <span class="dv">1042</span> ) <span class="kw">*</span> fwdtt_<span class="dv">1</span>, </a>
-<a class="sourceLine" id="cb6-20" title="20">     <span class="kw">-</span> y1mtmp(     <span class="dv">1043</span> ) <span class="kw">*</span> fwdtt_<span class="dv">1</span>, fwdvgpnt_<span class="dv">1</span>( <span class="dv">1</span> ), fwdvgpnt_<span class="dv">1</span>( <span class="dv">2</span> ),     </a>
-<a class="sourceLine" id="cb6-21" title="21">     fwdlpnt_<span class="dv">1</span>( <span class="dv">1</span> ), fwdlpnt_<span class="dv">1</span>( <span class="dv">2</span> ), fwfipp1_<span class="dv">1</span>( <span class="dv">3</span> ), fwfipp2_<span class="dv">1</span>(     <span class="dv">3</span> ), </a>
-<a class="sourceLine" id="cb6-22" title="22">     fwfpntpnt1_<span class="dv">1</span>( <span class="dv">3</span> ), fwfpntpnt2_<span class="dv">1</span>( <span class="dv">3</span> ), fwpflowpp_<span class="dv">1</span>,     </a>
-<a class="sourceLine" id="cb6-23" title="23">     fwzpp_<span class="dv">1</span>( <span class="dv">3</span> ), fwdtt_<span class="dv">1</span>, kf0 )</a>
-<a class="sourceLine" id="cb6-24" title="24"></a>
-<a class="sourceLine" id="cb6-25" title="25"><span class="kw">CALL</span> ysfpp5t( <span class="dv">202</span>, <span class="dv">4</span>, fwpflowppv_<span class="dv">1</span>, fwfpp1_<span class="dv">1</span>, fwfpp2_<span class="dv">1</span>,     fwdfpp1_<span class="dv">1</span>, fwdfpp2_<span class="dv">1</span>, fwdfpp1_fi_<span class="dv">1</span>, fwdfpp2_fi_<span class="dv">1</span>, y1mtmp(     <span class="dv">852</span> ), y1mtmp( <span class="dv">853</span> ), <span class="kw">-</span> y1mtmp( <span class="dv">1044</span> ) <span class="kw">*</span> fwdtt_<span class="dv">1</span>, <span class="kw">-</span> y1mtmp(     <span class="dv">1045</span> ) <span class="kw">*</span> fwdtt_<span class="dv">1</span>, fwdvgpnt_<span class="dv">1</span>( <span class="dv">3</span> ), fwdvgpnt_<span class="dv">1</span>( <span class="dv">4</span> ),     fwdlpnt_<span class="dv">1</span>( <span class="dv">3</span> ), fwdlpnt_<span class="dv">1</span>( <span class="dv">4</span> ), fwfipp1_<span class="dv">1</span>( <span class="dv">4</span> ), fwfipp2_<span class="dv">1</span>(     <span class="dv">4</span> ), fwfpntpnt1_<span class="dv">1</span>( <span class="dv">4</span> ), fwfpntpnt2_<span class="dv">1</span>( <span class="dv">4</span> ), fwpflowpp_<span class="dv">1</span>,     fwzpp_<span class="dv">1</span>( <span class="dv">4</span> ), fwdtt_<span class="dv">1</span>, kf0 )</a>
-<a class="sourceLine" id="cb6-26" title="26"></a>
-<a class="sourceLine" id="cb6-27" title="27"><span class="kw">CALL</span> ysfpp5t( <span class="dv">202</span>, <span class="dv">5</span>, fwpflowppv_<span class="dv">1</span>, fwfpp1_<span class="dv">1</span>, fwfpp2_<span class="dv">1</span>,     fwdfpp1_<span class="dv">1</span>, fwdfpp2_<span class="dv">1</span>, fwdfpp1_fi_<span class="dv">1</span>, fwdfpp2_fi_<span class="dv">1</span>, y1mtmp(     <span class="dv">851</span> ), y1mtmp( <span class="dv">854</span> ), <span class="kw">-</span> y1mtmp( <span class="dv">1043</span> ) <span class="kw">*</span> fwdtt_<span class="dv">1</span>, <span class="kw">-</span> y1mtmp(     <span class="dv">1046</span> ) <span class="kw">*</span> fwdtt_<span class="dv">1</span>, fwdvgpnt_<span class="dv">1</span>( <span class="dv">2</span> ), fwdvgpnt_<span class="dv">1</span>( <span class="dv">5</span> ),     fwdlpnt_<span class="dv">1</span>( <span class="dv">2</span> ), fwdlpnt_<span class="dv">1</span>( <span class="dv">5</span> ), fwfipp1_<span class="dv">1</span>( <span class="dv">5</span> ), fwfipp2_<span class="dv">1</span>(     <span class="dv">5</span> ), fwfpntpnt1_<span class="dv">1</span>( <span class="dv">5</span> ), fwfpntpnt2_<span class="dv">1</span>( <span class="dv">5</span> ), fwpflowpp_<span class="dv">1</span>,     fwzpp_<span class="dv">1</span>( <span class="dv">5</span> ), fwdtt_<span class="dv">1</span>, kf0 )</a>
-<a class="sourceLine" id="cb6-28" title="28"></a>
-<a class="sourceLine" id="cb6-29" title="29"><span class="kw">CALL</span> ysfpp5t( <span class="dv">202</span>, <span class="dv">6</span>, fwpflowppv_<span class="dv">1</span>, fwfpp1_<span class="dv">1</span>, fwfpp2_<span class="dv">1</span>,     fwdfpp1_<span class="dv">1</span>, fwdfpp2_<span class="dv">1</span>, fwdfpp1_fi_<span class="dv">1</span>, fwdfpp2_fi_<span class="dv">1</span>, y1mtmp(     <span class="dv">853</span> ), y1mtmp( <span class="dv">854</span> ), <span class="kw">-</span> y1mtmp( <span class="dv">1045</span> ) <span class="kw">*</span> fwdtt_<span class="dv">1</span>, <span class="kw">-</span> y1mtmp(     <span class="dv">1046</span> ) <span class="kw">*</span> fwdtt_<span class="dv">1</span>, fwdvgpnt_<span class="dv">1</span>( <span class="dv">4</span> ), fwdvgpnt_<span class="dv">1</span>( <span class="dv">5</span> ),     fwdlpnt_<span class="dv">1</span>( <span class="dv">4</span> ), fwdlpnt_<span class="dv">1</span>( <span class="dv">5</span> ), fwfipp1_<span class="dv">1</span>( <span class="dv">6</span> ), fwfipp2_<span class="dv">1</span>(     <span class="dv">6</span> ), fwfpntpnt1_<span class="dv">1</span>( <span class="dv">6</span> ), fwfpntpnt2_<span class="dv">1</span>( <span class="dv">6</span> ), fwpflowpp_<span class="dv">1</span>,     fwzpp_<span class="dv">1</span>( <span class="dv">6</span> ), fwdtt_<span class="dv">1</span>, kf0 )</a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode fortran"><code class="sourceCode fortran"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw">CALL</span> ysfpp5t( <span class="dv">202</span>, <span class="dv">1</span>, fwpflowppv_<span class="dv">1</span>, fwfpp1_<span class="dv">1</span>, fwfpp2_<span class="dv">1</span>,</span>
+<span id="cb6-2"><a href="#cb6-2"></a>     fwdfpp1_<span class="dv">1</span>, fwdfpp2_<span class="dv">1</span>, fwdfpp1_fi_<span class="dv">1</span>, fwdfpp2_fi_<span class="dv">1</span>, </span>
+<span id="cb6-3"><a href="#cb6-3"></a>     y1mtmp(<span class="dv">862</span> ), y1mtmp( <span class="dv">863</span> ), <span class="kw">-</span> y1mtmp( <span class="dv">1054</span> ) <span class="kw">*</span> fwdtt_<span class="dv">1</span>, </span>
+<span id="cb6-4"><a href="#cb6-4"></a>     <span class="kw">-</span> y1mtmp( <span class="dv">1055</span> ) <span class="kw">*</span> fwdtt_<span class="dv">1</span>, fwdvgpnt_<span class="dv">1</span>( <span class="dv">13</span> ), fwdvgpnt_<span class="dv">1</span>( <span class="dv">14</span> ),</span>
+<span id="cb6-5"><a href="#cb6-5"></a>     fwdlpnt_<span class="dv">1</span>( <span class="dv">13</span> ), fwdlpnt_<span class="dv">1</span>( <span class="dv">14</span> ), fwfipp1_<span class="dv">1</span>( <span class="dv">1</span> ), fwfipp2_<span class="dv">1</span>(<span class="dv">1</span> ), </span>
+<span id="cb6-6"><a href="#cb6-6"></a>     fwfpntpnt1_<span class="dv">1</span>( <span class="dv">1</span> ), fwfpntpnt2_<span class="dv">1</span>( <span class="dv">1</span> ), fwpflowpp_<span class="dv">1</span>,</span>
+<span id="cb6-7"><a href="#cb6-7"></a>     fwzpp_<span class="dv">1</span>( <span class="dv">1</span> ), fwdtt_<span class="dv">1</span>, kf0 )</span>
+<span id="cb6-8"><a href="#cb6-8"></a></span>
+<span id="cb6-9"><a href="#cb6-9"></a><span class="kw">CALL</span> ysfpp5t( <span class="dv">202</span>, <span class="dv">2</span>, fwpflowppv_<span class="dv">1</span>, fwfpp1_<span class="dv">1</span>, fwfpp2_<span class="dv">1</span>,</span>
+<span id="cb6-10"><a href="#cb6-10"></a>     fwdfpp1_<span class="dv">1</span>, fwdfpp2_<span class="dv">1</span>, fwdfpp1_fi_<span class="dv">1</span>, fwdfpp2_fi_<span class="dv">1</span>, </span>
+<span id="cb6-11"><a href="#cb6-11"></a>     y1mtmp(     <span class="dv">863</span> ), y1mtmp( <span class="dv">864</span> ), <span class="kw">-</span> y1mtmp( <span class="dv">1055</span> ) <span class="kw">*</span> fwdtt_<span class="dv">1</span>, </span>
+<span id="cb6-12"><a href="#cb6-12"></a>     <span class="kw">-</span> y1mtmp(     <span class="dv">1056</span> ) <span class="kw">*</span> fwdtt_<span class="dv">1</span>, fwdvgpnt_<span class="dv">1</span>( <span class="dv">14</span> ), fwdvgpnt_<span class="dv">1</span>( <span class="dv">15</span> ),     </span>
+<span id="cb6-13"><a href="#cb6-13"></a>     fwdlpnt_<span class="dv">1</span>( <span class="dv">14</span> ), fwdlpnt_<span class="dv">1</span>( <span class="dv">15</span> ), fwfipp1_<span class="dv">1</span>( <span class="dv">2</span> ), fwfipp2_<span class="dv">1</span>(     <span class="dv">2</span> ), </span>
+<span id="cb6-14"><a href="#cb6-14"></a>     fwfpntpnt1_<span class="dv">1</span>( <span class="dv">2</span> ), fwfpntpnt2_<span class="dv">1</span>( <span class="dv">2</span> ), fwpflowpp_<span class="dv">1</span>,     </span>
+<span id="cb6-15"><a href="#cb6-15"></a>     fwzpp_<span class="dv">1</span>( <span class="dv">2</span> ), fwdtt_<span class="dv">1</span>, kf0 )</span>
+<span id="cb6-16"><a href="#cb6-16"></a></span>
+<span id="cb6-17"><a href="#cb6-17"></a><span class="kw">CALL</span> ysfpp5t( <span class="dv">202</span>, <span class="dv">3</span>, fwpflowppv_<span class="dv">1</span>, fwfpp1_<span class="dv">1</span>, fwfpp2_<span class="dv">1</span>,</span>
+<span id="cb6-18"><a href="#cb6-18"></a>     fwdfpp1_<span class="dv">1</span>, fwdfpp2_<span class="dv">1</span>, fwdfpp1_fi_<span class="dv">1</span>, fwdfpp2_fi_<span class="dv">1</span>, </span>
+<span id="cb6-19"><a href="#cb6-19"></a>     y1mtmp(     <span class="dv">850</span> ), y1mtmp( <span class="dv">851</span> ), <span class="kw">-</span> y1mtmp( <span class="dv">1042</span> ) <span class="kw">*</span> fwdtt_<span class="dv">1</span>, </span>
+<span id="cb6-20"><a href="#cb6-20"></a>     <span class="kw">-</span> y1mtmp(     <span class="dv">1043</span> ) <span class="kw">*</span> fwdtt_<span class="dv">1</span>, fwdvgpnt_<span class="dv">1</span>( <span class="dv">1</span> ), fwdvgpnt_<span class="dv">1</span>( <span class="dv">2</span> ),     </span>
+<span id="cb6-21"><a href="#cb6-21"></a>     fwdlpnt_<span class="dv">1</span>( <span class="dv">1</span> ), fwdlpnt_<span class="dv">1</span>( <span class="dv">2</span> ), fwfipp1_<span class="dv">1</span>( <span class="dv">3</span> ), fwfipp2_<span class="dv">1</span>(     <span class="dv">3</span> ), </span>
+<span id="cb6-22"><a href="#cb6-22"></a>     fwfpntpnt1_<span class="dv">1</span>( <span class="dv">3</span> ), fwfpntpnt2_<span class="dv">1</span>( <span class="dv">3</span> ), fwpflowpp_<span class="dv">1</span>,     </span>
+<span id="cb6-23"><a href="#cb6-23"></a>     fwzpp_<span class="dv">1</span>( <span class="dv">3</span> ), fwdtt_<span class="dv">1</span>, kf0 )</span>
+<span id="cb6-24"><a href="#cb6-24"></a></span>
+<span id="cb6-25"><a href="#cb6-25"></a><span class="kw">CALL</span> ysfpp5t( <span class="dv">202</span>, <span class="dv">4</span>, fwpflowppv_<span class="dv">1</span>, fwfpp1_<span class="dv">1</span>, fwfpp2_<span class="dv">1</span>,     fwdfpp1_<span class="dv">1</span>, fwdfpp2_<span class="dv">1</span>, fwdfpp1_fi_<span class="dv">1</span>, fwdfpp2_fi_<span class="dv">1</span>, y1mtmp(     <span class="dv">852</span> ), y1mtmp( <span class="dv">853</span> ), <span class="kw">-</span> y1mtmp( <span class="dv">1044</span> ) <span class="kw">*</span> fwdtt_<span class="dv">1</span>, <span class="kw">-</span> y1mtmp(     <span class="dv">1045</span> ) <span class="kw">*</span> fwdtt_<span class="dv">1</span>, fwdvgpnt_<span class="dv">1</span>( <span class="dv">3</span> ), fwdvgpnt_<span class="dv">1</span>( <span class="dv">4</span> ),     fwdlpnt_<span class="dv">1</span>( <span class="dv">3</span> ), fwdlpnt_<span class="dv">1</span>( <span class="dv">4</span> ), fwfipp1_<span class="dv">1</span>( <span class="dv">4</span> ), fwfipp2_<span class="dv">1</span>(     <span class="dv">4</span> ), fwfpntpnt1_<span class="dv">1</span>( <span class="dv">4</span> ), fwfpntpnt2_<span class="dv">1</span>( <span class="dv">4</span> ), fwpflowpp_<span class="dv">1</span>,     fwzpp_<span class="dv">1</span>( <span class="dv">4</span> ), fwdtt_<span class="dv">1</span>, kf0 )</span>
+<span id="cb6-26"><a href="#cb6-26"></a></span>
+<span id="cb6-27"><a href="#cb6-27"></a><span class="kw">CALL</span> ysfpp5t( <span class="dv">202</span>, <span class="dv">5</span>, fwpflowppv_<span class="dv">1</span>, fwfpp1_<span class="dv">1</span>, fwfpp2_<span class="dv">1</span>,     fwdfpp1_<span class="dv">1</span>, fwdfpp2_<span class="dv">1</span>, fwdfpp1_fi_<span class="dv">1</span>, fwdfpp2_fi_<span class="dv">1</span>, y1mtmp(     <span class="dv">851</span> ), y1mtmp( <span class="dv">854</span> ), <span class="kw">-</span> y1mtmp( <span class="dv">1043</span> ) <span class="kw">*</span> fwdtt_<span class="dv">1</span>, <span class="kw">-</span> y1mtmp(     <span class="dv">1046</span> ) <span class="kw">*</span> fwdtt_<span class="dv">1</span>, fwdvgpnt_<span class="dv">1</span>( <span class="dv">2</span> ), fwdvgpnt_<span class="dv">1</span>( <span class="dv">5</span> ),     fwdlpnt_<span class="dv">1</span>( <span class="dv">2</span> ), fwdlpnt_<span class="dv">1</span>( <span class="dv">5</span> ), fwfipp1_<span class="dv">1</span>( <span class="dv">5</span> ), fwfipp2_<span class="dv">1</span>(     <span class="dv">5</span> ), fwfpntpnt1_<span class="dv">1</span>( <span class="dv">5</span> ), fwfpntpnt2_<span class="dv">1</span>( <span class="dv">5</span> ), fwpflowpp_<span class="dv">1</span>,     fwzpp_<span class="dv">1</span>( <span class="dv">5</span> ), fwdtt_<span class="dv">1</span>, kf0 )</span>
+<span id="cb6-28"><a href="#cb6-28"></a></span>
+<span id="cb6-29"><a href="#cb6-29"></a><span class="kw">CALL</span> ysfpp5t( <span class="dv">202</span>, <span class="dv">6</span>, fwpflowppv_<span class="dv">1</span>, fwfpp1_<span class="dv">1</span>, fwfpp2_<span class="dv">1</span>,     fwdfpp1_<span class="dv">1</span>, fwdfpp2_<span class="dv">1</span>, fwdfpp1_fi_<span class="dv">1</span>, fwdfpp2_fi_<span class="dv">1</span>, y1mtmp(     <span class="dv">853</span> ), y1mtmp( <span class="dv">854</span> ), <span class="kw">-</span> y1mtmp( <span class="dv">1045</span> ) <span class="kw">*</span> fwdtt_<span class="dv">1</span>, <span class="kw">-</span> y1mtmp(     <span class="dv">1046</span> ) <span class="kw">*</span> fwdtt_<span class="dv">1</span>, fwdvgpnt_<span class="dv">1</span>( <span class="dv">4</span> ), fwdvgpnt_<span class="dv">1</span>( <span class="dv">5</span> ),     fwdlpnt_<span class="dv">1</span>( <span class="dv">4</span> ), fwdlpnt_<span class="dv">1</span>( <span class="dv">5</span> ), fwfipp1_<span class="dv">1</span>( <span class="dv">6</span> ), fwfipp2_<span class="dv">1</span>(     <span class="dv">6</span> ), fwfpntpnt1_<span class="dv">1</span>( <span class="dv">6</span> ), fwfpntpnt2_<span class="dv">1</span>( <span class="dv">6</span> ), fwpflowpp_<span class="dv">1</span>,     fwzpp_<span class="dv">1</span>( <span class="dv">6</span> ), fwdtt_<span class="dv">1</span>, kf0 )</span></code></pre></div>
 </section><div><a class="slider-prev" href="#fortran-subset-syntax-1"></a><a class="slider-next" href="#fortran-subset-syntax-3"></a></div>
 <section id="fortran-subset-syntax-3" class="slide level1">
 <h1>Fortran subset syntax</h1>
@@ -482,13 +483,13 @@ return divisor</code></pre>
 <section id="static-formal-semantics" class="slide level1">
 <h1>Static formal semantics</h1>
 <h2 id="operator-of-multiple-assignment-and-special-functional-symbol">Operator of multiple assignment and special functional symbol</h2>
-<div class="sourceCode" id="cb9"><pre class="sourceCode fortran"><code class="sourceCode fortran"><a class="sourceLine" id="cb9-1" title="1"><span class="kw">IF</span> ( f_temp1 <span class="op">.GT.</span> thhgconv ) <span class="kw">THEN</span></a>
-<a class="sourceLine" id="cb9-2" title="2">    htcarg1 <span class="kw">=</span> f_temp1 <span class="kw">*</span> fipnt <span class="kw">+</span> thhgconv <span class="kw">*</span> ( kf1 <span class="kw">-</span> fipnt )</a>
-<a class="sourceLine" id="cb9-3" title="3">    mode <span class="kw">=</span> <span class="dv">6</span></a>
-<a class="sourceLine" id="cb9-4" title="4"><span class="kw">ELSE</span></a>
-<a class="sourceLine" id="cb9-5" title="5">    htcarg1 <span class="kw">=</span> thhgconv</a>
-<a class="sourceLine" id="cb9-6" title="6">    mode <span class="kw">=</span> <span class="dv">15</span></a>
-<a class="sourceLine" id="cb9-7" title="7"><span class="kw">END IF</span></a></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode fortran"><code class="sourceCode fortran"><span id="cb9-1"><a href="#cb9-1"></a><span class="kw">IF</span> ( f_temp1 <span class="op">.GT.</span> thhgconv ) <span class="kw">THEN</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a>    htcarg1 <span class="kw">=</span> f_temp1 <span class="kw">*</span> fipnt <span class="kw">+</span> thhgconv <span class="kw">*</span> ( kf1 <span class="kw">-</span> fipnt )</span>
+<span id="cb9-3"><a href="#cb9-3"></a>    mode <span class="kw">=</span> <span class="dv">6</span></span>
+<span id="cb9-4"><a href="#cb9-4"></a><span class="kw">ELSE</span></span>
+<span id="cb9-5"><a href="#cb9-5"></a>    htcarg1 <span class="kw">=</span> thhgconv</span>
+<span id="cb9-6"><a href="#cb9-6"></a>    mode <span class="kw">=</span> <span class="dv">15</span></span>
+<span id="cb9-7"><a href="#cb9-7"></a><span class="kw">END IF</span></span></code></pre></div>
 <p>(htcarg1, mode) = IF1234(f_temp1, thhgconv, fipnt, kf1)</p>
 </section><div><a class="slider-prev" href="#static-formal-semantics-transformation"></a><a class="slider-next" href="#dynamic-semantics"></a></div>
 <section id="dynamic-semantics" class="slide level1">
