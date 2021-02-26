@@ -14,15 +14,15 @@ Course topics include:
 * specification of domain-specific programming languages
 * static typing and type inference
 
-**In 2020: Wednesday, 10:45-12:20, aud. 13-07, starting February 26th.**
+**In 2021: Friday, 12:30-14:05, live video @ vk.com, starting February 19th.**
 
 <!--Please take a quick survey about the course: [Survey form](https://goo.gl/forms/PYP4oSGn0VfQQL403)-->
 
 
-**26.02.2020** Introduction. History of programming languages. 
+**19.02.2021, 26.02.2021** Introduction. History of programming languages. 
 [presentation - html](presentations/01-Introduction.html)
 
-**04.03.2020** Classification of programming languages. 
+**26.02.2021** Classification of programming languages. 
 [presentation - html](presentations/02-Classification.html) 
 
 **11.03.2020** Specification of programming language. Syntax. 
