@@ -371,7 +371,7 @@ START: do {
 ```
 
 # Polymorphism
-— a means of making the same operations for different arguments.
+— a means of making the same operations for different types of arguments.
 
 ## Ad-hoc polymorphism
 ## Subtype polymorphism
@@ -431,7 +431,7 @@ single dispatch
 multiple dispatch
 ~ the decision is based on multiple arguments
 
-Example of multiple dispatch: an implementation of the addition operator in [Julia programming language](http://docs.julialang.org/en/release-0.4/manual/methods/):
+Example of multiple dispatch: an implementation of the addition operator in [Julia programming language](https://docs.julialang.org/en/v1/manual/methods/#Methods):
 
 <div style="overflow-y: scroll; height: 10em;" >
 
