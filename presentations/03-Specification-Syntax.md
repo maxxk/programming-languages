@@ -82,7 +82,7 @@ Syntax of a programming language is concerned with the form of programs: how exp
 
 <span class="small">Definition from D. Watt — Programming Language Design Concepts</span>
 
-In other words: How can we write the program and how the compiler/interpreter expects it to be formed.
+In other words: How the program is written and how the compiler/interpreter expects it to be formed.
 
 # Syntax: example
 https://stackoverflow.com/questions/5508110/why-is-this-program-erroneously-rejected-by-three-c-compilers/
@@ -96,12 +96,12 @@ Syntax representations:
  - LISP prefix S-expression: `(+ (* v w) (/ y z))`
  - reverse polish notation / stack calculator:  `v w * y z / +`
  - graph-based syntax (not related to previous examples) https://noflojs.org/dataflow-noflo/demo/draggabilly.html https://noflojs.org/example/
- - some [visual "syntax"](https://blockly-demo.appspot.com/static/demos/blockfactory/index.html)
-
+ - some kind of [visual "syntax"](https://blockly-demo.appspot.com/static/demos/blockfactory/index.html) and [structured editors](http://guilabs.net/)
  ![](images/scratch-syntax.png)
+- tagged representation [(colorForth)](https://github.com/AshleyF/Color/blob/master/Docs/beautiful_simplicity.md)
+- [content-addressed «database» representation](https://www.unisonweb.org/docs/tour)
 
-
-Example based on F. Turbak, D. Gifford. Design Concepts in Programming Languages
+First example is based on F. Turbak, D. Gifford. Design Concepts in Programming Languages
 
 # Semantics
 Semantics of a programming language is concerned with the meaning of programs: how a well-formed program may be expected to behave when executed on a computer.
