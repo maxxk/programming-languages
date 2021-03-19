@@ -78,7 +78,7 @@ digraph Spec {
 
 
 # Syntax
-Syntax of a programming language is concerned with the form of programs: how expressions, commands, declarations and other constructs must be arranged to make a well-formed program.
+Syntax of a programming language is concerned with the form of programs: how expressions, commands, declarations and other constructs must be arranged to compose a well-formed program.
 
 <span class="small">Definition from D. Watt — Programming Language Design Concepts</span>
 
@@ -147,7 +147,7 @@ Each part of language specification must be implemented in mathematical terms.
 # Syntax: relation to formal languages
 (regular ⊂ context-free ⊂ context-sensitive ⊂ unbounded)
 
-We could make a relation between programs and formal languages in many ways:
+We could define a relation between programs and formal languages in many ways:
 
 - language $L_{wf}$, containing all well-formed (syntactically correct) programs
   
@@ -160,14 +160,14 @@ We could make a relation between programs and formal languages in many ways:
   $L_{wt} ∖ L_{c}$ — "typing gap", well-typed programs which throw errors in run-time
 
 
-It is obvious that for almost every practical ("Turing complete") programming language $L_{c}$ is unbounded. For the modern languages, $L_{wf}$ is usually context-free or some subset of context-free languages (Deterministic Context-Free Languages, unambiguous languages which can be accepted by deterministic pushdown automaton and therefore can be parsed in $O(n)$).
+It is obvious that for almost every practical ("Turing complete") programming language $L_{c}$ is unbounded. For modern languages $L_{wf}$ is usually context-free or some subset of context-free languages (Deterministic Context-Free Languages, unambiguous languages which can be accepted by deterministic pushdown automaton and therefore can be parsed in $O(n)$).
 
-$L_{wt}$ may be decidable, but usually decidability is not proven. Compiler freezes may be caused by undecidability of type checking.
+$L_{wt}$ may be decidable, but usually decidability is not proven. Undecidability of typechecking may cause compiler freezes.
 
 # Lexical analysis
 ## List\<Char\> ⟶ List\<Token\>
 
-Traditionally decision problem of $L_{wf}$ -membership (well-formedness of a program) is split by two parts:
+We can split the decision problem of $L_{wf}$ -membership (well-formedness of a program) by two parts:
 
 1. lexical analysis transforms a sequence of characters to a sequence of tokens (marked groups of characters, like identifiers, integers, etc.):
 
@@ -178,8 +178,8 @@ int main (int argc, char argv)
 KEYWORD IDENTIFIER LPAR KEYWORD IDENTIFIER COMMA KEYWORD IDENTIFIER RPAR
 ```
 
-- usually lexical specification of the language is regular
-- Unicode standard defines base categories for a lexical analysis (identifier start, identifier, digit, punctuation etc.)
+- [usually](https://github.com/rust-lang/rust/blob/cb8ab33ed29544973da866bdc3eff509b3c3e789/src/grammar/raw-string-literal-ambiguity.md) lexical specification of the language is regular
+- Unicode standard [defines](https://www.unicode.org/reports/tr31/) base categories for a lexical analysis (identifier start, identifier, digit, punctuation etc.)
 
 # Syntax analysis
 ## List\<Token\> ⟶ AbstractSyntaxTree
@@ -189,8 +189,13 @@ KEYWORD IDENTIFIER LPAR KEYWORD IDENTIFIER COMMA KEYWORD IDENTIFIER RPAR
 - **concrete syntax**: the syntax of a language including all the features visible in the source code such as parentheses and delimiters;
 - **abstract syntax**: the high-level description of a language structure independent of machine-oriented structures and encodings.
 
+
 ![](images/ast-example-js.png)
 <span class="small">Source: http://azu.github.io/slide/JSojisan/resources/ast-is-true.png</span>
+
+https://eli.thegreenplace.net/2009/02/16/abstract-vs-concrete-syntax-trees
+
+https://libcst.readthedocs.io/en/latest/why_libcst.html
 
 # Abstract Syntax Tree
 
@@ -236,7 +241,7 @@ During the development of ALGOL 60, John Backus proposed a notation for context-
 >   <expr> ::= <expr> | <expr> <add-operation> <atom>
 >   ```
 
-BNF is the generative grammar specification language.
+BNF is a generative grammar specification language.
 
 # BNF example
 ```bnf
@@ -319,7 +324,7 @@ Operator binding power:
 See also:
 
 - Interactive example http://l-lang.org/blog/TDOP---Pratt-parser-in-pictures/
-- simple implementation http://javascript.crockford.com/tdop/tdop.html
+- simple implementation http://crockford.com/javascript/tdop/tdop.html
 - Nitra language workbench (russian project): https://github.com/rsdn/nitra
 - original Pratt paper: https://tdop.github.io
 </div>
@@ -339,7 +344,7 @@ Live example of calculator implemented as attribute PEG grammar: http://pegjs.or
 </div>
 
 # Parser combinators
-Special technique of parser implementation for functional languages (required support of higher-order functions)
+Special technique of parser implementation for functional languages (requires higher-order function support)
 
 ```
 type Parser<U, V> = Iterable<U> → V

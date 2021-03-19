@@ -25,7 +25,7 @@ Course topics include:
 **26.02.2021, 05.03.2021** Classification of programming languages. 
 [presentation - html](presentations/02-Classification.html) 
 
-**12.03.2021** Specification of programming language. Syntax. 
+**12.03.2021, 19.03.2021** Specification of programming language. Syntax. 
 [presentation - html](presentations/03-Specification-Syntax.html) 
 
 <hr>

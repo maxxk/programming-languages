@@ -147,7 +147,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </section><div><a class="slider-prev" href="#programming-language-specification-1"></a><a class="slider-next" href="#syntax"></a></div>
 <section id="syntax" class="slide level1">
 <h1>Syntax</h1>
-<p>Syntax of a programming language is concerned with the form of programs: how expressions, commands, declarations and other constructs must be arranged to make a well-formed program.</p>
+<p>Syntax of a programming language is concerned with the form of programs: how expressions, commands, declarations and other constructs must be arranged to compose a well-formed program.</p>
 <p><span class="small">Definition from D. Watt — Programming Language Design Concepts</span></p>
 <p>In other words: How the program is written and how the compiler/interpreter expects it to be formed.</p>
 </section><div><a class="slider-prev" href="#programming-language-specification-2"></a><a class="slider-next" href="#syntax-example"></a></div>
@@ -224,7 +224,7 @@ z
 <section id="syntax-relation-to-formal-languages" class="slide level1">
 <h1>Syntax: relation to formal languages</h1>
 <p>(regular ⊂ context-free ⊂ context-sensitive ⊂ unbounded)</p>
-<p>We could make a relation between programs and formal languages in many ways:</p>
+<p>We could define a relation between programs and formal languages in many ways:</p>
 <ul>
 <li class="fragment"><p>language <span class="math inline"><em>L</em><sub><em>w</em><em>f</em></sub></span>, containing all well-formed (syntactically correct) programs</p></li>
 <li class="fragment"><p>language <span class="math inline"><em>L</em><sub><em>w</em><em>t</em></sub> ⊆ <em>L</em><sub><em>w</em><em>f</em></sub></span>, containing all well-typed (runnable) programs</p>
@@ -232,13 +232,13 @@ z
 <li class="fragment"><p>language <span class="math inline"><em>L</em><sub><em>c</em></sub> ⊆ <em>L</em><sub><em>w</em><em>t</em></sub></span>, containing all semantically-correct programs (running without errors)</p>
 <p><span class="math inline"><em>L</em><sub><em>w</em><em>t</em></sub> ∖ <em>L</em><sub><em>c</em></sub></span> — “typing gap”, well-typed programs which throw errors in run-time</p></li>
 </ul>
-<p>It is obvious that for almost every practical (“Turing complete”) programming language <span class="math inline"><em>L</em><sub><em>c</em></sub></span> is unbounded. For the modern languages, <span class="math inline"><em>L</em><sub><em>w</em><em>f</em></sub></span> is usually context-free or some subset of context-free languages (Deterministic Context-Free Languages, unambiguous languages which can be accepted by deterministic pushdown automaton and therefore can be parsed in <span class="math inline"><em>O</em>(<em>n</em>)</span>).</p>
-<p><span class="math inline"><em>L</em><sub><em>w</em><em>t</em></sub></span> may be decidable, but usually decidability is not proven. Compiler freezes may be caused by undecidability of type checking.</p>
+<p>It is obvious that for almost every practical (“Turing complete”) programming language <span class="math inline"><em>L</em><sub><em>c</em></sub></span> is unbounded. For modern languages <span class="math inline"><em>L</em><sub><em>w</em><em>f</em></sub></span> is usually context-free or some subset of context-free languages (Deterministic Context-Free Languages, unambiguous languages which can be accepted by deterministic pushdown automaton and therefore can be parsed in <span class="math inline"><em>O</em>(<em>n</em>)</span>).</p>
+<p><span class="math inline"><em>L</em><sub><em>w</em><em>t</em></sub></span> may be decidable, but usually decidability is not proven. Undecidability of typechecking may cause compiler freezes.</p>
 </section><div><a class="slider-prev" href="#syntax-1"></a><a class="slider-next" href="#lexical-analysis"></a></div>
 <section id="lexical-analysis" class="slide level1">
 <h1>Lexical analysis</h1>
 <h2 id="listchar-listtoken">List&lt;Char&gt; ⟶ List&lt;Token&gt;</h2>
-<p>Traditionally decision problem of <span class="math inline"><em>L</em><sub><em>w</em><em>f</em></sub></span> -membership (well-formedness of a program) is split by two parts:</p>
+<p>We can split the decision problem of <span class="math inline"><em>L</em><sub><em>w</em><em>f</em></sub></span> -membership (well-formedness of a program) by two parts:</p>
 <ol type="1">
 <li class="fragment">lexical analysis transforms a sequence of characters to a sequence of tokens (marked groups of characters, like identifiers, integers, etc.):</li>
 </ol>
@@ -247,8 +247,8 @@ z
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">int</span>      main      <span class="op">(</span>    <span class="dt">int</span>       argc    <span class="op">,</span>     <span class="dt">char</span>     argv      <span class="op">)</span></span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>KEYWORD IDENTIFIER LPAR KEYWORD IDENTIFIER COMMA KEYWORD IDENTIFIER RPAR</span></code></pre></div>
 <ul>
-<li class="fragment">usually lexical specification of the language is regular</li>
-<li class="fragment">Unicode standard defines base categories for a lexical analysis (identifier start, identifier, digit, punctuation etc.)</li>
+<li class="fragment"><a href="https://github.com/rust-lang/rust/blob/cb8ab33ed29544973da866bdc3eff509b3c3e789/src/grammar/raw-string-literal-ambiguity.md">usually</a> lexical specification of the language is regular</li>
+<li class="fragment">Unicode standard <a href="https://www.unicode.org/reports/tr31/">defines</a> base categories for a lexical analysis (identifier start, identifier, digit, punctuation etc.)</li>
 </ul>
 </section><div><a class="slider-prev" href="#syntax-relation-to-formal-languages"></a><a class="slider-next" href="#syntax-analysis"></a></div>
 <section id="syntax-analysis" class="slide level1">
@@ -262,6 +262,8 @@ z
 <li class="fragment"><strong>abstract syntax</strong>: the high-level description of a language structure independent of machine-oriented structures and encodings.</li>
 </ul>
 <p><img data-src="images/ast-example-js.png" src="images/ast-example-js.png"> <span class="small">Source: <a href="http://azu.github.io/slide/JSojisan/resources/ast-is-true.png" class="uri">http://azu.github.io/slide/JSojisan/resources/ast-is-true.png</a></span></p>
+<p><a href="https://eli.thegreenplace.net/2009/02/16/abstract-vs-concrete-syntax-trees" class="uri">https://eli.thegreenplace.net/2009/02/16/abstract-vs-concrete-syntax-trees</a></p>
+<p><a href="https://libcst.readthedocs.io/en/latest/why_libcst.html" class="uri">https://libcst.readthedocs.io/en/latest/why_libcst.html</a></p>
 </section><div><a class="slider-prev" href="#lexical-analysis"></a><a class="slider-next" href="#abstract-syntax-tree"></a></div>
 <section id="abstract-syntax-tree" class="slide level1">
 <h1>Abstract Syntax Tree</h1>
@@ -298,7 +300,7 @@ z
 <li><p>at the right side of the definition operator the alternative operator <strong>|</strong> is allowed:</p>
 <pre><code>&lt;expr&gt; ::= &lt;expr&gt; | &lt;expr&gt; &lt;add-operation&gt; &lt;atom&gt;</code></pre></li>
 </ul>
-<p>BNF is the generative grammar specification language.</p>
+<p>BNF is a generative grammar specification language.</p>
 </section><div><a class="slider-prev" href="#language-specification"></a><a class="slider-next" href="#bnf-example"></a></div>
 <section id="bnf-example" class="slide level1">
 <h1>BNF example</h1>
@@ -381,7 +383,7 @@ Expr    ← Product / Sum / Value</code></pre>
 <p>See also:</p>
 <ul>
 <li class="fragment">Interactive example <a href="http://l-lang.org/blog/TDOP---Pratt-parser-in-pictures/" class="uri">http://l-lang.org/blog/TDOP---Pratt-parser-in-pictures/</a></li>
-<li class="fragment">simple implementation <a href="http://javascript.crockford.com/tdop/tdop.html" class="uri">http://javascript.crockford.com/tdop/tdop.html</a></li>
+<li class="fragment">simple implementation <a href="http://crockford.com/javascript/tdop/tdop.html" class="uri">http://crockford.com/javascript/tdop/tdop.html</a></li>
 <li class="fragment">Nitra language workbench (russian project): <a href="https://github.com/rsdn/nitra" class="uri">https://github.com/rsdn/nitra</a></li>
 <li class="fragment">original Pratt paper: <a href="https://tdop.github.io" class="uri">https://tdop.github.io</a></li>
 </ul>
@@ -402,7 +404,7 @@ Factor → integer [ Factor.value = strToInt(integer.str) ]</code></pre>
 </section><div><a class="slider-prev" href="#tdop-algorithm"></a><a class="slider-next" href="#parser-combinators"></a></div>
 <section id="parser-combinators" class="slide level1">
 <h1>Parser combinators</h1>
-<p>Special technique of parser implementation for functional languages (required support of higher-order functions)</p>
+<p>Special technique of parser implementation for functional languages (requires higher-order function support)</p>
 <pre><code>type Parser&lt;U, V&gt; = Iterable&lt;U&gt; → V
 
 or&lt;U,V&gt; : (left : Parser&lt;U, V&gt;, right : Parser&lt;U, V&gt;) → Parser&lt;U, V&gt;
