@@ -8,26 +8,28 @@
   <link rel="stylesheet" href="slider.css">
   <style type="text/css">code{white-space: pre;}</style>
   <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -36,9 +38,9 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {  }
+  {   }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -88,6 +90,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 .twocolumn {
   -moz-column-count: 2;
   -webkit-column-count: 2;
+  column-count: 2;
 }
 .small { font-size: small !important; }
 .smaller { font-size: 0.8em !important; }
@@ -106,10 +109,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>BNF has a graph structure (actually, a directed hypergraph with per-edge ordered destination nodes). Parse tree is a tree derived from the graph (if syntax analysis walks through a cycle, first repeating vertex is duplicated).</p>
 <p><img data-src="graphviz-images/bf9e1f309d9b94e9d24da483ef8f703eb63e3c0a.svg" src="graphviz-images/bf9e1f309d9b94e9d24da483ef8f703eb63e3c0a.svg"></p>
 <div class="smallish">
-<div class="sourceCode" id="cb1"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb1-1" data-line-number="1">term ::= factor | term <span class="ch">'+'</span> factor</a>
-<a class="sourceLine" id="cb1-2" data-line-number="2">factor ::= atom | factor <span class="ch">'*'</span> atom</a>
-<a class="sourceLine" id="cb1-3" data-line-number="3">atom ::= number | <span class="ch">'('</span> term <span class="ch">')'</span></a></code></pre></div>
-<div class="sourceCode" id="cb2"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb2-1" data-line-number="1">(<span class="dv">3</span>+<span class="dv">2</span>)*<span class="dv">4</span>+<span class="dv">1</span></a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>term <span class="op">::=</span> factor <span class="op">|</span> term <span class="ch">'+'</span> factor</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>factor <span class="op">::=</span> atom <span class="op">|</span> factor <span class="ch">'*'</span> atom</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>atom <span class="op">::=</span> number <span class="op">|</span> <span class="ch">'('</span> term <span class="ch">')'</span></span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="op">(</span><span class="dv">3</span><span class="op">+</span><span class="dv">2</span><span class="op">)*</span><span class="dv">4</span><span class="op">+</span><span class="dv">1</span></span></code></pre></div>
 </div>
 </section><div><a class="slider-prev" href="#programming-language-specification"></a><a class="slider-next" href="#mechanization"></a></div>
 <section id="mechanization" class="slide level1">
@@ -118,79 +121,79 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Programs are complex. Theoretically, you can make a mathematical description of a programming language on paper with some assumptions. But usually proving properties on paper is infeasible. Therefore we have to use some (mathematically sound) mechanization tools to make a precise reasoning about the program. Scientific publications which we will discuss today use Coq or Agda proof-assistants for mechanization.</p>
 </div>
 <div class="twocolumn" style="font-size: 0.5em;">
-<div class="sourceCode" id="cb3"><pre class="sourceCode cpp"><code class="sourceCode cpp"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw">class</span> HashEntry</a>
-<a class="sourceLine" id="cb3-2" data-line-number="2">{</a>
-<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="kw">private</span>:</a>
-<a class="sourceLine" id="cb3-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb3-5" data-line-number="5">      <span class="dt">int</span> key;</a>
-<a class="sourceLine" id="cb3-6" data-line-number="6">      <span class="dt">int</span> value;</a>
-<a class="sourceLine" id="cb3-7" data-line-number="7"></a>
-<a class="sourceLine" id="cb3-8" data-line-number="8"><span class="kw">public</span>:</a>
-<a class="sourceLine" id="cb3-9" data-line-number="9"></a>
-<a class="sourceLine" id="cb3-10" data-line-number="10">      HashEntry(<span class="dt">int</span> key, <span class="dt">int</span> value)</a>
-<a class="sourceLine" id="cb3-11" data-line-number="11">      {</a>
-<a class="sourceLine" id="cb3-12" data-line-number="12">            <span class="kw">this</span>-&gt;key = key;</a>
-<a class="sourceLine" id="cb3-13" data-line-number="13">            <span class="kw">this</span>-&gt;value = value;</a>
-<a class="sourceLine" id="cb3-14" data-line-number="14">      }</a>
-<a class="sourceLine" id="cb3-15" data-line-number="15"></a>
-<a class="sourceLine" id="cb3-16" data-line-number="16">      <span class="dt">int</span> getKey() { <span class="cf">return</span> key; }</a>
-<a class="sourceLine" id="cb3-17" data-line-number="17"></a>
-<a class="sourceLine" id="cb3-18" data-line-number="18">      <span class="dt">int</span> getValue() { <span class="cf">return</span> value; }</a>
-<a class="sourceLine" id="cb3-19" data-line-number="19">};</a>
-<a class="sourceLine" id="cb3-20" data-line-number="20"></a>
-<a class="sourceLine" id="cb3-21" data-line-number="21"><span class="at">const</span> <span class="dt">int</span> TABLE_SIZE = <span class="dv">128</span>;</a>
-<a class="sourceLine" id="cb3-22" data-line-number="22"></a>
-<a class="sourceLine" id="cb3-23" data-line-number="23"><span class="kw">class</span> HashMap</a>
-<a class="sourceLine" id="cb3-24" data-line-number="24">{</a>
-<a class="sourceLine" id="cb3-25" data-line-number="25"><span class="kw">private</span>:</a>
-<a class="sourceLine" id="cb3-26" data-line-number="26"></a>
-<a class="sourceLine" id="cb3-27" data-line-number="27">      HashEntry **table;</a>
-<a class="sourceLine" id="cb3-28" data-line-number="28"></a>
-<a class="sourceLine" id="cb3-29" data-line-number="29"><span class="kw">public</span>:</a>
-<a class="sourceLine" id="cb3-30" data-line-number="30"></a>
-<a class="sourceLine" id="cb3-31" data-line-number="31">      HashMap()</a>
-<a class="sourceLine" id="cb3-32" data-line-number="32">      {</a>
-<a class="sourceLine" id="cb3-33" data-line-number="33">            table = <span class="kw">new</span> HashEntry*[TABLE_SIZE];</a>
-<a class="sourceLine" id="cb3-34" data-line-number="34"></a>
-<a class="sourceLine" id="cb3-35" data-line-number="35">            <span class="cf">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt; TABLE_SIZE; i++)</a>
-<a class="sourceLine" id="cb3-36" data-line-number="36">                  table[i] = NULL;</a>
-<a class="sourceLine" id="cb3-37" data-line-number="37">      }</a>
-<a class="sourceLine" id="cb3-38" data-line-number="38"></a>
-<a class="sourceLine" id="cb3-39" data-line-number="39">      <span class="dt">int</span> get(<span class="dt">int</span> key)</a>
-<a class="sourceLine" id="cb3-40" data-line-number="40">      {</a>
-<a class="sourceLine" id="cb3-41" data-line-number="41">            <span class="dt">int</span> hash = (key % TABLE_SIZE);</a>
-<a class="sourceLine" id="cb3-42" data-line-number="42"></a>
-<a class="sourceLine" id="cb3-43" data-line-number="43">            <span class="cf">while</span> (table[hash] != NULL &amp;&amp; table[hash]-&gt;getKey() != key)</a>
-<a class="sourceLine" id="cb3-44" data-line-number="44">                  hash = (hash + <span class="dv">1</span>) % TABLE_SIZE;</a>
-<a class="sourceLine" id="cb3-45" data-line-number="45"></a>
-<a class="sourceLine" id="cb3-46" data-line-number="46">            <span class="cf">if</span> (table[hash] == NULL)</a>
-<a class="sourceLine" id="cb3-47" data-line-number="47">                  <span class="cf">return</span> <span class="dv">-1</span>;</a>
-<a class="sourceLine" id="cb3-48" data-line-number="48">            <span class="cf">else</span></a>
-<a class="sourceLine" id="cb3-49" data-line-number="49">                  <span class="cf">return</span> table[hash]-&gt;getValue();</a>
-<a class="sourceLine" id="cb3-50" data-line-number="50">      }</a>
-<a class="sourceLine" id="cb3-51" data-line-number="51"></a>
-<a class="sourceLine" id="cb3-52" data-line-number="52">      <span class="dt">void</span> put(<span class="dt">int</span> key, <span class="dt">int</span> value)</a>
-<a class="sourceLine" id="cb3-53" data-line-number="53">      {</a>
-<a class="sourceLine" id="cb3-54" data-line-number="54">            <span class="dt">int</span> hash = (key % TABLE_SIZE);</a>
-<a class="sourceLine" id="cb3-55" data-line-number="55"></a>
-<a class="sourceLine" id="cb3-56" data-line-number="56">            <span class="cf">while</span> (table[hash] != NULL &amp;&amp; table[hash]-&gt;getKey() != key)</a>
-<a class="sourceLine" id="cb3-57" data-line-number="57">                  hash = (hash + <span class="dv">1</span>) % TABLE_SIZE;</a>
-<a class="sourceLine" id="cb3-58" data-line-number="58"></a>
-<a class="sourceLine" id="cb3-59" data-line-number="59">            <span class="cf">if</span> (table[hash] != NULL)</a>
-<a class="sourceLine" id="cb3-60" data-line-number="60">                  <span class="kw">delete</span> table[hash];</a>
-<a class="sourceLine" id="cb3-61" data-line-number="61"></a>
-<a class="sourceLine" id="cb3-62" data-line-number="62">            table[hash] = <span class="kw">new</span> HashEntry(key, value);</a>
-<a class="sourceLine" id="cb3-63" data-line-number="63">      }     </a>
-<a class="sourceLine" id="cb3-64" data-line-number="64"></a>
-<a class="sourceLine" id="cb3-65" data-line-number="65">      ~HashMap()</a>
-<a class="sourceLine" id="cb3-66" data-line-number="66">      {</a>
-<a class="sourceLine" id="cb3-67" data-line-number="67">            <span class="cf">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt; TABLE_SIZE; i++)</a>
-<a class="sourceLine" id="cb3-68" data-line-number="68">                  <span class="cf">if</span> (table[i] != NULL)</a>
-<a class="sourceLine" id="cb3-69" data-line-number="69">                        <span class="kw">delete</span> table[i];</a>
-<a class="sourceLine" id="cb3-70" data-line-number="70"></a>
-<a class="sourceLine" id="cb3-71" data-line-number="71">            <span class="kw">delete</span>[] table;</a>
-<a class="sourceLine" id="cb3-72" data-line-number="72">      }</a>
-<a class="sourceLine" id="cb3-73" data-line-number="73">};</a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> HashEntry</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="kw">private</span><span class="op">:</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>      <span class="dt">int</span> key<span class="op">;</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>      <span class="dt">int</span> value<span class="op">;</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span><span class="op">:</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>      HashEntry<span class="op">(</span><span class="dt">int</span> key<span class="op">,</span> <span class="dt">int</span> value<span class="op">)</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>      <span class="op">{</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>            <span class="kw">this</span><span class="op">-&gt;</span>key <span class="op">=</span> key<span class="op">;</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>            <span class="kw">this</span><span class="op">-&gt;</span>value <span class="op">=</span> value<span class="op">;</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>      <span class="op">}</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>      <span class="dt">int</span> getKey<span class="op">()</span> <span class="op">{</span> <span class="cf">return</span> key<span class="op">;</span> <span class="op">}</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>      <span class="dt">int</span> getValue<span class="op">()</span> <span class="op">{</span> <span class="cf">return</span> value<span class="op">;</span> <span class="op">}</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="at">const</span> <span class="dt">int</span> TABLE_SIZE <span class="op">=</span> <span class="dv">128</span><span class="op">;</span></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> HashMap</span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a><span class="kw">private</span><span class="op">:</span></span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>      HashEntry <span class="op">**</span>table<span class="op">;</span></span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span><span class="op">:</span></span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>      HashMap<span class="op">()</span></span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>      <span class="op">{</span></span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>            table <span class="op">=</span> <span class="kw">new</span> HashEntry<span class="op">*[</span>TABLE_SIZE<span class="op">];</span></span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> TABLE_SIZE<span class="op">;</span> i<span class="op">++)</span></span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a>                  table<span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> NULL<span class="op">;</span></span>
+<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a>      <span class="op">}</span></span>
+<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a>      <span class="dt">int</span> get<span class="op">(</span><span class="dt">int</span> key<span class="op">)</span></span>
+<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a>      <span class="op">{</span></span>
+<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a>            <span class="dt">int</span> hash <span class="op">=</span> <span class="op">(</span>key <span class="op">%</span> TABLE_SIZE<span class="op">);</span></span>
+<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a>            <span class="cf">while</span> <span class="op">(</span>table<span class="op">[</span>hash<span class="op">]</span> <span class="op">!=</span> NULL <span class="op">&amp;&amp;</span> table<span class="op">[</span>hash<span class="op">]-&gt;</span>getKey<span class="op">()</span> <span class="op">!=</span> key<span class="op">)</span></span>
+<span id="cb3-44"><a href="#cb3-44" aria-hidden="true" tabindex="-1"></a>                  hash <span class="op">=</span> <span class="op">(</span>hash <span class="op">+</span> <span class="dv">1</span><span class="op">)</span> <span class="op">%</span> TABLE_SIZE<span class="op">;</span></span>
+<span id="cb3-45"><a href="#cb3-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-46"><a href="#cb3-46" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="op">(</span>table<span class="op">[</span>hash<span class="op">]</span> <span class="op">==</span> NULL<span class="op">)</span></span>
+<span id="cb3-47"><a href="#cb3-47" aria-hidden="true" tabindex="-1"></a>                  <span class="cf">return</span> <span class="op">-</span><span class="dv">1</span><span class="op">;</span></span>
+<span id="cb3-48"><a href="#cb3-48" aria-hidden="true" tabindex="-1"></a>            <span class="cf">else</span></span>
+<span id="cb3-49"><a href="#cb3-49" aria-hidden="true" tabindex="-1"></a>                  <span class="cf">return</span> table<span class="op">[</span>hash<span class="op">]-&gt;</span>getValue<span class="op">();</span></span>
+<span id="cb3-50"><a href="#cb3-50" aria-hidden="true" tabindex="-1"></a>      <span class="op">}</span></span>
+<span id="cb3-51"><a href="#cb3-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-52"><a href="#cb3-52" aria-hidden="true" tabindex="-1"></a>      <span class="dt">void</span> put<span class="op">(</span><span class="dt">int</span> key<span class="op">,</span> <span class="dt">int</span> value<span class="op">)</span></span>
+<span id="cb3-53"><a href="#cb3-53" aria-hidden="true" tabindex="-1"></a>      <span class="op">{</span></span>
+<span id="cb3-54"><a href="#cb3-54" aria-hidden="true" tabindex="-1"></a>            <span class="dt">int</span> hash <span class="op">=</span> <span class="op">(</span>key <span class="op">%</span> TABLE_SIZE<span class="op">);</span></span>
+<span id="cb3-55"><a href="#cb3-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-56"><a href="#cb3-56" aria-hidden="true" tabindex="-1"></a>            <span class="cf">while</span> <span class="op">(</span>table<span class="op">[</span>hash<span class="op">]</span> <span class="op">!=</span> NULL <span class="op">&amp;&amp;</span> table<span class="op">[</span>hash<span class="op">]-&gt;</span>getKey<span class="op">()</span> <span class="op">!=</span> key<span class="op">)</span></span>
+<span id="cb3-57"><a href="#cb3-57" aria-hidden="true" tabindex="-1"></a>                  hash <span class="op">=</span> <span class="op">(</span>hash <span class="op">+</span> <span class="dv">1</span><span class="op">)</span> <span class="op">%</span> TABLE_SIZE<span class="op">;</span></span>
+<span id="cb3-58"><a href="#cb3-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-59"><a href="#cb3-59" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> <span class="op">(</span>table<span class="op">[</span>hash<span class="op">]</span> <span class="op">!=</span> NULL<span class="op">)</span></span>
+<span id="cb3-60"><a href="#cb3-60" aria-hidden="true" tabindex="-1"></a>                  <span class="kw">delete</span> table<span class="op">[</span>hash<span class="op">];</span></span>
+<span id="cb3-61"><a href="#cb3-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-62"><a href="#cb3-62" aria-hidden="true" tabindex="-1"></a>            table<span class="op">[</span>hash<span class="op">]</span> <span class="op">=</span> <span class="kw">new</span> HashEntry<span class="op">(</span>key<span class="op">,</span> value<span class="op">);</span></span>
+<span id="cb3-63"><a href="#cb3-63" aria-hidden="true" tabindex="-1"></a>      <span class="op">}</span>     </span>
+<span id="cb3-64"><a href="#cb3-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-65"><a href="#cb3-65" aria-hidden="true" tabindex="-1"></a>      <span class="op">~</span>HashMap<span class="op">()</span></span>
+<span id="cb3-66"><a href="#cb3-66" aria-hidden="true" tabindex="-1"></a>      <span class="op">{</span></span>
+<span id="cb3-67"><a href="#cb3-67" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> TABLE_SIZE<span class="op">;</span> i<span class="op">++)</span></span>
+<span id="cb3-68"><a href="#cb3-68" aria-hidden="true" tabindex="-1"></a>                  <span class="cf">if</span> <span class="op">(</span>table<span class="op">[</span>i<span class="op">]</span> <span class="op">!=</span> NULL<span class="op">)</span></span>
+<span id="cb3-69"><a href="#cb3-69" aria-hidden="true" tabindex="-1"></a>                        <span class="kw">delete</span> table<span class="op">[</span>i<span class="op">];</span></span>
+<span id="cb3-70"><a href="#cb3-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-71"><a href="#cb3-71" aria-hidden="true" tabindex="-1"></a>            <span class="kw">delete</span><span class="op">[]</span> table<span class="op">;</span></span>
+<span id="cb3-72"><a href="#cb3-72" aria-hidden="true" tabindex="-1"></a>      <span class="op">}</span></span>
+<span id="cb3-73"><a href="#cb3-73" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div>
 <p>2009 nodes in an abstract syntax tree. <img data-src="images/S6kW9.jpg" src="images/S6kW9.jpg"></p>
 </div>
 <div class="small">
@@ -260,44 +263,44 @@ interpretAtom (AGroup t) = interpretTerm t</code></pre>
 <h1>Coq and Agda</h1>
 <p>In Coq and Agda all definable functions are (under the normal circumstances) total, which means:</p>
 <ol type="1">
-<li class="fragment">The function will accept any input of the specified type, errors like Haskell’s “non-exhaustive patterns” are not possible:</li>
+<li class="fragment">The function must accept any input of the specified type, errors like Haskell’s “non-exhaustive patterns” are not possible:</li>
 </ol>
-<div class="sourceCode" id="cb7"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="ot">helper ::</span> <span class="dt">Integer</span> <span class="ot">-&gt;</span> [<span class="dt">Integer</span>] <span class="ot">-&gt;</span> [<span class="dt">Integer</span>] <span class="ot">-&gt;</span> [(<span class="dt">Integer</span>,<span class="dt">Integer</span>)] <span class="ot">-&gt;</span> [<span class="dt">Integer</span>]</a>
-<a class="sourceLine" id="cb7-2" data-line-number="2">helper n [] (v) _ <span class="fu">=</span> []</a>
-<a class="sourceLine" id="cb7-3" data-line-number="3">helper n (x<span class="fu">:</span>y<span class="fu">:</span>xs) (v) (c<span class="fu">:</span>cs) <span class="fu">=</span></a>
-<a class="sourceLine" id="cb7-4" data-line-number="4">    <span class="kw">if</span> (chinese3 (b<span class="fu">:</span>c<span class="fu">:</span>cs) <span class="fu">==</span> n)</a>
-<a class="sourceLine" id="cb7-5" data-line-number="5">      <span class="kw">then</span> (x<span class="fu">:</span>v)</a>
-<a class="sourceLine" id="cb7-6" data-line-number="6">    <span class="kw">else</span> helper n (xs) (x<span class="fu">:</span>v) ((n <span class="ot">`mod`</span> y,y)<span class="fu">:</span>c<span class="fu">:</span>cs)</a>
-<a class="sourceLine" id="cb7-7" data-line-number="7">    <span class="kw">where</span> b <span class="fu">=</span>(n <span class="ot">`mod`</span> x,x)</a>
-<a class="sourceLine" id="cb7-8" data-line-number="8"></a>
-<a class="sourceLine" id="cb7-9" data-line-number="9"><span class="co">-- helper 10 primes [] [] ⟶ error: Non-exhaustive patterns in function helper.</span></a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ot">helper ::</span> <span class="dt">Integer</span> <span class="ot">-&gt;</span> [<span class="dt">Integer</span>] <span class="ot">-&gt;</span> [<span class="dt">Integer</span>] <span class="ot">-&gt;</span> [(<span class="dt">Integer</span>,<span class="dt">Integer</span>)] <span class="ot">-&gt;</span> [<span class="dt">Integer</span>]</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>helper n [] (v) _ <span class="ot">=</span> []</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>helper n (x<span class="op">:</span>y<span class="op">:</span>xs) (v) (c<span class="op">:</span>cs) <span class="ot">=</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">if</span> (chinese3 (b<span class="op">:</span>c<span class="op">:</span>cs) <span class="op">==</span> n)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>      <span class="kw">then</span> (x<span class="op">:</span>v)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">else</span> helper n (xs) (x<span class="op">:</span>v) ((n <span class="ot">`mod`</span> y,y)<span class="op">:</span>c<span class="op">:</span>cs)</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">where</span> b <span class="ot">=</span>(n <span class="ot">`mod`</span> x,x)</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="co">-- helper 10 primes [] [] ⟶ error: Non-exhaustive patterns in function helper.</span></span></code></pre></div>
 <ol start="2" type="1">
-<li class="fragment">The function will terminate for any input, infinite recursion is not allowed:</li>
+<li class="fragment">The function must terminate for any input. Infinite recursion is not allowed:</li>
 </ol>
-<div class="sourceCode" id="cb8"><pre class="sourceCode haskell"><code class="sourceCode haskell"><a class="sourceLine" id="cb8-1" data-line-number="1">helper a b c d <span class="fu">=</span> helper a (a<span class="fu">:</span>b) c d</a></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>helper a b c d <span class="ot">=</span> helper a (a<span class="op">:</span>b) c d</span></code></pre></div>
 </section><div><a class="slider-prev" href="#proof-assistants-coq-and-agda"></a><a class="slider-next" href="#agda-examples"></a></div>
 <section id="agda-examples" class="slide level1">
 <h1>Agda examples</h1>
 <p>Inductive datatype is defined by a set of constructors. Note that indentation is significant (like in Python and Haskell)</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="kw">data</span> Nat <span class="ot">:</span> <span class="dt">Set</span> <span class="kw">where</span></a>
-<a class="sourceLine" id="cb9-2" data-line-number="2">    zero <span class="ot">:</span> Nat</a>
-<a class="sourceLine" id="cb9-3" data-line-number="3">    succ <span class="ot">:</span> Nat <span class="ot">→</span> Nat</a></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode agda"><code class="sourceCode agda"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">data</span> Nat <span class="ot">:</span> <span class="dt">Set</span> <span class="kw">where</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    zero <span class="ot">:</span> Nat</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    succ <span class="ot">:</span> Nat <span class="ot">→</span> Nat</span></code></pre></div>
 <p>Function on inductive types are defined by the means of pattern matching.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb10-1" data-line-number="1">plus <span class="ot">:</span> Nat <span class="ot">→</span> Nat <span class="ot">→</span> Nat</a>
-<a class="sourceLine" id="cb10-2" data-line-number="2">plus zero m <span class="ot">=</span> m</a>
-<a class="sourceLine" id="cb10-3" data-line-number="3">plus <span class="ot">(</span>succ n<span class="ot">)</span> m <span class="ot">=</span> succ <span class="ot">(</span>plus n m<span class="ot">)</span></a></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode agda"><code class="sourceCode agda"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>plus <span class="ot">:</span> Nat <span class="ot">→</span> Nat <span class="ot">→</span> Nat</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>plus zero m <span class="ot">=</span> m</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>plus <span class="ot">(</span>succ n<span class="ot">)</span> m <span class="ot">=</span> succ <span class="ot">(</span>plus n m<span class="ot">)</span></span></code></pre></div>
 </section><div><a class="slider-prev" href="#coq-and-agda"></a><a class="slider-next" href="#agda-examples-1"></a></div>
 <section id="agda-examples-1" class="slide level1">
 <h1>Agda examples</h1>
 <p>Dependent product indexed type familiy. Note that the implicit argument n to <code>cons</code> is enclosed in braces.</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="kw">data</span> Vec <span class="ot">(</span>A <span class="ot">:</span> <span class="dt">Set</span><span class="ot">)</span> <span class="ot">:</span> Nat <span class="ot">→</span> <span class="dt">Set</span> <span class="kw">where</span></a>
-<a class="sourceLine" id="cb11-2" data-line-number="2">    [] <span class="ot">:</span> Vec A zero</a>
-<a class="sourceLine" id="cb11-3" data-line-number="3">    cons <span class="ot">:</span> <span class="ot">{</span>n <span class="ot">:</span> Nat<span class="ot">}</span> <span class="ot">→</span> A <span class="ot">→</span> Vec A n <span class="ot">→</span> Vec A <span class="ot">(</span>succ n<span class="ot">)</span></a>
-<a class="sourceLine" id="cb11-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb11-5" data-line-number="5">cons zero [] <span class="co">-- Vector with a single element (0)</span></a>
-<a class="sourceLine" id="cb11-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb11-7" data-line-number="7">head <span class="ot">:</span> <span class="ot">{</span>A <span class="ot">:</span> <span class="dt">Set</span><span class="ot">}{</span>n <span class="ot">:</span> Nat<span class="ot">}</span> <span class="ot">→</span> Vec A <span class="ot">(</span>succ n<span class="ot">)</span> <span class="ot">→</span> A</a>
-<a class="sourceLine" id="cb11-8" data-line-number="8">head <span class="ot">(</span>cons x xs<span class="ot">)</span> <span class="ot">=</span> x</a></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode agda"><code class="sourceCode agda"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">data</span> Vec <span class="ot">(</span>A <span class="ot">:</span> <span class="dt">Set</span><span class="ot">)</span> <span class="ot">:</span> Nat <span class="ot">→</span> <span class="dt">Set</span> <span class="kw">where</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    [] <span class="ot">:</span> Vec A zero</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    cons <span class="ot">:</span> <span class="ot">{</span>n <span class="ot">:</span> Nat<span class="ot">}</span> <span class="ot">→</span> A <span class="ot">→</span> Vec A n <span class="ot">→</span> Vec A <span class="ot">(</span>succ n<span class="ot">)</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>cons zero [] <span class="co">-- Vector with a single element (0)</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>head <span class="ot">:</span> <span class="ot">{</span>A <span class="ot">:</span> <span class="dt">Set</span><span class="ot">}{</span>n <span class="ot">:</span> Nat<span class="ot">}</span> <span class="ot">→</span> Vec A <span class="ot">(</span>succ n<span class="ot">)</span> <span class="ot">→</span> A</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>head <span class="ot">(</span>cons x xs<span class="ot">)</span> <span class="ot">=</span> x</span></code></pre></div>
 </section><div><a class="slider-prev" href="#agda-examples"></a><a class="slider-next" href="#coq-examples"></a></div>
 <section id="coq-examples" class="slide level1">
 <h1>Coq examples</h1>
@@ -330,69 +333,69 @@ Definition head A n (vec : Vector A (S n)) : A := head' vec.</code></pre>
 <section id="coq-and-agda-example-side-by-side" class="slide level1">
 <h1>Coq and Agda example side by side</h1>
 <div class="twocolumn">
-<div class="sourceCode" id="cb16"><pre class="sourceCode ocaml"><code class="sourceCode ocaml"><a class="sourceLine" id="cb16-1" data-line-number="1">Inductive Nat :=</a>
-<a class="sourceLine" id="cb16-2" data-line-number="2">  | zero : Nat</a>
-<a class="sourceLine" id="cb16-3" data-line-number="3">  | <span class="dt">succ</span> : Nat -&gt; Nat.</a>
-<a class="sourceLine" id="cb16-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb16-5" data-line-number="5">Inductive Even: Nat -&gt; Prop :=</a>
-<a class="sourceLine" id="cb16-6" data-line-number="6">  | even_base : Even zero</a>
-<a class="sourceLine" id="cb16-7" data-line-number="7">  | even_step : forall n, Even n -&gt; Even (<span class="dt">succ</span> (<span class="dt">succ</span> n)).</a>
-<a class="sourceLine" id="cb16-8" data-line-number="8"></a>
-<a class="sourceLine" id="cb16-9" data-line-number="9">Fixpoint add (n:Nat) (m:Nat) :=</a>
-<a class="sourceLine" id="cb16-10" data-line-number="10">  <span class="kw">match</span> n <span class="kw">with</span></a>
-<a class="sourceLine" id="cb16-11" data-line-number="11">    | zero =&gt; m</a>
-<a class="sourceLine" id="cb16-12" data-line-number="12">    | <span class="dt">succ</span> n' =&gt; <span class="dt">succ</span> (add n' m)</a>
-<a class="sourceLine" id="cb16-13" data-line-number="13">  <span class="kw">end</span>.</a>
-<a class="sourceLine" id="cb16-14" data-line-number="14"></a>
-<a class="sourceLine" id="cb16-15" data-line-number="15">Lemma add_succ:</a>
-<a class="sourceLine" id="cb16-16" data-line-number="16">  forall n m, add (<span class="dt">succ</span> n) m  = <span class="dt">succ</span> (add n m).</a>
-<a class="sourceLine" id="cb16-17" data-line-number="17">Proof.</a>
-<a class="sourceLine" id="cb16-18" data-line-number="18">  auto.</a>
-<a class="sourceLine" id="cb16-19" data-line-number="19">Qed.</a>
-<a class="sourceLine" id="cb16-20" data-line-number="20"></a>
-<a class="sourceLine" id="cb16-21" data-line-number="21">Lemma even_sum :</a>
-<a class="sourceLine" id="cb16-22" data-line-number="22">  forall n m, Even n -&gt; Even m -&gt; Even (add n m).</a>
-<a class="sourceLine" id="cb16-23" data-line-number="23">Proof.</a>
-<a class="sourceLine" id="cb16-24" data-line-number="24">  intros n m even_n even_m.</a>
-<a class="sourceLine" id="cb16-25" data-line-number="25">  induction even_n.</a>
-<a class="sourceLine" id="cb16-26" data-line-number="26">   <span class="co">(* case even_base *)</span></a>
-<a class="sourceLine" id="cb16-27" data-line-number="27">   - simpl.</a>
-<a class="sourceLine" id="cb16-28" data-line-number="28">     assumption.</a>
-<a class="sourceLine" id="cb16-29" data-line-number="29">   <span class="co">(* case even_step *)</span></a>
-<a class="sourceLine" id="cb16-30" data-line-number="30">   - repeat (rewrite add_succ).</a>
-<a class="sourceLine" id="cb16-31" data-line-number="31">     apply even_step.</a>
-<a class="sourceLine" id="cb16-32" data-line-number="32">     assumption.</a>
-<a class="sourceLine" id="cb16-33" data-line-number="33">Qed.</a></code></pre></div>
-<div class="sourceCode" id="cb17"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="kw">data</span> Nat <span class="ot">:</span> <span class="dt">Set</span> <span class="kw">where</span></a>
-<a class="sourceLine" id="cb17-2" data-line-number="2">  zero <span class="ot">:</span> Nat</a>
-<a class="sourceLine" id="cb17-3" data-line-number="3">  succ <span class="ot">:</span> Nat <span class="ot">-&gt;</span> Nat</a>
-<a class="sourceLine" id="cb17-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb17-5" data-line-number="5"><span class="kw">data</span> Even <span class="ot">:</span> Nat <span class="ot">-&gt;</span> <span class="dt">Set</span> <span class="kw">where</span></a>
-<a class="sourceLine" id="cb17-6" data-line-number="6">  even<span class="ot">_</span>base <span class="ot">:</span> Even zero</a>
-<a class="sourceLine" id="cb17-7" data-line-number="7">  even<span class="ot">_</span>step <span class="ot">:</span> <span class="kw">forall</span> <span class="ot">{</span>n<span class="ot">}</span> <span class="ot">-&gt;</span> Even n <span class="ot">-&gt;</span> Even <span class="ot">(</span>succ <span class="ot">(</span>succ n<span class="ot">))</span></a>
-<a class="sourceLine" id="cb17-8" data-line-number="8"></a>
-<a class="sourceLine" id="cb17-9" data-line-number="9"><span class="ot">_</span>+<span class="ot">_</span> <span class="ot">:</span> Nat <span class="ot">-&gt;</span> Nat <span class="ot">-&gt;</span> Nat</a>
-<a class="sourceLine" id="cb17-10" data-line-number="10">zero + n <span class="ot">=</span> n</a>
-<a class="sourceLine" id="cb17-11" data-line-number="11"><span class="ot">(</span>succ n<span class="ot">)</span> + m <span class="ot">=</span> succ <span class="ot">(</span>n + m<span class="ot">)</span></a>
-<a class="sourceLine" id="cb17-12" data-line-number="12"></a>
-<a class="sourceLine" id="cb17-13" data-line-number="13">even<span class="ot">_</span>sum <span class="ot">:</span> <span class="kw">forall</span> <span class="ot">{</span>n m<span class="ot">}</span> <span class="ot">-&gt;</span> Even n <span class="ot">-&gt;</span> Even m <span class="ot">-&gt;</span> Even <span class="ot">(</span>n + m<span class="ot">)</span></a>
-<a class="sourceLine" id="cb17-14" data-line-number="14">even<span class="ot">_</span>sum even<span class="ot">_</span>base x      <span class="ot">=</span> x</a>
-<a class="sourceLine" id="cb17-15" data-line-number="15">even<span class="ot">_</span>sum <span class="ot">(</span>even<span class="ot">_</span>step x<span class="ot">)</span> y  <span class="ot">=</span> even<span class="ot">_</span>step <span class="ot">(</span>even<span class="ot">_</span>sum x y<span class="ot">)</span></a></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode ocaml"><code class="sourceCode ocaml"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>Inductive Nat :=</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  | zero : Nat</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  | <span class="dt">succ</span> : Nat -&gt; Nat.</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>Inductive Even: Nat -&gt; Prop :=</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>  | even_base : Even zero</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>  | even_step : forall n, Even n -&gt; Even (<span class="dt">succ</span> (<span class="dt">succ</span> n)).</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>Fixpoint add (n:Nat) (m:Nat) :=</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>  <span class="kw">match</span> n <span class="kw">with</span></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>    | zero =&gt; m</span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>    | <span class="dt">succ</span> n' =&gt; <span class="dt">succ</span> (add n' m)</span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>  <span class="kw">end</span>.</span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>Lemma add_succ:</span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>  forall n m, add (<span class="dt">succ</span> n) m  = <span class="dt">succ</span> (add n m).</span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>Proof.</span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>  auto.</span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a>Qed.</span>
+<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a>Lemma even_sum :</span>
+<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a>  forall n m, Even n -&gt; Even m -&gt; Even (add n m).</span>
+<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a>Proof.</span>
+<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a>  intros n m even_n even_m.</span>
+<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a>  induction even_n.</span>
+<span id="cb16-26"><a href="#cb16-26" aria-hidden="true" tabindex="-1"></a>   <span class="co">(* case even_base *)</span></span>
+<span id="cb16-27"><a href="#cb16-27" aria-hidden="true" tabindex="-1"></a>   - simpl.</span>
+<span id="cb16-28"><a href="#cb16-28" aria-hidden="true" tabindex="-1"></a>     assumption.</span>
+<span id="cb16-29"><a href="#cb16-29" aria-hidden="true" tabindex="-1"></a>   <span class="co">(* case even_step *)</span></span>
+<span id="cb16-30"><a href="#cb16-30" aria-hidden="true" tabindex="-1"></a>   - repeat (rewrite add_succ).</span>
+<span id="cb16-31"><a href="#cb16-31" aria-hidden="true" tabindex="-1"></a>     apply even_step.</span>
+<span id="cb16-32"><a href="#cb16-32" aria-hidden="true" tabindex="-1"></a>     assumption.</span>
+<span id="cb16-33"><a href="#cb16-33" aria-hidden="true" tabindex="-1"></a>Qed.</span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode agda"><code class="sourceCode agda"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="kw">data</span> Nat <span class="ot">:</span> <span class="dt">Set</span> <span class="kw">where</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  zero <span class="ot">:</span> Nat</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  succ <span class="ot">:</span> Nat <span class="ot">-&gt;</span> Nat</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="kw">data</span> Even <span class="ot">:</span> Nat <span class="ot">-&gt;</span> <span class="dt">Set</span> <span class="kw">where</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>  even<span class="ot">_</span>base <span class="ot">:</span> Even zero</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>  even<span class="ot">_</span>step <span class="ot">:</span> <span class="kw">forall</span> <span class="ot">{</span>n<span class="ot">}</span> <span class="ot">-&gt;</span> Even n <span class="ot">-&gt;</span> Even <span class="ot">(</span>succ <span class="ot">(</span>succ n<span class="ot">))</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a><span class="ot">_</span>+<span class="ot">_</span> <span class="ot">:</span> Nat <span class="ot">-&gt;</span> Nat <span class="ot">-&gt;</span> Nat</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>zero + n <span class="ot">=</span> n</span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a><span class="ot">(</span>succ n<span class="ot">)</span> + m <span class="ot">=</span> succ <span class="ot">(</span>n + m<span class="ot">)</span></span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>even<span class="ot">_</span>sum <span class="ot">:</span> <span class="kw">forall</span> <span class="ot">{</span>n m<span class="ot">}</span> <span class="ot">-&gt;</span> Even n <span class="ot">-&gt;</span> Even m <span class="ot">-&gt;</span> Even <span class="ot">(</span>n + m<span class="ot">)</span></span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>even<span class="ot">_</span>sum even<span class="ot">_</span>base x      <span class="ot">=</span> x</span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>even<span class="ot">_</span>sum <span class="ot">(</span>even<span class="ot">_</span>step x<span class="ot">)</span> y  <span class="ot">=</span> even<span class="ot">_</span>step <span class="ot">(</span>even<span class="ot">_</span>sum x y<span class="ot">)</span></span></code></pre></div>
 <p><span class="small"> Source: <a href="https://dorchard.blog/2015/03/02/an-afternoon-of-dtttheorem-provers-agda-and-coq/" class="uri">https://dorchard.blog/2015/03/02/an-afternoon-of-dtttheorem-provers-agda-and-coq/</a> </span></p>
 </div>
 </section><div><a class="slider-prev" href="#coq-examples-1"></a><a class="slider-next" href="#formal-syntax-analysis-1"></a></div>
 <section id="formal-syntax-analysis-1" class="slide level1">
 <h1>Formal syntax analysis</h1>
 <p>Parser is a function which implements syntax analysis.</p>
-<p>Suppose we have defined a syntax as a grammar G and an abstract syntax tree and implemented a parser P. More realistic example: you write a code generator, so you have to make sure (to prove) that it will always generate code without compiling.</p>
+<p>Suppose we have defined a syntax as a grammar G + an abstract syntax tree and implemented a parser P. More realistic example: you write a code generator, so you have to make sure (to prove) that it will always generate code without compiling.</p>
 <p>P : String → AST + SyntaxError</p>
 <p>How can we make sure that our parser will:</p>
 <ol type="1">
 <li class="fragment">accept all strings from G-defined language,</li>
-<li class="fragment">not accept any string outside of G-defined language,</li>
-<li class="fragment">will terminate for every finite input?</li>
+<li class="fragment">reject any string outside of G-defined language,</li>
+<li class="fragment">terminate for every finite input?</li>
 </ol>
-<h2 id="couldnt-we-just-write-a-parser-in-a-proof-assistant">Couldn’t we just write a parser in a proof assistant?</h2>
+<h2 id="why-wont-we-just-write-a-parser-in-a-proof-assistant">Why won’t we just write a parser in a proof assistant?</h2>
 <p>From the previous lecture: left recursion.</p>
 <pre><code>term ::= factor | term '+' factor
 factor ::= atom | factor '*' atom
@@ -403,83 +406,83 @@ atom ::= number | '(' term ')'</code></pre>
 <section id="danielsson.-total-parser-combinators-2010" class="slide level1">
 <h1>Danielsson. Total Parser Combinators (2010)</h1>
 <p>Main idea is: use the lazy computation. Total, dependently-typed programming languages may represent infinite lazy computations as a corecursive type. After the parsing process is represented as tree with some infinite-depth paths, make a breadth-first search of successful parse result.</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb20-1" data-line-number="1"><span class="kw">data</span> List <span class="ot">(</span>A <span class="ot">:</span> <span class="dt">Set</span><span class="ot">)</span> <span class="ot">:</span> <span class="dt">Set</span> <span class="kw">where</span></a>
-<a class="sourceLine" id="cb20-2" data-line-number="2">  [] <span class="ot">:</span> List A</a>
-<a class="sourceLine" id="cb20-3" data-line-number="3">  <span class="ot">_</span>::<span class="ot">_</span> <span class="ot">:</span> A <span class="ot">→</span> List A <span class="ot">→</span> List A</a>
-<a class="sourceLine" id="cb20-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb20-5" data-line-number="5"><span class="kw">data</span> Colist <span class="ot">(</span>A <span class="ot">:</span> <span class="dt">Set</span><span class="ot">)</span> <span class="ot">:</span> <span class="dt">Set</span> <span class="kw">where</span></a>
-<a class="sourceLine" id="cb20-6" data-line-number="6">  [] <span class="ot">:</span> Colist A</a>
-<a class="sourceLine" id="cb20-7" data-line-number="7">  <span class="ot">_</span>::<span class="ot">_</span> <span class="ot">:</span> A <span class="ot">→</span> ∞ <span class="ot">(</span>Colist A<span class="ot">)</span> <span class="ot">→</span> Colist A</a>
-<a class="sourceLine" id="cb20-8" data-line-number="8"></a>
-<a class="sourceLine" id="cb20-9" data-line-number="9">♯ <span class="ot">:</span> <span class="ot">{</span>A <span class="ot">:</span> <span class="dt">Set</span><span class="ot">}</span> <span class="ot">→</span>  A <span class="ot">→</span> ∞ A</a>
-<a class="sourceLine" id="cb20-10" data-line-number="10">♭ <span class="ot">:</span> <span class="ot">{</span>A <span class="ot">:</span> <span class="dt">Set</span><span class="ot">}</span> <span class="ot">→</span> ∞ A→ A</a></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode agda"><code class="sourceCode agda"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="kw">data</span> List <span class="ot">(</span>A <span class="ot">:</span> <span class="dt">Set</span><span class="ot">)</span> <span class="ot">:</span> <span class="dt">Set</span> <span class="kw">where</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  [] <span class="ot">:</span> List A</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="ot">_</span>::<span class="ot">_</span> <span class="ot">:</span> A <span class="ot">→</span> List A <span class="ot">→</span> List A</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="kw">data</span> Colist <span class="ot">(</span>A <span class="ot">:</span> <span class="dt">Set</span><span class="ot">)</span> <span class="ot">:</span> <span class="dt">Set</span> <span class="kw">where</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>  [] <span class="ot">:</span> Colist A</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>  <span class="ot">_</span>::<span class="ot">_</span> <span class="ot">:</span> A <span class="ot">→</span> ∞ <span class="ot">(</span>Colist A<span class="ot">)</span> <span class="ot">→</span> Colist A</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>♯ <span class="ot">:</span> <span class="ot">{</span>A <span class="ot">:</span> <span class="dt">Set</span><span class="ot">}</span> <span class="ot">→</span>  A <span class="ot">→</span> ∞ A</span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>♭ <span class="ot">:</span> <span class="ot">{</span>A <span class="ot">:</span> <span class="dt">Set</span><span class="ot">}</span> <span class="ot">→</span> ∞ A→ A</span></code></pre></div>
 <p><span class="smaller"> Danielsson N.A. Total parser combinators // Proceedings of the 15th ACM SIGPLAN international conference on Functional programming - ICFP ’10. ACM Press, 2010. P. 285–285. Source and paper is available at: <a href="http://www.cse.chalmers.se/~nad/publications/danielsson-parser-combinators.html" class="uri">http://www.cse.chalmers.se/~nad/publications/danielsson-parser-combinators.html</a> </span></p>
 </section><div><a class="slider-prev" href="#formal-syntax-analysis-1"></a><a class="slider-next" href="#danielsson.-total-parser-combinators-2010-1"></a></div>
 <section id="danielsson.-total-parser-combinators-2010-1" class="slide level1">
 <h1>Danielsson. Total Parser Combinators (2010)</h1>
-<div class="sourceCode" id="cb21"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb21-1" data-line-number="1">map <span class="ot">:</span> <span class="ot">∀{</span>A B<span class="ot">}</span> <span class="ot">→</span> <span class="ot">(</span> A <span class="ot">→</span> B<span class="ot">)</span> <span class="ot">→</span> Colist A <span class="ot">→</span> Colist B</a>
-<a class="sourceLine" id="cb21-2" data-line-number="2">map f [ ] <span class="ot">=</span> [ ]</a>
-<a class="sourceLine" id="cb21-3" data-line-number="3">map f <span class="ot">(</span>x::xs<span class="ot">)</span> <span class="ot">=</span> f x :: ♯ map f <span class="ot">(</span>♭xs<span class="ot">)</span></a></code></pre></div>
-<div class="sourceCode" id="cb22"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb22-1" data-line-number="1"><span class="kw">mutual</span></a>
-<a class="sourceLine" id="cb22-2" data-line-number="2">  <span class="co">-- The index is true if the corresponding language contains the</span></a>
-<a class="sourceLine" id="cb22-3" data-line-number="3">  <span class="co">-- empty string (is nullable).</span></a>
-<a class="sourceLine" id="cb22-4" data-line-number="4">  <span class="kw">data</span> P <span class="ot">:</span> Bool <span class="ot">→</span> <span class="dt">Set</span> <span class="kw">where</span></a>
-<a class="sourceLine" id="cb22-5" data-line-number="5">    fail  <span class="ot">:</span> P false</a>
-<a class="sourceLine" id="cb22-6" data-line-number="6">    empty <span class="ot">:</span> P true</a>
-<a class="sourceLine" id="cb22-7" data-line-number="7">    tok   <span class="ot">:</span> Tok <span class="ot">→</span> P false</a>
-<a class="sourceLine" id="cb22-8" data-line-number="8">    <span class="ot">_</span>∣<span class="ot">_</span>   <span class="ot">:</span> <span class="ot">∀</span> <span class="ot">{</span>n₁ n₂<span class="ot">}</span> <span class="ot">→</span> P n₁ <span class="ot">→</span>            P n₂ <span class="ot">→</span> P <span class="ot">(</span>n₁ ∨ n₂<span class="ot">)</span></a>
-<a class="sourceLine" id="cb22-9" data-line-number="9">    <span class="ot">_</span>·<span class="ot">_</span>   <span class="ot">:</span> <span class="ot">∀</span> <span class="ot">{</span>n₁ n₂<span class="ot">}</span> <span class="ot">→</span> P n₁ <span class="ot">→</span> ∞⟨ not n₁ ⟩P n₂ <span class="ot">→</span> P <span class="ot">(</span>n₁ ∧ n₂<span class="ot">)</span></a>
-<a class="sourceLine" id="cb22-10" data-line-number="10"></a>
-<a class="sourceLine" id="cb22-11" data-line-number="11">  <span class="co">-- Coinductive if the index is true.</span></a>
-<a class="sourceLine" id="cb22-12" data-line-number="12">  ∞⟨<span class="ot">_</span>⟩P <span class="ot">:</span> Bool <span class="ot">→</span> Bool <span class="ot">→</span> <span class="dt">Set</span></a>
-<a class="sourceLine" id="cb22-13" data-line-number="13">  ∞⟨ true  ⟩P n <span class="ot">=</span> ∞ <span class="ot">(</span>P n<span class="ot">)</span></a>
-<a class="sourceLine" id="cb22-14" data-line-number="14">  ∞⟨ false ⟩P n <span class="ot">=</span>    P n</a></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode agda"><code class="sourceCode agda"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>map <span class="ot">:</span> <span class="ot">∀{</span>A B<span class="ot">}</span> <span class="ot">→</span> <span class="ot">(</span> A <span class="ot">→</span> B<span class="ot">)</span> <span class="ot">→</span> Colist A <span class="ot">→</span> Colist B</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>map f [ ] <span class="ot">=</span> [ ]</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>map f <span class="ot">(</span>x::xs<span class="ot">)</span> <span class="ot">=</span> f x :: ♯ map f <span class="ot">(</span>♭xs<span class="ot">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode agda"><code class="sourceCode agda"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="kw">mutual</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">-- The index is true if the corresponding language contains the</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="co">-- empty string (is nullable).</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">data</span> P <span class="ot">:</span> Bool <span class="ot">→</span> <span class="dt">Set</span> <span class="kw">where</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>    fail  <span class="ot">:</span> P false</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>    empty <span class="ot">:</span> P true</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>    tok   <span class="ot">:</span> Tok <span class="ot">→</span> P false</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>    <span class="ot">_</span>∣<span class="ot">_</span>   <span class="ot">:</span> <span class="ot">∀</span> <span class="ot">{</span>n₁ n₂<span class="ot">}</span> <span class="ot">→</span> P n₁ <span class="ot">→</span>            P n₂ <span class="ot">→</span> P <span class="ot">(</span>n₁ ∨ n₂<span class="ot">)</span></span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>    <span class="ot">_</span>·<span class="ot">_</span>   <span class="ot">:</span> <span class="ot">∀</span> <span class="ot">{</span>n₁ n₂<span class="ot">}</span> <span class="ot">→</span> P n₁ <span class="ot">→</span> ∞⟨ not n₁ ⟩P n₂ <span class="ot">→</span> P <span class="ot">(</span>n₁ ∧ n₂<span class="ot">)</span></span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>  <span class="co">-- Coinductive if the index is true.</span></span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>  ∞⟨<span class="ot">_</span>⟩P <span class="ot">:</span> Bool <span class="ot">→</span> Bool <span class="ot">→</span> <span class="dt">Set</span></span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>  ∞⟨ true  ⟩P n <span class="ot">=</span> ∞ <span class="ot">(</span>P n<span class="ot">)</span></span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>  ∞⟨ false ⟩P n <span class="ot">=</span>    P n</span></code></pre></div>
 </section><div><a class="slider-prev" href="#danielsson.-total-parser-combinators-2010"></a><a class="slider-next" href="#danielsson.-total-parser-combinators-2010-2"></a></div>
 <section id="danielsson.-total-parser-combinators-2010-2" class="slide level1">
 <h1>Danielsson. Total Parser Combinators (2010)</h1>
 <p>Example from: <a href="http://www.cse.chalmers.se/~nad/publications/danielsson-parser-combinators/TotalParserCombinators.Examples.Expression.html#233" class="uri">http://www.cse.chalmers.se/~nad/publications/danielsson-parser-combinators/TotalParserCombinators.Examples.Expression.html#233</a></p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb23-1" data-line-number="1"><span class="kw">module</span> Monadic <span class="kw">where</span></a>
-<a class="sourceLine" id="cb23-2" data-line-number="2">  <span class="kw">mutual</span></a>
-<a class="sourceLine" id="cb23-3" data-line-number="3">    term   <span class="ot">=</span> factor</a>
-<a class="sourceLine" id="cb23-4" data-line-number="4">           ∣ ♯ term            &gt;&gt;= <span class="ot">λ</span> e₁ <span class="ot">→</span></a>
-<a class="sourceLine" id="cb23-5" data-line-number="5">             tok <span class="ch">'+'</span>           &gt;&gt;= <span class="ot">λ</span> <span class="ot">_</span>  <span class="ot">→</span></a>
-<a class="sourceLine" id="cb23-6" data-line-number="6">             factor            &gt;&gt;= <span class="ot">λ</span> e₂ <span class="ot">→</span></a>
-<a class="sourceLine" id="cb23-7" data-line-number="7">             return <span class="ot">(</span>e₁ + e₂<span class="ot">)</span></a>
-<a class="sourceLine" id="cb23-8" data-line-number="8">    factor <span class="ot">=</span> atom</a>
-<a class="sourceLine" id="cb23-9" data-line-number="9">           ∣ ♯ factor          &gt;&gt;= <span class="ot">λ</span> e₁ <span class="ot">→</span></a>
-<a class="sourceLine" id="cb23-10" data-line-number="10">             tok <span class="ch">'*'</span>           &gt;&gt;= <span class="ot">λ</span> <span class="ot">_</span>  <span class="ot">→</span></a>
-<a class="sourceLine" id="cb23-11" data-line-number="11">             atom              &gt;&gt;= <span class="ot">λ</span> e₂ <span class="ot">→</span></a>
-<a class="sourceLine" id="cb23-12" data-line-number="12">             return <span class="ot">(</span>e₁ * e₂<span class="ot">)</span></a>
-<a class="sourceLine" id="cb23-13" data-line-number="13">    atom   <span class="ot">=</span> number</a>
-<a class="sourceLine" id="cb23-14" data-line-number="14">           ∣ tok <span class="ch">'('</span>           &gt;&gt;= <span class="ot">λ</span> <span class="ot">_</span>  <span class="ot">→</span></a>
-<a class="sourceLine" id="cb23-15" data-line-number="15">             ♯ term            &gt;&gt;= <span class="ot">λ</span> e  <span class="ot">→</span></a>
-<a class="sourceLine" id="cb23-16" data-line-number="16">             tok <span class="ch">')'</span>           &gt;&gt;= <span class="ot">λ</span> <span class="ot">_</span>  <span class="ot">→</span></a>
-<a class="sourceLine" id="cb23-17" data-line-number="17">             return e</a></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode agda"><code class="sourceCode agda"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="kw">module</span> Monadic <span class="kw">where</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">mutual</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>    term   <span class="ot">=</span> factor</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>           ∣ ♯ term            &gt;&gt;= <span class="ot">λ</span> e₁ <span class="ot">→</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>             tok <span class="ch">'+'</span>           &gt;&gt;= <span class="ot">λ</span> <span class="ot">_</span>  <span class="ot">→</span></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>             factor            &gt;&gt;= <span class="ot">λ</span> e₂ <span class="ot">→</span></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>             return <span class="ot">(</span>e₁ + e₂<span class="ot">)</span></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>    factor <span class="ot">=</span> atom</span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>           ∣ ♯ factor          &gt;&gt;= <span class="ot">λ</span> e₁ <span class="ot">→</span></span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>             tok <span class="ch">'*'</span>           &gt;&gt;= <span class="ot">λ</span> <span class="ot">_</span>  <span class="ot">→</span></span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>             atom              &gt;&gt;= <span class="ot">λ</span> e₂ <span class="ot">→</span></span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>             return <span class="ot">(</span>e₁ * e₂<span class="ot">)</span></span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>    atom   <span class="ot">=</span> number</span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a>           ∣ tok <span class="ch">'('</span>           &gt;&gt;= <span class="ot">λ</span> <span class="ot">_</span>  <span class="ot">→</span></span>
+<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a>             ♯ term            &gt;&gt;= <span class="ot">λ</span> e  <span class="ot">→</span></span>
+<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a>             tok <span class="ch">')'</span>           &gt;&gt;= <span class="ot">λ</span> <span class="ot">_</span>  <span class="ot">→</span></span>
+<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a>             return e</span></code></pre></div>
 </section><div><a class="slider-prev" href="#danielsson.-total-parser-combinators-2010-1"></a><a class="slider-next" href="#and-what-about-proofs"></a></div>
 <section id="and-what-about-proofs" class="slide level1">
 <h1>And what about proofs?</h1>
 <p>Simplification</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb24-1" data-line-number="1"><span class="co">-- f &lt;$&gt; fail                  → fail</span></a>
-<a class="sourceLine" id="cb24-2" data-line-number="2"><span class="co">-- f &lt;$&gt; return x              → return (f x)</span></a>
-<a class="sourceLine" id="cb24-3" data-line-number="3"><span class="co">-- fail         ∣ p            → p</span></a>
-<a class="sourceLine" id="cb24-4" data-line-number="4"><span class="co">-- p            ∣ fail         → p</span></a>
-<a class="sourceLine" id="cb24-5" data-line-number="5"><span class="co">-- token &gt;&gt;= p₁ ∣ token &gt;&gt;= p₂ → token &gt;&gt;= (λ t → p₁ t ∣ p₂ t)  (*)</span></a>
-<a class="sourceLine" id="cb24-6" data-line-number="6"><span class="co">-- ...</span></a>
-<a class="sourceLine" id="cb24-7" data-line-number="7">simplify₁ <span class="ot">:</span> <span class="ot">∀</span> <span class="ot">{</span>Tok R xs<span class="ot">}</span> <span class="ot">(</span>p <span class="ot">:</span> Parser Tok R xs<span class="ot">)</span> <span class="ot">→</span></a>
-<a class="sourceLine" id="cb24-8" data-line-number="8">            ∃₂ <span class="ot">λ</span> xs <span class="ot">(</span>p′ <span class="ot">:</span> Parser Tok R xs<span class="ot">)</span> <span class="ot">→</span> p ≅P p′</a></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode agda"><code class="sourceCode agda"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co">-- f &lt;$&gt; fail                  → fail</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="co">-- f &lt;$&gt; return x              → return (f x)</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="co">-- fail         ∣ p            → p</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="co">-- p            ∣ fail         → p</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="co">-- token &gt;&gt;= p₁ ∣ token &gt;&gt;= p₂ → token &gt;&gt;= (λ t → p₁ t ∣ p₂ t)  (*)</span></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a><span class="co">-- ...</span></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>simplify₁ <span class="ot">:</span> <span class="ot">∀</span> <span class="ot">{</span>Tok R xs<span class="ot">}</span> <span class="ot">(</span>p <span class="ot">:</span> Parser Tok R xs<span class="ot">)</span> <span class="ot">→</span></span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>            ∃₂ <span class="ot">λ</span> xs <span class="ot">(</span>p′ <span class="ot">:</span> Parser Tok R xs<span class="ot">)</span> <span class="ot">→</span> p ≅P p′</span></code></pre></div>
 <p>Completeness</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode agda"><code class="sourceCode agda"><a class="sourceLine" id="cb25-1" data-line-number="1"><span class="co">-- A proof showing that all functions of type List Bool → List R can</span></a>
-<a class="sourceLine" id="cb25-2" data-line-number="2"><span class="co">-- be realised using parser combinators (for any R, assuming that bag</span></a>
-<a class="sourceLine" id="cb25-3" data-line-number="3"><span class="co">-- equality is used for the lists of results).</span></a>
-<a class="sourceLine" id="cb25-4" data-line-number="4">parser⇒fun <span class="ot">:</span> <span class="ot">∀</span> <span class="ot">{</span>R xs<span class="ot">}</span> <span class="ot">(</span>p <span class="ot">:</span> Parser Bool R xs<span class="ot">)</span> <span class="ot">{</span>x s<span class="ot">}</span> <span class="ot">→</span></a>
-<a class="sourceLine" id="cb25-5" data-line-number="5">             x ∈ p · s ⇿ x ∈ parse p s</a>
-<a class="sourceLine" id="cb25-6" data-line-number="6">maximally-expressive <span class="ot">:</span></a>
-<a class="sourceLine" id="cb25-7" data-line-number="7"> <span class="ot">∀</span> <span class="ot">{</span>R<span class="ot">}</span> <span class="ot">(</span>f <span class="ot">:</span> List Bool <span class="ot">→</span> List R<span class="ot">)</span> <span class="ot">{</span>s<span class="ot">}</span> <span class="ot">→</span></a>
-<a class="sourceLine" id="cb25-8" data-line-number="8"> parse <span class="ot">(</span>grammar f<span class="ot">)</span> s ≈[ bag ] f s</a></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode agda"><code class="sourceCode agda"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co">-- A proof showing that all functions of type List Bool → List R can</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="co">-- be realised using parser combinators (for any R, assuming that bag</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="co">-- equality is used for the lists of results).</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>parser⇒fun <span class="ot">:</span> <span class="ot">∀</span> <span class="ot">{</span>R xs<span class="ot">}</span> <span class="ot">(</span>p <span class="ot">:</span> Parser Bool R xs<span class="ot">)</span> <span class="ot">{</span>x s<span class="ot">}</span> <span class="ot">→</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>             x ∈ p · s ⇿ x ∈ parse p s</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>maximally-expressive <span class="ot">:</span></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a> <span class="ot">∀</span> <span class="ot">{</span>R<span class="ot">}</span> <span class="ot">(</span>f <span class="ot">:</span> List Bool <span class="ot">→</span> List R<span class="ot">)</span> <span class="ot">{</span>s<span class="ot">}</span> <span class="ot">→</span></span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a> parse <span class="ot">(</span>grammar f<span class="ot">)</span> s ≈[ bag ] f s</span></code></pre></div>
 </section><div><a class="slider-prev" href="#danielsson.-total-parser-combinators-2010-2"></a><a class="slider-next" href="#koprowski-binsztok.-trx-a-formally-verified-parser-interpreter"></a></div>
 <section id="koprowski-binsztok.-trx-a-formally-verified-parser-interpreter" class="slide level1">
 <h1>Koprowski, Binsztok. TRX: A Formally Verified Parser Interpreter</h1>
-<p>Main idea: like in original PEG parsers, disallow direct and indirect left-recursive grammars. <a href="http://www.google.com/patents/EP2454661A1?cl=en">Patented</a> algorithm :)</p>
+<p>Main idea: like in original PEG parsers, disallow direct and indirect left-recursive grammars. <a href="http://www.google.com/patents/EP2454661A1?cl=en">Patented</a> algorithm.</p>
 <pre class="coq"><code>Definition wf_analyse (exp : pexp) (wf : PES.t) : bool :=
   match exp with
   | empty ⇒ true
@@ -494,8 +497,10 @@ atom ::= number | '(' term ')'</code></pre>
 end.</code></pre>
 <pre class="coq"><code>Program Fixpoint parse (T : Type) (e : PExp T | is grammar exp e) (s : string)
 {measure (e , s ) ≻ } : {r : ParsingResult T | ∃ n , [ e , s ] ⇒ [ n , r ] }</code></pre>
-<p><span class="smaller"> Koprowski A., Binsztok H. TRX: A Formally Verified Parser Interpreter // Logical Methods in Computer Science / ed. Gordon A. 2011. Vol. 7, № 2.</span></p>
-<p>Medeiros S., Ierusalimschy R. A parsing machine for PEGs // Proceedings of the 2008 symposium on Dynamic languages - DLS ’08. 2008. P. 1–12. </p>
+<div class="smaller">
+<p>Koprowski A., Binsztok H. TRX: A Formally Verified Parser Interpreter // Logical Methods in Computer Science / ed.&nbsp;Gordon A. 2011. Vol. 7, № 2. <a href="https://arxiv.org/abs/1105.2576">(arXiv)</a> <a href="http://www.cs.ru.nl/~Adam.Koprowski/pres/trx-esop-10.pdf">(presentation PDF)</a></p>
+<p>Medeiros S., Ierusalimschy R. A parsing machine for PEGs // Proceedings of the 2008 symposium on Dynamic languages - DLS ’08. 2008. P. 1–12. <a href="https://dl.acm.org/doi/10.1145/1408681.1408683">(ACM)</a> <a href="http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.139.1374&amp;rep=rep1&amp;type=pdf">(Citeseer PDF)</a></p>
+</div>
 </section><div><a class="slider-prev" href="#and-what-about-proofs"></a><a class="slider-next" href="#see-also"></a></div>
 <section id="see-also" class="slide level1">
 <h1>See also</h1>
@@ -505,9 +510,9 @@ end.</code></pre>
 <li class="fragment">Bernardy, Jean-Philippe, Jansson, Patrik. Certified Context-Free Parsing: a Formalisation of Valiant’s Algorithm in Agda: Preprint. Chalmers University of Technology, University of Gothenburg, Sweden, 2016. 27 p.</li>
 <li class="fragment">Sjöblom, Thomas Bååth. An Agda proof of the correctness of Valiant’s algorithm for context free parsing: MSc. Göteborg University: Chalmers University of Technilogy, University of Gothenburg, 2013. 63 p.</li>
 </ol>
-</section><div><a class="slider-prev" href="#koprowski-binsztok.-trx-a-formally-verified-parser-interpreter"></a><a class="slider-next" href="#macros"></a></div>
-<section id="macros" class="slide level1">
-<h1>Macros</h1>
+</section><div><a class="slider-prev" href="#koprowski-binsztok.-trx-a-formally-verified-parser-interpreter"></a><a class="slider-next" href="#macros-and-staged-computations"></a></div>
+<section id="macros-and-staged-computations" class="slide level1">
+<h1>Macros and staged computations</h1>
 <p>Macro (macroinstruction) — is a rule of generation a set of instructions in compile-time.</p>
 <p>Different kinds of macros may be related to both syntax and static semantics of programming language.</p>
 </section><div><a class="slider-prev" href="#see-also"></a><a class="slider-next" href="#macroassemblers-revisited"></a></div>
@@ -549,7 +554,7 @@ stax    x, J, I         ;Store to X[J][I]
 Next    J
 Next    I</code></pre>
 </div>
-</section><div><a class="slider-prev" href="#macros"></a><a class="slider-next" href="#preprocessors"></a></div>
+</section><div><a class="slider-prev" href="#macros-and-staged-computations"></a><a class="slider-next" href="#preprocessors"></a></div>
 <section id="preprocessors" class="slide level1">
 <h1>Preprocessors</h1>
 <p>Preprocessor is a program which operates on input data for some other program. Preprocessors may be used to provide primitive macro facilities.</p>
@@ -557,51 +562,52 @@ Next    I</code></pre>
 </section><div><a class="slider-prev" href="#macroassemblers-revisited"></a><a class="slider-next" href="#c-preprocessor"></a></div>
 <section id="c-preprocessor" class="slide level1">
 <h1>C preprocessor</h1>
-<div class="sourceCode" id="cb30"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb30-1" data-line-number="1"><span class="pp">#include </span><span class="im">&lt;math.h&gt;</span></a>
-<a class="sourceLine" id="cb30-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb30-3" data-line-number="3"><span class="pp">#ifndef _WINDOW_H</span></a>
-<a class="sourceLine" id="cb30-4" data-line-number="4"><span class="pp">#define _WINDOW_H</span></a>
-<a class="sourceLine" id="cb30-5" data-line-number="5"><span class="pp">#endif</span></a>
-<a class="sourceLine" id="cb30-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb30-7" data-line-number="7"><span class="pp">#define MAX(a,b) ((a) &gt; (b) ? (a) : (b))</span></a>
-<a class="sourceLine" id="cb30-8" data-line-number="8"></a>
-<a class="sourceLine" id="cb30-9" data-line-number="9"><span class="pp">#if VERBOSE &gt;= 2</span></a>
-<a class="sourceLine" id="cb30-10" data-line-number="10">  print(<span class="st">"trace message"</span>);</a>
-<a class="sourceLine" id="cb30-11" data-line-number="11"><span class="pp">#endif</span></a>
-<a class="sourceLine" id="cb30-12" data-line-number="12"></a>
-<a class="sourceLine" id="cb30-13" data-line-number="13"><span class="pp">#if !(defined __LP64__ || defined __LLP64__) || defined _WIN32 &amp;&amp; !defined _WIN64</span></a>
-<a class="sourceLine" id="cb30-14" data-line-number="14"><span class="pp">#error 32-bit systems not supported</span></a>
-<a class="sourceLine" id="cb30-15" data-line-number="15"><span class="pp">#else</span></a>
-<a class="sourceLine" id="cb30-16" data-line-number="16">    <span class="co">// we are compiling for a 64-bit system</span></a>
-<a class="sourceLine" id="cb30-17" data-line-number="17"><span class="pp">#endif</span></a></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;math.h&gt;</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#ifndef _WINDOW_H</span></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="pp">#define _WINDOW_H</span></span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a><span class="pp">#endif</span></span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a><span class="pp">#define MAX(a,b) ((a) &gt; (b) ? (a) : (b))</span></span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a><span class="pp">#if VERBOSE &gt;= 2</span></span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a>  print<span class="op">(</span><span class="st">"trace message"</span><span class="op">);</span></span>
+<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a><span class="pp">#endif</span></span>
+<span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a><span class="pp">#if !(defined __LP64__ || defined __LLP64__) || defined _WIN32 &amp;&amp; !defined _WIN64</span></span>
+<span id="cb30-14"><a href="#cb30-14" aria-hidden="true" tabindex="-1"></a><span class="pp">#error 32-bit systems not supported</span></span>
+<span id="cb30-15"><a href="#cb30-15" aria-hidden="true" tabindex="-1"></a><span class="pp">#else</span></span>
+<span id="cb30-16"><a href="#cb30-16" aria-hidden="true" tabindex="-1"></a>    <span class="co">// we are compiling for a 64-bit system</span></span>
+<span id="cb30-17"><a href="#cb30-17" aria-hidden="true" tabindex="-1"></a><span class="pp">#endif</span></span></code></pre></div>
 </section><div><a class="slider-prev" href="#preprocessors"></a><a class="slider-next" href="#c-preprocessor-1"></a></div>
 <section id="c-preprocessor-1" class="slide level1">
 <h1>C preprocessor</h1>
-<div class="sourceCode" id="cb31"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb31-1" data-line-number="1"><span class="pp">#define xstr(s) str(s)</span></a>
-<a class="sourceLine" id="cb31-2" data-line-number="2"><span class="pp">#define str(s) #s</span></a>
-<a class="sourceLine" id="cb31-3" data-line-number="3"><span class="pp">#define foo 4</span></a>
-<a class="sourceLine" id="cb31-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb31-5" data-line-number="5">str (foo)  <span class="co">// outputs "foo"</span></a>
-<a class="sourceLine" id="cb31-6" data-line-number="6">xstr (foo) <span class="co">// outputs "4"</span></a>
-<a class="sourceLine" id="cb31-7" data-line-number="7"></a>
-<a class="sourceLine" id="cb31-8" data-line-number="8"><span class="pp">#define DECLARE_STRUCT_TYPE(name) typedef struct name##_s name##_t</span></a>
-<a class="sourceLine" id="cb31-9" data-line-number="9"></a>
-<a class="sourceLine" id="cb31-10" data-line-number="10">DECLARE_STRUCT_TYPE(g_object);</a>
-<a class="sourceLine" id="cb31-11" data-line-number="11"><span class="co">// Outputs: typedef struct g_object_s g_object_t;</span></a></code></pre></div>
-<p>(It is even possible to write limited recursive programs in C preprocessor by itself: <a href="https://github.com/pfultz2/Cloak/wiki/Is-the-C-preprocessor-Turing-complete%3F">https://github.com/pfultz2/Cloak/wiki/Is-the-C-preprocessor-Turing-complete%3F</a>)</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#define xstr(s) str(s)</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="pp">#define str(s) #s</span></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#define foo 4</span></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>str <span class="op">(</span>foo<span class="op">)</span>  <span class="co">// outputs "foo"</span></span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>xstr <span class="op">(</span>foo<span class="op">)</span> <span class="co">// outputs "4"</span></span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a><span class="pp">#define DECLARE_STRUCT_TYPE(name) typedef struct name##_s name##_t</span></span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a>DECLARE_STRUCT_TYPE<span class="op">(</span>g_object<span class="op">);</span></span>
+<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a><span class="co">// Outputs: typedef struct g_object_s g_object_t;</span></span></code></pre></div>
+<p>(It is even possible to write limited recursive programs in C preprocessor by itself: <a href="https://github.com/pfultz2/Cloak/wiki/Is-the-C-preprocessor-Turing-complete%3F" class="uri">https://github.com/pfultz2/Cloak/wiki/Is-the-C-preprocessor-Turing-complete%3F</a>)</p>
 </section><div><a class="slider-prev" href="#c-preprocessor"></a><a class="slider-next" href="#m4-t4"></a></div>
 <section id="m4-t4" class="slide level1">
 <h1>M4 / T4</h1>
 <p>Some external preprocessors feature complex programming languages for template transformations:</p>
-<div class="sourceCode" id="cb32"><pre class="sourceCode csharp"><code class="sourceCode cs"><a class="sourceLine" id="cb32-1" data-line-number="1"><span class="kw">public</span> <span class="kw">class</span> Decorator: &lt;#= <span class="kw">interface</span>.<span class="fu">FullName</span> #&gt;</a>
-<a class="sourceLine" id="cb32-2" data-line-number="2">{    <span class="co">// …</span></a>
-<a class="sourceLine" id="cb32-3" data-line-number="3">&lt;#</a>
-<a class="sourceLine" id="cb32-4" data-line-number="4">    <span class="kw">foreach</span>(Member member <span class="kw">in</span> interfaceType.<span class="fu">Members</span>)</a>
-<a class="sourceLine" id="cb32-5" data-line-number="5">        <span class="fu">WriteMember</span>(member);</a>
-<a class="sourceLine" id="cb32-6" data-line-number="6">#&gt;</a>
-<a class="sourceLine" id="cb32-7" data-line-number="7">}</a></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode csharp"><code class="sourceCode cs"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="kw">class</span> Decorator<span class="op">:</span> <span class="op">&lt;</span>#<span class="op">=</span> <span class="kw">interface</span><span class="op">.</span><span class="fu">FullName</span> #<span class="op">&gt;</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="op">{</span>    <span class="co">// …</span></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;</span>#</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">foreach</span><span class="op">(</span>Member member <span class="kw">in</span> interfaceType<span class="op">.</span><span class="fu">Members</span><span class="op">)</span></span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>        <span class="fu">WriteMember</span><span class="op">(</span>member<span class="op">);</span></span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>#<span class="op">&gt;</span></span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <p>Notes on the M4 Macro Language: <a href="http://mbreen.com/m4.html" class="uri">http://mbreen.com/m4.html</a></p>
 <p>T4 Text Templates: <a href="https://docs.microsoft.com/en-us/visualstudio/modeling/design-time-code-generation-by-using-t4-text-templates" class="uri">https://docs.microsoft.com/en-us/visualstudio/modeling/design-time-code-generation-by-using-t4-text-templates</a></p>
+<p>CamlP5 (formerly: CamlP4, powerful OCaml preprocessor) <a href="https://github.com/camlp5/camlp5" class="uri">https://github.com/camlp5/camlp5</a></p>
 </section><div><a class="slider-prev" href="#c-preprocessor-1"></a><a class="slider-next" href="#lisp-reader-macros"></a></div>
 <section id="lisp-reader-macros" class="slide level1">
 <h1>LISP Reader Macros</h1>
@@ -631,13 +637,13 @@ Next    I</code></pre>
 13 = Active character, for example ~
 14 = Comment character, normally %
 15 = Invalid character, normally &lt;delete&gt;</code></pre>
-<div class="sourceCode" id="cb34"><pre class="sourceCode latex"><code class="sourceCode latex"><a class="sourceLine" id="cb34-1" data-line-number="1"><span class="co">% \makeatletter substitute:</span></a>
-<a class="sourceLine" id="cb34-2" data-line-number="2"><span class="fu">\hello@</span> <span class="co">% is two tokens \hello  @ by default</span></a>
-<a class="sourceLine" id="cb34-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb34-4" data-line-number="4"><span class="co">% make @ an ordinary letter</span></a>
-<a class="sourceLine" id="cb34-5" data-line-number="5"><span class="fu">\catcode</span>`<span class="fu">\@</span>=11<span class="fu">\relax</span> </a>
-<a class="sourceLine" id="cb34-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb34-7" data-line-number="7"><span class="fu">\hello@</span> <span class="co">% is a single token \hello@</span></a></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode latex"><code class="sourceCode latex"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co">% \makeatletter substitute:</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="fu">\hello@</span> <span class="co">% is two tokens \hello  @ by default</span></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a><span class="co">% make @ an ordinary letter</span></span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a><span class="fu">\catcode</span>`<span class="fu">\@</span>=11<span class="fu">\relax</span> </span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a><span class="fu">\hello@</span> <span class="co">% is a single token \hello@</span></span></code></pre></div>
 </section><div><a class="slider-prev" href="#lisp-reader-macros"></a><a class="slider-next" href="#lisp-macros"></a></div>
 <section id="lisp-macros" class="slide level1">
 <h1>LISP Macros</h1>
@@ -645,26 +651,26 @@ Next    I</code></pre>
 <p>Macros transform program AST at some stage before the evaluation.</p>
 <p>Example: short-circuit evaluation</p>
 <p>C:</p>
-<div class="sourceCode" id="cb35"><pre class="sourceCode c"><code class="sourceCode c"><a class="sourceLine" id="cb35-1" data-line-number="1">A() </a>
-<a class="sourceLine" id="cb35-2" data-line-number="2">  &amp;&amp; B() <span class="co">// only run if A returned non-zero</span></a>
-<a class="sourceLine" id="cb35-3" data-line-number="3">  &amp;&amp; C(); <span class="co">// only run if both A and B returned non-zero</span></a>
-<a class="sourceLine" id="cb35-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb35-5" data-line-number="5">and(A(), B(), C()) <span class="co">// will evaluate A(), B() and C() before going inside and </span></a></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>A<span class="op">()</span> </span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>  <span class="op">&amp;&amp;</span> B<span class="op">()</span> <span class="co">// only run if A returned non-zero</span></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>  <span class="op">&amp;&amp;</span> C<span class="op">();</span> <span class="co">// only run if both A and B returned non-zero</span></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>and<span class="op">(</span>A<span class="op">(),</span> B<span class="op">(),</span> C<span class="op">())</span> <span class="co">// will evaluate A(), B() and C() before going inside and </span></span></code></pre></div>
 <p>LISP:</p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode scheme"><code class="sourceCode scheme"><a class="sourceLine" id="cb36-1" data-line-number="1">(<span class="ex">defmacro</span><span class="fu"> </span>&amp;&amp; (expr1 &amp;rest exprs)</a>
-<a class="sourceLine" id="cb36-2" data-line-number="2">    `(<span class="kw">if</span> ,expr1</a>
-<a class="sourceLine" id="cb36-3" data-line-number="3">         (&amp;&amp; ,@exprs)</a>
-<a class="sourceLine" id="cb36-4" data-line-number="4">         nil))</a>
-<a class="sourceLine" id="cb36-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb36-6" data-line-number="6">(&amp;&amp; (A) (B) (C))</a></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode scheme"><code class="sourceCode scheme"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>(<span class="ex">defmacro</span><span class="fu"> </span>&amp;&amp; (expr1 &amp;rest exprs)</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>    `(<span class="kw">if</span> ,expr1</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>         (&amp;&amp; ,@exprs)</span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>         nil))</span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>(&amp;&amp; (A) (B) (C))</span></code></pre></div>
 </section><div><a class="slider-prev" href="#tex"></a><a class="slider-next" href="#lisp-macros-1"></a></div>
 <section id="lisp-macros-1" class="slide level1">
 <h1>LISP Macros</h1>
 <p>Complex example: SQL-like queries in LISP: <a href="https://marijnhaverbeke.nl/postmodern/s-sql.html" class="uri">https://marijnhaverbeke.nl/postmodern/s-sql.html</a></p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode scheme"><code class="sourceCode scheme"><a class="sourceLine" id="cb37-1" data-line-number="1">(:select (:+ 'field<span class="dv">-1</span> <span class="dv">100</span>) 'field<span class="dv">-5</span></a>
-<a class="sourceLine" id="cb37-2" data-line-number="2">   :from (:as 'my-table 'x)</a>
-<a class="sourceLine" id="cb37-3" data-line-number="3">   :left-join 'your-table :on (:= 'x.field<span class="dv">-2</span> 'your-table.field<span class="dv">-1</span>)</a>
-<a class="sourceLine" id="cb37-4" data-line-number="4">   :where (:not-null 'a.field<span class="dv">-3</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode scheme"><code class="sourceCode scheme"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>(:select (:+ 'field-1 <span class="dv">100</span>) 'field-5</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>   :from (:as 'my-table 'x)</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>   :left-join 'your-table :on (:= 'x.field-2 'your-table.field-1)</span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>   :where (:not-null 'a.field-3))</span></code></pre></div>
 </section><div><a class="slider-prev" href="#lisp-macros"></a><a class="slider-next" href="#lisp-macros-2"></a></div>
 <section id="lisp-macros-2" class="slide level1">
 <h1>LISP Macros</h1>
@@ -672,33 +678,51 @@ Next    I</code></pre>
 <p>Macro code starts running in expansion-time. The run-time is separated from expansion-time with <em>quotation</em> operators: - <code>'</code> — quote - <code>`</code> — quasiquote, allowing for unquoting with operator <code>,</code></p>
 <p>Examples: - <code>(f a b c)</code> – call function <code>f</code> with arguments <code>a</code>, <code>b</code>, <code>c</code> and replace macro invocation node in AST with the result - <code>'(f a b c)</code> – return list (AST) with symbols <code>f</code>, <code>a</code>, <code>b</code>, <code>c</code> as its elements - <code>`(f a b ,(+ 1 2))</code> – evaluate <code>(+ 1 2)</code> at expansion time and return list <code>(f a b 3)</code></p>
 <p>What the code from the previous example does?</p>
-<div class="sourceCode" id="cb38"><pre class="sourceCode scheme"><code class="sourceCode scheme"><a class="sourceLine" id="cb38-1" data-line-number="1">`(<span class="kw">if</span> ,expr1</a>
-<a class="sourceLine" id="cb38-2" data-line-number="2">         (&amp;&amp; ,@exprs)</a>
-<a class="sourceLine" id="cb38-3" data-line-number="3">         nil))</a></code></pre></div>
-</section><div><a class="slider-prev" href="#lisp-macros-1"></a><a class="slider-next" href="#macros-in-rust"></a></div>
-<section id="macros-in-rust" class="slide level1">
-<h1>Macros in Rust</h1>
-<div class="sourceCode" id="cb39"><pre class="sourceCode rust"><code class="sourceCode rust"><a class="sourceLine" id="cb39-1" data-line-number="1"><span class="pp">macro_rules!</span> vec <span class="op">{</span></a>
-<a class="sourceLine" id="cb39-2" data-line-number="2">    ( $( $x:expr ),* ) =&gt; <span class="op">{</span></a>
-<a class="sourceLine" id="cb39-3" data-line-number="3">        <span class="op">{</span></a>
-<a class="sourceLine" id="cb39-4" data-line-number="4">            <span class="kw">let</span> <span class="kw">mut</span> temp_vec = <span class="dt">Vec</span>::new();</a>
-<a class="sourceLine" id="cb39-5" data-line-number="5">            $(</a>
-<a class="sourceLine" id="cb39-6" data-line-number="6">                temp_vec.push($x);</a>
-<a class="sourceLine" id="cb39-7" data-line-number="7">            )*</a>
-<a class="sourceLine" id="cb39-8" data-line-number="8">            temp_vec</a>
-<a class="sourceLine" id="cb39-9" data-line-number="9">        <span class="op">}</span></a>
-<a class="sourceLine" id="cb39-10" data-line-number="10">    <span class="op">}</span>;</a>
-<a class="sourceLine" id="cb39-11" data-line-number="11"><span class="op">}</span></a></code></pre></div>
-<div class="sourceCode" id="cb40"><pre class="sourceCode rust"><code class="sourceCode rust"><a class="sourceLine" id="cb40-1" data-line-number="1"><span class="kw">let</span> x: <span class="dt">Vec</span>&lt;<span class="dt">u32</span>&gt; = <span class="pp">vec!</span><span class="op">[</span><span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span><span class="op">]</span>; </a>
-<a class="sourceLine" id="cb40-2" data-line-number="2"><span class="co">// expanded:</span></a>
-<a class="sourceLine" id="cb40-3" data-line-number="3"><span class="kw">let</span> x : <span class="dt">Vec</span>&lt;<span class="dt">u32</span>&gt; = <span class="op">{</span></a>
-<a class="sourceLine" id="cb40-4" data-line-number="4">  <span class="kw">let</span> <span class="kw">mut</span> temp_vec = <span class="dt">Vec</span>::new();</a>
-<a class="sourceLine" id="cb40-5" data-line-number="5">  temp_vec.push(<span class="dv">1</span>);</a>
-<a class="sourceLine" id="cb40-6" data-line-number="6">  temp_vec.push(<span class="dv">2</span>);</a>
-<a class="sourceLine" id="cb40-7" data-line-number="7">  temp_vec.push(<span class="dv">3</span>);</a>
-<a class="sourceLine" id="cb40-8" data-line-number="8">  temp_vec</a>
-<a class="sourceLine" id="cb40-9" data-line-number="9"><span class="op">}</span></a></code></pre></div>
-</section><div><a class="slider-prev" href="#lisp-macros-2"></a><a class="slider-next" href="#homework-assignments"></a></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode scheme"><code class="sourceCode scheme"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>`(<span class="kw">if</span> ,expr1</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>         (&amp;&amp; ,@exprs)</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>         nil))</span></code></pre></div>
+</section><div><a class="slider-prev" href="#lisp-macros-1"></a><a class="slider-next" href="#syntactic-macros-in-rust"></a></div>
+<section id="syntactic-macros-in-rust" class="slide level1">
+<h1>Syntactic macros in Rust</h1>
+<div class="sourceCode" id="cb39"><pre class="sourceCode rust"><code class="sourceCode rust"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="pp">macro_rules!</span> vec <span class="op">{</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>    ( <span class="op">$</span>( <span class="op">$</span>x<span class="op">:</span>expr )<span class="op">,*</span> ) <span class="op">=&gt;</span> <span class="op">{</span></span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>        <span class="op">{</span></span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>            <span class="kw">let</span> <span class="kw">mut</span> temp_vec <span class="op">=</span> <span class="dt">Vec</span><span class="pp">::</span>new()<span class="op">;</span></span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>            <span class="op">$</span>(</span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a>                temp_vec<span class="op">.</span>push(<span class="op">$</span>x)<span class="op">;</span></span>
+<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a>            )<span class="op">*</span></span>
+<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a>            temp_vec</span>
+<span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+<span id="cb39-10"><a href="#cb39-10" aria-hidden="true" tabindex="-1"></a>    <span class="op">};</span></span>
+<span id="cb39-11"><a href="#cb39-11" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode rust"><code class="sourceCode rust"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> x<span class="op">:</span> <span class="dt">Vec</span><span class="op">&lt;</span><span class="dt">u32</span><span class="op">&gt;</span> <span class="op">=</span> <span class="pp">vec!</span>[<span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span>]<span class="op">;</span> </span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="co">// expanded:</span></span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a><span class="kw">let</span> x <span class="op">:</span> <span class="dt">Vec</span><span class="op">&lt;</span><span class="dt">u32</span><span class="op">&gt;</span> <span class="op">=</span> <span class="op">{</span></span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">let</span> <span class="kw">mut</span> temp_vec <span class="op">=</span> <span class="dt">Vec</span><span class="pp">::</span>new()<span class="op">;</span></span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>  temp_vec<span class="op">.</span>push(<span class="dv">1</span>)<span class="op">;</span></span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a>  temp_vec<span class="op">.</span>push(<span class="dv">2</span>)<span class="op">;</span></span>
+<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a>  temp_vec<span class="op">.</span>push(<span class="dv">3</span>)<span class="op">;</span></span>
+<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a>  temp_vec</span>
+<span id="cb40-9"><a href="#cb40-9" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+</section><div><a class="slider-prev" href="#lisp-macros-2"></a><a class="slider-next" href="#forth-macros-and-multi-stage-computing"></a></div>
+<section id="forth-macros-and-multi-stage-computing" class="slide level1">
+<h1>Forth macros and multi-stage computing</h1>
+<p>Macros, preprocessors etc. represent a separate stage of computation:</p>
+<ul>
+<li class="fragment">macros run at <em>compile-time</em> modifying the code of program</li>
+<li class="fragment">program runs at <em>run-time</em></li>
+</ul>
+<p>In Forth these stages are interleaved.</p>
+<p>Functions in Forth are called “words”. Compiler reads input word-by-word (space-separated). Every word is either macro-word or normal word or a number. When compiler encounters normal word, it emits run-time call to the corresponding code. When compiler encounters macro-word it calls the code immediately at compile-time.</p>
+<p>You can use normal words inside definitions of macro-words.</p>
+<p><code>IF</code> is a macro which pushes current offset to a compiler stack and writes a no-op placeholder <code>jump here</code>.</p>
+<p><code>ENDIF</code> (in Forth it is confusinglytcalled <code>THEN</code>) removes an offset from the stack and writes <code>jump to current offset</code> instead of <code>jump here</code>.</p>
+<pre><code>X 5 &lt; IF 10 PRINT ENDIF </code></pre>
+</section><div><a class="slider-prev" href="#syntactic-macros-in-rust"></a><a class="slider-next" href="#rust-procedural-macros"></a></div>
+<section id="rust-procedural-macros" class="slide level1">
+<h1>Rust procedural macros</h1>
+<p><a href="https://doc.rust-lang.org/reference/procedural-macros.html" class="uri">https://doc.rust-lang.org/reference/procedural-macros.html</a></p>
+</section><div><a class="slider-prev" href="#forth-macros-and-multi-stage-computing"></a><a class="slider-next" href="#homework-assignments"></a></div>
 <section id="homework-assignments" class="slide level1">
 <h1>Homework assignments</h1>
 <p><strong>Task 4.1</strong> (10*) Implement Danielsson’s Total Parser Combinators in Coq.</p>
@@ -715,18 +739,19 @@ Next    I</code></pre>
 <li class="fragment">task 4.3a: implement extensible parser without proofs</li>
 <li class="fragment">task 4.3b: implement simple parser using Coq/Agda</li>
 </ul>
-</section><div><a class="slider-prev" href="#macros-in-rust"></a><a class="slider-next" href="#homework-assignments-1"></a></div>
+</section><div><a class="slider-prev" href="#rust-procedural-macros"></a><a class="slider-next" href="#homework-assignments-1"></a></div>
 <section id="homework-assignments-1" class="slide level1">
 <h1>Homework assignments</h1>
 <p><strong>Task 4.4</strong>*** Extend parser from Task 4.3a with reader macros for a subset of a context-free grammar as an interpreter from s-expressions to parser extension. It’ll be easier to implement in some lanugage featuring <code>eval</code> command (like JavaScript, Python or LISP family)</p>
-<div class="sourceCode" id="cb42"><pre class="sourceCode scheme"><code class="sourceCode scheme"><a class="sourceLine" id="cb42-1" data-line-number="1">(reader-macro &lt;start-string&gt; &lt;stop-string&gt; &lt;grammar&gt;)</a>
-<a class="sourceLine" id="cb42-2" data-line-number="2"><span class="co">; Example:</span></a>
-<a class="sourceLine" id="cb42-3" data-line-number="3">(reader-macro <span class="st">"#"</span> <span class="st">"#"</span> (float decimal-digits</a>
-<a class="sourceLine" id="cb42-4" data-line-number="4">    (optional <span class="st">"."</span> (optional decimal-digits))</a>
-<a class="sourceLine" id="cb42-5" data-line-number="5">    (optional <span class="st">"e"</span> (either <span class="st">"+"</span> <span class="st">"-"</span> <span class="st">""</span>) decimal-digits)))</a>
-<a class="sourceLine" id="cb42-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb42-7" data-line-number="7">#<span class="fl">1.5e11</span># ⟶ (float <span class="st">"1"</span> (<span class="st">"."</span> (<span class="st">"5"</span>)) (<span class="st">"e"</span> (<span class="st">""</span>) <span class="st">"11"</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode scheme"><code class="sourceCode scheme"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>(reader-macro &lt;start-string&gt; &lt;stop-string&gt; &lt;grammar&gt;)</span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="co">; Example:</span></span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>(reader-macro <span class="st">"#"</span> <span class="st">"#"</span> (float decimal-digits</span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>    (optional <span class="st">"."</span> (optional decimal-digits))</span>
+<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a>    (optional <span class="st">"e"</span> (either <span class="st">"+"</span> <span class="st">"-"</span> <span class="st">""</span>) decimal-digits)))</span>
+<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-7"><a href="#cb43-7" aria-hidden="true" tabindex="-1"></a>#<span class="fl">1.5e11</span># ⟶ (float <span class="st">"1"</span> (<span class="st">"."</span> (<span class="st">"5"</span>)) (<span class="st">"e"</span> (<span class="st">""</span>) <span class="st">"11"</span>))</span></code></pre></div>
 <p><strong>Task 4.5</strong>* Write a reader macro for infix arithmetical expressions (addition, multiplication, brackets).</p>
+<p><strong>Task 4.6</strong>** Write Forth macro for infix arithmetical expressions (addition, subtraction, multiplication, brackets)</p>
 </section><div><a class="slider-prev" href="#homework-assignments"></a><a class="slider-next"></a></div>
 
 <!-- start page -->

@@ -8,6 +8,7 @@
 .twocolumn {
   -moz-column-count: 2;
   -webkit-column-count: 2;
+  column-count: 2;
 }
 .small { font-size: small !important; }
 .smaller { font-size: 0.8em !important; }
@@ -150,6 +151,7 @@ public:
       }
 };
 ```
+
 2009 nodes in an abstract syntax tree.
 ![](images/S6kW9.jpg)
 </div>
@@ -234,7 +236,7 @@ Example (in Russian): https://habrahabr.ru/post/148769/
 # Coq and Agda
 In Coq and Agda all definable functions are (under the normal circumstances) total, which means:
 
-1. The function will accept any input of the specified type, errors like Haskell's "non-exhaustive patterns" are not possible:
+1. The function must accept any input of the specified type, errors like Haskell's "non-exhaustive patterns" are not possible:
 
 ```haskell
 helper :: Integer -> [Integer] -> [Integer] -> [(Integer,Integer)] -> [Integer]
@@ -248,7 +250,7 @@ helper n (x:y:xs) (v) (c:cs) =
 -- helper 10 primes [] [] ⟶ error: Non-exhaustive patterns in function helper.
 ```
 
-2. The function will terminate for any input, infinite recursion is not allowed:
+2. The function must terminate for any input. Infinite recursion is not allowed:
 ```haskell
 helper a b c d = helper a (a:b) c d
 ```
@@ -383,7 +385,7 @@ Source: https://dorchard.blog/2015/03/02/an-afternoon-of-dtttheorem-provers-agda
 # Formal syntax analysis
 Parser is a function which implements syntax analysis.
 
-Suppose we have defined a syntax as a grammar G and an abstract syntax tree and implemented a parser P.
+Suppose we have defined a syntax as a grammar G + an abstract syntax tree and implemented a parser P.
 More realistic example: you write a code generator, so you have to make sure (to prove)
 that it will always generate code without compiling.
 
@@ -392,10 +394,10 @@ P : String → AST + SyntaxError
 How can we make sure that our parser will:
 
 1. accept all strings from G-defined language,
-2. not accept any string outside of G-defined language,
-3. will terminate for every finite input?
+2. reject any string outside of G-defined language,
+3. terminate for every finite input?
 
-## Couldn't we just write a parser in a proof assistant?
+## Why won't we just write a parser in a proof assistant?
 From the previous lecture: left recursion.
 ```
 term ::= factor | term '+' factor
@@ -501,7 +503,7 @@ maximally-expressive :
 ```
 
 # Koprowski, Binsztok. TRX: A Formally Verified Parser Interpreter
-Main idea: like in original PEG parsers, disallow direct and indirect left-recursive grammars. [Patented](http://www.google.com/patents/EP2454661A1?cl=en) algorithm :)
+Main idea: like in original PEG parsers, disallow direct and indirect left-recursive grammars. [Patented](http://www.google.com/patents/EP2454661A1?cl=en) algorithm.
 ```coq
 Definition wf_analyse (exp : pexp) (wf : PES.t) : bool :=
   match exp with
@@ -522,11 +524,15 @@ Program Fixpoint parse (T : Type) (e : PExp T | is grammar exp e) (s : string)
 {measure (e , s ) ≻ } : {r : ParsingResult T | ∃ n , [ e , s ] ⇒ [ n , r ] }
 ```
 
-<span class="smaller">
+<div class="smaller">
 Koprowski A., Binsztok H. TRX: A Formally Verified Parser Interpreter // Logical Methods in Computer Science / ed. Gordon A. 2011. Vol. 7, № 2.
+[(arXiv)](https://arxiv.org/abs/1105.2576)
+[(presentation PDF)](http://www.cs.ru.nl/~Adam.Koprowski/pres/trx-esop-10.pdf)  
 
 Medeiros S., Ierusalimschy R. A parsing machine for PEGs // Proceedings of the 2008 symposium on Dynamic languages - DLS ’08. 2008. P. 1–12.
-</span>
+[(ACM)](https://dl.acm.org/doi/10.1145/1408681.1408683)
+[(Citeseer PDF)](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.139.1374&rep=rep1&type=pdf)
+</div>
 
 # See also
 1. Uustalu, Tarmo, Firsov, Denis. Certified Parsing of Regular Languages // Certified Programs and Proofs. Springer International Publishing, 2013. P. 98–113.
@@ -535,7 +541,7 @@ Medeiros S., Ierusalimschy R. A parsing machine for PEGs // Proceedings of the 2
 2. Sjöblom, Thomas Bååth. An Agda proof of the correctness of Valiant’s algorithm for context free parsing: MSc. Göteborg University: Chalmers University of Technilogy, University of Gothenburg, 2013. 63 p.
 
 
-# Macros
+# Macros and staged computations
 Macro (macroinstruction) — is a rule of generation a set of instructions in compile-time.
 
 Different kinds of macros may be related to both syntax and static semantics of programming language.
@@ -642,6 +648,8 @@ public class Decorator: <#= interface.FullName #>
 Notes on the M4 Macro Language: http://mbreen.com/m4.html
 
 T4 Text Templates: https://docs.microsoft.com/en-us/visualstudio/modeling/design-time-code-generation-by-using-t4-text-templates
+
+CamlP5 (formerly: CamlP4, powerful OCaml preprocessor) https://github.com/camlp5/camlp5
 
 
 # LISP Reader Macros
@@ -750,7 +758,7 @@ What the code from the previous example does?
          nil))
 ```
 
-# Macros in Rust
+# Syntactic macros in Rust
 ```rust
 macro_rules! vec {
     ( $( $x:expr ),* ) => {
@@ -776,6 +784,31 @@ let x : Vec<u32> = {
   temp_vec
 }
 ```
+
+# Forth macros and multi-stage computing
+Macros, preprocessors etc. represent a separate stage of computation:
+
+- macros run at *compile-time* modifying the code of program
+- program runs at *run-time*
+
+In Forth these stages are interleaved.
+
+Functions in Forth are called "words". Compiler reads input word-by-word (space-separated). Every word is either macro-word or normal word or a number.
+When compiler encounters normal word, it emits run-time call to the corresponding code. When compiler encounters macro-word it calls the code immediately at compile-time. 
+
+You can use normal words inside definitions of macro-words.
+
+`IF` is a macro which pushes current offset to a compiler stack and writes a no-op placeholder `jump here`.
+
+`ENDIF` (in Forth it is confusinglytcalled `THEN`) removes an offset from the stack and writes `jump to current offset` instead of `jump here`.
+
+```
+X 5 < IF 10 PRINT ENDIF 
+```
+
+# Rust procedural macros
+
+https://doc.rust-lang.org/reference/procedural-macros.html
 
 # Homework assignments
 
@@ -814,3 +847,5 @@ What's the difference?
 ```
 
 **Task 4.5*** Write a reader macro for infix arithmetical expressions (addition, multiplication, brackets).
+
+**Task 4.6**\*\* Write Forth macro for infix arithmetical expressions (addition, subtraction, multiplication, brackets)
