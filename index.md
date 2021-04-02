@@ -28,7 +28,7 @@ Course topics include:
 **12.03.2021, 19.03.2021** Specification of programming language. Syntax. 
 [presentation - html](presentations/03-Specification-Syntax.html) 
 
-**26.03.2021, 02.04.2021** Formal syntax analysis. Syntax extensions. 
+**26.03.2021** Formal syntax analysis. Syntax extensions. 
 [presentation - html](presentations/04-Macros-Parsing.html) 
 
 **02.04.2021** Static semantics. Naming, Bindings and Scope. 
