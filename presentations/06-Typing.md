@@ -112,7 +112,7 @@ Typing:
   Γ ⊦ let x be e in f : σ
 
 # Soundness and completeness
-The following properties connect typing with program execution.
+The following properties describe the relation of typing to program execution.
 
 **Soundness: ** *No incorrect programs are allowed.*
 
@@ -142,7 +142,7 @@ Formally: $Γ ⊢ e₁ : τ$, $e₁ ⟶ e₂$ ⇒ $Γ ⊢ e₂ : τ$
 
 **Progress: ** If well-typed expression is not a value, it is possible to make an evaluation step.
 
-Formally: $Γ ⊢ e₁ : τ$, $e₁$ is not value ⇒ ∃ $e₂$ : $e₁ ⟶ e₂$.
+Formally: $Γ ⊢ e₁ : τ$, $e₁$ is not a value ⇒ ∃ $e₂$ : $e₁ ⟶ e₂$.
 
 # Logical properties of typing
 (usually are proved either by induction on rules or by induction on derivation)
@@ -153,7 +153,7 @@ We usually want this property in a sane type system, it may be neccessary to use
 
 **Inversion: ** *(example) If Γ ⊦ plus(a, b) : num then Γ ⊦ a : num, Γ ⊦ b : num. *
 
-If typing rules are complex, such principles are difficult to state and prove. But these principle is essential for e.g. type inference.
+If typing rules are complex, such principles are difficult to state and prove. But these principles are essential for e.g. type inference.
 
 
 # Structural properties of typing {.inference}
@@ -199,10 +199,10 @@ Linear types with weakening (some variables may stay unused)
 In C++ affine types are implemented as `std::unique_ptr`:
 ```c++
 std::unique_ptr<int> p1(new int(5));
-std::unique_ptr<int> p2 = p1; //Compile error.
-std::unique_ptr<int> p3 = std::move(p1); //Transfers ownership. p3 now owns the memory and p1 is rendered invalid.
+std::unique_ptr<int> p2 = p1; //Compile-time error.
+std::unique_ptr<int> p3 = std::move(p1); //Transfers the ownership. p3 now owns the memory and p1 is rendered invalid.
 
-p3.reset(); //Deletes the memory.
+p3.reset(); //Frees the memory.
 p1.reset(); //Does nothing.
 ```
 
@@ -215,7 +215,7 @@ AppendAB :: File -> (File, File)
 AppendAB file = (fileA, fileB)
 where
     fileA = fwritec 'a' file
-    fileB = fwritec 'b' file -- compile error
+    fileB = fwritec 'b' file -- compile-time error
 ```
 
 ```haskell
@@ -247,6 +247,14 @@ ftp://ftp.cs.washington.edu/tr/2015/03/UW-CSE-15-03-02.pdf
 RustBelt: Securing the Foundations of the Rust Programming Language
 https://dl.acm.org/doi/pdf/10.1145/3158154
 https://plv.mpi-sws.org/rustbelt/popl18/appendix.pdf
+
+See also:
+
+RustViz: Interactively Visualizing Ownership and Borrowing
+https://arxiv.org/pdf/2011.09012.pdf
+
+The Rust Programming Language. Chapter 4. Ownership and Borrowing.
+https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html
 
 # Type inference
 In some languages it is possible to leave "holes" in place of type specifiers. Type checker tries to fill these holes in process of **type inference (type reconstruction).**
@@ -470,6 +478,8 @@ Additional typing rules:
 Example: polymorphic identity function
 
 Λα. λ(x : α). x : ∀α. α → α
+
+Hindley-Milner type system is a simplified version of System F.
 
 # Data-type encoding in polymorphic lambda-calculus
 

@@ -11,6 +11,7 @@
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
@@ -138,14 +139,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 </section><div><a class="slider-prev" href="#type-system"></a><a class="slider-next" href="#simply-typed-lambda-calculus"></a></div>
 <section id="simply-typed-lambda-calculus" class="slide level1 inference">
-<h1>Simply Typed Lambda Calculus</h1>
+<h1 class="inference">Simply Typed Lambda Calculus</h1>
 <p>Type: τ ≡ <em>b</em> | τ₁ → τ₂,</p>
 <p><em>b</em> is an element of the set of basic types.</p>
 <p>Typing rules:</p>
 <table>
 <thead>
 <tr class="header">
-<th style="text-align: center;"><span class="math inline">  </span></th>
+<th style="text-align: center;"><span class="math inline">   </span></th>
 </tr>
 </thead>
 <tbody>
@@ -181,7 +182,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <table>
 <thead>
 <tr class="header">
-<th style="text-align: center;">Γ ⊦ x : σ → τ <span class="math inline">  </span> Γ ⊦ y : σ</th>
+<th style="text-align: center;">Γ ⊦ x : σ → τ <span class="math inline">   </span> Γ ⊦ y : σ</th>
 </tr>
 </thead>
 <tbody>
@@ -193,7 +194,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Derivation — tree of rule applications which starts from empty context and ends in typing derivation for required expression.</p>
 </section><div><a class="slider-prev" href="#typing-1"></a><a class="slider-next" href="#example-from-harpers-practical-foundations"></a></div>
 <section id="example-from-harpers-practical-foundations" class="slide level1 inference">
-<h1>Example from Harper’s «Practical Foundations…»</h1>
+<h1 class="inference">Example from Harper’s «Practical Foundations…»</h1>
 <p>Type: τ ≡ num | str</p>
 Expression: e ≡ x <em>(variable)</em> | n |
 <div class="ib">
@@ -219,7 +220,7 @@ let x be e in f <em>(definition)</em>
 <table>
 <thead>
 <tr class="header">
-<th style="text-align: center;"><span class="math inline">  </span></th>
+<th style="text-align: center;"><span class="math inline">   </span></th>
 </tr>
 </thead>
 <tbody>
@@ -231,7 +232,7 @@ let x be e in f <em>(definition)</em>
 <table>
 <thead>
 <tr class="header">
-<th style="text-align: center;"><span class="math inline">  </span></th>
+<th style="text-align: center;"><span class="math inline">   </span></th>
 </tr>
 </thead>
 <tbody>
@@ -243,7 +244,7 @@ let x be e in f <em>(definition)</em>
 <table>
 <thead>
 <tr class="header">
-<th style="text-align: center;"><span class="math inline">  </span></th>
+<th style="text-align: center;"><span class="math inline">   </span></th>
 </tr>
 </thead>
 <tbody>
@@ -255,7 +256,7 @@ let x be e in f <em>(definition)</em>
 <table>
 <thead>
 <tr class="header">
-<th style="text-align: center;">Γ ⊦ e : num <span class="math inline">  </span> Γ ⊦ f : num</th>
+<th style="text-align: center;">Γ ⊦ e : num <span class="math inline">   </span> Γ ⊦ f : num</th>
 </tr>
 </thead>
 <tbody>
@@ -267,7 +268,7 @@ let x be e in f <em>(definition)</em>
 <table>
 <thead>
 <tr class="header">
-<th style="text-align: center;">Γ ⊦ e : str <span class="math inline">  </span> Γ ⊦ f : str</th>
+<th style="text-align: center;">Γ ⊦ e : str <span class="math inline">   </span> Γ ⊦ f : str</th>
 </tr>
 </thead>
 <tbody>
@@ -291,7 +292,7 @@ let x be e in f <em>(definition)</em>
 <table>
 <thead>
 <tr class="header">
-<th style="text-align: center;">Γ ⊦ e : τ <span class="math inline">  </span> Γ, x : τ ⊦ f : σ</th>
+<th style="text-align: center;">Γ ⊦ e : τ <span class="math inline">   </span> Γ, x : τ ⊦ f : σ</th>
 </tr>
 </thead>
 <tbody>
@@ -303,7 +304,7 @@ let x be e in f <em>(definition)</em>
 </section><div><a class="slider-prev" href="#simply-typed-lambda-calculus"></a><a class="slider-next" href="#soundness-and-completeness"></a></div>
 <section id="soundness-and-completeness" class="slide level1">
 <h1>Soundness and completeness</h1>
-<p>The following properties connect typing with program execution.</p>
+<p>The following properties describe the relation of typing to program execution.</p>
 <p><strong>Soundness: </strong> <em>No incorrect programs are allowed.</em></p>
 <p><strong>Completeness: </strong> <em>No correct programs are rejected.</em></p>
 <p><strong>Decidability of type checking:</strong> <em>Type checking is decidable</em></p>
@@ -323,7 +324,7 @@ let x be e in f <em>(definition)</em>
 <p><strong>Preservation: </strong> Evaluation preserves typing.</p>
 <p>Formally: <span class="math inline"><em>Γ</em> ⊢ <em>e</em>₁ : <em>τ</em></span>, <span class="math inline"><em>e</em>₁ ⟶ <em>e</em>₂</span> ⇒ <span class="math inline"><em>Γ</em> ⊢ <em>e</em>₂ : <em>τ</em></span></p>
 <p><strong>Progress: </strong> If well-typed expression is not a value, it is possible to make an evaluation step.</p>
-<p>Formally: <span class="math inline"><em>Γ</em> ⊢ <em>e</em>₁ : <em>τ</em></span>, <span class="math inline"><em>e</em>₁</span> is not value ⇒ ∃ <span class="math inline"><em>e</em>₂</span> : <span class="math inline"><em>e</em>₁ ⟶ <em>e</em>₂</span>.</p>
+<p>Formally: <span class="math inline"><em>Γ</em> ⊢ <em>e</em>₁ : <em>τ</em></span>, <span class="math inline"><em>e</em>₁</span> is not a value ⇒ ∃ <span class="math inline"><em>e</em>₂</span> : <span class="math inline"><em>e</em>₁ ⟶ <em>e</em>₂</span>.</p>
 </section><div><a class="slider-prev" href="#soundness-and-completeness"></a><a class="slider-next" href="#logical-properties-of-typing"></a></div>
 <section id="logical-properties-of-typing" class="slide level1">
 <h1>Logical properties of typing</h1>
@@ -331,10 +332,10 @@ let x be e in f <em>(definition)</em>
 <p><strong>Unicity: </strong> <em>For every typing context Γ and expression e there exists at most one τ such that <span class="math inline"><em>Γ</em> ⊦ <em>e</em> : <em>τ</em></span>.</em></p>
 <p>We usually want this property in a sane type system, it may be neccessary to use a different statement in case of subtyping (not a single type, but a single minimal/maximal type).</p>
 <p><strong>Inversion: </strong> <em>(example) If Γ ⊦ plus(a, b) : num then Γ ⊦ a : num, Γ ⊦ b : num. </em></p>
-<p>If typing rules are complex, such principles are difficult to state and prove. But these principle is essential for e.g.&nbsp;type inference.</p>
+<p>If typing rules are complex, such principles are difficult to state and prove. But these principles are essential for e.g.&nbsp;type inference.</p>
 </section><div><a class="slider-prev" href="#soundness"></a><a class="slider-next" href="#structural-properties-of-typing"></a></div>
 <section id="structural-properties-of-typing" class="slide level1 inference">
-<h1>Structural properties of typing</h1>
+<h1 class="inference">Structural properties of typing</h1>
 <p><strong>Weakening: </strong> If Γ ⊦ e : τ then Γ, x : σ ⊦ e : τ for x ∉ Γ. (we may add to context any number of typing judgements which do not overwrite the types of existing variables)</p>
 <p><strong>Contraction: </strong> (we may remove repeating judgements from context)</p>
 <table>
@@ -378,12 +379,12 @@ let x be e in f <em>(definition)</em>
 <section id="affine-types-1" class="slide level1">
 <h1>Affine types</h1>
 <p>In C++ affine types are implemented as <code>std::unique_ptr</code>:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1"></a><span class="bu">std::</span>unique_ptr&lt;<span class="dt">int</span>&gt; p1(<span class="kw">new</span> <span class="dt">int</span>(<span class="dv">5</span>));</span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="bu">std::</span>unique_ptr&lt;<span class="dt">int</span>&gt; p2 = p1; <span class="co">//Compile error.</span></span>
-<span id="cb1-3"><a href="#cb1-3"></a><span class="bu">std::</span>unique_ptr&lt;<span class="dt">int</span>&gt; p3 = <span class="bu">std::</span>move(p1); <span class="co">//Transfers ownership. p3 now owns the memory and p1 is rendered invalid.</span></span>
-<span id="cb1-4"><a href="#cb1-4"></a></span>
-<span id="cb1-5"><a href="#cb1-5"></a>p3.reset(); <span class="co">//Deletes the memory.</span></span>
-<span id="cb1-6"><a href="#cb1-6"></a>p1.reset(); <span class="co">//Does nothing.</span></span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="bu">std::</span>unique_ptr<span class="op">&lt;</span><span class="dt">int</span><span class="op">&gt;</span> p1<span class="op">(</span><span class="kw">new</span> <span class="dt">int</span><span class="op">(</span><span class="dv">5</span><span class="op">));</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="bu">std::</span>unique_ptr<span class="op">&lt;</span><span class="dt">int</span><span class="op">&gt;</span> p2 <span class="op">=</span> p1<span class="op">;</span> <span class="co">//Compile-time error.</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="bu">std::</span>unique_ptr<span class="op">&lt;</span><span class="dt">int</span><span class="op">&gt;</span> p3 <span class="op">=</span> <span class="bu">std::</span>move<span class="op">(</span>p1<span class="op">);</span> <span class="co">//Transfers the ownership. p3 now owns the memory and p1 is rendered invalid.</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>p3<span class="op">.</span>reset<span class="op">();</span> <span class="co">//Frees the memory.</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>p1<span class="op">.</span>reset<span class="op">();</span> <span class="co">//Does nothing.</span></span></code></pre></div>
 <div class="small">
 See also: <a href="http://homepages.inf.ed.ac.uk/wadler/topics/linear-logic.html" class="uri">http://homepages.inf.ed.ac.uk/wadler/topics/linear-logic.html</a>
 </div>
@@ -391,20 +392,20 @@ See also: <a href="http://homepages.inf.ed.ac.uk/wadler/topics/linear-logic.html
 <section id="linear-types-1" class="slide level1">
 <h1>Linear types</h1>
 <p><code>Clean</code> programming language</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb2-1"><a href="#cb2-1"></a><span class="dt">AppendAB</span><span class="ot"> ::</span> <span class="dt">File</span> <span class="ot">-&gt;</span> (<span class="dt">File</span>, <span class="dt">File</span>)</span>
-<span id="cb2-2"><a href="#cb2-2"></a><span class="dt">AppendAB</span> file <span class="ot">=</span> (fileA, fileB)</span>
-<span id="cb2-3"><a href="#cb2-3"></a><span class="kw">where</span></span>
-<span id="cb2-4"><a href="#cb2-4"></a>    fileA <span class="ot">=</span> fwritec <span class="ch">'a'</span> file</span>
-<span id="cb2-5"><a href="#cb2-5"></a>    fileB <span class="ot">=</span> fwritec <span class="ch">'b'</span> file <span class="co">-- compile error</span></span></code></pre></div>
-<div class="sourceCode" id="cb3"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb3-1"><a href="#cb3-1"></a><span class="dt">WriteAB</span><span class="ot"> ::</span> <span class="dt">File</span> <span class="ot">-&gt;</span> <span class="dt">File</span></span>
-<span id="cb3-2"><a href="#cb3-2"></a><span class="dt">WriteAB</span> file <span class="ot">=</span> fileAB</span>
-<span id="cb3-3"><a href="#cb3-3"></a><span class="kw">where</span></span>
-<span id="cb3-4"><a href="#cb3-4"></a>    fileA <span class="ot">=</span> fwritec <span class="ch">'a'</span> file</span>
-<span id="cb3-5"><a href="#cb3-5"></a>    fileAB <span class="ot">=</span> fwritec <span class="ch">'b'</span> fileA</span></code></pre></div>
-<div class="sourceCode" id="cb4"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb4-1"><a href="#cb4-1"></a><span class="dt">AppendAorB</span><span class="ot"> ::</span> <span class="dt">Bool</span> <span class="op">*</span><span class="dt">File</span> <span class="ot">-&gt;</span> <span class="op">*</span><span class="dt">File</span></span>
-<span id="cb4-2"><a href="#cb4-2"></a><span class="dt">AppendAorB</span> cond file</span>
-<span id="cb4-3"><a href="#cb4-3"></a>    <span class="op">|</span> cond <span class="ot">=</span> fwritec <span class="ch">'a'</span> file</span>
-<span id="cb4-4"><a href="#cb4-4"></a>    <span class="op">|</span> <span class="fu">otherwise</span> <span class="ot">=</span> fwritec <span class="ch">'b'</span> file</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="dt">AppendAB</span><span class="ot"> ::</span> <span class="dt">File</span> <span class="ot">-&gt;</span> (<span class="dt">File</span>, <span class="dt">File</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="dt">AppendAB</span> file <span class="ot">=</span> (fileA, fileB)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="kw">where</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    fileA <span class="ot">=</span> fwritec 'a' file</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    fileB <span class="ot">=</span> fwritec 'b' file <span class="co">-- compile-time error</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="dt">WriteAB</span><span class="ot"> ::</span> <span class="dt">File</span> <span class="ot">-&gt;</span> <span class="dt">File</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="dt">WriteAB</span> file <span class="ot">=</span> fileAB</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="kw">where</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    fileA <span class="ot">=</span> fwritec 'a' file</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    fileAB <span class="ot">=</span> fwritec 'b' fileA</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="dt">AppendAorB</span><span class="ot"> ::</span> <span class="dt">Bool</span> <span class="op">*</span><span class="dt">File</span> <span class="ot">-&gt;</span> <span class="op">*</span><span class="dt">File</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="dt">AppendAorB</span> cond file</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="op">|</span> cond <span class="ot">=</span> fwritec 'a' file</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="op">|</span> <span class="fu">otherwise</span> <span class="ot">=</span> fwritec 'b' file</span></code></pre></div>
 <div class="small">
 <a href="http://www.inf.ufsc.br/~joao.bosco.mota.alves/cleanBookI.pdf" class="uri">http://www.inf.ufsc.br/~joao.bosco.mota.alves/cleanBookI.pdf</a>
 </div>
@@ -414,31 +415,34 @@ See also: <a href="http://homepages.inf.ed.ac.uk/wadler/topics/linear-logic.html
 <p>Linear types provide simple, almost-syntactical value lifetime checking. More powerful lifetime tracking techniques are required in practice.</p>
 <p>Patina: A Formalization of the Rust Programming Language <a href="ftp://ftp.cs.washington.edu/tr/2015/03/UW-CSE-15-03-02.pdf" class="uri">ftp://ftp.cs.washington.edu/tr/2015/03/UW-CSE-15-03-02.pdf</a></p>
 <p>RustBelt: Securing the Foundations of the Rust Programming Language <a href="https://dl.acm.org/doi/pdf/10.1145/3158154" class="uri">https://dl.acm.org/doi/pdf/10.1145/3158154</a> <a href="https://plv.mpi-sws.org/rustbelt/popl18/appendix.pdf" class="uri">https://plv.mpi-sws.org/rustbelt/popl18/appendix.pdf</a></p>
+<p>See also:</p>
+<p>RustViz: Interactively Visualizing Ownership and Borrowing <a href="https://arxiv.org/pdf/2011.09012.pdf" class="uri">https://arxiv.org/pdf/2011.09012.pdf</a></p>
+<p>The Rust Programming Language. Chapter 4. Ownership and Borrowing. <a href="https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html" class="uri">https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html</a></p>
 </section><div><a class="slider-prev" href="#linear-types-1"></a><a class="slider-next" href="#type-inference"></a></div>
 <section id="type-inference" class="slide level1">
 <h1>Type inference</h1>
 <p>In some languages it is possible to leave “holes” in place of type specifiers. Type checker tries to fill these holes in process of <strong>type inference (type reconstruction).</strong></p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb5-1"><a href="#cb5-1"></a><span class="bu">std::</span>vector&lt;<span class="bu">std::</span>map&lt;<span class="dt">int</span>, <span class="dt">bool</span>&gt;&gt; m;</span>
-<span id="cb5-2"><a href="#cb5-2"></a><span class="co">// ...</span></span>
-<span id="cb5-3"><a href="#cb5-3"></a><span class="cf">for</span> (<span class="bu">std::</span>vector&lt;<span class="bu">std::</span>map&lt;<span class="dt">int</span>,<span class="dt">bool</span>&gt;&gt;::const_iterator it = v.begin();</span>
-<span id="cb5-4"><a href="#cb5-4"></a>  it != v.end(); ++it) { <span class="co">/* ... */</span> }</span>
-<span id="cb5-5"><a href="#cb5-5"></a></span>
-<span id="cb5-6"><a href="#cb5-6"></a><span class="cf">for</span> (<span class="kw">auto</span> it=v.begin(); it != v.end(); ++it) {</span>
-<span id="cb5-7"><a href="#cb5-7"></a>  <span class="kw">decltype</span>(it) it2;</span>
-<span id="cb5-8"><a href="#cb5-8"></a>  <span class="co">/* ... */</span></span>
-<span id="cb5-9"><a href="#cb5-9"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="bu">std::</span>vector<span class="op">&lt;</span><span class="bu">std::</span>map<span class="op">&lt;</span><span class="dt">int</span><span class="op">,</span> <span class="dt">bool</span><span class="op">&gt;&gt;</span> m<span class="op">;</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co">// ...</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> <span class="op">(</span><span class="bu">std::</span>vector<span class="op">&lt;</span><span class="bu">std::</span>map<span class="op">&lt;</span><span class="dt">int</span><span class="op">,</span><span class="dt">bool</span><span class="op">&gt;&gt;::</span>const_iterator it <span class="op">=</span> v<span class="op">.</span>begin<span class="op">();</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  it <span class="op">!=</span> v<span class="op">.</span>end<span class="op">();</span> <span class="op">++</span>it<span class="op">)</span> <span class="op">{</span> <span class="co">/* ... */</span> <span class="op">}</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> <span class="op">(</span><span class="kw">auto</span> it<span class="op">=</span>v<span class="op">.</span>begin<span class="op">();</span> it <span class="op">!=</span> v<span class="op">.</span>end<span class="op">();</span> <span class="op">++</span>it<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="kw">decltype</span><span class="op">(</span>it<span class="op">)</span> it2<span class="op">;</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="co">/* ... */</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 </section><div><a class="slider-prev" href="#lifetimes-and-borrow-checking-rust"></a><a class="slider-next" href="#type-inference-1"></a></div>
 <section id="type-inference-1" class="slide level1">
 <h1>Type inference</h1>
-<div class="sourceCode" id="cb6"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw">data</span> <span class="dt">List</span> t <span class="ot">=</span> <span class="dt">Nil</span> <span class="op">|</span> <span class="dt">Cons</span> (t, <span class="dt">List</span> t)</span>
-<span id="cb6-2"><a href="#cb6-2"></a></span>
-<span id="cb6-3"><a href="#cb6-3"></a><span class="fu">length</span> l <span class="ot">=</span></span>
-<span id="cb6-4"><a href="#cb6-4"></a>  <span class="kw">case</span> l <span class="kw">of</span></span>
-<span id="cb6-5"><a href="#cb6-5"></a>    <span class="dt">Nil</span> <span class="ot">-&gt;</span> <span class="dv">0</span></span>
-<span id="cb6-6"><a href="#cb6-6"></a>    <span class="dt">Cons</span>(x, xs) <span class="ot">-&gt;</span> <span class="dv">1</span> <span class="op">+</span> <span class="fu">length</span>(xs)</span>
-<span id="cb6-7"><a href="#cb6-7"></a></span>
-<span id="cb6-8"><a href="#cb6-8"></a></span>
-<span id="cb6-9"><a href="#cb6-9"></a><span class="co">-- length :: List t -&gt; Integer</span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">data</span> <span class="dt">List</span> t <span class="ot">=</span> <span class="dt">Nil</span> <span class="op">|</span> <span class="dt">Cons</span> (t, <span class="dt">List</span> t)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span> l <span class="ot">=</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">case</span> l <span class="kw">of</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">Nil</span> <span class="ot">-&gt;</span> <span class="dv">0</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">Cons</span>(x, xs) <span class="ot">-&gt;</span> <span class="dv">1</span> <span class="op">+</span> <span class="fu">length</span>(xs)</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="co">-- length :: List t -&gt; Integer</span></span></code></pre></div>
 </section><div><a class="slider-prev" href="#type-inference"></a><a class="slider-next" href="#hindley-milner-algorithm-w"></a></div>
 <section id="hindley-milner-algorithm-w" class="slide level1">
 <h1>Hindley-Milner Algorithm W</h1>
@@ -455,13 +459,13 @@ See also: <a href="http://homepages.inf.ed.ac.uk/wadler/topics/linear-logic.html
 <p>Oukseh Lee and Kwangkeun Yi. 1998. Proofs about a folklore let-polymorphic type inference algorithm. ACM Trans. Program. Lang. Syst. 20, 4 (July 1998), 707-723. <a href="http://dx.doi.org/10.1145/291891.291892" class="uri">http://dx.doi.org/10.1145/291891.291892</a></p>
 </section><div><a class="slider-prev" href="#hindley-milner-algorithm-w"></a><a class="slider-next" href="#subtyping"></a></div>
 <section id="subtyping" class="slide level1 inference">
-<h1>Subtyping</h1>
+<h1 class="inference">Subtyping</h1>
 <p>Type inference algorithms are undecidable in case of subtyping</p>
 <p>Subsumption rule for subtyping:</p>
 <table>
 <thead>
 <tr class="header">
-<th style="text-align: center;">Γ ⊦ t : T <span class="math inline">  </span> T &lt;: U</th>
+<th style="text-align: center;">Γ ⊦ t : T <span class="math inline">   </span> T &lt;: U</th>
 </tr>
 </thead>
 <tbody>
@@ -475,25 +479,25 @@ See also: <a href="http://homepages.inf.ed.ac.uk/wadler/topics/linear-logic.html
 <h1>Row polymorphism</h1>
 <p>Row polymorphism is “duck typing” implementation for records (structures, named tuples).</p>
 <p>Usual definition for structure type: [ <span class="math inline"><em>t</em><sub>1</sub></span> : <span class="math inline"><em>T</em><sub>1</sub></span>, <span class="math inline"><em>t</em><sub>2</sub></span> : <span class="math inline"><em>T</em><sub>2</sub></span>, … ]</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb7-1"><a href="#cb7-1"></a><span class="op">{</span> <span class="dt">a</span><span class="op">:</span><span class="dv">1</span><span class="op">,</span> <span class="dt">b</span><span class="op">:</span> <span class="st">"B"</span>  <span class="op">}</span> <span class="op">:</span> [ a <span class="op">:</span> Integer<span class="op">,</span> b <span class="op">:</span> String ]</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>{ <span class="dt">a</span><span class="op">:</span><span class="dv">1</span><span class="op">,</span> <span class="dt">b</span><span class="op">:</span> <span class="st">"B"</span>  } <span class="op">:</span> [ a <span class="op">:</span> Integer<span class="op">,</span> b <span class="op">:</span> <span class="bu">String</span> ]</span></code></pre></div>
 <p>Row polymorphism: [ <span class="math inline"><em>t</em><sub>1</sub></span> : <span class="math inline"><em>T</em><sub>1</sub></span>, <span class="math inline"><em>t</em><sub>2</sub></span> : <span class="math inline"><em>T</em><sub>2</sub></span>, … | τ] τ may be instantiated to extra fields.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb8-1"><a href="#cb8-1"></a> <span class="op">{</span> <span class="dt">a</span><span class="op">:</span><span class="dv">1</span><span class="op">,</span> <span class="dt">b</span><span class="op">:</span> <span class="st">"B"</span> <span class="op">}</span> <span class="op">:</span> [ a <span class="op">:</span> Integer <span class="op">|</span> τ ]</span>
-<span id="cb8-2"><a href="#cb8-2"></a> <span class="op">{</span> <span class="dt">a</span><span class="op">:</span><span class="dv">1</span><span class="op">,</span> <span class="dt">b</span><span class="op">:</span> <span class="st">"B"</span> <span class="op">}</span> <span class="op">:</span> [ b<span class="op">:</span> String <span class="op">|</span> τ ]</span>
-<span id="cb8-3"><a href="#cb8-3"></a></span>
-<span id="cb8-4"><a href="#cb8-4"></a><span class="kw">function</span> <span class="at">f</span>(x) <span class="op">{</span> <span class="cf">return</span> <span class="va">x</span>.<span class="at">a</span> <span class="op">+</span> <span class="dv">1</span> <span class="op">}</span></span>
-<span id="cb8-5"><a href="#cb8-5"></a>f <span class="op">:</span> [ a <span class="op">:</span> Integer <span class="op">|</span> τ ] → Integer</span>
-<span id="cb8-6"><a href="#cb8-6"></a></span>
-<span id="cb8-7"><a href="#cb8-7"></a><span class="kw">function</span> <span class="at">g</span>(x) <span class="op">{</span> <span class="cf">return</span> <span class="va">x</span>.<span class="at">b</span> <span class="op">+</span> <span class="st">"!"</span> <span class="op">}</span></span>
-<span id="cb8-8"><a href="#cb8-8"></a>g <span class="op">:</span> [ b <span class="op">:</span> String <span class="op">|</span> τ ] → String</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a> { <span class="dt">a</span><span class="op">:</span><span class="dv">1</span><span class="op">,</span> <span class="dt">b</span><span class="op">:</span> <span class="st">"B"</span> } <span class="op">:</span> [ a <span class="op">:</span> Integer <span class="op">|</span> τ ]</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a> { <span class="dt">a</span><span class="op">:</span><span class="dv">1</span><span class="op">,</span> <span class="dt">b</span><span class="op">:</span> <span class="st">"B"</span> } <span class="op">:</span> [ b<span class="op">:</span> <span class="bu">String</span> <span class="op">|</span> τ ]</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">f</span>(x) { <span class="cf">return</span> x<span class="op">.</span><span class="at">a</span> <span class="op">+</span> <span class="dv">1</span> }</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>f <span class="op">:</span> [ a <span class="op">:</span> Integer <span class="op">|</span> τ ] → Integer</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">g</span>(x) { <span class="cf">return</span> x<span class="op">.</span><span class="at">b</span> <span class="op">+</span> <span class="st">"!"</span> }</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>g <span class="op">:</span> [ b <span class="op">:</span> <span class="bu">String</span> <span class="op">|</span> τ ] → <span class="bu">String</span></span></code></pre></div>
 </section><div><a class="slider-prev" href="#subtyping"></a><a class="slider-next" href="#dynamic-type-checking"></a></div>
 <section id="dynamic-type-checking" class="slide level1">
 <h1>Dynamic type checking</h1>
 <p>Dynamic type checking can be an implementation detail (for strongly-typed programming languages).</p>
 <p>For example, GHC compiler for Haskell programming language has a flag <code>-fdefer-type-errors</code>:</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb9-1"><a href="#cb9-1"></a><span class="ot">{-# OPTIONS_GHC -fdefer-type-errors #-}</span></span>
-<span id="cb9-2"><a href="#cb9-2"></a><span class="ot">f ::</span> <span class="dt">Int</span> <span class="ot">-&gt;</span> <span class="dt">Bool</span></span>
-<span id="cb9-3"><a href="#cb9-3"></a>f <span class="dv">1</span> <span class="ot">=</span> <span class="dt">False</span></span>
-<span id="cb9-4"><a href="#cb9-4"></a>f <span class="dv">2</span> <span class="ot">=</span> <span class="fu">not</span> <span class="ch">'x'</span> <span class="co">-- boolean "not" operator on string</span></span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ot">{-# OPTIONS_GHC -fdefer-type-errors #-}</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="ot">f ::</span> <span class="dt">Int</span> <span class="ot">-&gt;</span> <span class="dt">Bool</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>f <span class="dv">1</span> <span class="ot">=</span> <span class="dt">False</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>f <span class="dv">2</span> <span class="ot">=</span> <span class="fu">not</span> 'x' <span class="co">-- boolean "not" operator on string</span></span></code></pre></div>
 <pre><code>/Users/rae/work/blog/011-dynamic/post.lhs:32:13: warning:
     • Couldn't match expected type ‘Bool’ with actual type ‘Char’
     • In the first argument of ‘not’, namely ‘'x'’
@@ -511,13 +515,13 @@ See also: <a href="http://homepages.inf.ed.ac.uk/wadler/topics/linear-logic.html
 </div>
 </section><div><a class="slider-prev" href="#row-polymorphism"></a><a class="slider-next" href="#gradual-typing"></a></div>
 <section id="gradual-typing" class="slide level1 inference">
-<h1>Gradual typing</h1>
+<h1 class="inference">Gradual typing</h1>
 <p>Gradual typing is a seamless combination of dynamic and static type checking.</p>
 <p>Gradual typing introduces a special <em>unknown</em> type (usually denoted as <strong>?</strong> or <code>Any</code>) with weakened form of type equivalence:</p>
 <table>
 <thead>
 <tr class="header">
-<th style="text-align: center;"><span class="math inline">  </span></th>
+<th style="text-align: center;"><span class="math inline">   </span></th>
 </tr>
 </thead>
 <tbody>
@@ -529,7 +533,7 @@ See also: <a href="http://homepages.inf.ed.ac.uk/wadler/topics/linear-logic.html
 <table>
 <thead>
 <tr class="header">
-<th style="text-align: center;"><span class="math inline">  </span></th>
+<th style="text-align: center;"><span class="math inline">   </span></th>
 </tr>
 </thead>
 <tbody>
@@ -541,7 +545,7 @@ See also: <a href="http://homepages.inf.ed.ac.uk/wadler/topics/linear-logic.html
 <table>
 <thead>
 <tr class="header">
-<th style="text-align: center;"><span class="math inline">  </span></th>
+<th style="text-align: center;"><span class="math inline">   </span></th>
 </tr>
 </thead>
 <tbody>
@@ -553,7 +557,7 @@ See also: <a href="http://homepages.inf.ed.ac.uk/wadler/topics/linear-logic.html
 <table>
 <thead>
 <tr class="header">
-<th style="text-align: center;">T ~ U <span class="math inline">  </span> V ~ W</th>
+<th style="text-align: center;">T ~ U <span class="math inline">   </span> V ~ W</th>
 </tr>
 </thead>
 <tbody>
@@ -571,7 +575,7 @@ See also: <a href="http://homepages.inf.ed.ac.uk/wadler/topics/linear-logic.html
 <p>Example: <a href="http://mazzo.li/posts/Lambda.html" class="uri">http://mazzo.li/posts/Lambda.html</a></p>
 </section><div><a class="slider-prev" href="#gradual-typing"></a><a class="slider-next" href="#recursive-types"></a></div>
 <section id="recursive-types" class="slide level1 inference">
-<h1>Recursive types</h1>
+<h1 class="inference">Recursive types</h1>
 <p>Example: simply-typed lambda calculus with iso-recursive types (B. Pierce. Types and Programming Languages, Chapter 20).</p>
 <p>Additional terms: fold [T] t, unfold [T] t (T — type)</p>
 <p>Additional value: fold [T] v (T — type)</p>
@@ -580,7 +584,7 @@ See also: <a href="http://homepages.inf.ed.ac.uk/wadler/topics/linear-logic.html
 <table>
 <thead>
 <tr class="header">
-<th style="text-align: center;"><span class="math inline">  </span></th>
+<th style="text-align: center;"><span class="math inline">   </span></th>
 </tr>
 </thead>
 <tbody>
@@ -617,7 +621,7 @@ See also: <a href="http://homepages.inf.ed.ac.uk/wadler/topics/linear-logic.html
 <table>
 <thead>
 <tr class="header">
-<th style="text-align: center;">U = μX.T <span class="math inline">  </span> Γ ⊦ t : [X := U] T</th>
+<th style="text-align: center;">U = μX.T <span class="math inline">   </span> Γ ⊦ t : [X := U] T</th>
 </tr>
 </thead>
 <tbody>
@@ -629,7 +633,7 @@ See also: <a href="http://homepages.inf.ed.ac.uk/wadler/topics/linear-logic.html
 <table>
 <thead>
 <tr class="header">
-<th style="text-align: center;">U = μX.T <span class="math inline">  </span> Γ ⊦ t : U</th>
+<th style="text-align: center;">U = μX.T <span class="math inline">   </span> Γ ⊦ t : U</th>
 </tr>
 </thead>
 <tbody>
@@ -648,11 +652,11 @@ See also: <a href="http://homepages.inf.ed.ac.uk/wadler/topics/linear-logic.html
 <p>nil : ℕ-List := fold [ℕ-List] (inl 1)</p>
 <p>cons : ℕ → ℕ-List → ℕ-List := λ (n : ℕ). λ (l : ℕ-List). fold [ℕ-List] (inr (n, l))</p>
 <p>head : ℕ-List → 1 + ℕ := λ (l : ℕ-List). case (unfold [ℕ-List] l) of</p>
-<p><span class="math inline">  </span> inl _ ⇒ inl 1</p>
-<p><span class="math inline">  </span> inr (h, t) ⇒ inr h</p>
+<p><span class="math inline">   </span> inl _ ⇒ inl 1</p>
+<p><span class="math inline">   </span> inr (h, t) ⇒ inr h</p>
 </section><div><a class="slider-prev" href="#recursive-types"></a><a class="slider-next" href="#system-f-polymorphic-lambda-calculus"></a></div>
 <section id="system-f-polymorphic-lambda-calculus" class="slide level1 inference">
-<h1>System F: polymorphic lambda-calculus</h1>
+<h1 class="inference">System F: polymorphic lambda-calculus</h1>
 <p>Additional types: α (type variable), ∀α.T (polymorphic type)</p>
 <p>Additional terms: Λα.t (type abstraction), t ∘ A (type application)</p>
 <p>Additional typing rules:</p>
@@ -682,6 +686,7 @@ See also: <a href="http://homepages.inf.ed.ac.uk/wadler/topics/linear-logic.html
 </table>
 <p>Example: polymorphic identity function</p>
 <p>Λα. λ(x : α). x : ∀α. α → α</p>
+<p>Hindley-Milner type system is a simplified version of System F.</p>
 </section><div><a class="slider-prev" href="#recursive-types-example"></a><a class="slider-next" href="#data-type-encoding-in-polymorphic-lambda-calculus"></a></div>
 <section id="data-type-encoding-in-polymorphic-lambda-calculus" class="slide level1">
 <h1>Data-type encoding in polymorphic lambda-calculus</h1>

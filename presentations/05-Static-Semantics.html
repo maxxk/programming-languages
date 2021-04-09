@@ -233,7 +233,7 @@ Example from: <a href="http://www.c-sharpcorner.com/UploadFile/deveshomar/generi
 <span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  }</span>
 <span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> b<span class="op">;</span> <span class="co">// b = 1</span></span>
 <span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
-<p><code>this</code> in object-oriented language may be seen as either an implicit argument to a function or as a way of introducing a dynamic scope.</p>
+<p><code>this</code> in an object-oriented language may be seen as either an implicit argument to a function or as a way of introducing a dynamic scope.</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode javascript"><code class="sourceCode javascript"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">g</span>() {</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="kw">this</span><span class="op">.</span><span class="at">x</span><span class="op">;</span></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>}</span>
@@ -283,7 +283,7 @@ Example from: <a href="http://stackoverflow.com/questions/226144/overload-a-c-fu
 </section><div><a class="slider-prev" href="#dynamic-scope"></a><a class="slider-next" href="#lexical-scope-declarative-region"></a></div>
 <section id="lexical-scope-declarative-region" class="slide level1">
 <h1>Lexical scope declarative region</h1>
-<p>Where does declaration effect start/stop?</p>
+<p>Where does the declaration effect start/stop?</p>
 <div class="twocolumn">
 <div class="sourceCode" id="cb10"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> f(x):</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    x <span class="op">=</span> <span class="dv">0</span></span>
@@ -331,7 +331,11 @@ Example from: <a href="http://stackoverflow.com/questions/226144/overload-a-c-fu
 <div class="small">
 Example at: Vasenin V. A., Krivchikov M. A. Ecma-335 static formal semantics // Programming and Computer Software. — 2012. — Vol. 38, no. 4. — P. 183–188. <a href="http://dx.doi.org/10.1134/S0361768812040056" class="uri">http://dx.doi.org/10.1134/S0361768812040056</a>
 </div>
-</section><div><a class="slider-prev" href="#lexical-scope-declarative-region"></a><a class="slider-next" href="#higher-order-abstract-syntax"></a></div>
+</section><div><a class="slider-prev" href="#lexical-scope-declarative-region"></a><a class="slider-next" href="#α-equivalence-and-de-bruijn-indices"></a></div>
+<section id="α-equivalence-and-de-bruijn-indices" class="slide level1">
+<h1>α-equivalence and de Bruijn indices</h1>
+<p>(see the previous semester: <a href="https://maxxk.github.io/formal-models/presentations/06-Markov-Refal-Lambda-calculus.html#%D1%81%D1%82%D1%80%D0%BE%D0%B3%D0%BE%D0%B5-%D0%BE%D0%BF%D1%80%D0%B5%D0%B4%D0%B5%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5" class="uri">https://maxxk.github.io/formal-models/presentations/06-Markov-Refal-Lambda-calculus.html#%D1%81%D1%82%D1%80%D0%BE%D0%B3%D0%BE%D0%B5-%D0%BE%D0%BF%D1%80%D0%B5%D0%B4%D0%B5%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5</a> )</p>
+</section><div><a class="slider-prev" href="#static-semantics-representation"></a><a class="slider-next" href="#higher-order-abstract-syntax"></a></div>
 <section id="higher-order-abstract-syntax" class="slide level1">
 <h1>Higher order abstract syntax</h1>
 — the technique to capture the variable binding in abstract syntax tree (Miller, 1987; Phenning, 1988).
@@ -365,7 +369,7 @@ Higher-order syntax captures the name binding:
 <span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>    | Abs : ('d 'V -&gt; ('r, 'V) <span class="dt">exp</span>) -&gt; ('d -&gt; 'r, 'V) <span class="dt">exp</span></span></code></pre></div>
 <p><a href="http://adam.chlipala.net/papers/PhoasICFP08/" class="uri">http://adam.chlipala.net/papers/PhoasICFP08/</a></p>
 </div>
-</section><div><a class="slider-prev" href="#static-semantics-representation"></a><a class="slider-next" href="#ornaments"></a></div>
+</section><div><a class="slider-prev" href="#α-equivalence-and-de-bruijn-indices"></a><a class="slider-next" href="#ornaments"></a></div>
 <section id="ornaments" class="slide level1">
 <h1>Ornaments</h1>
 <p>Conor McBride. «Ornamental Algebras, Algebraic Ornaments»</p>
@@ -487,12 +491,12 @@ Example from: <a href="http://www.codeproject.com/Articles/177153/Type-conversio
 <section id="homework-assignments-12" class="slide level1">
 <h1>Homework assignments (1/2)</h1>
 <p><strong>Task 5.1.</strong> ** Implement a translator from simply-typed lambda calculus <abbr title="Abstract Syntax Tree">AST</abbr> to <abbr title="Higher-Order Abstract Syntax">HOAS</abbr> in Haskell or any other language of your choice (except OCaml) which is expressive enough to represent HOAS.</p>
-<p><strong>Task 5.2.</strong> *** Implement a translator from simply-typed lambda calculus <abbr title="Abstract Syntax Tree">AST</abbr> to <abbr title="Parametrized Higher-Order Abstract Syntax">PHOAS</abbr> in Haskell or any other language of your choice (except the original OCaml) which is expressive enough to represent PHOAS.</p>
+<p><strong>Task 5.2.</strong> *** Implement a translator from simply-typed lambda calculus <abbr title="Abstract Syntax Tree">AST</abbr> to <abbr title="Parametrized Higher-Order Abstract Syntax">PHOAS</abbr> in Agda or any other language of your choice which is expressive enough to represent PHOAS.</p>
 <p><strong>Task 5.3.</strong> * Look at the assembly code generated by GCC on example code from “Closure” slide and explain how “closures” are implemented in this case.</p>
 <p><strong>Task 5.4.</strong> Describe static semantics of BNF in terms of Parametrized Higher Order Syntax.</p>
 <ol type="a">
 <li class="fragment">“on paper” (**)</li>
-<li class="fragment">in Coq, following the original paper (***)</li>
+<li class="fragment">in Coq, following the original paper (4*)</li>
 </ol>
 </section><div><a class="slider-prev" href="#implicit-coercions"></a><a class="slider-next" href="#homework-assignments-22"></a></div>
 <section id="homework-assignments-22" class="slide level1">
