@@ -37,10 +37,13 @@ Course topics include:
 **09.04.2021** Typing.
 [presentation - html](presentations/06-Typing.html) 
 
-<hr>
-
-**15.04.2020** Operational semantics 
+**16.04.2021** Operational semantics 
 [presentation - html](presentations/07-Operational-Semantics.html)
+
+**16.04.2021** Mechanized semantics (Operational semantics implementation)
+[presentation - html](presentations/10-Operational-Semantics-Implementation.html)
+
+<hr>
 
 **22.04.2020** Denotational semantics
 [presentation - html](presentations/08-Denotational-semantics-example.html) 
@@ -50,8 +53,6 @@ Course topics include:
 
 <hr>
 
-**29.04.2019** Mechanized semantics (Operational semantics implementation)
-[presentation - html](presentations/10-Operational-Semantics-Implementation.html)
 
 **06.05.2019** Axiomatic semantics 
 [presentation - html](presentations/11-Axiomatic-Semantics.html)

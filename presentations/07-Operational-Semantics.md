@@ -208,7 +208,7 @@ same context always have the same meaning.
 Turbak, Gifford. p. 85
 
 # K Framework 
-http://www.kframework.org/index.php/Main_Page
+http://www.kframework.org/
 
 # Homework Assignments
 Turbak, Gifford.
