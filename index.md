@@ -40,7 +40,7 @@ Course topics include:
 **16.04.2021** Operational semantics 
 [presentation - html](presentations/07-Operational-Semantics.html)
 
-**16.04.2021** Mechanized semantics (Operational semantics implementation)
+**16.04.2021, 23.04.2021** Mechanized semantics (Operational semantics implementation)
 [presentation - html](presentations/10-Operational-Semantics-Implementation.html)
 
 <hr>

@@ -254,7 +254,7 @@ Inductive cont: Type :=
   | Kseq: statement -> cont -> cont
   (* Kloop1 s1 s2 k = after s1 in Sloop s1 s2 *)
   | Kloop1: statement -> statement -> cont -> cont
-  (* Kloop1 s1 s2 k = after s2 in Sloop s1 s2 *)
+  (* Kloop2 s1 s2 k = after s2 in Sloop s1 s2 *)
   | Kloop2: statement -> statement -> cont -> cont
   (* catches break statements arising out of switch *)
   | Kswitch: cont -> cont
@@ -329,8 +329,8 @@ to Clight statement.
 You can check syntax of your definition in Coq:
 
 1. Clone CompCert repository: https://github.com/AbsInt/CompCert
-2. Install CompCert prerequisites (Coq 8.7+, OCaml 4.02+, Menhir 20181113)
-3. Configure and compile CompCert: `./configure x86_64-linux && make`
+2. Install CompCert prerequisites (Coq 8.8+, OCaml 4.05+, Menhir 20190626)
+3. [Configure and compile CompCert](https://compcert.org/man/manual002.html#install): `./configure x86_64-linux && make`
 4. Open CoqIDE with Clight module: `./coq cfrontend/Clight.v`
 5. Append your code to the end of the file in separate definition:
 
