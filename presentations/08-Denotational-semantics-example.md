@@ -9,6 +9,7 @@
 .twocolumn {
   -moz-column-count: 2;
   -webkit-column-count: 2;
+  column-count: 2;
 }
 .small { font-size: small !important; }
 .smaller { font-size: 0.8em !important; }

@@ -43,12 +43,10 @@ Course topics include:
 **16.04.2021, 23.04.2021** Mechanized semantics (Operational semantics implementation)
 [presentation - html](presentations/10-Operational-Semantics-Implementation.html)
 
-<hr>
-
-**22.04.2020** Denotational semantics
+**14.05.2021** Denotational semantics
 [presentation - html](presentations/08-Denotational-semantics-example.html) 
 
-**22.04.2020** Denotational semantics implementation: Monads, Fixed points
+**14.05.2021** Denotational semantics implementation: Monads, Fixed points
 [presentation - html](presentations/09-Monads.html) 
 
 <hr>
