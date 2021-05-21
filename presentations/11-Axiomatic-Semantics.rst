@@ -15,6 +15,7 @@ Axiomatic semantics literature
 
 1. *Chapter 6 of* **Winskel G. The Formal Semantics of Programming Languages. Cambridge, Massachusetts, US: MIT Press, 1993. xx+361 p.**
 2. *Part IV of* Шилов Н.В. Основы синтаксиса, семантики, трансляции и верификации программ: учебное пособие. Новосибирск: НГУ, 2011. 292 p.
+3. Статьи по предикатному программированию (В.И. Шелехов)
 
 Bibliography
 ============
@@ -29,8 +30,8 @@ Further reading
 
 6. Ynot (http://ynot.cs.harvard.edu) — Imperative programming with Hoare logic in Coq.
 7. Chen H. et al. Using Crash Hoare logic for certifying the FSCQ file system. ACM Press, 2015. P. 18–37.
-8. `Lecture 1 <http://web.eecs.umich.edu/~weimerw/2017-590/lectures/weimer-gradpl-08.pdf>`_,
-   `Lecture 2 <http://web.eecs.umich.edu/~weimerw/2017-590/lectures/weimer-gradpl-09.pdf>`_.
+8. `Lecture 1 <http://web.eecs.umich.edu/~weimerw/590/lectures/weimer-gradpl-08.pdf>`_,
+   `Lecture 2 <http://web.eecs.umich.edu/~weimerw/590/lectures/weimer-gradpl-09.pdf>`_.
 
 
 Axiomatic semantics
@@ -70,7 +71,7 @@ The connection between axiomatic and operational semantics is defined in followi
 - Assertion validity judgement ⊨ — relation between operational semantics configurations and assertions ( σ ⊨ A means "assertion A holds in configuration σ" ) 
 
 - Hoare triple semantics (partial): ⊨ { A } c { B } is defined as:
-  For all σ ∈ Σ, for all σ' ∈ Σ, if σ ⊨ A and σ (c)⇒ σ', then σ' ⊨ B
+  * For all σ ∈ Σ, for all σ' ∈ Σ, if σ ⊨ A and σ (c)⇒ σ', then σ' ⊨ B
 
 - Hoare triple semantics (total): ⊨ [ A ] c [ B ] is defined as:
   * partial semantics ⊨ { A } c { B }
@@ -155,7 +156,7 @@ Imp' axiomatic semantics
 Derivable rules:
 
 - "forward" axiom for assignment: ⊢ {A} ``x = e`` { ∃ x₀. A[ ``x`` := x₀]  ∧ ``x`` = ``e``[``x`` := x₀] } 
-- loop invariant for loops: **If** ⊢ A ∧ b ⊢ C, ⊢ {C} ``c`` {A}, ⊢ A ∧ ¬ ``b`` ⇒ B **then** ⊢ {A} ``while (b) { c }`` { B }
+- loop invariant: **If** ⊢ A ∧ b ⊢ C, ⊢ {C} ``c`` {A}, ⊢ A ∧ ¬ ``b`` ⇒ B **then** ⊢ {A} ``while (b) { c }`` { B }
 
 Assignment
 **********

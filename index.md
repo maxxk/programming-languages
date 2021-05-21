@@ -49,12 +49,10 @@ Course topics include:
 **14.05.2021** Denotational semantics implementation: Monads, Fixed points
 [presentation - html](presentations/09-Monads.html) 
 
-<hr>
-
-
-**06.05.2019** Axiomatic semantics 
+**21.05.2021** Axiomatic semantics 
 [presentation - html](presentations/11-Axiomatic-Semantics.html)
 
+<hr>
 **13.05.2019** Domain-specific languages. Intermediate representations
 [presentation - html](presentations/12-IR-DSL.html)
 

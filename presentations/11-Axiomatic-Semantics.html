@@ -8,26 +8,28 @@
   <link rel="stylesheet" href="slider.css">
   <style type="text/css">code{white-space: pre;}</style>
   <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(title);
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -36,9 +38,9 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {  }
+  {   }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -90,6 +92,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ol type="1">
 <li class="fragment"><em>Chapter 6 of</em> <strong>Winskel G. The Formal Semantics of Programming Languages. Cambridge, Massachusetts, US: MIT Press, 1993. xx+361 p.</strong></li>
 <li class="fragment"><em>Part IV of</em> Шилов Н.В. Основы синтаксиса, семантики, трансляции и верификации программ: учебное пособие. Новосибирск: НГУ, 2011. 292 p.</li>
+<li class="fragment">Статьи по предикатному программированию (В.И. Шелехов)</li>
 </ol>
 <h2 id="bibliography">Bibliography</h2>
 <ol start="3" type="1">
@@ -101,7 +104,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ol start="6" type="1">
 <li class="fragment">Ynot (<a href="http://ynot.cs.harvard.edu">http://ynot.cs.harvard.edu</a>) — Imperative programming with Hoare logic in Coq.</li>
 <li class="fragment">Chen H. et al. Using Crash Hoare logic for certifying the FSCQ file system. ACM Press, 2015. P. 18–37.</li>
-<li class="fragment"><a href="http://web.eecs.umich.edu/~weimerw/2017-590/lectures/weimer-gradpl-08.pdf">Lecture 1</a>, <a href="http://web.eecs.umich.edu/~weimerw/2017-590/lectures/weimer-gradpl-09.pdf">Lecture 2</a>.</li>
+<li class="fragment"><a href="http://web.eecs.umich.edu/~weimerw/590/lectures/weimer-gradpl-08.pdf">Lecture 1</a>, <a href="http://web.eecs.umich.edu/~weimerw/590/lectures/weimer-gradpl-09.pdf">Lecture 2</a>.</li>
 </ol>
 </section><div><a class="slider-prev" href="#software-and-programming-language-theory"></a><a class="slider-next" href="#axiomatic-semantics-1"></a></div>
 <section id="axiomatic-semantics-1" class="slide level1">
@@ -131,7 +134,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>The connection between axiomatic and operational semantics is defined in following way:</p>
 <ul>
 <li class="fragment">Assertion validity judgement ⊨ — relation between operational semantics configurations and assertions ( σ ⊨ A means "assertion A holds in configuration σ" )</li>
-<li class="fragment">Hoare triple semantics (partial): ⊨ { A } c { B } is defined as: For all σ ∈ Σ, for all σ' ∈ Σ, if σ ⊨ A and σ (c)⇒ σ', then σ' ⊨ B</li>
+<li class="fragment">Hoare triple semantics (partial): ⊨ { A } c { B } is defined as:
+<ul>
+<li class="fragment">For all σ ∈ Σ, for all σ' ∈ Σ, if σ ⊨ A and σ (c)⇒ σ', then σ' ⊨ B</li>
+</ul></li>
 <li class="fragment">Hoare triple semantics (total): ⊨ [ A ] c [ B ] is defined as:
 <ul>
 <li class="fragment">partial semantics ⊨ { A } c { B }</li>
@@ -201,7 +207,7 @@ BooleanExpression = ArithmeticalExpression ("&lt;" | "&gt;" | "==") Arithmetical
 <p>Derivable rules:</p>
 <ul>
 <li class="fragment">"forward" axiom for assignment: ⊢ {A} <code>x = e</code> { ∃ x₀. A[ <code>x</code> := x₀] ∧ <code>x</code> = <code>e</code>[<code>x</code> := x₀] }</li>
-<li class="fragment">loop invariant for loops: <strong>If</strong> ⊢ A ∧ b ⊢ C, ⊢ {C} <code>c</code> {A}, ⊢ A ∧ ¬ <code>b</code> ⇒ B <strong>then</strong> ⊢ {A} <code>while (b) { c }</code> { B }</li>
+<li class="fragment">loop invariant: <strong>If</strong> ⊢ A ∧ b ⊢ C, ⊢ {C} <code>c</code> {A}, ⊢ A ∧ ¬ <code>b</code> ⇒ B <strong>then</strong> ⊢ {A} <code>while (b) { c }</code> { B }</li>
 </ul>
 </section><div><a class="slider-prev" href="#assertion-derivation"></a><a class="slider-next" href="#assignment"></a></div>
 <section id="assignment" class="slide level1">
@@ -281,21 +287,21 @@ BooleanExpression = ArithmeticalExpression ("&lt;" | "&gt;" | "==") Arithmetical
 </section><div><a class="slider-prev" href="#verification-conditions"></a><a class="slider-next" href="#codecontracts-examples"></a></div>
 <section id="codecontracts-examples" class="slide level1">
 <h1>CodeContracts examples</h1>
-<div class="sourceCode" id="cb2"><pre class="sourceCode csharp"><code class="sourceCode cs"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">private</span> <span class="kw">static</span> <span class="dt">void</span> <span class="fu">Main</span>(<span class="dt">string</span>[] args)</a>
-<a class="sourceLine" id="cb2-2" title="2">{</a>
-<a class="sourceLine" id="cb2-3" title="3">    <span class="fu">DoRequiresForAll</span>(<span class="kw">new</span> List&lt;<span class="dt">string</span>&gt;() {<span class="st">"test"</span>,<span class="kw">null</span>,<span class="st">"foo"</span>});</a>
-<a class="sourceLine" id="cb2-4" title="4">}</a>
-<a class="sourceLine" id="cb2-5" title="5"></a>
-<a class="sourceLine" id="cb2-6" title="6"><span class="kw">public</span> <span class="kw">static</span> <span class="dt">void</span> <span class="fu">DoRequiresForAll</span>(List&lt;<span class="dt">string</span>&gt; input)</a>
-<a class="sourceLine" id="cb2-7" title="7">{</a>
-<a class="sourceLine" id="cb2-8" title="8">    Contract.<span class="fu">Requires</span>(Contract.<span class="fu">ForAll</span>(input, w =&gt; w != <span class="kw">null</span>));</a>
-<a class="sourceLine" id="cb2-9" title="9">    input.<span class="fu">ForEach</span>(Console.<span class="fu">WriteLine</span>);</a>
-<a class="sourceLine" id="cb2-10" title="10">}</a></code></pre></div>
-<div class="sourceCode" id="cb3"><pre class="sourceCode csharp"><code class="sourceCode cs"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">public</span> <span class="kw">static</span> <span class="dt">string</span> <span class="fu">TrimAfter</span>(<span class="dt">string</span> value, <span class="dt">string</span> suffix)</a>
-<a class="sourceLine" id="cb3-2" title="2">{</a>
-<a class="sourceLine" id="cb3-3" title="3">    Contract.<span class="fu">Requires</span>(!String.<span class="fu">IsNullOrEmpty</span>(suffix));</a>
-<a class="sourceLine" id="cb3-4" title="4">    Contract.<span class="fu">Requires</span>(value != <span class="kw">null</span>);</a>
-<a class="sourceLine" id="cb3-5" title="5">    Contract.<span class="fu">Ensures</span>( !Contract.<span class="fu">Result</span>&lt;<span class="dt">string</span>&gt;().<span class="fu">EndsWith</span>(suffix));</a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode csharp"><code class="sourceCode cs"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">private</span> <span class="kw">static</span> <span class="dt">void</span> <span class="fu">Main</span><span class="op">(</span><span class="dt">string</span><span class="op">[]</span> args<span class="op">)</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">DoRequiresForAll</span><span class="op">(</span><span class="kw">new</span> List<span class="op">&lt;</span><span class="dt">string</span><span class="op">&gt;()</span> <span class="op">{</span><span class="st">"test"</span><span class="op">,</span><span class="kw">null</span><span class="op">,</span><span class="st">"foo"</span><span class="op">});</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="kw">static</span> <span class="dt">void</span> <span class="fu">DoRequiresForAll</span><span class="op">(</span>List<span class="op">&lt;</span><span class="dt">string</span><span class="op">&gt;</span> input<span class="op">)</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    Contract<span class="op">.</span><span class="fu">Requires</span><span class="op">(</span>Contract<span class="op">.</span><span class="fu">ForAll</span><span class="op">(</span>input<span class="op">,</span> w <span class="op">=&gt;</span> w <span class="op">!=</span> <span class="kw">null</span><span class="op">));</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    input<span class="op">.</span><span class="fu">ForEach</span><span class="op">(</span>Console<span class="op">.</span><span class="fu">WriteLine</span><span class="op">);</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode csharp"><code class="sourceCode cs"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="kw">static</span> <span class="dt">string</span> <span class="fu">TrimAfter</span><span class="op">(</span><span class="dt">string</span> value<span class="op">,</span> <span class="dt">string</span> suffix<span class="op">)</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    Contract<span class="op">.</span><span class="fu">Requires</span><span class="op">(!</span>String<span class="op">.</span><span class="fu">IsNullOrEmpty</span><span class="op">(</span>suffix<span class="op">));</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    Contract<span class="op">.</span><span class="fu">Requires</span><span class="op">(</span>value <span class="op">!=</span> <span class="kw">null</span><span class="op">);</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    Contract<span class="op">.</span><span class="fu">Ensures</span><span class="op">(</span> <span class="op">!</span>Contract<span class="op">.</span><span class="fu">Result</span><span class="op">&lt;</span><span class="dt">string</span><span class="op">&gt;().</span><span class="fu">EndsWith</span><span class="op">(</span>suffix<span class="op">));</span></span></code></pre></div>
 </section><div><a class="slider-prev" href="#application-of-axiomatic-semantics"></a><a class="slider-next" href="#homework-assignments"></a></div>
 <section id="homework-assignments" class="slide level1">
 <h1>Homework assignments</h1>
