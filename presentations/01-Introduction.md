@@ -1,7 +1,8 @@
-# Software and Programming Language Theory {.center }
+# Software and Programming Language Theory
 ## Introduction
 ### History of programming languages
 ### Classification of programming languages
+
 <style>
 .twocolumn {
   -moz-column-count: 2;
@@ -29,14 +30,14 @@
 
 Instructor — Maxim A. Krivchikov, senior researcher,
 Lomonosov Moscow State University
+
 maxim.krivchikov@gmail.com
 
 https://maxxk.github.io/programming-languages/
 
-<span style="font-size: 0.5em">Chrome or Firefox are recommended to watch presentations; Konqueror in aud. 13-15 skips some slides. Open with Firefox and enable scripts with button “Settings”, lower right corner</span>
 
 # Quick recap
-## Previous semester — Formal models of computation
+## [Previous semester](https://maxxk.github.io/formal-models/) — Formal models of computation
 - the mathematical point of view to the problem of software verification
 - evolution of the idea of type in the foundations of mathematics
 

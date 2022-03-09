@@ -14,13 +14,17 @@ Course topics include:
 * specification of domain-specific programming languages
 * static typing and type inference
 
-**In 2021: Friday, 12:30-14:05, live video @ vk.com, starting February 19th.**
+**In 2022: Wednesday, 10:45-12:20, Microsoft Teams, starting March 9th.**
+
+https://scs.math.msu.ru/enroll
 
 <!--Please take a quick survey about the course: [Survey form](https://goo.gl/forms/PYP4oSGn0VfQQL403)-->
 
 
-**19.02.2021, 26.02.2021** Introduction. History of programming languages. 
+**09.03.2022** Introduction. History of programming languages. 
 [presentation - html](presentations/01-Introduction.html)
+
+<hr>
 
 **26.02.2021, 05.03.2021** Classification of programming languages. 
 [presentation - html](presentations/02-Classification.html) 
@@ -52,7 +56,6 @@ Course topics include:
 **21.05.2021** Axiomatic semantics 
 [presentation - html](presentations/11-Axiomatic-Semantics.html)
 
-<hr>
 **13.05.2019** Domain-specific languages. Intermediate representations
 [presentation - html](presentations/12-IR-DSL.html)
 
