@@ -24,10 +24,11 @@ https://scs.math.msu.ru/enroll
 **09.03.2022** Introduction. History of programming languages. 
 [presentation - html](presentations/01-Introduction.html)
 
+**16.03.2022** Classification of programming languages. 
+[presentation - html](presentations/02-Classification.html) 
+
 <hr>
 
-**26.02.2021, 05.03.2021** Classification of programming languages. 
-[presentation - html](presentations/02-Classification.html) 
 
 **12.03.2021, 19.03.2021** Specification of programming language. Syntax. 
 [presentation - html](presentations/03-Specification-Syntax.html) 
