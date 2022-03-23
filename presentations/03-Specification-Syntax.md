@@ -215,7 +215,7 @@ Lisp S-expression is a direct representation of abstract syntax tree:
 ```
 
 # Language specification
-Foraml languages (which are (possibly infinite) subsets of strings of some alphabet: Σ*) usually have a finite description, which is called "grammar".
+Formal languages (which are (possibly infinite) subsets of strings of some alphabet: Σ*) usually have a finite description, which is called "grammar".
 
 - **generative grammar:** how to generate all strings of the language starting from a single "start" symbol
 - **analytic grammar:** how to get an abstract syntax tree (a tree of rule applications) from a given string
