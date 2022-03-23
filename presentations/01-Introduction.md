@@ -768,7 +768,7 @@ Implement something non-trivial (more than 200 lines in equivalent C code) in la
 - Fortran *
 - Algol *
 - Ada *
-
+- Assembly (x86-64 or ARM) *
 </div>
 
 <!--

@@ -27,11 +27,12 @@ https://scs.math.msu.ru/enroll
 **16.03.2022** Classification of programming languages. 
 [presentation - html](presentations/02-Classification.html) 
 
+
+**23.03.2022** Specification of programming language. Syntax. 
+[presentation - html](presentations/03-Specification-Syntax.html) 
+
 <hr>
 
-
-**12.03.2021, 19.03.2021** Specification of programming language. Syntax. 
-[presentation - html](presentations/03-Specification-Syntax.html) 
 
 **26.03.2021** Formal syntax analysis. Syntax extensions. 
 [presentation - html](presentations/04-Macros-Parsing.html) 

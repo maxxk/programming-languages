@@ -16,7 +16,7 @@ maxim.krivchikov@gmail.com
 
 # Additions
 ## Optional typing systems
-In similar way to the annotations of model checking tools, the optional type checkers do not neccessarily accept all correct programs.
+In similar way to the annotations of model checking tools, the optional type checkers do not necessarily accept all correct programs.
 
 ```javascript
 /*::
