@@ -31,14 +31,13 @@ https://scs.math.msu.ru/enroll
 **23.03.2022** Specification of programming language. Syntax. 
 [presentation - html](presentations/03-Specification-Syntax.html) 
 
-<hr>
-
-
-**26.03.2021** Formal syntax analysis. Syntax extensions. 
+**30.03.2022**, **06.04.2022** Formal syntax analysis. Syntax extensions. 
 [presentation - html](presentations/04-Macros-Parsing.html) 
 
-**02.04.2021** Static semantics. Naming, Bindings and Scope. 
+**06.04.2022** Static semantics. Naming, Bindings and Scope. 
 [presentation - html](presentations/05-Static-Semantics.html)
+
+<hr />
 
 **09.04.2021** Typing.
 [presentation - html](presentations/06-Typing.html) 
