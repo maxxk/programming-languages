@@ -37,10 +37,10 @@ https://scs.math.msu.ru/enroll
 **06.04.2022** Static semantics. Naming, Bindings and Scope. 
 [presentation - html](presentations/05-Static-Semantics.html)
 
-<hr />
-
-**09.04.2021** Typing.
+**13.04.2022** Typing.
 [presentation - html](presentations/06-Typing.html) 
+
+<hr/>
 
 **16.04.2021** Operational semantics 
 [presentation - html](presentations/07-Operational-Semantics.html)
