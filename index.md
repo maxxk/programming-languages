@@ -40,16 +40,16 @@ https://scs.math.msu.ru/enroll
 **13.04.2022** Typing.
 [presentation - html](presentations/06-Typing.html) 
 
-<hr/>
-
-**16.04.2021** Operational semantics 
+**20.04.2022** Operational semantics 
 [presentation - html](presentations/07-Operational-Semantics.html)
 
-**16.04.2021, 23.04.2021** Mechanized semantics (Operational semantics implementation)
+**27.04.2022** Mechanized semantics (Operational semantics implementation)
 [presentation - html](presentations/10-Operational-Semantics-Implementation.html)
 
-**14.05.2021** Denotational semantics
+**04.05.2022** Denotational semantics
 [presentation - html](presentations/08-Denotational-semantics-example.html) 
+
+<hr />
 
 **14.05.2021** Denotational semantics implementation: Monads, Fixed points
 [presentation - html](presentations/09-Monads.html) 
