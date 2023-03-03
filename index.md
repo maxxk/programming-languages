@@ -14,16 +14,17 @@ Course topics include:
 * specification of domain-specific programming languages
 * static typing and type inference
 
-**In 2022: Wednesday, 10:45-12:20, Microsoft Teams, starting March 9th.**
+**In 2023: Friday, 10:45-12:20, Zoom, starting March 3rd.**
 
-https://scs.math.msu.ru/enroll
+Lecture recordings and Zoom link: https://vk.com/msumathprogx05
 
 <!--Please take a quick survey about the course: [Survey form](https://goo.gl/forms/PYP4oSGn0VfQQL403)-->
 
 
-**09.03.2022** Introduction. History of programming languages. 
+**03.03.2023** Introduction. History of programming languages. 
 [presentation - html](presentations/01-Introduction.html)
 
+<hr/>
 **16.03.2022** Classification of programming languages. 
 [presentation - html](presentations/02-Classification.html) 
 
