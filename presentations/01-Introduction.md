@@ -50,7 +50,7 @@ https://maxxk.github.io/programming-languages/
 (to have acquaintance with programming language ≈ can write something more sophisticated than Hello World in less than an hour)
 
 
-# GitHub can detect 343 programming languages
+# GitHub can detect 431 programming languages
 
 In 2019 it was 316, in 2018 — 299, in 2017 — 277!
 
@@ -110,6 +110,8 @@ See also: Bootstrapping a simple compiler from nothing - 1GL to 3GL
 http://homepage.ntlworld.com/edmund.grimley-evans/bcompiler.html
 
 https://github.com/smtlaissezfaire/bcompiler
+
+http://visual6502.org
 
 ```x86asm
 # _start:
@@ -751,7 +753,7 @@ $ENTRY Go {
 
 
 # Homework assignments
-**Task 1.1** (at most 7* in total, at most one language from category, you can use modern implementations/dialects)
+**Task 1.1** (at most 6* in total, at most one language from category, you can use modern implementations/dialects)
 
 Implement something non-trivial (more than 200 lines in equivalent C code) in languages from list:
 
