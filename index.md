@@ -24,13 +24,13 @@ Lecture recordings and Zoom link: https://vk.com/msumathprogx05
 **03.03.2023** Introduction. History of programming languages. 
 [presentation - html](presentations/01-Introduction.html)
 
-<hr/>
-**16.03.2022** Classification of programming languages. 
+**10.03.2023** Classification of programming languages. 
 [presentation - html](presentations/02-Classification.html) 
 
-
-**23.03.2022** Specification of programming language. Syntax. 
+**17.03.2023** Specification of programming language. Syntax. 
 [presentation - html](presentations/03-Specification-Syntax.html) 
+
+<hr/>
 
 **30.03.2022**, **06.04.2022** Formal syntax analysis. Syntax extensions. 
 [presentation - html](presentations/04-Macros-Parsing.html) 
@@ -50,7 +50,6 @@ Lecture recordings and Zoom link: https://vk.com/msumathprogx05
 **04.05.2022** Denotational semantics
 [presentation - html](presentations/08-Denotational-semantics-example.html) 
 
-<hr />
 
 **14.05.2021** Denotational semantics implementation: Monads, Fixed points
 [presentation - html](presentations/09-Monads.html) 
